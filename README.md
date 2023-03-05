@@ -20,11 +20,11 @@ this project is primarilly provided to be used for educational purposes. Don't
 use it for production.
 
 ## Contributors:
-Christian Sillaber
-Michael Brunner
-Clemens Sauerwein
-Andrea Mussmann
-Alexander Blaas
+- Christian Sillaber
+- Michael Brunner
+- Clemens Sauerwein
+- Andrea Mussmann
+- Alexander Blaas
 
 ## Requirements
 - Java 17
