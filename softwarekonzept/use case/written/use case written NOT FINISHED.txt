@@ -1,0 +1,65 @@
+Case: a
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved: a
+
+
+
+Visitor
+
+Case: Registering account
+Description: A Visitor wants to register an account as either User or Gardener
+Prerequisite: The Planth Health ™  website's home page is open
+Steps:
+1. The Visitor click on register and gets redirected to the registration page
+2. The Visitor is prompted to enter an email, a username and a password
+3. After all the required fields are filled, the Visitor can click on the register button
+Postcondition: The Visitor is now registered as either as User
+Alternatives:
+A)
+4. The email / username is already being used by another existing account
+5. An error message is diplayed, stating which field is already being taken
+6. Step 2
+
+B)
+3. The Visitor click on the register button without filling all the fields
+4. An error message is displayed, stating that all fields must be filled
+5. Step 2
+Classes Involved: Visitor
+
+
+Case: Upload picture
+Description: A Visitor / User / Gardener / Administrator wants to upload a picture of a plant
+Prerequisite: Any Planth Health ™  website's page is open
+Steps:
+1. The  Visitor / User / Gardener / Administrator click on the upload a picture button
+2. The  Visitor / User / Gardener / Administrator gets reidrected on the camera view, where the QR code of the plant can be scanned
+3. Once the QR code is scanned, the  Visitor / User / Gardener / Administrator gets redirected to the plant information page
+4. Here the  Visitor / User / Gardener / Administrator click the upload new picture button
+5. The  Visitor / User / Gardener / Administrator gets redirected to the device gallery where the picture to upload can be chosen
+Postcondition: The picture gets added to a review list where the plant Gardener will have to approve or deny, before it gets added to the viewable gallery of the plant
+Alternatives:
+
+Classes Involved: Visitor / User / Gardener / Administrator
+
+
+
+User
+
+Case: 	Log in
+Description: A User / Gardener / Administrator log in their account
+Prerequisite: A valid account should already being registered, the Planth Health ™  website's home page is open
+Steps:
+1. The User / Gardener / Administrator enter their email and password
+2.
+Postcondition: a
+Alternatives:
+A)
+Classes Involved: a
+
