@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 /**
  * Spring boot application. Execute maven with <code>mvn spring-boot:run</code>
  * to start this web application.
+ *
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
  */
