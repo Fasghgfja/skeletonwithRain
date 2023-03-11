@@ -1,30 +1,32 @@
-# swe-skeleton
-SKEL: Skeleton Project
-This project provides a starting point for development of projects during the
-course "Software Engineering". It is a simple web application offering nearly
-no "real" functionality. Its main purpose is to help you getting started quickly
-by providing a suitable starting point.
-It utilizes Spring Boot and is configured as a Maven web application project with:
+# Plant Health
 
-all relevant Spring Framework features enabled
-embedded Tomcat with support for JSF2
-embedded H2 in-memory database (including H2 console)
-support for PrimeFaces
-basic functionality for user management and Spring web security
+Plant Health has set itself the goal to equip unused public and private space with little greenhouses in order to bring back plants into offices, hallways etc.\
+It shows that there are three main reasons why people shy away from plating plants:
+1. Lack of time
+2. Knowledge
+3. Environment
 
-Execute "mvn spring-boot:run" to start the skeleton project and connect to
-http://localhost:8080/ to access the skeleton web application. You may login
-with "admin" and "passwd".
-Feel free to use this skeleton project as you see fit - but keept in mind that
-this project is primarilly provided to be used for educational purposes. Don't
-use it for production.
+In order to achieve this goal an overall technical solution should be developed, that tracks the plants in the greenhouses and uses relevant data of ground, air and light quality to display in an web application for users which environmental circumstances may be good or bad for the plant.
+
+## Description
+
+Greenhouses are placed in public or pirvate office rooms. These greenhouses are equipped with sensors to measure ground humidity, air humidity, air pressure, air temperature and light intensity. They are also equipped with LEDs and speakers to give audial and visual feedback.\
+These sensor stations communicate with an access point. Data will be transmitted to the access point. The access point checks if certain thresholds are exceeded. Visual signals will be displayed on the sensor station if this is the case. Access points will also store the received data temporarly before then transmitting it to the web server.\
+The core of the project is a webapp that allows users to keep track of their plants. Therefore, the data sent to the webserver is displayed in the webapp.\
+Users are able to follow certain greenhouses in order to see the different measurements made. This is displayed in a dashboard view with colorcoding (red = bad, yellow = neutral, green = good). Users can also see more in-depth information including pictures and more precise information on each measured value.\
+Plants may also have a gardener assigned that takes care of them. This gardener has an even more in-depth view on the state of the plant and is able to track different measurements over a specific time frame.
+
+### Used Technologies
+- Java 17
+- Prime Faces
+- MySQL
+- Arduino
+- Raspberry Pi
+
 
 ## Contributors:
-- Christian Sillaber
-- Michael Brunner
-- Clemens Sauerwein
-- Andrea Mussmann
-- Alexander Blaas
-
-## Requirements
-- Java 17
+- Giuliano Giambertone
+- Stefan Huter
+- Deniz Özkaya
+- Marco Ponti
+- Tom van Loon
