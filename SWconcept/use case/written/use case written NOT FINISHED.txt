@@ -1,3 +1,262 @@
+Guest
+
+Case: Registering account
+Description: A Guest wants to register an account as User
+Prerequisite: The Planth Health ™  website's home page is open
+Steps:
+1. The Guest click on register and gets redirected to the registration page
+2. The Guest is prompted to enter an email, a username and a password
+3. After all the required fields are filled, the Guest can click on the register button
+Postcondition: The Guest is now registered as User
+Alternatives:
+A)
+4. The email / username is already being used by another existing account
+5. An error message is diplayed, stating which field is already being taken
+6. Step 2
+
+B)
+3. The Guest click on the register button without filling all the fields
+4. An error message is displayed, stating that all fields must be filled
+5. Step 2
+Classes Involved:  Guest
+
+
+Case: Upload picture
+Description: A Guest / User / Gardener / Administrator wants to upload a picture of a plant
+Prerequisite: The Guest / User / Gardener / Administrator have a device that can scan QR code
+Steps:
+1. The  Guest / User / Gardener / Administrator scan the plant's QR code
+2. Once the QR code is scanned, the  Guest / User / Gardener / Administrator gets redirected to the plant gallery page
+3. Here the  Guest / User / Gardener / Administrator click the upload new picture button
+4. The  Guest / User / Gardener / Administrator gets redirected to its own device gallery where the picture to upload can be chosen
+Postcondition: The picture gets added to a review list where the plant Gardener will have to approve or deny it, before it gets added to the viewable gallery of the plant
+Alternatives:
+Classes Involved: Guest / User / Gardener / Administrator
+
+
+
+User
+
+Case: Log in
+Description: A User / Gardener / Administrator log in their account
+Prerequisite: A valid account should already being registered, the Planth Health ™  website's home page is open
+Steps:
+1. A User / Gardener / Administrator enters an email and a password and click the log in button
+Postcondition: The User / Gardener / Administrator gets redirected in its dashboard view
+Alternatives:
+A)
+2. If the entered email is not linked to any active Planth Health ™ account, an error message is displayed, stating that there is no account with this email.
+3. Step 1
+
+B)
+2. If the password is not correct, an error message is displayed, stating that the entered password is wrong
+3. Step 1
+Classes Involved:  User / Gardener / Administrator
+
+
+Case: Log out
+Description: A User / Gardener / Administrator log out from their account
+Prerequisite:  A User / Gardener / Administrator is already logged in and any Planth Health ™  website's page is open
+Steps:
+1. The User / Gardener / Administrator clicks on the log out button
+Postcondition: The User / Gardener / Administrator is now logged out of its account
+Alternatives:
+Classes Involved:  User / Gardener / Administrator
+
+
+Case: Add plant to dashboard
+Description: The  User / Gardener / Administrator add a plant to their dashboard
+Prerequisite: A User / Gardener / Administrator is already logged in and the plant catalog page is open
+Steps:
+1. The User / Gardener / Administrator click on the add button next to the chosen plant
+Postcondition: The plant is now present in the User / Gardener / Administrator 's dashboard
+Alternatives:
+A) 
+2. If the plant is already present in the User / Gardener / Administrator 's dashboard, then an error message will be displayed, stating that the plant is already part of the User / Gardener / Administrator 's dashboard
+Classes Involved: User / Gardener / Administrator
+
+
+Case: Remove plant from dashboard
+Description: The  User / Gardener / Administrator remove a plant from their dashboard
+Prerequisite: A User / Gardener / Administrator is already logged in, the dashboard view page is open and at least one plant is present in the User / Gardener / Administrator 's dashboard view
+Steps:
+1. The User / Gardener / Administrator click on the remove button next to the chosen plant
+Postcondition: The plant is now removed from the User / Gardener / Administrator 's dashboard
+Alternatives:
+Classes Involved: User / Gardener / Administrator
+
+-------------------------------------------------------------------------------------------------NOT FINISHED 
+										|
+										|
+										|
+									             V
+Gardener
+
+Case: Set accesspoint transmission intervals
+Description: A Gardener / Administrator  set set the accesspoint transmission intervals of one of its greenhouses
+Prerequisite: A Gardener / Administrator is already logged in, the greenhouse monitoring page is open and at least one plant is present in the Gardener / Administrator 's  greenhouse monitoring view
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved:  Gardener / Administrator
+
+Case: Set greenhouse thresholds
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved:  Gardener / Administrator
+
+
+Case: Approve / Deny uploaded picture in plant's gallery
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved:  Gardener / Administrator
+
+
+Administrator
+
+Case: Search new greenhouse
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved: Administrator
+
+
+Case: Add greenhouse
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved: Administrator
+
+
+Case: Edit greenhouse
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved: Administrator
+
+
+Case: Delete greenhouse
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved: Administrator
+
+
+Case: Create accesspoint
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved: Administrator
+
+
+Case: Edit accesspoint
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved: Administrator
+
+
+Case: Delete accesspoint
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved: Administrator
+
+
+Case: Add User
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved: Administrator
+
+
+Case: Edit User (grant Gradener rights or remove)
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved: Administrator
+
+
+Case: Remove User
+Description: a
+Prerequisite: a
+Steps:
+1. 
+Postcondition: a
+Alternatives:
+A) 
+1. 
+Classes Involved: Administrator
+
+
+
+
+
+
+
+
+
+
 Case: a
 Description: a
 Prerequisite: a
@@ -10,56 +269,4 @@ A)
 Classes Involved: a
 
 
-
-Visitor
-
-Case: Registering account
-Description: A Visitor wants to register an account as either User or Gardener
-Prerequisite: The Planth Health ™  website's home page is open
-Steps:
-1. The Visitor click on register and gets redirected to the registration page
-2. The Visitor is prompted to enter an email, a username and a password
-3. After all the required fields are filled, the Visitor can click on the register button
-Postcondition: The Visitor is now registered as either as User
-Alternatives:
-A)
-4. The email / username is already being used by another existing account
-5. An error message is diplayed, stating which field is already being taken
-6. Step 2
-
-B)
-3. The Visitor click on the register button without filling all the fields
-4. An error message is displayed, stating that all fields must be filled
-5. Step 2
-Classes Involved: Visitor
-
-
-Case: Upload picture
-Description: A Visitor / User / Gardener / Administrator wants to upload a picture of a plant
-Prerequisite: Any Planth Health ™  website's page is open
-Steps:
-1. The  Visitor / User / Gardener / Administrator click on the upload a picture button
-2. The  Visitor / User / Gardener / Administrator gets reidrected on the camera view, where the QR code of the plant can be scanned
-3. Once the QR code is scanned, the  Visitor / User / Gardener / Administrator gets redirected to the plant information page
-4. Here the  Visitor / User / Gardener / Administrator click the upload new picture button
-5. The  Visitor / User / Gardener / Administrator gets redirected to the device gallery where the picture to upload can be chosen
-Postcondition: The picture gets added to a review list where the plant Gardener will have to approve or deny, before it gets added to the viewable gallery of the plant
-Alternatives:
-
-Classes Involved: Visitor / User / Gardener / Administrator
-
-
-
-User
-
-Case: 	Log in
-Description: A User / Gardener / Administrator log in their account
-Prerequisite: A valid account should already being registered, the Planth Health ™  website's home page is open
-Steps:
-1. The User / Gardener / Administrator enter their email and password
-2.
-Postcondition: a
-Alternatives:
-A)
-Classes Involved: a
 
