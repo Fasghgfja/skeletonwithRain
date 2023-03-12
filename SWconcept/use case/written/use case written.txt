@@ -1,0 +1,305 @@
+Guest
+
+Registering account
+Description: A Guest wants to register an account as User
+Prerequisite: The Planth Health ™  website's home page is open
+Steps:
+1. The Guest clicks on the register button and gets redirected to the registration page
+2. The Guest is prompted to enter an email, a username and a password
+3. After all the required fields are filled, the Guest can click on the register button
+Postcondition: The Guest is now registered as User
+Alternatives:
+A)
+4. The email / username is already being used by another existing account
+5. An error message is diplayed, stating which field is already being taken
+6. Step 2
+
+B)
+3. The Guest click on the register button without filling all the mandatory fields
+4. An error message is displayed, stating that all fields must be filled
+5. Step 2
+Classes Involved:  Guest
+
+
+
+Upload picture
+Description: A Guest / User / Gardener / Administrator wants to upload a picture of a plant
+Prerequisite: A Guest / User / Gardener / Administrator has a device that can scan QR code
+Steps:
+1. The  Guest / User / Gardener / Administrator scan the plant's QR code
+2. Once the QR code is scanned, the  Guest / User / Gardener / Administrator gets redirected to the plant gallery page
+3. Here the  Guest / User / Gardener / Administrator click the upload new picture button
+4. The  Guest / User / Gardener / Administrator gets redirected to its own device gallery where the picture to upload can be chosen
+Postcondition: The picture gets added to a review list where the plant's Gardener will have to approve or deny it, before it gets added to the viewable gallery of the plant
+Alternatives:
+Classes Involved: Guest / User / Gardener / Administrator
+
+
+
+User
+
+
+Log in
+Description: A User / Gardener / Administrator logs in their account
+Prerequisite: A valid account should already being registered, the Planth Health ™  website's home page is open
+Steps:
+1. A User / Gardener / Administrator enters an email and a password and click the log in button
+Postcondition: The User / Gardener / Administrator gets redirected in its dashboard page
+Alternatives:
+A)
+2. If the entered email is not linked to any active Planth Health ™ account, an error message is displayed, stating that there is no account with this email.
+3. Step 1
+
+B)
+2. If the password is not correct, an error message is displayed, stating that the entered password is wrong
+3. Step 1
+Classes Involved:  User / Gardener / Administrator
+
+
+
+Log out
+Description: A User / Gardener / Administrator logs out from their account
+Prerequisite:  A User / Gardener / Administrator is already logged in and any Planth Health ™  website's home page is open
+Steps:
+1. The User / Gardener / Administrator clicks on the log out button
+Postcondition: The User / Gardener / Administrator is now logged out of its account
+Alternatives:
+Classes Involved:  User / Gardener / Administrator
+
+
+
+Add plant to dashboard
+Description: A  User / Gardener / Administrator adds a plant to their dashboard
+Prerequisite: A User / Gardener / Administrator is already logged in and the dashboard page is open
+Steps:
+1. The User / Gardener / Administrator click on the add button next to the chosen plant
+Postcondition: The plant is now present in the User / Gardener / Administrator 's dashboard page
+Alternatives:
+A) 
+2. If the plant is already present in the User / Gardener / Administrator 's dashboard, then an error message will be displayed, stating that the plant is already part of the User / Gardener / Administrator 's dashboard
+Classes Involved: User / Gardener / Administrator
+
+
+
+Remove plant from dashboard
+Description: A  User / Gardener / Administrator remove a plant from their dashboard
+Prerequisite: A User / Gardener / Administrator is already logged in, the dashboard page is open and at least one plant is present in the User / Gardener / Administrator 's dashboard 
+Steps:
+1. The User / Gardener / Administrator click on the remove button next to the chosen plant
+Postcondition: The plant is now removed from the User / Gardener / Administrator 's dashboard
+Alternatives:
+Classes Involved: User / Gardener / Administrator
+
+
+
+Gardener
+
+Set accesspoint transmission intervals
+Description: A Gardener / Administrator sets the accesspoint transmission intervals of a greenhouse
+Prerequisite: A Gardener / Administrator is already logged in and the statistic page for a greenhouse (for a Gardener) or the manage greenhouse page (for an Administrator) is open and at least one plant is present
+Steps:
+1. The Gardener / Administrator click on edit
+2. A pop-up opens where the Gardener / Administrator  can edit the intervals   
+Postcondition: The intervals are now updated correctly
+Alternatives:
+A) 
+3. If the Gardener / Administrator enters a non recognized value, an error message will be displayed, stating that the entered value is not recognized
+
+B)
+3. If the Gardener / Administrator enters a value that is either too small or too large than some defined limit values, an error message will be displayed, stating that the entered value is too small or too large
+Classes Involved:  Gardener / Administrator
+
+
+
+Set greenhouse thresholds
+Description: A Gardener / Administrator sets the sensor's thresholds of a greenhouse
+Prerequisite: A Gardener / Administrator is already logged in and the statistic page for a greenhouse (for a Gardener) or the manage greenhouses page (for an Administrator) is open and at least one greenhouse is present
+Steps:
+1. The Gardener / Administrator click on edit
+2. A pop-up opens where the Gardener / Administrator  can edit the thresholds
+Postcondition: The sensor's threshold are now updated correctly
+Alternatives:
+A) 
+3. If the Gardener / Administrator enters a non recognized value, an error message will be displayed, stating that the entered value is not recognized
+
+B)
+3. If the Gardener / Administrator enters a value that is either too small or too large than some defined limit values, an error message will be displayed, stating that the entered value is too small or too large
+Classes Involved:  Gardener / Administrator
+
+
+
+Approve / Deny uploaded picture in plant's gallery
+Description:  A Gardener / Administrator decides if approving or denying an uploaded picture of a plant 
+Prerequisite: A Gardener / Administrator is already logged in, the greenhouse monitoring page is open and at least one greenhouse is present in the Gardener / Administrator 's greenhouse monitoring
+Steps:
+1. The Gardener / Administrator click on a greenhouse that has at least one picture waiting for approval (it is showed on the appropriate column)
+2. The Gardener / Administrator gets redirected to the greenhouse statistics page, where it's possible to click on the plant's gallery
+3. By clicking on the plant's gallery, the Gardener / Administrator gets redirected to the plant's gallery page, where it's possible to approve or deny the pictures waiting for approval
+Postcondition: All the approved pictures are now part of the plant's gallery, while the denied ones are deleted
+Alternatives:
+Classes Involved:  Gardener / Administrator
+
+
+
+Administrator
+
+
+Add greenhouse
+Description: An Administrator adds a new greenhouse 
+Prerequisite: An Administrator is already logged in and the manage greenhouses page is open
+Steps:
+1. The  Administrator clicks on the add greenhouse button
+2. A pop-up opens where the Administrator must enter a UUID and an existing accesspoint, before clicking on save
+Postcondition: The new greenhouse is created and associated with an accesspoint
+Alternatives:
+A) 
+3. If the UUID entered is already in used by another greenhouse, an error message will be displayed, stating that the entered UUID is already taken
+4. Step 2
+
+B)
+3. If the UUID entered is not in the correct format, an error message will be displayed, stating that the entered UUID is not in the correct format
+4. Step 2
+
+C)
+3. If the accesspoint enterted it doesn't exist, an error message will be displayed, stating that the entered accespoint doesn't exist
+4. Step 2
+Classes Involved: Administrator
+
+
+
+Assign Gardener to greenhouse
+Description: An Administrator adds a Gardener to a greenhouse
+Prerequisite: An Administrator is already logged in, the manage greenhouses page is open and at least one greenhouse is present
+Steps:
+1. The Administrator clicks on the chosen  greenhouse
+2. A pop-up opens where the Administrator can enter a Gardener for the specified  greenhouse
+Postcondition: The greenhouse is now assigned to the Gardener of choice
+Alternatives:
+A) 
+3. If the specified Gardener doesn't exist, an error message will be displayed, stating that the chosen Gardener doesn't exist
+4. Step 2
+Classes Involved: Administrator
+
+
+
+Delete greenhouse
+Description: An Administrator deletes a greenhouse
+Prerequisite: An Administrator is already logged in, the manage greenhouses page is open and at least one greenhouse is present
+Steps:
+1. The Administrator clicks on the delete button of the chosen greenhouse
+Postcondition: The greenhouse is now deleted 
+Alternatives:
+Classes Involved: Administrator
+
+
+
+Create accesspoint
+Description: An Administrator creates an accesspoint
+Prerequisite: An Administrator is already logged in and the manage accesspoint page is open 
+Steps:
+1. The  Administrator clicks on the add accesspoint button
+2. A pop-up opens where the Administrator must enter a UID (and optionally a location), before clicking on save
+Postcondition: The accesspoint is now created
+Alternatives:
+A) 
+3. If the UID entered is already in used by another accesspoint, an error message will be displayed, stating that the entered UID is already taken
+4. Step 2
+
+B)
+3. If the UID entered is not in the correct format, an error message will be displayed, stating that the entered UID is not in the correct format
+4. Step 2
+Classes Involved: Administrator
+
+
+
+Edit accesspoint
+Description: An Administrator edits an accesspoint
+Prerequisite: An Administrator is already logged in, the manage accesspoint page is open and at least one accesspoint is present
+Steps:
+1. The  Administrator clicks on the edit accesspoint button next to desired accesspoint
+2. A pop-up opens where the Administrator can edit the accesspoint details before clicking on save
+Postcondition: The new accesspoint details are now saved 
+Alternatives:
+Classes Involved: Administrator
+
+
+
+Delete accesspoint
+Description: An Administrator deletes an accesspoint
+Prerequisite: An Administrator is already logged in, the manage accesspoint page is open and at least one accesspoint is present
+Steps:
+1. The  Administrator clicks on the delete accesspoint button next to desired accesspoint
+Postcondition: The accesspoint is now deleted
+Alternatives:
+Classes Involved: Administrator
+
+
+
+Add User
+Description: An Administrator adds a User / Gardener / Administrator
+Prerequisite: An Administrator is already logged in and the manage users page is open 
+Steps:
+1. The  Administrator clicks on the add user button
+2. A pop-up opens where the Administrator must enter an email, a username and a password (and optionally a first name, last name, if the User  has Gardener role,etc.), before clicking on save 
+Postcondition: The User is now registered and can log in into the account with the specified details
+Alternatives:
+A)
+3. The email / username is already being used by another existing account
+4. An error message is diplayed, stating which field is already being taken
+5. Step 2
+
+B)
+3. The Administrator click on the register button without filling all the mandatory fields
+4. An error message is displayed, stating that all fields must be filled
+5. Step 2
+Classes Involved: Administrator
+
+
+
+Edit User
+Description: An Administrator edits a User / Gardener
+Prerequisite: An Administrator is already logged in, the manage users page is open and at least one user (apart from the Administrator itself) is present
+Steps:
+1. The  Administrator clicks on the edit user button, next to the desired User
+2. A pop-up opens where the Administrator can edit all the details about the specified User, before pressing save
+Postcondition: The new User details are now saved
+Alternatives:
+A)
+3. The email / username is already being used by another existing account
+4. An error message is diplayed, stating which field is already being taken
+5. Step 2
+
+B)
+3. The Administrator click on the register button without filling all mandatory the fields
+4. An error message is displayed, stating that all fields must be filled
+5. Step 2
+
+C)
+2. If the Administrator tries to edit an Administrator, an error message will be displayed, stating that Administrators cannot be edited
+Classes Involved: Administrator
+
+
+
+Remove User
+Description: An Administrator removes a User / Gardener
+Prerequisite: An Administrator is already logged in, the manage users page is open and at least one user (apart from the Administrator itself) is present
+Steps:
+1. The  Administrator clicks on the remove user button, next to the desired User
+Postcondition: The User is now removed
+Alternatives:
+A) 
+2. If the Administrator tries to remove an Administrator, an error message will be displayed, stating that Administrators cannot be removed
+Classes Involved: Administrator
+
+
+
+
+
+
+
+
+
+
+
+
+
