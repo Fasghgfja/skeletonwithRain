@@ -16,6 +16,8 @@ The core of the project is a webapp that allows users to keep track of their pla
 Users are able to follow certain greenhouses in order to see the different measurements made. This is displayed in a dashboard view with colorcoding (red = bad, yellow = neutral, green = good). Users can also see more in-depth information including pictures and more precise information on each measured value.\
 Plants may also have a gardener assigned that takes care of them. This gardener has an even more in-depth view on the state of the plant and is able to track different measurements over a specific time frame.
 
+For more details, check the [wiki](https://git.uibk.ac.at/informatik/qe/swess23/group4/g4t2/-/wikis/home) page.
+
 ### Used Technologies
 - Java 17
 - Prime Faces
