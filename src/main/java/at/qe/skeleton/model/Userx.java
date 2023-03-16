@@ -1,7 +1,7 @@
 package at.qe.skeleton.model;
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 import jakarta.persistence.CollectionTable;
@@ -13,42 +13,30 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import org.springframework.data.domain.Persistable;
 
 /**
  * Entity representing users.
- *
+ * <p>
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
  */
 @Entity
-public class Userx implements Persistable<String>, Serializable, Comparable<Userx> {
-
+public class Userx extends Metadata implements Persistable<String>, Serializable, Comparable<Userx> {
+    @Serial
     private static final long serialVersionUID = 1L;
-
     @Id
     @Column(length = 100)
     private String username;
-
     @ManyToOne(optional = false)
     private Userx createUser;
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime createDate;
     @ManyToOne(optional = true)
     private Userx updateUser;
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime updateDate;
-
     private String password;
-
     private String firstName;
     private String lastName;
     private String email;
     private String phone;
-
     boolean enabled;
 
     @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
@@ -128,13 +116,6 @@ public class Userx implements Persistable<String>, Serializable, Comparable<User
         this.createUser = createUser;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
 
     public Userx getUpdateUser() {
         return updateUser;
@@ -144,13 +125,6 @@ public class Userx implements Persistable<String>, Serializable, Comparable<User
         this.updateUser = updateUser;
     }
 
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
-    }
 
     @Override
     public int hashCode() {
@@ -164,14 +138,10 @@ public class Userx implements Persistable<String>, Serializable, Comparable<User
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Userx)) {
+        if (!(obj instanceof final Userx other)) {
             return false;
         }
-        final Userx other = (Userx) obj;
-        if (!Objects.equals(this.username, other.username)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.username, other.username);
     }
 
     @Override
@@ -190,7 +160,7 @@ public class Userx implements Persistable<String>, Serializable, Comparable<User
 
     @Override
     public boolean isNew() {
-        return (null == createDate);
+        return (null == super.getCreateDate());
     }
 
 	@Override
