@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 
+
+//TODO: Fix like the example in the demo
 /**
  * Entity representing an audit log entry.
  */
