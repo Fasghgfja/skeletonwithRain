@@ -2,33 +2,32 @@ package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.UserxRepository;
+import java.time.LocalDate;
 import java.util.Collection;
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * Service for accessing and manipulating user data.
- *
+ * <p>
  * This class is part of the skeleton project provided for students of the
- * course "Software Engineering" offered by the University of Innsbruck.
+ * course "Software Architecture" offered by Innsbruck University.
  */
-@Component
+@Service
 @Scope("application")
 public class UserService {
 
     @Autowired
     private UserxRepository userRepository;
 
+
+
     /**
      * Returns a collection of all users.
-     *
-     * @return
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public Collection<Userx> getAllUsers() {
@@ -47,10 +46,13 @@ public class UserService {
     }
 
     /**
-     * Saves the user. This method will also set {@link Userx#createDate} for new
-     * entities or {@link Userx#updateDate} for updated entities. The user
-     * requesting this operation will also be stored as {@link Userx#createDate}
-     * or {@link Userx#updateUser} respectively.
+     * Saves the user. This method will also set {@link Userx#setCreateDate} for new
+     * entities or {@link Userx#setUpdateDate} for updated entities.
+     * If the user did not exist before The Date of the operation will be stored with {@link Userx#setCreateDate}
+     * and the user requesting the operation will be stored as the creator with  {@link Userx#setCreateUser(Userx)}
+     * <p>
+     * If the user already existed then update Date and the user doing the update
+     * will be saved with  {@link Userx#setUpdateDate} {@link Userx#setUpdateUser(Userx)}
      *
      * @param user the user to save
      * @return the updated user
@@ -58,10 +60,10 @@ public class UserService {
     @PreAuthorize("hasAuthority('ADMIN')")
     public Userx saveUser(Userx user) {
         if (user.isNew()) {
-            user.setCreateDate(LocalDateTime.now());
+            user.setCreateDate(LocalDate.now());
             user.setCreateUser(getAuthenticatedUser());
         } else {
-            user.setUpdateDate(LocalDateTime.now());
+            user.setUpdateDate(LocalDate.now());
             user.setUpdateUser(getAuthenticatedUser());
         }
         return userRepository.save(user);
