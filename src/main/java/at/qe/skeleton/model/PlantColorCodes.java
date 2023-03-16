@@ -7,7 +7,7 @@ package at.qe.skeleton.model;
  * Green: ok values
  * **/
 
-public enum PlanColorCodes {
+public enum PlantColorCodes {
     RED,
     YELLOW,
     GREEN
