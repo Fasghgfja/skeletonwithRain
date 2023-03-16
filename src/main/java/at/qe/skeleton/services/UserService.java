@@ -1,6 +1,8 @@
 package at.qe.skeleton.services;
 
+import at.qe.skeleton.model.Log;
 import at.qe.skeleton.model.Userx;
+import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.UserxRepository;
 import java.time.LocalDate;
 import java.util.Collection;
@@ -24,7 +26,8 @@ public class UserService {
     @Autowired
     private UserxRepository userRepository;
 
-
+    @Autowired
+    private LogRepository logRepository;
 
     /**
      * Returns a collection of all users.
@@ -70,16 +73,29 @@ public class UserService {
     }
 
     /**
-     * Deletes the user.
+     * This method Deletes the user.
+     * the method will delete the selected user and additionally
+     * create an entry in the log stating who deleted the user and when.
      *
      * @param user the user to delete
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteUser(Userx user) {
+        Log deleteLog = new Log();
+
+        deleteLog.setDate(LocalDate.now());
+        deleteLog.setAuthor(getAuthenticatedUser().getUsername());
+        deleteLog.setSubject("USER DELETION");
+        deleteLog.setText("DELETED USER: " + user.getUsername());
+
+        logRepository.save(deleteLog);
         userRepository.delete(user);
-        // :TODO: write some audit log stating who and when this user was permanently deleated.
     }
 
+    /**
+     * This Method returns the actual instance of the user.
+     * @return the authenticated user.
+     */
     private Userx getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
