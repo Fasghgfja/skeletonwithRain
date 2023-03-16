@@ -10,17 +10,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
-
 import at.qe.skeleton.spring.CustomizedLogoutSuccessHandler;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * Spring configuration for web security.
- *
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
  */
@@ -88,14 +86,15 @@ public class WebSecurityConfig {
         //Configure roles and passwords via datasource
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled from userx where username=?")
-                .authoritiesByUsernameQuery("select userx_username, roles from userx_user_role where userx_username=?");
+                .authoritiesByUsernameQuery("select userx_username, roles from userx_user_role where userx_username=?")
+                .passwordEncoder(passwordEncoder());
     }
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
-        // :TODO: use proper passwordEncoder and do not store passwords in plain text
-        return NoOpPasswordEncoder.getInstance();
+            return new BCryptPasswordEncoder();
     }
+
 
 
 }
