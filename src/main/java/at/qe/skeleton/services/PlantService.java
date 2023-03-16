@@ -82,7 +82,7 @@ public class PlantService {
         this.plantRepository = plantRepository;
     }
 
-
+    //TODO:find plant by gardener
 }
 
 
