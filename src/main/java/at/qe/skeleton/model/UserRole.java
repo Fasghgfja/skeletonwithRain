@@ -8,7 +8,7 @@ package at.qe.skeleton.model;
 public enum UserRole {
 
     ADMIN,
-    USER,
-    GARDENER
+    GARDENER,
+    USER
 
 }
