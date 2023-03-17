@@ -79,6 +79,13 @@
             <version>${joinfaces.version}</version>
         </dependency>
 
+        <!-- to reduce boilerplate code -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- special test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
