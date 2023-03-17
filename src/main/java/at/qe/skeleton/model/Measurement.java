@@ -4,8 +4,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Entity
-public class Measurement {
+public class Measurement implements Serializable {
+    @Serial
+    static final long serialVersionUID = 66L;
     @Id
     private Long id;
     @Column
