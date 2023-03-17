@@ -19,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * Spring configuration for web security.
+ *
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
  */
@@ -47,23 +48,26 @@ public class WebSecurityConfig {
             http.headers().frameOptions().disable(); // needed for H2 console
 
             http
-                .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/").permitAll()
-                .requestMatchers("/**.jsf").permitAll()
-                .requestMatchers(antMatcher("/h2-console/**")).permitAll()
-                .requestMatchers("/jakarta.faces.resource/**").permitAll()
-                .requestMatchers("/error/**").permitAll()
-                .requestMatchers("/admin/**").hasAnyAuthority(ADMIN)
-                .requestMatchers("/secured/**").hasAnyAuthority(ADMIN, GARDENER, USER)
-                .requestMatchers("/omnifaces.push/**").hasAnyAuthority(ADMIN, GARDENER, USER)
-                    .anyRequest().authenticated())
+                    .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/**").authenticated()).httpBasic()
+                    .and()
+                    .authorizeHttpRequests(authorize -> authorize
+                            .requestMatchers("/").permitAll()
+                            //.requestMatchers("/api/**").permitAll()
+                            .requestMatchers("/**.jsf").permitAll()
+                            .requestMatchers(antMatcher("/h2-console/**")).permitAll()
+                            .requestMatchers("/jakarta.faces.resource/**").permitAll()
+                            .requestMatchers("/error/**").permitAll()
+                            .requestMatchers("/admin/**").hasAnyAuthority(ADMIN)
+                            .requestMatchers("/secured/**").hasAnyAuthority(ADMIN, GARDENER, USER)
+                            .requestMatchers("/omnifaces.push/**").hasAnyAuthority(ADMIN, GARDENER, USER)
+                            .anyRequest().authenticated())
                     .formLogin()
                     .loginPage("/login.xhtml")
                     .permitAll()
                     .failureUrl("/error/access_denied.xhtml")
                     .defaultSuccessUrl("/secured/welcome.xhtml")
-                .loginProcessingUrl("/login")
-                .successForwardUrl("/secured/welcome.xhtml")
+                    .loginProcessingUrl("/login")
+                    .successForwardUrl("/secured/welcome.xhtml")
                     .and()
                     .logout()
                     .logoutSuccessUrl("/login.xhtml")
@@ -94,7 +98,6 @@ public class WebSecurityConfig {
     public static PasswordEncoder passwordEncoder() {
             return new BCryptPasswordEncoder();
     }
-
 
 
 }
