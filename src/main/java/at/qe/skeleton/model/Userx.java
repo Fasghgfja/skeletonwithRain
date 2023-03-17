@@ -28,6 +28,7 @@ import org.springframework.data.domain.Persistable;
 public class Userx extends Metadata implements Persistable<String>, Serializable, Comparable<Userx> {
     @Serial
     private static final long serialVersionUID = 1L;
+    //TODO:ask is this really necessary?
     @Id
     @Column(length = 100)
     private String username;

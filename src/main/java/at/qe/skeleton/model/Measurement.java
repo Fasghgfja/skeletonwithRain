@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class Measurement implements Serializable {
     @Serial
     static final long serialVersionUID = 66L;
+    //TODO:do we need this?
     @Id
     private Long id;
     @Column
@@ -33,6 +34,7 @@ public class Measurement implements Serializable {
     public Long getPlantID() {
         return plantID;
     }
+
 
     public void setPlantID(Long plantID) {
         this.plantID = plantID;

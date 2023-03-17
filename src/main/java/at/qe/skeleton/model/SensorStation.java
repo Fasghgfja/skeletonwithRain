@@ -12,7 +12,6 @@ import java.util.Objects;
  */
 
 @Entity
-@Table(name = "SENSOR_STATION")
 public class SensorStation extends Metadata implements Persistable<Long>, Serializable, Comparable<SensorStation> {
     @Serial
     private static final long serialVersionUID = 1L;

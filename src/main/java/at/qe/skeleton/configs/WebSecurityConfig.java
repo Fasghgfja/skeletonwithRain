@@ -80,8 +80,6 @@ public class WebSecurityConfig {
             catch (Exception ex) {
                     throw new BeanCreationException("Wrong spring security configuration", ex);
             }
-                
-        // :TODO: user failureUrl(/login.xhtml?error) and make sure that a corresponding message is displayed , done?
 
     }
 
