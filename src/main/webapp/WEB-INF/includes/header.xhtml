@@ -8,31 +8,26 @@
     <body>
         <ui:composition>
             <h:form>
-                <p:menubar>
-                    <p:submenu label="Employee Submenu 1" rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
-                        <p:menuitem value="Employee Action 1 - 1"/>
-                        <p:menuitem value="Employee Action 1 - 2"/>
-                    </p:submenu>
-                    <p:submenu label="Employee Submenu 2" rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
-                        <p:menuitem value="Employee Action 2 - 1"/>
-                        <p:menuitem value="Employee Action 2 - 2"/>
-                    </p:submenu>
-                    <p:submenu label="Manager Submenu" rendered="#{sessionInfoBean.hasRole('MANAGER')}">
-                        <p:menuitem value="Manager Action 1"/>
-                        <p:menuitem value="Manager Action 2"/>
-                    </p:submenu>
-                    <p:submenu label="Admin Submenu" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
-                        <p:menuitem value="Manage Users" url="/admin/users.xhtml"/>
-                    </p:submenu>
-                    <p:submenu label="Test Submenu" rendered="#{sessionInfoBean.loggedIn}">
-                        <p:menuitem value="Security Test" url="/secured/test.xhtml"/>
-                    </p:submenu>                    
-                    <p:submenu label="Demos" rendered="#{sessionInfoBean.loggedIn}">                    
-                        <p:menuitem value="Websockets" url="/secured/demos/chatRoom.xhtml"/>                    
-                    </p:submenu>
+                <p:menubar style="background-color: #2E7930; border-radius: 0px;border:None">
+
+                    <p:menuitem rendered="#{sessionInfoBean.hasRole('ADMIN')}" value="Manage Users" url="/admin/users.xhtml">
+                        <em class="icon pi pi-fw pi-user"/>
+                        <span class="menu-text">Manage Users</span>
+                    </p:menuitem>
+
+                    <p:menuitem rendered="#{sessionInfoBean.hasRole('ADMIN')}" value="Audit Log" url="/admin/auditLog.xhtml">
+                        <em class="icon pi pi-fw pi-inbox"/>
+                        <span class="menu-text">Audit Log</span>
+                    </p:menuitem>
+
+
+                    <p:menuitem value="Security Test" iconPos="right" url="/secured/test.xhtml"/>
+
+                    <p:menuitem value="Websockets" iconPos="right" url="/secured/demos/chatRoom.xhtml"/>
+
                     
-                    <p:menuitem value="Login" url="/login.xhtml" rendered="#{!sessionInfoBean.loggedIn}"/>
-                    <p:menuitem value="Logout" url="/logout" rendered="#{sessionInfoBean.loggedIn}"/>                    
+                    <p:menuitem value="Login" iconPos="right" url="/login.xhtml" rendered="#{!sessionInfoBean.loggedIn}"/>
+                    <p:menuitem value="Logout" iconPos="right" url="/logout" rendered="#{sessionInfoBean.loggedIn}"/>
                     
                 </p:menubar>
             </h:form>
