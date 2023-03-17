@@ -20,6 +20,12 @@
                         <span class="menu-text">Audit Log</span>
                     </p:menuitem>
 
+                    <p:menuitem rendered="#{sessionInfoBean.hasRole('ADMIN')}" value="Sensor Stations" url="/plants/Plants.xhtml">
+                        <em class="icon pi pi-fw pi-wallet"/>
+                        <span class="menu-text">Manage Sensor Stations</span>
+                    </p:menuitem>
+
+
 
                     <p:menuitem value="Security Test" iconPos="right" url="/secured/test.xhtml"/>
 
