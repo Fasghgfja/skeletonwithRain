@@ -64,7 +64,7 @@ public class WebSecurityConfig {
                     .formLogin()
                     .loginPage("/login.xhtml")
                     .permitAll()
-                    .failureUrl("/error/access_denied.xhtml")
+                    .failureUrl("/login.xhtml?error=true")
                     .defaultSuccessUrl("/secured/welcome.xhtml")
                     .loginProcessingUrl("/login")
                     .successForwardUrl("/secured/welcome.xhtml")
@@ -74,7 +74,7 @@ public class WebSecurityConfig {
                     .deleteCookies("JSESSIONID");
             
             http.exceptionHandling().accessDeniedPage("/error/access_denied.xhtml");
-            // http.sessionManagement().invalidSessionUrl("/error/invalid_session.xhtml");
+            http.sessionManagement().invalidSessionUrl("/error/invalid_session.xhtml");
 			return http.build();
             }
             catch (Exception ex) {
