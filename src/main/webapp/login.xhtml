@@ -17,20 +17,19 @@
                     <p:staticMessage style="width: 100%"  rendered="${!empty param['error']}" severity="error" summary="ERROR" detail="Username or password invalid!" />
 
 
-                    <h:outputText value="Login" styleClass="login-header" style="font-weight: bold"/>
-                    <h:panelGrid columns="1" style="margin-top: 20px" layout="grid">
+                    <h:outputText value="Login" styleClass="login-header" style="font-weight: bold; font-size: 24px;"/>
+                    <h:panelGrid columns="1" style="margin-top: 20px; width: 100%" layout="grid">
                         <h:outputLabel for="username" value="Username:" />
-                        <p:inputText id="username" type="text" required="true"/>
+                        <p:inputText id="username" type="text" required="true" style="width: 100%" />
                         <h:outputLabel for="password" value="Password:" />
-                        <p:inputText id="password" type="password" required="true"/>
+                        <p:inputText id="password" type="password" required="true" style="width: 100%" />
                     </h:panelGrid>
-
 
                     <h:panelGrid columns="1" style="
                             width: 100%;
                             text-align: center;
                             align-self: center;">
-                        <button style=" margin-top: 20px;margin-right: 13px; background-color: black;width: 80%;" type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                        <button style=" margin-top: 20px;margin-right: 13px; background-color: black;width: 100%;" type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
                             <span class="ui-button-text">Login</span>
                         </button>
                         <div style="width: 100%">
@@ -40,7 +39,7 @@
 
                     <h:panelGrid columns="1" style="margin-top: 20px" layout="grid">
                         <p:commandLink style="display:block; text-align:center;">
-                            <p:graphicImage url="https://i.ibb.co/NxFM4rH/banner.png" style="height:70px;" />
+                            <p:graphicImage url="https://i.ibb.co/NxFM4rH/banner.png" style="height:100px;" />
                         </p:commandLink>
                     </h:panelGrid>
 
