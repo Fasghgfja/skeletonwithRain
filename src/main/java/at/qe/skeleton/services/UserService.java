@@ -60,14 +60,14 @@ public class UserService {
      * @param user the user to save
      * @return the updated user
      */
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("permitAll()")
     public Userx saveUser(Userx user) {
         if (user.isNew()) {
             user.setCreateDate(LocalDate.now());
-            user.setCreateUser(getAuthenticatedUser());
+            user.setCreateUser(user);
         } else {
             user.setUpdateDate(LocalDate.now());
-            user.setUpdateUser(getAuthenticatedUser());
+            user.setUpdateUser(user);
         }
         return userRepository.save(user);
     }

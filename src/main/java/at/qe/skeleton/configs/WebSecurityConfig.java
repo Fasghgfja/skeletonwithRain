@@ -52,7 +52,7 @@ public class WebSecurityConfig {
                     .and()
                     .authorizeHttpRequests(authorize -> authorize
                             .requestMatchers("/").permitAll()
-                            .requestMatchers("/register/**").permitAll()
+                            .requestMatchers("/registration/**").permitAll()
                             //.requestMatchers("/api/**").permitAll()
                             .requestMatchers("/**.jsf").permitAll()
                             .requestMatchers(antMatcher("/h2-console/**")).permitAll()
@@ -73,7 +73,6 @@ public class WebSecurityConfig {
                     .logout()
                     .logoutSuccessUrl("/login.xhtml")
                     .deleteCookies("JSESSIONID");
-            
             http.exceptionHandling().accessDeniedPage("/error/access_denied.xhtml");
             http.sessionManagement().invalidSessionUrl("/error/invalid_session.xhtml");
 			return http.build();

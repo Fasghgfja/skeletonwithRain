@@ -1,53 +1,34 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-    <title>Register</title>
-</h:head>
-<h:body>
-    <center>
-        <h:form>
-            <h2>JSF Registration App</h2>
-            <h4>Registration Form</h4>
-            <table>
-                <tr>
-                    <td>Username:</td>
-                    <td>
-                        <h:inputText label="Username"
-                                     id="fname" value="#{userRegistrationBean.userName}"
-                                     required="true"/>
-                        <h:message for="fname" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td>
-                        <h:inputText label="password"
-                                     id="lname" value="#{userRegistrationBean.password}"
-                                     required="true"/>
-                        <h:message for="lname" />
-                    </td>
-                </tr>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/loginMain.xhtml">
 
+<ui:define name="content">
+    <div style="display:flex;width: 100%; min-height: 100vh; justify-content: center; align-items: center; background-image: url('https://c0.wallpaperflare.com/path/750/852/868/4k-wallpaper-close-up-growth-leaves-facfdb0eca583ca4e1e41e4d0d0c71e1.jpg'); background-size: cover;">
 
-            </table>
-            <p><h:commandButton value="Register" action="confirm" /></p>
-        </h:form>
-    </center>
-</h:body>
-</html>
+        <p:card style="width: 25em; margin:10px">
+            <h:form>
+                <h:outputText value="Register" styleClass="login-header" style="font-weight: bold; font-size: 24px;"/>
+                <h:panelGrid columns="1" style="margin-top: 20px; width: 100%" layout="grid">
+                    <h:outputLabel for="username" value="Username:" />
+                    <p:inputText id="username" value="#{userRegistrationBean.userName}" type="text" required="true" style="width: 100%" />
+                    <h:outputLabel for="password" value="Password:" />
+                    <p:inputText id="password" value="#{userRegistrationBean.password}" type="password" required="true" style="width: 100%" />
+                </h:panelGrid>
 
-        <!--
-                       <tr>
-                           <td>Email Address:</td>
-                           <td>
-                               <h:inputText label="Email Address"
-                                            id="email" value="#{userBean.email}"
-                                            required="true"
-                                            validator="#{userBean.validateEmail}"/>
-                               <h:message for="email" />
-                           </td>
-                       </tr>
-        -->
+                <p><h:commandButton value="Register" action="confirm" /></p>
+
+                <h:panelGrid columns="1" style="margin-top: 30px" layout="grid">
+                    <h:commandLink>
+                        <h:graphicImage url="https://i.ibb.co/NxFM4rH/banner.png" style="height:100px;" />
+                    </h:commandLink>
+                </h:panelGrid>
+
+            </h:form>
+        </p:card>
+    </div>
+</ui:define>
+</ui:composition>
