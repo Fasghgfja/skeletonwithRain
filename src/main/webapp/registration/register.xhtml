@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Register</title>
+</h:head>
+<h:body>
+    <center>
+        <h:form>
+            <h2>JSF Registration App</h2>
+            <h4>Registration Form</h4>
+            <table>
+                <tr>
+                    <td>Username:</td>
+                    <td>
+                        <h:inputText label="Username"
+                                     id="fname" value="#{userRegistrationBean.userName}"
+                                     required="true"/>
+                        <h:message for="fname" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td>
+                        <h:inputText label="password"
+                                     id="lname" value="#{userRegistrationBean.password}"
+                                     required="true"/>
+                        <h:message for="lname" />
+                    </td>
+                </tr>
+
+
+            </table>
+            <p><h:commandButton value="Register" action="confirm" /></p>
+        </h:form>
+    </center>
+</h:body>
+</html>
+
+        <!--
+                       <tr>
+                           <td>Email Address:</td>
+                           <td>
+                               <h:inputText label="Email Address"
+                                            id="email" value="#{userBean.email}"
+                                            required="true"
+                                            validator="#{userBean.validateEmail}"/>
+                               <h:message for="email" />
+                           </td>
+                       </tr>
+        -->

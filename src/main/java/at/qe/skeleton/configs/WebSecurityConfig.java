@@ -52,6 +52,7 @@ public class WebSecurityConfig {
                     .and()
                     .authorizeHttpRequests(authorize -> authorize
                             .requestMatchers("/").permitAll()
+                            .requestMatchers("/register/**").permitAll()
                             //.requestMatchers("/api/**").permitAll()
                             .requestMatchers("/**.jsf").permitAll()
                             .requestMatchers(antMatcher("/h2-console/**")).permitAll()
