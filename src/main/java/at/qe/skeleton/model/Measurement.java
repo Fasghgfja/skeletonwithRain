@@ -28,22 +28,6 @@ public class Measurement implements Serializable {
     @Column
     private LocalDate timestamp;
 
-    public Long getSensorStationID() {
-        return sensorStationID;
-    }
-
-    public void setSensorStationID(Long sensorStationID) {
-        this.sensorStationID = sensorStationID;
-    }
-
-    public LocalDate getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDate timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public Long getId() {
         return id;
     }
