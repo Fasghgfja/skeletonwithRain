@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 public class Measurement implements Serializable {
@@ -15,6 +16,8 @@ public class Measurement implements Serializable {
     @Id
     private Long id;
     @Column
+    private Long sensorStationID;
+    @Column
     private Long plantID;
     @Column
     private Double value;
@@ -22,6 +25,24 @@ public class Measurement implements Serializable {
     private String unit;
     @Column
     private MeasurementType type;
+    @Column
+    private LocalDate timestamp;
+
+    public Long getSensorStationID() {
+        return sensorStationID;
+    }
+
+    public void setSensorStationID(Long sensorStationID) {
+        this.sensorStationID = sensorStationID;
+    }
+
+    public LocalDate getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDate timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public Long getId() {
         return id;
