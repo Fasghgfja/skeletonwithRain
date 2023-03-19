@@ -10,6 +10,10 @@ import org.springframework.data.repository.query.Param;
  * Repository for managing {@link Userx} entities.
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
+ * usage:
+ *  The Derived Query are split into two parts separated by keywords:
+ *  The first one is the introducer(e.g find.., read.., query.., ...)
+ *  The second one defines the criteria (e.g ...ByName, ...).
  */
 public interface UserxRepository extends AbstractRepository<Userx, String> {
 
