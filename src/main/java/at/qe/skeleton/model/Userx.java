@@ -21,9 +21,6 @@ import org.springframework.data.domain.Persistable;
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
  */
-
-
-
 @Entity
 public class Userx extends Metadata implements Persistable<String>, Serializable, Comparable<Userx> {
     @Serial
