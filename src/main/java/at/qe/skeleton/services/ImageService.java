@@ -1,72 +1,79 @@
 package at.qe.skeleton.services;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
 
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+import at.qe.skeleton.model.Image;
+import at.qe.skeleton.model.Plant;
+import at.qe.skeleton.repositories.ImageRepository;
+import at.qe.skeleton.repositories.PlantRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
+import java.util.Collection;
+
+/**
+ * Service for accessing and manipulating image data.
+ */
 @Service
+@Scope("application")
 public class ImageService {
-    private final Path root = Paths.get("./uploads");
 
+    @Autowired
+    private ImageRepository imageRepository;
 
-    public void init() {
-        try {
-            Files.createDirectories(root);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not initialize folder for upload!");
-        }
+    @Autowired
+    private PlantRepository plantRepository;
+
+    /**
+     * Returns a collection of all images.
+     */
+    @PreAuthorize("permitAll()")
+    public Collection<Image> getAllImages() {
+        return imageRepository.findAll();
     }
 
-
-    public void save(MultipartFile file) {
-        try {
-            Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-        } catch (Exception e) {
-            if (e instanceof FileAlreadyExistsException) {
-                throw new RuntimeException("A file of that name already exists.");
-            }
-
-            throw new RuntimeException(e.getMessage());
-        }
+    /**
+     * Loads a single image identified by its ID.
+     *
+     * @param imageId the ID of the image to load
+     * @return the image with the given ID
+     */
+    @PreAuthorize("permitAll()")
+    public Image loadImage(Long imageId) {
+        return imageRepository.findById(imageId).orElse(null);
     }
 
-
-    public Resource load(String filename) {
-        try {
-            Path file = root.resolve(filename);
-            Resource resource = new UrlResource(file.toUri());
-
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            } else {
-                throw new RuntimeException("Could not read the file!");
-            }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Error: " + e.getMessage());
+    /**
+     * Saves a single image.
+     * If the image is new then creation date will be saved along, if it is not then
+     * the method will change the update date for this image.
+     *
+     * @param image   the image to save
+     * @param plantId the ID of the plant associated with this image
+     * @return the saved image
+     */
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Image saveImage(Image image, Long plantId) {
+        Plant plant = plantRepository.findById(plantId).orElse(null);
+        if (plant == null) {
+            return null;
         }
+
+        image.setPlant(plant);
+        return imageRepository.save(image);
     }
 
-
-    public void deleteAll() {
-        FileSystemUtils.deleteRecursively(root.toFile());
-    }
-
-
-    public Stream<Path> loadAll() {
-        try {
-            return Files.walk(this.root, 1).filter(path -> !path.equals(this.root)).map(this.root::relativize);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not load the files!");
-        }
+    /**
+     * Deletes the image.
+     *
+     * @param image the image to delete
+     */
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deleteImage(Image image) {
+        Plant plant = image.getPlant();
+        plantRepository.save(plant);
+        imageRepository.delete(image);
     }
 }
