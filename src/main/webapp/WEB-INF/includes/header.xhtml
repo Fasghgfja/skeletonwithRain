@@ -25,23 +25,23 @@
                     <h:graphicImage url="../resources/images/leafFlaticon.png" height="30"/>
                 </p:menuitem>
 
-                <p:submenu label="Admin Submenus" rendered="#{sessionInfoBean.hasRole('ADMIN')}" icon="pi pi-fw pi-file">
+                <p:submenu label="Admin Submenus" style="color:white; font-weight: bold; background-color: black;"  rendered="#{sessionInfoBean.hasRole('ADMIN')}" icon="pi pi-fw pi-file">
 
                     <p:menuitem rendered="#{sessionInfoBean.hasRole('ADMIN')}" value="Manage Users" url="/admin/users.xhtml">
-                        <em class="icon pi pi-fw pi-user"/>
-                        <span class="menu-text">Manage Users</span>
+                        <em style="color:black; font-weight: bold" class="icon pi pi-fw pi-user"/>
+                        <span style="color:black; font-weight: bold" class="menu-text">Manage Users</span>
                     </p:menuitem>
 
 
                     <p:menuitem rendered="#{sessionInfoBean.hasRole('ADMIN')}" value="Image Upload Test" url="/admin/fileupload.xhtml">
-                        <em class="icon pi pi-fw pi-user"/>
-                        <span class="menu-text">Image Upload Test</span>
+                        <em style="color:black; font-weight: bold"  class="icon pi pi-fw pi-user"/>
+                        <span style="color:black; font-weight: bold" class="menu-text">Image Upload Test</span>
                     </p:menuitem>
 
 
                     <p:menuitem rendered="#{sessionInfoBean.hasRole('ADMIN')}" value="Image Gallery" url="/admin/imageGallery.xhtml">
-                        <em class="icon pi pi-fw pi-user"/>
-                        <span class="menu-text">Image Gallery</span>
+                        <em style="color:black; font-weight: bold" class="icon pi pi-fw pi-user"/>
+                        <span style="color:black; font-weight: bold" class="menu-text">Image Gallery</span>
                     </p:menuitem>
 
 
