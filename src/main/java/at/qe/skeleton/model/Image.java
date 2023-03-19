@@ -43,6 +43,14 @@ public class Image {
         this.imageName = imageName;
     }
 
+    public Plant getPlant() {
+        return plant;
+    }
+
+    public void setPlant(Plant plant) {
+        this.plant = plant;
+    }
+
     public Long getId() {return imageId;}
 
     public void setId(Long imageId) {this.imageId = imageId;}
