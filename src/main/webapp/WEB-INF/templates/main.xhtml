@@ -1,36 +1,36 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xml:lang="de">
+      xml:lang="en"
+      style="height: 100%;"
+>
 
-    <h:head>
-        <title>Skeleton</title>
-        <!-- stylesheets here -->
-            <h:outputStylesheet library="css" name="chat.css" />
-            <!-- js-utils here -->		
-            <h:outputScript library="js" name="chat.js" />
-    </h:head>
-    <h:body style="margin:10px;">
-		
-        <div id="page">
+<h:head>
+    <title>Plant Health</title>
+    <h:outputStylesheet name="css/style.css" />
+    <h:outputStylesheet name="css/style_footer.css" />
 
-            <div id="header" style="margin-bottom: 10px;">
-                <ui:include src="/WEB-INF/includes/header.xhtml" />
-            </div>
+</h:head>
+<h:body style="display: table; height: 100%; width: 100%;  margin: 0; padding: 0">
 
-            <div id="content">
-                <ui:insert name="content">Content</ui:insert>
-            </div>
+    <!-- Header -->
+    <div id="header" style="width: 100%">
+        <ui:include src="/WEB-INF/includes/header.xhtml" />
+    </div>
 
-            <div id="footer" style="margin-top: 10px;">
-                <ui:include src="/WEB-INF/includes/footer.xhtml" />
-            </div>
-
+    <!-- Content -->
+    <div id="page" style="display: table-row; height: 100%; width: 100%; background: ghostwhite">
+        <div  id="content" style="height: 100%; width: 100%; display: table-cell">
+            <ui:insert name="content">Content</ui:insert>
         </div>
-        
+    </div>
 
-    </h:body>
+    <!-- Footer -->
+    <div id="footer" style="width: 100%">
+        <ui:include src="/WEB-INF/includes/footer.xhtml" />
+    </div>
+</h:body>
 </html>
