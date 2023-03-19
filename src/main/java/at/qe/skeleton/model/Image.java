@@ -28,7 +28,7 @@ public class Image {
     private String author;
 
     @Column(columnDefinition = "DATE")
-    private LocalDate date;
+    private LocalDate creationDate;
 
 
 
@@ -64,10 +64,10 @@ public class Image {
     }
 
     public LocalDate getDate() {
-        return date;
+        return creationDate;
     }
 
     public void setDate(LocalDate date) {
-        this.date = date;
+        this.creationDate = date;
     }
 }
