@@ -1,0 +1,15 @@
+.table-spacer {
+    width: 1%;
+}
+.footer-link-text, body .ui-commandlink,  body .ui-link{
+    color: white;
+    font-family: 'Lucida Console', Courier New, monospace;
+}
+
+.footer-link-text:hover, body .ui-commandlink:hover,  body .ui-link:hover {
+    color: white;
+}
+
+.footer-link-text:active, body .ui-commandlink:active,  body .ui-link:active {
+    color: lightblue;
+}

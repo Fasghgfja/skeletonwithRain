@@ -3,41 +3,62 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       xml:lang="en">
-    <body>
-        <ui:composition>
-            <h:form>
-                <p:menubar style="background-color: #2E7930; border-radius: 0px;border:None">
+<head>
+    <title/>
+</head>
+<body>
+<ui:composition>
+    <ui:fragment rendered="#{sessionInfoBean.loggedIn}">
 
+        <h:form>
+            <p:menubar style="background-image: url('https://i.ibb.co/hcwDv6B/header.jpg'); background-size: cover; border-radius: 0px;border:None">
+                <p:menuitem onclick="history.back()" rendered="#{sessionInfoBean.loggedIn}">
+                    <em style="color:white" class="pi pi-fw pi-arrow-left"/>
+                </p:menuitem>
+
+                <p:menuitem style="margin: 0; padding: 0" url="/secured/welcome.xhtml">
+                    <h:graphicImage url="../resources/images/leavesFlaticon.png" height="30"/>
+                    <h:graphicImage url="../resources/images/logoWhite.png" height="40" style="margin-right: 1px; padding-top: 7px;align-self: center"/>
+                    <h:graphicImage url="../resources/images/leafFlaticon.png" height="30"/>
+                </p:menuitem>
+
+                <p:submenu label="Admin Submenus" rendered="#{sessionInfoBean.hasRole('ADMIN')}" icon="pi pi-fw pi-file">
                     <p:menuitem rendered="#{sessionInfoBean.hasRole('ADMIN')}" value="Manage Users" url="/admin/users.xhtml">
                         <em class="icon pi pi-fw pi-user"/>
                         <span class="menu-text">Manage Users</span>
                     </p:menuitem>
+                </p:submenu>
 
-                    <p:menuitem rendered="#{sessionInfoBean.hasRole('ADMIN')}" value="Audit Log" url="/admin/auditLog.xhtml">
-                        <em class="icon pi pi-fw pi-inbox"/>
-                        <span class="menu-text">Audit Log</span>
+                <p:menuitem rendered="#{sessionInfoBean.hasRole('ADMIN')}" value="Audit Log" url="/admin/auditLog.xhtml">
+                    <em class="icon pi pi-fw pi-inbox"/>
+                    <span class="menu-text">Audit Log</span>
+                </p:menuitem>
+
+                <p:menuitem rendered="#{sessionInfoBean.hasRole('ADMIN')}" value="Sensor Stations" url="/plants/Plants.xhtml">
+                    <em class="icon pi pi-fw pi-wallet"/>
+                    <span class="menu-text">Manage Sensor Stations</span>
+                </p:menuitem>
+
+
+
+                <p:menuitem value="Security Test" iconPos="right" url="/secured/test.xhtml"/>
+
+                <p:menuitem value="Websockets" iconPos="right" url="/secured/demos/chatRoom.xhtml"/>
+
+                <f:facet name="options">
+                    <p:menuitem>
+                        <p:button styleClass="rounded-button ui-button-outlined"
+                                  style="margin-top: 5px; color:white; font-family: 'Lucida Console', Courier New, monospace;"
+                                  href="/logout" value="Logout" title="Logout"/>
                     </p:menuitem>
-
-                    <p:menuitem rendered="#{sessionInfoBean.hasRole('ADMIN')}" value="Sensor Stations" url="/plants/Plants.xhtml">
-                        <em class="icon pi pi-fw pi-wallet"/>
-                        <span class="menu-text">Manage Sensor Stations</span>
-                    </p:menuitem>
-
-
-
-                    <p:menuitem value="Security Test" iconPos="right" url="/secured/test.xhtml"/>
-
-                    <p:menuitem value="Websockets" iconPos="right" url="/secured/demos/chatRoom.xhtml"/>
-
-                    
-                    <p:menuitem value="Login" iconPos="right" url="/login.xhtml" rendered="#{!sessionInfoBean.loggedIn}"/>
-                    <p:menuitem value="Logout" iconPos="right" url="/logout" rendered="#{sessionInfoBean.loggedIn}"/>
-                    
-                </p:menubar>
-            </h:form>
-        </ui:composition>
-    </body>
+                </f:facet>
+            </p:menubar>
+        </h:form>
+    </ui:fragment>
+</ui:composition>
+</body>
 </html>
 

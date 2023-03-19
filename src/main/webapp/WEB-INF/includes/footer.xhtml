@@ -2,25 +2,88 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
       xml:lang="en">
-    
-    <h:head>
-        <title>Unused: Footer</title>
-    </h:head>
-    <body>
-        <ui:composition>
 
-            <div style="float: right;">
-                <ui:fragment rendered="#{sessionInfoBean.loggedIn}">
-                    Logged in as #{sessionInfoBean.currentUserName} [#{sessionInfoBean.currentUserRoles}]
-                </ui:fragment>
-                <ui:fragment rendered="#{!sessionInfoBean.loggedIn}">
-                    Not logged in
-                </ui:fragment>
-            </div>
+<head>
+    <title>Unused: Footer</title>
+</head>
+<body style="margin-bottom: 20px">
+<ui:composition>
+    <ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+        <table style="width:100%;  background-image: url('https://c0.wallpaperflare.com/path/750/852/868/4k-wallpaper-close-up-growth-leaves-facfdb0eca583ca4e1e41e4d0d0c71e1.jpg'); background-size: cover; color:white; padding-top: 30px; padding-bottom: 20px">
+            <caption/>
+            <tr>
+                <th id="table-header 1"/>
+            </tr>
+            <tr style="width: 100%;">
+                <td style="width: 5%;" />
+                <td style="width: 30%; text-align: center; border: 3px solid white;vertical-align: top; font-family: 'Lucida Console', Courier New, monospace;">
+                    <p style="font-size: 20px;" >Placeholder: LINKS</p>
 
-        </ui:composition>
-    </body>
+                    <table style="width: 100%">
+                        <caption/>
+                        <tr>
+                            <th id="table-header 2"/>
+                        </tr>
+                        <tr>
+                            <td>
+
+
+                                <p>
+                                    <p:link rendered="#{sessionInfoBean.hasRole('ADMIN')}" outcome="/admin/users.xhtml" value="USERS"  class="footer-link-test"/>
+                                </p>
+                                <p>
+                                    <p:link outcome="/secured/welcome.xhtml" value="ABOUT" class="footer-link-text" />
+                                </p>
+                            </td>
+                            <td>
+
+                                <p>
+                                    <p:link rendered="#{sessionInfoBean.hasRole('ADMIN')}" outcome="/admin/auditLog.xhtml" value="AUDIT LOG" class="footer-link-text"/>
+                                </p>
+
+                                <p>
+                                    <p:link rendered="#{sessionInfoBean.hasRole('ADMIN')}" outcome="/registration/register.xhtml" value="REGISTRATION TEST"  class="footer-link-test"/>
+                                </p>
+
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td  class="table-spacer" />
+                <td style="width: 28%; text-align: center; border: 3px solid white; vertical-align: top; font-family: 'Lucida Console', Courier New, monospace;">
+                    <p style="font-size: 20px;">INFO</p>
+                    <ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+                        <p>Logged in as #{sessionInfoBean.currentUserName} [#{sessionInfoBean.currentUserRoles}]</p>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{!sessionInfoBean.loggedIn}">
+                        Not logged in
+                    </ui:fragment>
+                    <p:button styleClass="rounded-button ui-button-outlined" style="color:white; font-family: 'Lucida Console', Courier New, monospace; margin-top: 20px" href="/logout" value="Logout" title="Logout" />
+                </td>
+                <td  class="table-spacer" />
+                <td style="width: 30%; text-align: center; border: 3px solid white;vertical-align: top; font-family: 'Lucida Console', Courier New, monospace;">
+                    <p style="font-size: 20px;">Ngo Info</p>
+                    <table style="width: 100%">
+                        <caption/>
+                        <tr>
+                            <th id="table-header 3"/>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Text Placeholder</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 5%;" />
+            </tr>
+        </table>
+    </ui:fragment>
+</ui:composition>
+</body>
 </html>
 
