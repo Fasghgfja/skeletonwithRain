@@ -6,6 +6,8 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templates/main.xhtml">
+
+
     <ui:define name ="content">
         <h:form id="userForm">
             <p:dataTable id="usersTable" var="user" value="#{userListController.users}">

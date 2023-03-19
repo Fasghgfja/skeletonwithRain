@@ -1,7 +1,9 @@
 package at.qe.skeleton;
 
+import at.qe.skeleton.services.ImageService;
 import jakarta.faces.webapp.FacesServlet;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -46,5 +48,4 @@ public class Main extends SpringBootServletInitializer {
             servletRegistrationBean.setLoadOnStartup(1);
             return servletRegistrationBean;
     }
-
 }
