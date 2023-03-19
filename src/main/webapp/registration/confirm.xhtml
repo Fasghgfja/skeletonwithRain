@@ -1,43 +1,42 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-    <title>JSF Registration App</title>
-</h:head>
-<h:body>
-    <center>
-        <f:view>
-            <h:form>
-                <h2>JSF Registration App</h2>
-                <h4>Registration Form Conform</h4>
-                <table border="0">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Username:</td>
-                        <td><h:outputText value="#{userRegistrationBean.userName}"/></td>
-                    </tr>
-                    <tr>
-                        <td>Password:</td>
-                        <td><h:outputText value="#{userRegistrationBean.password}"/></td>
-                    </tr>
-                    <tr>
-                        <td>Email Address:</td>
-                        <td><h:outputText value="#{userRegistrationBean.email}"/></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <h:commandButton value="Edit" action="register" />
-                <h:commandButton value="Confirm" action="#{userRegistrationBean.addConfirmedUser}" />
-            </h:form>
-        </f:view>
-    </center>
-</h:body>
-</html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/loginMain.xhtml">
+
+    <ui:define name="content">
+        <div style="display:flex;width: 100%; min-height: 100vh; justify-content: center; align-items: center;
+     background-image: url('https://c4.wallpaperflare.com/wallpaper/331/66/547/nature-leaves-water-drops-closeup-wallpaper-preview.jpg'); background-size: cover;">
+
+            <p:card style="width: 30%;  justify-content: left;">
+                <h:form>
+
+                    <h:panelGrid columns="2" style=" width: 100%" >
+                        <h:outputText value="Registration Form" styleClass="login-header" style="font-size: 34px; color: black"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="2" style="width: 100%; margin-top: 20px;">
+                        <h:outputLabel for="username" value="Username:" />
+                        <h:outputText id="username" value="#{userRegistrationBean.userName}" type="text" style="width: 100%" />
+                        <h:outputLabel for="password" value="Password:" />
+                        <h:outputText id="password" value="#{userRegistrationBean.password}" type="password" style="width: 100%" />
+                        <h:outputLabel for="email" value="email:" />
+                        <h:outputText id="email" value="#{userRegistrationBean.email}" type="password" style="width: 100%" />
+                        <h:commandButton style="background-color: black;margin-top: 20px; width: 75%; height: 45px; line-height: 40px;
+                                         font-size: 16px; padding: 0;" type="submit"
+                                         class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                                         value="Edit" action="register" />
+                        <h:commandButton style="background-color: black;margin-top: 20px; width: 100%; height: 45px; line-height: 40px;
+                                         font-size: 16px; padding: 0;" type="submit"
+                                         class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                                         value="Confirm" action="#{userRegistrationBean.addConfirmedUser}" />
+                    </h:panelGrid>
+
+
+                </h:form>
+            </p:card>
+        </div>
+    </ui:define>
+</ui:composition>
