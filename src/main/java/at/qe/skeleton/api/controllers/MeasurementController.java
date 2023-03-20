@@ -1,30 +1,48 @@
 package at.qe.skeleton.api.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
 import at.qe.skeleton.api.exceptions.MeasurementNotFoundException;
 import at.qe.skeleton.api.model.Measurement;
 import at.qe.skeleton.api.services.MeasurementService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class MeasurementController {
+
     @Autowired
     MeasurementService measurementService;
 
     @PostMapping("/api/measurements")
-    private Measurement createMeasurement(@RequestBody Measurement measurement){
+    Measurement createMeasurement(@RequestBody Measurement measurement)
+    {
         return measurementService.addMeasurement(measurement);
     }
 
     @GetMapping("/api/measurements/{id}")
-    private Measurement getOneMeasurement(@PathVariable Long id){
-        try{
-            return measurementService.findOneMeasurement(id);
-        } catch(MeasurementNotFoundException ex)
+    Measurement getOneMeasurement(@PathVariable Long id)
+    {
+        try
         {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
+            return measurementService.findOneMeasurement(id);
+        }
+        catch(MeasurementNotFoundException ex)
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PatchMapping("/api/measurements/{id}")
+    Measurement updateMeasurement(@PathVariable long id, @RequestBody Measurement measurement)
+    {
+        return measurementService.updateMeasurement(id, measurement);
+    }
+
 }
