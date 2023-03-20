@@ -18,7 +18,7 @@ public class Image {
 
 
     @ManyToOne
-    @JoinColumn(name = "plant_id", nullable = false)
+    @JoinColumn(name = "plant_id", nullable = true)
     private Plant plant;
 
     @Column
@@ -35,13 +35,6 @@ public class Image {
     @Column(length = 50000000)
     private byte[] imageByte;
 
-    public Image() {
-
-    }
-
-    public Image(String imageName, byte[] picByte) {
-        this.imageName = imageName;
-    }
 
     public Plant getPlant() {
         return plant;

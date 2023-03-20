@@ -55,15 +55,16 @@ public class ImageService {
      * @return the saved image
      */
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Image saveImage(Image image, Long plantId) {
-        Plant plant = plantRepository.findById(plantId).orElse(null);
-        if (plant == null) {
-            return null;
-        }
+    public Image saveImage(Image image) {
+      //  Plant plant = plantRepository.findById(plantId).orElse(null);
+      //  if (plant == null) {
+         //   return null;
+       //}
 
-        image.setPlant(plant);
+      //  image.setPlant(plant);
         return imageRepository.save(image);
     }
+
 
     /**
      * Deletes the image.
