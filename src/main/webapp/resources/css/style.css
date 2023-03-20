@@ -1,33 +1,9 @@
-.ma{
-    --text-color: white;
+/* Test */
+body {
+    color: green;
 }
 
-.icon{
-    color: white;
-    margin-right: 5px;
+/* Test2 */
+.submenu {
+    background-color: green;
 }
-
-.menu-text{
-    color:white;
-    font-family: 'Lucida Console', Courier New, monospace;
-}
-
-.my-sub-menu{
-    color:white;
-}
-
-.my-card {
-    padding-top: 0px;
-    margin: 20px 5%;
-}
-
-
-.ui-menuitem-text {
-    vertical-align: middle;
-    color: white;
-}
-
-.body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-menuitem-text {
-     vertical-align: middle;
-     color: white;
- }

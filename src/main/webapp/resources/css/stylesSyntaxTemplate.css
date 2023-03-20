@@ -1,0 +1,186 @@
+@import url(https://fonts.googleapis.com/css2?family=Orbitron);
+
+html * {
+    font-family: "Orbitron", Helvetica, sans-serif;
+}
+
+.ui-widget {
+    font-family: "Orbitron", Helvetica, sans-serif !important;
+    font-size: 0.8rem !important;
+}
+
+.ui-panel {
+    opacity: 90%;
+}
+
+.ui-panelgrid {
+    opacity: 90%;
+}
+
+.ui-datatable {
+    opacity: 90%;
+}
+
+.ui-datepicker .ui-icon {
+    text-indent: 0 !important;
+}
+
+
+
+h1 {
+    text-align: center;
+}
+
+.loginSpan {
+    display: flex;
+    justify-content: center;
+}
+
+.loginFrame {
+    background-image: url(#{request.contextPath}/resources/images/Arduino_Login_Small.png);
+    display: flex;
+    width: 304px;
+    height: 770px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 2px;
+    text-align: center;
+}
+
+.loginGrid {
+    display: flex;
+    margin: 0 auto;
+}
+
+.acrosticGridLeft {
+    text-align: left;
+    color: white;
+    font-size: 1.5rem;
+    height: 770px;
+}
+
+.acrosticGridRight {
+    text-align: right;
+    color: white;
+    font-size: 1.5rem;
+    height: 770px;
+}
+
+.acrosticSpanLeft {
+    margin: 0 auto;
+    display: flex;
+    height: 770px;
+    float: left;
+}
+
+.acrosticSpanRight {
+    margin: 0 auto;
+    display: flex;
+    height: 770px;
+    float: right;
+}
+
+#username {
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    margin-top: 76px;
+    height: 40px;
+    width: 180px;
+    text-align: center;
+}
+
+#password {
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    margin-top: 10px;
+    height: 40px;
+    width: 180px;
+    text-align: center;
+}
+
+.loginButton {
+    color: black !important;
+    margin-top: 10px !important;
+    width: auto !important;
+    height: 40px !important;
+    border-color: black !important;
+    border-radius: 5px !important;
+    border-style: solid !important;
+    border-width: 2px !important;
+    background-color: white !important;
+}
+
+#tspForm3\:raspberrySettingsDialog {
+    height: 100% !important;
+    overflow: auto !important;
+    text-align: center;
+}
+
+.tspButtons {
+    display: flex;
+    justify-content: center;
+}
+
+.tspSlider {
+    margin: 0 auto;
+}
+
+.tspInput {
+    text-align: center;
+}
+
+.tspPanel > * {
+    background: none !important;
+    border: none !important;
+    color: #000000 !important;
+    padding: 0.5rem !important;
+}
+
+.tspColorPicker > * {
+    background: none !important;
+    border: 1px solid #dee2e6 !important;
+}
+
+.profilePanelGrid {
+    width: 100%;
+}
+
+.profilePanelGridHeading {
+    font-size: 1.1rem;
+}
+
+.profileButton {
+    display: flex !important;
+    margin: 0 auto !important;
+}
+
+.splitter {
+    display: flex;
+}
+
+.mainPage {
+    overflow: auto;
+}
+
+.sideMenu {
+    display: flex;
+    border: 0px;
+    border-radius: 4px;
+}
+
+#tspMenuForm {
+    display: flex;
+}
+
+#tspMenuForm\:tspMenu {
+    display: flex;
+    overflow: auto;
+    justify-content: center;
+    opacity: 90%;
+    border: 1px solid #e9ecef;
+    background: #f8f9fa;
+}
