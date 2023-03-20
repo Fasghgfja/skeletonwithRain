@@ -1,19 +1,14 @@
 package at.qe.skeleton.spring;
 
 import java.io.IOException;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import at.qe.skeleton.ui.controllers.demo.ChatManagerController;
-import at.qe.skeleton.ui.controllers.demo.UserStatusController;
 
 /**
  * This handler is triggered after a logout is performed.
@@ -25,20 +20,11 @@ import at.qe.skeleton.ui.controllers.demo.UserStatusController;
 @Component
 public class CustomizedLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
 
-    @Autowired
-    private UserStatusController userStatusController;
-    @Autowired
-    private ChatManagerController chatManagerController;
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
                     throws IOException, ServletException {
-        String username = authentication.getName();
-        // update chat-manager
-        this.chatManagerController.onLogout(username);
-        // update online-status
-        this.userStatusController.afterLogout(username);
-        // continue as expected
+        // log
         super.onLogoutSuccess(request, response, authentication);
     }
 

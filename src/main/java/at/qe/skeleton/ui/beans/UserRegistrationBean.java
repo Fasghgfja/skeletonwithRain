@@ -9,6 +9,7 @@ import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.validator.ValidatorException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import java.io.Serializable;
@@ -108,14 +109,8 @@ public class UserRegistrationBean implements Serializable {
         user.setPassword(passwordEncoder.encode(password));
        // user.setEmail(email);
         user.setEnabled(true);
-
-        selectedRoles.forEach(x -> {
-            if(x.equals("USER")) {
-                roles.add(UserRole.USER);
-            }
-        });
+        roles.add(UserRole.USER);
         user.setRoles(roles);
-
         userService.saveUser(user);
     }
 

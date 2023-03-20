@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 
 /**
@@ -28,4 +29,16 @@ public class LogService {
     public Collection<Log> getAllLogs() {
         return logRepository.findAll();
     }
+
+
+
+
+    //TODO: implement this placeholder method
+    public Log createLogEntry(){
+        Log logEntry = new Log();
+        return logEntry;
+    }
+
+
+
 }

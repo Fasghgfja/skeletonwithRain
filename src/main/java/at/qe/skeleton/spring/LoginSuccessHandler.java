@@ -1,16 +1,14 @@
 package at.qe.skeleton.spring;
 
+import at.qe.skeleton.services.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
 
-import at.qe.skeleton.ui.controllers.demo.ChatManagerController;
-import at.qe.skeleton.ui.controllers.demo.UserStatusController;
 
 /**
  * This handler is triggered after a login is performed.
- *
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
  *
@@ -19,17 +17,13 @@ import at.qe.skeleton.ui.controllers.demo.UserStatusController;
 public class LoginSuccessHandler implements ApplicationListener<InteractiveAuthenticationSuccessEvent> {
 
     @Autowired
-    private UserStatusController userStatusController;
-    @Autowired
-    private ChatManagerController chatManagerController;
+    private LogService logService;
 
     @Override
     public void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
         String username = event.getAuthentication().getName();
-        // update chat-manager
-        this.chatManagerController.onLogin(username);
-        // update online-status
-        this.userStatusController.afterLogin(username);
+        //Audit Log
+        logService.createLogEntry();
     }
 
 }
