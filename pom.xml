@@ -86,6 +86,16 @@
             <optional>true</optional>
         </dependency>
 
+
+        <!-- theme -->
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>rain-amber-dark</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+
+
         <!-- special test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

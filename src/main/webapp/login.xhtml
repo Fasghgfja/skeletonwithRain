@@ -6,9 +6,9 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templates/loginMain.xhtml">
 
+
     <ui:define name="content">
         <div style="display:flex;width: 100%; min-height: 100vh; justify-content: center; align-items: center; background-image: url('https://c0.wallpaperflare.com/path/750/852/868/4k-wallpaper-close-up-growth-leaves-facfdb0eca583ca4e1e41e4d0d0c71e1.jpg'); background-size: cover;">
-
 
             <p:card style="width: 25em; margin:10px" rendered="#{not sessionInfoBean.loggedIn}">
                 <form id="login_form" action="#{request.contextPath}/login" method="post">
