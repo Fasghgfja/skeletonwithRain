@@ -5,15 +5,10 @@ import at.qe.skeleton.model.Image;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.repositories.ImageRepository;
 import at.qe.skeleton.repositories.PlantRepository;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,31 +18,16 @@ import java.util.List;
 @Scope("application")
 public class ImageService {
 
-    //TODO:Only for testing , replace with ImageRepository access
-    List<Image> pictures;
-
-
     @Autowired
     private ImageRepository imageRepository;
 
     @Autowired
     private PlantRepository plantRepository;
 
-    //TODO:implement backend with database , method only made to test frontend
-    /**
-     * Returns a collection of all images.
-     */
-    @PostConstruct
-    public void init() {
-        pictures = new ArrayList<>();
-
-        pictures.add(new Image("../resources/images/logoTop.svg"));
-        pictures.add(new Image("../resources/images/logoTop.svg"));
-    }
 
     @PreAuthorize("permitAll()")
     public List<Image> getAllImages() {
-        return pictures;
+        return imageRepository.findAll();
     }
 
     /**

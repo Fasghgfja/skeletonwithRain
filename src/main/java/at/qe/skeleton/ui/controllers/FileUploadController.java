@@ -3,40 +3,50 @@ package at.qe.skeleton.ui.controllers;
 import at.qe.skeleton.model.Image;
 import at.qe.skeleton.services.ImageService;
 import jakarta.annotation.ManagedBean;
-import jakarta.enterprise.context.RequestScoped;
+
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
-import java.rmi.RemoteException;
+import java.io.*;
+
 
 
 @ManagedBean
 @SessionScoped
 public class FileUploadController implements Serializable {
 
-
     @Autowired
     private ImageService imageService;
 
 
-    public void upload(FileUploadEvent event) throws IOException {
-        throw new RuntimeException("Method Reached ! success");
-        /**Image image = new Image();
-        UploadedFile inputfile = event.getFile();
-        image.setImageByte(inputfile.getContent());
-        image.setAuthor("test");
-        imageService.saveImage(image);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Successful", image.getId() + " is uploaded."));
-      */
-    }
+    public void handleFileUpload(FileUploadEvent event) throws IOException {
+        FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        UploadedFile file = event.getFile();
+        // Do what you want with the file
+        InputStream in = file.getInputStream();
+        OutputStream out = new FileOutputStream(new File("file"));
+                // write the inputStream to a FileOutputStream
+                int read = 0;
+                byte[] bytes = new byte[1024];
+                while ((read = in.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
+                in.close();
+                out.flush();
+                out.close();
+                Image image = new Image();
+                image.setImageByte(bytes);
+                imageService.saveImage(image);
+
+        }
+
+
 }
+
+
