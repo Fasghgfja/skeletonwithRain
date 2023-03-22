@@ -9,7 +9,7 @@
 
     <ui:define name="viewname">
         <li>START</li>
-        <li><i class="pi pi-chevron-right"></i></li>
+        <li><em class="pi pi-chevron-right"></em></li>
         <li>
             <p:link outcome="/documentation">DOCUMENTATION</p:link>
         </li>
@@ -30,12 +30,12 @@ sass --update src/main/webapp/resources:src/main/webapp/resources --no-source-ma
 mvn jetty:run
 
 </code></pre>  
-<small>*Note: The sass command above is supported by <b>Dart Sass</b>. Please use <a href="https://sass-lang.com/install">Dart Sass</a> instead of <a href="https://sass-lang.com/ruby-sass">Ruby Sass</a>.</small>
+<small>*Note: The sass command above is supported by <strong>Dart Sass</strong>. Please use <a href="https://sass-lang.com/install">Dart Sass</a> instead of <a href="https://sass-lang.com/ruby-sass">Ruby Sass</a>.</small>
 <br /><br />
-                    <p>Navigate to <b>http://localhost:8080/rain</b> to view the demos which is exactly same as the live version.</p>                 
+                    <p>Navigate to <strong>http://localhost:8080/rain</strong> to view the demos which is exactly same as the live version.</p>
                     
                     <h4>Size</h4>
-                    <p><b>rem</b> units are utilized for scalability so in order to change the size of the overall UI, configure the font-size at the html root. Refer to the <b>SASS Variables</b> section for more information.</p>
+                    <p><strong>rem</strong> units are utilized for scalability so in order to change the size of the overall UI, configure the font-size at the html root. Refer to the <strong>SASS Variables</strong> section for more information.</p>
 <pre class="language-css"><code>
 html {
     font-size: $fontSize;
@@ -44,19 +44,20 @@ html {
 </code></pre>  
                     
                     <h4>Layout</h4>
-                    <p>Rain utilizes <a href="http://docs.oracle.com/javaee/6/tutorial/doc/giqxp.html">JSF templating APIs</a> and provides a main template.xhtml along with additional <b>topbar</b>, <b>menu</b>, <b>breadcrumb</b>, <b>rightpanel</b> and <b>footer</b> fragments for the base layout. 
-                        These xhtml files must be placed under WEB-INF folder and client pages should reference the template.xhtml as their template. 
-                        Provided empty.xhtml is a sample content page using the main template.xhtml that defines "content" as the main ui:define placeholder. By default template defines 3 placeholders 
+                    <p>Rain utilizes <a href="http://docs.oracle.com/javaee/6/tutorial/doc/giqxp.html">JSF templating APIs</a> and provides a main template.xhtml (in our project WEB-INF/templates/main.xhtml) along with additional <strong>topbar</strong>, <strong>menu</strong>, <strong>breadcrumb</strong>, <strong>rightpanel</strong> and <strong>footer</strong> fragments for the base layout(
+                        (In our project those are all located in WEB-INF/includes).
+                        These xhtml files must be placed under WEB-INF folder and client pages should reference the template.xhtml(in our project WEB-INF/templates/main.xhtml) as their template.
+                        Provided empty.xhtml is a sample content page using the main template.xhtml that defines "content" as the main ui:define placeholder. By default template(in our project WEB-INF/templates/main.xhtml) defines 3 placeholders
                         (page title, head, viewname and actual content) and you may add more as per your requirements.</p>
                         
-                    <p>Sample page below uses the main template from rain.</p>
+                    <p>Sample page below uses the correct template main.xhtml for the SWE project .</p>
 <pre class="language-xml"><code>
 &lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template.xhtml"&gt;
+                template="/WEB-INF/templates/main.xhtml"&gt;
                 
     &lt;ui:define name="title"&gt;Test Page&lt;/ui:define&gt;
 
@@ -70,8 +71,8 @@ html {
 
 </code></pre> 
                     
-                    <p>Other required assets are the css, javascript and images that are located inside resources/rain-layout folder, simply copy the rain-layout folder to your <b>%WEB-APP-FOLDER%/resources</b> folder 
-                        so that final path would be <b>%WEB-APP-FOLDER%/resources/rain-layout/</b>. Please refer to demo app or maven project of the demo app as the reference.</p>
+                    <p>Other required assets are the css, javascript and images that are located inside resources/rain-layout folder, simply copy the rain-layout folder to your <strong>%WEB-APP-FOLDER%/resources</strong> folder
+                        so that final path would be <strong>%WEB-APP-FOLDER%/resources/rain-layout/</strong>. Please refer to demo app or maven project of the demo app as the reference.</p>
                     
                     <h4>GuestPreferences Bean</h4>
                     <p>GuestPreferences is a simple session scoped bean to keep the user customizations of the layout, template xhtml files
@@ -81,11 +82,11 @@ html {
 &lt;h:outputStylesheet name="css/\#{guestPreferences.layout}.css" library="rain-layout" /&gt;
 
 </code></pre>                
-                    <p>In your application, you may also need a similar bean to make the template dynamic so that your users will be able to change their preferred experience.</p>
+                    <p>All parameters available in the interactive settings and more can be setted simply by changing the variable in GuestPreferences bean.</p>
                     
                     <h4>Layout Theme</h4>
                     <p>Rain provides 11 PrimeFaces layout theme colors out of the box. Setup of a theme simple as including the theme jar in your classpath and defining primefaces.THEME 
-                        context parameter in web.xml such as "layout-blue-light". A theme color offers 3 alternatives; <b>light</b>, <b>dim</b> and <b>dark</b>. Full list of available themes are;</p>
+                        context parameter in web.xml such as "layout-blue-light". A theme color offers 3 alternatives; <strong>light</strong>, <strong>dim</strong> and <strong>dark</strong>. Full list of available themes are;</p>
                     
                     <ul>
                         <li>blue</li>
@@ -103,7 +104,7 @@ html {
 
                     <h4>Component Theme</h4>
                     <p>Rain provides 11 PrimeFaces component theme colors out of the box. Setup of a theme simple as including the theme jar in your classpath and defining primefaces.THEME 
-                        context parameter in web.xml such as "primefaces-rain-blue-light". A theme color offers 3 alternatives; <b>light</b> and <b>dark</b>. Full list of available themes are;</p>
+                        context parameter in web.xml such as "primefaces-rain-blue-light". A theme color offers 3 alternatives; <strong>light</strong> and <strong>dark</strong>. Full list of available themes are;</p>
                     
                     <ul>
                         <li>blue</li>
@@ -125,7 +126,7 @@ html {
                         <li>Copy the sass folder from the distribution to webapp/resources.</li>
                         <li>Define the variables listed below along with the imports at the end.</li>
                         <li>Build the scss to generate css.</li>
-                        <li>Set primefaces.THEME context parameter as <i>rain-myown</i></li>
+                        <li>Set primefaces.THEME context parameter as <em>rain-myown</em></li>
                         <li>Either bundle the css in a jar file for reuse between different projects or serve from webapp/resources/primefaces-rain-myown folder using a h:outputStyleSheet.</li>
                     </ul>
                     
@@ -182,7 +183,7 @@ sass --watch src/main/webapp/resources:src/main/webapp/resources --no-source-map
 </code></pre>  
 
                     <h4>SASS Variables</h4>
-                    <p>In case you'd like to customize common variables such as font-size, the <b>_variables.scss</b> under the sass folder is where they are defined.</p>
+                    <p>In case you'd like to customize common variables such as font-size, the <strong>_variables.scss</strong> under the sass folder is where they are defined.</p>
 <pre class="language-css"><code>
 //general
 $fontSize: 14px !default;
@@ -199,7 +200,7 @@ $phoneBreakpoint: 576px !default;
 
 </code></pre>  
 
-                    <p>Variables of the layout are defined in <b>_layout_light.css</b>, <b>_layout_dim.scss</b> and <b>_layout_dark.scss</b> depending on the color scheme.</p>
+                    <p>Variables of the layout are defined in <strong>_layout_light.css</strong>, <strong>_layout_dim.scss</strong> and <strong>_layout_dark.scss</strong> depending on the color scheme.</p>
                     <h5>_layout_light.scss</h5>
 <pre class="language-css"><code>
 $bodyBgColor:#f4f7f9  !default;
@@ -223,7 +224,7 @@ $topbarItemSubmenuBoxShadow: 0 2px 8px 0 rgba(25, 26, 28, 0.12) !default;
 
 </code></pre> 
 
-                    <p>Variables of the PrimeFaces theme are defined in <b>_theme_light.css</b>, <b>_theme_dim.scss</b> and <b>_theme_dark.scss</b> depending on the color scheme.</p>
+                    <p>Variables of the PrimeFaces theme are defined in <strong>_theme_light.css</strong>, <strong>_theme_dim.scss</strong> and <strong>_theme_dark.scss</strong> depending on the color scheme.</p>
                     <h5>_theme_light.scss</h5>
 
 <div style="height:400px;overflow: auto">
@@ -1050,7 +1051,7 @@ xmlns:pr="http://primefaces.org/rain"
 &lt;/pr:menu&gt;
 
 </code></pre>   
-                    <p>Menu has 3 layouts modes; <b>static</b>, <b>overlay</b>, <b>horizontal</b>, <b>slim</b> and <b>slim plus</b>. Layout wrapper element in template.xhtml is used to define which mode to use by adding specific classes. Default
+                    <p>Menu has 3 layouts modes; <strong>static</strong>, <strong>overlay</strong>, <strong>horizontal</strong>, <strong>slim</strong> and <strong>slim plus</strong>. Layout wrapper element in template.xhtml (in our project WEB-INF templates main.xhtml ) is used to define which mode to use by adding specific classes. Default
                     is static and here is the list of classes for each mode.</p>
                     
                     <ul>
@@ -1106,7 +1107,7 @@ xmlns:pr="http://primefaces.org/rain"
                     <p>Rain Layout uses PrimeIcons v5.0 for layout which is included in the resources and no configuration is required.</p>
              
                     <h4>Outlined vs Filled</h4>
-                    <p>Input fields come in two styles, default is outlined with borders around the field whereas filled alternative adds a background color to the field. Applying <b>ui-input-filled</b> to an ancestor of an input enables the filled style.
+                    <p>Input fields come in two styles, default is outlined with borders around the field whereas filled alternative adds a background color to the field. Applying <strong>ui-input-filled</strong> to an ancestor of an input enables the filled style.
                         If you prefer to use filled inputs in the entire application, use a global container such as document body or the application element to apply the style class.</p>
 <pre class="language-xml"><code>
 &lt;div class="ui-input-filled"&gt;
@@ -1116,8 +1117,8 @@ xmlns:pr="http://primefaces.org/rain"
 </code></pre> 
                         
                     <h4>Overrides</h4>
-                    <p>The best practice when adding your own extensions is using the scss files under the <b>sass/overrides</b> folder. <b>_layout_variables</b> and <b>_theme_variables</b> files allow 
-                        overriding the default variables whereas <b>_layout_styles</b> and <b>_theme_styles</b> files can be used to include additional styling. 
+                    <p>The best practice when adding your own extensions is using the scss files under the <strong>sass/overrides</strong> folder. <strong>_layout_variables</strong> and <strong>_theme_variables</strong> files allow
+                        overriding the default variables whereas <strong>_layout_styles</strong> and <strong>_theme_styles</strong> files can be used to include additional styling.
                         This approach allows seamless updates so your changes are not overriden with the maintenance updates from PrimeTek.
                     </p>
 
@@ -1173,8 +1174,8 @@ xmlns:pr="http://primefaces.org/rain"
             <p>PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more. Although it is not required, it is highly
                 recommended to add PrimeFlex as it is likely to need such utilities when developing applications with PrimeFaces.</p>
             <h5>Install</h5>
-            <p>PrimeFlex is available at <a href="https://github.com/primefaces/primeflex">GitHub</a>. Download <i>primeflex.min.css</i>, add it to your application and include the path
-                usign the <i>h:outputStylesheet</i> component.</p>
+            <p>PrimeFlex is available at <a href="https://github.com/primefaces/primeflex">GitHub</a>. Download <em>primeflex.min.css</em>, add it to your application and include the path
+                usign the <em>h:outputStylesheet</em> component.</p>
 
             <pre class="language-xml"><code>
 &lt;h:outputStylesheet name="%YOUR_PATH%/primeflex.min.css" /&gt;
@@ -1204,7 +1205,7 @@ sass --update primeflex.scss:primeflex.min.css --style compressed
 </code></pre>
 
             <h5>Variables</h5>
-            <p>Predefined values like breakpoints can be customized when creating your own build using the <i>src/_variables</i> file.</p>
+            <p>Predefined values like breakpoints can be customized when creating your own build using the <em>src/_variables</em> file.</p>
 
             <div class="doc-tablewrapper">
                 <table class="doc-table">

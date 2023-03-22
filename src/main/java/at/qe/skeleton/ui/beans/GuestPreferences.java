@@ -1,19 +1,19 @@
 package at.qe.skeleton.ui.beans;
 
 
-import jakarta.annotation.ManagedBean;
-import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.SessionScoped;
 
+import jakarta.annotation.PostConstruct;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@ManagedBean
-@SessionScoped
+@Component
+@Scope("session")
 public class GuestPreferences implements Serializable {
 
-    private String menuMode = "layout-static layout-static-active";
+    private String menuMode = "layout-horizontal layout-static-active";
 
     private String darkMode = "light";
 
@@ -31,9 +31,9 @@ public class GuestPreferences implements Serializable {
 
     private boolean lightLogo = true;
 
-    private List<ComponentTheme> componentThemes = new ArrayList<ComponentTheme>();
+    private List<ComponentTheme> componentThemes = new ArrayList<>();
 
-    private List<LayoutPrimaryColor> layoutPrimaryColors = new ArrayList<LayoutPrimaryColor>();
+    private List<LayoutPrimaryColor> layoutPrimaryColors = new ArrayList<>();
 
 
 
