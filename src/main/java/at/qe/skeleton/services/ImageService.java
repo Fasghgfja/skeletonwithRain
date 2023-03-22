@@ -38,7 +38,7 @@ public class ImageService {
      */
     @PreAuthorize("permitAll()")
     public Image loadImage(Long imageId) {
-        return imageRepository.findById(imageId).orElse(null);
+        return imageRepository.findById(1L).orElse(null);
     }
 
     /**
@@ -56,7 +56,6 @@ public class ImageService {
       //  if (plant == null) {
          //   return null;
        //}
-
       //  image.setPlant(plant);
         return imageRepository.save(image);
     }

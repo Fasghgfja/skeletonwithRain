@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 
-
 /**
  * JPA Entity to Represent an Image.
  */
@@ -22,24 +21,6 @@ public class Image {
     private Plant plant;
 
 
-
-
-
-
-
-    //TODO:Field and Methods only for testing frontend , remove and implement properly with its service and respository
-    private String imageSrc;
-
-    public Image(String test) {imageSrc = test;}
-    public String getImageSrc() {return imageSrc;}
-    public void setImageSrc(String imageSrc) {this.imageSrc = imageSrc;}
-    public Image() {}
-
-
-
-
-
-
     @Column
     private String imageName;
 
@@ -48,7 +29,6 @@ public class Image {
 
     @Column(columnDefinition = "DATE")
     private LocalDate creationDate;
-
 
 
     @Column(length = 50000000)

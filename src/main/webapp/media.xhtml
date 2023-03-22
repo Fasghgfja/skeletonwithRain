@@ -39,9 +39,9 @@
                     <h5>Galleria</h5>
                     <div class="flex justify-content-center">
                         <p:galleria value="#{GalleryController.images}" var="image" numVisible="5" style="max-width: 640px">
-                            <p:graphicImage name="#{image.itemImageSrc}" alt="#{image.alt}" style="width: 100%" />
+                            <p:graphicImage src="#{request.contextPath}/getPic/#{image.imageId}" alt="#{image.alt}" style="width: 100%" />
                             <f:facet name="thumbnail">
-                                <p:graphicImage name="#{image.thumbnailImageSrc}" alt="#{image.alt}" />
+                                <p:graphicImage src="#{request.contextPath}/getPic/#{image.imageId}" alt="#{image.alt}" />
                             </f:facet>
                         </p:galleria>
                     </div>
