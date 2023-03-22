@@ -21,6 +21,25 @@ public class Image {
     @JoinColumn(name = "plant_id", nullable = true)
     private Plant plant;
 
+
+
+
+
+
+
+    //TODO:Field and Methods only for testing frontend , remove and implement properly with its service and respository
+    private String imageSrc;
+
+    public Image(String test) {imageSrc = test;}
+    public String getImageSrc() {return imageSrc;}
+    public void setImageSrc(String imageSrc) {this.imageSrc = imageSrc;}
+    public Image() {}
+
+
+
+
+
+
     @Column
     private String imageName;
 
