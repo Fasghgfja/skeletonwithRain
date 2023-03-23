@@ -15,9 +15,6 @@
 
     <ui:define name="head">
         <style type="text/css">
-
-
-
         </style>
     </ui:define>
 
@@ -33,7 +30,7 @@
                 <div class="card">
                     <h5>Galleria</h5>
                     <div class="flex justify-content-center">
-                        <p:galleria value="#{galleryController.images}" var="image" numVisible="5" style="max-width: 400px">
+                        <p:galleria value="#{galleryController.images}" var="image" numVisible="5" style="max-width: 300px">
                             <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 100%">
                             <f:param name="id" value="#{image.id}" />
                             </p:graphicImage>

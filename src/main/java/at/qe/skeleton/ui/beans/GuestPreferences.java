@@ -31,37 +31,14 @@ public class GuestPreferences implements Serializable {
 
     private boolean lightLogo = true;
 
-    private List<ComponentTheme> componentThemes = new ArrayList<>();
 
     private List<LayoutPrimaryColor> layoutPrimaryColors = new ArrayList<>();
 
 
 
     @PostConstruct
-    public void init() {  
-        componentThemes.add(new ComponentTheme("Blue", "blue", "#2c84d8"));
-        componentThemes.add(new ComponentTheme("Wisteria", "wisteria", "#A864AE"));
-        componentThemes.add(new ComponentTheme("Cyan", "cyan", "#25A4D4"));
-        componentThemes.add(new ComponentTheme("Amber", "amber", "#DB8519"));
-        componentThemes.add(new ComponentTheme("Pink", "pink", "#F5487F"));
-        componentThemes.add(new ComponentTheme("Orange", "orange", "#CB623A"));
-        componentThemes.add(new ComponentTheme("Victoria", "victoria", "#594791"));
-        componentThemes.add(new ComponentTheme("Chateau Green", "chateau-green", "#3C9462"));
-        componentThemes.add(new ComponentTheme("Paradiso", "paradiso", "#3B9195"));
-        componentThemes.add(new ComponentTheme("Chambray", "chambray", "#3161BA"));
-        componentThemes.add(new ComponentTheme("Tapestry", "tapestry", "#A2527F"));
+    public void init() {
 
-        layoutPrimaryColors.add(new LayoutPrimaryColor("Blue", "blue", "#2c84d8"));
-        layoutPrimaryColors.add(new LayoutPrimaryColor("Wisteria", "wisteria", "#A053A7"));
-        layoutPrimaryColors.add(new LayoutPrimaryColor("Cyan", "cyan", "#25A4D4"));
-        layoutPrimaryColors.add(new LayoutPrimaryColor("Amber", "amber", "#DB8519"));
-        layoutPrimaryColors.add(new LayoutPrimaryColor("Pink", "pink", "#F5487F"));
-        layoutPrimaryColors.add(new LayoutPrimaryColor("Orange", "orange", "#CB623A"));
-        layoutPrimaryColors.add(new LayoutPrimaryColor("Victoria", "victoria", "#705BB1"));
-        layoutPrimaryColors.add(new LayoutPrimaryColor("Chateau Green", "chateau-green", "#3C9462"));
-        layoutPrimaryColors.add(new LayoutPrimaryColor("Paradiso", "paradiso", "#3B9195"));
-        layoutPrimaryColors.add(new LayoutPrimaryColor("Chambray", "chambray", "#3161BA"));
-        layoutPrimaryColors.add(new LayoutPrimaryColor("Tapestry", "tapestry", "#924470"));
     }
 
     public String getDarkMode() {
@@ -82,7 +59,7 @@ public class GuestPreferences implements Serializable {
     public String getLayout() {
         return "layout-" + this.layoutPrimaryColor + '-' + this.darkMode ;
     }
-    
+
     public String getTheme() {
         return this.componentTheme + '-' + this.darkMode ;
     }
@@ -91,40 +68,26 @@ public class GuestPreferences implements Serializable {
         return layoutPrimaryColor;
     }
 
-    public void setLayoutPrimaryColor(String layoutPrimaryColor) {
-        this.layoutPrimaryColor = layoutPrimaryColor;
-        this.componentTheme = layoutPrimaryColor;
-    }
 
     public String getComponentTheme() {
         return componentTheme;
     }
 
-    public void setComponentTheme(String componentTheme) {
-        this.componentTheme = componentTheme;
-    }
-
     public String getMenuTheme() {
         return menuTheme;
     }
-    
-    public void setMenuTheme(String menuTheme) {
-        this.menuTheme = menuTheme;
-    }
+
 
     public String getTopbarTheme() {
         return topbarTheme;
     }
-    
-    public void setTopbarTheme(String topbarTheme) {
-        this.topbarTheme = topbarTheme;
-        this.lightLogo = !this.topbarTheme.equals("light");
-    }
+
+
 
     public String getMenuMode() {
         return this.menuMode;
     }
-    
+
     public void setMenuMode(String menuMode) {
         this.menuMode = menuMode;
     }
@@ -150,9 +113,7 @@ public class GuestPreferences implements Serializable {
     }
 
 
-    public List<ComponentTheme> getComponentThemes() {
-        return componentThemes;
-    }  
+
 
     public class ComponentTheme {
         String name;
@@ -180,7 +141,7 @@ public class GuestPreferences implements Serializable {
 
     public List<LayoutPrimaryColor> getLayoutPrimaryColors() {
         return layoutPrimaryColors;
-    }  
+    }
 
     public class LayoutPrimaryColor {
         String name;
