@@ -38,7 +38,7 @@ public class ImageService {
      */
     @PreAuthorize("permitAll()")
     public Image loadImage(Long imageId) {
-        return imageRepository.findById(1L).orElse(null);
+        return imageRepository.findById(imageId).orElse(null);
     }
 
     /**

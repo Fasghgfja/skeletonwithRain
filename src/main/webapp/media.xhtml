@@ -15,20 +15,15 @@
 
     <ui:define name="head">
         <style type="text/css">
-            .product-item .product-item-content {
-                border: 1px solid var(--surface-d);
-                border-radius: 3px;
-                margin: .3rem;
-                text-align: center;
-                padding: 2rem 0;
-            }
 
-            .product-item .product-image {
-                width: 50%;
-                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
-            }
+
+
         </style>
     </ui:define>
+
+
+
+
 
     <ui:define name="content">
         <div class="grid">
@@ -38,13 +33,13 @@
                 <div class="card">
                     <h5>Galleria</h5>
                     <div class="flex justify-content-center">
-                        <p:galleria value="#{galleryController.images}" var="image" numVisible="5" style="max-width: 640px">
-                            <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 100%; height: 60%">
+                        <p:galleria value="#{galleryController.images}" var="image" numVisible="5" style="max-width: 400px">
+                            <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 100%">
                             <f:param name="id" value="#{image.id}" />
                             </p:graphicImage>
                             <f:facet name="thumbnail">
-                                <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 20%; height: 10%">
-                                    <f:param name="imageId" value="#{image.id}" />
+                                <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 20%">
+                                    <f:param name="id" value="#{image.id}" />
                                 </p:graphicImage>
                             </f:facet>
                         </p:galleria>
