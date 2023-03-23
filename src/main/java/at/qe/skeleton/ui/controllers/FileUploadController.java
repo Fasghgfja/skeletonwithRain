@@ -33,7 +33,7 @@ public class FileUploadController implements Serializable {
         OutputStream out = new FileOutputStream(new File("file"));
                 // write the inputStream to a FileOutputStream
                 int read = 0;
-                byte[] bytes = new byte[1024];
+                byte[] bytes = new byte[50000000];
                 while ((read = in.read(bytes)) != -1) {
                     out.write(bytes, 0, read);
                 }

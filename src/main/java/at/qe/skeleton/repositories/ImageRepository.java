@@ -24,7 +24,7 @@ public interface ImageRepository extends AbstractRepository<Image, Long> {
      * @return The card with the given id.
      * @throws IllegalArgumentException If imageID is {@literal null}.
      */
-    Image findFirstByImageId(Long imageID);
+    Image findFirstById(Long imageID);
 
 
     /**

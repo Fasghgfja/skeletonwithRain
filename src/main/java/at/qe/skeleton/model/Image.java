@@ -13,7 +13,7 @@ public class Image {
     @Id
     @GeneratedValue
     @Column(nullable = false, unique = true)
-    private Long imageId;
+    private Long id;
 
 
     @ManyToOne
@@ -43,9 +43,9 @@ public class Image {
         this.plant = plant;
     }
 
-    public Long getId() {return imageId;}
+    public Long getId() {return id;}
 
-    public void setId(Long imageId) {this.imageId = imageId;}
+    public void setId(Long id) {this.id = id;}
 
     public byte[] getImageByte() {
         return imageByte;

@@ -38,10 +38,10 @@
                 <div class="card">
                     <h5>Galleria</h5>
                     <div class="flex justify-content-center">
-                        <p:galleria value="#{GalleryController.images}" var="image" numVisible="5" style="max-width: 640px">
-                            <p:graphicImage src="#{request.contextPath}/getPic/#{image.imageId}" alt="#{image.alt}" style="width: 100%" />
+                        <p:galleria value="#{galleryController.images}" var="image" numVisible="5" style="max-width: 640px">
+                            <p:graphicImage src="#{request.contextPath}/getPic/#{image.id}" alt="#{request.contextPath}/getPic/#{image.id}" style="width: 100%" />
                             <f:facet name="thumbnail">
-                                <p:graphicImage src="#{request.contextPath}/getPic/#{image.imageId}" alt="#{image.alt}" />
+                                <p:graphicImage src="#{request.contextPath}/getPic/#{image.id}" alt="#{request.contextPath}/getPic/#{image.id}" />
                             </f:facet>
                         </p:galleria>
                     </div>
@@ -53,7 +53,7 @@
                     <h5>Upload Picture Test</h5>
                     <h:form>
                         <p:fileUpload listener="#{fileUploadController.handleFileUpload}" mode="advanced" dragDropSupport="false"
-                                      multiple="true" update="messages" sizeLimit="100000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width:100%" />
+                                      multiple="true" update="messages" sizeLimit="50000000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width:100%" />
                         <p:growl id="messages" showDetail="true" />
                     </h:form>
                 </div>

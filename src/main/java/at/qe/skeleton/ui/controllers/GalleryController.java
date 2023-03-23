@@ -9,38 +9,44 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.primefaces.model.ResponsiveOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
+import org.springframework.web.bind.annotation.RequestMethod;
+import java.io.IOException;
 import java.util.List;
 
 @Component
 @Scope("view")
 public class GalleryController {
 
-
-    private List<ResponsiveOption> responsiveOptions;
-
-    private List<Image> images;
-
     @Autowired
     private ImageService imageService;
 
-    @PostConstruct
-    public void init() {
-        responsiveOptions = new ArrayList<>();
-        responsiveOptions.add(new ResponsiveOption("1024px", 3, 3));
-        responsiveOptions.add(new ResponsiveOption("768px", 2, 2));
-        responsiveOptions.add(new ResponsiveOption("560px", 1, 1));
-        images = imageService.getAllImages();
+    @ModelAttribute("images")
+    public List<Image> getImages() {
+        return imageService.getAllImages();
     }
 
+    @RequestMapping(value = "/getPic/{id}", method = RequestMethod.GET,
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> getImage(@PathVariable long id) throws IOException {
+        Image image = imageService.loadImage(id);
+        byte[] imageBytes = image.getImageByte();
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<byte[]>(imageBytes, headers, HttpStatus.CREATED);
+    }
+}
 
 
+
+    /**
     @RequestMapping(value = "/getPic/{id}")
     public void getPhoto(HttpServletResponse response, @PathVariable("id") long id) throws Exception {
         response.setContentType("image/jpeg");
@@ -53,11 +59,8 @@ public class GalleryController {
     }
 
 
-
-
-    /**
      * Method made for testing
-     * */
+     *
     public void setImageService(ImageService imageService) {
         this.imageService = imageService;
     }
@@ -69,11 +72,5 @@ public class GalleryController {
     public void setResponsiveOptions(List<ResponsiveOption> responsiveOptions) {
         this.responsiveOptions = responsiveOptions;
     }
-
-    public List<Image> getImages() {
-        images = imageService.getAllImages();
-        return images;
-    }
-
-}
+    */
 
