@@ -2,6 +2,8 @@ package at.qe.skeleton.model;
 
 
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
@@ -9,7 +11,10 @@ import java.time.LocalDate;
  * JPA Entity to Represent an Image.
  */
 @Entity
-public class Image {
+public class Image implements Serializable {
+
+    String imageSrc;
+
     @Id
     @GeneratedValue
     @Column(nullable = false, unique = true)
@@ -34,6 +39,21 @@ public class Image {
     @Column(length = 50000000)
     private byte[] imageByte;
 
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImageSrc() {
+        return imageSrc;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc = imageSrc;
+    }
 
     public Plant getPlant() {
         return plant;
