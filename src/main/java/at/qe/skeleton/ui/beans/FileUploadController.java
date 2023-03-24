@@ -29,7 +29,7 @@ public class FileUploadController implements Serializable {
      * Handles the uploaded file by converting it to a byte array, saving it as an {@link Image} object using the
      * {@link ImageService}, and displaying a {@code FacesMessage} upon successful upload.
      * @param event the file upload event triggered by the user */
- public void handleFileUpload(FileUploadEvent event) throws IOException {
+    public void handleFileUpload(FileUploadEvent event) throws IOException {
             FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             UploadedFile file = event.getFile();
@@ -53,7 +53,7 @@ public class FileUploadController implements Serializable {
             Image image = new Image();
             image.setImageByte(fileBytes);
             imageService.saveImage(image);
-        }
+    }
 
 
 }
