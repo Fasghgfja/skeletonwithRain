@@ -1,6 +1,5 @@
 package at.qe.skeleton.model;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
@@ -23,15 +22,13 @@ import org.springframework.data.domain.Persistable;
  */
 @Entity
 public class Userx extends Metadata implements Persistable<String>, Serializable, Comparable<Userx> {
-    @Serial
-    private static final long serialVersionUID = 1L;
-    //TODO:ask is this really necessary?
+
     @Id
     @Column(length = 100)
     private String username;
     @ManyToOne(optional = false)
     private Userx createUser;
-    @ManyToOne(optional = true)
+    @ManyToOne
     private Userx updateUser;
     private String password;
     private String firstName;

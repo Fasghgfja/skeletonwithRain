@@ -2,9 +2,7 @@ package at.qe.skeleton.services;
 
 
 import at.qe.skeleton.model.Image;
-import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.repositories.ImageRepository;
-import at.qe.skeleton.repositories.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,7 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Service for accessing and manipulating image data.
+ * Service for accessing and managing image data.
+ *  The class is annotated with @Scope("application") to ensure
+ *  that a single instance of the UserService is created for the entire application.
  */
 @Service
 @Scope("application")
@@ -21,10 +21,12 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
-    @Autowired
-    private PlantRepository plantRepository;
+    //TODO: Autowire plant repository to search by plant id and so
 
 
+    /**
+     * Returns a collection of all images.
+     */
     @PreAuthorize("permitAll()")
     public List<Image> getAllImages() {
         return imageRepository.findAll();
@@ -52,24 +54,16 @@ public class ImageService {
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public Image saveImage(Image image) {
-      //  Plant plant = plantRepository.findById(plantId).orElse(null);
-      //  if (plant == null) {
-         //   return null;
-       //}
-      //  image.setPlant(plant);
         return imageRepository.save(image);
     }
 
 
     /**
      * Deletes the image.
-     *
      * @param image the image to delete
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteImage(Image image) {
-        Plant plant = image.getPlant();
-        plantRepository.save(plant);
         imageRepository.delete(image);
     }
 }

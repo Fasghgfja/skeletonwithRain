@@ -11,8 +11,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import java.io.*;
 
-
-
+/**
+ * The class is responsible for handling the file upload functionality in the application.
+ * It receives the uploaded file, saves it in the local file system, and also saves it in the database as an {@link Image}.
+ *
+ * and performs the necessary actions. Upon successful upload, a {@code FacesMessage} is displayed.
+ * This class is dependent on the {@link ImageService}, which is injected using Spring's {@code @Autowired} annotation.
+ */
 @Component
 @Scope("session")
 public class FileUploadController implements Serializable {
@@ -27,6 +32,11 @@ public class FileUploadController implements Serializable {
         UploadedFile file = event.getFile();
 
         // Saving in the database
+        // The code doesn't save the file in the local file system.
+        // Instead, it saves the file as a byte array in the database through the imageService.saveImage() method.
+        // The FileOutputStream is used to write the bytes into a file named "file" (which doesn't really exist) .....solve it more elegantly
+        // possible solution : ByteArrayOutputStream instead of a FileOutputStream
+        //Obtaining bytes
         InputStream in = file.getInputStream();
         OutputStream out = new FileOutputStream(new File("file"));
                 // write the inputStream to a FileOutputStream and database
@@ -38,6 +48,7 @@ public class FileUploadController implements Serializable {
                 in.close();
                 out.flush();
                 out.close();
+                 //saving
                 Image image = new Image();
                 image.setImageByte(bytes);
                 imageService.saveImage(image);

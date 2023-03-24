@@ -2,6 +2,7 @@ package at.qe.skeleton.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.io.Serial;
@@ -10,10 +11,10 @@ import java.time.LocalDate;
 
 @Entity
 public class Measurement implements Serializable {
-    @Serial
-    static final long serialVersionUID = 66L;
-    //TODO:do we need this?
+
     @Id
+    @GeneratedValue
+    @Column(nullable = false, unique = true)
     private Long id;
     @Column
     private Long sensorStationID;

@@ -38,10 +38,6 @@ import java.util.List;
  * A common pattern is to pass the information, which is probably stored in your @ViewScoped bean, via request parameters.
  *
  */
-
-//TODO: pass real id to show more images instal of 1L only
-
-
 @Component
 @Scope("request")
 public class GalleryController implements Serializable {
@@ -51,7 +47,17 @@ public class GalleryController implements Serializable {
 
     private List<ResponsiveOption> responsiveOptions;
 
-
+    //TODO: use primefaces responsive options for the gallery
+    /**
+     *  This method initializes the {@link #responsiveOptions} list of {@link ResponsiveOption} objects for the gallery {@code p:galleria}, using PrimeFaces responsive options.
+     *  <p>The method sets up different configurations of {@link ResponsiveOption} objects for different screen sizes,
+     *  @see <a href="https://primefaces.github.io/primefaces/10_0_0/#/components/galleria?id=resposive-options">p:galleria responsive options</a>
+     *  as a  {@code @PostConstruct}. annotated method is called after the bean has been constructed and all its dependencies have been injected.
+     *  so that the gallery can adjust itself responsively to the device's screen width.
+     *  The responsive configurations are based on the recommended responsive options by PrimeFaces for Galleria component.
+     *  @see <a href="https://www.primefaces.org/showcase/ui/data/galleria/basic.xhtml">PrimeFaces Galleria component documentation</a>
+     *  @see ResponsiveOption
+     */
     @PostConstruct
     public void init() {
         responsiveOptions = new ArrayList<>();
@@ -60,7 +66,15 @@ public class GalleryController implements Serializable {
         responsiveOptions.add(new ResponsiveOption("560px", 1, 1));
     }
 
-
+    /**
+     * This method returns an instance of ByteArrayInputStream for the image content requested.
+     * It retrieves the image ID from the request parameters and loads the corresponding image using {@link ImageService#loadImage(Long)}.
+     * If no image ID is found in the request parameters, it loads a default image using {@link ImageService#loadImage(Long)} with an ID of 1L.
+     * THIS NEEDS TO BE RESOLVED
+     * The method returns the image content as a ByteArrayInputStream.
+     * @return An instance of ByteArrayInputStream containing the requested image content.
+     */
+    //TODO: multiple null requests bug
     public ByteArrayInputStream getPhotoAsStreamedContent() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         String id = facesContext.getExternalContext().getRequestParameterMap().get("id");
@@ -76,6 +90,10 @@ public class GalleryController implements Serializable {
         }
     }
 
+    /**
+     * Returns a list of all images available in the application.
+     * @return a list of Image objects representing all images in the application.
+     */
     public List<Image> getImages() {
         return imageService.getAllImages();
     }

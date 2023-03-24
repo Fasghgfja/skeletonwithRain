@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Repository for managing image entities {@link Image}.
  * Provides basic methods for loading, saving and removing entities as inherited from the Abstract Repository
- * and adds methods to find cards by CardId  {@link ImageRepository#findFirstByImageId(Long)} and
+ * and adds methods to find cards by CardId  {@link ImageRepository#findFirstById(Long)} and
  * By Deck {@link ImageRepository#findImagesByPlant(Plant)}.
  * The Derived Query are split into two parts separated by keywords:
  * The first one is the introducer(e.g find.., read.., query.., ...)

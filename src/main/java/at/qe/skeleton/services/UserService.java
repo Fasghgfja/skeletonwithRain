@@ -14,10 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
- * Service for accessing and manipulating user data.
- * <p>
- * This class is part of the skeleton project provided for students of the
- * course "Software Architecture" offered by Innsbruck University.
+ The UserService class provides methods for managing Userx objects and performing CRUD operations
+ on the underlying UserxRepository. The class is annotated with @Scope("application") to ensure
+ that a single instance of the UserService is created for the entire application.
  */
 @Service
 @Scope("application")
@@ -26,6 +25,9 @@ public class UserService {
     @Autowired
     private UserxRepository userRepository;
 
+    /**
+     The LogRepository is used to save logs for user deletions.
+     */
     @Autowired
     private LogRepository logRepository;
 
@@ -49,16 +51,11 @@ public class UserService {
     }
 
     /**
-     * Saves the user. This method will also set {@link Userx#setCreateDate} for new
-     * entities or {@link Userx#setUpdateDate} for updated entities.
-     * If the user did not exist before The Date of the operation will be stored with {@link Userx#setCreateDate}
-     * and the user requesting the operation will be stored as the creator with  {@link Userx#setCreateUser(Userx)}
-     * <p>
-     * If the user already existed then update Date and the user doing the update
-     * will be saved with  {@link Userx#setUpdateDate} {@link Userx#setUpdateUser(Userx)}
-     *
-     * @param user the user to save
-     * @return the updated user
+     Saves a user to the database. If the user is new, his create date and user are set. If the
+     user already exists, his update date and user are set instead.
+     The user is then saved to the UserxRepository.
+     @param user the Userx object to save
+     @return the updated Userx object
      */
     @PreAuthorize("permitAll()")
     public Userx saveUser(Userx user) {
@@ -73,11 +70,10 @@ public class UserService {
     }
 
     /**
-     * This method Deletes the user.
-     * the method will delete the selected user and additionally
-     * create an entry in the log stating who deleted the user and when.
-     *
-     * @param user the user to delete
+     Deletes a user from the database and logs the deletion.
+     The user to be deleted is passed as a parameter to the method. A Log object is created to record the deletion and saved to the
+     LogRepository. The Userx object is then deleted from the UserxRepository.
+     @param user the Userx object to delete
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteUser(Userx user) {
