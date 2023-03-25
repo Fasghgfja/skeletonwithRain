@@ -18,8 +18,7 @@ public class SensorStation extends Metadata implements Persistable<Long>, Serial
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_gen")
-    @SequenceGenerator(name = "id_gen", initialValue = 52)
+    @GeneratedValue
     @Column(nullable = false, unique = true)
     private Long sensorStationID;
 
@@ -39,7 +38,6 @@ public class SensorStation extends Metadata implements Persistable<Long>, Serial
     public Long getSensorStationID() {
         return sensorStationID;
     }
-    @Override
     public Long getId() {
         return this.getSensorStationID();
     }

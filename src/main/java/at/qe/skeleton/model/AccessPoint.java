@@ -12,12 +12,12 @@ public class AccessPoint extends Metadata implements Persistable<Long>, Serializ
     @Id
     @GeneratedValue
     @Column(nullable = false, unique = true)
-    private Long id;
+    private Long accessPointID;
     private String location;
     private boolean validated;
 
     public void setId(Long id) {
-        this.id = id;
+        this.accessPointID = id;
     }
 
     public String getLocation() {
@@ -38,7 +38,7 @@ public class AccessPoint extends Metadata implements Persistable<Long>, Serializ
 
     @Override
     public Long getId() {
-        return this.id;
+        return this.accessPointID;
     }
 
     @Override
@@ -48,6 +48,6 @@ public class AccessPoint extends Metadata implements Persistable<Long>, Serializ
 
     @Override
     public int compareTo(AccessPoint o) {
-        return this.id.compareTo(o.getId());
+        return this.accessPointID.compareTo(o.getId());
     }
 }
