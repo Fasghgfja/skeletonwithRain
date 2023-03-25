@@ -30,8 +30,7 @@ public class Image implements Serializable {
     private String imageName;
 
     @Column
-    @JoinColumn(name="uploader")
-    private Userx uploader;
+    private String author;
 
     @Column(columnDefinition = "DATE")
     private LocalDate creationDate;
@@ -76,6 +75,13 @@ public class Image implements Serializable {
         this.imageByte = imageByte;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     public LocalDate getDate() {
         return creationDate;
