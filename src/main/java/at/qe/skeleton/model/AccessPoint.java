@@ -1,12 +1,13 @@
 package at.qe.skeleton.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serializable;
-
+@Entity
 public class AccessPoint extends Metadata implements Persistable<Long>, Serializable, Comparable<AccessPoint>{
 
     @Id
