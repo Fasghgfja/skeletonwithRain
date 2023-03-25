@@ -1,6 +1,7 @@
 package at.qe.skeleton.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import java.time.LocalDate;
 
@@ -15,6 +16,10 @@ public abstract class Metadata {
     private LocalDate createDate;
     @Column(columnDefinition = "DATE")
     private LocalDate updateDate;
+    @ManyToOne
+    private Userx createUser;
+    @ManyToOne
+    private Userx updateUser;
 
     public LocalDate getCreateDate() {
         return createDate;
