@@ -4,8 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -16,17 +14,11 @@ public class Measurement implements Serializable {
     @GeneratedValue
     @Column(nullable = false, unique = true)
     private Long id;
-    @Column
     private Long sensorStationID;
-    @Column
     private Long plantID;
-    @Column
     private Double value;
-    @Column
     private String unit;
-    @Column
     private MeasurementType type;
-    @Column
     private LocalDate timestamp;
 
     public Long getId() {
