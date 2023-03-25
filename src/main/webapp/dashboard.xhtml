@@ -260,35 +260,37 @@
                         <div class="col-12 md:col-6">
                             <div class="card status">
                                 <div class="card-header">
-                                    <h5>Access Points</h5>
+                                    <h5>Audit Log</h5>
                                 </div>
                                 <div class="status-content">
                                     <div class="status-graph">
-                                        <p:graphicImage name="images/dashboard/asset-graph-72.svg" library="demo" />
+                                        <h:outputText value="#{userListController.usersAmount}" />
+                                        <h:outputText value="#{userListController.usersAmount}" />
+
                                         <div class="graph-info">
                                             <h5>12.6%</h5>
                                         </div>
                                     </div>
 
                                     <div class="status-info">
-                                        <h6>Conversion Funnels</h6>
+                                        <h6>Logs</h6>
                                         <ul>
                                             <li>
                                                 <div class="status">
-                                                    <span ><i class="pi pi-circle-on"></i> Added to card</span>
-                                                    <span >4.6%</span>
+                                                    <span ><i class="pi pi-circle-on"></i> Error</span>
+                                                    <span >4</span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="status">
-                                                    <span ><i class="pi pi-circle-on"></i> Reached checkout</span>
-                                                    <span >2.1%</span>
+                                                    <span ><i class="pi pi-circle-on"></i> Warning</span>
+                                                    <span >25</span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="status">
-                                                    <span ><i class="pi pi-circle-on"></i> Sessions converted</span>
-                                                    <span >5.9%</span>
+                                                    <span ><i class="pi pi-circle-on"></i> Success</span>
+                                                    <span >36</span>
                                                 </div>
                                             </li>
                                         </ul>
@@ -344,6 +346,13 @@
                 </div>
 
 
+
+
+
+
+
+
+                <!-- USERS TABLE -->
                 <div class="col-12 md:col-12 xl:col-8">
                     <div class="card transactions">
                         <div class="card-header">
