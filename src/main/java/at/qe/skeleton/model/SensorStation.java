@@ -15,26 +15,10 @@ import java.util.Objects;
 public class SensorStation extends Metadata implements Persistable<Long>, Serializable, Comparable<SensorStation> {
     @Serial
     private static final long serialVersionUID = 1L;
-
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_gen")
-    @SequenceGenerator(name = "id_gen", initialValue = 52)
+    @GeneratedValue
     @Column(nullable = false, unique = true)
     private Long sensorStationID;
-
-    @Column(length = 100)
-    private String location;
-
-    public String getSensorStationLocation() {
-        return location;
-    }
-
-    public void setSensorStationLocation(String location) {
-        this.location = location;
-    }
-
-
 
     public Long getSensorStationID() {
         return sensorStationID;
