@@ -23,24 +23,19 @@ import org.springframework.data.domain.Persistable;
 @Entity
 public class Userx extends Metadata implements Persistable<String>, Serializable, Comparable<Userx> {
 
-
-    /*
+    @Id
+    @Column(length = 100)
+    private String username;
     @ManyToOne(optional = false)
     private Userx createUser;
     @ManyToOne
     private Userx updateUser;
-    */
-    private String firstName;
-    private boolean enabled;
-    private String lastName;
     private String password;
+    private String firstName;
+    private String lastName;
     private String email;
     private String phone;
-    @Id
-    @Column(length = 100)
-    private String username;
-
-
+    boolean enabled;
 
     @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "Userx_UserRole")
@@ -110,7 +105,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     public void setRoles(Set<UserRole> roles) {
         this.roles = roles;
     }
-/*
+
     public Userx getCreateUser() {
         return createUser;
     }
@@ -127,7 +122,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     public void setUpdateUser(Userx updateUser) {
         this.updateUser = updateUser;
     }
-*/
+
 
     @Override
     public int hashCode() {
