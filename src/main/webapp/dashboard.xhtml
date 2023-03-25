@@ -73,14 +73,12 @@
             });
         </script>
 
-
-
-
-
-
-
-
     </ui:define>
+
+
+
+
+
 
     <ui:define name="content">
         <div class="layout-dashboard">
@@ -207,11 +205,11 @@
 
 
 
-                <!-- ..........................................OUTER FRAME LOG PREVIEW AND LOG GROUPS ................................................ -->
+                <!-- ..........................................OUTER FRAME LOG SYSTEM MESSAGES AND LOGS ................:::::::::::::::........ -->
                 <div class="col-12 md:col-12 xl:col-8">
                     <div class="grid">
 
-                        <!-- ..........................................LOG PREVIEW................................................................... -->
+                        <!-- ..........................................SYSTEM MESSAGES................................................. -->
                         <div class="col-12 md:col-6">
                             <div class="card feedbacks">
                                 <div class="card-header">
@@ -271,52 +269,70 @@
                             </div>
                         </div>
 
-                        <!-- ..........................................AUDIT LOG ERROR GROUPS.............................................................. -->
+
+                        <!-- ..........................................AUDIT LOG FRAME .............................................................. -->
                         <div class="col-12 md:col-6">
                             <div class="card status">
-                                <div class="card-header">
-                                    <h5>Audit Log</h5>
-                                </div>
+                                <h5>Audit Logs</h5>
                                 <div class="status-content">
-                                    <div class="status-graph">
-                                        <h:outputText value="#{userListController.usersAmount}" />
-                                        <h:outputText value="#{userListController.usersAmount}" />
 
-                                        <div class="graph-info">
-                                            <h5>12.6%</h5>
+
+
+                                    <!-- ..........................................AUDIT LOG PREVIEW .................................... -->
+                                        <div class="card">
+                                                <p:dataTable id="latestlogs" var="log" value="#{logListController.latestlogs}" selectionMode="single" reflow="true" paginatorPosition="bottom"
+                                                             rowKey="#{log.id}" paginator="true" rows="5" sortBy="#{log.id}" sortOrder="descending" >
+                                                    <p:column >
+                                                        <h:outputText value="#{log.id}" />
+                                                    </p:column>
+                                                    <p:column >
+                                                        <h:outputText value="#{log.text}" />
+                                                    </p:column>
+                                                </p:dataTable>
                                         </div>
-                                    </div>
 
+
+                                    <!-- ..........................................LOG CATEGORIES .................................... -->
                                     <div class="status-info">
                                         <h6>Logs</h6>
                                         <ul>
                                             <li>
                                                 <div class="status">
                                                     <span ><i class="pi pi-circle-on"></i> Error</span>
-                                                    <span >4</span>
+                                                    <span>
+                                                        <h:outputText value="#{logListController.logsAmount}" />
+                                                    </span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="status">
                                                     <span ><i class="pi pi-circle-on"></i> Warning</span>
-                                                    <span >25</span>
+                                                    <span >
+                                                        <h:outputText value="#{logListController.logsAmount}" />
+                                                    </span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="status">
                                                     <span ><i class="pi pi-circle-on"></i> Success</span>
-                                                    <span >36</span>
+                                                    <span >
+                                                        <h:outputText value="#{logListController.logsAmount}" />
+                                                    </span>
                                                 </div>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div><!-- .................LOG CATEGORIES END............. -->
+
+
+
                                 </div>
                             </div>
-                        </div>
+                        </div><!-- .......AUDIT LOG FRAME END............ -->
+
+
 
                     </div>
-                </div>
-
+                </div><!-- ................ END OF OUTER FRAME SYSTEM MESSAGES AND LOGS ............-->
 
 
 

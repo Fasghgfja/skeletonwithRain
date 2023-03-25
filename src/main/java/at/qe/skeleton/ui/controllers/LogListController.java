@@ -2,7 +2,6 @@ package at.qe.skeleton.ui.controllers;
 
 import at.qe.skeleton.model.Log;
 import at.qe.skeleton.services.LogService;
-import org.primefaces.model.ResponsiveOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -36,6 +35,11 @@ public class LogListController {
         latestLogs = new ArrayList<>();
         latestLogs.addAll(logService.getAllLogs());
         return latestLogs;
+    }
+
+
+    public Integer getLogsAmount() {
+        return logService.getLogsAmount();
     }
 
 

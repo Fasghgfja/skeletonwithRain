@@ -18,14 +18,13 @@ public class GuestPreferences implements Serializable {
 
     private String menuMode = "layout-horizontal layout-static-active";
     private String darkMode = "light";
-    private String layoutPrimaryColor = "cyan";
-    private String componentTheme = "cyan";
+    private String layoutPrimaryColor = "chateau-green";
+    private String componentTheme = "chateau-green";
     private String topbarTheme = "colored";
     private String menuTheme = "dim";
     private String profileMode = "popup";
     private String inputStyle = "outlined";
     private boolean lightLogo = true;
-
 
 
     /**
@@ -44,13 +43,6 @@ public class GuestPreferences implements Serializable {
      */
     public String getLayout() {
         return "layout-" + this.layoutPrimaryColor + '-' + this.darkMode ;
-    }
-
-    /**
-     * Returns the CSS class for the current component theme.
-     */
-    public String getTheme() {
-        return this.componentTheme + '-' + this.darkMode ;
     }
 
     public boolean isLightLogo() {
@@ -96,33 +88,6 @@ public class GuestPreferences implements Serializable {
         return layoutPrimaryColors;
     }
 
-
-
-
-
-    public class ComponentTheme {
-        String name;
-        String file;
-        String color;
-
-        public ComponentTheme(String name, String file, String color) {
-            this.name = name;
-            this.file = file;
-            this.color = color;
-        }
-
-        public String getName() {
-            return this.name;
-        }
-
-        public String getFile() {
-            return this.file;
-        }
-
-        public String getColor() {
-            return this.color;
-        }
-    }
 
 
     /**
