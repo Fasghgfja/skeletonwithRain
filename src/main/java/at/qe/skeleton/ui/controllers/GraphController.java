@@ -1,4 +1,4 @@
-package at.qe.skeleton.ui.beans;
+package at.qe.skeleton.ui.controllers;
 
 
 import jakarta.annotation.PostConstruct;
