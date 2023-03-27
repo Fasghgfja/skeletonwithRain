@@ -1,7 +1,7 @@
 package at.qe.skeleton.ui.controllers;
 
+import at.qe.skeleton.api.services.MeasurementService;
 import at.qe.skeleton.model.Measurement;
-import at.qe.skeleton.model.MeasurementType;
 import at.qe.skeleton.model.SensorStation;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,11 +24,13 @@ public class SensorStationDetailController implements Serializable {
     @Autowired
     private SensorStationService sensorService;
 
-    //TODO: implement this so that real measurments are sent
-    /**
+
     @Autowired
     private MeasurementService measurementService;
-     */
+
+
+    @Autowired
+    private GraphController GraphController;
 
 
     /**
@@ -37,46 +39,28 @@ public class SensorStationDetailController implements Serializable {
     private SensorStation sensorStation;
 
     /**
-     * Mock for frontend , delete for real implementation.
+     * Attribute to cache the latestMEasurements.
      */
     private List<Measurement> latestMeasurements;
 
-
-    /**
-     * Mock for frontend , delete for real implementation.
-     */
     public List<Measurement> getLatestMeasurements() {
-        latestMeasurements = new ArrayList<>();
-        Measurement airMeasurement = new Measurement();
-        airMeasurement.setId(1L);
-        airMeasurement.setType(MeasurementType.AIR_PRESSURE);
-        airMeasurement.setUnit("bar");
-        airMeasurement.setValue(1.0);
-        airMeasurement.setPlantID(2L);
-        Measurement tempMeasurement = new Measurement();
-        tempMeasurement.setId(2L);
-        tempMeasurement.setType(MeasurementType.TEMPERATURE);
-        tempMeasurement.setUnit("°C");
-        tempMeasurement.setValue(20.0);
-        tempMeasurement.setPlantID(2L);
-        Measurement humidityMeasurement = new Measurement();
-        humidityMeasurement.setId(3L);
-        humidityMeasurement.setType(MeasurementType.HUMIDITY);
-        humidityMeasurement.setUnit("%");
-        humidityMeasurement.setValue(50.0);
-        humidityMeasurement.setPlantID(2L);
-        Measurement lightMeasurement = new Measurement();
-        lightMeasurement.setId(4L);
-        lightMeasurement.setType(MeasurementType.LIGHT_INTENSITY);
-        lightMeasurement.setUnit("lux");
-        lightMeasurement.setValue(10.0);
-        lightMeasurement.setPlantID(2L);
-        latestMeasurements.add(airMeasurement);
-        latestMeasurements.add(tempMeasurement);
-        latestMeasurements.add(humidityMeasurement);
-        latestMeasurements.add(lightMeasurement);
+        latestMeasurements = new ArrayList<>(measurementService.getLatestPlantMeasurements(sensorStation));
         return latestMeasurements;
     }
+
+    /**
+     * Opens last measurement row toggle for selected sensor station.
+     */
+    public void onRowToggle(ToggleEvent event) {
+        if (event.getVisibility() == Visibility.VISIBLE) {
+            sensorStation = (SensorStation) event.getData();
+            if (sensorStation != this.sensorStation){
+                getLatestMeasurements();            }
+        }
+    }
+
+
+
 
     /**
      * Sets the currently displayed sensor station and reloads it form db. This sensor station is
@@ -121,17 +105,9 @@ public class SensorStationDetailController implements Serializable {
         sensorStation = null;
     }
 
-    /**
-     * Opens last measurement row toggle for selected sensor station.
-     */
-    //TODO: use the sensor station extracter from the event to make a call for its latest measurements
-    public void onRowToggle(ToggleEvent event) {
-        if (event.getVisibility() == Visibility.VISIBLE) {
-            SensorStation sensorStation = (SensorStation) event.getData();
-            if (latestMeasurements == null) {
-                getLatestMeasurements();            }
-        }
-    }
+
+
+
 
 
 
