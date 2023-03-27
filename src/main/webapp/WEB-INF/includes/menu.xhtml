@@ -53,7 +53,7 @@
                 <p:menuitem id="m_dashboard" value="Dashboard" icon="pi pi-home" outcome="/dashboard" />
 
                 <p:submenu id="m_components" label="Aministration Utility" icon="pi pi-star-fill" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
-                    <p:menuitem id="m_input" value="Manage Sensor Stations" icon="pi pi-check-square" outcome="/table" />
+                    <p:menuitem id="m_input" value="Manage Sensor Stations" icon="pi pi-check-square" outcome="/greenhouses" />
                     <p:menuitem id="m_table" value="Manage Users" icon="pi pi-table" outcome="/table" />
                     <p:menuitem id="m_list" value="Manage Access Points" icon="pi pi-list" outcome="/table" />
                     <p:menuitem id="m_media" value="Image Gallery Test" icon="pi pi-image" url="/admin/media.xhtml" />
@@ -63,7 +63,7 @@
                     <p:menuitem id="m_doc" value="Documentation" icon="pi pi-info-circle" outcome="/documentation"/>
                 </p:submenu>
                 <p:submenu id="m_primeblocks" label="Gardener Submenu" icon="pi pi-prime" rendered="#{sessionInfoBean.hasRole('GARDENER')}">
-                    <p:menuitem id="m_freeblocks" value="Manage Greenhouses" icon="pi pi-eye" outcome="/table"/>
+                    <p:menuitem id="m_freeblocks" value="Manage Greenhouses" icon="pi pi-eye" outcome="/greenhouses"/>
                     <p:menuitem id="m_allblocks" value="Gardener utility" icon="pi pi-globe" target="_blank" url="https://www.primefaces.org/primeblocks-jsf"/>
                 </p:submenu>
 

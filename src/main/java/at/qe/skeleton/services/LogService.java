@@ -30,7 +30,10 @@ public class LogService {
         return logRepository.findAll();
     }
 
-
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Integer getLogsAmount() {
+        return logRepository.findAll().stream().toList().size();
+    }
 
 
     //TODO: implement this placeholder method
@@ -39,6 +42,8 @@ public class LogService {
         return logEntry;
     }
 
-
+    public void saveLog(Log log) {
+        logRepository.save(log);
+    }
 
 }

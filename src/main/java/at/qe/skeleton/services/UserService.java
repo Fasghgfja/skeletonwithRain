@@ -39,6 +39,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Integer getUsersAmount() {
+        return userRepository.findAll().stream().toList().size();
+    }
+
     /**
      * Loads a single user identified by its username.
      *

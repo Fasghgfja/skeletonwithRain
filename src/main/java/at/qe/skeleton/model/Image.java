@@ -2,6 +2,7 @@ package at.qe.skeleton.model;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.time.LocalDate;

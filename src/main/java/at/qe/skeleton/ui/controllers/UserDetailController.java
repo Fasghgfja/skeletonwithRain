@@ -4,8 +4,7 @@ import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.services.UserService;
 import java.io.Serializable;
 
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
