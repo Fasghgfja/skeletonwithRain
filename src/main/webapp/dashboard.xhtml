@@ -91,7 +91,8 @@
                             <h5>Selected GreenHouse Details</h5>
                         </div>
                         <div class="card">
-                            <p:barChart model="#{graphController.barModel}"/>
+                            <p:barChart id="myBarChart" model="#{graphController.barModel}" />
+
                         </div>
                     </div>
                 </div>
@@ -109,6 +110,7 @@
                             <h5>Green Houses</h5>
                             <p:dataTable id="ordersTable" var="sensorStation" value="#{sensorStationListController.sensorStations}" selectionMode="single" reflow="true" paginatorPosition="bottom"
                                          rowKey="#{sensorStation.id}" paginator="true" rows="5" sortBy="#{sensorStation.id}" sortOrder="descending" >
+                                <p:ajax event="rowSelect" update="myBarChart" listener="#{graphController.onRowSelect}" />
                                 <p:column headerText="Id" sortBy="#{sensorStation.id}">
                                     <h:outputText value="#{sensorStation.id}" />
                                 </p:column>
