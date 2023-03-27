@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/Fayer/Desktop/Project/cleanProject/src/main/java/at/qe/skeleton</OriginalElement>
+  <nodes>
+    <node x="-724.0019210463108" y="1239.3808963554802">at.qe.skeleton.model.UserRole</node>
+    <node x="-329.5859777113053" y="949.5367413189206">at.qe.skeleton.services.ImageService</node>
+    <node x="-224.58972250561715" y="1702.6568033208769">at.qe.skeleton.ui.beans.SecurityTestBean</node>
+    <node x="1280.410277494383" y="1702.6568033208769">at.qe.skeleton.api.exceptions.MeasurementNotFoundException</node>
+    <node x="640.3274447364843" y="386.3515169235252">at.qe.skeleton.ui.controllers.GalleryController</node>
+    <node x="-1709.0" y="338.87203899358246">at.qe.skeleton.ui.controllers.SensorStationDetailController</node>
+    <node x="621.8276489236041" y="-568.0363074958516">at.qe.skeleton.model.Metadata</node>
+    <node x="-876.5897225056171" y="1702.6568033208769">at.qe.skeleton.configs.WebSecurityConfig</node>
+    <node x="245.4711689327712" y="-1172.0">at.qe.skeleton.model.Userx</node>
+    <node x="905.8252838493258" y="-741.1192406094406">at.qe.skeleton.model.Plant</node>
+    <node x="-469.2568703201839" y="-710.705208151159">at.qe.skeleton.repositories.UserxRepository</node>
+    <node x="976.4102774943831" y="1702.6568033208769">at.qe.skeleton.configs.CustomServletContextInitializer</node>
+    <node x="24.44771226246894" y="1271.6568033208769">at.qe.skeleton.model.Log</node>
+    <node x="-500.58972250561715" y="1702.6568033208769">at.qe.skeleton.model.MeasurementType</node>
+    <node x="-929.172749446311" y="-688.3317700442549">at.qe.skeleton.repositories.PlantRepository</node>
+    <node x="-1709.0" y="1702.6568033208769">at.qe.skeleton.ui.beans.GuestPreferences</node>
+    <node x="1163.7126268074871" y="-501.98592459983115">at.qe.skeleton.model.AccessPoint</node>
+    <node x="1380.5591119545898" y="-95.58723543496922">at.qe.skeleton.services.SensorStationService</node>
+    <node x="-642.756444574587" y="656.3305925223635">at.qe.skeleton.model.Measurement</node>
+    <node x="-1709.0" y="2375.656803320877">at.qe.skeleton.utils.CDIAutowired</node>
+    <node x="606.4102774943831" y="1702.6568033208769">at.qe.skeleton.spring.CDIAwareBeanPostProcessor</node>
+    <node x="990.2180892199412" y="204.19981703965004">at.qe.skeleton.ui.controllers.UserListController</node>
+    <node x="691.6796737889399" y="783.6040400039992">at.qe.skeleton.services.UserService</node>
+    <node x="-173.96228243573432" y="-168.79886819931494">at.qe.skeleton.repositories.ImageRepository</node>
+    <node x="345.5864745632671" y="-241.90099589893373">at.qe.skeleton.repositories.SensorStationRepository</node>
+    <node x="-58.19185027642925" y="-311.6481078340205">at.qe.skeleton.repositories.LogRepository</node>
+    <node x="286.41027749438285" y="1702.6568033208769">at.qe.skeleton.ui.websockets.WebSocketManager</node>
+    <node x="-316.55576975217446" y="677.0212418835476">at.qe.skeleton.ui.beans.SessionInfoBean</node>
+    <node x="534.6567033478873" y="159.43584486664918">at.qe.skeleton.spring.LoginSuccessHandler</node>
+    <node x="-337.6269446949909" y="1183.301188583845">at.qe.skeleton.model.Image</node>
+    <node x="-1455.1490174289363" y="-33.935406356359636">at.qe.skeleton.repositories.AbstractRepository</node>
+    <node x="-758.6875185818199" y="-529.8609875017698">at.qe.skeleton.api.services.MeasurementService</node>
+    <node x="291.8146359530924" y="329.7892611479151">at.qe.skeleton.ui.controllers.UserDetailController</node>
+    <node x="-1336.0" y="1798.721729858703">at.qe.skeleton.spring.CustomizedLogoutSuccessHandler</node>
+    <node x="-342.4511518781003" y="48.24761967438917">at.qe.skeleton.ui.beans.UserRegistrationBean</node>
+    <node x="-1490.7657423952803" y="-524.9109609552384">at.qe.skeleton.repositories.MeasurementRepository</node>
+    <node x="681.6443144075106" y="-272.4394198546794">at.qe.skeleton.model.SensorStation</node>
+    <node x="315.73904147586086" y="612.4911135280481">at.qe.skeleton.ui.controllers.GraphController</node>
+    <node x="1851.4102774943826" y="1702.6568033208769">at.qe.skeleton.utils.CDIContextRelated</node>
+    <node x="-21.70100582112832" y="1000.2025753200437">at.qe.skeleton.services.PlantService</node>
+    <node x="989.5103951005349" y="6.508081201346613">at.qe.skeleton.ui.controllers.SensorStationListController</node>
+    <node x="1033.7063277360517" y="438.2556072506486">at.qe.skeleton.services.LogService</node>
+    <node x="-1079.4643236141728" y="-124.32412196156292">at.qe.skeleton.ui.controllers.FileUploadController</node>
+    <node x="-629.5020877552688" y="384.56671603896257">at.qe.skeleton.ui.controllers.LogListController</node>
+    <node x="19.410277494382854" y="1702.6568033208769">at.qe.skeleton.model.PlantColorCodes</node>
+    <node x="1598.410277494383" y="1702.6568033208769">at.qe.skeleton.api.controllers.MeasurementController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="at.qe.skeleton.configs.WebSecurityConfig" target="at.qe.skeleton.spring.CustomizedLogoutSuccessHandler" relationship="CREATE">
+      <point x="-165.5" y="18.564926537826068" />
+      <point x="199.0" y="0.0" />
+    </edge>
+    <edge source="at.qe.skeleton.model.AccessPoint" target="at.qe.skeleton.model.Metadata" relationship="GENERALIZATION">
+      <point x="-99.00025578610894" y="6.852588126093906E-5" />
+      <point x="1112.3253710213785" y="-352.9858560739499" />
+      <point x="1112.3253710213785" y="-302.37785607394994" />
+      <point x="727.827371021378" y="-302.37785607394994" />
+      <point x="-2.779022258891928E-4" y="116.00045142190163" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.SensorStationDetailController" target="at.qe.skeleton.services.SensorStationService" relationship="TO_ONE">
+      <point x="0.0" y="159.9999610064175" />
+      <point x="-1562.5" y="1675.157" />
+      <point x="1349.0" y="1675.157" />
+      <point x="1349.0" y="357.0" />
+      <point x="1535.559" y="357.0" />
+      <point x="-1.1195458978363604E-4" y="105.00023543496921" />
+    </edge>
+    <edge source="at.qe.skeleton.model.Userx" target="at.qe.skeleton.model.UserRole" relationship="TO_MANY">
+      <point x="-1.6893277120288985E-4" y="-435.0" />
+      <point x="347.471" y="-1204.5" />
+      <point x="-1592.5" y="-1204.5" />
+      <point x="-1592.5" y="133.56500000000005" />
+      <point x="-381.0" y="133.565" />
+      <point x="-381.0" y="1322.381" />
+      <point x="89.49992104631087" y="1.0364451986788481E-4" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.LogListController" target="at.qe.skeleton.services.LogService" relationship="TO_ONE">
+      <point x="8.775526885074214E-5" y="83.00028396103744" />
+      <point x="-519.502" y="623.248" />
+      <point x="25.549" y="623.248" />
+      <point x="25.549" y="592.0" />
+      <point x="997.718" y="592.0" />
+      <point x="997.718" y="521.256" />
+      <point x="-103.00032773605176" y="3.927493513629088E-4" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.FileUploadController" target="at.qe.skeleton.model.Image" relationship="CREATE">
+      <point x="-130.0" y="0.0" />
+      <point x="-1756.5" y="-74.32412196156292" />
+      <point x="-1756.5" y="2348.156803320877" />
+      <point x="-242.08972250561715" y="2348.156803320877" />
+      <point x="-1.4627778106262213" y="204.0" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.GraphController" target="at.qe.skeleton.model.Measurement" relationship="TO_MANY">
+      <point x="-157.50004147586088" y="-1.1352804813213879E-4" />
+      <point x="71.0" y="915.491" />
+      <point x="71.0" y="634.0" />
+      <point x="-522.756" y="634.0" />
+      <point x="4.4457458704982855E-4" y="-258.9995925223635" />
+    </edge>
+    <edge source="at.qe.skeleton.model.SensorStation" target="at.qe.skeleton.model.Metadata" relationship="GENERALIZATION">
+      <point x="5.661386762767506E-5" y="-182.00043621927057" />
+      <point x="805.144371021378" y="-302.37785607394994" />
+      <point x="727.827371021378" y="-302.37785607394994" />
+      <point x="-2.779022258891928E-4" y="116.00045142190163" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.beans.UserRegistrationBean" target="at.qe.skeleton.model.Userx" relationship="CREATE">
+      <point x="-22.011130557634033" y="-281.0" />
+      <point x="-191.46228243573432" y="-204.40099589893373" />
+      <point x="276.5377175642657" y="-204.40099589893373" />
+      <point x="-70.93345136850553" y="435.0" />
+    </edge>
+    <edge source="at.qe.skeleton.repositories.ImageRepository" target="at.qe.skeleton.repositories.AbstractRepository" relationship="INTERFACE_GENERALIZATION">
+      <point x="-3.465428875415455E-4" y="71.00001212536495" />
+      <point x="55.03737102137825" y="8.622143926050057" />
+      <point x="-1109.7446289786217" y="8.622143926050057" />
+      <point x="-1109.7446289786217" y="61.25214392604994" />
+      <point x="115.50038845031463" y="35.18755028240969" />
+    </edge>
+    <edge source="at.qe.skeleton.model.Measurement" target="at.qe.skeleton.model.SensorStation" relationship="TO_ONE">
+      <point x="120.00044457458705" y="0.16040747763645413" />
+      <point x="-359.951" y="915.491" />
+      <point x="-359.951" y="29.0" />
+      <point x="482.086" y="29.0" />
+      <point x="482.086" y="-90.439" />
+      <point x="-123.50031440751059" y="4.198546793929836E-4" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.beans.SessionInfoBean" target="at.qe.skeleton.model.Userx" relationship="TO_ONE">
+      <point x="101.49976975217446" y="-15.000241883547687" />
+      <point x="36.049" y="767.021" />
+      <point x="36.049" y="70.748" />
+      <point x="328.086" y="70.74799999999999" />
+      <point x="328.086" y="-262.0" />
+      <point x="347.471" y="-262.0" />
+      <point x="-1.6893277120288985E-4" y="435.0" />
+    </edge>
+    <edge source="at.qe.skeleton.model.Plant" target="at.qe.skeleton.model.Metadata" relationship="GENERALIZATION">
+      <point x="8.717205253105931E-5" y="204.00038453549064" />
+      <point x="1000.3253710213785" y="-302.37785607394994" />
+      <point x="727.827371021378" y="-302.37785607394994" />
+      <point x="-2.779022258891928E-4" y="116.00045142190163" />
+    </edge>
+    <edge source="at.qe.skeleton.repositories.UserxRepository" target="at.qe.skeleton.repositories.AbstractRepository" relationship="INTERFACE_GENERALIZATION">
+      <point x="2.413415621731474E-4" y="60.00035207720907" />
+      <point x="-319.25662897862185" y="-559.3778560739499" />
+      <point x="-792.1726289786218" y="-559.3778560739499" />
+      <point x="-792.1726289786218" y="8.622143926050057" />
+      <point x="-1109.7446289786217" y="8.622143926050057" />
+      <point x="-1109.7446289786217" y="61.25214392604994" />
+      <point x="115.50038845031463" y="35.18755028240969" />
+    </edge>
+    <edge source="at.qe.skeleton.repositories.SensorStationRepository" target="at.qe.skeleton.repositories.AbstractRepository" relationship="INTERFACE_GENERALIZATION">
+      <point x="-1.0354188874828196E-4" y="38.00013982498376" />
+      <point x="467.08637102137845" y="8.622143926050057" />
+      <point x="-1109.7446289786217" y="8.622143926050057" />
+      <point x="-1109.7446289786217" y="61.25214392604994" />
+      <point x="115.50038845031463" y="35.18755028240969" />
+    </edge>
+    <edge source="at.qe.skeleton.repositories.LogRepository" target="at.qe.skeleton.repositories.AbstractRepository" relationship="INTERFACE_GENERALIZATION">
+      <point x="2.2129780745672178E-4" y="-14.499748239929431" />
+      <point x="14.808371021378207" y="-559.3778560739499" />
+      <point x="-792.1726289786218" y="-559.3778560739499" />
+      <point x="-792.1726289786218" y="8.622143926050057" />
+      <point x="-1109.7446289786217" y="8.622143926050057" />
+      <point x="-1109.7446289786217" y="61.25214392604994" />
+      <point x="115.50038845031463" y="35.18755028240969" />
+    </edge>
+    <edge source="at.qe.skeleton.model.Image" target="at.qe.skeleton.model.Plant" relationship="TO_ONE">
+      <point x="-97.00005530500908" y="-170.80118858384503" />
+      <point x="-665.0" y="1216.5" />
+      <point x="-665.0" y="198.0" />
+      <point x="-1607.5" y="198.0" />
+      <point x="-1607.5" y="-1219.5" />
+      <point x="1000.325" y="-1219.5" />
+      <point x="-2.8384932579683664E-4" y="-203.99975939055946" />
+    </edge>
+    <edge source="at.qe.skeleton.model.Metadata" target="at.qe.skeleton.model.Userx" relationship="TO_ONE">
+      <point x="-69.3276489236041" y="116.00030749585159" />
+      <point x="658.5" y="-262.0" />
+      <point x="606.086" y="-262.0" />
+      <point x="606.086" y="70.748" />
+      <point x="328.086" y="70.74799999999999" />
+      <point x="328.086" y="-262.0" />
+      <point x="347.471" y="-262.0" />
+      <point x="-1.6893277120288985E-4" y="435.0" />
+    </edge>
+    <edge source="at.qe.skeleton.spring.LoginSuccessHandler" target="at.qe.skeleton.services.LogService" relationship="TO_ONE">
+      <point x="-187.99970334788725" y="50.0001551333508" />
+      <point x="542.157" y="592.0" />
+      <point x="997.718" y="592.0" />
+      <point x="997.718" y="521.256" />
+      <point x="-103.00032773605176" y="3.927493513629088E-4" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.SensorStationDetailController" target="at.qe.skeleton.model.SensorStation" relationship="TO_ONE">
+      <point x="-15.0" y="-160.00003899358245" />
+      <point x="-1577.5" y="148.565" />
+      <point x="-1049.0" y="148.565" />
+      <point x="-1049.0" y="29.0" />
+      <point x="482.086" y="29.0" />
+      <point x="482.086" y="-90.439" />
+      <point x="-123.50031440751059" y="4.198546793929836E-4" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.SensorStationDetailController" target="at.qe.skeleton.api.services.MeasurementService" relationship="TO_ONE">
+      <point x="15.0" y="-160.00003899358245" />
+      <point x="-1547.5" y="276.0" />
+      <point x="-481.688" y="276.0" />
+      <point x="14.99951858181987" y="258.99998750176985" />
+    </edge>
+    <edge source="at.qe.skeleton.model.Userx" target="at.qe.skeleton.model.Metadata" relationship="GENERALIZATION">
+      <point x="102.00020208860707" y="3.381143926050072" />
+      <point x="604.327371021378" y="-733.6188560739499" />
+      <point x="604.327371021378" y="-302.37785607394994" />
+      <point x="727.827371021378" y="-302.37785607394994" />
+      <point x="-2.779022258891928E-4" y="116.00045142190163" />
+    </edge>
+    <edge source="at.qe.skeleton.api.services.MeasurementService" target="at.qe.skeleton.model.Measurement" relationship="TO_MANY">
+      <point x="-4.814181801293671E-4" y="258.99998750176985" />
+      <point x="-496.688" y="213.0" />
+      <point x="-1049.0" y="213.0" />
+      <point x="-1049.0" y="634.0" />
+      <point x="-522.756" y="634.0" />
+      <point x="4.4457458704982855E-4" y="-258.9995925223635" />
+    </edge>
+    <edge source="at.qe.skeleton.api.services.MeasurementService" target="at.qe.skeleton.repositories.MeasurementRepository" relationship="TO_ONE">
+      <point x="-262.0" y="-84.04997345346851" />
+      <point x="251.5" y="0.0" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.LogListController" target="at.qe.skeleton.model.Log" relationship="TO_MANY">
+      <point x="-110.0" y="0.0" />
+      <point x="-741.5019210463108" y="467.56671603896257" />
+      <point x="-741.5019210463108" y="1422.8808963554802" />
+      <point x="-359.951" y="1422.8808963554802" />
+      <point x="-359.951" y="1133.0367413189206" />
+      <point x="-111.12700000000001" y="1133.0367413189206" />
+      <point x="-111.12700000000001" y="1464.6568033208769" />
+      <point x="-87.0" y="0.0" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.GraphController" target="at.qe.skeleton.services.SensorStationService" relationship="TO_ONE">
+      <point x="28.26095852413914" y="-303.00011352804813" />
+      <point x="501.5" y="357.0" />
+      <point x="1535.559" y="357.0" />
+      <point x="-1.1195458978363604E-4" y="105.00023543496921" />
+    </edge>
+    <edge source="at.qe.skeleton.services.UserService" target="at.qe.skeleton.model.Log" relationship="CREATE">
+      <point x="109.00032621106004" y="16.395959996000784" />
+      <point x="1278.0" y="916.0" />
+      <point x="1278.0" y="1464.657" />
+      <point x="87.00028773753107" y="1.966791230643139E-4" />
+    </edge>
+    <edge source="at.qe.skeleton.repositories.PlantRepository" target="at.qe.skeleton.repositories.AbstractRepository" relationship="INTERFACE_GENERALIZATION">
+      <point x="1.2046768915752182E-4" y="48.99991397030499" />
+      <point x="-777.1726289786218" y="-559.3778560739499" />
+      <point x="-792.1726289786218" y="-559.3778560739499" />
+      <point x="-792.1726289786218" y="8.622143926050057" />
+      <point x="-1109.7446289786217" y="8.622143926050057" />
+      <point x="-1109.7446289786217" y="61.25214392604994" />
+      <point x="115.50038845031463" y="35.18755028240969" />
+    </edge>
+    <edge source="at.qe.skeleton.services.ImageService" target="at.qe.skeleton.repositories.ImageRepository" relationship="TO_ONE">
+      <point x="115.0" y="-49.83416599887687" />
+      <point x="86.0" y="982.7025753200437" />
+      <point x="30.962282435734323" y="71.0" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.GalleryController" target="at.qe.skeleton.services.ImageService" relationship="TO_ONE">
+      <point x="-131.64744473648432" y="83.00048307647478" />
+      <point x="674.18" y="1250.991" />
+      <point x="-52.086" y="1250.991" />
+      <point x="-52.086" y="1623.801" />
+      <point x="-126.12700000000001" y="1623.801" />
+      <point x="88.4589777113053" y="83.00025868107946" />
+    </edge>
+    <edge source="at.qe.skeleton.services.UserService" target="at.qe.skeleton.repositories.UserxRepository" relationship="TO_ONE">
+      <point x="109.0" y="-15.000040003999175" />
+      <point x="1873.91" y="884.604" />
+      <point x="1873.91" y="-1234.5" />
+      <point x="-319.2568703201839" y="-1234.5" />
+      <point x="0.0" y="-60.0" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.beans.SessionInfoBean" target="at.qe.skeleton.services.UserService" relationship="TO_ONE">
+      <point x="101.49976975217446" y="-2.4188354768739373E-4" />
+      <point x="56.0" y="782.021" />
+      <point x="56.0" y="569.852" />
+      <point x="800.68" y="569.852" />
+      <point x="3.262110600417145E-4" y="-116.00004000399917" />
+    </edge>
+    <edge source="at.qe.skeleton.services.LogService" target="at.qe.skeleton.model.Log" relationship="CREATE">
+      <point x="102.99967226394824" y="-14.999607250648637" />
+      <point x="1278.0" y="506.256" />
+      <point x="1278.0" y="1464.657" />
+      <point x="87.00028773753107" y="1.966791230643139E-4" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.UserListController" target="at.qe.skeleton.services.UserService" relationship="TO_ONE">
+      <point x="-102.00008921994129" y="11.736182960349936" />
+      <point x="56.0" y="276.936" />
+      <point x="56.0" y="569.852" />
+      <point x="800.68" y="569.852" />
+      <point x="3.262110600417145E-4" y="-116.00004000399917" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.SensorStationDetailController" target="at.qe.skeleton.model.Measurement" relationship="TO_MANY">
+      <point x="0.0" y="-160.00003899358245" />
+      <point x="-1562.5" y="213.0" />
+      <point x="-1049.0" y="213.0" />
+      <point x="-1049.0" y="634.0" />
+      <point x="-522.756" y="634.0" />
+      <point x="4.4457458704982855E-4" y="-258.9995925223635" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.FileUploadController" target="at.qe.skeleton.services.ImageService" relationship="TO_ONE">
+      <point x="130.00032361417277" y="1.2196156292532123E-4" />
+      <point x="-775.0" y="-74.324" />
+      <point x="-775.0" y="495.5" />
+      <point x="-1124.745" y="495.5" />
+      <point x="-1124.745" y="1623.801" />
+      <point x="-126.12700000000001" y="1623.801" />
+      <point x="88.4589777113053" y="83.00025868107946" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.beans.UserRegistrationBean" target="at.qe.skeleton.services.UserService" relationship="TO_ONE">
+      <point x="173.0001518781003" y="3.8032561081990934E-4" />
+      <point x="56.0" y="329.248" />
+      <point x="56.0" y="569.852" />
+      <point x="800.68" y="569.852" />
+      <point x="3.262110600417145E-4" y="-116.00004000399917" />
+    </edge>
+    <edge source="at.qe.skeleton.services.LogService" target="at.qe.skeleton.repositories.LogRepository" relationship="TO_ONE">
+      <point x="102.99967226394824" y="3.927493513629088E-4" />
+      <point x="1334.0" y="521.256" />
+      <point x="1334.0" y="526.5" />
+      <point x="1858.91" y="526.5" />
+      <point x="1858.91" y="-1189.5" />
+      <point x="29.808" y="-1189.5" />
+      <point x="14.99985027642925" y="-14.499892165979531" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.GraphController" target="at.qe.skeleton.api.services.MeasurementService" relationship="TO_ONE">
+      <point x="-157.50004147586088" y="41.54588647195192" />
+      <point x="-67.086" y="957.037" />
+      <point x="-67.086" y="1608.801" />
+      <point x="-1064.0" y="1608.801" />
+      <point x="-1064.0" y="276.0" />
+      <point x="-481.688" y="276.0" />
+      <point x="14.99951858181987" y="258.99998750176985" />
+    </edge>
+    <edge source="at.qe.skeleton.model.Measurement" target="at.qe.skeleton.model.Plant" relationship="TO_ONE">
+      <point x="-119.99955542541295" y="4.0747763648596447E-4" />
+      <point x="-665.0" y="915.331" />
+      <point x="-665.0" y="198.0" />
+      <point x="-1607.5" y="198.0" />
+      <point x="-1607.5" y="-1219.5" />
+      <point x="1000.325" y="-1219.5" />
+      <point x="-2.8384932579683664E-4" y="-203.99975939055946" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.SensorStationDetailController" target="at.qe.skeleton.ui.controllers.GraphController" relationship="TO_ONE">
+      <point x="-146.5" y="0.0" />
+      <point x="-1786.5" y="498.87203899358246" />
+      <point x="-1786.5" y="2437.156803320877" />
+      <point x="578.9102774943829" y="2437.156803320877" />
+      <point x="105.671236018522" y="303.0" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.GraphController" target="at.qe.skeleton.model.SensorStation" relationship="TO_ONE">
+      <point x="-157.50004147586088" y="14.999886471951868" />
+      <point x="-359.951" y="930.491" />
+      <point x="-359.951" y="29.0" />
+      <point x="482.086" y="29.0" />
+      <point x="482.086" y="-90.439" />
+      <point x="-123.50031440751059" y="4.198546793929836E-4" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.UserDetailController" target="at.qe.skeleton.model.Userx" relationship="TO_ONE">
+      <point x="-57.22863595309241" y="-105.00026114791513" />
+      <point x="328.086" y="-262.0" />
+      <point x="347.471" y="-262.0" />
+      <point x="-1.6893277120288985E-4" y="435.0" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.SensorStationListController" target="at.qe.skeleton.services.SensorStationService" relationship="TO_ONE">
+      <point x="74.2076048994652" y="60.9999187986534" />
+      <point x="1211.718" y="357.0" />
+      <point x="1535.559" y="357.0" />
+      <point x="-1.1195458978363604E-4" y="105.00023543496921" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.beans.UserRegistrationBean" target="at.qe.skeleton.model.UserRole" relationship="TO_MANY">
+      <point x="-172.99984812189973" y="3.8032561081990934E-4" />
+      <point x="-381.0" y="329.248" />
+      <point x="-381.0" y="1322.381" />
+      <point x="89.49992104631087" y="1.0364451986788481E-4" />
+    </edge>
+    <edge source="at.qe.skeleton.services.UserService" target="at.qe.skeleton.repositories.LogRepository" relationship="TO_ONE">
+      <point x="109.00032621106004" y="-4.000399917458708E-5" />
+      <point x="1334.0" y="899.604" />
+      <point x="1334.0" y="526.5" />
+      <point x="1858.91" y="526.5" />
+      <point x="1858.91" y="-1189.5" />
+      <point x="29.808" y="-1189.5" />
+      <point x="14.99985027642925" y="-14.499892165979531" />
+    </edge>
+    <edge source="at.qe.skeleton.services.PlantService" target="at.qe.skeleton.repositories.LogRepository" relationship="TO_ONE">
+      <point x="5.821128326033431E-6" y="105.00042467995627" />
+      <point x="110.299" y="1235.991" />
+      <point x="1334.0" y="1235.991" />
+      <point x="1334.0" y="526.5" />
+      <point x="1858.91" y="526.5" />
+      <point x="1858.91" y="-1189.5" />
+      <point x="29.808" y="-1189.5" />
+      <point x="14.99985027642925" y="-14.499892165979531" />
+    </edge>
+    <edge source="at.qe.skeleton.services.SensorStationService" target="at.qe.skeleton.model.Log" relationship="CREATE">
+      <point x="14.999888045410216" y="105.00023543496921" />
+      <point x="1550.559" y="506.256" />
+      <point x="1278.0" y="506.256" />
+      <point x="1278.0" y="1464.657" />
+      <point x="87.00028773753107" y="1.966791230643139E-4" />
+    </edge>
+    <edge source="at.qe.skeleton.services.PlantService" target="at.qe.skeleton.repositories.PlantRepository" relationship="TO_ONE">
+      <point x="-108.38871668448883" y="105.0" />
+      <point x="1.9102774943828535" y="2422.156803320877" />
+      <point x="-1771.5" y="2422.156803320877" />
+      <point x="-1771.5" y="-639.3317700442549" />
+      <point x="-152.0" y="0.0" />
+    </edge>
+    <edge source="at.qe.skeleton.repositories.MeasurementRepository" target="at.qe.skeleton.repositories.AbstractRepository" relationship="INTERFACE_GENERALIZATION">
+      <point x="1.1341665867803385E-4" y="-169.9998951187115" />
+      <point x="-1239.2656289786216" y="-559.3778560739499" />
+      <point x="-792.1726289786218" y="-559.3778560739499" />
+      <point x="-792.1726289786218" y="8.622143926050057" />
+      <point x="-1109.7446289786217" y="8.622143926050057" />
+      <point x="-1109.7446289786217" y="61.25214392604994" />
+      <point x="115.50038845031463" y="35.18755028240969" />
+    </edge>
+    <edge source="at.qe.skeleton.ui.controllers.UserDetailController" target="at.qe.skeleton.services.UserService" relationship="TO_ONE">
+      <point x="-93.49963595309242" y="-2.61147915125548E-4" />
+      <point x="56.0" y="434.789" />
+      <point x="56.0" y="569.852" />
+      <point x="800.68" y="569.852" />
+      <point x="3.262110600417145E-4" y="-116.00004000399917" />
+    </edge>
+    <edge source="at.qe.skeleton.services.SensorStationService" target="at.qe.skeleton.repositories.LogRepository" relationship="TO_ONE">
+      <point x="-155.00011195458978" y="2.3543496921618612E-4" />
+      <point x="1334.0" y="9.413" />
+      <point x="1334.0" y="526.5" />
+      <point x="1858.91" y="526.5" />
+      <point x="1858.91" y="-1189.5" />
+      <point x="29.808" y="-1189.5" />
+      <point x="14.99985027642925" y="-14.499892165979531" />
+    </edge>
+    <edge source="at.qe.skeleton.services.SensorStationService" target="at.qe.skeleton.repositories.SensorStationRepository" relationship="TO_ONE">
+      <point x="0.0" y="-105.0" />
+      <point x="1535.5591119545898" y="-758.6192406094406" />
+      <point x="467.0864745632671" y="-758.6192406094406" />
+      <point x="0.0" y="-38.0" />
+    </edge>
+  </edges>
+  <settings layout="Components" zoom="0.401376146788991" showDependencies="true" x="-45.239475401142045" y="-255.37028571428618" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
