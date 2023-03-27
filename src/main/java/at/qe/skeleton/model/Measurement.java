@@ -1,64 +1,37 @@
 package at.qe.skeleton.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Getter
+@Setter
 @Entity
 public class Measurement implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private Long id;
-    private Long sensorStationID;
-    private Long plantID;
-    private Double value;
+
+
+    @ManyToOne
+    @JoinColumn(name = "sensor_station_id", nullable = true)
+    private SensorStation sensorStation;
+
+
+    @ManyToOne
+    @JoinColumn(name = "plant_id", nullable = true)
+    private Plant plant;
+
+    //TODO: JDBC is on crack and if this is called value its seen as a primary key and the table will not be created O_o, find a workaround
+    private String value_s;
     private String unit;
-    private MeasurementType type;
+    private String type;
     private LocalDate timestamp;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getPlantID() {
-        return plantID;
-    }
-
-
-    public void setPlantID(Long plantID) {
-        this.plantID = plantID;
-    }
-
-    public Double getValue() {
-        return value;
-    }
-
-    public void setValue(Double value) {
-        this.value = value;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public MeasurementType getType() {
-        return type;
-    }
-
-    public void setType(MeasurementType type) {
-        this.type = type;
-    }
 }
