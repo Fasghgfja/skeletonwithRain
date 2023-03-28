@@ -18,19 +18,16 @@ import java.util.Objects;
 public class Plant extends Metadata implements Persistable<Long>, Serializable, Comparable<Plant> {
     @Serial
     private static final long serialVersionUID = 1L;
-
-    private String description;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_gen")
-    @SequenceGenerator(name = "id_gen", initialValue = 52)
+    @SequenceGenerator(name = "id_gen", initialValue = 1)
     @Column(nullable = false, unique = true)
     private Long plantID;
 
+    private String description;
+
     @Column(length = 100)
     private String plantName;
-
-
 
     @Override
     public int hashCode() {

@@ -1,12 +1,13 @@
 package at.qe.skeleton.model;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MappedSuperclass;
 import java.time.LocalDate;
 
 
 /**
- * Abstract Metadata to save and retrieve createDate and updateDate of entities.
+ * Abstract Metadata to save and retrieve creatinDate and updateDate of entities.
  */
 @MappedSuperclass
 public abstract class Metadata {
@@ -15,30 +16,10 @@ public abstract class Metadata {
     private LocalDate createDate;
     @Column(columnDefinition = "DATE")
     private LocalDate updateDate;
-
     @ManyToOne
-    @JoinColumn(name="crateUser")
     private Userx createUser;
-
     @ManyToOne
-    @JoinColumn(name="updateUser")
     private Userx updateUser;
-
-    public Userx getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(Userx createUser) {
-        this.createUser = createUser;
-    }
-
-    public Userx getUpdateUser() {
-        return updateUser;
-    }
-
-    public void setUpdateUser(Userx updateUser) {
-        this.updateUser = updateUser;
-    }
 
     public LocalDate getCreateDate() {
         return createDate;

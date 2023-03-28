@@ -2,6 +2,7 @@ package at.qe.skeleton.model;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,32 +13,24 @@ import java.time.LocalDate;
  */
 @Entity
 public class Image implements Serializable {
-
-    String imageSrc;
-
     @Id
     @GeneratedValue
     @Column(nullable = false, unique = true)
     private Long id;
 
-
     @ManyToOne
-    @JoinColumn(name = "plant_id", nullable = true)
     private Plant plant;
 
-
-    @Column
+    @Column(length = 1000)
     private String imageName;
-
-    @Column
-    private String author;
 
     @Column(columnDefinition = "DATE")
     private LocalDate creationDate;
 
-
     @Column(length = 50000000)
     private byte[] imageByte;
+
+    private boolean approved;
 
     public String getImageName() {
         return imageName;
@@ -45,14 +38,6 @@ public class Image implements Serializable {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
-    }
-
-    public String getImageSrc() {
-        return imageSrc;
-    }
-
-    public void setImageSrc(String imageSrc) {
-        this.imageSrc = imageSrc;
     }
 
     public Plant getPlant() {
@@ -75,13 +60,6 @@ public class Image implements Serializable {
         this.imageByte = imageByte;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public LocalDate getDate() {
         return creationDate;

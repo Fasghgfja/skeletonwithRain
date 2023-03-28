@@ -13,17 +13,25 @@ import java.util.Objects;
 
 @Entity
 public class SensorStation extends Metadata implements Persistable<Long>, Serializable, Comparable<SensorStation> {
-    @Serial
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
     @Column(nullable = false, unique = true)
     private Long sensorStationID;
 
+    @Column(length = 100)
+    private String location;
+
+    public String getSensorStationLocation() {
+        return location;
+    }
+
+    public void setSensorStationLocation(String location) {
+        this.location = location;
+    }
+
     public Long getSensorStationID() {
         return sensorStationID;
     }
-    @Override
     public Long getId() {
         return this.getSensorStationID();
     }
@@ -31,8 +39,6 @@ public class SensorStation extends Metadata implements Persistable<Long>, Serial
     public void setSensorStationID(Long sensorStationID) {
         this.sensorStationID = sensorStationID;
     }
-
-
 
     @Override
     public int hashCode() {
@@ -54,11 +60,8 @@ public class SensorStation extends Metadata implements Persistable<Long>, Serial
 
     @Override
     public String toString() {
-        return "at.qe.skeleton.model.Text[ id=" + serialVersionUID + " , " + sensorStationID + " ]";
+        return "at.qe.skeleton.model.Text[ id=" + sensorStationID + " , " + sensorStationID + " ]";
     }
-
-
-
 
     @Override
     public boolean isNew() {
@@ -69,7 +72,13 @@ public class SensorStation extends Metadata implements Persistable<Long>, Serial
     public int compareTo(SensorStation o) {
         return this.sensorStationID.compareTo(o.getSensorStationID());
     }
+    public String getLocation() {
+        return location;
+    }
 
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
 
 
