@@ -29,6 +29,10 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
     @Column(length = 100)
     private String plantName;
 
+
+
+
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -49,7 +53,7 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
 
     @Override
     public String toString() {
-        return "at.qe.skeleton.model.Text[ id=" + serialVersionUID + " , " + plantID + " ]";
+        return "[ " + plantName + " , " + plantID + " ]";
     }
 
 

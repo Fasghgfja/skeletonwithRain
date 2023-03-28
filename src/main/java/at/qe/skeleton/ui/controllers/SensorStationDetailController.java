@@ -5,6 +5,7 @@ import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.SensorStation;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import at.qe.skeleton.services.SensorStationService;
@@ -36,7 +37,7 @@ public class SensorStationDetailController implements Serializable {
     /**
      * Attribute to cache the currently displayed sensor station.
      */
-    private SensorStation sensorStation;
+    private SensorStation sensorStation = new SensorStation();
 
     /**
      * Attribute to cache the latestMEasurements.
@@ -48,6 +49,14 @@ public class SensorStationDetailController implements Serializable {
         return latestMeasurements;
     }
 
+    public Collection<SensorStation> getSensorStations() {
+        return sensorService.getAllSensorStations();
+    }
+
+
+
+
+
     /**
      * Opens last measurement row toggle for selected sensor station.
      */
@@ -58,6 +67,18 @@ public class SensorStationDetailController implements Serializable {
                 getLatestMeasurements();            }
         }
     }
+
+    /**
+     * Opens last measurement row toggle for selected sensor station.
+     */
+    public void onRowSelectLineChart(ToggleEvent event) {
+        if (event.getVisibility() == Visibility.VISIBLE) {
+            sensorStation = (SensorStation) event.getData();
+            if (sensorStation != this.sensorStation){
+                getLatestMeasurements();            }
+        }
+    }
+
 
 
 
