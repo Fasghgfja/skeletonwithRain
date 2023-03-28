@@ -38,8 +38,8 @@ public class GraphController implements Serializable {
     /**
      * Different charts that can be used in the application
      * to call them from the frontend just use graphcontroller.fieldname
-     * */
-    private LineChartModel lineModel;
+     */
+    private LineChartModel lineModel = new LineChartModel();
     private LineChartModel cartesianLinerModel;
     private BarChartModel barModel = new BarChartModel();
 
@@ -62,19 +62,32 @@ public class GraphController implements Serializable {
     private List<Measurement> latestMeasurements;
 
 
-
     /**
      * Method used in the dashboard to change the Graph displayed based on row selection of the panel beside.
      */
     public void onRowSelect(SelectEvent<SensorStation> event) {
         sensorStation = (SensorStation) event.getObject();
-            createLineModel();
-            createCartesianLinerModel();
-            latestMeasurements = new ArrayList<>(measurementService.getLatestPlantMeasurements(sensorStation));
-        if(!latestMeasurements.isEmpty()) {
-        createBarModel(latestMeasurements);
+        createLineModel();
+        createCartesianLinerModel();
+        latestMeasurements = new ArrayList<>(measurementService.getLatestPlantMeasurements(sensorStation));
+        if (!latestMeasurements.isEmpty()) {
+            createBarModel(latestMeasurements);
         }
     }
+
+    /**
+     * Method used in the dashboard to change the Graph displayed based on row selection of the panel beside.
+     */
+    public void onRowSelectLineChart(SelectEvent<Measurement> event) {
+        Measurement measurement = event.getObject();
+        sensorStation = measurement.getSensorStation();
+        createCartesianLinerModel();
+        latestMeasurements = new ArrayList<>(measurementService.getLatestPlantMeasurements(sensorStation));
+        if (!latestMeasurements.isEmpty()) {
+            createLineModel(latestMeasurements);
+        }
+    }
+
 
     //TODO: hide y axis values for dashboard graph
     public void createBarModel(List<Measurement> measurements) {
@@ -87,7 +100,11 @@ public class GraphController implements Serializable {
         //TODO:change this with a query for AirValue GroundValue HumidityValue etc instead of hoping they come out in the correct order
         List<Number> values = new ArrayList<>();
         measurements.forEach(measurement -> {
-            if(measurement == null) {values.add(0);} else {values.add(Integer.parseInt(measurement.getValue_s()));}
+            if (measurement == null) {
+                values.add(0);
+            } else {
+                values.add(Integer.parseInt(measurement.getValue_s()));
+            }
         });
 
         barDataSet.setData(values);
@@ -160,6 +177,57 @@ public class GraphController implements Serializable {
         barModel.setOptions(options);
     }
 
+    public void createLineModel(List<Measurement> measurements) {
+        lineModel = new LineChartModel();
+        ChartData Air_Temperature = new ChartData();
+        ChartData Air_Humidity = new ChartData();
+        ChartData Ground_Humidity = new ChartData();
+
+        LineChartDataSet dataSet = new LineChartDataSet();
+        //TODO:change this with a query for AirValue GroundValue HumidityValue etc instead of hoping they come out in the correct order
+        List<Object> values = new ArrayList<>();
+        measurements.forEach(measurement -> {
+            if (measurement == null) {
+                values.add(0);
+            } else {
+                values.add(Integer.parseInt(measurement.getValue_s()));
+            }
+        });
+        dataSet.setData(values);
+        dataSet.setFill(false);
+        dataSet.setLabel("Air Temperature");
+        dataSet.setBorderColor("rgb(75, 192, 192)");
+        dataSet.setTension(0.1);
+        Air_Temperature.addChartDataSet(dataSet);
+
+
+        List<String> labels = new ArrayList<>();
+        labels.add("January");
+        labels.add("February");
+        labels.add("March");
+        labels.add("April");
+        labels.add("May");
+        labels.add("June");
+        labels.add("July");
+        Air_Temperature.setLabels(labels);
+
+        //Options
+        LineChartOptions options = new LineChartOptions();
+        Title title = new Title();
+        title.setDisplay(true);
+        title.setText("Line Chart");
+        options.setTitle(title);
+
+        lineModel.setOptions(options);
+        lineModel.setData(Air_Temperature);
+    }
+
+
+
+
+
+
+
 
 
 
@@ -173,8 +241,7 @@ public class GraphController implements Serializable {
     public void createLineModel() {
         lineModel = new LineChartModel();
         ChartData Air_Temperature = new ChartData();
-        ChartData Air_Humidity = new ChartData();
-        ChartData Ground_Humidity = new ChartData();
+
 
         LineChartDataSet dataSet = new LineChartDataSet();
         List<Object> values = new ArrayList<>();
@@ -212,6 +279,36 @@ public class GraphController implements Serializable {
         lineModel.setOptions(options);
         lineModel.setData(Air_Temperature);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void createCartesianLinerModel() {
         cartesianLinerModel = new LineChartModel();
