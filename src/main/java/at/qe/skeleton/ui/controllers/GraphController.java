@@ -51,7 +51,7 @@ public class GraphController implements Serializable {
     private BarChartModel barModel = new BarChartModel();
 
 
-    //TODO: is it good/necessary to cache this attributes or should we avoid it and just call them from the service?
+    //TODO: is it good/necessary to cache this attributes or should we avoid it and just call them from the SENSOR DETAIL CONTROLLER?
     /**Attribute to cache the currently displayed sensor station.*/
     private SensorStation sensorStation;
     /**Attribute to cache the latest Measurements loaded which are loaded into the graph.*/
@@ -60,7 +60,8 @@ public class GraphController implements Serializable {
 
 
     /**
-     * Method used in the dashboard to change the Graph displayed based on row selection of the panel beside.
+     * Method used in the dashboard to change the Bar Chart displayed based on row selection of the table beside.
+     * it is used to display the most recent mesasurements (1 per type) on the barchart.
      */
     public void onRowSelect(SelectEvent<SensorStation> event) {
         sensorStation = (SensorStation) event.getObject();
@@ -73,20 +74,25 @@ public class GraphController implements Serializable {
     }
 
     /**
-     * Method used in greenhouse details page to change the Line Graph displayed based on row selection of the panel beside.
+     * Method used in greenhouse details page greenHouseDetails.xhtml to change the Line Graph displayed based on row selection of the table
+     * beside.
+     * it is used to display the selected measurement history on the graph.
      */
     public void onRowSelectLineChart(SelectEvent<Measurement> event) {
         Measurement measurement = event.getObject();
         sensorStation = measurement.getSensorStation();
         createCartesianLinerModel();
-        latestMeasurements = new ArrayList<>(measurementService.getLatestPlantMeasurements(sensorStation));
+        latestMeasurements = new ArrayList<>(measurementService.getAllMeasurementsBySensorStationAndType(sensorStation, measurement.getType()));
         if (!latestMeasurements.isEmpty()) {
             createLineModel(latestMeasurements);
         }
     }
 
 
-    //TODO: hide y axis values for dashboard graph
+
+
+
+    //TODO: hide y axis values for dashboard graph as with different measures it doesent make any sense
     public void createBarModel(List<Measurement> measurements) {
         barModel = new BarChartModel();
         ChartData data = new ChartData();
@@ -178,35 +184,30 @@ public class GraphController implements Serializable {
     public void createLineModel(List<Measurement> measurements) {
         lineModel = new LineChartModel();
         ChartData Air_Temperature = new ChartData();
-        ChartData Air_Humidity = new ChartData();
-        ChartData Ground_Humidity = new ChartData();
-
         LineChartDataSet dataSet = new LineChartDataSet();
-        //TODO:change this with a query for AirValue GroundValue HumidityValue etc instead of hoping they come out in the correct order
+
+
+
         List<Object> values = new ArrayList<>();
+        //actually the timestamps
+        List<String> labels = new ArrayList<>();
+
         measurements.forEach(measurement -> {
-            if (measurement == null) {
-                values.add(0);
-            } else {
+            if (measurement != null) {
                 values.add(Integer.parseInt(measurement.getValue_s()));
+                labels.add(measurement.getTimestamp().toString());
             }
         });
+
+
         dataSet.setData(values);
         dataSet.setFill(false);
-        dataSet.setLabel("Air Temperature");
+        //TODO: test what happens if get(0) gets a null or measurements is empty....
+        dataSet.setLabel(measurements.get(0).getType());
         dataSet.setBorderColor("rgb(75, 192, 192)");
         dataSet.setTension(0.1);
         Air_Temperature.addChartDataSet(dataSet);
 
-
-        List<String> labels = new ArrayList<>();
-        labels.add("January");
-        labels.add("February");
-        labels.add("March");
-        labels.add("April");
-        labels.add("May");
-        labels.add("June");
-        labels.add("July");
         Air_Temperature.setLabels(labels);
 
         //Options
@@ -219,6 +220,13 @@ public class GraphController implements Serializable {
         lineModel.setOptions(options);
         lineModel.setData(Air_Temperature);
     }
+
+
+
+
+
+
+
 
 
     //TODO:standard mock implementation without paramenters to avoid null values , find a more elegant solution and just diplay a empty graph

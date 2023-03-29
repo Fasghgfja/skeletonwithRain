@@ -39,6 +39,9 @@ public class SensorStationDetailController implements Serializable {
     @Autowired
     private transient SessionInfoBean sessionInfoBean;
 
+    @Autowired
+    private transient GraphController graphController;
+
 
     /**
      * Tells us if the sensor station is new , replace with a more elegant solution!.
@@ -71,18 +74,6 @@ public class SensorStationDetailController implements Serializable {
      * from it.
      */
     public void onRowToggle(ToggleEvent event) {
-        if (event.getVisibility() == Visibility.VISIBLE) {
-            sensorStation = (SensorStation) event.getData();
-            if (sensorStation != this.sensorStation){
-                getLatestMeasurements();            }
-        }
-    }
-
-    /**
-     * Almost exactly the same as {@link SensorStationDetailController#onRowToggle(ToggleEvent)} but on row selection.
-     * supposed to produce the line chart for the greenhouse detail view.
-     */
-    public void onRowSelectLineChart(ToggleEvent event) {
         if (event.getVisibility() == Visibility.VISIBLE) {
             sensorStation = (SensorStation) event.getData();
             if (sensorStation != this.sensorStation){

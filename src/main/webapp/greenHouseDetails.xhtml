@@ -23,7 +23,10 @@
         <h:form>
             <p:toolbar>
                 <p:toolbarGroup>
+
                     <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................TEMPERATURE BOX........................................ -->
+                        <h:link id="tempMeasurements" outcome="/dashboard">
                         <div class="card  overview-box">
                             <p:graphicImage name="images/dashboard/effect-useronline.svg"  />
                             <span class="overview-icon">
@@ -31,12 +34,16 @@
                         </span>
                             <div class="overview">
                                 <span class="overview-title">TEMPERATURE</span>
-                                <h3>3882</h3>
-                                <span><span>72</span> new users since last visit</span>
+                                <h3>query</h3>
+                                <span><span>72</span> new measurements since last visit</span>
                             </div>
                         </div>
+                        </h:link>
                     </div>
+
                     <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................AIR HUMIDITY BOX........................................ -->
+                        <h:link id="airHumMeasurements" outcome="/dashboard">
                         <div class="card overview-box">
                             <p:graphicImage name="images/dashboard/effect-checkins.svg"  />
                             <span class="overview-icon">
@@ -48,8 +55,12 @@
                                 <span><span>48</span> new city since last visit</span>
                             </div>
                         </div>
+                        </h:link>
                     </div>
+
                     <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................GROUND HUMIDITY BOX........................................ -->
+                        <h:link id="groundHumMeasurements" outcome="/dashboard">
                         <div class="card overview-box ">
                             <p:graphicImage name="images/dashboard/effect-filessynced.svg"  />
                             <span class="overview-icon">
@@ -61,8 +72,12 @@
                                 <span><span>1.8%</span> increase since last visit</span>
                             </div>
                         </div>
+                        </h:link>
                     </div>
+
                     <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................LIGHT INTENSITY BOX........................................ -->
+                        <h:link id="lightIntMeasurements" outcome="/dashboard">
                         <div class="card overview-box">
                             <p:graphicImage name="images/dashboard/effect-messages.svg"  />
                             <span class="overview-icon">
@@ -74,22 +89,30 @@
                                 <span><span>24</span> new since last visit</span>
                             </div>
                         </div>
+                        </h:link>
                     </div>
+
                 </p:toolbarGroup>
+
+                <!-- ........................................PLANT GALLERY LINK BOX............................................... -->
                 <p:toolbarGroup>
-                    <!-- ..........................................PLANT GALLERY LINK................................................................... -->
                             <span class="overview-icon">
                             <p:graphicImage name="images/dashboard/icon-messages.png"  />
                         </span>
                             <div class="overview">
+                                <h:link id="galleryRedirect" outcome="/dashboard">
                                 <span class="overview-title">   GALLERY</span>
                                 <h3>CLICK TO VISIT</h3>
                                 <span><span>24</span> new since last visit</span>
+                                </h:link>
                             </div>
-
                 </p:toolbarGroup>
+
                 <p:toolbarGroup>
+
                     <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................AIR PRESSURE BOX........................................ -->
+                        <h:link id="airPressMeasurements" outcome="/dashboard">
                         <div class="card  overview-box">
                             <p:graphicImage name="images/dashboard/effect-useronline.svg"  />
                             <span class="overview-icon">
@@ -97,12 +120,16 @@
                         </span>
                             <div class="overview">
                                 <span class="overview-title">AIR PRESSURE</span>
-                                <h3>3882</h3>
+                                <h3>queue</h3>
                                 <span><span>72</span> new users since last visit</span>
                             </div>
                         </div>
+                        </h:link>
                     </div>
+
                     <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................AIR QUALITY BOX........................................ -->
+                        <h:link id="airQualMeasurements" outcome="/dashboard">
                         <div class="card overview-box">
                             <p:graphicImage name="images/dashboard/effect-checkins.svg"  />
                             <span class="overview-icon">
@@ -114,8 +141,11 @@
                                 <span><span>48</span> new city since last visit</span>
                             </div>
                         </div>
+                        </h:link>
                     </div>
+
                     <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................ASSIGNED GARDENER BOX........................................ -->
                         <div class="card overview-box ">
                             <p:graphicImage name="images/dashboard/effect-filessynced.svg"  />
                             <span class="overview-icon">
@@ -128,7 +158,9 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................TIME OF LAST MEASUREMENT BOX.................................... -->
                         <div class="card overview-box">
                             <p:graphicImage name="images/dashboard/effect-messages.svg"  />
                             <span class="overview-icon">
@@ -142,8 +174,8 @@
                         </div>
                     </div>
 
-
                 </p:toolbarGroup>
+
             </p:toolbar>
         </h:form>
 
