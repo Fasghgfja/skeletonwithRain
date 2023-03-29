@@ -87,7 +87,7 @@
         </dependency>
 
 
-        <!-- theme -->
+        <!-- theme !set autoinstall -->
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>rain-amber-dark</artifactId>
