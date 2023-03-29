@@ -2,6 +2,10 @@
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui" xmlns:po="http://primefaces.org/rain" template="/WEB-INF/templates/main.xhtml">
 
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{sensorStationDetailController.init}" />
+    </f:metadata>
+
     <ui:define name="title">GREENHOUSE DETAILS</ui:define>
     <ui:define name="viewname">
     </ui:define>
@@ -12,6 +16,7 @@
     </ui:define>
 
     <ui:define name="content">
+
 
 
         <!-- ..........................................TOP INFO BOXES................................................................... -->
@@ -73,12 +78,11 @@
                 </p:toolbarGroup>
                 <p:toolbarGroup>
                     <!-- ..........................................PLANT GALLERY LINK................................................................... -->
-
                             <span class="overview-icon">
                             <p:graphicImage name="images/dashboard/icon-messages.png"  />
                         </span>
                             <div class="overview">
-                                <span class="overview-title">  GALLERY</span>
+                                <span class="overview-title">   GALLERY</span>
                                 <h3>CLICK TO VISIT</h3>
                                 <span><span>24</span> new since last visit</span>
                             </div>
@@ -145,10 +149,12 @@
 
 
 
+
+
+
         <!-- ..........................................PAGE................................................................... -->
         <div class="layout-dashboard">
             <div class="grid">
-
 
                             <!-- ..........................................GRAPH................................................................... -->
                             <div class="col-12 md:col-12 xl:col-6">
@@ -168,16 +174,10 @@
 
 
 
-
-
-
-
-
-
-
+                    <!-- .........................................MEASUREMENTS TABLE...................................................... -->
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="card products">
-                        <p:dataTable widgetVar="customersDT2" var="measurement" value="#{measurementListController.measurements}" selectionMode="single" reflow="true"
+                        <p:dataTable widgetVar="customersDT2" var="measurement" value="#{measurementListController.getMeasurementsForSensorStation()}" selectionMode="single" reflow="true"
                                      rowKey="#{measurement.id}" rows="10" scrollable="true" scrollHeight="500"
                                      styleClass="ui-datatable-striped ui-datatable-sm ui-datatable-gridlines">
                             <p:ajax event="rowSelect" update="mylineChart" listener="#{graphController.onRowSelectLineChart}" />

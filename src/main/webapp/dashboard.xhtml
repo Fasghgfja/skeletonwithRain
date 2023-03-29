@@ -34,7 +34,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- .....................ACCESS POINTS..................................... -->
                 <div class="col-12 md:col-6 xl:col-3">
                     <div class="card overview-box">
@@ -48,7 +47,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- .....................PLANTS UNDER CARE..................................... -->
                 <div class="col-12 md:col-6 xl:col-3">
                     <div class="card overview-box ">
@@ -64,8 +62,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- .....................INTERACTIONS..................................... -->
+                <!-- .....................MEASUREMENTS..................................... -->
                 <div class="col-12 md:col-6 xl:col-3">
                     <div class="card overview-box">
                         <p:graphicImage url="../resources/images/dashboard/effect-messages.svg" />
@@ -73,8 +70,10 @@
                             <p:graphicImage url="../resources/images/dashboard/icon-messages.png"/>
                         </span>
                         <div class="overview">
-                            <span class="overview-title">INTERACTIONS</span>
-                            <h3>query this field</h3>
+                            <span class="overview-title">MEASUREMENTS</span>
+                            <h3>
+                                <h:outputText value="#{measurementListController.measurementsAmount}" />
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -132,7 +131,12 @@
                                 </p:column>
 
                                 <p:column style="width: 3.5rem">
-                                    <p:commandButton icon="pi pi-search" outcome="/greenHouseDetails" />
+
+                                    <!-- DetailView page Button -->
+                                    <p:button icon="pi pi-search"
+                                              title="open Detail-View"
+                                              href="/greenHouseDetails.xhtml?id=#{sensorStation.id}" />
+
                                 </p:column>
                             </p:dataTable>
                         </div>
