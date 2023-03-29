@@ -51,6 +51,8 @@ public class WebSecurityConfig {
                     .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/**").authenticated()).httpBasic()
                     .and()
                     .authorizeHttpRequests(authorize -> authorize
+                            //Permit access for all to the sensor stations for now
+                            .requestMatchers("/sensorStation/**").permitAll()
                             .requestMatchers("/").permitAll()
                             .requestMatchers("/registration/**").permitAll()
                             //.requestMatchers("/api/**").permitAll()
@@ -58,6 +60,7 @@ public class WebSecurityConfig {
                             .requestMatchers(antMatcher("/h2-console/**")).permitAll()
                             .requestMatchers("/jakarta.faces.resource/**").permitAll()
                             .requestMatchers("/error/**").permitAll()
+                            // Only access with higher autority role
                             .requestMatchers("/admin/**").hasAnyAuthority(ADMIN)
                             .requestMatchers("/secured/**").hasAnyAuthority(ADMIN, GARDENER, USER)
                             .requestMatchers("/omnifaces.push/**").hasAnyAuthority(ADMIN, GARDENER, USER)

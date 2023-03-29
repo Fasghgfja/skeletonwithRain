@@ -35,6 +35,13 @@ import java.util.List;
 @Scope("view")
 public class GraphController implements Serializable {
 
+    //TODO: is it better to map controllers to controllers or controllers to services?
+    @Autowired
+    MeasurementService measurementService;
+    @Autowired
+    SensorStationService sensorService;
+
+
     /**
      * Different charts that can be used in the application
      * to call them from the frontend just use graphcontroller.fieldname
@@ -43,23 +50,13 @@ public class GraphController implements Serializable {
     private LineChartModel cartesianLinerModel;
     private BarChartModel barModel = new BarChartModel();
 
-    @Autowired
-    MeasurementService measurementService;
 
-
-    @Autowired
-    SensorStationService sensorService;
-
-
-    /**
-     * Attribute to cache the currently displayed sensor station.
-     */
+    //TODO: is it good/necessary to cache this attributes or should we avoid it and just call them from the service?
+    /**Attribute to cache the currently displayed sensor station.*/
     private SensorStation sensorStation;
-
-    /**
-     * Attribute to cache the latest Measurements.
-     */
+    /**Attribute to cache the latest Measurements loaded which are loaded into the graph.*/
     private List<Measurement> latestMeasurements;
+
 
 
     /**
@@ -76,7 +73,7 @@ public class GraphController implements Serializable {
     }
 
     /**
-     * Method used in the dashboard to change the Graph displayed based on row selection of the panel beside.
+     * Method used in greenhouse details page to change the Line Graph displayed based on row selection of the panel beside.
      */
     public void onRowSelectLineChart(SelectEvent<Measurement> event) {
         Measurement measurement = event.getObject();
@@ -177,6 +174,7 @@ public class GraphController implements Serializable {
         barModel.setOptions(options);
     }
 
+
     public void createLineModel(List<Measurement> measurements) {
         lineModel = new LineChartModel();
         ChartData Air_Temperature = new ChartData();
@@ -223,26 +221,11 @@ public class GraphController implements Serializable {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //TODO:standard mock implementation without paramenters to avoid null values , find a more elegant solution and just diplay a empty graph
+    //then remove this metod
     public void createLineModel() {
         lineModel = new LineChartModel();
         ChartData Air_Temperature = new ChartData();
-
-
         LineChartDataSet dataSet = new LineChartDataSet();
         List<Object> values = new ArrayList<>();
         values.add(65);
@@ -258,7 +241,6 @@ public class GraphController implements Serializable {
         dataSet.setBorderColor("rgb(75, 192, 192)");
         dataSet.setTension(0.1);
         Air_Temperature.addChartDataSet(dataSet);
-
         List<String> labels = new ArrayList<>();
         labels.add("January");
         labels.add("February");
@@ -268,48 +250,19 @@ public class GraphController implements Serializable {
         labels.add("June");
         labels.add("July");
         Air_Temperature.setLabels(labels);
-
         //Options
         LineChartOptions options = new LineChartOptions();
         Title title = new Title();
         title.setDisplay(true);
         title.setText("Line Chart");
         options.setTitle(title);
-
         lineModel.setOptions(options);
         lineModel.setData(Air_Temperature);
     }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //TODO:other type of graph basic implementation , implement or remove as needed
     public void createCartesianLinerModel() {
         cartesianLinerModel = new LineChartModel();
         ChartData data = new ChartData();
@@ -376,6 +329,7 @@ public class GraphController implements Serializable {
 
         cartesianLinerModel.setOptions(options);
     }
+
 
 
 }
