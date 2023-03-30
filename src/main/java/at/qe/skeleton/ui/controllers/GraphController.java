@@ -51,9 +51,10 @@ public class GraphController implements Serializable {
     private BarChartModel barModel = new BarChartModel();
 
 
-    //TODO: is it good/necessary to cache this attributes or should we avoid it and just call them from the SENSOR DETAIL CONTROLLER?
+    //TODO: is it good/necessary to cache this attributes or should we avoid it and just call it from the SENSOR DETAIL CONTROLLER?
     /**Attribute to cache the currently displayed sensor station.*/
     private SensorStation sensorStation;
+
     /**Attribute to cache the latest Measurements loaded which are loaded into the graph.*/
     private List<Measurement> latestMeasurements;
 
@@ -91,7 +92,10 @@ public class GraphController implements Serializable {
 
 
 
-
+    /**
+     * Method to create a barchart from a list of measurements.
+     * used in the dashboard
+     */
     //TODO: hide y axis values for dashboard graph as with different measures it doesent make any sense
     public void createBarModel(List<Measurement> measurements) {
         barModel = new BarChartModel();
@@ -181,6 +185,11 @@ public class GraphController implements Serializable {
     }
 
 
+
+    /**
+     * Method to create a linechart from a list of measurements.
+     * used in the sensor station detail view.
+     */
     public void createLineModel(List<Measurement> measurements) {
         lineModel = new LineChartModel();
         ChartData Air_Temperature = new ChartData();
@@ -220,6 +229,8 @@ public class GraphController implements Serializable {
         lineModel.setOptions(options);
         lineModel.setData(Air_Temperature);
     }
+
+
 
 
 

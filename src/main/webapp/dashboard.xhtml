@@ -10,9 +10,6 @@
 
 
 
-
-
-
     <ui:define name="content">
         <div class="layout-dashboard">
             <div class="grid">
@@ -107,22 +104,25 @@
                             <h5>Green Houses</h5>
                             <p:dataTable id="ordersTable" var="sensorStation" value="#{sensorStationListController.sensorStations}" selectionMode="single" reflow="true" paginatorPosition="bottom"
                                          rowKey="#{sensorStation.id}" paginator="true" rows="5" sortBy="#{sensorStation.id}" sortOrder="descending" >
+
+                                <!-- .......................ROW SELECTION EVENT................ -->
                                 <p:ajax event="rowSelect" update="myBarChart" listener="#{graphController.onRowSelect}" />
+
                                 <p:column headerText="Id" sortBy="#{sensorStation.id}">
                                     <h:outputText value="#{sensorStation.id}" />
                                 </p:column>
 
-                                <p:column headerText="Plant" sortBy="#{sensorStation.createDate}">
-                                    <h:outputText value="#{sensorStation.createDate}" />
+                                <p:column headerText="Plant" sortBy="#{sensorStation.plant}">
+                                    <h:outputText value="#{sensorStation.plant}" />
                                 </p:column>
 
+                                <!-- ...........THIS HAS TO CHANGE WITH PLANT DATE!!!!!!!!......... -->
                                 <p:column headerText="Date" sortBy="#{sensorStation.createDate}">
                                     <h:outputText value="#{sensorStation.createDate}" />
                                 </p:column>
 
                                 <p:column headerText="Location" sortBy="#{sensorStation.location}">
                                     <h:outputText value="#{sensorStation.location}">
-                                        <f:convertNumber currencySymbol="$" type="currency" />
                                     </h:outputText>
                                 </p:column>
 
@@ -132,7 +132,7 @@
 
                                 <p:column style="width: 3.5rem">
 
-                                    <!-- DetailView page Button -->
+                                    <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
                                     <p:button icon="pi pi-search"
                                               title="open Detail-View"
                                               href="/greenHouseDetails.xhtml?id=#{sensorStation.id}" />
