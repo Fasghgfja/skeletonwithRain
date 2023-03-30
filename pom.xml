@@ -87,11 +87,11 @@
         </dependency>
 
 
-        <!-- theme !set autoinstall -->
+        <!-- theme -->
         <dependency>
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>rain-amber-dark</artifactId>
-            <version>1.0</version>
+            <groupId>mytheme</groupId>
+            <artifactId>mytheme-a</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
 
@@ -114,6 +114,17 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+
+    <!-- In Project repository for the theme -->
+    <repositories>
+    <repository>
+        <id>in-project</id>
+        <name>In Project Repo</name>
+        <url>file://${project.basedir}/zDevResources</url>
+    </repository>
+    </repositories>
+
 
     <build>
         <plugins>
