@@ -27,7 +27,9 @@
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................TEMPERATURE BOX........................................ -->
                         <h:link id="tempMeasurements" outcome="/dashboard">
-                        <div class="card  overview-box">
+
+                            <div class="card  overview-box">
+
                             <p:graphicImage name="images/dashboard/effect-useronline.svg"  />
                             <span class="overview-icon">
                             <p:graphicImage name="images/dashboard/icon-usersonline.png"  />
@@ -209,9 +211,11 @@
                     <!-- .........................................MEASUREMENTS TABLE...................................................... -->
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="card products">
-                        <p:dataTable widgetVar="customersDT2" var="measurement" value="#{measurementListController.getMeasurementsForSensorStation()}" selectionMode="single" reflow="true"
+                        <p:dataTable id="myDataTable" widgetVar="customersDT2" var="measurement" value="#{measurementListController.getMeasurementsForSensorStation()}" selectionMode="single" reflow="true"
                                      rowKey="#{measurement.sensorStation.id}" rows="10" scrollable="true" scrollHeight="350"
                                      styleClass="ui-datatable-striped ui-datatable-sm ui-datatable-gridlines">
+
+                            <!-- ........THIS CAN BE ADDED TO ANY INTERACTIVE ELEMENT TO REFRESH SOMETHING............ -->
                             <p:ajax event="rowSelect" update="mylineChart" listener="#{graphController.onRowSelectLineChart}" />
 
                             <f:facet name="header">
