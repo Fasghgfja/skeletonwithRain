@@ -6,12 +6,7 @@
     <ui:define name="head">
         <h:outputScript name="js/chart.js" />
         <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
-
-
     </ui:define>
-
-
-
 
 
 
@@ -36,7 +31,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- .....................ACCESS POINTS..................................... -->
                 <div class="col-12 md:col-6 xl:col-3">
                     <div class="card overview-box">
@@ -50,7 +44,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- .....................PLANTS UNDER CARE..................................... -->
                 <div class="col-12 md:col-6 xl:col-3">
                     <div class="card overview-box ">
@@ -66,8 +59,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- .....................INTERACTIONS..................................... -->
+                <!-- .....................MEASUREMENTS..................................... -->
                 <div class="col-12 md:col-6 xl:col-3">
                     <div class="card overview-box">
                         <p:graphicImage url="../resources/images/dashboard/effect-messages.svg" />
@@ -75,8 +67,10 @@
                             <p:graphicImage url="../resources/images/dashboard/icon-messages.png"/>
                         </span>
                         <div class="overview">
-                            <span class="overview-title">INTERACTIONS</span>
-                            <h3>query this field</h3>
+                            <span class="overview-title">MEASUREMENTS</span>
+                            <h3>
+                                <h:outputText value="#{measurementListController.measurementsAmount}" />
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -110,22 +104,25 @@
                             <h5>Green Houses</h5>
                             <p:dataTable id="ordersTable" var="sensorStation" value="#{sensorStationListController.sensorStations}" selectionMode="single" reflow="true" paginatorPosition="bottom"
                                          rowKey="#{sensorStation.id}" paginator="true" rows="5" sortBy="#{sensorStation.id}" sortOrder="descending" >
+
+                                <!-- .......................ROW SELECTION EVENT................ -->
                                 <p:ajax event="rowSelect" update="myBarChart" listener="#{graphController.onRowSelect}" />
+
                                 <p:column headerText="Id" sortBy="#{sensorStation.id}">
                                     <h:outputText value="#{sensorStation.id}" />
                                 </p:column>
 
-                                <p:column headerText="Plant" sortBy="#{sensorStation.createDate}">
-                                    <h:outputText value="#{sensorStation.createDate}" />
+                                <p:column headerText="Plant" sortBy="#{sensorStation.plant}">
+                                    <h:outputText value="#{sensorStation.plant}" />
                                 </p:column>
 
+                                <!-- ...........THIS HAS TO CHANGE WITH PLANT DATE!!!!!!!!......... -->
                                 <p:column headerText="Date" sortBy="#{sensorStation.createDate}">
                                     <h:outputText value="#{sensorStation.createDate}" />
                                 </p:column>
 
                                 <p:column headerText="Location" sortBy="#{sensorStation.location}">
                                     <h:outputText value="#{sensorStation.location}">
-                                        <f:convertNumber currencySymbol="$" type="currency" />
                                     </h:outputText>
                                 </p:column>
 
@@ -134,7 +131,12 @@
                                 </p:column>
 
                                 <p:column style="width: 3.5rem">
-                                    <p:commandButton icon="pi pi-search" />
+
+                                    <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
+                                    <p:button icon="pi pi-search"
+                                              title="open Detail-View"
+                                              href="/greenHouseDetails.xhtml?id=#{sensorStation.id}" />
+
                                 </p:column>
                             </p:dataTable>
                         </div>

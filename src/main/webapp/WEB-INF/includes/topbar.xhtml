@@ -147,7 +147,12 @@
                     <ui:fragment rendered="#{guestPreferences.profileMode == 'popup' ? true : false}">
                         <li class="topbar-item user-profile">
                             <a href="#">
-                                <p:graphicImage name="images/avatar-profilemenu.png"  />
+
+                                <!-- ........................AVATAR PICTURE................................ -->
+                                <p:avatar styleClass="mr-2" size="large" shape="circle">
+                                <p:graphicImage name="images/awesomeProfilePicture.png"  />
+                                </p:avatar>
+
                             </a>
                             <ul>
                                 <li>

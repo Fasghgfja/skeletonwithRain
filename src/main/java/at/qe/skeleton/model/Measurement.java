@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -33,5 +32,10 @@ public class Measurement implements Serializable {
     private String type;
     private LocalDate timestamp;
 
-
+    @Override
+    public String toString() {
+        return "Measurement{" +
+                "id: "+id + " "+  plant.getPlantName() + " "+  timestamp + " "+ type +
+                '}';
+    }
 }

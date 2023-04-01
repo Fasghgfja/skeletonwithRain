@@ -35,48 +35,68 @@ import java.util.List;
 @Scope("view")
 public class GraphController implements Serializable {
 
-    /**
-     * Different charts that can be used in the application
-     * to call them from the frontend just use graphcontroller.fieldname
-     * */
-    private LineChartModel lineModel;
-    private LineChartModel cartesianLinerModel;
-    private BarChartModel barModel = new BarChartModel();
-
+    //TODO: is it better to map controllers to controllers or controllers to services?
     @Autowired
     MeasurementService measurementService;
-
-
     @Autowired
     SensorStationService sensorService;
 
 
     /**
-     * Attribute to cache the currently displayed sensor station.
+     * Different charts that can be used in the application
+     * to call them from the frontend just use graphcontroller.fieldname
      */
+    private LineChartModel lineModel = new LineChartModel();
+    private LineChartModel cartesianLinerModel;
+    private BarChartModel barModel = new BarChartModel();
+
+
+    //TODO: is it good/necessary to cache this attributes or should we avoid it and just call it from the SENSOR DETAIL CONTROLLER?
+    /**Attribute to cache the currently displayed sensor station.*/
     private SensorStation sensorStation;
 
-    /**
-     * Attribute to cache the latest Measurements.
-     */
+    /**Attribute to cache the latest Measurements loaded which are loaded into the graph.*/
     private List<Measurement> latestMeasurements;
 
 
 
     /**
-     * Method used in the dashboard to change the Graph displayed based on row selection of the panel beside.
+     * Method used in the dashboard to change the Bar Chart displayed based on row selection of the table beside.
+     * it is used to display the most recent mesasurements (1 per type) on the barchart.
      */
     public void onRowSelect(SelectEvent<SensorStation> event) {
         sensorStation = (SensorStation) event.getObject();
-            createLineModel();
-            createCartesianLinerModel();
-            latestMeasurements = new ArrayList<>(measurementService.getLatestPlantMeasurements(sensorStation));
-        if(!latestMeasurements.isEmpty()) {
-        createBarModel(latestMeasurements);
+        createLineModel();
+        createCartesianLinerModel();
+        latestMeasurements = new ArrayList<>(measurementService.getLatestPlantMeasurements(sensorStation));
+        if (!latestMeasurements.isEmpty()) {
+            createBarModel(latestMeasurements);
         }
     }
 
-    //TODO: hide y axis values for dashboard graph
+    /**
+     * Method used in greenhouse details page greenHouseDetails.xhtml to change the Line Graph displayed based on row selection of the table
+     * beside.
+     * it is used to display the selected measurement history on the graph.
+     */
+    public void onRowSelectLineChart(SelectEvent<Measurement> event) {
+        Measurement measurement = event.getObject();
+        sensorStation = measurement.getSensorStation();
+        createCartesianLinerModel();
+        latestMeasurements = new ArrayList<>(measurementService.getAllMeasurementsBySensorStationAndType(sensorStation, measurement.getType()));
+        if (!latestMeasurements.isEmpty()) {
+            createLineModel(latestMeasurements);
+        }
+    }
+
+
+
+
+    /**
+     * Method to create a barchart from a list of measurements.
+     * used in the dashboard
+     */
+    //TODO: hide y axis values for dashboard graph as with different measures it doesent make any sense
     public void createBarModel(List<Measurement> measurements) {
         barModel = new BarChartModel();
         ChartData data = new ChartData();
@@ -87,7 +107,11 @@ public class GraphController implements Serializable {
         //TODO:change this with a query for AirValue GroundValue HumidityValue etc instead of hoping they come out in the correct order
         List<Number> values = new ArrayList<>();
         measurements.forEach(measurement -> {
-            if(measurement == null) {values.add(0);} else {values.add(Integer.parseInt(measurement.getValue_s()));}
+            if (measurement == null) {
+                values.add(0);
+            } else {
+                values.add(Integer.parseInt(measurement.getValue_s()));
+            }
         });
 
         barDataSet.setData(values);
@@ -162,6 +186,49 @@ public class GraphController implements Serializable {
 
 
 
+    /**
+     * Method to create a linechart from a list of measurements.
+     * used in the sensor station detail view.
+     */
+    public void createLineModel(List<Measurement> measurements) {
+        lineModel = new LineChartModel();
+        ChartData Air_Temperature = new ChartData();
+        LineChartDataSet dataSet = new LineChartDataSet();
+
+
+
+        List<Object> values = new ArrayList<>();
+        //actually the timestamps
+        List<String> labels = new ArrayList<>();
+
+        measurements.forEach(measurement -> {
+            if (measurement != null) {
+                values.add(Integer.parseInt(measurement.getValue_s()));
+                labels.add(measurement.getTimestamp().toString());
+            }
+        });
+
+
+        dataSet.setData(values);
+        dataSet.setFill(false);
+        //TODO: test what happens if get(0) gets a null or measurements is empty....
+        dataSet.setLabel(measurements.get(0).getType());
+        dataSet.setBorderColor("rgb(75, 192, 192)");
+        dataSet.setTension(0.1);
+        Air_Temperature.addChartDataSet(dataSet);
+
+        Air_Temperature.setLabels(labels);
+
+        //Options
+        LineChartOptions options = new LineChartOptions();
+        Title title = new Title();
+        title.setDisplay(true);
+        title.setText("Line Chart");
+        options.setTitle(title);
+
+        lineModel.setOptions(options);
+        lineModel.setData(Air_Temperature);
+    }
 
 
 
@@ -170,12 +237,14 @@ public class GraphController implements Serializable {
 
 
 
+
+
+
+    //TODO:standard mock implementation without paramenters to avoid null values , find a more elegant solution and just diplay a empty graph
+    //then remove this metod
     public void createLineModel() {
         lineModel = new LineChartModel();
         ChartData Air_Temperature = new ChartData();
-        ChartData Air_Humidity = new ChartData();
-        ChartData Ground_Humidity = new ChartData();
-
         LineChartDataSet dataSet = new LineChartDataSet();
         List<Object> values = new ArrayList<>();
         values.add(65);
@@ -191,7 +260,6 @@ public class GraphController implements Serializable {
         dataSet.setBorderColor("rgb(75, 192, 192)");
         dataSet.setTension(0.1);
         Air_Temperature.addChartDataSet(dataSet);
-
         List<String> labels = new ArrayList<>();
         labels.add("January");
         labels.add("February");
@@ -201,18 +269,19 @@ public class GraphController implements Serializable {
         labels.add("June");
         labels.add("July");
         Air_Temperature.setLabels(labels);
-
         //Options
         LineChartOptions options = new LineChartOptions();
         Title title = new Title();
         title.setDisplay(true);
         title.setText("Line Chart");
         options.setTitle(title);
-
         lineModel.setOptions(options);
         lineModel.setData(Air_Temperature);
     }
 
+
+
+    //TODO:other type of graph basic implementation , implement or remove as needed
     public void createCartesianLinerModel() {
         cartesianLinerModel = new LineChartModel();
         ChartData data = new ChartData();
@@ -279,6 +348,7 @@ public class GraphController implements Serializable {
 
         cartesianLinerModel.setOptions(options);
     }
+
 
 
 }

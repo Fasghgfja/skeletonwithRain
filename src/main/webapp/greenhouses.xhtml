@@ -6,11 +6,16 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templates/main.xhtml">
-
+    <!-- ........THIS PAGE SHOWS THE LIST OF GREENHOUSES ; IF THE BUTTON IS PRESSED ON A GREENHOUSE THEN THE GREENHOUSEDETAILSPAGE............... -->
+    <!-- ........OF THE SENSOR STATION(GREENHOUSE) OF THE CORRESPONDING GREENHOUSE IS OPENED::::::::::::::::::::::::::::::::............... -->
 
     <ui:define name ="content">
+
+
+        <!-- .........................................TABLE.............................................................. -->
         <h:form id="userForm">
             <div class="col-12">
+
                 <div class="card">
                     <h5>Greenhouses</h5>
                     <p:dataTable var="sensorStation" value="#{sensorStationListController.sensorStations}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{sensorStation.id}">
@@ -29,8 +34,8 @@
                             <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
                         </p:column>
 
-                        <p:column headerText="Plant" sortBy="#{sensorStation.location}">
-                            <h:outputText value="$#{sensorStation.location}"/>
+                        <p:column headerText="Plant" sortBy="#{sensorStation.plant}">
+                            <h:outputText value="$#{sensorStation.plant}"/>
                         </p:column>
 
                         <p:column headerText="Planted" sortBy="#{sensorStation.createDate}">
@@ -45,6 +50,18 @@
                             <h:outputText value="$#{sensorStation.location}"/>
                         </p:column>
 
+
+                        <p:column style="width: 3.5rem">
+
+                            <!-- DetailView page Button -->
+                            <p:button icon="pi pi-search"
+                                             title="open Detail-View"
+                                             href="/greenHouseDetails.xhtml?id=#{sensorStation.id}" />
+
+                        </p:column>
+
+
+                        <!-- .........................................ROW EXPANSION.......................................................... -->
                         <p:rowExpansion>
                             <div class="orders-subtable">
                                 <h5>Latest Measurements for Greenhouse #{sensorStation.id}</h5>
@@ -67,17 +84,17 @@
                                         <span class="order-badge order-#{order.status.name().toLowerCase()}">#{order.status}</span>
                                     </p:column>
 
-                                    <p:column style="width: 3.5rem">
-                                        <p:commandButton icon="pi pi-search" />
-                                    </p:column>
                                 </p:dataTable>
                             </div>
                         </p:rowExpansion>
+
                     </p:dataTable>
                 </div>
             </div>
-
-
         </h:form>
+
+
+
+
     </ui:define>
 </ui:composition>

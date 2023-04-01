@@ -3,15 +3,16 @@ package at.qe.skeleton.repositories;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
-
 import java.time.LocalDate;
 import java.util.List;
 
+
 /**
  * Repository for managing measurement entities {@link Measurement}.
+ * ALL METHODS RETURN MEASUREMENTS ORDERED BY DATE ; MOST RECENT FIRST
  * Provides methods for loading, saving and removing Measurements as inherited from the Abstract Repository
  * and adds methods to find measurements by measurementId  {@link MeasurementRepository#findFirstById(Long)} and
- * By Plant {@link MeasurementRepository#findMeasurementsByPlantID(Long)}.
+ * By Plant {@link MeasurementRepository#findMeasurementsByPlantOrderByTimestampDesc(Plant)} .
  * among with a wide selection of methods to find measurements using different parameters:
  * The Derived Query are split into parts separated by keywords:
  * The first one is the introducer(e.g find.., read.., query.., ...)
@@ -39,7 +40,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @return The measurements belonging to the selected plant as a List.
      * @throws IllegalArgumentException If plantID is {@literal null}.
      */
-    List<Measurement> findMeasurementsByPlant(Plant plant);
+    List<Measurement> findMeasurementsByPlantOrderByTimestampDesc(Plant plant);
 
 
     /**
@@ -48,7 +49,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @return The measurements belonging to the selected sensorStation as a List.
      * @throws IllegalArgumentException If sensorStation is {@literal null}.
      */
-    List<Measurement> findMeasurementsBySensorStation(SensorStation sensorStation);
+    List<Measurement> findMeasurementsBySensorStationOrderByTimestampDesc(SensorStation sensorStation);
 
     /**
      * Retrieves all measurements from a sensor station of a given type.
@@ -57,7 +58,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @return The measurements belonging to the selected sensorStation as a List.
      * @throws IllegalArgumentException If sensorStation is {@literal null}.
      */
-    List<Measurement> findMeasurementsBySensorStationAndTypeLike(SensorStation sensorStation, String type);
+    List<Measurement> findMeasurementsBySensorStationAndTypeLikeOrderByTimestampDesc(SensorStation sensorStation, String type);
 
 
 
@@ -72,21 +73,21 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @param date the date after which it filters, must not be {@literal null}
      * @return IllegalArgumentException If plantID or date is {@literal null}.
      */
-    List<Measurement> findMeasurementsByTimestamp(LocalDate date);
+    List<Measurement> findMeasurementsByTimestampOrderByTimestampDesc(LocalDate date);
 
     /**
      * Retrieves all measurements created before or equal to the given date.
      * @param date the date after which it filters, must not be {@literal null}
      * @return IllegalArgumentException If date is {@literal null}.
      */
-    List<Measurement> findMeasurementsByTimestampLessThanEqual(LocalDate date);
+    List<Measurement> findMeasurementsByTimestampLessThanEqualOrderByTimestampDesc(LocalDate date);
 
     /**
      * Retrieves all measurements created after the given date.
      * @param date the date after which it filters, must not be {@literal null}
      * @return IllegalArgumentException If plantID or date is {@literal null}.
      */
-    List<Measurement> findMeasurementsByTimestampGreaterThan(LocalDate date);
+    List<Measurement> findMeasurementsByTimestampGreaterThanOrderByTimestampDesc(LocalDate date);
 
 
 
@@ -102,7 +103,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @param date the date after which it filters, must not be {@literal null}
      * @return IllegalArgumentException If plantID or date is {@literal null}.
      */
-    List<Measurement> findMeasurementsByPlantAndTimestamp(Plant plant, LocalDate date);
+    List<Measurement> findMeasurementsByPlantAndTimestampOrderByTimestampDesc(Plant plant, LocalDate date);
 
     /**
      * Retrieves all measurements from a plant created before or equal to the given date (the measurements)
@@ -110,7 +111,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @param date the date after which it filters, must not be {@literal null}
      * @return IllegalArgumentException If plantID or date is {@literal null}.
      */
-    List<Measurement> findMeasurementsByPlantAndTimestampLessThanEqual(Plant plant, LocalDate date);
+    List<Measurement> findMeasurementsByPlantAndTimestampLessThanEqualOrderByTimestampDesc(Plant plant, LocalDate date);
 
     /**
      * Retrieves all measurements from a plant created after the given date (the measurements)
@@ -118,7 +119,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @param date the date after which it filters, must not be {@literal null}
      * @return IllegalArgumentException If plantID or date is {@literal null}.
      */
-    List<Measurement> findMeasurementsByPlantAndTimestampGreaterThan(Plant plant, LocalDate date);
+    List<Measurement> findMeasurementsByPlantAndTimestampGreaterThanOrderByTimestampDesc(Plant plant, LocalDate date);
 
 
 
@@ -136,7 +137,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @param type the type after which it filters, must not be {@literal null}
      * @return IllegalArgumentException If plantID ot type is {@literal null}.
      */
-    List<Measurement> findMeasurementsByPlantAndType(Plant plant, String type);
+    List<Measurement> findMeasurementsByPlantAndTypeLikeOrderByTimestampDesc(Plant plant, String type);
 
     /**
      * Retrieves all measurements of a specific type and date for a given plant.
@@ -145,7 +146,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @param date the date after which it filters, must not be {@literal null}
      * @return IllegalArgumentException If plantID,type or date is {@literal null}.
      */
-    List<Measurement> findMeasurementsByPlantAndTypeAndTimestamp(Plant plant, String type, LocalDate date);
+    List<Measurement> findMeasurementsByPlantAndTypeAndTimestampOrderByTimestampDesc(Plant plant, String type, LocalDate date);
 
     /**
      * Retrieves all measurements of a specific type after a date for a given plant.
@@ -154,7 +155,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @param date the date after which it filters, must not be {@literal null}
      * @return IllegalArgumentException If plantID,type or date is {@literal null}.
      */
-    List<Measurement> findMeasurementsByPlantAndTypeAndTimestampGreaterThan(Plant plant, String type, LocalDate date);
+    List<Measurement> findMeasurementsByPlantAndTypeAndTimestampGreaterThanOrderByTimestampDesc(Plant plant, String type, LocalDate date);
 
     /**
      * Retrieves all measurements of a specific type before a date  for a given plant.
@@ -163,8 +164,30 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @param date the date after which it filters, must not be {@literal null}
      * @return IllegalArgumentException If plantID,type or date is {@literal null}.
      */
-    List<Measurement> findMeasurementsByPlantAndTypeAndTimestampLessThanEqual(Plant plant, String type, LocalDate date);
+    List<Measurement> findMeasurementsByPlantAndTypeAndTimestampLessThanEqualOrderByTimestampDesc(Plant plant, String type, LocalDate date);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //new
+    List<Measurement> findMeasurementsByPlantAndTypeOrderByTimestampDesc(Plant plant, String type);
+
+    Measurement findFirstMeasurementByPlantAndTypeOrderByTimestampDesc(Plant plant, String type);
+
+
+
 
 
 }
+
 

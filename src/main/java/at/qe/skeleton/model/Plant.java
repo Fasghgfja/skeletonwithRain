@@ -29,27 +29,10 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
     @Column(length = 100)
     private String plantName;
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.plantID);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof final Plant other)) {
-            return false;
-        }
-        return Objects.equals(this.getPlantID(), other.getPlantID());
-    }
 
     @Override
     public String toString() {
-        return "at.qe.skeleton.model.Text[ id=" + serialVersionUID + " , " + plantID + " ]";
+        return  plantName ;
     }
 
 
@@ -68,5 +51,25 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
         return this.plantID.compareTo(o.getPlantID());
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Plant plant = (Plant) o;
+
+        if (!Objects.equals(plantID, plant.plantID)) return false;
+        if (!Objects.equals(description, plant.description)) return false;
+        return Objects.equals(plantName, plant.plantName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = plantID != null ? plantID.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (plantName != null ? plantName.hashCode() : 0);
+        return result;
+    }
 }
 

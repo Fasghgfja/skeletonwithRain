@@ -74,7 +74,7 @@ public class GalleryController implements Serializable {
      * The method returns the image content as a ByteArrayInputStream.
      * @return An instance of ByteArrayInputStream containing the requested image content.
      */
-    //TODO: multiple null requests bug
+    //TODO: multiple null requests bug: when the gallery page is opened it appears multiple requests are made so some carry null while usually the last one carry a real value
     public ByteArrayInputStream getPhotoAsStreamedContent() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         String id = facesContext.getExternalContext().getRequestParameterMap().get("id");

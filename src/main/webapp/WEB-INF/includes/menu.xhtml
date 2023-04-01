@@ -52,24 +52,27 @@
 
                 <p:menuitem id="m_dashboard" value="Dashboard" icon="pi pi-home" outcome="/dashboard" />
 
+                <!-- ..........................................ADMIN SUBMENU............................................................... -->
                 <p:submenu id="m_components" label="Aministration Utility" icon="pi pi-star-fill" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
                     <p:menuitem id="m_input" value="Manage Sensor Stations" icon="pi pi-check-square" outcome="/greenhouses" />
-                    <p:menuitem id="m_table" value="Manage Users" icon="pi pi-table" outcome="/table" />
-                    <p:menuitem id="m_list" value="Manage Access Points" icon="pi pi-list" outcome="/table" />
+                    <p:menuitem id="m_table" value="Manage Users" icon="pi pi-question-circle" outcome="/table" />
+                    <p:menuitem id="m_list" value="Manage Access Points" icon="pi pi-question-circle" outcome="/empty" />
                     <p:menuitem id="m_media" value="Image Gallery Test" icon="pi pi-image" url="/admin/media.xhtml" />
-                    <p:menuitem id="m_misc" value="Upload Image" icon="pi pi-circle-off" url="/admin/file.xhtml" />
-                    <p:menuitem id="m_button" value="Security Tests" icon="pi pi-mobile" outcome="/table" styleClass="rotated-icon"/>
-                    <p:menuitem id="m_formlayout" value="Audit Log" icon="pi pi-id-card" outcome="/table" />
+                    <p:menuitem id="m_button" value="Upload A Picture" icon="pi pi-mobile" url="/admin/file.xhtml" styleClass="rotated-icon"/>
+                    <p:menuitem id="m_formlayout" value="Audit Log" icon="pi pi-question-circle" outcome="/empty" />
                     <p:menuitem id="m_doc" value="Documentation" icon="pi pi-info-circle" outcome="/documentation"/>
                 </p:submenu>
+
+                <!-- ..........................................GARDENER SUBMENU............................................................... -->
                 <p:submenu id="m_primeblocks" label="Gardener Submenu" icon="pi pi-prime" rendered="#{sessionInfoBean.hasRole('GARDENER')}">
                     <p:menuitem id="m_freeblocks" value="Manage Greenhouses" icon="pi pi-eye" outcome="/greenhouses"/>
-                    <p:menuitem id="m_allblocks" value="Gardener utility" icon="pi pi-globe" target="_blank" url="https://www.primefaces.org/primeblocks-jsf"/>
+                    <p:menuitem id="m_allblocks" value="Gardener utility" icon="pi pi-question-circle" outcome="/empty"/>
                 </p:submenu>
 
-                <p:menuitem id="m_icons" value="Plants Catalogue" icon="pi pi-prime" outcome="/table"/>
-                <p:menuitem id="m_crud" value="Settings" icon="pi pi-pencil" outcome="/table" />
-                <p:menuitem id="m_help" value="Help" icon="pi pi-question-circle" outcome="/documentation" />
+                <!-- ..........................................OTHER MENU ELEMENTS..................................................... -->
+                <p:menuitem id="m_icons" value="Plants Catalogue" icon="pi pi-question-circle" outcome="/empty"/>
+                <p:menuitem id="m_crud" value="Settings" icon="pi pi-question-circle" outcome="/empty" />
+                <p:menuitem id="m_help" value="Help" icon="pi pi-question-circle" outcome="/empty" />
 
 
             </pr:menu>
