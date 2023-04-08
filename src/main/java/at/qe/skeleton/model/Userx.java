@@ -1,6 +1,8 @@
 package at.qe.skeleton.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 import jakarta.persistence.CollectionTable;
@@ -12,6 +14,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
 /**
@@ -20,6 +25,9 @@ import org.springframework.data.domain.Persistable;
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
  */
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Userx extends Metadata implements Persistable<String>, Serializable, Comparable<Userx> {
 
@@ -42,87 +50,28 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     @Enumerated(EnumType.STRING)
     private Set<UserRole> roles;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
+    /**
+     * Constructor to create user via pop-up in webapp
+     * @param username unique username
+     * @param password password of the user
+     * @param firstName first name of the user
+     * @param lastName last name of the user
+     * @param email email of the user
+     * @param phone phone number of the user
+     * @param roles Roles of the user
+     */
+    public Userx(String username, String password, String firstName, String lastName, String email, String phone, Set<UserRole> roles) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
+        this.createUser = null;
+        this.updateUser = null;
         this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public Set<UserRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<UserRole> roles) {
         this.roles = roles;
+        this.enabled = true;
     }
-
-    public Userx getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(Userx createUser) {
-        this.createUser = createUser;
-    }
-
-
-    public Userx getUpdateUser() {
-        return updateUser;
-    }
-
-    public void setUpdateUser(Userx updateUser) {
-        this.updateUser = updateUser;
-    }
-
 
     @Override
     public int hashCode() {
