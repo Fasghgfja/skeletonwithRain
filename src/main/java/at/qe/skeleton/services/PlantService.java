@@ -82,6 +82,12 @@ public class PlantService {
         this.plantRepository = plantRepository;
     }
 
+    //TODO: push this down to repository and queue , it is too expensive here
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Integer getPlantsAmount() {
+        return plantRepository.findAll().stream().toList().size();
+    }
+
     //TODO:find plant by gardener
 }
 
