@@ -5,9 +5,18 @@ import at.qe.skeleton.services.UserService;
 import java.io.Serializable;
 
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+
+import at.qe.skeleton.model.UserRole;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Controller for the user detail view.
@@ -15,6 +24,9 @@ import org.springframework.stereotype.Component;
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
  */
+
+@Getter
+@Setter
 @Component
 @Scope("view")
 public class UserDetailController implements Serializable {
@@ -25,7 +37,17 @@ public class UserDetailController implements Serializable {
     /**
      * Attribute to cache the currently displayed user
      */
+    @Setter(AccessLevel.NONE)
     private Userx user;
+    private String username;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phone;
+    private Set<UserRole> roles;
+    private boolean admin;
+    private boolean gardener;
 
     /**
      * Sets the currently displayed user and reloads it form db. This user is
@@ -38,15 +60,6 @@ public class UserDetailController implements Serializable {
     public void setUser(Userx user) {
         this.user = user;
         doReloadUser();
-    }
-
-    /**
-     * Returns the currently displayed user.
-     *
-     * @return
-     */
-    public Userx getUser() {
-        return user;
     }
 
     /**
@@ -71,6 +84,17 @@ public class UserDetailController implements Serializable {
         user = null;
     }
 
+    public void doCreateUser() {
+        roles = new HashSet<>();
+        roles.add(UserRole.USER);
+        if(admin){
+            roles.add(UserRole.GARDENER);
+            roles.add(UserRole.ADMIN);
+        } else if(gardener){
+            roles.add(UserRole.GARDENER);
+        }
+        this.userService.createUser(username,password, firstName,lastName,email, phone, roles);
+    }
 
 
 }

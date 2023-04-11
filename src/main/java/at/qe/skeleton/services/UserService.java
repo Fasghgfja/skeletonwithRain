@@ -1,11 +1,13 @@
 package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Log;
+import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.UserxRepository;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -75,6 +77,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Userx createUser(String username, String password, String firstName, String lastName, String email, String phone, Set<UserRole> roles) {
+        Userx userToBeCreated = new Userx(username, password, firstName, lastName, email, phone, roles);
+        saveUser(userToBeCreated);
+        return userToBeCreated;
+    }
     /**
      Deletes a user from the database and logs the deletion.
      The user to be deleted is passed as a parameter to the method. A Log object is created to record the deletion and saved to the
@@ -83,14 +91,15 @@ public class UserService {
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteUser(Userx user) {
-        Log deleteLog = new Log();
+        //TODO: Fix logging
+        /*Log deleteLog = new Log();
 
         deleteLog.setDate(LocalDate.now());
         deleteLog.setAuthor(getAuthenticatedUser().getUsername());
         deleteLog.setSubject("USER DELETION");
         deleteLog.setText("DELETED USER: " + user.getUsername());
 
-        logRepository.save(deleteLog);
+        logRepository.save(deleteLog);*/
         userRepository.delete(user);
     }
 
@@ -101,6 +110,77 @@ public class UserService {
     private Userx getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
+    }
+
+    /**
+     * Edits the user email.
+     *
+     * @param user the user to edit
+     * @param email the new email for the user
+     */
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void editUserEmail(Userx user, String email){
+        user.setEmail(email);
+        userRepository.save(user);
+    }
+
+    /**
+     * Edits the users phone number.
+     *
+     * @param user the user to edit
+     * @param phone the new email for the user
+     */
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void editUserPhone(Userx user, String phone){
+        user.setPhone(phone);
+        userRepository.save(user);
+    }
+
+    /**
+     * Edits the user firstName.
+     *
+     * @param user the user to edit
+     * @param firstName the new firstName for the user
+     */
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void editUserFirstName(Userx user, String firstName){
+        user.setFirstName(firstName);
+        userRepository.save(user);
+    }
+
+    /**
+     * Edits the user lastName.
+     *
+     * @param user the user to edit
+     * @param lastName the new lastName for the user
+     */
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void editUserLastName(Userx user, String lastName){
+        user.setLastName(lastName);
+        userRepository.save(user);
+    }
+
+    /**
+     * Edits the user password.
+     *
+     * @param user the user to edit
+     * @param password the new password for the user
+     */
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void editUserPassword(Userx user, String password){
+        user.setPassword(password);
+        userRepository.save(user);
+    }
+
+    /**
+     *
+     * @param user the user to edit
+     * @param roles the new roles assigned to this user
+     */
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void editUserRoles(Userx user, Set<UserRole> roles){
+        user.setRoles(roles);
+        userRepository.save(user);
     }
 
 }
