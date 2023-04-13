@@ -8,4 +8,6 @@ public interface AccessPointRepository extends AbstractRepository<AccessPoint, L
     //AccessPoint findByLocation(String location);
 
     //AccessPoint findByValidatedTrue();
+
+    long count();
 }

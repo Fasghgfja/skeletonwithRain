@@ -61,8 +61,8 @@ public class SensorStationService {
 
     //TODO: push this down to repository and queue , it is too expensive here
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Integer getSensorStationsAmount() {
-        return sensorStationRepository.findAll().stream().toList().size();
+    public long getSensorStationsAmount() {
+        return sensorStationRepository.count();
     }
 
 }

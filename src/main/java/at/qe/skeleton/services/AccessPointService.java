@@ -32,6 +32,11 @@ public class AccessPointService {
     public Collection<AccessPoint> getAllAccessPoint() {
         return accessPointRepository.findAll();
     }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public long getAccessPointsAmount(){
+        return accessPointRepository.count();
+    }
     @PreAuthorize("hasAuthority('ADMIN')")
     public AccessPoint loadAccessPoint(Long id) {
         return accessPointRepository.findFirstById(id);
