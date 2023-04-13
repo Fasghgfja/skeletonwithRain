@@ -6,7 +6,9 @@ import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 /**
@@ -28,6 +30,9 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
 
     @Column(length = 100)
     private String plantName;
+
+    @ManyToMany(mappedBy = "followedPlants", fetch = FetchType.LAZY)
+    private Set<Userx> followers = new HashSet<>();
 
 
     @Override

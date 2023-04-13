@@ -1,9 +1,11 @@
 package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Log;
+import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.LogRepository;
+import at.qe.skeleton.repositories.PlantRepository;
 import at.qe.skeleton.repositories.UserxRepository;
 import java.time.LocalDate;
 import java.util.*;
@@ -27,6 +29,8 @@ public class UserService {
     @Autowired
     private UserxRepository userRepository;
 
+    @Autowired
+    private PlantRepository plantRepository;
     /**
      The LogRepository is used to save logs for user deletions.
      */
@@ -181,6 +185,16 @@ public class UserService {
     public void editUserRoles(Userx user, Set<UserRole> roles){
         user.setRoles(roles);
         userRepository.save(user);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void addPlantToFollowedPlants(Userx user, Plant plant) {
+        if (user != null && plant != null) {
+            user.getFollowedPlants().add(plant);
+            plant.getFollowers().add(user);
+            userRepository.save(user);
+            plantRepository.save(plant);
+        }
     }
 
 }

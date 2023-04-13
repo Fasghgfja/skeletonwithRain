@@ -1,5 +1,6 @@
 package at.qe.skeleton.ui.controllers;
 
+import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.services.UserService;
 import java.io.Serializable;
@@ -94,6 +95,10 @@ public class UserDetailController implements Serializable {
             roles.add(UserRole.GARDENER);
         }
         this.userService.createUser(username,password, firstName,lastName,email, phone, roles);
+    }
+
+    public void doAddPlantToFollowedPlants(Userx user, Plant plant) {
+        this.userService.addPlantToFollowedPlants(user,plant);
     }
 
 
