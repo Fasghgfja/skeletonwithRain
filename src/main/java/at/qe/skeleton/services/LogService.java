@@ -1,6 +1,7 @@
 package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Log;
+import at.qe.skeleton.model.LogType;
 import at.qe.skeleton.repositories.LogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -31,8 +32,23 @@ public class LogService {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Integer getLogsAmount() {
-        return logRepository.findAll().stream().toList().size();
+    public long getLogsAmount() {
+        return logRepository.count();
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public long getErrorLogsAmount() {
+        return logRepository.countLogByType(LogType.ERROR);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public long getWarningLogsAmount() {
+        return logRepository.countLogByType(LogType.WARNING);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public long getSuccessLogsAmount() {
+        return logRepository.countLogByType(LogType.SUCCESS);
     }
 
 

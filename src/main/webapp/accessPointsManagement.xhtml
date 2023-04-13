@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:po="http://primefaces.org/rain"
+                template="/WEB-INF/templates/main.xhtml">
+
+    <ui:define name="title">Plant Health - Access Points Management</ui:define>
+
+    <ui:define name="content">
+        <h:form id="accessPointsForm">
+            <div class="grid table-demo">
+                <div class="col-12">
+                    <div class="card">
+
+                        <p:dataTable id="accessPointsTable" var="accessPoint"
+                                     value="#{accessPointController.accessPoints}"
+                                     paginator="true" paginatorPosition="bottom" rows="10" rowIndexVar="rowIndex"
+                        emptyMessage="No Access Points found.">
+                            <p:column style="text-align: center" headerText="Access Point ID" sortBy="#{accessPoint.id}"
+                                      filterBy="#{accessPoint.id}">
+                                <h:outputText value="#{accessPoint.id}"/>
+                            </p:column>
+
+                            <p:column style="text-align: center" headerText="Location" sortBy="#{accessPoint.location}"
+                                      filterBy="#{accessPoint.location}">
+                                <h:outputText value="#{accessPoint.location}"/>
+                            </p:column>
+
+                            <p:column style="text-align: center" headerText="Validated"
+                                      sortBy="#{accessPoint.validated}" filterBy="#{accessPoint.validated}">
+                                <h:selectBooleanCheckbox value="#{accessPoint.validated}" disabled="true"/>
+                            </p:column>
+                            <p:column style="text-align: center">
+                                <p:commandButton class="ui-button-danger" icon="pi pi-trash" title="Delete"
+                                                 update="accessPointsForm:accessPointsTable"
+                                                 action="#{accessPointController.doDeleteAccessPoint}">
+                                    <f:setPropertyActionListener value="#{accessPoint}"
+                                                                 target="#{accessPointController.accessPoint}"/>
+                                    <p:confirm header="Confirmation"
+                                               message="Are you sure you want to delete the access point with ID '#{accessPoint.id}'?"
+                                               icon="pi pi-exclamation-triangle"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                        <!-- CREATE ACCESS POINT BUTTON -->
+                        <p:separator>
+                            <p:commandButton icon="pi pi-plus" value="Create New Access Point"
+                                             oncomplete="PF('createAPDialog').show()"
+                                             ajax="true" class="btn btn-primary">
+                                <f:setPropertyActionListener value="#{accessPoint}"
+                                                             target="#{accessPointController.accessPointToBeCreated}"/>
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="350"
+                                             widgetVar="confirmDialog">
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"
+                                                 icon="pi pi-check"/>
+                                <p:commandButton value="No" type="button"
+                                                 styleClass="ui-confirmdialog-no ui-button-secondary"
+                                                 icon="pi pi-times"/>
+                            </p:confirmDialog>
+                        </p:separator>
+
+                        <!-- CREATE ACCESS POINT DIALOG -->
+
+                        <p:dialog id="createAPDialog" showEffect="fade" hideEffect="fade"
+                                  header="Create New Access Point"
+                                  widgetVar="createAPDialog" modal="true">
+                            <p:outputPanel id="createAP"
+                                           rendered="#{not empty accessPointController.accessPointToBeCreated}">
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel for="location" value="Location:"/>
+                                    <p:inputText id="location" value="#{accessPointController.location}"
+                                                 required="true"/>
+
+                                    <p:commandButton value="Create"
+                                                     action="#{accessPointController.doCreateAccessPoint}"
+                                                     update=":accessPointsForm:accessPointsTable: createAPDialog"
+                                                     oncomplete="PF('createAPDialog').hide()"/>
+                                    <p:commandButton value="Cancel" onclick="PF('createAPDialog').hide()"/>
+
+                                </h:panelGrid>
+                            </p:outputPanel>
+
+                        </p:dialog>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

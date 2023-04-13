@@ -38,8 +38,18 @@ public class LogListController {
     }
 
 
-    public Integer getLogsAmount() {
+    public long getLogsAmount() {
         return logService.getLogsAmount();
+    }
+
+    public long getErrorLogsAmount(){
+        return logService.getErrorLogsAmount();
+    }
+    public long getWarningLogsAmount(){
+        return logService.getWarningLogsAmount();
+    }
+    public long getSuccessLogsAmount(){
+        return logService.getSuccessLogsAmount();
     }
 
 

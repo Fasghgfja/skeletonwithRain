@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 
 import at.qe.skeleton.model.UserRole;
+import org.springframework.stereotype.Controller;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,8 +28,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Component
-@Scope("view")
+@Controller
 public class UserDetailController implements Serializable {
 
     @Autowired
@@ -37,8 +37,8 @@ public class UserDetailController implements Serializable {
     /**
      * Attribute to cache the currently displayed user
      */
-    @Setter(AccessLevel.NONE)
     private Userx user;
+    private Userx userToBeCreated = new Userx();
     private String username;
     private String password;
     private String firstName;
@@ -48,19 +48,6 @@ public class UserDetailController implements Serializable {
     private Set<UserRole> roles;
     private boolean admin;
     private boolean gardener;
-
-    /**
-     * Sets the currently displayed user and reloads it form db. This user is
-     * targeted by any further calls of
-     * {@link #doReloadUser()}, {@link #doSaveUser()} and
-     * {@link #doDeleteUser()}.
-     *
-     * @param user
-     */
-    public void setUser(Userx user) {
-        this.user = user;
-        doReloadUser();
-    }
 
     /**
      * Action to force a reload of the currently displayed user.
@@ -94,6 +81,7 @@ public class UserDetailController implements Serializable {
             roles.add(UserRole.GARDENER);
         }
         this.userService.createUser(username,password, firstName,lastName,email, phone, roles);
+        this.userToBeCreated = null;
     }
 
 

@@ -1,41 +1,24 @@
 package at.qe.skeleton.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serializable;
+
+@Getter
+@Setter
 @Entity
 public class AccessPoint extends Metadata implements Persistable<Long>, Serializable, Comparable<AccessPoint>{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, unique = true)
     private Long accessPointID;
     private String location;
     private boolean validated;
-
-    public void setId(Long id) {
-        this.accessPointID = id;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public boolean isValidated() {
-        return validated;
-    }
-
-    public void setValidated(boolean validated) {
-        this.validated = validated;
-    }
 
     @Override
     public Long getId() {
