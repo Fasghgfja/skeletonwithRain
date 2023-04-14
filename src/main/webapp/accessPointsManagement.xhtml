@@ -45,9 +45,10 @@
                         <p:separator>
                             <p:commandButton icon="pi pi-plus" value="Create New Access Point"
                                              oncomplete="PF('createAPDialog').show()"
+                                             update="accessPointsForm:createAPDialog"
                                              ajax="true" class="btn btn-primary">
                                 <f:setPropertyActionListener value="#{accessPoint}"
-                                                             target="#{accessPointController.accessPointToBeCreated}"/>
+                                                             target="#{accessPointController.accessPoint}"/>
                             </p:commandButton>
                             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="350"
                                              widgetVar="confirmDialog">
@@ -65,7 +66,7 @@
                                   header="Create New Access Point"
                                   widgetVar="createAPDialog" modal="true">
                             <p:outputPanel id="createAP"
-                                           rendered="#{not empty accessPointController.accessPointToBeCreated}">
+                                           visible="#{not empty accessPointController.accessPoint}">
                                 <h:panelGrid columns="2">
                                     <p:outputLabel for="location" value="Location:"/>
                                     <p:inputText id="location" value="#{accessPointController.location}"
@@ -73,7 +74,7 @@
 
                                     <p:commandButton value="Create"
                                                      action="#{accessPointController.doCreateAccessPoint}"
-                                                     update=":accessPointsForm:accessPointsTable: createAPDialog"
+                                                     update=":accessPointsForm:accessPointsTable"
                                                      oncomplete="PF('createAPDialog').hide()"/>
                                     <p:commandButton value="Cancel" onclick="PF('createAPDialog').hide()"/>
 
