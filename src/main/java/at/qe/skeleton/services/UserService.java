@@ -1,11 +1,13 @@
 package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Log;
+import at.qe.skeleton.model.LogType;
 import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.UserxRepository;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +83,15 @@ public class UserService {
     public Userx createUser(String username, String password, String firstName, String lastName, String email, String phone, Set<UserRole> roles) {
         Userx userToBeCreated = new Userx(username, password, firstName, lastName, email, phone, roles);
         saveUser(userToBeCreated);
+        Log createLog = new Log();
+
+        createLog.setDate(LocalDate.now());
+        createLog.setTime(LocalDateTime.now());
+        createLog.setAuthor(getAuthenticatedUser().getUsername());
+        createLog.setSubject("USER CREATION");
+        createLog.setText("CREATED USER: " + userToBeCreated.getUsername());
+        createLog.setType(LogType.SUCCESS);
+        logRepository.save(createLog);
         return userToBeCreated;
     }
     /**
@@ -91,15 +102,16 @@ public class UserService {
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteUser(Userx user) {
-        //TODO: Fix logging
-        /*Log deleteLog = new Log();
+        Log deleteLog = new Log();
 
         deleteLog.setDate(LocalDate.now());
+        deleteLog.setTime(LocalDateTime.now());
         deleteLog.setAuthor(getAuthenticatedUser().getUsername());
         deleteLog.setSubject("USER DELETION");
         deleteLog.setText("DELETED USER: " + user.getUsername());
+        deleteLog.setType(LogType.SUCCESS);
 
-        logRepository.save(deleteLog);*/
+        logRepository.save(deleteLog);
         userRepository.delete(user);
     }
 

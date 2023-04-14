@@ -56,7 +56,7 @@
                 <p:submenu id="m_components" label="Administration Utility" icon="pi pi-pencil" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
                     <p:menuitem id="m_input" value="Manage Sensor Stations" icon="pi pi-check-square" outcome="/greenhouses" />
                         <p:menuitem id="m_table" value="Manage Users" icon="pi pi-users" outcome="/userManagement" />
-                    <p:menuitem id="m_list" value="Manage Access Points" icon="pi pi-question-circle" outcome="/empty" />
+                    <p:menuitem id="m_list" value="Manage Access Points" icon="pi pi-server" outcome="/accessPointsManagement" />
                     <p:menuitem id="m_media" value="Image Gallery Test" icon="pi pi-image" url="/admin/media.xhtml" />
                     <p:menuitem id="m_button" value="Upload A Picture" icon="pi pi-mobile" url="/admin/file.xhtml" styleClass="rotated-icon"/>
                     <p:menuitem id="m_formlayout" value="Audit Log" icon="pi pi-question-circle" outcome="/empty" />

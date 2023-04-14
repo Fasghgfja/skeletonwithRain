@@ -1,5 +1,9 @@
 package at.qe.skeleton.repositories;
 import at.qe.skeleton.model.Log;
+import at.qe.skeleton.model.LogType;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 
 /**
@@ -9,4 +13,8 @@ import at.qe.skeleton.model.Log;
  *  * The second one defines the criteria (e.g ...ByName, ...).
  */
 public interface LogRepository extends AbstractRepository<Log, Long> {
+    long countLogByType(LogType logType);
+    long count();
+
+
 }

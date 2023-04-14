@@ -2,15 +2,20 @@ package at.qe.skeleton.model;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 //TODO: Fix like the example in the demo
 /**
  * Entity representing an audit log entry.
  */
+ @Getter
+ @Setter
 @Entity
 public class Log {
 
@@ -30,43 +35,8 @@ public class Log {
     @Column(columnDefinition = "DATE")
     private LocalDate date;
 
-    public Long getId() {
-        return id;
-    }
+    private LocalDateTime time;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+    @Enumerated(EnumType.STRING)
+    private LogType type;
 }

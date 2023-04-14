@@ -1,13 +1,13 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui" xmlns:po="http://primefaces.org/rain" template="/WEB-INF/templates/main.xhtml">
+                xmlns:p="http://primefaces.org/ui" xmlns:po="http://primefaces.org/rain"
+                template="/WEB-INF/templates/main.xhtml">
 
     <ui:define name="title">Dashboard</ui:define>
     <ui:define name="head">
-        <h:outputScript name="js/chart.js" />
+        <h:outputScript name="js/chart.js"/>
         <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
     </ui:define>
-
 
 
     <ui:define name="content">
@@ -26,7 +26,7 @@
                         <div class="overview">
                             <span class="overview-title">USERS SIGNED UP</span>
                             <h3>
-                                <h:outputText value="#{userListController.usersAmount}" />
+                                <h:outputText value="#{userListController.usersAmount}"/>
                             </h3>
                         </div>
                     </div>
@@ -40,7 +40,9 @@
                         </span>
                         <div class="overview">
                             <span class="overview-title">ACCESS POINTS</span>
-                            <h3>query this field</h3>
+                            <h3>
+                                <h:outputText value="#{accessPointController.accessPointsAmount}"/>
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -54,7 +56,7 @@
                         <div class="overview">
                             <span class="overview-title">PLANTS UNDER CARE</span>
                             <h3>
-                                <h:outputText value="#{sensorStationListController.sensorStationsAmount}" />
+                                <h:outputText value="#{sensorStationListController.sensorStationsAmount}"/>
                             </h3>
                         </div>
                     </div>
@@ -62,20 +64,18 @@
                 <!-- .....................MEASUREMENTS..................................... -->
                 <div class="col-12 md:col-6 xl:col-3">
                     <div class="card overview-box">
-                        <p:graphicImage url="../resources/images/dashboard/effect-messages.svg" />
+                        <p:graphicImage url="../resources/images/dashboard/effect-messages.svg"/>
                         <span class="overview-icon">
                             <p:graphicImage url="../resources/images/dashboard/icon-messages.png"/>
                         </span>
                         <div class="overview">
                             <span class="overview-title">MEASUREMENTS</span>
                             <h3>
-                                <h:outputText value="#{measurementListController.measurementsAmount}" />
+                                <h:outputText value="#{measurementListController.measurementsAmount}"/>
                             </h3>
                         </div>
                     </div>
                 </div>
-
-
 
 
                 <!-- ..........................................GRAPH................................................................... -->
@@ -85,7 +85,7 @@
                             <h5>Selected GreenHouse Details</h5>
                         </div>
                         <div class="card">
-                            <p:barChart id="myBarChart" model="#{graphController.barModel}" />
+                            <p:barChart id="myBarChart" model="#{graphController.barModel}"/>
 
                         </div>
                     </div>
@@ -94,31 +94,32 @@
                 <!-- ...................supported charts are .lineModel and .cartesianLinearModel................... -->
 
 
-
-
-
                 <!-- ..........................................GREENHOUSES PREVIEW................................................................... -->
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="col-12">
                         <div class="card">
                             <h5>Green Houses</h5>
-                            <p:dataTable id="ordersTable" var="sensorStation" value="#{sensorStationListController.sensorStations}" selectionMode="single" reflow="true" paginatorPosition="bottom"
-                                         rowKey="#{sensorStation.id}" paginator="true" rows="5" sortBy="#{sensorStation.id}" sortOrder="descending" >
+                            <p:dataTable id="ordersTable" var="sensorStation"
+                                         value="#{sensorStationListController.sensorStations}" selectionMode="single"
+                                         reflow="true" paginatorPosition="bottom"
+                                         rowKey="#{sensorStation.id}" paginator="true" rows="5"
+                                         sortBy="#{sensorStation.id}" sortOrder="descending">
 
                                 <!-- .......................ROW SELECTION EVENT................ -->
-                                <p:ajax event="rowSelect" update="myBarChart" listener="#{graphController.onRowSelect}" />
+                                <p:ajax event="rowSelect" update="myBarChart"
+                                        listener="#{graphController.onRowSelect}"/>
 
                                 <p:column headerText="Id" sortBy="#{sensorStation.id}">
-                                    <h:outputText value="#{sensorStation.id}" />
+                                    <h:outputText value="#{sensorStation.id}"/>
                                 </p:column>
 
                                 <p:column headerText="Plant" sortBy="#{sensorStation.plant}">
-                                    <h:outputText value="#{sensorStation.plant}" />
+                                    <h:outputText value="#{sensorStation.plant}"/>
                                 </p:column>
 
                                 <!-- ...........THIS HAS TO CHANGE WITH PLANT DATE!!!!!!!!......... -->
                                 <p:column headerText="Date" sortBy="#{sensorStation.createDate}">
-                                    <h:outputText value="#{sensorStation.createDate}" />
+                                    <h:outputText value="#{sensorStation.createDate}"/>
                                 </p:column>
 
                                 <p:column headerText="Location" sortBy="#{sensorStation.location}">
@@ -135,16 +136,13 @@
                                     <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
                                     <p:button icon="pi pi-search"
                                               title="open Detail-View"
-                                              href="/greenHouseDetails.xhtml?id=#{sensorStation.id}" />
+                                              href="/greenHouseDetails.xhtml?id=#{sensorStation.id}"/>
 
                                 </p:column>
                             </p:dataTable>
                         </div>
                     </div>
                 </div>
-
-
-
 
 
                 <!-- ..........................................OUTER FRAME LOG SYSTEM MESSAGES AND LOGS ................:::::::::::::::........ -->
@@ -164,7 +162,7 @@
                                 </div>
                                 <div class="feedbacks-list">
                                     <div class="feedback">
-                                        <p:graphicImage name="images/dashboard/avatar-1.png" library="demo" />
+                                        <p:graphicImage name="images/dashboard/avatar-1.png" library="demo"/>
                                         <div class="feedback-content">
                                             <div class="feedback-header">
                                                 <h6>Tamas Bunce</h6>
@@ -175,7 +173,7 @@
                                         </div>
                                     </div>
                                     <div class="feedback">
-                                        <p:graphicImage name="images/dashboard/avatar-1.png" library="demo" />
+                                        <p:graphicImage name="images/dashboard/avatar-1.png" library="demo"/>
                                         <div class="feedback-content">
                                             <div class="feedback-header">
                                                 <h6>Tamas Bunce</h6>
@@ -186,7 +184,7 @@
                                         </div>
                                     </div>
                                     <div class="feedback">
-                                        <p:graphicImage name="images/dashboard/avatar-2.png" library="demo" />
+                                        <p:graphicImage name="images/dashboard/avatar-2.png" library="demo"/>
                                         <div class="feedback-content">
                                             <div class="feedback-header">
                                                 <h6>Olivia Arribas</h6>
@@ -197,11 +195,11 @@
                                         </div>
                                     </div>
                                     <div class="feedback">
-                                        <p:graphicImage name="images/dashboard/avatar-3.png" library="demo" />
+                                        <p:graphicImage name="images/dashboard/avatar-3.png" library="demo"/>
                                         <div class="fesedback-content">
                                             <div class="feedback-header">
                                                 <h6>Naomí Yepes</h6>
-                                                <p:rating value="4"  readonly="true"/>
+                                                <p:rating value="4" readonly="true"/>
                                                 <span>1w ago</span>
                                             </div>
                                             <span>The analysis of satellite data has revealed the loss of ice in just a few months of abnormally high…</span>
@@ -219,19 +217,33 @@
                                 <div class="status-content">
 
 
-
                                     <!-- ..........................................AUDIT LOG PREVIEW .................................... -->
-                                        <div class="card">
-                                                <p:dataTable id="latestlogs" var="log" value="#{logListController.latestlogs}" selectionMode="single" reflow="true" paginatorPosition="bottom"
-                                                             rowKey="#{log.id}" paginator="true" rows="5" sortBy="#{log.id}" sortOrder="descending" >
-                                                    <p:column >
-                                                        <h:outputText value="#{log.id}" />
-                                                    </p:column>
-                                                    <p:column >
-                                                        <h:outputText value="#{log.text}" />
-                                                    </p:column>
-                                                </p:dataTable>
-                                        </div>
+                                    <div class="card">
+                                        <p:dataTable id="latestlogs" var="log" value="#{logListController.latestlogs}"
+                                                     selectionMode="single" reflow="true" paginatorPosition="bottom"
+                                                     rowKey="#{log.id}" paginator="true" rows="5" sortBy="#{log.id}"
+                                                     sortOrder="descending">
+                                            <p:column>
+                                                <p:panel style="text-align: center">
+                                                    <h:panelGroup rendered="#{log.type == 'SUCCESS'}">
+                                                        <i class="pi pi-circle-on" style="color:green"></i>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup rendered="#{log.type == 'WARNING'}">
+                                                        <i class="pi pi-circle-on" style="color: orange"></i>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup rendered="#{log.type == 'ERROR'}">
+                                                        <i class="pi pi-circle-on" style="color:red"></i>
+                                                    </h:panelGroup>
+                                                </p:panel>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="#{log.time}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="#{log.text}"/>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </div>
 
 
                                     <!-- ..........................................LOG CATEGORIES .................................... -->
@@ -240,25 +252,35 @@
                                         <ul>
                                             <li>
                                                 <div class="status">
-                                                    <span ><i class="pi pi-circle-on"></i> Error</span>
+                                                    <span><i class="pi pi-info"></i> Total Amount</span>
                                                     <span>
-                                                        <h:outputText value="#{logListController.logsAmount}" />
+                                                        <h:outputText value="#{logListController.logsAmount}"/>
                                                     </span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="status">
-                                                    <span ><i class="pi pi-circle-on"></i> Warning</span>
-                                                    <span >
-                                                        <h:outputText value="#{logListController.logsAmount}" />
+                                                    <span><i class="pi pi-circle-on"
+                                                             style="color: red"></i> Error</span>
+                                                    <span>
+                                                        <h:outputText value="#{logListController.errorLogsAmount}"/>
                                                     </span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="status">
-                                                    <span ><i class="pi pi-circle-on"></i> Success</span>
-                                                    <span >
-                                                        <h:outputText value="#{logListController.logsAmount}" />
+                                                    <span><i class="pi pi-circle-on" style="color: orange"></i> Warning</span>
+                                                    <span>
+                                                        <h:outputText value="#{logListController.warningLogsAmount}"/>
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="status">
+                                                    <span><i class="pi pi-circle-on"
+                                                             style="color: green"></i> Success</span>
+                                                    <span>
+                                                        <h:outputText value="#{logListController.successLogsAmount}"/>
                                                     </span>
                                                 </div>
                                             </li>
@@ -280,14 +302,15 @@
                         <div class="card-header">
                             <h5>ACCESS POINTS</h5>
                             <div class="header-buttons">
-                                <p:commandButton type="button" icon="pi pi-search" styleClass="ui-button-secondary outlined-button mr-2" />
+                                <p:commandButton type="button" icon="pi pi-search"
+                                                 styleClass="ui-button-secondary outlined-button mr-2"/>
                             </div>
                         </div>
-                        <p:graphicImage name="images/dashboard/asset-worldmap.png" library="demo" />
+                        <p:graphicImage name="images/dashboard/asset-worldmap.png" library="demo"/>
                         <div class="progress-item">
                             <div class="progress-title">
-                                <span >United States of America</span>
-                                <span >5K/10K</span>
+                                <span>United States of America</span>
+                                <span>5K/10K</span>
                             </div>
 
                             <div class="progress-bar">
@@ -297,8 +320,8 @@
                         </div>
                         <div class="progress-item">
                             <div class="progress-title">
-                                <span >France</span>
-                                <span >2K/6K</span>
+                                <span>France</span>
+                                <span>2K/6K</span>
                             </div>
 
                             <div class="progress-bar">
@@ -308,8 +331,8 @@
                         </div>
                         <div class="progress-item">
                             <div class="progress-title">
-                                <span >Japan</span>
-                                <span >4K/9K</span>
+                                <span>Japan</span>
+                                <span>4K/9K</span>
                             </div>
 
                             <div class="progress-bar">
@@ -321,23 +344,22 @@
                 </div>
 
 
-
-
-
-
                 <!-- ..........................................USERS TABLE................................................................... -->
                 <div class="col-12 md:col-12 xl:col-8">
                     <div class="card transactions">
                         <div class="card-header">
                             <h5>Users</h5>
                             <div class="header-buttons">
-                                <p:commandButton type="button" icon="pi pi-search" styleClass="ui-button-secondary outlined-button  mr-2"/>
-                                <p:commandButton type="button" icon="pi pi-ellipsis-v"  styleClass="ui-button-secondary outlined-button " />
+                                <p:commandButton type="button" icon="pi pi-search"
+                                                 styleClass="ui-button-secondary outlined-button  mr-2"/>
+                                <p:commandButton type="button" icon="pi pi-ellipsis-v"
+                                                 styleClass="ui-button-secondary outlined-button "/>
                             </div>
                         </div>
                         <h:form id="form">
-                            <p:dataTable  widgetVar="customersDT" var="user" value="#{userListController.users}" reflow="true" rowKey="#{user.id}"
-                                          rows="10" scrollable="true" scrollHeight="500">
+                            <p:dataTable widgetVar="customersDT" var="user" value="#{userListController.users}"
+                                         reflow="true" rowKey="#{user.id}"
+                                         rows="10" scrollable="true" scrollHeight="500">
                                 <f:facet name="header">
                                     <style type="text/css">
                                         .table-no-select-all .ui-chkbox-all {
@@ -350,40 +372,43 @@
 
                                         <span class="ui-input-icon-left filter-container">
                                         <i class="pi pi-search"/>
-                                        <p:inputText id="globalFilter" onkeyup="PF('customersDT').filter()" placeholder="Global Search"/>
+                                        <p:inputText id="globalFilter" onkeyup="PF('customersDT').filter()"
+                                                     placeholder="Global Search"/>
                                     </span>
                                     </div>
                                 </f:facet>
                                 <p:column headerText="Username" sortBy="#{user.username}" filterBy="#{user.username}">
-                                    <h:outputText value="#{user.username}" />
+                                    <h:outputText value="#{user.username}"/>
                                 </p:column>
-                                <p:column headerText="First Name" sortBy="#{user.firstName}" filterBy="#{user.firstName}">
+                                <p:column headerText="First Name" sortBy="#{user.firstName}"
+                                          filterBy="#{user.firstName}">
                                     <span class="flag flag-#{customer.country.code}" style="width: 30px; height: 20px"/>
-                                    <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{user.firstName}" />
+                                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                                  value="#{user.firstName}"/>
                                 </p:column>
                                 <p:column headerText="Last Name" sortBy="#{user.lastName}" filterBy="#{user.lastName}">
-                                    <p:graphicImage name="images/avatar/#{customer.representative.image}" width="32" style="vertical-align: middle" />
-                                    <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{user.lastName}" />
+                                    <p:graphicImage name="images/avatar/#{customer.representative.image}" width="32"
+                                                    style="vertical-align: middle"/>
+                                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                                  value="#{user.lastName}"/>
                                 </p:column>
-                                <p:column headerText="Join Date" sortBy="#{user.createDate}" filterBy="#{user.createDate}">
-                                    <h:outputText value="#{user.createDate}" />
+                                <p:column headerText="Join Date" sortBy="#{user.createDate}"
+                                          filterBy="#{user.createDate}">
+                                    <h:outputText value="#{user.createDate}"/>
                                 </p:column>
                                 <p:column headerText="Roles" sortBy="#{customer.status}" filterBy="#{customer.status}">
                                     <span class="customer-badge status-#{customer.status.name().toLowerCase()}">#{customer.status}</span>
                                 </p:column>
                                 <p:column headerText="Enabled" sortBy="#{user.enabled}">
-                                    <h:outputText value="#{user.enabled}" />
+                                    <h:outputText value="#{user.enabled}"/>
                                 </p:column>
                                 <p:column style="width: 8rem; text-align: center;">
-                                    <p:button icon="pi pi-cog" styleClass="ui-button-secondary" />
+                                    <p:button icon="pi pi-cog" styleClass="ui-button-secondary"/>
                                 </p:column>
                             </p:dataTable>
                         </h:form>
                     </div>
                 </div>
-
-
-
 
 
             </div>
