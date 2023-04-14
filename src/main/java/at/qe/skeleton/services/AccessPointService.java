@@ -56,6 +56,7 @@ public class AccessPointService {
         Log deleteLog = new Log();
         deleteLog.setDate(LocalDate.now());
         deleteLog.setTime(LocalDateTime.now());
+        deleteLog.setAuthor(getAuthenticatedUser().getUsername());
         deleteLog.setSubject("ACCESS POINT DELETION");
         deleteLog.setText("DELETED ACCESS POINT: " + accessPoint.getId());
         deleteLog.setType(LogType.SUCCESS);
