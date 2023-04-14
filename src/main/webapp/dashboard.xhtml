@@ -224,17 +224,8 @@
                                                      rowKey="#{log.id}" paginator="true" rows="5" sortBy="#{log.id}"
                                                      sortOrder="descending">
                                             <p:column>
-                                                <p:panel style="text-align: center">
-                                                    <h:panelGroup rendered="#{log.type == 'SUCCESS'}">
-                                                        <i class="pi pi-circle-on" style="color:green"></i>
-                                                    </h:panelGroup>
-                                                    <h:panelGroup rendered="#{log.type == 'WARNING'}">
-                                                        <i class="pi pi-circle-on" style="color: orange"></i>
-                                                    </h:panelGroup>
-                                                    <h:panelGroup rendered="#{log.type == 'ERROR'}">
-                                                        <i class="pi pi-circle-on" style="color:red"></i>
-                                                    </h:panelGroup>
-                                                </p:panel>
+                                                <h:outputText value="#{log.type}"
+                                                              style="color:#{log.type == 'ERROR' ? 'red' : log.type == 'WARNING' ? 'orange' : 'green'};"/>
                                             </p:column>
                                             <p:column>
                                                 <h:outputText value="#{log.time}"/>
