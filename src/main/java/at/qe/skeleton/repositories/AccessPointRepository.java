@@ -9,5 +9,9 @@ public interface AccessPointRepository extends AbstractRepository<AccessPoint, L
 
     //AccessPoint findByValidatedTrue();
 
+
+    @Override
+    <S extends AccessPoint> S save(S entity);
+
     long count();
 }

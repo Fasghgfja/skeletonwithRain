@@ -45,9 +45,7 @@ public class AccessPointController implements Serializable {
      */
     public void doCreateAccessPoint(){
         this.accessPoint = new AccessPoint();
-        this.accessPoint.setLocation(location);
-        this.accessPoint.setValidated(false);
-        doSaveAccessPoint();
+        this.accessPointService.createAccessPoint(accessPoint, location);
     }
 
     /**

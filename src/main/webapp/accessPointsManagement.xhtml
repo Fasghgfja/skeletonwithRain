@@ -64,7 +64,8 @@
 
                         <p:dialog id="createAPDialog" showEffect="fade" hideEffect="fade"
                                   header="Create New Access Point"
-                                  widgetVar="createAPDialog" modal="true">
+                                  widgetVar="createAPDialog" modal="true"
+                                  onShow="document.getElementById('accessPointsForm:location').value=''">
                             <p:outputPanel id="createAP"
                                            visible="#{not empty accessPointController.accessPoint}">
                                 <h:panelGrid columns="2">

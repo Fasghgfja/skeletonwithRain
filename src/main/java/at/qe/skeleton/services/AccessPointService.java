@@ -5,6 +5,7 @@ import at.qe.skeleton.repositories.AccessPointRepository;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.SensorStationRepository;
 import at.qe.skeleton.repositories.UserxRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -62,12 +63,13 @@ public class AccessPointService {
         accessPointRepository.delete(accessPoint);
     }
 
+    @Transactional
     @PreAuthorize("hasAuthority('ADMIN')")
-    public AccessPoint createAccessPoint(String location){
-        AccessPoint accessPointToBeCreated = new AccessPoint();
-        accessPointToBeCreated.setLocation(location);
-        accessPointToBeCreated.setValidated(false);
-        saveAccessPoint(accessPointToBeCreated);
+    public AccessPoint createAccessPoint(AccessPoint accessPoint, String location){
+
+        accessPoint.setLocation(location);
+        accessPoint.setValidated(false);
+        AccessPoint accessPointToBeCreated = saveAccessPoint(accessPoint);
 
 
         Log createLog = new Log();
@@ -75,7 +77,7 @@ public class AccessPointService {
         createLog.setTime(LocalDateTime.now());
         createLog.setAuthor(getAuthenticatedUser().getUsername());
         createLog.setSubject("AP CREATION");
-        createLog.setText("CREATED AP: " + accessPointToBeCreated.getId());
+        createLog.setText("CREATED AP ID: " + accessPointToBeCreated.getId());
         createLog.setType(LogType.SUCCESS);
         logRepository.save(createLog);
         return accessPointToBeCreated;
