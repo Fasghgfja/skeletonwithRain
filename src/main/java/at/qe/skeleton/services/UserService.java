@@ -8,6 +8,7 @@ import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.UserxRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +87,7 @@ public class UserService {
         Log createLog = new Log();
 
         createLog.setDate(LocalDate.now());
-        createLog.setTime(LocalDateTime.now());
+        createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         createLog.setAuthor(getAuthenticatedUser().getUsername());
         createLog.setSubject("USER CREATION");
         createLog.setText("CREATED USER: " + userToBeCreated.getUsername());
@@ -105,7 +106,7 @@ public class UserService {
         Log deleteLog = new Log();
 
         deleteLog.setDate(LocalDate.now());
-        deleteLog.setTime(LocalDateTime.now());
+        deleteLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         deleteLog.setAuthor(getAuthenticatedUser().getUsername());
         deleteLog.setSubject("USER DELETION");
         deleteLog.setText("DELETED USER: " + user.getUsername());

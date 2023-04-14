@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.sql.RowSet;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 
 @Service
@@ -55,10 +56,10 @@ public class AccessPointService {
     public void deleteAccessPoint(AccessPoint accessPoint) {
         Log deleteLog = new Log();
         deleteLog.setDate(LocalDate.now());
-        deleteLog.setTime(LocalDateTime.now());
+        deleteLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         deleteLog.setAuthor(getAuthenticatedUser().getUsername());
-        deleteLog.setSubject("ACCESS POINT DELETION");
-        deleteLog.setText("DELETED ACCESS POINT: " + accessPoint.getId());
+        deleteLog.setSubject("AP DELETION");
+        deleteLog.setText("DELETED AP: " + accessPoint.getId());
         deleteLog.setType(LogType.SUCCESS);
         logRepository.save(deleteLog);
         accessPointRepository.delete(accessPoint);
@@ -75,7 +76,7 @@ public class AccessPointService {
 
         Log createLog = new Log();
         createLog.setDate(LocalDate.now());
-        createLog.setTime(LocalDateTime.now());
+        createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         createLog.setAuthor(getAuthenticatedUser().getUsername());
         createLog.setSubject("AP CREATION");
         createLog.setText("CREATED AP ID: " + accessPointToBeCreated.getId());
