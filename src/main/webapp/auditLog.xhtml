@@ -9,7 +9,7 @@
         <h:form id="logForm">
             <div class="grid">
                 <!-- ..........................................TOP INFO BOXES................................................................... -->
-                <!-- .....................USERS SIGNED UP..................................... -->
+                <!-- .....................TOTAL LOGS..................................... -->
                 <div class="col-12 md:col-6 xl:col-3">
                     <div class="card  overview-box">
                         <p:graphicImage url="../resources/images/dashboard/effect-useronline.svg"/>
@@ -19,12 +19,12 @@
                         <div class="overview">
                             <span class="overview-title">TOTAL LOGS</span>
                             <h3>
-                                <h:outputText value="#{logListController.logsAmount}"/>
+                                <h:outputText value="#{logController.logsAmount}"/>
                             </h3>
                         </div>
                     </div>
                 </div>
-                <!-- .....................ACCESS POINTS..................................... -->
+                <!-- .....................SUCCESS LOGS..................................... -->
                 <div class="col-12 md:col-6 xl:col-3">
                     <div class="card overview-box">
                         <p:graphicImage url="../resources/images/dashboard/effect-filessynced.svg"
@@ -35,13 +35,13 @@
                         <div class="overview">
                             <span class="overview-title">SUCCESS LOGS</span>
                             <h3>
-                                <h:outputText value="#{logListController.successLogsAmount}"/>
+                                <h:outputText value="#{logController.successLogsAmount}"/>
                             </h3>
                         </div>
                     </div>
                 </div>
 
-                <!-- .....................PLANTS UNDER CARE..................................... -->
+                <!-- .....................WARNING LOGS..................................... -->
                 <div class="col-12 md:col-6 xl:col-3">
                     <div class="card overview-box ">
                         <p:graphicImage url="../resources/images/dashboard/warning-effect.svg"/>
@@ -51,12 +51,12 @@
                         <div class="overview">
                             <span class="overview-title">WARNING LOGS</span>
                             <h3>
-                                <h:outputText value="#{logListController.warningLogsAmount}"/>
+                                <h:outputText value="#{logController.warningLogsAmount}"/>
                             </h3>
                         </div>
                     </div>
                 </div>
-                <!-- .....................MEASUREMENTS..................................... -->
+                <!-- .....................ERROR LOGS..................................... -->
                 <div class="col-12 md:col-6 xl:col-3">
                     <div class="card overview-box">
                         <p:graphicImage url="../resources/images/dashboard/error-effect.svg"/>
@@ -66,17 +66,18 @@
                         <div class="overview">
                             <span class="overview-title">ERROR LOGS</span>
                             <h3>
-                                <h:outputText value="#{logListController.errorLogsAmount}"/>
+                                <h:outputText value="#{logController.errorLogsAmount}"/>
                             </h3>
                         </div>
                     </div>
                 </div>
             </div>
 
+                    <!-- DATATABLE WITH ENTRIES OF ALL LOGS -->
             <div class="grid table-demo">
                 <div class="col-12">
                     <div class="card">
-                        <p:dataTable id="logsTable" var="log" value="#{logListController.logs}" paginator="true"
+                        <p:dataTable id="logsTable" var="log" value="#{logController.logs}" paginator="true"
                                      paginatorPosition="bottom"
                                      rows="20">
                             <p:column headerText="Type" sortBy="#{log.type}" filterBy="#{log.type}">

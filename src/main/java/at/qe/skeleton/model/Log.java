@@ -4,10 +4,13 @@ package at.qe.skeleton.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.domain.Persistable;
 
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 
 
 //TODO: Fix like the example in the demo
@@ -17,7 +20,7 @@ import java.time.format.DateTimeFormatter;
  @Getter
  @Setter
 @Entity
-public class Log {
+public class Log implements Persistable<Long>, Serializable, Comparable<Log> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -39,4 +42,14 @@ public class Log {
 
     @Enumerated(EnumType.STRING)
     private LogType type;
+
+    @Override
+    public int compareTo(Log o) {
+        return id.compareTo(o.getId());
+    }
+
+    @Override
+    public boolean isNew() {
+        return null == getTime();
+    }
 }

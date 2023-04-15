@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Component
 @Scope("view")
-public class LogListController {
+public class LogController {
 
 
     private List<Log> latestLogs;
@@ -27,14 +27,6 @@ public class LogListController {
 
     public Collection<Log> getLogs() {
         return logService.getAllLogs();
-    }
-
-
-
-    public Collection<Log> getLatestlogs() {
-        latestLogs = new ArrayList<>();
-        latestLogs.addAll(logService.getAllLogs());
-        return latestLogs;
     }
 
 

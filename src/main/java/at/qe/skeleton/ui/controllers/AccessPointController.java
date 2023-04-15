@@ -49,7 +49,7 @@ public class AccessPointController implements Serializable {
     }
 
     /**
-     * Deletes an accesspoint
+     * Deletes an access point.
      */
 
     public void doDeleteAccessPoint(){

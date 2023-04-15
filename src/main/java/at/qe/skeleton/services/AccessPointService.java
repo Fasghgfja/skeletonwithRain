@@ -52,6 +52,11 @@ public class AccessPointService {
         }
         return accessPointRepository.save(accessPoint);
     }
+
+    /**
+     * Deletes an access point and creates a delete log.
+     * @param accessPoint
+     */
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteAccessPoint(AccessPoint accessPoint) {
         Log deleteLog = new Log();
@@ -65,6 +70,12 @@ public class AccessPointService {
         accessPointRepository.delete(accessPoint);
     }
 
+    /**
+     * Creates a new access point and saves it to the database with the given input values.
+     * @param accessPoint
+     * @param location
+     * @return
+     */
     @Transactional
     @PreAuthorize("hasAuthority('ADMIN')")
     public AccessPoint createAccessPoint(AccessPoint accessPoint, String location){
