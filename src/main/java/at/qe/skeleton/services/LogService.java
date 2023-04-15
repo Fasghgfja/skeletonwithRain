@@ -2,13 +2,18 @@ package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Log;
 import at.qe.skeleton.model.LogType;
+import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.LogRepository;
+import at.qe.skeleton.repositories.UserxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Collection;
 
 /**
@@ -20,6 +25,9 @@ public class LogService {
 
     @Autowired
     private LogRepository logRepository;
+
+    @Autowired
+    private UserxRepository userxRepository;
 
     /**
      * The method Returns all Logs.
@@ -58,8 +66,14 @@ public class LogService {
         return logEntry;
     }
 
-    public void saveLog(Log log) {
-        logRepository.save(log);
+    @PreAuthorize("permitAll()")
+    public Log saveLog(Log log) {
+        return logRepository.save(log);
+    }
+
+    private Userx getAuthenticatedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return userxRepository.findFirstByUsername(auth.getName());
     }
 
 }

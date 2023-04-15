@@ -31,7 +31,7 @@ public class UserService {
     private UserxRepository userRepository;
 
     /**
-     The LogRepository is used to save logs for user deletions.
+     The LogRepository is used to save logs for user interactions.
      */
     @Autowired
     private LogRepository logRepository;
@@ -80,12 +80,45 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    /**
+     * Creates a new user with the input values given in the popup and also logs this creation.
+     * If the entered username is already taken, a warning will be logged and the user will not be created.
+     * @param username
+     * @param password
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param phone
+     * @param roles
+     * @return
+     */
+
     @PreAuthorize("hasAuthority('ADMIN')")
     public Userx createUser(String username, String password, String firstName, String lastName, String email, String phone, Set<UserRole> roles) {
-        Userx userToBeCreated = new Userx(username, password, firstName, lastName, email, phone, roles);
-        saveUser(userToBeCreated);
-        Log createLog = new Log();
+        Userx userToBeCreated = new Userx();
+        userToBeCreated.setUsername(username);
+        userToBeCreated.setPassword(password);
+        userToBeCreated.setFirstName(firstName);
+        userToBeCreated.setLastName(lastName);
+        userToBeCreated.setEmail(email);
+        userToBeCreated.setPhone(phone);
+        userToBeCreated.setRoles(roles);
 
+        if (userRepository.findFirstByUsername(username) != null){
+            Log creationFailLog = new Log();
+            creationFailLog.setDate(LocalDate.now());
+            creationFailLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+            creationFailLog.setAuthor(getAuthenticatedUser().getUsername());
+            creationFailLog.setSubject("USER CREATION FAILED");
+            creationFailLog.setText("ENTERED USERNAME ALREADY TAKEN: " + userToBeCreated.getUsername());
+            creationFailLog.setType(LogType.WARNING);
+            logRepository.save(creationFailLog);
+            return userToBeCreated;
+        }
+
+        saveUser(userToBeCreated);
+
+        Log createLog = new Log();
         createLog.setDate(LocalDate.now());
         createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         createLog.setAuthor(getAuthenticatedUser().getUsername());
@@ -93,6 +126,7 @@ public class UserService {
         createLog.setText("CREATED USER: " + userToBeCreated.getUsername());
         createLog.setType(LogType.SUCCESS);
         logRepository.save(createLog);
+
         return userToBeCreated;
     }
     /**
@@ -104,7 +138,6 @@ public class UserService {
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteUser(Userx user) {
         Log deleteLog = new Log();
-
         deleteLog.setDate(LocalDate.now());
         deleteLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         deleteLog.setAuthor(getAuthenticatedUser().getUsername());
@@ -123,77 +156,6 @@ public class UserService {
     private Userx getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
-    }
-
-    /**
-     * Edits the user email.
-     *
-     * @param user the user to edit
-     * @param email the new email for the user
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void editUserEmail(Userx user, String email){
-        user.setEmail(email);
-        userRepository.save(user);
-    }
-
-    /**
-     * Edits the users phone number.
-     *
-     * @param user the user to edit
-     * @param phone the new email for the user
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void editUserPhone(Userx user, String phone){
-        user.setPhone(phone);
-        userRepository.save(user);
-    }
-
-    /**
-     * Edits the user firstName.
-     *
-     * @param user the user to edit
-     * @param firstName the new firstName for the user
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void editUserFirstName(Userx user, String firstName){
-        user.setFirstName(firstName);
-        userRepository.save(user);
-    }
-
-    /**
-     * Edits the user lastName.
-     *
-     * @param user the user to edit
-     * @param lastName the new lastName for the user
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void editUserLastName(Userx user, String lastName){
-        user.setLastName(lastName);
-        userRepository.save(user);
-    }
-
-    /**
-     * Edits the user password.
-     *
-     * @param user the user to edit
-     * @param password the new password for the user
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void editUserPassword(Userx user, String password){
-        user.setPassword(password);
-        userRepository.save(user);
-    }
-
-    /**
-     *
-     * @param user the user to edit
-     * @param roles the new roles assigned to this user
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void editUserRoles(Userx user, Set<UserRole> roles){
-        user.setRoles(roles);
-        userRepository.save(user);
     }
 
 }

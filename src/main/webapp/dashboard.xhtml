@@ -213,14 +213,17 @@
                         <!-- ..........................................AUDIT LOG FRAME .............................................................. -->
                         <div class="col-12 md:col-6">
                             <div class="card status">
-                                <h5>Audit Logs</h5>
+                                <h:outputLink value="/auditLog.xhtml">
+                                    <h5 style="text-align: center; color: grey;">Audit Logs</h5>
+                                </h:outputLink>
+
                                 <div class="status-content">
 
 
                                     <!-- ..........................................AUDIT LOG PREVIEW .................................... -->
                                     <div class="card">
-                                        <p:dataTable id="latestlogs" var="log" value="#{logListController.latestlogs}"
-                                                     selectionMode="single" reflow="true" paginatorPosition="bottom"
+                                        <p:dataTable id="logs" var="log" value="#{logController.logs}"
+                                                     reflow="true" paginatorPosition="bottom"
                                                      rowKey="#{log.id}" paginator="true" rows="5" sortBy="#{log.id}"
                                                      sortOrder="descending">
                                             <p:column>
@@ -245,7 +248,7 @@
                                                 <div class="status">
                                                     <span><i class="pi pi-info"></i> Total Amount</span>
                                                     <span>
-                                                        <h:outputText value="#{logListController.logsAmount}"/>
+                                                        <h:outputText value="#{logController.logsAmount}"/>
                                                     </span>
                                                 </div>
                                             </li>
@@ -254,7 +257,7 @@
                                                     <span><i class="pi pi-circle-on"
                                                              style="color: red"></i> Error</span>
                                                     <span>
-                                                        <h:outputText value="#{logListController.errorLogsAmount}"/>
+                                                        <h:outputText value="#{logController.errorLogsAmount}"/>
                                                     </span>
                                                 </div>
                                             </li>
@@ -262,7 +265,7 @@
                                                 <div class="status">
                                                     <span><i class="pi pi-circle-on" style="color: orange"></i> Warning</span>
                                                     <span>
-                                                        <h:outputText value="#{logListController.warningLogsAmount}"/>
+                                                        <h:outputText value="#{logController.warningLogsAmount}"/>
                                                     </span>
                                                 </div>
                                             </li>
@@ -271,7 +274,7 @@
                                                     <span><i class="pi pi-circle-on"
                                                              style="color: green"></i> Success</span>
                                                     <span>
-                                                        <h:outputText value="#{logListController.successLogsAmount}"/>
+                                                        <h:outputText value="#{logController.successLogsAmount}"/>
                                                     </span>
                                                 </div>
                                             </li>

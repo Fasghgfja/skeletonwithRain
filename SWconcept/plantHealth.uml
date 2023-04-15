@@ -46,7 +46,7 @@
     <node x="989.5103951005349" y="6.508081201346613">at.qe.skeleton.ui.controllers.SensorStationListController</node>
     <node x="1033.7063277360517" y="438.2556072506486">at.qe.skeleton.services.LogService</node>
     <node x="-1079.4643236141728" y="-124.32412196156292">at.qe.skeleton.ui.controllers.FileUploadController</node>
-    <node x="-629.5020877552688" y="384.56671603896257">at.qe.skeleton.ui.controllers.LogListController</node>
+    <node x="-629.5020877552688" y="384.56671603896257">at.qe.skeleton.ui.controllers.LogController</node>
     <node x="19.410277494382854" y="1702.6568033208769">at.qe.skeleton.model.PlantColorCodes</node>
     <node x="1598.410277494383" y="1702.6568033208769">at.qe.skeleton.api.controllers.MeasurementController</node>
   </nodes>
@@ -80,7 +80,7 @@
       <point x="-381.0" y="1322.381" />
       <point x="89.49992104631087" y="1.0364451986788481E-4" />
     </edge>
-    <edge source="at.qe.skeleton.ui.controllers.LogListController" target="at.qe.skeleton.services.LogService" relationship="TO_ONE">
+    <edge source="at.qe.skeleton.ui.controllers.LogController" target="at.qe.skeleton.services.LogService" relationship="TO_ONE">
       <point x="8.775526885074214E-5" y="83.00028396103744" />
       <point x="-519.502" y="623.248" />
       <point x="25.549" y="623.248" />
@@ -230,7 +230,7 @@
       <point x="-262.0" y="-84.04997345346851" />
       <point x="251.5" y="0.0" />
     </edge>
-    <edge source="at.qe.skeleton.ui.controllers.LogListController" target="at.qe.skeleton.model.Log" relationship="TO_MANY">
+    <edge source="at.qe.skeleton.ui.controllers.LogController" target="at.qe.skeleton.model.Log" relationship="TO_MANY">
       <point x="-110.0" y="0.0" />
       <point x="-741.5019210463108" y="467.56671603896257" />
       <point x="-741.5019210463108" y="1422.8808963554802" />

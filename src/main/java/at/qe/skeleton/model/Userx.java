@@ -50,29 +50,6 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     @Enumerated(EnumType.STRING)
     private Set<UserRole> roles;
 
-    /**
-     * Constructor to create user via pop-up in webapp
-     * @param username unique username
-     * @param password password of the user
-     * @param firstName first name of the user
-     * @param lastName last name of the user
-     * @param email email of the user
-     * @param phone phone number of the user
-     * @param roles Roles of the user
-     */
-    public Userx(String username, String password, String firstName, String lastName, String email, String phone, Set<UserRole> roles) {
-        this.username = username;
-        this.createUser = null;
-        this.updateUser = null;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.roles = roles;
-        this.enabled = true;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
