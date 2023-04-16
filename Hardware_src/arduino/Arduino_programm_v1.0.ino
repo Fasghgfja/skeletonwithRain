@@ -64,9 +64,7 @@ void setup() {
   pinMode(piezo, OUTPUT);
   pinMode(ligth_sensor, INPUT);
   //BluetoothLE setup
-  while (!Serial);
-  
-
+  //while (!Serial);
   if (!BLE.begin()) {
     while(1);
   }
@@ -116,7 +114,7 @@ void setup() {
   //---------------------------------------------------------------
   BLE.advertise();   
 //BME688 setup
-  while (!Serial);
+  //while (!Serial);
   if (!bme.begin()) {
     while (1);
   }
@@ -135,11 +133,7 @@ void loop(){
   if(connection_on){
     BLE.poll();  
   }
-  if(readButton == HIGH){
-    connection_on = true;
-    piezo_on = true;
-    piezo_timer_start = millis();
-  }
+
   if(piezo_on && (timer_current - piezo_timer_start) >= 1000){
     if(piep){
       noTone(piezo);
@@ -152,25 +146,29 @@ void loop(){
     piezo_timer_start = millis();
   }
   //-------------------------------------------------------------------------------------check alarm signal----------------------------------------------------------------------------------------------
-  if(hygroValueCharacteristic.written() && Alarm == false){
+  if(hygroValueCharacteristic.written()){
     hygroAlarm();
   }
-  if(ligthValueCharacteristic.written() && Alarm == false){
+  if(ligthValueCharacteristic.written()){
     ligthAlarm();
   }
-  if(tempValueCharacteristic.written() && Alarm == false){
+  if(tempValueCharacteristic.written()){
     tempAlarm();
   }
-  if(humidityValueCharacteristic.written() && Alarm == false){
+  if(humidityValueCharacteristic.written()){
     humAlarm();
   }
-  if(pressureValueCharacteristic.written() && Alarm == false){
+  if(pressureValueCharacteristic.written()){
     pessAlarm();
   }
-  if(gasValueCharacteristic.written() && Alarm == false){
+  if(gasValueCharacteristic.written()){
     gasAlarm();    
   }  
-
+  if(readButton == HIGH){
+    connection_on = true;
+    piezo_on = true;
+    piezo_timer_start = millis();
+  }
   //Is called to evaluate if air cond is reat successfull
   if( (timer_current - readSensor_timer_start) >= readAir_condition_timer_delta && read_sensor_state == 1){
     readAir_condition_sensor();    
@@ -202,17 +200,17 @@ void gasAlarm(){
 }
 void pessAlarm(){
   alarm_ligth_type = 4;
-  Alarm_time_delta = 5000;
+  Alarm_time_delta = 3000;
   alarm_controller(); //uncomment for ligth sequence
 }
 void humAlarm(){
   alarm_ligth_type = 3;
-  Alarm_time_delta = 5000;
+  Alarm_time_delta = 3000;
   alarm_controller(); //uncomment for ligth sequence // test ok
 }
 void tempAlarm(){
   alarm_ligth_type = 2;
-  Alarm_time_delta = 5000;
+  Alarm_time_delta = 3000;
   alarm_controller(); //uncomment for ligth sequence
 }
 void ligthAlarm(){
@@ -228,6 +226,7 @@ void hygroAlarm(){
 void alarm_controller(){
   if(Alarm){
       Alarm = false;  
+      alarm_ligth_type = 6;
       lightOff();          
     }
     else{
@@ -247,42 +246,42 @@ void readAir_condition_sensor(){
 }
 //---------------------------------------------------------------------------------------sequence functions for alarmligth-------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//green ligth with delay 5sec
+//green ligth with delay 3sec +
 void sequence_temp_alarm(){
   switch(alarm_ligth_state){
     case 0: lightOn(0, 0, ligth_on); alarm_ligth_state++; break;
     case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
   }  
 }
-//blue ligth with delay 5sec
+//blue ligth with delay 3sec +
 void sequence_humidy_alarm(){
   switch(alarm_ligth_state){
     case 0: lightOn(0, ligth_on, 0); alarm_ligth_state++; break;
     case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
   }  
 }
-// red ligth with delay 5sec
+// red ligth with delay 3sec +
 void sequence_pressure_alarm(){
   switch(alarm_ligth_state){
     case 0: lightOn(ligth_on, 0, 0); alarm_ligth_state++; break;
     case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
   }  
 }
-// green ligth with delay 1sec
+// green ligth with delay 1sec +
 void sequence_gas_alarm(){
   switch(alarm_ligth_state){
     case 0: lightOn(0, 0, ligth_on); alarm_ligth_state++; break;
     case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
   }  
 }
-// red ligth with delay 1sec
+// red ligth with delay 1sec +
 void sequence_hygro_alarm(){
   switch(alarm_ligth_state){
     case 0: lightOn(ligth_on, 0, 0); alarm_ligth_state++; break;
     case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
   }  
 }
-// blue ligth with delay 1sec
+// blue ligth with delay 1sec +
 void sequence_ligth_alarm(){
   switch(alarm_ligth_state){
     case 0: lightOn(0, ligth_on, 0); alarm_ligth_state++; break;

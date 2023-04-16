@@ -1,739 +1,181 @@
 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			0.00 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			0.00 
 Sensor type:	PressureSensor
 uuid:			000019b4-0000-1000-8000-00805f9b34fb
 Value:			0.00 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			626
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			0.00 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			27.36 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1017
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			87.37 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.91 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			639
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			9.15 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			27.20 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1022
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.93 
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			87.33 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			639
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			10.12 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			27.09 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.94 
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			87.27 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			637
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			11.27 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			27.00 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1003
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.95 
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			87.29 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			624
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			12.70 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.93 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1020
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.96 
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			87.51 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			625
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			13.73 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.87 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1004
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.96 
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			87.81 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			648
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			14.66 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.82 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.96 
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			87.85 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			639
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			15.56 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.78 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.97 
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			87.97 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			638
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			16.23 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.74 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1003
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.95 
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			87.96 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			652
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			16.94 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.72 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1017
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.96 
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			87.95 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			637
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			17.57 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.69 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1014
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.98 
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.04 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			625
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			18.12 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.67 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1006
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.98 
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.11 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			649
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			18.58 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.66 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.99 
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.16 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			638
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			19.16 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.64 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.10 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			911.99 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			626
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			19.57 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.63 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.02 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.00 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			651
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			20.02 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.62 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1003
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.04 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.00 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			650
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			20.51 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.60 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1003
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.06 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.01 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			643
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			20.95 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.59 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1021
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.11 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.01 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			641
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			21.37 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.58 
 Sensor type:	LigthSensor
 uuid:			000019b0-0000-1000-8000-00805f9b34fb
 Value:			1001
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.11 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.01 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			644
 Sensor type:	GasSensor
 uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			21.65 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.57 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1022
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.22 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.02 
+Value:			0.00 
 Sensor type:	HygroSensor
 uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			646
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			21.96 
+Value:			639
 Sensor type:	TempSensor
 uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.56 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1021
+Value:			0.00 
 Sensor type:	humiditySensor
 uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.59 
+Value:			0.00 
 Sensor type:	PressureSensor
 uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.01 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			642
+Value:			0.00 
 Sensor type:	GasSensor
 uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			22.19 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.55 
+Value:			0.00 
 Sensor type:	LigthSensor
 uuid:			000019b0-0000-1000-8000-00805f9b34fb
 Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.83 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.02 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			632
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			22.47 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.53 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.85 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.02 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			644
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			22.74 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.52 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.93 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.02 
 Sensor type:	HygroSensor
 uuid:			000019b1-0000-1000-8000-00805f9b34fb
 Value:			622
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			22.93 
 Sensor type:	TempSensor
 uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.51 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1006
+Value:			24.25 
 Sensor type:	humiditySensor
 uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.98 
+Value:			97.25 
 Sensor type:	PressureSensor
 uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.02 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			646
+Value:			910.33 
 Sensor type:	GasSensor
 uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			23.62 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.50 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.97 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.03 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			641
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			23.87 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.49 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.92 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.03 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			636
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			24.02 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.48 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.87 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.03 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			636
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			24.26 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.47 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.77 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.02 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			645
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			24.46 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.46 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.67 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.03 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			644
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			24.73 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.45 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1022
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.68 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.03 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			636
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			24.90 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.44 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1011
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.67 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.04 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			631
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			24.96 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.43 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1001
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.62 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.05 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			639
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			25.05 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.43 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.74 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.05 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			650
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			25.23 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.43 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1016
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.52 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.05 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			644
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			25.36 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.43 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.86 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.04 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			632
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			25.45 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.43 
+Value:			5.89 
 Sensor type:	LigthSensor
 uuid:			000019b0-0000-1000-8000-00805f9b34fb
 Value:			1014
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			642
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			24.13 
 Sensor type:	humiditySensor
 uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			88.80 
+Value:			97.15 
 Sensor type:	PressureSensor
 uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.04 
+Value:			910.34 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			6.83 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			998
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			645
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			24.04 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			97.07 
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			910.35 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			7.84 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1023
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			637
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			23.98 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			97.04 
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			910.35 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			8.92 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			97.04 
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			624
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			23.93 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1005
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			910.36 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			9.95 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			96.99 
 Sensor type:	HygroSensor
 uuid:			000019b1-0000-1000-8000-00805f9b34fb
 Value:			647
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			25.56 
 Sensor type:	TempSensor
 uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.43 
+Value:			23.96 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1018
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			910.39 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			7.48 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			96.40 
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			627
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			23.99 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1015
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			910.41 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			8.89 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			96.34 
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			625
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			24.01 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			999
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			910.42 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			10.27 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			96.32 
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			634
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			24.03 
 Sensor type:	LigthSensor
 uuid:			000019b0-0000-1000-8000-00805f9b34fb
 Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			89.14 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.05 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			636
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			25.68 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.43 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1023
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			89.52 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.05 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			650
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			25.71 
-Sensor type:	TempSensor
-uuid:			000019b2-0000-1000-8000-00805f9b34fb
-Value:			26.41 
-Sensor type:	LigthSensor
-uuid:			000019b0-0000-1000-8000-00805f9b34fb
-Value:			1022
-Sensor type:	humiditySensor
-uuid:			000019b3-0000-1000-8000-00805f9b34fb
-Value:			89.75 
-Sensor type:	PressureSensor
-uuid:			000019b4-0000-1000-8000-00805f9b34fb
-Value:			912.05 
-Sensor type:	HygroSensor
-uuid:			000019b1-0000-1000-8000-00805f9b34fb
-Value:			626
-Sensor type:	GasSensor
-uuid:			000019b5-0000-1000-8000-00805f9b34fb
-Value:			25.85 
