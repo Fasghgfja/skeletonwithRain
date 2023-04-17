@@ -36,6 +36,7 @@ public class SensorStationDetailController implements Serializable {
     private SensorStationService sensorService;
     @Autowired
     private MeasurementService measurementService;
+
     @Autowired
     private transient SessionInfoBean sessionInfoBean;
 
