@@ -1,0 +1,379 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:po="http://primefaces.org/rain" template="/WEB-INF/templates/main.xhtml">
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{sensorStationDetailController.init}" />
+    </f:metadata>
+
+    <ui:define name="title">GREENHOUSE DETAILS</ui:define>
+    <ui:define name="viewname">
+    </ui:define>
+    <ui:define name="head">
+        <h:outputScript name="js/chart.js" />
+        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
+
+    </ui:define>
+
+    <ui:define name="content">
+
+
+
+        <!-- ..........................................TOP INFO BOXES................................................................... -->
+        <h:form>
+            <p:toolbar>
+                <p:toolbarGroup>
+
+                    <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................TEMPERATURE BOX........................................ -->
+                        <h:link id="tempMeasurements" outcome="/dashboard">
+                        <div class="card  overview-box">
+                            <p:graphicImage name="images/dashboard/effect-useronline.svg"  />
+                            <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-usersonline.png"  />
+                        </span>
+                            <div class="overview">
+                                <span class="overview-title">TEMPERATURE</span>
+                                <h3>query</h3>
+                                <span><span>72</span> new measurements since last visit</span>
+                            </div>
+                        </div>
+                        </h:link>
+                    </div>
+
+                    <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................AIR HUMIDITY BOX........................................ -->
+                        <h:link id="airHumMeasurements" outcome="/dashboard">
+                        <div class="card overview-box">
+                            <p:graphicImage name="images/dashboard/effect-checkins.svg"  />
+                            <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-checkins.png"  />
+                        </span>
+                            <div class="overview">
+                                <span class="overview-title">AIR HUMIDITY</span>
+                                <h3>532</h3>
+                                <span><span>48</span> new city since last visit</span>
+                            </div>
+                        </div>
+                        </h:link>
+                    </div>
+
+                    <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................GROUND HUMIDITY BOX........................................ -->
+                        <h:link id="groundHumMeasurements" outcome="/dashboard">
+                        <div class="card overview-box ">
+                            <p:graphicImage name="images/dashboard/effect-filessynced.svg"  />
+                            <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-filessynced.png"  />
+                        </span>
+                            <div class="overview">
+                                <span class="overview-title">GROUND HUMIDITY</span>
+                                <h3>12.6%</h3>
+                                <span><span>1.8%</span> increase since last visit</span>
+                            </div>
+                        </div>
+                        </h:link>
+                    </div>
+
+                    <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................LIGHT INTENSITY BOX........................................ -->
+                        <h:link id="lightIntMeasurements" outcome="/dashboard">
+                        <div class="card overview-box">
+                            <p:graphicImage name="images/dashboard/effect-messages.svg"  />
+                            <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-messages.png"  />
+                        </span>
+                            <div class="overview">
+                                <span class="overview-title">LIGHT INTENSITY</span>
+                                <h3>440</h3>
+                                <span><span>24</span> new since last visit</span>
+                            </div>
+                        </div>
+                        </h:link>
+                    </div>
+
+                </p:toolbarGroup>
+
+                <!-- ........................................PLANT GALLERY LINK BOX............................................... -->
+                <p:toolbarGroup>
+                            <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-messages.png"  />
+                        </span>
+                            <div class="overview">
+                                <h:link id="galleryRedirect" outcome="/dashboard">
+                                <span class="overview-title">   GALLERY</span>
+                                <h3>CLICK TO VISIT</h3>
+                                <span><span>24</span> new since last visit</span>
+                                </h:link>
+                            </div>
+                </p:toolbarGroup>
+
+                <p:toolbarGroup>
+
+                    <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................AIR PRESSURE BOX........................................ -->
+                        <h:link id="airPressMeasurements" outcome="/dashboard">
+                        <div class="card  overview-box">
+                            <p:graphicImage name="images/dashboard/effect-useronline.svg"  />
+                            <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-usersonline.png"  />
+                        </span>
+                            <div class="overview">
+                                <span class="overview-title">AIR PRESSURE</span>
+                                <h3>queue</h3>
+                                <span><span>72</span> new users since last visit</span>
+                            </div>
+                        </div>
+                        </h:link>
+                    </div>
+
+                    <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................AIR QUALITY BOX........................................ -->
+                        <h:link id="airQualMeasurements" outcome="/dashboard">
+                        <div class="card overview-box">
+                            <p:graphicImage name="images/dashboard/effect-checkins.svg"  />
+                            <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-checkins.png"  />
+                        </span>
+                            <div class="overview">
+                                <span class="overview-title">AIR QUALITY</span>
+                                <h3>532</h3>
+                                <span><span>48</span> new city since last visit</span>
+                            </div>
+                        </div>
+                        </h:link>
+                    </div>
+
+                    <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................ASSIGNED GARDENER BOX........................................ -->
+                        <div class="card overview-box ">
+                            <p:graphicImage name="images/dashboard/effect-filessynced.svg"  />
+                            <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-filessynced.png"  />
+                        </span>
+                            <div class="overview">
+                                <span class="overview-title">ASSIGNED GARDENER</span>
+                                <h3>12.6%</h3>
+                                <span><span>1.8%</span> increase since last visit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................TIME OF LAST MEASUREMENT BOX.................................... -->
+                        <div class="card overview-box">
+                            <p:graphicImage name="images/dashboard/effect-messages.svg"  />
+                            <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-messages.png"  />
+                        </span>
+                            <div class="overview">
+                                <span class="overview-title">MOST RECENT MEASUREMENT</span>
+                                <h3>440</h3>
+                                <span><span>24</span> new since last visit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </p:toolbarGroup>
+
+            </p:toolbar>
+        </h:form>
+
+
+
+
+
+
+        <!-- ..........................................PAGE................................................................... -->
+        <div class="layout-dashboard">
+            <div class="grid">
+
+                            <!-- ..........................................GRAPH................................................................... -->
+                            <div class="col-12 md:col-12 xl:col-6">
+                                <div class="card chart">
+                                    <div class="card-header">
+                                        <h5>Selected Measurement type History Graph</h5>
+                                    </div>
+                                    <div class="card">
+                                        <p:lineChart id="mylineChart" model="#{graphController.lineModel}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ...................simply modify the graph controller do display different data................... -->
+                            <!-- ...................supported charts are .lineModel and .cartesianLinearModel................... -->
+
+
+
+
+
+                    <!-- .........................................MEASUREMENTS TABLE...................................................... -->
+                <div class="col-12 md:col-12 xl:col-6">
+                    <div class="card products">
+                        <p:dataTable widgetVar="customersDT2" var="measurement" value="#{measurementListController.getMeasurementsForSensorStation()}" selectionMode="single" reflow="true"
+                                     rowKey="#{measurement.sensorStation.id}" rows="10" scrollable="true" scrollHeight="350"
+                                     styleClass="ui-datatable-striped ui-datatable-sm ui-datatable-gridlines">
+                            <p:ajax event="rowSelect" update="mylineChart" listener="#{graphController.onRowSelectLineChart}" />
+
+                            <f:facet name="header">
+                                <div class="customers-table-header">
+                                    <span style="font-weight: bold">Last measurements</span>
+
+                                    <span class="ui-input-icon-left filter-container">
+                                        <i class="pi pi-search"/>
+                                        <p:inputText id="globalFilter" onkeyup="PF('customersDT2').filter()" placeholder="Search"/>
+                                    </span>
+                                </div>
+                            </f:facet>
+                            <p:column headerText="Sensor Station" sortBy="#{measurement.sensorStation.id}" filterBy="#{measurement.sensorStation.id}">
+                                <h:outputText value="#{measurement.sensorStation.id}" />
+                            </p:column>
+                            <p:column headerText="Plant" sortBy="#{measurement.plant.plantName}" filterBy="#{measurement.plant.plantName}">
+                                <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{measurement.plant.plantName}" />
+                            </p:column>
+                            <p:column headerText="Measurement" sortBy="#{measurement.value_s}" filterBy="#{measurement.value_s}">
+                                <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{measurement.value_s} #{measurement.unit}" />
+                            </p:column>
+                            <p:column headerText="Date" sortBy="#{measurement.timestamp}" filterBy="#{measurement.timestamp}">
+                                <h:outputText value="#{measurement.timestamp}" />
+                            </p:column>
+                            <p:column headerText="Status" sortBy="#{customer.status}" filterBy="#{customer.status}">
+                                <span class="customer-badge status-#{customer.status.name().toLowerCase()}">#{customer.status}</span>
+                            </p:column>
+                            <p:column headerText="Type" sortBy="#{measurement.type}">
+                                <h:outputText value="#{measurement.type}" />
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </div>
+
+
+
+
+
+                <!-- .........................................GARDENER ONLY TASK PANEL................................................................... -->
+
+                <div class="col-12 md:col-6 xl:col-4">
+                    <div class="card tasks">
+                        <div class="card-header">
+                            <h5>TASKS (Gardener only panel)</h5>
+                        </div>
+                        <ul>
+                            <li>
+                                <div class="checkbox">
+                                    <p:selectBooleanCheckbox value="true"/>
+                                    <p>Given Water</p>
+                                </div>
+                                <span>TODAY</span>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <p:selectBooleanCheckbox value="true"/>
+                                    <p>Ferilizer</p>
+                                </div>
+                                <span>TODAY</span>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <p:selectBooleanCheckbox value="true"/>
+                                    <p>Change Pot</p>
+                                </div>
+                                <span>TODAY</span>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <p:selectBooleanCheckbox value="true"/>
+                                    <p>Check soil</p>
+                                </div>
+                                <span>TODAY</span>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <p:selectBooleanCheckbox value="false"/>
+                                    <p>Change light shedule</p>
+                                </div>
+                                <span class="later">LATER</span>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <p:selectBooleanCheckbox value="false"/>
+                                    <p>Meeting With Staff</p>
+                                </div>
+                                <span class="later">LATER</span>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <p:selectBooleanCheckbox value="false"/>
+                                    <p>Present New Ideas </p>
+                                </div>
+                                <span class="later">LATER</span>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <p:selectBooleanCheckbox value="false"/>
+                                    <p>Check new picture Upload</p>
+                                </div>
+                                <span class="later">LATER</span>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <p:selectBooleanCheckbox value="false"/>
+                                    <p>Daily Measurement check</p>
+                                </div>
+                                <span class="later">LATER</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+
+
+                <!-- .........................................Free EXTRA PANEL FOR ADMINS OR GARDENERS.............................................................. -->
+
+                <div class="col-12 md:col-12 xl:col-8">
+                    <div class="card transactions">
+                        <div class="card-header">
+                            <h5>Free extra panel for staff or gardeners</h5>
+                            <div class="header-buttons">
+                                <p:commandButton type="button" icon="pi pi-search" styleClass="ui-button-secondary outlined-button  mr-2"/>
+                                <p:commandButton type="button" icon="pi pi-ellipsis-v"  styleClass="ui-button-secondary outlined-button " />
+                            </div>
+                        </div>
+                        <h:form id="form">
+                            <p:dataTable id="ordersTable" var="order" value="#{dashboardView.orders}" selectionMode="single" reflow="true" paginatorPosition="bottom"
+                                         rowKey="#{order.id}" paginator="true" rows="5" sortBy="#{order.date}" sortOrder="descending" >
+                                <p:column headerText="Id" sortBy="#{order.id}">
+                                    <h:outputText value="#{order.id}" />
+                                </p:column>
+
+                                <p:column headerText="Date" sortBy="#{order.date}">
+                                    <h:outputText value="#{order.date}" />
+                                </p:column>
+
+                                <p:column headerText="Amount" sortBy="#{order.amount}">
+                                    <h:outputText value="#{order.amount}">
+                                        <f:convertNumber currencySymbol="$" type="currency" />
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column headerText="Status" sortBy="#{order.status}">
+                                    <span class="order-badge order-#{order.status.name().toLowerCase()}">#{order.status}</span>
+                                </p:column>
+
+                                <p:column style="width: 3.5rem">
+                                    <p:commandButton icon="pi pi-search" />
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -1,7 +1,9 @@
 package at.qe.skeleton;
 
+import at.qe.skeleton.services.ImageService;
 import jakarta.faces.webapp.FacesServlet;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -25,6 +27,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
  * Prevent spring from trying to autowire the websocket-infrastructure: Exclude
  * the at.qe.skeleton.ui.websockets package from component scan.
  *
+ *
  * NOTE: Do not add any components to this package which should be managed by
  * spring. It is reserved for the CDI-injection-mechanisms (Weld). Only add
  * CDI-managed components.
@@ -46,5 +49,4 @@ public class Main extends SpringBootServletInitializer {
             servletRegistrationBean.setLoadOnStartup(1);
             return servletRegistrationBean;
     }
-
 }

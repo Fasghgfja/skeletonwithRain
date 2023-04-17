@@ -79,6 +79,23 @@
             <version>${joinfaces.version}</version>
         </dependency>
 
+        <!-- to reduce boilerplate code -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+
+        <!-- theme -->
+        <dependency>
+            <groupId>mytheme</groupId>
+            <artifactId>mytheme-a</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+
+
         <!-- special test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -97,6 +114,17 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+
+    <!-- In Project repository for the theme -->
+    <repositories>
+    <repository>
+        <id>in-project</id>
+        <name>In Project Repo</name>
+        <url>file://${project.basedir}/zDevResources</url>
+    </repository>
+    </repositories>
+
 
     <build>
         <plugins>

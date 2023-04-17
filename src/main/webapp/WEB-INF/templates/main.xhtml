@@ -1,36 +1,55 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xml:lang="de">
+      xmlns:p="http://primefaces.org/ui"
+      lang="en">
 
     <h:head>
-        <title>Skeleton</title>
-        <!-- stylesheets here -->
-            <h:outputStylesheet library="css" name="chat.css" />
-            <!-- js-utils here -->		
-            <h:outputScript library="js" name="chat.js" />
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <link rel="icon" href="#{request.contextPath}/resources/images/tabIcon.ico" type="image/x-icon"></link>
+        </f:facet>
+        <title><ui:insert name="title">Plant Health</ui:insert></title>
+        <h:outputScript name="js/layout.js"/>
+        <h:outputScript name="js/prism.js"/>
+        <ui:insert name="head"/>
     </h:head>
-    <h:body style="margin:10px;">
-		
-        <div id="page">
 
-            <div id="header" style="margin-bottom: 10px;">
-                <ui:include src="/WEB-INF/includes/header.xhtml" />
+    <h:body styleClass="#{guestPreferences.inputStyleClass}">
+        <div class="layout-wrapper layout-topbar-#{guestPreferences.topbarTheme} layout-menu-#{guestPreferences.menuTheme} #{guestPreferences.menuMode}" >
+            <ui:include src="/WEB-INF/includes/topbar.xhtml"/>
+            <ui:include src="/WEB-INF/includes/menu.xhtml"/>
+
+            <ui:include src="/WEB-INF/includes/rightpanel.xhtml"/>
+            <ui:include src="/WEB-INF/includes/config.xhtml" />
+
+            <div class="layout-main">
+                <ui:include src="/WEB-INF/includes/breadcrumb.xhtml" />
+                <div class="layout-content">
+                    <ui:insert name="content"/>
+                </div>
+                <ui:include src="/WEB-INF/includes/footer.xhtml"/>
             </div>
 
-            <div id="content">
-                <ui:insert name="content">Content</ui:insert>
-            </div>
+            <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
+                <f:facet name="start">
+                    <i class="pi pi-spin pi-spinner layout-ajax-loader-icon" aria-hidden="true"/>
+                </f:facet>
 
-            <div id="footer" style="margin-top: 10px;">
-                <ui:include src="/WEB-INF/includes/footer.xhtml" />
-            </div>
-
+                <f:facet name="complete">
+                    <h:outputText value=""/>
+                </f:facet>
+            </p:ajaxStatus>
+            <div class="layout-mask modal-in"></div>
         </div>
-        
-
+        <h:outputStylesheet name="css/primeicons.css"  />
+        <h:outputStylesheet name="css/primeflex.min.css"/>
+        <h:outputStylesheet name="css/#{guestPreferences.layout}.css"  />
     </h:body>
+
 </html>

@@ -30,4 +30,9 @@ public class UserListController implements Serializable {
         return userService.getAllUsers();
     }
 
+
+    public Integer getUsersAmount() {
+        return userService.getUsersAmount();
+    }
+
 }

@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <div id="layout-config" class="layout-config">
+        <div class="layout-config-content">
+            <a href="#" id="layout-config-button" class="layout-config-button">
+                <i class="pi pi-cog"/>
+            </a>
+            <h:form id="config-form" styleClass="layout-config-form">
+                <div class="layout-config-header">
+                    <h3>Theme Customization</h3>
+                </div>
+                <p:outputPanel id="lightdark-panel" styleClass="layout-config-section options">
+                    <span class="section-name">Layout Mode</span>
+                    <div class="grid layout-config-options">
+                        <p:selectOneRadio layout="responsive" columns="2" value="#{guestPreferences.darkMode}" onchange="PrimeFaces.RainConfigurator.changeLayout('#{guestPreferences.layoutPrimaryColor}', '#{guestPreferences.componentTheme}', event.target.value)"   >
+                            <f:selectItem itemLabel="Light" itemValue="light" />
+                            <f:selectItem itemLabel="Dark" itemValue="dark" />
+                            <p:ajax onstart="PrimeFaces.RainConfigurator.beforeResourceChange()" update="config-form logolink footerlogolink  rightpanellogo"/>
+                        </p:selectOneRadio>
+                    </div>
+                </p:outputPanel>
+            </h:form>
+        </div>
+    </div>
+</ui:composition>

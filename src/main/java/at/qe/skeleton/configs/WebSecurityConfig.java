@@ -10,12 +10,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
-
 import at.qe.skeleton.spring.CustomizedLogoutSuccessHandler;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
@@ -29,8 +28,8 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
 
     private static final String ADMIN = UserRole.ADMIN.name();
-    private static final String MANAGER = UserRole.MANAGER.name();
-    private static final String EMPLOYEE = UserRole.EMPLOYEE.name();
+    private static final String GARDENER = UserRole.GARDENER.name();
+    private static final String USER = UserRole.USER.name();
 
     @Autowired
     DataSource dataSource;
@@ -49,37 +48,40 @@ public class WebSecurityConfig {
             http.headers().frameOptions().disable(); // needed for H2 console
 
             http
-                .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/").permitAll()
-                .requestMatchers("/**.jsf").permitAll()
-                .requestMatchers(antMatcher("/h2-console/**")).permitAll()
-                .requestMatchers("/jakarta.faces.resource/**").permitAll()
-                .requestMatchers("/error/**").permitAll()
-                .requestMatchers("/admin/**").hasAnyAuthority(ADMIN)
-                .requestMatchers("/secured/**").hasAnyAuthority(ADMIN, MANAGER, EMPLOYEE)
-                .requestMatchers("/omnifaces.push/**").hasAnyAuthority(ADMIN, MANAGER, EMPLOYEE)
-                    .anyRequest().authenticated())
+                    .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/**").authenticated())
+                    .authorizeHttpRequests(authorize -> authorize
+                            //Permit access for all to the sensor stations for now
+                            .requestMatchers("/sensorStation/**").permitAll()
+                            .requestMatchers("/").permitAll()
+                            .requestMatchers("/registration/**").permitAll()
+                            //.requestMatchers("/api/**").permitAll()
+                            .requestMatchers("/**.jsf").permitAll()
+                            .requestMatchers(antMatcher("/h2-console/**")).permitAll()
+                            .requestMatchers("/jakarta.faces.resource/**").permitAll()
+                            .requestMatchers("/error/**").permitAll()
+                            // Only access with higher autority role
+                            .requestMatchers("/admin/**").hasAnyAuthority(ADMIN)
+                            .requestMatchers("/secured/**").hasAnyAuthority(ADMIN, GARDENER, USER)
+                            .requestMatchers("/omnifaces.push/**").hasAnyAuthority(ADMIN, GARDENER, USER)
+                            .anyRequest().authenticated())
                     .formLogin()
                     .loginPage("/login.xhtml")
                     .permitAll()
-                    .failureUrl("/error/access_denied.xhtml")
-                    .defaultSuccessUrl("/secured/welcome.xhtml")
-                .loginProcessingUrl("/login")
-                .successForwardUrl("/secured/welcome.xhtml")
+                    .failureUrl("/login.xhtml?error=true")
+                    .defaultSuccessUrl("/dashboard.xhtml")
+                    .loginProcessingUrl("/login")
+                    .successForwardUrl("/dashboard.xhtml")
                     .and()
                     .logout()
                     .logoutSuccessUrl("/login.xhtml")
                     .deleteCookies("JSESSIONID");
-            
             http.exceptionHandling().accessDeniedPage("/error/access_denied.xhtml");
-            // http.sessionManagement().invalidSessionUrl("/error/invalid_session.xhtml");
+            http.sessionManagement().invalidSessionUrl("/error/invalid_session.xhtml");
 			return http.build();
             }
             catch (Exception ex) {
                     throw new BeanCreationException("Wrong spring security configuration", ex);
             }
-                
-        // :TODO: user failureUrl(/login.xhtml?error) and make sure that a corresponding message is displayed
 
     }
 
@@ -88,13 +90,13 @@ public class WebSecurityConfig {
         //Configure roles and passwords via datasource
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled from userx where username=?")
-                .authoritiesByUsernameQuery("select userx_username, roles from userx_user_role where userx_username=?");
+                .authoritiesByUsernameQuery("select userx_username, roles from userx_user_role where userx_username=?")
+                .passwordEncoder(passwordEncoder());
     }
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
-        // :TODO: use proper passwordEncoder and do not store passwords in plain text
-        return NoOpPasswordEncoder.getInstance();
+            return new BCryptPasswordEncoder();
     }
 
 
