@@ -9,6 +9,9 @@ import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 /**
@@ -26,34 +29,40 @@ public class FileUploadController implements Serializable {
 
 
     /**
-     * Handles the uploaded file by converting it to a byte array, saving it as an {@link Image} object using the
+     * Handles the uploaded file by converting it to a byte array, saving it as an {@link at.qe.skeleton.model.Image} object using the
      * {@link ImageService}, and displaying a {@code FacesMessage} upon successful upload.
      * @param event the file upload event triggered by the user */
     public void handleFileUpload(FileUploadEvent event) throws IOException {
-            FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            UploadedFile file = event.getFile();
+        FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        UploadedFile file = event.getFile();
 
-            // Saving in the database
-            // Using ByteArrayOutputStream to directly save the file as a byte array in the database
-            InputStream in = file.getInputStream();
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
+        // Read the input image into a BufferedImage
+        InputStream in = file.getInputStream();
+        BufferedImage inputImage = ImageIO.read(in);
+        in.close();
 
-            int read;
-            byte[] bytes = new byte[50000000];
-            while ((read = in.read(bytes)) != -1) {
-                out.write(bytes, 0, read);
-            }
-            in.close();
-            out.flush();
-            byte[] fileBytes = out.toByteArray();
-            out.close();
+        // Resize the input image to a fixed size
+        int targetWidth = 800;
+        int targetHeight = 600;
+        java.awt.Image scaledImage = inputImage.getScaledInstance(targetWidth, targetHeight, java.awt.Image.SCALE_SMOOTH);
 
-            // Saving the byte array in the Image object and persisting it using imageService
-            Image image = new Image();
-            image.setImageByte(fileBytes);
-            imageService.saveImage(image);
+        // Create a new BufferedImage and draw the scaled image on it
+        BufferedImage outputImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+        outputImage.createGraphics().drawImage(scaledImage, 0, 0, null);
+
+        // Write the output image to a byte array
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        ImageIO.write(outputImage, "jpg", out);
+        byte[] fileBytes = out.toByteArray();
+        out.close();
+
+        // Save the byte array in the Image object and persist it using imageService
+        Image image = new at.qe.skeleton.model.Image();
+        image.setImageByte(fileBytes);
+        imageService.saveImage(image);
     }
+
 
 
 }
