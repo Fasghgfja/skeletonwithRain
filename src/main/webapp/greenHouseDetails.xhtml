@@ -26,7 +26,7 @@
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................TEMPERATURE BOX........................................ -->
-                        <h:link id="tempMeasurements" outcome="/dashboard">
+                        <p:commandLink action="#{measurementListController.onTempClick()}" update="myDataTable1">
 
                             <div class="card  overview-box">
 
@@ -40,12 +40,12 @@
                                 <span><span>72</span> new measurements since last visit</span>
                             </div>
                         </div>
-                        </h:link>
+                        </p:commandLink>
                     </div>
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................AIR HUMIDITY BOX........................................ -->
-                        <h:link id="airHumMeasurements" outcome="/dashboard">
+                        <p:commandLink action="#{measurementListController.onAirHumidityClick()}" update="myDataTable1">
                         <div class="card overview-box">
                             <p:graphicImage name="images/dashboard/effect-checkins.svg"  />
                             <span class="overview-icon">
@@ -57,12 +57,12 @@
                                 <span><span>48</span> new city since last visit</span>
                             </div>
                         </div>
-                        </h:link>
+                        </p:commandLink>
                     </div>
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................GROUND HUMIDITY BOX........................................ -->
-                        <h:link id="groundHumMeasurements" outcome="/dashboard">
+                        <p:commandLink action="#{measurementListController.onGroundHumidityClick()}" update="myDataTable1">
                         <div class="card overview-box ">
                             <p:graphicImage name="images/dashboard/effect-filessynced.svg"  />
                             <span class="overview-icon">
@@ -74,12 +74,12 @@
                                 <span><span>1.8%</span> increase since last visit</span>
                             </div>
                         </div>
-                        </h:link>
+                        </p:commandLink>
                     </div>
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................LIGHT INTENSITY BOX........................................ -->
-                        <h:link id="lightIntMeasurements" outcome="/dashboard">
+                        <p:commandLink action="#{measurementListController.onLightIntensityClick()}" update="myDataTable1">
                         <div class="card overview-box">
                             <p:graphicImage name="images/dashboard/effect-messages.svg"  />
                             <span class="overview-icon">
@@ -91,7 +91,7 @@
                                 <span><span>24</span> new since last visit</span>
                             </div>
                         </div>
-                        </h:link>
+                        </p:commandLink>
                     </div>
 
                 </p:toolbarGroup>
@@ -114,7 +114,7 @@
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................AIR PRESSURE BOX........................................ -->
-                        <h:link id="airPressMeasurements" outcome="/dashboard">
+                        <p:commandLink action="#{measurementListController.onAirPressureClick()}" update="myDataTable1">
                         <div class="card  overview-box">
                             <p:graphicImage name="images/dashboard/effect-useronline.svg"  />
                             <span class="overview-icon">
@@ -126,13 +126,13 @@
                                 <span><span>72</span> new users since last visit</span>
                             </div>
                         </div>
-                        </h:link>
+                        </p:commandLink>
                     </div>
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................AIR QUALITY BOX........................................ -->
-                        <h:link id="airQualMeasurements" outcome="/dashboard">
-                        <div class="card overview-box">
+                        <p:commandLink action="#{measurementListController.onAirQualityClick()}" update="myDataTable1">
+                            <div class="card overview-box">
                             <p:graphicImage name="images/dashboard/effect-checkins.svg"  />
                             <span class="overview-icon">
                             <p:graphicImage name="images/dashboard/icon-checkins.png"  />
@@ -143,7 +143,7 @@
                                 <span><span>48</span> new city since last visit</span>
                             </div>
                         </div>
-                        </h:link>
+                        </p:commandLink>
                     </div>
 
                     <div class="col-12 md:col-6 xl:col-3">
@@ -163,6 +163,7 @@
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................TIME OF LAST MEASUREMENT BOX.................................... -->
+                        <p:commandLink action="#{measurementListController.reSetType()}" update="myDataTable1">
                         <div class="card overview-box">
                             <p:graphicImage name="images/dashboard/effect-messages.svg"  />
                             <span class="overview-icon">
@@ -174,6 +175,7 @@
                                 <span><span>24</span> new since last visit</span>
                             </div>
                         </div>
+                        </p:commandLink>
                     </div>
 
                 </p:toolbarGroup>
@@ -211,8 +213,8 @@
                     <!-- .........................................MEASUREMENTS TABLE...................................................... -->
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="card products">
-                        <p:dataTable id="myDataTable" widgetVar="customersDT2" var="measurement" value="#{measurementListController.getMeasurementsForSensorStation()}" selectionMode="single" reflow="true"
-                                     rowKey="#{measurement.sensorStation.id}" rows="10" scrollable="true" scrollHeight="350"
+                        <p:dataTable id="myDataTable1" widgetVar="customersDT2" var="measurement" value="#{measurementListController.getMeasurementsForSensorStation()}" selectionMode="single" reflow="true"
+                                     rowKey="#{measurement.sensorStation.id}" scrollable="true" scrollHeight="350"
                                      styleClass="ui-datatable-striped ui-datatable-sm ui-datatable-gridlines">
 
                             <!-- ........THIS CAN BE ADDED TO ANY INTERACTIVE ELEMENT TO REFRESH SOMETHING............ -->

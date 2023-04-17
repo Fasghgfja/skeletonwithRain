@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 
+
 @Component
 @Scope("view")
 public class MeasurementListController implements Serializable {
@@ -25,6 +26,12 @@ public class MeasurementListController implements Serializable {
         @Autowired
         private SensorStationDetailController sensorStationDetailController;
 
+    public void reSetType() {
+        this.type = "all";
+    }
+
+    private String type = "all";
+
 
         /**
          * Returns a list of all measurements.
@@ -32,6 +39,8 @@ public class MeasurementListController implements Serializable {
         public Collection<Measurement> getMeasurements() {
             return measurementService.getAllMeasurements();
         }
+
+
 
         /**
          * Returns how many sensor stations are registered in the system.
@@ -42,10 +51,18 @@ public class MeasurementListController implements Serializable {
         }
 
 
-          public Collection<Measurement> getMeasurementsForSensorStation() {
+        public Collection<Measurement> getMeasurementsForSensorStation() {
             SensorStation sensorStation = sensorStationDetailController.getSensorStation();
-            return measurementService.getAllMeasurementsBySensorStation(sensorStation);
+            if (type == null || type.equals("all")) { return measurementService.getAllMeasurementsBySensorStation(sensorStation);}
+            else return measurementService.getAllMeasurementsBySensorStationAndType(sensorStation,type);
         }
+
+        public void onAirQualityClick(){type = "AIR_QUALITY";}
+        public void onTempClick(){type = "TEMPERATURE";}
+        public void onAirHumidityClick(){type = "HUMIDITY";}
+        public void onGroundHumidityClick(){type = "SOIL_MOISTURE";}
+        public void onAirPressureClick(){type = "AIR_PRESSURE";}
+        public void onLightIntensityClick(){type = "LIGHT_INTENSITY";}
 
 }
 
