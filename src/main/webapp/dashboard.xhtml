@@ -51,7 +51,7 @@
                     <div class="card overview-box ">
                         <p:graphicImage url="../resources/images/dashboard/effect-filessynced.svg"/>
                         <span class="overview-icon">
-                            <p:graphicImage url="../resources/images/dashboard/icon-filessynced.png"/>
+                            <p:graphicImage url="../resources/images/plants.png"/>
                         </span>
                         <div class="overview">
                             <span class="overview-title">PLANTS UNDER CARE</span>
@@ -153,58 +153,7 @@
                         <div class="col-12 md:col-6">
                             <div class="card feedbacks">
                                 <div class="card-header">
-                                    <h5>System Messages</h5>
-                                    <div class="rating">
-                                        <p:rating value="4" readonly="true"/>
-                                        <span>4.0</span>
-                                    </div>
-
-                                </div>
-                                <div class="feedbacks-list">
-                                    <div class="feedback">
-                                        <p:graphicImage name="images/dashboard/avatar-1.png" library="demo"/>
-                                        <div class="feedback-content">
-                                            <div class="feedback-header">
-                                                <h6>Tamas Bunce</h6>
-                                                <p:rating value="5" readonly="true"/>
-                                                <span>12h ago</span>
-                                            </div>
-                                            <span>The analysis of satellite data has revealed the loss of ice in just a few months of abnormally high…</span>
-                                        </div>
-                                    </div>
-                                    <div class="feedback">
-                                        <p:graphicImage name="images/dashboard/avatar-1.png" library="demo"/>
-                                        <div class="feedback-content">
-                                            <div class="feedback-header">
-                                                <h6>Tamas Bunce</h6>
-                                                <p:rating value="5" readonly="true"/>
-                                                <span>12h ago</span>
-                                            </div>
-                                            <span>The analysis of satellite data has revealed the loss of ice in just a few months of abnormally high…</span>
-                                        </div>
-                                    </div>
-                                    <div class="feedback">
-                                        <p:graphicImage name="images/dashboard/avatar-2.png" library="demo"/>
-                                        <div class="feedback-content">
-                                            <div class="feedback-header">
-                                                <h6>Olivia Arribas</h6>
-                                                <p:rating value="4" readonly="true"/>
-                                                <span>1d ago</span>
-                                            </div>
-                                            <span>The analysis of satellite data has revealed the loss of ice in just a few months of abnormally high…</span>
-                                        </div>
-                                    </div>
-                                    <div class="feedback">
-                                        <p:graphicImage name="images/dashboard/avatar-3.png" library="demo"/>
-                                        <div class="fesedback-content">
-                                            <div class="feedback-header">
-                                                <h6>Naomí Yepes</h6>
-                                                <p:rating value="4" readonly="true"/>
-                                                <span>1w ago</span>
-                                            </div>
-                                            <span>The analysis of satellite data has revealed the loss of ice in just a few months of abnormally high…</span>
-                                        </div>
-                                    </div>
+                                    <h5>Work in Progress</h5>
                                 </div>
                             </div>
                         </div>
@@ -294,113 +243,8 @@
                 <div class="col-12 md:col-6 xl:col-4">
                     <div class="card sales">
                         <div class="card-header">
-                            <h5>ACCESS POINTS</h5>
-                            <div class="header-buttons">
-                                <p:commandButton type="button" icon="pi pi-search"
-                                                 styleClass="ui-button-secondary outlined-button mr-2"/>
-                            </div>
+                            <h5>Work in Progress</h5>
                         </div>
-                        <p:graphicImage name="images/dashboard/asset-worldmap.png" library="demo"/>
-                        <div class="progress-item">
-                            <div class="progress-title">
-                                <span>United States of America</span>
-                                <span>5K/10K</span>
-                            </div>
-
-                            <div class="progress-bar">
-                                <span class="progress"></span>
-                                <span class="progress-bar-background"></span>
-                            </div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-title">
-                                <span>France</span>
-                                <span>2K/6K</span>
-                            </div>
-
-                            <div class="progress-bar">
-                                <span class="progress"></span>
-                                <span class="progress-bar-background"></span>
-                            </div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-title">
-                                <span>Japan</span>
-                                <span>4K/9K</span>
-                            </div>
-
-                            <div class="progress-bar">
-                                <span class="progress"></span>
-                                <span class="progress-bar-background"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- ..........................................USERS TABLE................................................................... -->
-                <div class="col-12 md:col-12 xl:col-8">
-                    <div class="card transactions">
-                        <div class="card-header">
-                            <h5>Users</h5>
-                            <div class="header-buttons">
-                                <p:commandButton type="button" icon="pi pi-search"
-                                                 styleClass="ui-button-secondary outlined-button  mr-2"/>
-                                <p:commandButton type="button" icon="pi pi-ellipsis-v"
-                                                 styleClass="ui-button-secondary outlined-button "/>
-                            </div>
-                        </div>
-                        <h:form id="form">
-                            <p:dataTable widgetVar="customersDT" var="user" value="#{userListController.users}"
-                                         reflow="true" rowKey="#{user.id}"
-                                         rows="10" scrollable="true" scrollHeight="500">
-                                <f:facet name="header">
-                                    <style type="text/css">
-                                        .table-no-select-all .ui-chkbox-all {
-                                            display: none !important;
-                                        }
-
-                                    </style>
-                                    <div class="customers-table-header">
-                                        <span style="font-weight: bold">Greenhouses</span>
-
-                                        <span class="ui-input-icon-left filter-container">
-                                        <i class="pi pi-search"/>
-                                        <p:inputText id="globalFilter" onkeyup="PF('customersDT').filter()"
-                                                     placeholder="Global Search"/>
-                                    </span>
-                                    </div>
-                                </f:facet>
-                                <p:column headerText="Username" sortBy="#{user.username}" filterBy="#{user.username}">
-                                    <h:outputText value="#{user.username}"/>
-                                </p:column>
-                                <p:column headerText="First Name" sortBy="#{user.firstName}"
-                                          filterBy="#{user.firstName}">
-                                    <span class="flag flag-#{customer.country.code}" style="width: 30px; height: 20px"/>
-                                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
-                                                  value="#{user.firstName}"/>
-                                </p:column>
-                                <p:column headerText="Last Name" sortBy="#{user.lastName}" filterBy="#{user.lastName}">
-                                    <p:graphicImage name="images/avatar/#{customer.representative.image}" width="32"
-                                                    style="vertical-align: middle"/>
-                                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
-                                                  value="#{user.lastName}"/>
-                                </p:column>
-                                <p:column headerText="Join Date" sortBy="#{user.createDate}"
-                                          filterBy="#{user.createDate}">
-                                    <h:outputText value="#{user.createDate}"/>
-                                </p:column>
-                                <p:column headerText="Roles" sortBy="#{customer.status}" filterBy="#{customer.status}">
-                                    <span class="customer-badge status-#{customer.status.name().toLowerCase()}">#{customer.status}</span>
-                                </p:column>
-                                <p:column headerText="Enabled" sortBy="#{user.enabled}">
-                                    <h:outputText value="#{user.enabled}"/>
-                                </p:column>
-                                <p:column style="width: 8rem; text-align: center;">
-                                    <p:button icon="pi pi-cog" styleClass="ui-button-secondary"/>
-                                </p:column>
-                            </p:dataTable>
-                        </h:form>
                     </div>
                 </div>
 

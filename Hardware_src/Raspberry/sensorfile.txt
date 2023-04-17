@@ -1,0 +1,504 @@
+Connected to device G4T2 at 04/05/23__22:51:56
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			637
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			0.00 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			0.00 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			0.00 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1018
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			0.00 
+Disconnected at 04/05/23__22:51:57
+
+Connected to device G4T2 at 04/05/23__22:52:11
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			629
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.83 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			48.47 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.28 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1014
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.24 
+Disconnected at 04/05/23__22:52:13
+
+Connected to device G4T2 at 04/05/23__22:52:26
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			641
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.68 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			48.15 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.31 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1007
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.26 
+Disconnected at 04/05/23__22:52:28
+
+Activated alarm at 04/05/23__22:52:41 on uuid: 000019b1-0000-1000-8000-00805f9b34fb
+
+Connected to device G4T2 at 04/05/23__22:52:45
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			650
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.57 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			48.50 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.31 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1020
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.26 
+Disconnected at 04/05/23__22:52:47
+
+Activated alarm at 04/05/23__22:53:01 on uuid: 000019b1-0000-1000-8000-00805f9b34fb
+
+Connected to device G4T2 at 04/05/23__22:53:04
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			641
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.49 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			48.09 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.35 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1001
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.27 
+Disconnected at 04/05/23__22:53:05
+
+Activated alarm at 04/05/23__22:53:19 on uuid: 000019b0-0000-1000-8000-00805f9b34fb
+
+Connected to device G4T2 at 04/05/23__22:53:23
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			638
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.42 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			47.90 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.37 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1023
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.26 
+Disconnected at 04/05/23__22:53:25
+
+Activated alarm at 04/05/23__22:53:39 on uuid: 000019b0-0000-1000-8000-00805f9b34fb
+
+Connected to device G4T2 at 04/05/23__22:53:43
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			645
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.38 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			47.80 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.40 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1023
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.27 
+Disconnected at 04/05/23__22:53:45
+
+Activated alarm at 04/05/23__22:53:59 on uuid: 000019b2-0000-1000-8000-00805f9b34fb
+
+Connected to device G4T2 at 04/05/23__22:54:02
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			644
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.34 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			46.82 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.41 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1009
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.27 
+Disconnected at 04/05/23__22:54:03
+
+Activated alarm at 04/05/23__22:54:17 on uuid: 000019b2-0000-1000-8000-00805f9b34fb
+
+Connected to device G4T2 at 04/05/23__22:54:23
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			632
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.31 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			48.01 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.42 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1014
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.28 
+Disconnected at 04/05/23__22:54:24
+
+Activated alarm at 04/05/23__22:54:38 on uuid: 000019b3-0000-1000-8000-00805f9b34fb
+
+Connected to device G4T2 at 04/05/23__22:54:42
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			642
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.29 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			46.56 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.42 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1001
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.27 
+Disconnected at 04/05/23__22:54:44
+
+Activated alarm at 04/05/23__22:54:59 on uuid: 000019b3-0000-1000-8000-00805f9b34fb
+
+Connected to device G4T2 at 04/05/23__22:55:02
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			634
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.27 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			48.07 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.43 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1023
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.27 
+Disconnected at 04/05/23__22:55:03
+
+Activated alarm at 04/05/23__22:55:17 on uuid: 000019b4-0000-1000-8000-00805f9b34fb
+
+Connected to device G4T2 at 04/05/23__22:55:22
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			635
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.26 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			47.93 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.44 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1003
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.28 
+Disconnected at 04/05/23__22:55:24
+
+Activated alarm at 04/05/23__22:55:38 on uuid: 000019b4-0000-1000-8000-00805f9b34fb
+
+Connected to device G4T2 at 04/05/23__22:55:43
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			644
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.25 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			47.90 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.45 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1023
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.28 
+Disconnected at 04/05/23__22:55:44
+
+Activated alarm at 04/05/23__22:55:58 on uuid: 000019b5-0000-1000-8000-00805f9b34fb
+
+Connected to device G4T2 at 04/05/23__22:56:02
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			639
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.24 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			47.93 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.44 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1023
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.29 
+Disconnected at 04/05/23__22:56:04
+
+Activated alarm at 04/05/23__22:56:17 on uuid: 000019b5-0000-1000-8000-00805f9b34fb
+
+Connected to device G4T2 at 04/05/23__22:56:21
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			639
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.23 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			48.12 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.43 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1023
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.29 
+Disconnected at 04/05/23__22:56:23
+
+Connected to device G4T2 at 04/05/23__22:56:36
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			642
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.23 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			48.53 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.45 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1005
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.30 
+Disconnected at 04/05/23__22:56:38
+
+Connected to device G4T2 at 04/05/23__22:56:55
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			632
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.23 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			50.10 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.40 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1023
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.30 
+Disconnected at 04/05/23__22:56:57
+
+Connected to device G4T2 at 04/05/23__22:57:10
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			655
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.22 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			49.75 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.43 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1018
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.29 
+Disconnected at 04/05/23__22:57:12
+
+Connected to device G4T2 at 04/05/23__22:57:25
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			629
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.22 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			51.09 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.41 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1023
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.29 
+Disconnected at 04/05/23__22:57:27
+
+Connected to device G4T2 at 04/05/23__22:57:41
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+
+Sensor type:	HygroSensor
+uuid:			000019b1-0000-1000-8000-00805f9b34fb
+Value:			647
+Sensor type:	TempSensor
+uuid:			000019b2-0000-1000-8000-00805f9b34fb
+Value:			26.22 
+Sensor type:	GasSensor
+uuid:			000019b5-0000-1000-8000-00805f9b34fb
+Value:			52.08 
+Sensor type:	humiditySensor
+uuid:			000019b3-0000-1000-8000-00805f9b34fb
+Value:			90.39 
+Sensor type:	LigthSensor
+uuid:			000019b0-0000-1000-8000-00805f9b34fb
+Value:			1023
+Sensor type:	PressureSensor
+uuid:			000019b4-0000-1000-8000-00805f9b34fb
+Value:			911.30 
+Disconnected at 04/05/23__22:57:43
+
