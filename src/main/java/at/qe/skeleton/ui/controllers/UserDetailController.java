@@ -5,9 +5,19 @@ import at.qe.skeleton.services.UserService;
 import java.io.Serializable;
 
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+
+import at.qe.skeleton.model.UserRole;
+import org.springframework.stereotype.Controller;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Controller for the user detail view.
@@ -15,8 +25,10 @@ import org.springframework.stereotype.Component;
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
  */
-@Component
-@Scope("view")
+
+@Getter
+@Setter
+@Controller
 public class UserDetailController implements Serializable {
 
     @Autowired
@@ -26,28 +38,16 @@ public class UserDetailController implements Serializable {
      * Attribute to cache the currently displayed user
      */
     private Userx user;
-
-    /**
-     * Sets the currently displayed user and reloads it form db. This user is
-     * targeted by any further calls of
-     * {@link #doReloadUser()}, {@link #doSaveUser()} and
-     * {@link #doDeleteUser()}.
-     *
-     * @param user
-     */
-    public void setUser(Userx user) {
-        this.user = user;
-        doReloadUser();
-    }
-
-    /**
-     * Returns the currently displayed user.
-     *
-     * @return
-     */
-    public Userx getUser() {
-        return user;
-    }
+    private Userx userToBeCreated = new Userx();
+    private String username;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phone;
+    private Set<UserRole> roles;
+    private boolean admin;
+    private boolean gardener;
 
     /**
      * Action to force a reload of the currently displayed user.
@@ -71,6 +71,18 @@ public class UserDetailController implements Serializable {
         user = null;
     }
 
+    public void doCreateUser() {
+        roles = new HashSet<>();
+        roles.add(UserRole.USER);
+        if(admin){
+            roles.add(UserRole.GARDENER);
+            roles.add(UserRole.ADMIN);
+        } else if(gardener){
+            roles.add(UserRole.GARDENER);
+        }
+        this.userService.createUser(username,password, firstName,lastName,email, phone, roles);
+        this.userToBeCreated = null;
+    }
 
 
 }

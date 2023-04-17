@@ -38,7 +38,7 @@ public class SensorStationListController implements Serializable {
     /**
      * Returns how many sensor stations are registered in the system.
      */
-    public Integer getSensorStationsAmount() {
+    public long getSensorStationsAmount() {
         return sensorService.getSensorStationsAmount();
     }
 

@@ -1,11 +1,16 @@
 package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Log;
+import at.qe.skeleton.model.LogType;
+import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.UserxRepository;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,7 +31,7 @@ public class UserService {
     private UserxRepository userRepository;
 
     /**
-     The LogRepository is used to save logs for user deletions.
+     The LogRepository is used to save logs for user interactions.
      */
     @Autowired
     private LogRepository logRepository;
@@ -76,6 +81,55 @@ public class UserService {
     }
 
     /**
+     * Creates a new user with the input values given in the popup and also logs this creation.
+     * If the entered username is already taken, a warning will be logged and the user will not be created.
+     * @param username
+     * @param password
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param phone
+     * @param roles
+     * @return
+     */
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Userx createUser(String username, String password, String firstName, String lastName, String email, String phone, Set<UserRole> roles) {
+        Userx userToBeCreated = new Userx();
+        userToBeCreated.setUsername(username);
+        userToBeCreated.setPassword(password);
+        userToBeCreated.setFirstName(firstName);
+        userToBeCreated.setLastName(lastName);
+        userToBeCreated.setEmail(email);
+        userToBeCreated.setPhone(phone);
+        userToBeCreated.setRoles(roles);
+
+        if (userRepository.findFirstByUsername(username) != null){
+            Log creationFailLog = new Log();
+            creationFailLog.setDate(LocalDate.now());
+            creationFailLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+            creationFailLog.setAuthor(getAuthenticatedUser().getUsername());
+            creationFailLog.setSubject("USER CREATION FAILED");
+            creationFailLog.setText("ENTERED USERNAME ALREADY TAKEN: " + userToBeCreated.getUsername());
+            creationFailLog.setType(LogType.WARNING);
+            logRepository.save(creationFailLog);
+            return userToBeCreated;
+        }
+
+        saveUser(userToBeCreated);
+
+        Log createLog = new Log();
+        createLog.setDate(LocalDate.now());
+        createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        createLog.setAuthor(getAuthenticatedUser().getUsername());
+        createLog.setSubject("USER CREATION");
+        createLog.setText("CREATED USER: " + userToBeCreated.getUsername());
+        createLog.setType(LogType.SUCCESS);
+        logRepository.save(createLog);
+
+        return userToBeCreated;
+    }
+    /**
      Deletes a user from the database and logs the deletion.
      The user to be deleted is passed as a parameter to the method. A Log object is created to record the deletion and saved to the
      LogRepository. The Userx object is then deleted from the UserxRepository.
@@ -84,11 +138,12 @@ public class UserService {
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteUser(Userx user) {
         Log deleteLog = new Log();
-
         deleteLog.setDate(LocalDate.now());
+        deleteLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         deleteLog.setAuthor(getAuthenticatedUser().getUsername());
         deleteLog.setSubject("USER DELETION");
         deleteLog.setText("DELETED USER: " + user.getUsername());
+        deleteLog.setType(LogType.SUCCESS);
 
         logRepository.save(deleteLog);
         userRepository.delete(user);
