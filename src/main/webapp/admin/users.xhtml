@@ -11,7 +11,7 @@
     <ui:define name ="content">
         <h:form id="userForm">
             <p:dataTable id="usersTable" var="user" value="#{userListController.users}">
-                <p:column headerText="Username">
+                <p:column headerText="Username" sortBy="#{user.username}" filterBy="#{user.username}">
                     <h:outputText value="#{user.username}"/>
                 </p:column>
                 <p:column headerText="First Name">
