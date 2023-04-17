@@ -3,12 +3,17 @@ package at.qe.skeleton.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
 
 /**
  * Abstract Metadata to save and retrieve creatinDate and updateDate of entities.
  */
+@Getter
+@Setter
 @MappedSuperclass
 public abstract class Metadata {
 
@@ -20,21 +25,5 @@ public abstract class Metadata {
     private Userx createUser;
     @ManyToOne
     private Userx updateUser;
-
-    public LocalDate getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDate createDate) {
-        this.createDate = createDate;
-    }
-
-    public LocalDate getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDate updateDate) {
-        this.updateDate = updateDate;
-    }
 }
 

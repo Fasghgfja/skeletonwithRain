@@ -5,6 +5,7 @@ import at.qe.skeleton.model.SensorStation;
 
 public interface SensorStationRepository extends AbstractRepository<SensorStation, Long>{
     SensorStation findFirstById(Long id);
+    long count();
 
     SensorStation findByLocation(String location);
 
