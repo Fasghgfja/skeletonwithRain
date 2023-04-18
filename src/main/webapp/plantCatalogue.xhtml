@@ -15,8 +15,8 @@
             <div class="col-12">
 
                 <div class="card">
-                    <h5>Greenhouses</h5>
-                    <p:dataTable var="sensorStation" value="#{sensorStationListController.sensorStations}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{sensorStation.id}">
+                    <h5>Plants</h5>
+                    <p:dataTable var="plant" value="#{plantController.plants}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 
                         <p:column >
@@ -27,17 +27,25 @@
                             <h:outputText value="$#{plant.plantName}"/>
                         </p:column>
 
-                        <p:column headerText="Planted" sortBy="#{sensorStation.createDate}">
-                            <h:outputText value="#{product.category}"/>
+                        <!-- createDate should be equal to Planted???????-->
+                        <p:column headerText="Planted" sortBy="#{plant.createDate}">
+                            <h:outputText value="#{plant.createDate}"/>
                         </p:column>
 
                         <p:column headerText="Description" sortBy="#{plant.description}">
                             <h:outputText value="#{plant.description}"/>
                         </p:column>
 
-                        <p:column headerText="Location" sortBy="#{sensorStation.location}">
-                            <h:outputText value="$#{sensorStation.location}"/>
-                        </p:column>
+                        <p:column style="width: 3.5rem">
+
+                            <p:commandButton icon="pi pi-plus"
+                                      title="Add Plant to Dashboard"
+                                      action="#{userDetailController.doAddPlantToFollowedPlants(plant)}" >  </p:commandButton>
+
+
+
+                    </p:column>
+
 
                     </p:dataTable>
                 </div>

@@ -1,8 +1,16 @@
 package at.qe.skeleton.ui.controllers;
 
 import at.qe.skeleton.model.UserRole;
+import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.services.UserService;
+import java.io.Serializable;
+
+
+import at.qe.skeleton.ui.beans.SessionInfoBean;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -12,16 +20,22 @@ import java.util.*;
 
 /**
  * Controller for the user detail view.
- * <p>
+ *
  * This class is part of the skeleton project provided for students of the
- * course "Software Architecture" offered by Innsbruck University.
+ * course "Software Engineering" offered by the University of Innsbruck.
  */
+
+@Getter
+@Setter
 @Component
 @Scope("view")
 public class UserDetailController implements Serializable {
 
     @Autowired
     private transient UserService userService;
+
+    @Autowired
+    private SessionInfoBean sessionInfoBean;
 
     private List<String> selectedRoles;
 
@@ -43,6 +57,8 @@ public class UserDetailController implements Serializable {
      * targeted by any further calls of
      * {@link #doReloadUser()}, {@link #doSaveUser()} and
      * {@link #doDeleteUser()}.
+     *
+     * @param user
      */
     public void setUser(Userx user) {
         this.user = user;
@@ -96,6 +112,11 @@ public class UserDetailController implements Serializable {
 
     public List<String> getSelectedRolesEdit() {
         return selectedRolesEdit;
+    }
+
+    public void doAddPlantToFollowedPlants(Plant plant) {
+        user = sessionInfoBean.getCurrentUser();
+        this.userService.addPlantToFollowedPlants(user,plant);
     }
 
     public void setSelectedRolesEdit(List<String> selectedRolesEdit) {
