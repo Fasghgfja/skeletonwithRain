@@ -1,14 +1,12 @@
 package at.qe.skeleton.services;
 
-import at.qe.skeleton.model.Log;
-import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.UserRole;
-import at.qe.skeleton.model.Userx;
+import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.PlantRepository;
 import at.qe.skeleton.repositories.UserxRepository;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +28,10 @@ public class UserService {
     @Autowired
     private UserxRepository userRepository;
 
+
     @Autowired
     private PlantRepository plantRepository;
+
     /**
      The LogRepository is used to save logs for user interactions.
      */
@@ -160,77 +160,6 @@ public class UserService {
         return userRepository.findFirstByUsername(auth.getName());
     }
 
-    /**
-     * Edits the user email.
-     *
-     * @param user the user to edit
-     * @param email the new email for the user
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void editUserEmail(Userx user, String email){
-        user.setEmail(email);
-        userRepository.save(user);
-    }
-
-    /**
-     * Edits the users phone number.
-     *
-     * @param user the user to edit
-     * @param phone the new email for the user
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void editUserPhone(Userx user, String phone){
-        user.setPhone(phone);
-        userRepository.save(user);
-    }
-
-    /**
-     * Edits the user firstName.
-     *
-     * @param user the user to edit
-     * @param firstName the new firstName for the user
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void editUserFirstName(Userx user, String firstName){
-        user.setFirstName(firstName);
-        userRepository.save(user);
-    }
-
-    /**
-     * Edits the user lastName.
-     *
-     * @param user the user to edit
-     * @param lastName the new lastName for the user
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void editUserLastName(Userx user, String lastName){
-        user.setLastName(lastName);
-        userRepository.save(user);
-    }
-
-    /**
-     * Edits the user password.
-     *
-     * @param user the user to edit
-     * @param password the new password for the user
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void editUserPassword(Userx user, String password){
-        user.setPassword(password);
-        userRepository.save(user);
-    }
-
-    /**
-     *
-     * @param user the user to edit
-     * @param roles the new roles assigned to this user
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void editUserRoles(Userx user, Set<UserRole> roles){
-        user.setRoles(roles);
-        userRepository.save(user);
-    }
-
     @PreAuthorize("hasAuthority('ADMIN')")
     public void addPlantToFollowedPlants(Userx user, Plant plant) {
         if(user == null || plant == null || plant.getFollowers().contains(user)) {return;}
@@ -241,5 +170,5 @@ public class UserService {
     }
 
 
-
 }
+
