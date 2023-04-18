@@ -38,11 +38,13 @@
 
                         <p:column style="width: 3.5rem">
 
-                            <p:button icon="pi pi-plus"
+                            <p:commandButton icon="pi pi-plus"
                                       title="Add Plant to Dashboard"
-                                      action="#{userDetailController.doAddPlantToFollowedPlants(sessionInfoBean.currentUser, plant)}"/>
+                                      action="#{userDetailController.doAddPlantToFollowedPlants(plant)}" >  </p:commandButton>
 
-                        </p:column>
+
+
+                    </p:column>
 
 
                     </p:dataTable>

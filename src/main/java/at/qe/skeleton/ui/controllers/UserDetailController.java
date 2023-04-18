@@ -6,6 +6,7 @@ import at.qe.skeleton.services.UserService;
 import java.io.Serializable;
 
 
+import at.qe.skeleton.ui.beans.SessionInfoBean;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +35,9 @@ public class UserDetailController implements Serializable {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SessionInfoBean sessionInfoBean;
 
     /**
      * Attribute to cache the currently displayed user
@@ -97,7 +101,8 @@ public class UserDetailController implements Serializable {
         this.userService.createUser(username,password, firstName,lastName,email, phone, roles);
     }
 
-    public void doAddPlantToFollowedPlants(Userx user, Plant plant) {
+    public void doAddPlantToFollowedPlants(Plant plant) {
+        user = sessionInfoBean.getCurrentUser();
         this.userService.addPlantToFollowedPlants(user,plant);
     }
 

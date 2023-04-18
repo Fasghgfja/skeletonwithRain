@@ -189,12 +189,12 @@ public class UserService {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     public void addPlantToFollowedPlants(Userx user, Plant plant) {
-        if (user != null && plant != null) {
+        if(user == null || plant == null || plant.getFollowers().contains(user)) {return;}
             user.getFollowedPlants().add(plant);
             plant.getFollowers().add(user);
             userRepository.save(user);
             plantRepository.save(plant);
-        }
     }
-
 }
+
+
