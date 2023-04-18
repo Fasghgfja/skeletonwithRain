@@ -15,10 +15,8 @@
                     <p:staticMessage style="width: 100%"  rendered="${!empty param['error']}" severity="error" summary="ERROR" detail="Username or password invalid!" />
 
 
-                    <div style="display: flex; align-items: center; justify-content: center;">
-                        <h:outputText value="Login" style="font-size: 24px;" />
-                    </div>
-                    <h:panelGrid columns="1" style="margin-top: 20px; width: 100%; text-align: center" layout="grid">
+                    <h:outputText value="Login" styleClass="login-header" style="font-weight: bold; font-size: 24px;"/>
+                    <h:panelGrid columns="1" style="margin-top: 20px; width: 100%" layout="grid">
                         <h:outputLabel for="username" value="Username:" />
                         <p:inputText id="username" type="text" required="true" style="width: 100%" />
                         <h:outputLabel for="password" value="Password:" />
@@ -39,7 +37,7 @@
 
                     <h:panelGrid columns="1" style="margin-top: 30px" layout="grid">
                         <h:commandLink>
-                            <h:graphicImage url="https://i.ibb.co/NxFM4rH/banner.png" style="height:111px;" />
+                            <h:graphicImage url="https://i.ibb.co/NxFM4rH/banner.png" style="height:100px;" />
                         </h:commandLink>
                     </h:panelGrid>
 
