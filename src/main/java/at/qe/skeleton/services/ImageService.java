@@ -49,7 +49,6 @@ public class ImageService {
      * the method will change the update date for this image.
      *
      * @param image   the image to save
-     * @param plantId the ID of the plant associated with this image
      * @return the saved image
      */
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -66,4 +65,7 @@ public class ImageService {
     public void deleteImage(Image image) {
         imageRepository.delete(image);
     }
+
+
+
 }

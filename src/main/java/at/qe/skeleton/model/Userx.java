@@ -29,6 +29,9 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private Userx createUser;
     @ManyToOne
     private Userx updateUser;
+
+    @OneToOne
+    private Image profilePic;
     private String password;
     private String firstName;
     private String lastName;

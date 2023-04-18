@@ -16,7 +16,7 @@
 
                 <div class="card">
                     <h5>Plants</h5>
-                    <p:dataTable var="plant" value="#{plantController.plants}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
+                    <p:dataTable id="plantsTable" var="plant" value="#{plantController.plants}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 
                         <p:column >
@@ -40,11 +40,14 @@
 
                             <p:commandButton icon="pi pi-plus"
                                       title="Add Plant to Dashboard"
-                                      action="#{userDetailController.doAddPlantToFollowedPlants(plant)}" >  </p:commandButton>
+                                             update=":userForm:plantsTable">
+                                <p:ajax event="click" listener="#{userDetailController.doAddPlantToFollowedPlants(plant)}"/>
+                            </p:commandButton>
 
 
 
-                    </p:column>
+
+                        </p:column>
 
 
                     </p:dataTable>

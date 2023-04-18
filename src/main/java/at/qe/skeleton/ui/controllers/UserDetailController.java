@@ -3,7 +3,10 @@ package at.qe.skeleton.ui.controllers;
 import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Userx;
+import at.qe.skeleton.services.ImageService;
 import at.qe.skeleton.services.UserService;
+
+import java.io.InputStream;
 import java.io.Serializable;
 
 
@@ -11,6 +14,7 @@ import at.qe.skeleton.ui.beans.SessionInfoBean;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.omnifaces.util.Faces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -33,6 +37,9 @@ public class UserDetailController implements Serializable {
 
     @Autowired
     private transient UserService userService;
+
+    @Autowired
+    private transient GalleryController galleryController;
 
     @Autowired
     private SessionInfoBean sessionInfoBean;
@@ -114,13 +121,26 @@ public class UserDetailController implements Serializable {
         return selectedRolesEdit;
     }
 
+
+
     public void doAddPlantToFollowedPlants(Plant plant) {
         user = sessionInfoBean.getCurrentUser();
         this.userService.addPlantToFollowedPlants(user,plant);
     }
 
+
+
+
     public void setSelectedRolesEdit(List<String> selectedRolesEdit) {
         this.selectedRolesEdit = selectedRolesEdit;
     }
+
+    public InputStream getProfilePicture() {
+        if (user == null){return Faces.getResourceAsStream("images/awesomeProfilePicture.png");}
+        InputStream input = galleryController.getProfilePicAsStreamedContent(""+user.getProfilePic().getId());
+        return (input != null) ? input : Faces.getResourceAsStream("images/awesomeProfilePicture.png");
+    }
+
+
 
 }

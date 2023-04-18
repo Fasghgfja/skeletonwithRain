@@ -90,6 +90,30 @@ public class GalleryController implements Serializable {
         }
     }
 
+
+
+
+    public ByteArrayInputStream getProfilePicAsStreamedContent(String id) {
+        if (id == null) {
+            System.err.println("id = " + id);
+            Image image = imageService.loadImage(1L);
+            byte[] imageBytes = image.getImageByte();
+            return new ByteArrayInputStream(imageBytes);
+        } else {
+            Image image = imageService.loadImage(Long.valueOf(id));
+            byte[] imageBytes = image.getImageByte();
+            return new ByteArrayInputStream(imageBytes);
+        }
+    }
+
+
+
+
+
+
+
+
+
     /**
      * Returns a list of all images available in the application.
      * @return a list of Image objects representing all images in the application.
