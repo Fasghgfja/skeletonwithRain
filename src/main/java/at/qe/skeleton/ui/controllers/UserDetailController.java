@@ -1,5 +1,6 @@
 package at.qe.skeleton.ui.controllers;
 
+import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Userx;
@@ -12,6 +13,7 @@ import lombok.Setter;
 import org.omnifaces.util.Faces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import java.util.*;
 
@@ -36,6 +38,9 @@ public class UserDetailController implements Serializable {
 
     @Autowired
     private SessionInfoBean sessionInfoBean;
+
+    @Autowired
+    private transient PasswordEncoder passwordEncoder;
 
     private List<String> selectedRoles;
 
@@ -67,9 +72,9 @@ public class UserDetailController implements Serializable {
         for (UserRole userRole: newRoles) {
             this.selectedRolesEdit.add(userRole.name());
         }
-
         doReloadUser();
     }
+
 
     /**
      * Action to force a reload of the currently displayed user.
@@ -136,5 +141,15 @@ public class UserDetailController implements Serializable {
     }
 
 
+    /**
+     * Method to initialize a user view for the logged in user.
+     */
+    public void init() {
+        if (this.user != null) {return;}
+            Userx thisUser = sessionInfoBean.getCurrentUser();
+            this.user = userService.loadUser(thisUser.getId());
+        }
 
 }
+
+
