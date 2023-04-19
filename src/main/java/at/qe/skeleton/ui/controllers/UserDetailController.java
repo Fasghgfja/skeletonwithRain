@@ -3,23 +3,16 @@ package at.qe.skeleton.ui.controllers;
 import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Userx;
-import at.qe.skeleton.services.ImageService;
 import at.qe.skeleton.services.UserService;
-
 import java.io.InputStream;
 import java.io.Serializable;
-
-
 import at.qe.skeleton.ui.beans.SessionInfoBean;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.omnifaces.util.Faces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -32,7 +25,7 @@ import java.util.*;
 @Getter
 @Setter
 @Component
-@Scope("view")
+@Scope("request")
 public class UserDetailController implements Serializable {
 
     @Autowired
@@ -120,6 +113,7 @@ public class UserDetailController implements Serializable {
     public List<String> getSelectedRolesEdit() {
         return selectedRolesEdit;
     }
+
 
 
 

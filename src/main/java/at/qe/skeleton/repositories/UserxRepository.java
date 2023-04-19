@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+
+
+
 /**
  * Repository for managing {@link Userx} entities.
  * This class is part of the skeleton project provided for students of the
@@ -16,6 +19,8 @@ import org.springframework.data.repository.query.Param;
  *  The second one defines the criteria (e.g ...ByName, ...).
  */
 public interface UserxRepository extends AbstractRepository<Userx, String> {
+
+
 
     /**
      * The method Retrieves a User entity by its Username.

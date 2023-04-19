@@ -2,13 +2,13 @@ package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.LogRepository;
-import at.qe.skeleton.repositories.PlantRepository;
 import at.qe.skeleton.repositories.UserxRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,12 +25,10 @@ import org.springframework.stereotype.Service;
 @Scope("application")
 public class UserService {
 
+
     @Autowired
     private UserxRepository userRepository;
 
-
-    @Autowired
-    private PlantRepository plantRepository;
 
     /**
      The LogRepository is used to save logs for user interactions.
@@ -160,14 +158,12 @@ public class UserService {
         return userRepository.findFirstByUsername(auth.getName());
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void addPlantToFollowedPlants(Userx user, Plant plant) {
         if(user == null || plant == null || plant.getFollowers().contains(user)) {return;}
-        System.out.println(""+plant.getPlantID() + user );
+        user = userRepository.findFirstByUsername(user.getUsername());
         user.getFollowedPlants().add(plant);
         plant.getFollowers().add(user);
         userRepository.save(user);
-        plantRepository.save(plant);
     }
 
 
