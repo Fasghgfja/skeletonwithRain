@@ -1,6 +1,7 @@
 package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Plant;
+import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.PlantRepository;
 import jakarta.persistence.EntityManager;
@@ -89,6 +90,10 @@ public class PlantService {
     @PreAuthorize("hasAuthority('ADMIN')")
     public Integer getPlantsAmount() {
         return plantRepository.findAll().stream().toList().size();
+    }
+
+    public Collection<Plant> getFollowedPlants(Userx user) {
+        return plantRepository.findPlantsByFollowers(user);
     }
 
     //TODO:find plant by gardener

@@ -1,6 +1,7 @@
 package at.qe.skeleton.repositories;
 
 import at.qe.skeleton.model.Plant;
+import at.qe.skeleton.model.Userx;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
 
@@ -42,6 +43,8 @@ public interface PlantRepository extends AbstractRepository<Plant, Long> {
      * @throws IllegalArgumentException If deckName is {@literal null}.
      */
     List<Plant> findByPlantNameContaining(String plantName);
+
+    List<Plant> findPlantsByFollowers(Userx user);
 
 
 }
