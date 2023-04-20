@@ -68,14 +68,12 @@ public class CreateUserBean implements Serializable {
             if(x.equals("ADMIN")) {
                 roles.add(UserRole.ADMIN);
                 roles.add(UserRole.GARDENER);
-                roles.add(UserRole.USER);
+
             } else if(x.equals("GARDENER")) {
-                roles.add(UserRole.USER);
                 roles.add(UserRole.GARDENER);
-            } else{
-                roles.add(UserRole.USER);
             }
         });
+        roles.add(UserRole.USER);
         user.setRoles(roles);
 
         if (userxRepository.findFirstByUsername(user.getUsername()) != null){
@@ -88,7 +86,6 @@ public class CreateUserBean implements Serializable {
             creationFailLog.setType(LogType.WARNING);
             logRepository.save(creationFailLog);
         } else {
-
             Log createLog = new Log();
             createLog.setDate(LocalDate.now());
             createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
