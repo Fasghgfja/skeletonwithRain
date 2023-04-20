@@ -1,9 +1,6 @@
 package at.qe.skeleton;
 
-import at.qe.skeleton.services.ImageService;
 import jakarta.faces.webapp.FacesServlet;
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -22,7 +19,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
  * course "Software Engineering" offered by the University of Innsbruck.
  */
 @SpringBootApplication
-@EnableMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity()
 /*
  * Prevent spring from trying to autowire the websocket-infrastructure: Exclude
  * the at.qe.skeleton.ui.websockets package from component scan.
