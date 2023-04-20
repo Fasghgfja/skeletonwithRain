@@ -67,17 +67,14 @@ public class UserDetailController implements Serializable {
      */
     public void doSaveUser() {
         Set<UserRole> roles = new HashSet<>();
+        roles.add(UserRole.USER);
         if (selectedRolesEdit != null) {
             for (String role : selectedRolesEdit) {
                 if (role.equals("ADMIN")) {
                     roles.add(UserRole.ADMIN);
                     roles.add(UserRole.GARDENER);
-                    roles.add(UserRole.USER);
                 } else if (role.equals("GARDENER")) {
                     roles.add(UserRole.GARDENER);
-                    roles.add(UserRole.USER);
-                } else{
-                    roles.add(UserRole.USER);
                 }
             }
         }
