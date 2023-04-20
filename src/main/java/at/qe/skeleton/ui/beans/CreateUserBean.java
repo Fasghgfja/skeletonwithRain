@@ -10,7 +10,6 @@ import at.qe.skeleton.repositories.UserxRepository;
 import at.qe.skeleton.services.UserService;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;

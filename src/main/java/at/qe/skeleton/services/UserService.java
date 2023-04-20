@@ -87,55 +87,6 @@ public class UserService {
     }
 
     /**
-     * Creates a new user with the input values given in the popup and also logs this creation.
-     * If the entered username is already taken, a warning will be logged and the user will not be created.
-     * @param username
-     * @param password
-     * @param firstName
-     * @param lastName
-     * @param email
-     * @param phone
-     * @param roles
-     * @return
-     */
-
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public Userx createUser(String username, String password, String firstName, String lastName, String email, String phone, Set<UserRole> roles) {
-        Userx userToBeCreated = new Userx();
-        userToBeCreated.setUsername(username);
-        userToBeCreated.setPassword(password);
-        userToBeCreated.setFirstName(firstName);
-        userToBeCreated.setLastName(lastName);
-        userToBeCreated.setEmail(email);
-        userToBeCreated.setPhone(phone);
-        userToBeCreated.setRoles(roles);
-
-        if (userRepository.findFirstByUsername(username) != null){
-            Log creationFailLog = new Log();
-            creationFailLog.setDate(LocalDate.now());
-            creationFailLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-            creationFailLog.setAuthor(getAuthenticatedUser().getUsername());
-            creationFailLog.setSubject("USER CREATION FAILED");
-            creationFailLog.setText("ENTERED USERNAME ALREADY TAKEN: " + userToBeCreated.getUsername());
-            creationFailLog.setType(LogType.WARNING);
-            logRepository.save(creationFailLog);
-            return userToBeCreated;
-        }
-
-        saveUser(userToBeCreated);
-
-        Log createLog = new Log();
-        createLog.setDate(LocalDate.now());
-        createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-        createLog.setAuthor(getAuthenticatedUser().getUsername());
-        createLog.setSubject("USER CREATION");
-        createLog.setText("CREATED USER: " + userToBeCreated.getUsername());
-        createLog.setType(LogType.SUCCESS);
-        logRepository.save(createLog);
-
-        return userToBeCreated;
-    }
-    /**
      Deletes a user from the database and logs the deletion.
      The user to be deleted is passed as a parameter to the method. A Log object is created to record the deletion and saved to the
      LogRepository. The Userx object is then deleted from the UserxRepository.

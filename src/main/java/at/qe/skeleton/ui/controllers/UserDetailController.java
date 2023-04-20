@@ -27,7 +27,7 @@ import java.util.*;
 @Getter
 @Setter
 @Component
-@Scope("request")
+@Scope("view")
 public class UserDetailController implements Serializable {
 
     @Autowired
