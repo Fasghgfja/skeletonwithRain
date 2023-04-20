@@ -1,9 +1,7 @@
 package at.qe.skeleton.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.*;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
