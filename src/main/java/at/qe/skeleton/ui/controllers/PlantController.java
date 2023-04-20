@@ -3,7 +3,9 @@ import at.qe.skeleton.model.Plant;
 import java.io.Serializable;
 import java.util.Collection;
 
+import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.services.PlantService;
+import at.qe.skeleton.ui.beans.SessionInfoBean;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ import org.springframework.stereotype.Component;
 public class PlantController implements Serializable{
     @Autowired
     private PlantService plantService;
+
+    @Autowired
+    private SessionInfoBean sessionInfoBean;
 
     private Collection<Plant> filteredPlants;
 
@@ -32,6 +37,12 @@ public class PlantController implements Serializable{
      */
     public Integer getPlantsAmount() {
         return plantService.getPlantsAmount();
+    }
+
+    public Collection<Plant> doGetOnlyPlantsNotYetFollowed() {
+        Userx user = sessionInfoBean.getCurrentUser();
+        return this.plantService.getOnlyPlantsNotYetFollowed(user);
+
     }
 
 }

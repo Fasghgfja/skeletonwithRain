@@ -16,7 +16,7 @@
 
                 <div class="card">
                     <h5>Plants</h5>
-                    <p:dataTable id="plantsTable" var="plant" value="#{plantController.plants}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
+                    <p:dataTable id="plantsTable" var="plant" value="#{plantController.doGetOnlyPlantsNotYetFollowed()}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 
                         <p:column >
