@@ -173,5 +173,12 @@ public class UserService {
     }
 
 
+    public void removePlantToFollowedPlants(Userx user, Plant plant) {
+        if(user == null || plant == null) {return;}
+        user = userRepository.findFirstByUsername(user.getUsername());
+        user.getFollowedPlants().remove(plant);
+        plant.getFollowers().remove(user);
+        userRepository.save(user);
+    }
 }
 
