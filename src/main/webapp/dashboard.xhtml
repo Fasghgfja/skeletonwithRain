@@ -5,6 +5,7 @@
 
     <ui:define name="title">Dashboard</ui:define>
     <ui:define name="head">
+        <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css" />
         <h:outputScript name="js/chart.js"/>
         <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
     </ui:define>
@@ -127,13 +128,14 @@
                                     </h:outputText>
                                 </p:column>
 
+
                                 <p:column headerText="Status">
-                                    <p:button icon="pi pi-circle-on" style="color:#{sensorStationDetailController.getlastAirPressureMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" />
-                                    <p:button icon="pi pi-circle-on" style="color:#{sensorStationDetailController.getlastTemperatureMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" />
-                                    <p:button icon="pi pi-circle-on" style="color:#{sensorStationDetailController.getlastSoilMoistureMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" />
-                                    <p:button icon="pi pi-circle-on" style="color:#{sensorStationDetailController.getlastAirQualityMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" />
-                                    <p:button icon="pi pi-circle-on" style="color:#{sensorStationDetailController.getlastLightIntensityMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" />
-                                    <p:button icon="pi pi-circle-on" style="color:#{sensorStationDetailController.getlastHumidityMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" />
+                                    <p:button icon="fa-sharp fa-solid fa-arrows-to-circle" style="color:#{sensorStationDetailController.getlastAirPressureMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" title="Air Pressure"/>
+                                    <p:button icon="fa-solid fa-temperature-high" style="color:#{sensorStationDetailController.getlastTemperatureMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" title="Temperature" />
+                                    <p:button icon="fa-solid fa-water" style="color:#{sensorStationDetailController.getlastSoilMoistureMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" title="Soil Moisture" />
+                                    <p:button icon="fa-solid fa-wind" style="color:#{sensorStationDetailController.getlastAirQualityMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" title="Air Quality" />
+                                    <p:button icon="fa-solid fa-sun" style="color:#{sensorStationDetailController.getlastLightIntensityMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" title="Light Intensity" />
+                                    <p:button icon="fa-solid fa-droplet" style="color:#{sensorStationDetailController.getlastHumidityMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" title="Humidity" />
                                 </p:column>
 
                                  <p:column style="width: 3.5rem">
