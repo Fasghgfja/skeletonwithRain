@@ -15,38 +15,29 @@ import at.qe.skeleton.api.services.MeasurementService;
 
 @RestController
 public class MeasurementController {
-    /**
 
 
+    @Autowired
+    MeasurementService measurementService;
 
-     @Autowired
-     MeasurementService measurementService;
+    @PostMapping("/api/measurements")
+    Measurement createMeasurement(@RequestBody Measurement measurement) {
+        return measurementService.addMeasurement(measurement);
+    }
 
-     @PostMapping("/api/measurements")
-     Measurement createMeasurement(@RequestBody Measurement measurement)
-     {
-     return measurementService.addMeasurement(measurement);
-     }
+    @GetMapping("/api/measurements/{id}")
+    Measurement getOneMeasurement(@PathVariable Long id) {
+        try {
+            return measurementService.findOneMeasurement(id);
+        } catch (MeasurementNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
 
-     @GetMapping("/api/measurements/{id}")
-     Measurement getOneMeasurement(@PathVariable Long id)
-     {
-     try
-     {
-     return measurementService.findOneMeasurement(id);
-     }
-     catch(MeasurementNotFoundException ex)
-     {
-     throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-     }
-     }
-
-     @PatchMapping("/api/measurements/{id}")
-     Measurement updateMeasurement(@PathVariable long id, @RequestBody Measurement measurement)
-     {
-     return measurementService.updateMeasurement(id, measurement);
-     }
-     */
+    @PatchMapping("/api/measurements/{id}")
+    Measurement updateMeasurement(@PathVariable long id, @RequestBody Measurement measurement) {
+        return measurementService.updateMeasurement(id, measurement);
+    }
 
 
 }
