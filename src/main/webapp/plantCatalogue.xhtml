@@ -27,8 +27,8 @@
                             <h:outputText value="$#{plant.plantName}"/>
                         </p:column>
 
-                        <p:column headerText="Planted Date" sortBy="#{plant.createDate}">
-                            <h:outputText value="#{plant.createDate}"/>
+                        <p:column headerText="Planted Date" sortBy="#{plant.plantedDate}">
+                            <h:outputText value="#{plant.plantedDate}"/>
                         </p:column>
 
                         <p:column headerText="Description" sortBy="#{plant.description}">
@@ -38,7 +38,7 @@
                         <p:column style="width: 3.5rem">
 
                             <p:commandButton icon="pi pi-plus"
-                                      title="Add Plant to Dashboard"
+                                      title="Follow Plant"
                                              update=":userForm:plantsTable">
                                 <p:ajax event="click" listener="#{userDetailController.doAddPlantToFollowedPlants(plant)}"/>
                             </p:commandButton>
