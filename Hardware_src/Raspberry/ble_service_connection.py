@@ -3,6 +3,7 @@
 import struct
 import asyncio
 import time
+import rest_api
 
 
 from bleak import BleakClient, BleakScanner
@@ -132,11 +133,10 @@ def logConnectionException():
 
 repeat = 0
 while repeat < 100:
-    if asyncio.run(readSensorData()) == 1:
-        logConnectionException()
     time.sleep(5)
     checkBoarderValues()
     time.sleep(5)
     repeat += 1
+    rest_api.writeValueToWebApp()
     print(repeat)
 
