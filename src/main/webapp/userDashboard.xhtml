@@ -17,7 +17,7 @@
             <div class="col-12">
 
                 <div class="card">
-                    <h5>Greenhouses</h5>
+                    <h5>Followed plants</h5>
                     <p:dataTable id="plantsTable" var="plant" value="#{plantController.doGetFollowedPlants()}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
                         <p:ajax event="rowToggle" listener="#{sensorStationDetailController.onRowToggle}" />
@@ -31,13 +31,32 @@
                             <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
                         </p:column>
 
-                        <p:column headerText="Plant" sortBy="#{sensorStation.plant}">
-                            <h:outputText value="$#{sensorStation.plant}"/>
+                        <p:column headerText="Plant" sortBy="#{plant.plantName}">
+                            <h:outputText value="$#{plant.plantName}"/>
                         </p:column>
 
-                        <p:column headerText="Planted" sortBy="#{sensorStation.createDate}">
-                            <h:outputText value="#{product.category}"/>
+                        <p:column headerText="Planted Date" sortBy="#{plant.plantedDate}">
+                            <h:outputText value="#{plant.plantedDate}"/>
                         </p:column>
+
+                        <p:column headerText="Description" sortBy="#{plant.description}">
+                            <h:outputText value="#{plant.description}"/>
+                        </p:column>
+
+                        <p:column style="width: 3.5rem">
+
+                            <p:commandButton style="border-color: red; background-color: red"
+                                             icon="pi pi-minus"
+                                             title="Unfollow Plant"
+                                             update=":userForm:plantsTable">
+                                <p:ajax event="click" listener="#{userDetailController.doRemovePlantToFollowedPlants(plant)}"/>
+                            </p:commandButton>
+
+
+
+
+                        </p:column>
+
 
 
                         <!-- .........................................ROW EXPANSION.......................................................... -->
