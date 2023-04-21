@@ -130,12 +130,24 @@
 
 
                                 <p:column headerText="Status">
-                                    <i class="fa-sharp fa-solid fa-arrows-to-circle fa-lg" style="color:#{sensorStationDetailController.getlastAirPressureMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" title="Air Pressure"></i>
-                                    <i class="fa-solid fa-temperature-high fa-lg" style="color:#{sensorStationDetailController.getlastTemperatureMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" title="Temperature"></i>
-                                    <i class="fa-solid fa-water fa-lg" style="color:#{sensorStationDetailController.getlastSoilMoistureMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" title="Soil Moisture"></i>
-                                    <i class="fa-solid fa-wind fa-lg" style="color:#{sensorStationDetailController.getlastAirQualityMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" title="Air Quality"></i>
-                                    <i class="fa-solid fa-sun fa-lg" style="color:#{sensorStationDetailController.getlastLightIntensityMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" title="Light Intensity"></i>
-                                    <i class="fa-solid fa-droplet fa-lg" style="color:#{sensorStationDetailController.getlastHumidityMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" title="Humidity"></i>
+                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_PRESSURE')}"
+                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_PRESSURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                       title="Air Pressure"></i>
+                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('TEMPERATURE')}"
+                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('TEMPERATURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                       title="Temperature"></i>
+                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('SOIL_MOISTURE')}"
+                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('SOIL_MOISTURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                       title="Soil Moisture"></i>
+                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_QUALITY')}"
+                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_QUALITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                       title="Air Quality"></i>
+                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('LIGHT_INTENSITY')}"
+                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('LIGHT_INTENSITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                       title="Light Intensity"></i>
+                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('HUMIDITY')}"
+                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('HUMIDITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                       title="Humidity"></i>
                                 </p:column>
 
                                  <p:column style="width: 3.5rem">

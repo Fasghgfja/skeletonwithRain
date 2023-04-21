@@ -1,22 +1,24 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui" xmlns:po="http://primefaces.org/rain" template="/WEB-INF/templates/main.xhtml">
+                xmlns:p="http://primefaces.org/ui" xmlns:po="http://primefaces.org/rain"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/WEB-INF/templates/main.xhtml">
 
     <f:metadata>
-        <f:event type="preRenderView" listener="#{sensorStationDetailController.init}" />
+        <f:event type="preRenderView" listener="#{sensorStationDetailController.init}"/>
     </f:metadata>
 
     <ui:define name="title">GREENHOUSE DETAILS</ui:define>
     <ui:define name="viewname">
     </ui:define>
     <ui:define name="head">
-        <h:outputScript name="js/chart.js" />
+        <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css"/>
+        <h:outputScript name="js/chart.js"/>
         <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
 
     </ui:define>
 
     <ui:define name="content">
-
 
 
         <!-- ..........................................TOP INFO BOXES................................................................... -->
@@ -30,67 +32,69 @@
 
                             <div class="card  overview-box">
 
-                            <p:graphicImage name="images/dashboard/effect-useronline.svg"  />
-                            <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-usersonline.png"  />
+                                <p:graphicImage name="images/dashboard/effect-useronline.svg"/>
+                                <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-usersonline.png"/>
                         </span>
-                            <div class="overview">
-                                <span class="overview-title">TEMPERATURE</span>
-                                <h3>query</h3>
-                                <span><span>72</span> new measurements since last visit</span>
+                                <div class="overview">
+                                    <span class="overview-title">TEMPERATURE</span>
+                                    <h3>query</h3>
+                                    <span><span>72</span> new measurements since last visit</span>
+                                </div>
                             </div>
-                        </div>
                         </p:commandLink>
                     </div>
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................AIR HUMIDITY BOX........................................ -->
                         <p:commandLink action="#{measurementListController.onAirHumidityClick()}" update="myDataTable1">
-                        <div class="card overview-box">
-                            <p:graphicImage name="images/dashboard/effect-checkins.svg"  />
-                            <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-checkins.png"  />
+                            <div class="card overview-box">
+                                <p:graphicImage name="images/dashboard/effect-checkins.svg"/>
+                                <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-checkins.png"/>
                         </span>
-                            <div class="overview">
-                                <span class="overview-title">AIR HUMIDITY</span>
-                                <h3>532</h3>
-                                <span><span>48</span> new city since last visit</span>
+                                <div class="overview">
+                                    <span class="overview-title">AIR HUMIDITY</span>
+                                    <h3>532</h3>
+                                    <span><span>48</span> new city since last visit</span>
+                                </div>
                             </div>
-                        </div>
                         </p:commandLink>
                     </div>
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................GROUND HUMIDITY BOX........................................ -->
-                        <p:commandLink action="#{measurementListController.onGroundHumidityClick()}" update="myDataTable1">
-                        <div class="card overview-box ">
-                            <p:graphicImage name="images/dashboard/effect-filessynced.svg"  />
-                            <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-filessynced.png"  />
+                        <p:commandLink action="#{measurementListController.onGroundHumidityClick()}"
+                                       update="myDataTable1">
+                            <div class="card overview-box ">
+                                <p:graphicImage name="images/dashboard/effect-filessynced.svg"/>
+                                <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-filessynced.png"/>
                         </span>
-                            <div class="overview">
-                                <span class="overview-title">GROUND HUMIDITY</span>
-                                <h3>12.6%</h3>
-                                <span><span>1.8%</span> increase since last visit</span>
+                                <div class="overview">
+                                    <span class="overview-title">GROUND HUMIDITY</span>
+                                    <h3>12.6%</h3>
+                                    <span><span>1.8%</span> increase since last visit</span>
+                                </div>
                             </div>
-                        </div>
                         </p:commandLink>
                     </div>
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................LIGHT INTENSITY BOX........................................ -->
-                        <p:commandLink action="#{measurementListController.onLightIntensityClick()}" update="myDataTable1">
-                        <div class="card overview-box">
-                            <p:graphicImage name="images/dashboard/effect-messages.svg"  />
-                            <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-messages.png"  />
+                        <p:commandLink action="#{measurementListController.onLightIntensityClick()}"
+                                       update="myDataTable1">
+                            <div class="card overview-box">
+                                <p:graphicImage name="images/dashboard/effect-messages.svg"/>
+                                <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-messages.png"/>
                         </span>
-                            <div class="overview">
-                                <span class="overview-title">LIGHT INTENSITY</span>
-                                <h3>440</h3>
-                                <span><span>24</span> new since last visit</span>
+                                <div class="overview">
+                                    <span class="overview-title">LIGHT INTENSITY</span>
+                                    <h3>440</h3>
+                                    <span><span>24</span> new since last visit</span>
+                                </div>
                             </div>
-                        </div>
                         </p:commandLink>
                     </div>
 
@@ -99,15 +103,15 @@
                 <!-- ........................................PLANT GALLERY LINK BOX............................................... -->
                 <p:toolbarGroup>
                             <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-messages.png"  />
+                            <p:graphicImage name="images/dashboard/icon-messages.png"/>
                         </span>
-                            <div class="overview">
-                                <h:link id="galleryRedirect" outcome="/dashboard">
-                                <span class="overview-title">   GALLERY</span>
-                                <h3>CLICK TO VISIT</h3>
-                                <span><span>24</span> new since last visit</span>
-                                </h:link>
-                            </div>
+                    <div class="overview">
+                        <h:link id="galleryRedirect" outcome="/dashboard">
+                            <span class="overview-title">   GALLERY</span>
+                            <h3>CLICK TO VISIT</h3>
+                            <span><span>24</span> new since last visit</span>
+                        </h:link>
+                    </div>
                 </p:toolbarGroup>
 
                 <p:toolbarGroup>
@@ -115,17 +119,17 @@
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................AIR PRESSURE BOX........................................ -->
                         <p:commandLink action="#{measurementListController.onAirPressureClick()}" update="myDataTable1">
-                        <div class="card  overview-box">
-                            <p:graphicImage name="images/dashboard/effect-useronline.svg"  />
-                            <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-usersonline.png"  />
+                            <div class="card  overview-box">
+                                <p:graphicImage name="images/dashboard/effect-useronline.svg"/>
+                                <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-usersonline.png"/>
                         </span>
-                            <div class="overview">
-                                <span class="overview-title">AIR PRESSURE</span>
-                                <h3>queue</h3>
-                                <span><span>72</span> new users since last visit</span>
+                                <div class="overview">
+                                    <span class="overview-title">AIR PRESSURE</span>
+                                    <h3>queue</h3>
+                                    <span><span>72</span> new users since last visit</span>
+                                </div>
                             </div>
-                        </div>
                         </p:commandLink>
                     </div>
 
@@ -133,25 +137,25 @@
                         <!-- ...............................AIR QUALITY BOX........................................ -->
                         <p:commandLink action="#{measurementListController.onAirQualityClick()}" update="myDataTable1">
                             <div class="card overview-box">
-                            <p:graphicImage name="images/dashboard/effect-checkins.svg"  />
-                            <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-checkins.png"  />
+                                <p:graphicImage name="images/dashboard/effect-checkins.svg"/>
+                                <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-checkins.png"/>
                         </span>
-                            <div class="overview">
-                                <span class="overview-title">AIR QUALITY</span>
-                                <h3>532</h3>
-                                <span><span>48</span> new city since last visit</span>
+                                <div class="overview">
+                                    <span class="overview-title">AIR QUALITY</span>
+                                    <h3>532</h3>
+                                    <span><span>48</span> new city since last visit</span>
+                                </div>
                             </div>
-                        </div>
                         </p:commandLink>
                     </div>
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................ASSIGNED GARDENER BOX........................................ -->
                         <div class="card overview-box ">
-                            <p:graphicImage name="images/dashboard/effect-filessynced.svg"  />
+                            <p:graphicImage name="images/dashboard/effect-filessynced.svg"/>
                             <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-filessynced.png"  />
+                            <p:graphicImage name="images/dashboard/icon-filessynced.png"/>
                         </span>
                             <div class="overview">
                                 <span class="overview-title">ASSIGNED GARDENER</span>
@@ -164,17 +168,17 @@
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................TIME OF LAST MEASUREMENT BOX.................................... -->
                         <p:commandLink action="#{measurementListController.reSetType()}" update="myDataTable1">
-                        <div class="card overview-box">
-                            <p:graphicImage name="images/dashboard/effect-messages.svg"  />
-                            <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-messages.png"  />
+                            <div class="card overview-box">
+                                <p:graphicImage name="images/dashboard/effect-messages.svg"/>
+                                <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-messages.png"/>
                         </span>
-                            <div class="overview">
-                                <span class="overview-title">MOST RECENT MEASUREMENT</span>
-                                <h3>440</h3>
-                                <span><span>24</span> new since last visit</span>
+                                <div class="overview">
+                                    <span class="overview-title">MOST RECENT MEASUREMENT</span>
+                                    <h3>440</h3>
+                                    <span><span>24</span> new since last visit</span>
+                                </div>
                             </div>
-                        </div>
                         </p:commandLink>
                     </div>
 
@@ -184,41 +188,37 @@
         </h:form>
 
 
-
-
-
-
         <!-- ..........................................PAGE................................................................... -->
         <div class="layout-dashboard">
             <div class="grid">
 
-                            <!-- ..........................................GRAPH................................................................... -->
-                            <div class="col-12 md:col-12 xl:col-6">
-                                <div class="card chart">
-                                    <div class="card-header">
-                                        <h5>Selected Measurement type History Graph</h5>
-                                    </div>
-                                    <div class="card">
-                                        <p:lineChart id="mylineChart" model="#{graphController.lineModel}" />
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ...................simply modify the graph controller do display different data................... -->
-                            <!-- ...................supported charts are .lineModel and .cartesianLinearModel................... -->
+                <!-- ..........................................GRAPH................................................................... -->
+                <div class="col-12 md:col-12 xl:col-6">
+                    <div class="card chart">
+                        <div class="card-header">
+                            <h5>Selected Measurement type History Graph</h5>
+                        </div>
+                        <div class="card">
+                            <p:lineChart id="mylineChart" model="#{graphController.lineModel}"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- ...................simply modify the graph controller do display different data................... -->
+                <!-- ...................supported charts are .lineModel and .cartesianLinearModel................... -->
 
 
-
-
-
-                    <!-- .........................................MEASUREMENTS TABLE...................................................... -->
+                <!-- .........................................MEASUREMENTS TABLE...................................................... -->
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="card products">
-                        <p:dataTable id="myDataTable1" widgetVar="customersDT2" var="measurement" value="#{measurementListController.getMeasurementsForSensorStation()}" selectionMode="single" reflow="true"
+                        <p:dataTable id="myDataTable1" widgetVar="customersDT2" var="measurement"
+                                     value="#{measurementListController.getMeasurementsForSensorStation()}"
+                                     selectionMode="single" reflow="true"
                                      rowKey="#{measurement.sensorStation.id}" scrollable="true" scrollHeight="350"
                                      styleClass="ui-datatable-striped ui-datatable-sm ui-datatable-gridlines">
 
                             <!-- ........THIS CAN BE ADDED TO ANY INTERACTIVE ELEMENT TO REFRESH SOMETHING............ -->
-                            <p:ajax event="rowSelect" update="mylineChart" listener="#{graphController.onRowSelectLineChart}" />
+                            <p:ajax event="rowSelect" update="mylineChart"
+                                    listener="#{graphController.onRowSelectLineChart}"/>
 
                             <f:facet name="header">
                                 <div class="customers-table-header">
@@ -226,34 +226,40 @@
 
                                     <span class="ui-input-icon-left filter-container">
                                         <i class="pi pi-search"/>
-                                        <p:inputText id="globalFilter" onkeyup="PF('customersDT2').filter()" placeholder="Search"/>
+                                        <p:inputText id="globalFilter" onkeyup="PF('customersDT2').filter()"
+                                                     placeholder="Search"/>
                                     </span>
                                 </div>
                             </f:facet>
-                            <p:column headerText="Sensor Station" sortBy="#{measurement.sensorStation.id}" filterBy="#{measurement.sensorStation.id}">
-                                <h:outputText value="#{measurement.sensorStation.id}" />
+                            <p:column headerText="Sensor Station" sortBy="#{measurement.sensorStation.id}"
+                                      filterBy="#{measurement.sensorStation.id}">
+                                <h:outputText value="#{measurement.sensorStation.id}"/>
                             </p:column>
-                            <p:column headerText="Plant" sortBy="#{measurement.plant.plantName}" filterBy="#{measurement.plant.plantName}">
-                                <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{measurement.plant.plantName}" />
+                            <p:column headerText="Plant" sortBy="#{measurement.plant.plantName}"
+                                      filterBy="#{measurement.plant.plantName}">
+                                <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                              value="#{measurement.plant.plantName}"/>
                             </p:column>
-                            <p:column headerText="Measurement" sortBy="#{measurement.value_s}" filterBy="#{measurement.value_s}">
-                                <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{measurement.value_s} #{measurement.unit}" />
+                            <p:column headerText="Measurement" sortBy="#{measurement.value_s}"
+                                      filterBy="#{measurement.value_s}">
+                                <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                              value="#{measurement.value_s} #{measurement.unit}"/>
                             </p:column>
-                            <p:column headerText="Date" sortBy="#{measurement.timestamp}" filterBy="#{measurement.timestamp}">
-                                <h:outputText value="#{measurement.timestamp}" />
+                            <p:column headerText="Date" sortBy="#{measurement.timestamp}"
+                                      filterBy="#{measurement.timestamp}">
+                                <h:outputText value="#{measurement.timestamp}"/>
                             </p:column>
-                            <p:column headerText="Status" sortBy="#{customer.status}" filterBy="#{customer.status}">
-                                <span class="customer-badge status-#{customer.status.name().toLowerCase()}">#{customer.status}</span>
+                            <p:column headerText="Status">
+                                <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon(measurement.type)}"
+                                   style="display: flex; justify-content: center; align-items: center; color:#{sensorStationDetailController.getMeasurementStatus(measurement.id,measurement.type) == 'OK' ? 'green' : 'red'}"
+                                   title="#{measurement.type}"></i>
                             </p:column>
                             <p:column headerText="Type" sortBy="#{measurement.type}">
-                                <h:outputText value="#{measurement.type}" />
+                                <h:outputText value="#{measurement.type}"/>
                             </p:column>
                         </p:dataTable>
                     </div>
                 </div>
-
-
-
 
 
                 <!-- .........................................GARDENER ONLY TASK PANEL................................................................... -->
@@ -332,9 +338,6 @@
                 </div>
 
 
-
-
-
                 <!-- .........................................Free EXTRA PANEL FOR ADMINS OR GARDENERS.............................................................. -->
 
                 <div class="col-12 md:col-12 xl:col-8">
@@ -342,24 +345,28 @@
                         <div class="card-header">
                             <h5>Free extra panel for staff or gardeners</h5>
                             <div class="header-buttons">
-                                <p:commandButton type="button" icon="pi pi-search" styleClass="ui-button-secondary outlined-button  mr-2"/>
-                                <p:commandButton type="button" icon="pi pi-ellipsis-v"  styleClass="ui-button-secondary outlined-button " />
+                                <p:commandButton type="button" icon="pi pi-search"
+                                                 styleClass="ui-button-secondary outlined-button  mr-2"/>
+                                <p:commandButton type="button" icon="pi pi-ellipsis-v"
+                                                 styleClass="ui-button-secondary outlined-button "/>
                             </div>
                         </div>
                         <h:form id="form">
-                            <p:dataTable id="ordersTable" var="order" value="#{dashboardView.orders}" selectionMode="single" reflow="true" paginatorPosition="bottom"
-                                         rowKey="#{order.id}" paginator="true" rows="5" sortBy="#{order.date}" sortOrder="descending" >
+                            <p:dataTable id="ordersTable" var="order" value="#{dashboardView.orders}"
+                                         selectionMode="single" reflow="true" paginatorPosition="bottom"
+                                         rowKey="#{order.id}" paginator="true" rows="5" sortBy="#{order.date}"
+                                         sortOrder="descending">
                                 <p:column headerText="Id" sortBy="#{order.id}">
-                                    <h:outputText value="#{order.id}" />
+                                    <h:outputText value="#{order.id}"/>
                                 </p:column>
 
                                 <p:column headerText="Date" sortBy="#{order.date}">
-                                    <h:outputText value="#{order.date}" />
+                                    <h:outputText value="#{order.date}"/>
                                 </p:column>
 
                                 <p:column headerText="Amount" sortBy="#{order.amount}">
                                     <h:outputText value="#{order.amount}">
-                                        <f:convertNumber currencySymbol="$" type="currency" />
+                                        <f:convertNumber currencySymbol="$" type="currency"/>
                                     </h:outputText>
                                 </p:column>
 
@@ -368,15 +375,12 @@
                                 </p:column>
 
                                 <p:column style="width: 3.5rem">
-                                    <p:commandButton icon="pi pi-search" />
+                                    <p:commandButton icon="pi pi-search"/>
                                 </p:column>
                             </p:dataTable>
                         </h:form>
                     </div>
                 </div>
-
-
-
 
 
             </div>

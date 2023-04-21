@@ -75,41 +75,37 @@ public class SensorStationDetailController implements Serializable {
     private AbstractRepository measurementRepository;
 
 
-    public String getlastTemperatureMeasurementStatus(Long sensorStationId) {
-        String type = "TEMPERATURE";
+
+    public String getMeasurementStatus(String measurementId,String type) {
+        Measurement thisMeasurement = measurementService.findMeasurementById(Long.parseLong(measurementId));
+        if (thisMeasurement == null) {return "OK";}
+        if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
+    }
+
+
+    public String getlastMeasurementStatus(String type,Long sensorStationId) {
         Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
         if (thisMeasurement == null) {return "OK";}
         if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
     }
-    public String getlastLightIntensityMeasurementStatus(Long sensorStationId) {
-        String type = "LIGHT_INTENSITY";
-        Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
-        if (thisMeasurement == null) {return "OK";}
-        if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
-    }
-    public String getlastSoilMoistureMeasurementStatus(Long sensorStationId) {
-        String type = "SOIL_MOISTURE";
-        Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
-        if (thisMeasurement == null) {return "OK";}
-        if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
-    }
-    public String getlastAirQualityMeasurementStatus(Long sensorStationId) {
-        String type = "AIR_QUALITY";
-        Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
-        if (thisMeasurement == null) {return "OK";}
-        if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
-    }
-    public String getlastAirPressureMeasurementStatus(Long sensorStationId) {
-        String type = "AIR_PRESSURE";
-        Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
-        if (thisMeasurement == null) {return "OK";}
-        if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
-    }
-    public String getlastHumidityMeasurementStatus(Long sensorStationId) {
-        String type = "HUMIDITY";
-        Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
-        if (thisMeasurement == null) {return "OK";}
-        if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
+
+    public String getlastMeasurementStatusIcon(String type) {
+        switch(type) {
+            case "HUMIDITY":
+                return "fa-solid fa-droplet fa-lg";
+            case "TEMPERATURE":
+                return "fa-solid fa-thermometer-three-quarters fa-lg";
+            case "AIR_PRESSURE":
+                return "fa-sharp fa-solid fa-arrows-to-circle fa-lg";
+            case "LIGHT_INTENSITY":
+                return "fa-solid fa-sun fa-lg";
+            case "SOIL_MOISTURE":
+                return "fa-solid fa-water fa-lg";
+            case "AIR_QUALITY":
+                return "fa-solid fa-wind fa-lg";
+            default:
+                return "";
+        }
     }
 
     private int checkThreshold(Measurement measurement, String type) {
