@@ -33,3 +33,13 @@ Description:	Environmental Sensing
 ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/16/23__10:29:38
 INFO: Disconnected at 04/16/23__10:29:38
 
+INFO: Started at 17:36:40
+ERROR: Could not find device with name G4T2 at 04/17/23__17:36:50
+INFO: Boarder values have been checked at 04/17/23__17:36:55
+ERROR: Could not find device with name G4T2 at 04/17/23__17:37:11
+INFO: Boarder values have been checked at 04/17/23__17:37:16
+ERROR: Could not find device with name G4T2 at 04/17/23__17:37:31
+INFO: Boarder values have been checked at 04/17/23__17:37:36
+ERROR: Could not find device with name G4T2 at 04/17/23__17:37:51
+INFO: Boarder values have been checked at 04/17/23__17:37:56
+ERROR: Could not find device with name G4T2 at 04/17/23__17:38:11
