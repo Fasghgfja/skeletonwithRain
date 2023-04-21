@@ -7,7 +7,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import at.qe.skeleton.api.exceptions.MeasurementNotFoundException;
+
+
 import at.qe.skeleton.model.Measurement;
+import at.qe.skeleton.api.model.Measurement2;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.repositories.MeasurementRepository;
@@ -37,15 +40,15 @@ public class MeasurementService {
     private static final ConcurrentHashMap<Long, Measurement> measurements = new ConcurrentHashMap<>();
 
 
-    public Measurement addMeasurement(Measurement measurement) {
-        Measurement newMeasurement = new Measurement();
-        newMeasurement.setId(ID_COUNTER.getAndIncrement());
-        newMeasurement.setPlant(measurement.getPlant());
-        newMeasurement.setUnit(measurement.getUnit());
-        newMeasurement.setValue_s(measurement.getValue_s());
-        newMeasurement.setType(measurement.getType());
+    public Measurement2 addMeasurement(Measurement2 measurement) {
+        Measurement2 newMeasurement = new Measurement2();
+        newMeasurement.setSensorStationName(measurement.getSensorStationName());
+        newMeasurement.setUuid(measurement.getUuid());
+        newMeasurement.setValue(measurement.getValue());
 
-        measurements.put(newMeasurement.getId(), newMeasurement);
+        //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
+
+        System.out.println(newMeasurement);
         return newMeasurement;
     }
 
