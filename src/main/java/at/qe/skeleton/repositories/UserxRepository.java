@@ -40,6 +40,12 @@ public interface UserxRepository extends AbstractRepository<Userx, String> {
      */
     List<Userx> findByUsernameContaining(String username);
 
+
+
+    Userx findFirstById(Long id);
+
+
+
     /**
      * The method Retrieves a List of User entities searching by a string containing both firstname and lastname separated
      * by a space.

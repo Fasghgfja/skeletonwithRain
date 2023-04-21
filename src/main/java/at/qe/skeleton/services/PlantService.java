@@ -90,6 +90,10 @@ public class PlantService {
         return plantRepository.findAll().stream().toList().size();
     }
 
+    public Collection<Plant> getFollowedPlants(Userx user) {
+        return plantRepository.findPlantsByFollowers(user);
+    }
+
     //TODO:find plant by gardener
 
     public Collection<Plant> getOnlyPlantsNotYetFollowed(Userx user) {

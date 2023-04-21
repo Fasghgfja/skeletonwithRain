@@ -45,4 +45,9 @@ public class PlantController implements Serializable{
 
     }
 
+    public Collection<Plant> doGetFollowedPlants() {
+        Userx user = sessionInfoBean.getCurrentUser();
+        return this.plantService.getFollowedPlants(user);
+
+    }
 }

@@ -61,6 +61,12 @@ public class UserService {
         return userRepository.findFirstByUsername(username);
     }
 
+
+    @PreAuthorize("hasAuthority('ADMIN') or principal.username eq #username")
+    public Userx loadUserById(String id) {
+        return userRepository.findFirstById(Long.parseLong(id));
+    }
+
     /**
      Saves a user to the database. If the user is new, his create date and user are set. If the
      user already exists, his update date and user are set instead.

@@ -45,6 +45,9 @@
                         </p:commandButton>
                     </p:column>
                 </p:dataTable>
+
+
+
                 <p:dialog header="Edit User" id="userEditDialog" widgetVar="userEditDialog" modal="true"
                           showEffect="fade" hideEffect="fade" resizable="false">
                     <p:outputPanel id="userData" rendered="#{not empty userDetailController.user}">
@@ -78,11 +81,17 @@
                         </h:panelGrid>
                     </p:outputPanel>
                 </p:dialog>
+
+
+
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
                     <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
                 </p:confirmDialog>
             </h:form>
+
+
+
             <h:form id="createDialog">
                 <p:commandButton value="Create new user" update=":createDialog:userCreationDialog" oncomplete="PF('userCreationDialog').show()"
                                  icon="pi pi-user-plus" title="New User" class="btn btn-primary">
