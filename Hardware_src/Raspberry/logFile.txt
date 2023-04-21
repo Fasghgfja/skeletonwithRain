@@ -1,0 +1,39 @@
+INFO: Connected to device G4T2 at 04/21/23__12:42:07
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/21/23__12:42:09
+INFO: Disconnected at 04/21/23__12:42:09
+
+INFO: Connected to device G4T2 at 04/21/23__12:42:24
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/21/23__12:42:25
+INFO: Disconnected at 04/21/23__12:42:25
+
+INFO: Boarder values have been checked at 04/21/23__12:42:33
+INFO: Connected to device G4T2 at 04/21/23__12:42:49
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/21/23__12:42:51
+INFO: Disconnected at 04/21/23__12:42:51
+
+INFO: Boarder values have been checked at 04/21/23__12:42:58
+ERROR: Could not find device with name G4T2 at 04/21/23__12:43:23
+INFO: Boarder values have been checked at 04/21/23__12:43:28
+INFO: Connected to device G4T2 at 04/21/23__12:43:45
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/21/23__12:43:47
+INFO: Disconnected at 04/21/23__12:43:47
+
+INFO: Boarder values have been checked at 04/21/23__12:43:54
+INFO: Connected to device G4T2 at 04/21/23__12:44:12
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/21/23__12:44:13
+INFO: Disconnected at 04/21/23__12:44:13
+
+INFO: Boarder values have been checked at 04/21/23__12:44:21
+INFO: Connected to device G4T2 at 04/21/23__12:44:37
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing

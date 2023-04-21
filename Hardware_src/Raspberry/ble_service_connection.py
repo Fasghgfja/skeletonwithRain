@@ -102,7 +102,7 @@ async def readSensorData(new_connection, device_list):
                     if service.uuid != "00001801-0000-1000-8000-00805f9b34fb":
                         file1 = open("logFile.txt", "a")
                         file1.write("INFO: Connected to device {0} at {1}\nSerivce uuid:\t{2}\nDescription:\t{3}\n"
-                                    .format(device_name, datetime.now().strftime("%D__%H:%M:%S"), service.uuid, service.description))
+                                    .format(deviceName, datetime.now().strftime("%D__%H:%M:%S"), service.uuid, service.description))
                         file1.close()
                         if new_connection:
                             insertNewSensorStationToDatabase(service.description, deviceName)
@@ -183,7 +183,7 @@ def insertNewSensorStationToDatabase(attribute, name):
         conn.commit()
         print("saved")
     except Exception as e:
-        print("Error")
+        logException(e, attribute)
 def insertNewSensorToDatabase(attribute, name, type, sensor_index):
     try:
         conn = sqlite3.connect('AccessPoint')
@@ -194,8 +194,7 @@ def insertNewSensorToDatabase(attribute, name, type, sensor_index):
         conn.commit()
         print("ok-----------------InsertSensor")
     except Exception as e:
-        print(e)
-        print("error")
+        logException(e, attribute.uuid)
 def readStationNamesDatabase():
     # TODO call in loob all sensorstation name
     try:
@@ -206,7 +205,7 @@ def readStationNamesDatabase():
         '''.format(device_name))
         return c
     except Exception as e:
-        print("Error-----------------------------")
+        logException(e, "SensorStation")
 
 def readSensorsDatabase(name):
     # TODO call in loob all sensorstation name
@@ -218,7 +217,7 @@ def readSensorsDatabase(name):
         '''.format(name))
         return c
     except Exception as e:
-        print("Error-----------------------------")
+        logException(e, "Sensor")
 
 if __name__ == '__main__':
     # TODO read config.yaml
@@ -243,7 +242,9 @@ if __name__ == '__main__':
                 time.sleep(10)
                 program_state = 2
             case 2:
-                asyncio.run(readSensorData(new_SensorStation, readStationNamesDatabase().fetchall()))
+                device_name = readStationNamesDatabase().fetchone()[0] # extract from [('G4T2',)]
+                print(" its the name {0}".format(device_name))
+                asyncio.run(readSensorData(new_SensorStation, [device_name]))
                 print("Read Sensor data")
                 value_count += 1
                 # TODO if value_count > 10 call sendValuesTo Rest
