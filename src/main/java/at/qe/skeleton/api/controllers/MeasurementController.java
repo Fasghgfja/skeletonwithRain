@@ -1,6 +1,7 @@
 package at.qe.skeleton.api.controllers;
 
 import at.qe.skeleton.model.Measurement;
+import at.qe.skeleton.api.model.Measurement2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,8 @@ public class MeasurementController {
     MeasurementService measurementService;
 
     @PostMapping("/api/measurements")
-    Measurement createMeasurement(@RequestBody Measurement measurement) {
+    Measurement2 createMeasurement(@RequestBody Measurement2 measurement) {
+        System.out.println("test123");
         return measurementService.addMeasurement(measurement);
     }
 
@@ -33,11 +35,13 @@ public class MeasurementController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
-
+/*
     @PatchMapping("/api/measurements/{id}")
     Measurement updateMeasurement(@PathVariable long id, @RequestBody Measurement measurement) {
         return measurementService.updateMeasurement(id, measurement);
     }
+
+ */
 
 
 }
