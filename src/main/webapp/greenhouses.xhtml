@@ -9,6 +9,14 @@
     <!-- ........THIS PAGE SHOWS THE LIST OF GREENHOUSES ; IF THE BUTTON IS PRESSED ON A GREENHOUSE THEN THE GREENHOUSEDETAILSPAGE............... -->
     <!-- ........OF THE SENSOR STATION(GREENHOUSE) OF THE CORRESPONDING GREENHOUSE IS OPENED::::::::::::::::::::::::::::::::............... -->
 
+
+    <ui:define name="title">Dashboard</ui:define>
+    <ui:define name="head">
+        <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css" />
+    </ui:define>
+
+
+
     <ui:define name ="content">
 
 
@@ -42,8 +50,25 @@
                             <h:outputText value="#{product.category}"/>
                         </p:column>
 
-                        <p:column headerText="Status" sortBy="#{product.name}">
-                            <p:rating value="#{product.rating}" readonly="true"/>
+                        <p:column headerText="Status">
+                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_PRESSURE')}"
+                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_PRESSURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                               title="Air Pressure"></i>
+                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('TEMPERATURE')}"
+                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('TEMPERATURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                               title="Temperature"></i>
+                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('SOIL_MOISTURE')}"
+                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('SOIL_MOISTURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                               title="Soil Moisture"></i>
+                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_QUALITY')}"
+                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_QUALITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                               title="Air Quality"></i>
+                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('LIGHT_INTENSITY')}"
+                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('LIGHT_INTENSITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                               title="Light Intensity"></i>
+                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('HUMIDITY')}"
+                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('HUMIDITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                               title="Humidity"></i>
                         </p:column>
 
                         <p:column headerText="Location" sortBy="#{sensorStation.location}">
@@ -80,8 +105,10 @@
                                         </h:outputText>
                                     </p:column>
 
-                                    <p:column headerText="Status" sortBy="#{order.status}">
-                                        <span class="order-badge order-#{order.status.name().toLowerCase()}">#{order.status}</span>
+                                    <p:column headerText="Status">
+                                        <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon(measurement.type)}"
+                                           style="display: flex; justify-content: center; align-items: center; color:#{sensorStationDetailController.getMeasurementStatus(measurement.id,measurement.type) == 'OK' ? 'green' : 'red'}"
+                                           title="#{measurement.type}"></i>
                                     </p:column>
 
                                 </p:dataTable>
