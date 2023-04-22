@@ -2,7 +2,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
+                xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
                 template="/WEB-INF/templates/main.xhtml">
 
     <ui:define name="title">Empty Page</ui:define>
@@ -16,14 +16,19 @@
     </ui:define>
 
     <ui:define name="content">
-        <div class="grid">
-            <div class="col">
-                <div class="card">
-                    <h4>Empty Page</h4>
-                    <p>This is your empty page template to start building beautiful applications.</p>
-                </div>
-            </div>
-        </div>
+        <p:growl id="growl" showDetail="true" showSummary="true" globalOnly="false">
+            <p:autoUpdate />
+        </p:growl>
+
+        <p><p:inputText id="input" style="width:530px"/></p>
+        <pe:codeScanner width="530"
+                        height="400"
+                        for="input">
+            <p:ajax event="codeScanned" listener="#{codeScannerController.onCodeScanned}"/>
+        </pe:codeScanner>
+
+
+
     </ui:define>
 
 </ui:composition>
