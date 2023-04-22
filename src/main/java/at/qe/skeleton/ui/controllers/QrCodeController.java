@@ -41,7 +41,6 @@ public class QrCodeController implements Serializable {
     }
 
     public String getText() {
-        System.out.println(text);
         return text;
     }
 
