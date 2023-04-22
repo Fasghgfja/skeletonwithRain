@@ -45,7 +45,7 @@ public class UserService {
     }
 
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public Integer getUsersAmount() {
         return userRepository.findAll().stream().toList().size();
     }

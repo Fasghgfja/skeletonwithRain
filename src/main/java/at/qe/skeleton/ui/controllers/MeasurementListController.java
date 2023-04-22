@@ -45,7 +45,7 @@ public class MeasurementListController implements Serializable {
         /**
          * Returns how many sensor stations are registered in the system.
          */
-        @PreAuthorize("hasAuthority('ADMIN')")
+
         public Integer getMeasurementsAmount() {
             return measurementService.getMeasurementsAmount();
         }
