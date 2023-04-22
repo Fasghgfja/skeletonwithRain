@@ -1,7 +1,6 @@
 package at.qe.skeleton.ui.controllers;
 
 
-import org.primefaces.PrimeFaces;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 

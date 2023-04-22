@@ -1,6 +1,5 @@
 package at.qe.skeleton.ui.controllers;
 
-import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Userx;
@@ -23,7 +22,6 @@ import java.util.*;
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
  */
-
 @Getter
 @Setter
 @Component
