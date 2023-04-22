@@ -1,23 +1,17 @@
 package at.qe.skeleton.ui.controllers;
 
-
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Named;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
-
-
-/**
- * InputNumberController
- *
- * @author Mauricio Fenoglio / last modified by $Author$
- * @version $Revision$
- * @since 0.3
- */
-@Named("qrCodeController")
-@ViewScoped
-public class QRCodeController implements Serializable {
+@Getter
+@Setter
+@Component
+@Scope("view")
+public class QrCodeController implements Serializable {
 
     private static final long serialVersionUID = 20120316L;
     private String renderMethod;
@@ -27,12 +21,12 @@ public class QRCodeController implements Serializable {
     private int size;
     private String fillColor;
 
-    public QRCodeController() {
+    public QrCodeController() {
         renderMethod = "canvas";
-        text = "http://primefaces-extensions.github.io/";
-        label = "PF-Extensions";
+        text = "http://srh-softwaresolutions.com/";
+        label = "Plant Name";
         mode = 2;
-        fillColor = "7d767d";
+        fillColor = "8d888d";
         size = 200;
     }
 
