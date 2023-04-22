@@ -151,9 +151,9 @@ public class UserDetailController implements Serializable {
             this.user = userService.loadUser(thisUser.getId());
         }
 
-    public void doRemovePlantToFollowedPlants(Plant plant) {
+    public void doRemovePlantFromFollowedPlants(Plant plant) {
         user = sessionInfoBean.getCurrentUser();
-        this.userService.removePlantToFollowedPlants(user,plant);
+        this.userService.removePlantFromFollowedPlants(user,plant);
     }
 
 }
