@@ -19,8 +19,6 @@
     </ui:define>
 
     <ui:define name="content">
-
-
         <!-- ..........................................TOP INFO BOXES................................................................... -->
         <h:form>
             <p:toolbar>
@@ -272,12 +270,12 @@
                         <ul>
 
                             <li>
+                                <span class="later">Access Point:</span>
                                 <div class="checkbox">
                                     <h:form>
                                         <p:growl>
                                             <p:autoUpdate/>
                                         </p:growl>
-                                        <p:outputLabel for="sensorStationAccessPoint" value="Access Point: "/>
                                         <p:selectOneMenu id="sensorStationAccessPoint" value="#{null}" filter="true" emptyLabel="Access Point ID"
                                                          scrollHeight="250" updateLabel="true" >
                                             <f:selectItems value="#{accessPointController.accessPoints}"/>
@@ -292,24 +290,24 @@
                             </li>
 
                             <li>
+                                <span class="later">SensorStation ID:</span>
                                 <div class="checkbox">
                                     <p:outputPanel id="sensorStationID" rendered="#{not empty sensorStationDetailController.sensorStation}">
-                                        <h:panelGrid columns="2">
-                                            <p:outputLabel for="sensorStationID" value="SensorStation Id: "/>
+                                        <h:panelGrid columns="1">
                                             <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationID}" disabled="true" />
                                         </h:panelGrid>
                                     </p:outputPanel>
                                 </div>
-                                <span>SAVE</span>
+                                <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}" update="@all"/>
                             </li>
 
                             <li>
+                                <span class="later">Plant:</span>
                                 <div class="checkbox">
                                     <h:form>
                                         <p:growl>
                                             <p:autoUpdate/>
                                         </p:growl>
-                                        <p:outputLabel for="sensorStationPlant" value="Plant: "/>
                                         <p:selectOneMenu id="sensorStationPlant" value="#{null}"  filter="true" emptyLabel="Plant: #{sensorStationDetailController.sensorStation.plant.plantName}"
                                                          scrollHeight="250" updateLabel="true" >
                                             <f:selectItems value="#{plantController.plants}"/>
@@ -320,28 +318,28 @@
                                         </p:selectOneMenu>
                                     </h:form>
                                 </div>
-                                <span>SAVE</span>
+                                <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}" update="@all"/>
                             </li>
 
                             <li>
+                                <span class="later">Location:</span>
                                 <div class="checkbox">
                                     <p:outputPanel id="sensorStationLocation" rendered="#{not empty sensorStationDetailController.sensorStation}">
                                         <h:panelGrid columns="2">
-                                            <p:outputLabel for="sensorStationLocation" value="SensorStation Location: "/>
                                             <p:inputText id="sensorStationlocation" value="#{sensorStationDetailController.sensorStation.location}"/>
                                         </h:panelGrid>
                                     </p:outputPanel>
                                 </div>
-                                <span>SAVE</span>
+                                <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}" update="@all"/>
                             </li>
 
                             <li>
+                                <span class="later">Assigned Gardener:</span>
                                 <div class="checkbox">
                                     <h:form>
                                         <p:growl>
                                             <p:autoUpdate/>
                                         </p:growl>
-                                        <p:outputLabel for="multiple" value="Assigned Gardener: "/>
                                         <p:selectCheckboxMenu id="multiple" value="#{null}" label="Gardeners" style="min-width: 15rem"
                                                               multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"
                                                               emptyLabel="#{null}" updateLabel="true">
@@ -349,7 +347,9 @@
                                         </p:selectCheckboxMenu>
                                     </h:form>
                                 </div>
-                                <span>SAVE</span>
+                                <span>
+                                    <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}" update="@all"/>
+                                </span>
                             </li>
 
                         </ul>
