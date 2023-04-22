@@ -50,11 +50,10 @@
         <h:form id="menuform">
             <pr:menu widgetVar="RainMenuWidget">
 
-                <p:menuitem id="m_dashboard" value="Dashboard" icon="pi pi-home" outcome="/userDashboard" />
+                <p:menuitem id="m_dashboard" value="Dashboard" icon="pi pi-home" outcome="/dashboard" />
 
                 <!-- ..........................................ADMIN SUBMENU............................................................... -->
                 <p:submenu id="m_components" label="Administration Utility" icon="pi pi-pencil" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
-                    <p:menuitem id="m_input" value="Admin Dashboard" icon="pi pi-desktop" outcome="/dashboard" />
                     <p:menuitem id="m_input2" value="Manage Sensor Stations" icon="pi pi-check-square" outcome="/greenhouses" />
                     <p:menuitem id="m_table" value="Manage Users" icon="pi pi-users" outcome="/userManagement" />
                     <p:menuitem id="m_list" value="Manage Access Points" icon="pi pi-server" outcome="/accessPointsManagement" />
