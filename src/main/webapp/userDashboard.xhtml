@@ -20,7 +20,7 @@
                     <h5>Followed plants</h5>
                     <p:dataTable id="plantsTable" var="plant" value="#{plantController.doGetFollowedPlants()}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
-                        <p:ajax event="rowToggle" listener="#{sensorStationDetailController.onRowToggle}" />
+                        <p:ajax event="rowToggle"/>
 
                         <p:column style="width:2rem">
                             <p:rowToggler/>
@@ -61,12 +61,7 @@
 
                         <!-- .........................................ROW EXPANSION.......................................................... -->
                         <p:rowExpansion>
-                            <div class="card">
-                                <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
-                                    <p:graphicImage name="demo/images/nature/#{image}" alt="Image Description for #{image}"
-                                                    title="#{image}"/>
-                                </p:galleria>
-                            </div>
+                            <h:outputText value="Implement Gallery" />
                         </p:rowExpansion>
 
                     </p:dataTable>
