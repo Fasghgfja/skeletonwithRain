@@ -16,6 +16,7 @@
                     <!-- ................ EDIT FIELDS PANEL............-->
                     <div class="field col-12 md:col-4">
                         <p:outputPanel id="userData" rendered="#{not empty userDetailController.user}">
+                            <h5 class="mt-0">User Data </h5>
                             <h:panelGrid columns="2">
                                 <p:outputLabel for="username" value="Username: "/>
                                 <p:inputText id="username" value="#{userDetailController.user.username}"/>
@@ -27,7 +28,7 @@
                                 <p:inputText id="email" value="#{userDetailController.user.email}"/>
                                 <p:outputLabel for="phone" value="Phone Number: "/>
                                 <p:inputMask id="phone" value="#{userDetailController.user.phone}"
-                                             mask="+99? 999 9999999"/>
+                                             mask="+99 999 9999999"/>
                             </h:panelGrid>
                         </p:outputPanel>
                     </div>
@@ -75,13 +76,14 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- ................ SAVE BUTTON ............-->
-                    <p:commandButton value="Save" action="#{userDetailController.doSaveUser()}"
+                    <p:commandButton style="margin-bottom: 10px" value="Save" action="#{userDetailController.doSaveUser()}"
                                      oncomplete="PF('userEditDialog').hide()" update="userForm"/>
+
+
+
                     <!-- ................ ABORT BUTTON ............-->
                     <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
-
                 </div>
             </h:form>
         </div>
