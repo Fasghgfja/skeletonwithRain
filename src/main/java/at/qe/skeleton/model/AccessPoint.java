@@ -34,4 +34,11 @@ public class AccessPoint extends Metadata implements Persistable<Long>, Serializ
     public int compareTo(AccessPoint o) {
         return this.accessPointID.compareTo(o.getId());
     }
+
+    @Override
+    public String toString() {
+        return ""+accessPointID;
+    }
+
+
 }

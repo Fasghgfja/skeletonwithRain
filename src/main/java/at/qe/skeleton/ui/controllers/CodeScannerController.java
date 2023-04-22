@@ -2,6 +2,7 @@ package at.qe.skeleton.ui.controllers;
 
 
 
+import java.io.IOException;
 import java.io.Serializable;
 
 
@@ -26,6 +27,11 @@ public class CodeScannerController implements Serializable {
                 new FacesMessage(FacesMessage.SEVERITY_INFO,
                         String.format("Scanned: %s (%s)", code.getValue(), code.getFormat()),
                         null));
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect(code.getValue());
+        } catch (IOException e) {
+            // handle the exception
+        }
     }
 
 }

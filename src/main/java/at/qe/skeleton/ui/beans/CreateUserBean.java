@@ -10,7 +10,6 @@ import at.qe.skeleton.repositories.UserxRepository;
 import at.qe.skeleton.services.UserService;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
@@ -68,14 +67,12 @@ public class CreateUserBean implements Serializable {
             if(x.equals("ADMIN")) {
                 roles.add(UserRole.ADMIN);
                 roles.add(UserRole.GARDENER);
-                roles.add(UserRole.USER);
+
             } else if(x.equals("GARDENER")) {
-                roles.add(UserRole.USER);
                 roles.add(UserRole.GARDENER);
-            } else{
-                roles.add(UserRole.USER);
             }
         });
+        roles.add(UserRole.USER);
         user.setRoles(roles);
 
         if (userxRepository.findFirstByUsername(user.getUsername()) != null){
@@ -88,7 +85,6 @@ public class CreateUserBean implements Serializable {
             creationFailLog.setType(LogType.WARNING);
             logRepository.save(creationFailLog);
         } else {
-
             Log createLog = new Log();
             createLog.setDate(LocalDate.now());
             createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));

@@ -5,6 +5,7 @@
 
     <ui:define name="title">Dashboard</ui:define>
     <ui:define name="head">
+        <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css" />
         <h:outputScript name="js/chart.js"/>
         <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
     </ui:define>
@@ -127,13 +128,31 @@
                                     </h:outputText>
                                 </p:column>
 
-                                <p:column headerText="Status" sortBy="#{order.status}">
-                                    <span class="order-badge order-#{order.status.name().toLowerCase()}">#{order.status}</span>
+
+                                <p:column headerText="Status">
+                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_PRESSURE')}"
+                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_PRESSURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                       title="Air Pressure"></i>
+                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('TEMPERATURE')}"
+                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('TEMPERATURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                       title="Temperature"></i>
+                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('SOIL_MOISTURE')}"
+                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('SOIL_MOISTURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                       title="Soil Moisture"></i>
+                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_QUALITY')}"
+                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_QUALITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                       title="Air Quality"></i>
+                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('LIGHT_INTENSITY')}"
+                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('LIGHT_INTENSITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                       title="Light Intensity"></i>
+                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('HUMIDITY')}"
+                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('HUMIDITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                       title="Humidity"></i>
                                 </p:column>
 
-                                <p:column style="width: 3.5rem">
+                                 <p:column style="width: 3.5rem">
 
-                                    <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
+                                     <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
                                     <p:button icon="pi pi-search"
                                               title="open Detail-View"
                                               href="/greenHouseDetails.xhtml?id=#{sensorStation.id}"/>

@@ -1,23 +1,15 @@
 package at.qe.skeleton.ui.controllers;
 
 
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Named;
+import org.primefaces.PrimeFaces;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
-
-
-/**
- * InputNumberController
- *
- * @author Mauricio Fenoglio / last modified by $Author$
- * @version $Revision$
- * @since 0.3
- */
-@Named("qrCodeController")
-@ViewScoped
-public class QRCodeController implements Serializable {
+@Component
+@Scope("view")
+public class QrCodeController implements Serializable {
 
     private static final long serialVersionUID = 20120316L;
     private String renderMethod;
@@ -27,12 +19,16 @@ public class QRCodeController implements Serializable {
     private int size;
     private String fillColor;
 
-    public QRCodeController() {
+    private String linkInput; // Add this field to hold the new link input
+
+
+
+    public QrCodeController() {
         renderMethod = "canvas";
-        text = "http://primefaces-extensions.github.io/";
-        label = "PF-Extensions";
+        text = "http://srh-softwaresolutions.com/";
+        label = "Plant Name";
         mode = 2;
-        fillColor = "7d767d";
+        fillColor = "8d888d";
         size = 200;
     }
 
@@ -82,6 +78,24 @@ public class QRCodeController implements Serializable {
 
     public void setSize(final int size) {
         this.size = size;
+    }
+
+    public void updateQrCode() {
+        // Update the text field with the new link input
+        // This assumes that you have a getter and setter for the link input field
+        setText(linkInput);
+        System.out.println(linkInput);
+        // Update the QR code component on the page
+        PrimeFaces.current().ajax().update("qrCodeElem");
+    }
+
+
+    public String getLinkInput() {
+        return linkInput;
+    }
+
+    public void setLinkInput(final String linkInput) {
+        this.linkInput = linkInput;
     }
 
 }

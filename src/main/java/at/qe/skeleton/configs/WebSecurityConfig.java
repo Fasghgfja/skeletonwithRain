@@ -48,7 +48,7 @@ public class WebSecurityConfig {
             http.headers().frameOptions().disable(); // needed for H2 console
 
             http
-                    .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/**").authenticated())
+                    .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/**").authenticated()).httpBasic().and()
                     .authorizeHttpRequests(authorize -> authorize
                             //Permit access for all to the sensor stations for now
                             .requestMatchers("/sensorStation/**").permitAll()

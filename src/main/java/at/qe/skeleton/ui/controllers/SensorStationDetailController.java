@@ -2,10 +2,15 @@ package at.qe.skeleton.ui.controllers;
 
 import at.qe.skeleton.api.services.MeasurementService;
 import at.qe.skeleton.model.Measurement;
+import at.qe.skeleton.model.MeasurementType;
 import at.qe.skeleton.model.SensorStation;
+
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
+
+import at.qe.skeleton.repositories.AbstractRepository;
 import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import jakarta.faces.context.FacesContext;
@@ -14,6 +19,7 @@ import lombok.Setter;
 import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.Visibility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -52,16 +58,81 @@ public class SensorStationDetailController implements Serializable {
     /**
      * Attribute to cache the currently displayed sensor station.
      */
-    private SensorStation sensorStation ;
+    private SensorStation sensorStation;
 
     /**
      * Attribute to cache the latestMEasurements.
      */
     private Collection<Measurement> latestMeasurements;
 
-    /** maybe not needed fields.*/
+    /**
+     * maybe not needed fields.
+     */
     private String plantName = "";
     private String description = "";
+    @Autowired
+    @Qualifier("measurementRepository")
+    private AbstractRepository measurementRepository;
+
+
+
+    public String getMeasurementStatus(String measurementId,String type) {
+        Measurement thisMeasurement = measurementService.findMeasurementById(Long.parseLong(measurementId));
+        if (thisMeasurement == null) {return "OK";}
+        if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
+    }
+
+
+    public String getlastMeasurementStatus(String type,Long sensorStationId) {
+        Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
+        if (thisMeasurement == null) {return "OK";}
+        if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
+    }
+
+    public String getlastMeasurementStatusIcon(String type) {
+        switch(type) {
+            case "HUMIDITY":
+                return "fa-solid fa-droplet fa-lg";
+            case "TEMPERATURE":
+                return "fa-solid fa-thermometer-three-quarters fa-lg";
+            case "AIR_PRESSURE":
+                return "fa-sharp fa-solid fa-arrows-to-circle fa-lg";
+            case "LIGHT_INTENSITY":
+                return "fa-solid fa-sun fa-lg";
+            case "SOIL_MOISTURE":
+                return "fa-solid fa-water fa-lg";
+            case "AIR_QUALITY":
+                return "fa-solid fa-wind fa-lg";
+            default:
+                return "";
+        }
+    }
+
+    private int checkThreshold(Measurement measurement, String type) {
+        boolean isThresholdExceeded;
+        switch(type) {
+            case "SOIL_MOISTURE":
+                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 95 || Long.parseLong(measurement.getValue_s()) < 10);
+                return isThresholdExceeded ? 1 : 0;
+            case "HUMIDITY":
+                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 80 || Long.parseLong(measurement.getValue_s()) < 20);
+                return isThresholdExceeded ? 1 : 0;
+            case "AIR_PRESSURE":
+                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 2 || Long.parseLong(measurement.getValue_s()) < 1);
+                return isThresholdExceeded ? 1 : 0;
+            case "TEMPERATURE":
+                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 35 || Long.parseLong(measurement.getValue_s()) < 10);
+                return isThresholdExceeded ? 1 : 0;
+            case "AIR_QUALITY":
+                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) < 50);
+                return isThresholdExceeded ? 1 : 0;
+            case "LIGHT_INTENSITY":
+                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 1500 || Long.parseLong(measurement.getValue_s()) < 100);
+                return isThresholdExceeded ? 1 : 0;
+            default:
+                return 111;
+        }
+    }
 
 
 
@@ -71,17 +142,18 @@ public class SensorStationDetailController implements Serializable {
      * The method is used in the Greenhouses.chtml aka manage greenhouses page to open the info
      * about the last measurements (1 per type) .
      * the method calls {@link SensorStationDetailController#getLatestMeasurements()} to get them.
+     *
      * @param event the parameter is passed from the xhtml as a event , sensor station is extracted
-     * from it.
+     *              from it.
      */
     public void onRowToggle(ToggleEvent event) {
         if (event.getVisibility() == Visibility.VISIBLE) {
             sensorStation = (SensorStation) event.getData();
-            if (sensorStation != this.sensorStation){
-                getLatestMeasurements();            }
+            if (sensorStation != this.sensorStation) {
+                getLatestMeasurements();
+            }
         }
     }
-
 
 
     /**
@@ -90,10 +162,12 @@ public class SensorStationDetailController implements Serializable {
      * NOTE: this method is called from  {@link SensorStationDetailController#onRowToggle(ToggleEvent)}
      * and {@link SensorStationDetailController#onRowSelectLineChart(ToggleEvent)}.
      * When the sensor station row is toggled and the cached sensor station updated.
+     *
      * @return the latest measurements for the cached sensor station (1 per type).
      */
     public Collection<Measurement> getLatestMeasurements() {
         latestMeasurements = measurementService.getLatestPlantMeasurements(sensorStation);
+
         return latestMeasurements;
     }
 
@@ -108,11 +182,11 @@ public class SensorStationDetailController implements Serializable {
         this.sensorStation = sensorStation;
         doReloadSensorStation();
     }
+
     //TODO: Remove along the hierarchy and replace with something more elegant
     public void setSensorStationFromId(Long id) {
         this.sensorStation = sensorService.loadSensorStation(id);
     }
-
 
 
     /**
@@ -139,6 +213,7 @@ public class SensorStationDetailController implements Serializable {
 
 
     //TODO: simplify this monstruosity
+
     /**
      * Method to initialize a greenhouse/sensor station view for a specific greenhouse taken from facescontext.
      */
@@ -148,7 +223,7 @@ public class SensorStationDetailController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         params = context.getExternalContext().getRequestParameterMap();
         String idString = params.get("id");
-        System.out.println("ID HERE:--------------->"     + idString); // testing ;D
+        System.out.println("ID HERE:--------------->" + idString); // testing ;D
         this.newSensorStation = false;
         if (idString == null) {
             this.newSensorStation = true;
@@ -159,14 +234,14 @@ public class SensorStationDetailController implements Serializable {
             Long id = Long.parseLong(idString);
             this.setSensorStationFromId(id);
             this.sensorStation = this.getSensorStation();
-            if(this.getSensorStation().getPlant() == null){return;} // error handling XD
+            if (this.getSensorStation().getPlant() == null) {
+                return;
+            } // error handling XD
             this.plantName = "" + this.getSensorStation().getPlant().getPlantName();
             this.description = this.getSensorStation().getPlant().getDescription();
         }
 
     }
-
-
 
 
 }
