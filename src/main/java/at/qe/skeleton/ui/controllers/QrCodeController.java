@@ -41,6 +41,7 @@ public class QrCodeController implements Serializable {
     }
 
     public String getText() {
+        System.out.println(text);
         return text;
     }
 
@@ -80,14 +81,6 @@ public class QrCodeController implements Serializable {
         this.size = size;
     }
 
-    public void updateQrCode() {
-        // Update the text field with the new link input
-        // This assumes that you have a getter and setter for the link input field
-        setText(linkInput);
-        System.out.println(linkInput);
-        // Update the QR code component on the page
-        PrimeFaces.current().ajax().update("qrCodeElem");
-    }
 
 
     public String getLinkInput() {
