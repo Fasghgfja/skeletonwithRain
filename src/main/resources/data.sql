@@ -12,9 +12,9 @@ INSERT INTO USERX (ENABLED, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, CREATE_US
 INSERT INTO USERX_USER_ROLE (USERX_USERNAME, ROLES) VALUES ('elvis', 'ADMIN')
 
 
-INSERT INTO PLANT(PLANTID, PLANT_NAME, CREATE_DATE,UPDATE_DATE) VALUES(100, 'Atomic Northern Lights','2022-01-01','2022-01-01')
-INSERT INTO PLANT(PLANTID, PLANT_NAME, CREATE_DATE,UPDATE_DATE) VALUES(101, 'Charlotte''s Web','2022-01-01','2022-01-01')
-INSERT INTO PLANT(PLANTID, PLANT_NAME, CREATE_DATE,UPDATE_DATE) VALUES(102, 'Alpine Rocket', '2022-01-04','2022-05-01')
+INSERT INTO PLANT(PLANTID, PLANT_NAME, CREATE_DATE,UPDATE_DATE, DESCRIPTION) VALUES(100, 'Atomic Northern Lights','2022-01-01','2022-01-01','Atomic Northern Lights has a history of world travel. In the 1980s, Afghani indica seeds were brought to the U.S. and bred with Thai Haze.')
+INSERT INTO PLANT(PLANTID, PLANT_NAME, CREATE_DATE,UPDATE_DATE, DESCRIPTION) VALUES(101, 'Charlotte''s Web','2022-01-01','2022-01-01','Charlotte''s Web is a sativa marijuana strain and hemp cultivar that was specifically bred by the Stanley Brothers of Colorado for its high CBD and low THC content. ')
+INSERT INTO PLANT(PLANTID, PLANT_NAME, CREATE_DATE,UPDATE_DATE, DESCRIPTION) VALUES(102, 'Alpine Rocket', '2022-01-04','2022-05-01','This strain has a terpene feature that blends with its pungent and complex aromas and has curly leaves if cure properly with whitish trichomes.')
 INSERT INTO PLANT(PLANTID, PLANT_NAME, CREATE_DATE,UPDATE_DATE) VALUES(103, 'Blue Dream', '2022-01-02','2022-01-01')
 INSERT INTO PLANT(PLANTID, PLANT_NAME, CREATE_DATE,UPDATE_DATE) VALUES(104, 'Sour Diesel', '2022-01-01','2022-03-01')
 

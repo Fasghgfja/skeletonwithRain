@@ -35,7 +35,7 @@ public class AccessPointService {
         return accessPointRepository.findAll();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public long getAccessPointsAmount(){
         return accessPointRepository.count();
     }

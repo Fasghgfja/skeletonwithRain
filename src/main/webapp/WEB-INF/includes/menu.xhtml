@@ -50,18 +50,18 @@
         <h:form id="menuform">
             <pr:menu widgetVar="RainMenuWidget">
 
-                <p:menuitem id="m_dashboard" value="Dashboard" icon="pi pi-home" outcome="/dashboard" />
+                <p:menuitem id="m_dashboard" value="Dashboard" icon="pi pi-home" outcome="/dashboard.xhtml" />
 
                 <!-- ..........................................ADMIN SUBMENU............................................................... -->
                 <p:submenu id="m_components" label="Administration Utility" icon="pi pi-pencil" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
-                    <p:menuitem id="m_input" value="Manage Sensor Stations" icon="pi pi-check-square" outcome="/greenhouses" />
-                        <p:menuitem id="m_table" value="Manage Users" icon="pi pi-users" outcome="/userManagement" />
+                    <p:menuitem id="m_input2" value="Manage Sensor Stations" icon="pi pi-check-square" outcome="/greenhouses" />
+                    <p:menuitem id="m_table" value="Manage Users" icon="pi pi-users" outcome="/userManagement" />
                     <p:menuitem id="m_list" value="Manage Access Points" icon="pi pi-server" outcome="/accessPointsManagement" />
                     <p:menuitem id="m_media" value="Image Gallery Test" icon="pi pi-image" url="/admin/media.xhtml" />
                     <p:menuitem id="m_button" value="Upload A Picture" icon="pi pi-mobile" url="/admin/file.xhtml" styleClass="rotated-icon"/>
                     <p:menuitem id="m_formlayout" value="Audit Log" icon="pi pi-history" outcome="/auditLog" />
                     <p:menuitem id="m_doc" value="Documentation" icon="pi pi-info-circle" outcome="/documentation"/>
-                    <p:menuitem id="register" value="Upload picture page" icon="pi pi-info-circle" outcome="registration/register"/>
+                    <p:menuitem id="register" value="Upload picture page" icon="pi pi-info-circle" outcome="/register"/>
                     <p:menuitem id="qrCode" value="Generate Qr Code" icon="pi pi-info-circle" outcome="/generateQrCode"/>
                     <p:menuitem id="qrCodeScan" value="Scan Qr Code Test Page" icon="pi pi-info-circle" outcome="/codeScanPage"/>
                 </p:submenu>
