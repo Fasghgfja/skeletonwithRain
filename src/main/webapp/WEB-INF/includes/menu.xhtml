@@ -50,7 +50,7 @@
         <h:form id="menuform">
             <pr:menu widgetVar="RainMenuWidget">
 
-                <p:menuitem id="m_dashboard" value="Dashboard" icon="pi pi-home" outcome="/dashboard" />
+                <p:menuitem id="m_dashboard" value="Dashboard" icon="pi pi-home" outcome="/dashboard.xhtml" />
 
                 <!-- ..........................................ADMIN SUBMENU............................................................... -->
                 <p:submenu id="m_components" label="Administration Utility" icon="pi pi-pencil" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
