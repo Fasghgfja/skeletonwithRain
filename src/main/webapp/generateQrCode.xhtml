@@ -39,8 +39,14 @@
             </h:panelGrid>
             <h:outputText value="Fill color:" />
             <p:colorPicker value="#{qrCodeController.fillColor}"/>
+            <p:inputText id="link" value="#{qrCodeController.text}">
+            </p:inputText>
 
-            <p:commandButton value="update" update="qrCodeElem"/>
+            <p:commandButton value="update" action="#{qrCodeController.updateQrCode}" update="qrCodeElem" />
+
+
+
+
 
         </h:panelGrid>
 

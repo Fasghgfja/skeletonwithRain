@@ -1,14 +1,12 @@
 package at.qe.skeleton.ui.controllers;
 
-import lombok.Getter;
-import lombok.Setter;
+
+import org.primefaces.PrimeFaces;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
 @Component
 @Scope("view")
 public class QrCodeController implements Serializable {
@@ -20,6 +18,10 @@ public class QrCodeController implements Serializable {
     private int mode;
     private int size;
     private String fillColor;
+
+    private String linkInput; // Add this field to hold the new link input
+
+
 
     public QrCodeController() {
         renderMethod = "canvas";
@@ -76,6 +78,24 @@ public class QrCodeController implements Serializable {
 
     public void setSize(final int size) {
         this.size = size;
+    }
+
+    public void updateQrCode() {
+        // Update the text field with the new link input
+        // This assumes that you have a getter and setter for the link input field
+        setText(linkInput);
+        System.out.println(linkInput);
+        // Update the QR code component on the page
+        PrimeFaces.current().ajax().update("qrCodeElem");
+    }
+
+
+    public String getLinkInput() {
+        return linkInput;
+    }
+
+    public void setLinkInput(final String linkInput) {
+        this.linkInput = linkInput;
     }
 
 }
