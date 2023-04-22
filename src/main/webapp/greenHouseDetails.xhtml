@@ -262,88 +262,107 @@
                 </div>
 
 
-                <!-- .........................................GARDENER ONLY TASK PANEL................................................................... -->
+                <!-- .........................................GARDENER/STAFF GREENHOUSE SETTINGS PANEL................................................................... -->
 
                 <div class="col-12 md:col-6 xl:col-4">
                     <div class="card tasks">
                         <div class="card-header">
-                            <h5>TASKS (Gardener only panel)</h5>
+                            <h5>Edit Sensor Station (Gardener only panel)</h5>
                         </div>
                         <ul>
+
                             <li>
                                 <div class="checkbox">
-                                    <p:selectBooleanCheckbox value="true"/>
-                                    <p>Given Water</p>
+                                    <h:form>
+                                        <p:growl>
+                                            <p:autoUpdate/>
+                                        </p:growl>
+                                        <p:outputLabel for="sensorStationAccessPoint" value="Access Point: "/>
+                                        <p:selectOneMenu id="sensorStationAccessPoint" value="#{null}" filter="true" emptyLabel="Access Point ID"
+                                                         scrollHeight="250" updateLabel="true" >
+                                            <f:selectItems value="#{accessPointController.accessPoints}"/>
+                                            <f:facet name="footer">
+                                                <p:divider styleClass="mt-0" />
+                                                <h:outputText value="3 options" style="font-weight:bold;"/>
+                                            </f:facet>
+                                        </p:selectOneMenu>
+                                    </h:form>
                                 </div>
-                                <span>TODAY</span>
+                                <span class="later">PAIR</span>
                             </li>
+
                             <li>
                                 <div class="checkbox">
-                                    <p:selectBooleanCheckbox value="true"/>
-                                    <p>Ferilizer</p>
+                                    <p:outputPanel id="sensorStationID" rendered="#{not empty sensorStationDetailController.sensorStation}">
+                                        <h:panelGrid columns="2">
+                                            <p:outputLabel for="sensorStationID" value="SensorStation Id: "/>
+                                            <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationID}" disabled="true" />
+                                        </h:panelGrid>
+                                    </p:outputPanel>
                                 </div>
-                                <span>TODAY</span>
+                                <span>SAVE</span>
                             </li>
+
                             <li>
                                 <div class="checkbox">
-                                    <p:selectBooleanCheckbox value="true"/>
-                                    <p>Change Pot</p>
+                                    <h:form>
+                                        <p:growl>
+                                            <p:autoUpdate/>
+                                        </p:growl>
+                                        <p:outputLabel for="sensorStationPlant" value="Plant: "/>
+                                        <p:selectOneMenu id="sensorStationPlant" value="#{null}"  filter="true" emptyLabel="Plant: #{sensorStationDetailController.sensorStation.plant.plantName}"
+                                                         scrollHeight="250" updateLabel="true" >
+                                            <f:selectItems value="#{plantController.plants}"/>
+                                            <f:facet name="footer">
+                                                <p:divider styleClass="mt-0" />
+                                                <h:outputText value="3 options" style="font-weight:bold;"/>
+                                            </f:facet>
+                                        </p:selectOneMenu>
+                                    </h:form>
                                 </div>
-                                <span>TODAY</span>
+                                <span>SAVE</span>
                             </li>
+
                             <li>
                                 <div class="checkbox">
-                                    <p:selectBooleanCheckbox value="true"/>
-                                    <p>Check soil</p>
+                                    <p:outputPanel id="sensorStationLocation" rendered="#{not empty sensorStationDetailController.sensorStation}">
+                                        <h:panelGrid columns="2">
+                                            <p:outputLabel for="sensorStationLocation" value="SensorStation Location: "/>
+                                            <p:inputText id="sensorStationlocation" value="#{sensorStationDetailController.sensorStation.location}"/>
+                                        </h:panelGrid>
+                                    </p:outputPanel>
                                 </div>
-                                <span>TODAY</span>
+                                <span>SAVE</span>
                             </li>
+
                             <li>
                                 <div class="checkbox">
-                                    <p:selectBooleanCheckbox value="false"/>
-                                    <p>Change light shedule</p>
+                                    <h:form>
+                                        <p:growl>
+                                            <p:autoUpdate/>
+                                        </p:growl>
+                                        <p:outputLabel for="multiple" value="Assigned Gardener: "/>
+                                        <p:selectCheckboxMenu id="multiple" value="#{null}" label="Gardeners" style="min-width: 15rem"
+                                                              multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"
+                                                              emptyLabel="#{null}" updateLabel="true">
+                                            <f:selectItems value="#{userListController.users}"/>
+                                        </p:selectCheckboxMenu>
+                                    </h:form>
                                 </div>
-                                <span class="later">LATER</span>
+                                <span>SAVE</span>
                             </li>
-                            <li>
-                                <div class="checkbox">
-                                    <p:selectBooleanCheckbox value="false"/>
-                                    <p>Meeting With Staff</p>
-                                </div>
-                                <span class="later">LATER</span>
-                            </li>
-                            <li>
-                                <div class="checkbox">
-                                    <p:selectBooleanCheckbox value="false"/>
-                                    <p>Present New Ideas </p>
-                                </div>
-                                <span class="later">LATER</span>
-                            </li>
-                            <li>
-                                <div class="checkbox">
-                                    <p:selectBooleanCheckbox value="false"/>
-                                    <p>Check new picture Upload</p>
-                                </div>
-                                <span class="later">LATER</span>
-                            </li>
-                            <li>
-                                <div class="checkbox">
-                                    <p:selectBooleanCheckbox value="false"/>
-                                    <p>Daily Measurement check</p>
-                                </div>
-                                <span class="later">LATER</span>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
 
 
-                <!-- .........................................Free EXTRA PANEL FOR ADMINS OR GARDENERS.............................................................. -->
+                <!-- .........................................MEMO/TASKS PANEL.............................................................. -->
 
                 <div class="col-12 md:col-12 xl:col-8">
                     <div class="card transactions">
                         <div class="card-header">
-                            <h5>Free extra panel for staff or gardeners</h5>
+                            <h5>Panel to add memo/tasks for staff or gardeners</h5>
                             <div class="header-buttons">
                                 <p:commandButton type="button" icon="pi pi-search"
                                                  styleClass="ui-button-secondary outlined-button  mr-2"/>
@@ -356,23 +375,14 @@
                                          selectionMode="single" reflow="true" paginatorPosition="bottom"
                                          rowKey="#{order.id}" paginator="true" rows="5" sortBy="#{order.date}"
                                          sortOrder="descending">
-                                <p:column headerText="Id" sortBy="#{order.id}">
-                                    <h:outputText value="#{order.id}"/>
+                                <p:column headerText="Task" sortBy="#{order.id}">
+                                    <h:outputText value="Give Water"/>
                                 </p:column>
 
-                                <p:column headerText="Date" sortBy="#{order.date}">
+                                <p:column headerText="Due Date" sortBy="#{order.date}">
                                     <h:outputText value="#{order.date}"/>
                                 </p:column>
 
-                                <p:column headerText="Amount" sortBy="#{order.amount}">
-                                    <h:outputText value="#{order.amount}">
-                                        <f:convertNumber currencySymbol="$" type="currency"/>
-                                    </h:outputText>
-                                </p:column>
-
-                                <p:column headerText="Status" sortBy="#{order.status}">
-                                    <span class="order-badge order-#{order.status.name().toLowerCase()}">#{order.status}</span>
-                                </p:column>
 
                                 <p:column style="width: 3.5rem">
                                     <p:commandButton icon="pi pi-search"/>

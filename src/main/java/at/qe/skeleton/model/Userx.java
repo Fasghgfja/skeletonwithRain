@@ -73,7 +73,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
 
     @Override
     public String toString() {
-        return "at.qe.skeleton.model.User[ id=" + username + " ]";
+        return "" + username;
     }
 
     @Override
