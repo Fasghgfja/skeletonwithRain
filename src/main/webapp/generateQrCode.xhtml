@@ -11,11 +11,13 @@
         <li>PAGES</li>
         <li><i class="pi pi-chevron-right"></i></li>
         <li>
-            <p:link outcome="/empty">Generate QrCode</p:link>
+            <p:link outcome="/generateQrCode">Generate QrCode</p:link>
         </li>
     </ui:define>
 
     <ui:define name="content">
+        <h:form>
+
         <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 
             <h:outputText value="Render method: " />
@@ -39,12 +41,9 @@
             </h:panelGrid>
             <h:outputText value="Fill color:" />
             <p:colorPicker value="#{qrCodeController.fillColor}"/>
-            <p:inputText id="link" value="#{qrCodeController.text}">
-            </p:inputText>
-
-            <p:commandButton value="update" action="#{qrCodeController.updateQrCode}" update="qrCodeElem" />
-
-
+            <p:inputText id="link" value="#{qrCodeController.text}"/>
+            <p:commandButton value="update" update="qrCodeElem">
+            </p:commandButton>
 
 
 
@@ -64,7 +63,7 @@
                    ecLevel="H"
                    radius="0.5"/>
 
-
+        </h:form>
     </ui:define>
 
 </ui:composition>
