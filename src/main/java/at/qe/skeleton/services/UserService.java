@@ -45,7 +45,7 @@ public class UserService {
     }
 
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public Integer getUsersAmount() {
         return userRepository.findAll().stream().toList().size();
     }
@@ -124,5 +124,12 @@ public class UserService {
     }
 
 
+    public void removePlantFromFollowedPlants(Userx user, Plant plant) {
+        if(user == null || plant == null) {return;}
+        user = userRepository.findFirstByUsername(user.getUsername());
+        user.getFollowedPlants().remove(plant);
+        plant.getFollowers().remove(user);
+        userRepository.save(user);
+    }
 }
 

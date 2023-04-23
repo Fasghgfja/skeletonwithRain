@@ -1,9 +1,7 @@
 package at.qe.skeleton.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.*;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -73,7 +71,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
 
     @Override
     public String toString() {
-        return "at.qe.skeleton.model.User[ id=" + username + " ]";
+        return "" + username;
     }
 
     @Override

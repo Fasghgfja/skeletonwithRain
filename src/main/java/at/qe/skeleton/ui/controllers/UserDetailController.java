@@ -1,6 +1,5 @@
 package at.qe.skeleton.ui.controllers;
 
-import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Userx;
@@ -8,6 +7,7 @@ import at.qe.skeleton.services.UserService;
 import java.io.InputStream;
 import java.io.Serializable;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
+import jakarta.el.MethodExpression;
 import lombok.Getter;
 import lombok.Setter;
 import org.omnifaces.util.Faces;
@@ -23,7 +23,6 @@ import java.util.*;
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
  */
-
 @Getter
 @Setter
 @Component
@@ -146,6 +145,11 @@ public class UserDetailController implements Serializable {
             Userx thisUser = sessionInfoBean.getCurrentUser();
             this.user = userService.loadUser(thisUser.getId());
         }
+
+    public void doRemovePlantFromFollowedPlants(Plant plant) {
+        user = sessionInfoBean.getCurrentUser();
+        this.userService.removePlantFromFollowedPlants(user,plant);
+    }
 
 }
 

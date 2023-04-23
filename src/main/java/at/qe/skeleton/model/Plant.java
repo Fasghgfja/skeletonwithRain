@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -27,6 +29,9 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
     private Long plantID;
 
     private String description;
+
+    @Column(columnDefinition = "DATE")
+    private LocalDate plantedDate;
 
     @Column(length = 100)
     private String plantName;

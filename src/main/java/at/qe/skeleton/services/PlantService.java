@@ -1,10 +1,9 @@
 package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Plant;
+import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.PlantRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -91,7 +90,15 @@ public class PlantService {
         return plantRepository.findAll().stream().toList().size();
     }
 
+    public Collection<Plant> getFollowedPlants(Userx user) {
+        return plantRepository.findPlantsByFollowers(user);
+    }
+
     //TODO:find plant by gardener
+
+    public Collection<Plant> getOnlyPlantsNotYetFollowed(Userx user) {
+        return plantRepository.findPlantsInPlantsCatalogueNotYetFollowed(user.getUsername());
+    }
 }
 
 
