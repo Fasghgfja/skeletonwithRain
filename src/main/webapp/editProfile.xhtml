@@ -29,6 +29,12 @@
                                 <p:outputLabel for="phone" value="Phone Number: "/>
                                 <p:inputMask id="phone" value="#{userDetailController.user.phone}"
                                              mask="+99 999 9999999"/>
+                                <p:selectManyCheckbox id="roles" value="#{userDetailController.user.roles}"
+                                                      disabled="true">
+                                    <f:selectItem itemLabel="ADMIN" itemValue="ADMIN"/>
+                                    <f:selectItem itemLabel="GARDENER" itemValue="GARDENER"/>
+                                </p:selectManyCheckbox>
+
                             </h:panelGrid>
                         </p:outputPanel>
                     </div>
@@ -56,10 +62,6 @@
                                                 redisplay="true" disabled="true"/>
                                 </div>
                             </div>
-
-                            <p:messages id="messages" showDetail="true">
-                                <p:autoUpdate/>
-                            </p:messages>
                         </h:form>
                     </div>
 
@@ -69,21 +71,19 @@
                             <div class="card">
                                 <h:form>
                                     <h5>Upload new Profile picture</h5>
-                                    <p:fileUpload listener="#{fileUploadController.handleFileUpload}" mode="advanced" dragDropSupport="false"
-                                                  multiple="true" update="messages" sizeLimit="50000000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width:100%" />
-                                    <p:growl id="messages" showDetail="true" />
+                                    <p:fileUpload listener="#{fileUploadController.handleFileUpload}" mode="advanced"
+                                                  dragDropSupport="false"
+                                                  multiple="true" update="messages" sizeLimit="50000000" fileLimit="3"
+                                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width:100%"/>
+                                    <p:growl id="messages" showDetail="false"/>
                                 </h:form>
                             </div>
                         </div>
                     </div>
                     <!-- ................ SAVE BUTTON ............-->
-                    <p:commandButton style="margin-bottom: 10px" value="Save" action="#{userDetailController.doSaveUser()}"
-                                     oncomplete="PF('userEditDialog').hide()" update="userForm"/>
-
-
-
-                    <!-- ................ ABORT BUTTON ............-->
-                    <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
+                    <p:commandButton style="margin-bottom: 10px" value="Save"
+                                     action="#{userDetailController.doSaveOwnUser()}"
+                                     update=":userForm"/>
                 </div>
             </h:form>
         </div>
