@@ -126,7 +126,7 @@ public class MeasurementService {
 
 
 
-    public Measurement findFirstMeasurementBySensorStationIdAndType(Long sensorStationId,String type) {
+    public Measurement findFirstMeasurementBySensorStationIdAndType(String sensorStationId,String type) {
         return measurementRepository.findFirstBySensorStationIdAndType(sensorStationId,type);
     }
 

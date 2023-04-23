@@ -30,7 +30,7 @@ public class SensorStationService {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    public SensorStation loadSensorStation(Long id) {
+    public SensorStation loadSensorStation(String id) {
         return sensorStationRepository.findFirstById(id);
     }
 

@@ -75,37 +75,37 @@ public class SensorStationDetailController implements Serializable {
     private AbstractRepository measurementRepository;
 
 
-    public String getlastTemperatureMeasurementStatus(Long sensorStationId) {
+    public String getlastTemperatureMeasurementStatus(String sensorStationId) {
         String type = "TEMPERATURE";
         Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
         if (thisMeasurement == null) {return "OK";}
         if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
     }
-    public String getlastLightIntensityMeasurementStatus(Long sensorStationId) {
+    public String getlastLightIntensityMeasurementStatus(String sensorStationId) {
         String type = "LIGHT_INTENSITY";
         Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
         if (thisMeasurement == null) {return "OK";}
         if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
     }
-    public String getlastSoilMoistureMeasurementStatus(Long sensorStationId) {
+    public String getlastSoilMoistureMeasurementStatus(String sensorStationId) {
         String type = "SOIL_MOISTURE";
         Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
         if (thisMeasurement == null) {return "OK";}
         if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
     }
-    public String getlastAirQualityMeasurementStatus(Long sensorStationId) {
+    public String getlastAirQualityMeasurementStatus(String sensorStationId) {
         String type = "AIR_QUALITY";
         Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
         if (thisMeasurement == null) {return "OK";}
         if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
     }
-    public String getlastAirPressureMeasurementStatus(Long sensorStationId) {
+    public String getlastAirPressureMeasurementStatus(String sensorStationId) {
         String type = "AIR_PRESSURE";
         Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
         if (thisMeasurement == null) {return "OK";}
         if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
     }
-    public String getlastHumidityMeasurementStatus(Long sensorStationId) {
+    public String getlastHumidityMeasurementStatus(String sensorStationId) {
         String type = "HUMIDITY";
         Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
         if (thisMeasurement == null) {return "OK";}
@@ -188,7 +188,7 @@ public class SensorStationDetailController implements Serializable {
     }
 
     //TODO: Remove along the hierarchy and replace with something more elegant
-    public void setSensorStationFromId(Long id) {
+    public void setSensorStationFromId(String id) {
         this.sensorStation = sensorService.loadSensorStation(id);
     }
 
@@ -235,8 +235,7 @@ public class SensorStationDetailController implements Serializable {
             this.plantName = "";
             this.sensorStation = new SensorStation();
         } else {
-            Long id = Long.parseLong(idString);
-            this.setSensorStationFromId(id);
+            this.setSensorStationFromId(idString);
             this.sensorStation = this.getSensorStation();
             if (this.getSensorStation().getPlant() == null) {
                 return;
