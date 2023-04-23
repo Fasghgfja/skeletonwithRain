@@ -1,5 +1,6 @@
 # https://github.com/hbldh/bleak
 # https://github.com/hbldh/bleak/blob/master/examples/service_explorer.py
+import string
 import struct
 import asyncio
 import time
@@ -22,16 +23,29 @@ gas_alarm_characteristic_uuid = "000019b5-0000-1000-8000-00805f9b34fb"
 # device_name = "A52 von stefan"
 
 # writeValue is used to write the values to the database
-def writeValue(value, is_float, type, characteristic):
-    file1 = open("sensorfile.txt", "a")
-    file1.write("\nSensor type:\t{0}\nuuid:\t\t\t{1}\n".format(type.decode(), characteristic.uuid))
-    if is_float:
-        format = "Value:\t\t\t{float_value:.2f} "
-        [extract_float_value] = struct.unpack("f", value)
-        file1.write(format.format(float_value = extract_float_value))
+def insert_values_into_database(value, float_value, type, deviceName):
+    if float_value:
+        float_val = struct.unpack('f', value)[0]
+        string_value = float_val
     else:
-        file1.write("Value:\t\t\t{0}".format(int.from_bytes(value, "little")))
-    file1.close()
+        string_value = int.from_bytes(value, "little")
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+                select sensor_id from sensor where sensor_type='{0}' and station_name='{1}'
+        '''.format(type.decode(), deviceName))
+        sensor_id = c.fetchone()[0]
+        c = conn.cursor()
+        c.execute('''
+                insert into value values('{0}', CURRENT_TIMESTAMP, {1})
+            '''.format(string_value, sensor_id))
+        conn.commit()
+        file1 = open("logFile.txt", "a")
+        file1.write("INFO: Value for type {0} on id {1} saved\n".format(type.decode(), sensor_id))
+        file1.close()
+    except Exception as e:
+        logException(e, type)
 # send signal to switch on/off alarm ligth on a given uuid
 async def writeAlarmSignal(uuid, switch):
     device = await BleakScanner.find_device_by_name(device_name)
@@ -84,13 +98,13 @@ def checkBoarderValues():
     file1 = open("logFile.txt", "a")
     file1.write("INFO: Boarder values have been checked at {0}\n".format(datetime.now().strftime("%D__%H:%M:%S")))
     file1.close()
-async def readSensorData(new_connection, device_list):
+async def read_sensor_data(new_connection, device_list):
     # scanning for Sensorstation with name "G4T2"
     sensor_index = 0
     for deviceName in device_list:
         device = await BleakScanner.find_device_by_name(deviceName) # could also have timeout
         if device is None:
-            logConnectionException(deviceName)
+            log_connection_exception(deviceName)
         else:
             # the naming convention is not intuitive imho
             async with BleakClient(device) as client:
@@ -98,17 +112,17 @@ async def readSensorData(new_connection, device_list):
                 # print all services and all characteristics provided by device
 
                 for service in client.services: # iterate all defined services on peripheral
-                    print("Serivce: {0}".format(service))
+                    # print("Serivce: {0}".format(service))
                     if service.uuid != "00001801-0000-1000-8000-00805f9b34fb":
                         file1 = open("logFile.txt", "a")
                         file1.write("INFO: Connected to device {0} at {1}\nSerivce uuid:\t{2}\nDescription:\t{3}\n"
                                     .format(deviceName, datetime.now().strftime("%D__%H:%M:%S"), service.uuid, service.description))
                         file1.close()
                         if new_connection:
-                            insertNewSensorStationToDatabase(service.description, deviceName)
+                            insert_new_sensor_station_to_database(service.description, deviceName)
                     for characteristic in service.characteristics: # print the characteristics of the service
                         float_value = False
-                        print("Characteristic: {0} \n\twith properties: {1}".format(characteristic, ", ".join(characteristic.properties)))
+                        # print("Characteristic: {0} \n\twith properties: {1}".format(characteristic, ", ".join(characteristic.properties)))
                             # if characteristic.uuid != "00002a05-0000-1000-8000-00805f9b34fb":
 
                         for descriptor in characteristic.descriptors:
@@ -121,10 +135,10 @@ async def readSensorData(new_connection, device_list):
                             try:
                                 value = await client.read_gatt_char(characteristic.uuid)
                                 if new_connection :
-                                    insertNewSensorToDatabase(characteristic, deviceName,type, sensor_index)
+                                    insert_new_sensor_to_database(characteristic, deviceName, type, sensor_index)
                                     sensor_index +=1
                                 else:
-                                    writeValue(value, float_value, type, characteristic)
+                                    insert_values_into_database(value, float_value, type, deviceName)
                             except Exception as e:
                                 logException(e, characteristic.uuid)
                 file1 = open("logFile.txt", "a")
@@ -134,7 +148,7 @@ def logException(e, uuid):
     file1 = open("logFile.txt", "a")
     file1.write("ERROR: On characteristic {0}. Error is {1} at {2}\n".format(uuid, e, datetime.now().strftime("%D__%H:%M:%S")))
     file1.close()
-def logConnectionException(name):
+def log_connection_exception(name):
     file1 = open("logFile.txt", "a")
     file1.write("ERROR: Could not find device with name {0} at {1}\n".format(name, datetime.now().strftime("%D__%H:%M:%S")))
     file1.close()
@@ -146,7 +160,7 @@ def implement_database():
     c.execute('''
             create table if not exists Sensorstation(
             name varchar(64) not null primary key,
-            service_uuid varchar,
+            service_description varchar,
             alarm_switch varchar(15) )
           ''')
 
@@ -164,15 +178,13 @@ def implement_database():
 
     c.execute('''
             create table if not exists Value(
-            value_id int not null,
-            value varchar(64) not null,
+            value varchar not null,
             time_stamp timestamp,
             sensor_id int,
-            PRIMARY KEY (value_id),
             FOREIGN KEY (sensor_id) REFERENCES Sensor(sensor_id) ON DELETE CASCADE);
         ''')
     conn.commit()
-def insertNewSensorStationToDatabase(attribute, name):
+def insert_new_sensor_station_to_database(attribute, name):
     # TODO get number of max index of sensor
     try:
         conn = sqlite3.connect('AccessPoint')
@@ -181,10 +193,13 @@ def insertNewSensorStationToDatabase(attribute, name):
                 insert into Sensorstation values('{0}', '{1}', 'off')
             '''.format(name, attribute))
         conn.commit()
+        file1 = open("logFile.txt", "a")
+        file1.write("INFO: Sensor Station with name {0} has been inserted to the database\n".format(name))
+        file1.close()
         print("saved")
     except Exception as e:
         logException(e, attribute)
-def insertNewSensorToDatabase(attribute, name, type, sensor_index):
+def insert_new_sensor_to_database(attribute, name, type, sensor_index):
     try:
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
@@ -192,10 +207,13 @@ def insertNewSensorToDatabase(attribute, name, type, sensor_index):
                 insert into Sensor values( {0}, '{1}', '{2}', '{3}', {4}, {5}, {6})
             '''.format(sensor_index, attribute.uuid, name, type.decode(), 0, 0, 0))
         conn.commit()
+        file1 = open("logFile.txt", "a")
+        file1.write("INFO: Sensor with uuid {0} and type {1} from Station {2} has been inserted to the database\n".format(attribute.uuid, type.decode(), name))
+        file1.close()
         print("ok-----------------InsertSensor")
     except Exception as e:
         logException(e, attribute.uuid)
-def readStationNamesDatabase():
+def read_Sensor_Station_Database():
     # TODO call in loob all sensorstation name
     try:
         conn = sqlite3.connect('AccessPoint')
@@ -206,15 +224,29 @@ def readStationNamesDatabase():
         return c
     except Exception as e:
         logException(e, "SensorStation")
-
-def readSensorsDatabase(name):
+def read_value_from_database():
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+            select * from value
+        ''')
+        return c
+    except Exception as e:
+        logException(e, "Value")
+def read_sensors_database(name):
     # TODO call in loob all sensorstation name
     try:
+        count = 0
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
         c.execute('''
             select * from Sensor where station_name='{0}'
         '''.format(name))
+        # sensor count to get max index
+        for val in c.fetchall():
+            count += 1
+        print(count)
         return c
     except Exception as e:
         logException(e, "Sensor")
@@ -235,19 +267,23 @@ if __name__ == '__main__':
                 # TODO call web app for Sensorstations if a new is added return True e.g. new_SensorStation = readSensorstation() and set device_name to the new one
                 print("Call for new Sensorstation")
                 if new_SensorStation:
-                    asyncio.run(readSensorData(new_SensorStation, [device_name]))
+                    asyncio.run(read_sensor_data(new_SensorStation, [device_name]))
                 new_SensorStation = False
-                print(readStationNamesDatabase().fetchall())
-                print(readSensorsDatabase(device_name).fetchall())
                 time.sleep(10)
                 program_state = 2
             case 2:
-                device_name = readStationNamesDatabase().fetchone()[0] # extract from [('G4T2',)]
-                print(" its the name {0}".format(device_name))
-                asyncio.run(readSensorData(new_SensorStation, [device_name]))
+                device_name = read_Sensor_Station_Database().fetchone()[0] # extract from [('G4T2',)]
+                print("its the name {0}".format(device_name))
+                asyncio.run(read_sensor_data(new_SensorStation, [device_name]))
                 print("Read Sensor data")
                 value_count += 1
-                # TODO if value_count > 10 call sendValuesTo Rest
+                if value_count >= 10:
+                    for val in read_value_from_database().fetchall():
+                        file1 = open("sensorfile.txt", "a")
+                        file1.write("{0}\n".format(val))
+                        file1.close()
+                        print(val) # TODO call rest to write the values to the database
+                    value_count = 0
                 time.sleep(5)
                 program_state = 3
             case 3:
@@ -256,5 +292,4 @@ if __name__ == '__main__':
                 time.sleep(5)
                 program_state = 1
         repeat += 1
-
 #  cronjop to restart
