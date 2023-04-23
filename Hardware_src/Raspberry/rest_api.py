@@ -88,14 +88,14 @@ def checkIfNewStations():
                                 ''')
 
     for sensorstations in already_added_SensorStations:
-        added_sensorstation_list.append(sensorstations)
+        already_added_sensorstation_list.append(sensorstations)
 
     webapp_sensorstation_names = getSensorstations()
 
     tempList =[]
 
     for name in webapp_sensorstation_names:
-        if name not in added_sensorstation_list:
+        if name not in already_added_sensorstation_list:
             tempList.append(name)
 
 
