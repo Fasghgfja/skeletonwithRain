@@ -138,5 +138,6 @@ while repeat < 100:
     time.sleep(5)
     repeat += 1
     rest_api.writeValueToWebApp()
+    rest_api.getSensorstations()
     print(repeat)
 
