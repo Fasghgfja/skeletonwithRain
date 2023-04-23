@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class AccessPoint extends Metadata implements Persistable<Long>, Serializable, Comparable<AccessPoint>{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, unique = true)
     private Long accessPointID;
     private String location;

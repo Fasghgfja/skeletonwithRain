@@ -14,7 +14,7 @@
                         <p:dataTable id="accessPointsTable" var="accessPoint"
                                      value="#{accessPointController.accessPoints}"
                                      paginator="true" paginatorPosition="bottom" rows="10" rowIndexVar="rowIndex"
-                        emptyMessage="No Access Points found.">
+                                     emptyMessage="No Access Points found.">
                             <p:column style="text-align: center" headerText="Access Point ID" sortBy="#{accessPoint.id}"
                                       filterBy="#{accessPoint.id}">
                                 <h:outputText value="#{accessPoint.id}"/>
@@ -41,14 +41,14 @@
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
+                    </div></div></div></h:form>
                         <!-- CREATE ACCESS POINT BUTTON -->
+
                         <p:separator>
-                            <p:commandButton icon="pi pi-plus" value="Create New Access Point"
+                            <p:commandButton value="Create New Access Point" update=":createDialog:createAPDialog"
                                              oncomplete="PF('createAPDialog').show()"
-                                             update="accessPointsForm:createAPDialog"
-                                             ajax="true" class="btn btn-primary">
-                                <f:setPropertyActionListener value="#{accessPoint}"
-                                                             target="#{accessPointController.accessPoint}"/>
+                                             icon="pi pi-plus" title="Create new Access Point" class="btn btn-primary">
+                                    <p:resetInput target=":createDialog:createAPDialog"/>
                             </p:commandButton>
                             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="350"
                                              widgetVar="confirmDialog">
@@ -61,31 +61,25 @@
                         </p:separator>
 
                         <!-- CREATE ACCESS POINT DIALOG -->
+                        <h:form id="createDialog">
+                            <p:dialog header="Create New Access Point" id="createAPDialog" widgetVar="createAPDialog" modal="true"
+                                      showEffect="fade" hideEffect="fade" resizable="false">
+                                <p:ajax event="close" update="createAPDialog"/>
+                                <p:outputPanel id="createAP">
+                                    <h:panelGrid columns="2">
+                                        <p:outputLabel for="location" value="Location:"/>
+                                        <p:inputText id="location" value="#{createAccessPointBean.location}"
+                                                     required="true"/>
 
-                        <p:dialog id="createAPDialog" showEffect="fade" hideEffect="fade"
-                                  header="Create New Access Point"
-                                  widgetVar="createAPDialog" modal="true"
-                                  onShow="document.getElementById('accessPointsForm:location').value=''">
-                            <p:outputPanel id="createAP"
-                                           visible="#{not empty accessPointController.accessPoint}">
-                                <h:panelGrid columns="2">
-                                    <p:outputLabel for="location" value="Location:"/>
-                                    <p:inputText id="location" value="#{accessPointController.location}"
-                                                 required="true"/>
+                                        <p:commandButton value="Create"
+                                                         action="#{createAccessPointBean.doCreateNewAccessPoint}"
+                                                         update=":accessPointsForm:accessPointsTable"
+                                                         oncomplete="PF('createAPDialog').hide()"/>
+                                        <p:commandButton value="Cancel" onclick="PF('createAPDialog').hide()"/>
 
-                                    <p:commandButton value="Create"
-                                                     action="#{accessPointController.doCreateAccessPoint}"
-                                                     update=":accessPointsForm:accessPointsTable"
-                                                     oncomplete="PF('createAPDialog').hide()"/>
-                                    <p:commandButton value="Cancel" onclick="PF('createAPDialog').hide()"/>
-
-                                </h:panelGrid>
-                            </p:outputPanel>
-
-                        </p:dialog>
-                    </div>
-                </div>
-            </div>
-        </h:form>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </p:dialog>
+                        </h:form>
     </ui:define>
 </ui:composition>

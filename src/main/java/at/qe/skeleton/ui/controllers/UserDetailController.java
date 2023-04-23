@@ -1,8 +1,7 @@
 package at.qe.skeleton.ui.controllers;
 
-import at.qe.skeleton.model.UserRole;
-import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.Userx;
+import at.qe.skeleton.model.*;
+import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.services.UserService;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -17,6 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 /**
@@ -42,6 +45,9 @@ public class UserDetailController implements Serializable {
 
     @Autowired
     private transient PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private transient LogRepository logRepository;
 
     private List<String> selectedRoles;
 
@@ -102,11 +108,27 @@ public class UserDetailController implements Serializable {
         }
         user.setRoles(roles);
         user = this.userService.saveUser(user);
+        Log createLog = new Log();
+        createLog.setDate(LocalDate.now());
+        createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        createLog.setAuthor(sessionInfoBean.getCurrentUserName());
+        createLog.setSubject("USER EDIT");
+        createLog.setText("EDITED USER: " + user.getUsername());
+        createLog.setType(LogType.SUCCESS);
+        logRepository.save(createLog);
     }
 
     public void doSaveOwnUser(){
         this.userService.saveUser(user);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"User saved successfully!", null));
+        Log createLog = new Log();
+        createLog.setDate(LocalDate.now());
+        createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        createLog.setAuthor(sessionInfoBean.getCurrentUserName());
+        createLog.setSubject("USER EDIT");
+        createLog.setText("EDITED USER: " + user.getUsername());
+        createLog.setType(LogType.SUCCESS);
+        logRepository.save(createLog);
     }
 
 
