@@ -18,7 +18,7 @@ public class Measurement implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "sensor_station_id", nullable = true)
+    @JoinColumn(name = "sensorStationName", nullable = true)
     private SensorStation sensorStation;
 
 

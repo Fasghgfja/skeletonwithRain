@@ -48,21 +48,22 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.sensorStationName);
-        return hash;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SensorStation that = (SensorStation) o;
+
+        if (getSensorStationName() != null ? !getSensorStationName().equals(that.getSensorStationName()) : that.getSensorStationName() != null)
+            return false;
+        return getPlant() != null ? getPlant().equals(that.getPlant()) : that.getPlant() == null;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof final Plant other)) {
-            return false;
-        }
-        return Objects.equals(this.getSensorStationID(), other.getPlantID());
+    public int hashCode() {
+        int result = getSensorStationName() != null ? getSensorStationName().hashCode() : 0;
+        result = 31 * result + (getPlant() != null ? getPlant().hashCode() : 0);
+        return result;
     }
 
     @Override
