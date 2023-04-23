@@ -29,6 +29,8 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      */
     Measurement findFirstById(Long Id);
 
+
+
     //TODO: is it better to implement this in Measurement and search directly by plant?
     //    @ManyToOne
     //    @JoinColumn(name = "plant_id", nullable = false)
@@ -50,6 +52,10 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @throws IllegalArgumentException If sensorStation is {@literal null}.
      */
     List<Measurement> findMeasurementsBySensorStationOrderByTimestampDesc(SensorStation sensorStation);
+
+
+    Measurement findFirstBySensorStationIdAndType(Long sensorStationId,String type);
+
 
     /**
      * Retrieves all measurements from a sensor station of a given type.

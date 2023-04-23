@@ -49,6 +49,22 @@ public class MeasurementService {
         //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
 
         System.out.println(newMeasurement);
+        Measurement newMeasurement2 = convertMeasurement(newMeasurement);
+        measurementRepository.save(newMeasurement2);
+        newMeasurement2 = measurementRepository.findFirstById(newMeasurement2.getId());
+
+        return newMeasurement;
+    }
+
+    public Measurement convertMeasurement(Measurement2 measurement) {
+        Measurement newMeasurement = new Measurement();
+        newMeasurement.setType(measurement.getUuid());
+        newMeasurement.setValue_s(measurement.getValue());
+        measurementRepository.save(newMeasurement);
+        //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
+        System.out.println(newMeasurement);
+        newMeasurement = measurementRepository.findFirstById(newMeasurement.getId());
+        System.out.println(newMeasurement);
         return newMeasurement;
     }
 
@@ -105,6 +121,15 @@ public class MeasurementService {
     public Measurement findMeasurementById(Long id) {
         return measurementRepository.findFirstById(id);
     }
+
+
+
+
+
+    public Measurement findFirstMeasurementBySensorStationIdAndType(Long sensorStationId,String type) {
+        return measurementRepository.findFirstBySensorStationIdAndType(sensorStationId,type);
+    }
+
 
     /**
      * Retrieves all measurements from a plant.

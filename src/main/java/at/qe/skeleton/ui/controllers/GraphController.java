@@ -42,6 +42,7 @@ public class GraphController implements Serializable {
     SensorStationService sensorService;
 
 
+
     /**
      * Different charts that can be used in the application
      * to call them from the frontend just use graphcontroller.fieldname

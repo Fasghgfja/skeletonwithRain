@@ -127,13 +127,18 @@
                                     </h:outputText>
                                 </p:column>
 
-                                <p:column headerText="Status" sortBy="#{order.status}">
-                                    <span class="order-badge order-#{order.status.name().toLowerCase()}">#{order.status}</span>
+                                <p:column headerText="Status">
+                                    <p:button icon="pi pi-circle-on" style="color:#{sensorStationDetailController.getlastAirPressureMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" />
+                                    <p:button icon="pi pi-circle-on" style="color:#{sensorStationDetailController.getlastTemperatureMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" />
+                                    <p:button icon="pi pi-circle-on" style="color:#{sensorStationDetailController.getlastSoilMoistureMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" />
+                                    <p:button icon="pi pi-circle-on" style="color:#{sensorStationDetailController.getlastAirQualityMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" />
+                                    <p:button icon="pi pi-circle-on" style="color:#{sensorStationDetailController.getlastLightIntensityMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" />
+                                    <p:button icon="pi pi-circle-on" style="color:#{sensorStationDetailController.getlastHumidityMeasurementStatus(sensorStation.id) == 'OK' ? 'green' : 'red'}" />
                                 </p:column>
 
-                                <p:column style="width: 3.5rem">
+                                 <p:column style="width: 3.5rem">
 
-                                    <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
+                                     <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
                                     <p:button icon="pi pi-search"
                                               title="open Detail-View"
                                               href="/greenHouseDetails.xhtml?id=#{sensorStation.id}"/>
