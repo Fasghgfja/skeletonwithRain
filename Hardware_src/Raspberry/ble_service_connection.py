@@ -256,6 +256,7 @@ def read_sensors_database(name):
 
 if __name__ == '__main__':
     # TODO read config.yaml
+    rest_api.writeValueToWebApp()
     repeat = 0
     value_count = 0
     new_SensorStation = True
@@ -267,11 +268,16 @@ if __name__ == '__main__':
                 time.sleep(5)
                 program_state = 1
             case 1:
-                # TODO call web app for Sensorstations if a new is added return True e.g. new_SensorStation = readSensorstation() and set device_name to the new one
-                print("Call for new Sensorstation")
-                if new_SensorStation:
-                    asyncio.run(read_sensor_data(new_SensorStation, [device_name]))
-                new_SensorStation = False
+                new_device_name_list = rest_api.checkIfNewStations()
+                if len(new_device_name_list) == 1:
+                    new_SensorStation = True
+                    asyncio.run(read_sensor_data(new_SensorStation), [new_device_name_list])
+                elif len(new_device_name_list) > 1:
+                    new_SensorStation = True
+                    asyncio.run(read_sensor_data(new_SensorStation), new_device_name_list)
+
+                    print("Call for new Sensorstation")
+
                 time.sleep(10)
                 program_state = 2
             case 2:
