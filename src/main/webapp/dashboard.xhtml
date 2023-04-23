@@ -103,15 +103,15 @@
                             <p:dataTable id="ordersTable" var="sensorStation"
                                          value="#{sensorStationListController.sensorStations}" selectionMode="single"
                                          reflow="true" paginatorPosition="bottom"
-                                         rowKey="#{sensorStation.id}" paginator="true" rows="5"
-                                         sortBy="#{sensorStation.id}" sortOrder="descending">
+                                         rowKey="#{sensorStation.sensorStationName}" paginator="true" rows="5"
+                                         sortBy="#{sensorStation.sensorStationName}" sortOrder="descending">
 
                                 <!-- .......................ROW SELECTION EVENT................ -->
                                 <p:ajax event="rowSelect" update="myBarChart"
                                         listener="#{graphController.onRowSelect}"/>
 
-                                <p:column headerText="Id" sortBy="#{sensorStation.id}">
-                                    <h:outputText value="#{sensorStation.id}"/>
+                                <p:column headerText="Id" sortBy="#{sensorStation.sensorStationName}">
+                                    <h:outputText value="#{sensorStation.sensorStationName}"/>
                                 </p:column>
 
                                 <p:column headerText="Plant" sortBy="#{sensorStation.plant}">
@@ -155,7 +155,7 @@
                                     <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
                                     <p:button icon="pi pi-search"
                                               title="open Detail-View"
-                                              href="/greenHouseDetails.xhtml?id=#{sensorStation.id}"/>
+                                              href="/greenHouseDetails.xhtml?id=#{sensorStation.sensorStationName}"/>
 
                                 </p:column>
                             </p:dataTable>
