@@ -104,7 +104,7 @@
                                          value="#{sensorStationListController.sensorStations}" selectionMode="single"
                                          reflow="true" paginatorPosition="bottom"
                                          rowKey="#{sensorStation.sensorStationName}" paginator="true" rows="5"
-                                         sortBy="#{sensorStation.sensorStationName}" sortOrder="descending">
+                                         sortBy="#{sensorStation.sensorStationName}" sortOrder="ascending">
 
                                 <!-- .......................ROW SELECTION EVENT................ -->
                                 <p:ajax event="rowSelect" update="myBarChart"
@@ -150,9 +150,9 @@
                                        title="Humidity"></i>
                                 </p:column>
 
-                                <p:column style="width: 3.5rem">
+                                 <p:column style="width: 3.5rem">
 
-                                    <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
+                                     <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
                                     <p:button icon="pi pi-search"
                                               title="open Detail-View"
                                               href="/greenHouseDetails.xhtml?id=#{sensorStation.sensorStationName}"/>
