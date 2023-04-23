@@ -1,3 +1,6 @@
+import sqlite3
+
+import cursor as cursor
 import requests
 
 listOfSensorStations = []
@@ -7,6 +10,10 @@ auth = ("admin", "passwd")
 measurements_url = "http://localhost:8080/api/measurements"
 sensorStations_url = "http://localhost:8080/model/SensorStation"
 
+
+
+
+
 class SensorValue(object):
     def __init__(self, sensorStationName: str, uuid: str, value: str):
         self.sensorStationName = sensorStationName
@@ -15,11 +22,19 @@ class SensorValue(object):
 
 
 def writeValueToWebApp():
-    tempSensorValue = SensorValue(sensorStationName="123", uuid="TEMPERATURE", value="56")
-    r = requests.post(measurements_url, json=vars(tempSensorValue), auth=auth)
-    print(r.status_code)
+
+    conn = sqlite3.connect('AccessPoint')
+    sql = "SELECT sensorstationname, uuid, value FROM meine_tabelle LIMIT 10;"
+    temp_sql_values = cursor.execute(sql).fetchall()
+
+    for entry in temp_sql_values:
+        temp_sensor_value = SensorValue(sensorStationName=entry[0], uuid=entry[1], value=entry[2])
+        r = requests.post(measurements_url, json=vars(temp_sensor_value), auth=auth)
+        print(r.status_code)
+
 
 def getSensorstations():
+
     temp_sensor_names = []
 
     response = requests.get(sensorStations_url, auth=auth)
