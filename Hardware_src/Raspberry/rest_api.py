@@ -73,8 +73,8 @@ def getSensorstations():
     else:
         print("Fehler beim Abrufen der Daten. Status Code:", response.status_code)
 
-    print(temp_sensor_names)
-    return temp_sensor_names
+    print(temp_sensorstation_names)
+    return temp_sensorstation_names
 
 
 def checkIfNewStations():
