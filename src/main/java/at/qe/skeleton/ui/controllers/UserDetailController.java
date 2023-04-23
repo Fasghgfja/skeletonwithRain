@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.Serializable;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import jakarta.el.MethodExpression;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.Setter;
 import org.omnifaces.util.Faces;
@@ -100,6 +102,11 @@ public class UserDetailController implements Serializable {
         }
         user.setRoles(roles);
         user = this.userService.saveUser(user);
+    }
+
+    public void doSaveOwnUser(){
+        this.userService.saveUser(user);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"User saved successfully!", null));
     }
 
 
