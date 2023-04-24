@@ -23,14 +23,12 @@ public class SensorStationService {
     private LogRepository logRepository;
 
 
-
-    @PreAuthorize("hasAuthority('ADMIN')")
     public Collection<SensorStation> getAllSensorStations() {
         return sensorStationRepository.findAll();
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    public SensorStation loadSensorStation(Long id) {
+    public SensorStation loadSensorStation(String id) {
         return sensorStationRepository.findFirstById(id);
     }
 
@@ -60,7 +58,7 @@ public class SensorStationService {
 
 
     //TODO: push this down to repository and queue , it is too expensive here
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public long getSensorStationsAmount() {
         return sensorStationRepository.count();
     }

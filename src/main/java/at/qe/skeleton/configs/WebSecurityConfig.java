@@ -69,7 +69,7 @@ public class WebSecurityConfig {
                     .permitAll()
                     .failureUrl("/login.xhtml?error=true")
                     .defaultSuccessUrl("/dashboard.xhtml")
-                    .loginProcessingUrl("/login")
+                    .loginProcessingUrl("/")
                     .successForwardUrl("/dashboard.xhtml")
                     .and()
                     .logout()

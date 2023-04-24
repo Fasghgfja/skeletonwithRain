@@ -1,6 +1,10 @@
 package at.qe.skeleton.repositories;
 
 import at.qe.skeleton.model.Plant;
+import at.qe.skeleton.model.UserRole;
+import at.qe.skeleton.model.Userx;
+import org.springframework.data.jpa.repository.Query;
+import at.qe.skeleton.model.Userx;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
 
@@ -43,7 +47,14 @@ public interface PlantRepository extends AbstractRepository<Plant, Long> {
      */
     List<Plant> findByPlantNameContaining(String plantName);
 
+    @Query("SELECT p FROM Plant p LEFT OUTER JOIN p.followers f ON f.username = :username WHERE f.username IS NULL")
+    List<Plant> findPlantsInPlantsCatalogueNotYetFollowed(@Param("username") String username );
+    List<Plant> findPlantsByFollowers(Userx user);
 
+
+
+    @Query("SELECT u FROM Userx u WHERE :role MEMBER OF u.roles")
+    List<Userx> findByRole(@Param("role") UserRole role);
 }
 
 

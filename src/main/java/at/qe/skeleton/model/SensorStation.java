@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
-import java.io.Serial;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,11 +15,10 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-public class SensorStation extends Metadata implements Persistable<Long>, Serializable, Comparable<SensorStation> {
+public class SensorStation extends Metadata implements Persistable<String>, Serializable, Comparable<SensorStation> {
     @Id
-    @GeneratedValue
-    @Column(nullable = false, unique = true)
-    private Long sensorStationID;
+    @Column(length = 100)
+    private String sensorStationName;
 
     @Column(length = 100)
     private String location;
@@ -37,38 +36,39 @@ public class SensorStation extends Metadata implements Persistable<Long>, Serial
         this.location = location;
     }
 
-    public Long getSensorStationID() {
-        return sensorStationID;
+    public String getSensorStationID() {
+        return sensorStationName;
     }
-    public Long getId() {
+    public String getId() {
         return this.getSensorStationID();
     }
 
-    public void setSensorStationID(Long sensorStationID) {
-        this.sensorStationID = sensorStationID;
+    public void setSensorStationID(String sensorStationID) {
+        this.sensorStationName = sensorStationID;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SensorStation that = (SensorStation) o;
+
+        if (getSensorStationName() != null ? !getSensorStationName().equals(that.getSensorStationName()) : that.getSensorStationName() != null)
+            return false;
+        return getPlant() != null ? getPlant().equals(that.getPlant()) : that.getPlant() == null;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.sensorStationID);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof final Plant other)) {
-            return false;
-        }
-        return Objects.equals(this.getSensorStationID(), other.getPlantID());
+        int result = getSensorStationName() != null ? getSensorStationName().hashCode() : 0;
+        result = 31 * result + (getPlant() != null ? getPlant().hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
-        return "at.qe.skeleton.model.Text[ id=" + sensorStationID + " , " + sensorStationID + " ]";
+        return "at.qe.skeleton.model.Text[ id=" + sensorStationName + " , " + sensorStationName + " ]";
     }
 
     @Override
@@ -78,7 +78,7 @@ public class SensorStation extends Metadata implements Persistable<Long>, Serial
 
     @Override
     public int compareTo(SensorStation o) {
-        return this.sensorStationID.compareTo(o.getSensorStationID());
+        return this.sensorStationName.compareTo(o.getSensorStationID());
     }
     public String getLocation() {
         return location;

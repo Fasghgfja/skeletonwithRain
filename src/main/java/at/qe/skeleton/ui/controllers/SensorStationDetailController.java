@@ -83,7 +83,7 @@ public class SensorStationDetailController implements Serializable {
     }
 
 
-    public String getlastMeasurementStatus(String type,Long sensorStationId) {
+    public String getlastMeasurementStatus(String type,String sensorStationId) {
         Measurement thisMeasurement = measurementService.findFirstMeasurementBySensorStationIdAndType(sensorStationId,type);
         if (thisMeasurement == null) {return "OK";}
         if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
@@ -149,6 +149,7 @@ public class SensorStationDetailController implements Serializable {
     public void onRowToggle(ToggleEvent event) {
         if (event.getVisibility() == Visibility.VISIBLE) {
             sensorStation = (SensorStation) event.getData();
+            System.out.println(sensorStation);
             if (sensorStation != this.sensorStation) {
                 getLatestMeasurements();
             }
@@ -184,7 +185,7 @@ public class SensorStationDetailController implements Serializable {
     }
 
     //TODO: Remove along the hierarchy and replace with something more elegant
-    public void setSensorStationFromId(Long id) {
+    public void setSensorStationFromId(String id) {
         this.sensorStation = sensorService.loadSensorStation(id);
     }
 
@@ -231,8 +232,7 @@ public class SensorStationDetailController implements Serializable {
             this.plantName = "";
             this.sensorStation = new SensorStation();
         } else {
-            Long id = Long.parseLong(idString);
-            this.setSensorStationFromId(id);
+            this.setSensorStationFromId(idString);
             this.sensorStation = this.getSensorStation();
             if (this.getSensorStation().getPlant() == null) {
                 return;

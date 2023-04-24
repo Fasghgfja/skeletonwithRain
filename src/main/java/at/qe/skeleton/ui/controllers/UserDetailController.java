@@ -7,6 +7,7 @@ import at.qe.skeleton.services.UserService;
 import java.io.InputStream;
 import java.io.Serializable;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
+import jakarta.el.MethodExpression;
 import lombok.Getter;
 import lombok.Setter;
 import org.omnifaces.util.Faces;
@@ -144,6 +145,11 @@ public class UserDetailController implements Serializable {
             Userx thisUser = sessionInfoBean.getCurrentUser();
             this.user = userService.loadUser(thisUser.getId());
         }
+
+    public void doRemovePlantFromFollowedPlants(Plant plant) {
+        user = sessionInfoBean.getCurrentUser();
+        this.userService.removePlantFromFollowedPlants(user,plant);
+    }
 
 }
 

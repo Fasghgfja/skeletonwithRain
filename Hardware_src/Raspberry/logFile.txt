@@ -1,0 +1,315 @@
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:48:32
+INFO: Connected to device G4T2 at 04/23/23__10:48:32
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Sensor Station with name G4T2 has been inserted to the database
+INFO: Sensor with uuid 000019b1-0000-1000-8000-00805f9b34fb and type HygroSensor from Station G4T2 has been inserted to the database
+INFO: Sensor with uuid 000019b2-0000-1000-8000-00805f9b34fb and type TempSensor from Station G4T2 has been inserted to the database
+INFO: Sensor with uuid 000019b5-0000-1000-8000-00805f9b34fb and type GasSensor from Station G4T2 has been inserted to the database
+INFO: Sensor with uuid 000019b4-0000-1000-8000-00805f9b34fb and type PressureSensor from Station G4T2 has been inserted to the database
+INFO: Sensor with uuid 000019b3-0000-1000-8000-00805f9b34fb and type humiditySensor from Station G4T2 has been inserted to the database
+INFO: Sensor with uuid 000019b0-0000-1000-8000-00805f9b34fb and type LigthSensor from Station G4T2 has been inserted to the database
+INFO: Disconnected at 04/23/23__10:48:33
+
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:48:47
+INFO: Connected to device G4T2 at 04/23/23__10:48:47
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:48:49
+
+INFO: Boarder values have been checked at 04/23/23__10:48:56
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:49:12
+INFO: Connected to device G4T2 at 04/23/23__10:49:12
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:49:14
+
+INFO: Boarder values have been checked at 04/23/23__10:49:21
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:49:37
+INFO: Connected to device G4T2 at 04/23/23__10:49:37
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:49:39
+
+INFO: Boarder values have been checked at 04/23/23__10:49:46
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:50:02
+INFO: Connected to device G4T2 at 04/23/23__10:50:02
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:50:04
+
+INFO: Boarder values have been checked at 04/23/23__10:50:11
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:50:29
+INFO: Connected to device G4T2 at 04/23/23__10:50:29
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:50:31
+
+INFO: Boarder values have been checked at 04/23/23__10:50:38
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:50:55
+INFO: Connected to device G4T2 at 04/23/23__10:50:55
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:50:56
+
+INFO: Boarder values have been checked at 04/23/23__10:51:03
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:51:19
+INFO: Connected to device G4T2 at 04/23/23__10:51:19
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:51:21
+
+INFO: Boarder values have been checked at 04/23/23__10:51:28
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:51:47
+INFO: Connected to device G4T2 at 04/23/23__10:51:47
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:51:49
+
+INFO: Boarder values have been checked at 04/23/23__10:51:56
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:52:12
+INFO: Connected to device G4T2 at 04/23/23__10:52:12
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:52:14
+
+INFO: Boarder values have been checked at 04/23/23__10:52:21
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:52:39
+INFO: Connected to device G4T2 at 04/23/23__10:52:39
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:52:40
+
+INFO: Boarder values have been checked at 04/23/23__10:52:47
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:53:03
+INFO: Connected to device G4T2 at 04/23/23__10:53:03
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:53:05
+
+INFO: Boarder values have been checked at 04/23/23__10:53:12
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:53:28
+INFO: Connected to device G4T2 at 04/23/23__10:53:28
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:53:30
+
+INFO: Boarder values have been checked at 04/23/23__10:53:37
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:53:53
+INFO: Connected to device G4T2 at 04/23/23__10:53:53
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:53:55
+
+INFO: Boarder values have been checked at 04/23/23__10:54:02
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:54:19
+INFO: Connected to device G4T2 at 04/23/23__10:54:19
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:54:20
+
+INFO: Boarder values have been checked at 04/23/23__10:54:27
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:54:44
+INFO: Connected to device G4T2 at 04/23/23__10:54:44
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:54:45
+
+INFO: Boarder values have been checked at 04/23/23__10:54:52
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:55:08
+INFO: Connected to device G4T2 at 04/23/23__10:55:08
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:55:10
+
+INFO: Boarder values have been checked at 04/23/23__10:55:17
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:55:34
+INFO: Connected to device G4T2 at 04/23/23__10:55:34
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:55:35
+
+INFO: Boarder values have been checked at 04/23/23__10:55:42
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:55:58
+INFO: Connected to device G4T2 at 04/23/23__10:55:58
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:56:00
+
+INFO: Boarder values have been checked at 04/23/23__10:56:07
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:56:24
+INFO: Connected to device G4T2 at 04/23/23__10:56:24
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:56:25
+
+INFO: Boarder values have been checked at 04/23/23__10:56:33
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/23/23__10:56:50
+INFO: Connected to device G4T2 at 04/23/23__10:56:50
+Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb
+Description:	Environmental Sensing
+INFO: Value for type HygroSensor on id 0 saved
+INFO: Value for type GasSensor on id 2 saved
+INFO: Value for type TempSensor on id 1 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 5 saved
+INFO: Disconnected at 04/23/23__10:56:52
+
+INFO: Boarder values have been checked at 04/23/23__10:56:59
+INFO: Boarder values have been checked at 04/23/23__15:03:04
+INFO: Boarder values have been checked at 04/23/23__15:03:24
+INFO: Boarder values have been checked at 04/23/23__15:03:44
+INFO: Boarder values have been checked at 04/23/23__15:04:04
+INFO: Boarder values have been checked at 04/23/23__15:04:24
+INFO: Boarder values have been checked at 04/23/23__15:04:44
+INFO: Boarder values have been checked at 04/23/23__15:05:04
+INFO: Boarder values have been checked at 04/23/23__15:05:24
+INFO: Boarder values have been checked at 04/23/23__15:08:18
+INFO: Boarder values have been checked at 04/23/23__15:08:38
+INFO: Boarder values have been checked at 04/23/23__15:08:58
+INFO: Boarder values have been checked at 04/23/23__15:09:18
+INFO: Boarder values have been checked at 04/23/23__15:09:38
+INFO: Boarder values have been checked at 04/23/23__15:09:58
+INFO: Boarder values have been checked at 04/23/23__15:10:18
+INFO: Boarder values have been checked at 04/23/23__15:10:38
+INFO: Boarder values have been checked at 04/23/23__15:10:58
+INFO: Boarder values have been checked at 04/23/23__15:11:18
+INFO: Boarder values have been checked at 04/23/23__15:11:38
+INFO: Boarder values have been checked at 04/23/23__15:11:58
+INFO: Boarder values have been checked at 04/23/23__15:12:18
+INFO: Boarder values have been checked at 04/23/23__15:12:38
+INFO: Boarder values have been checked at 04/23/23__15:12:58
+INFO: Boarder values have been checked at 04/23/23__15:13:18
+INFO: Boarder values have been checked at 04/23/23__15:13:38
+INFO: Boarder values have been checked at 04/23/23__15:13:58
+INFO: Boarder values have been checked at 04/23/23__15:14:18
+INFO: Boarder values have been checked at 04/23/23__15:14:38
+INFO: Boarder values have been checked at 04/23/23__15:14:58
+INFO: Boarder values have been checked at 04/23/23__15:15:18
+INFO: Boarder values have been checked at 04/23/23__15:15:38
+INFO: Boarder values have been checked at 04/23/23__15:15:58
+INFO: Boarder values have been checked at 04/23/23__15:16:18
+INFO: Boarder values have been checked at 04/23/23__15:16:38
+INFO: Boarder values have been checked at 04/23/23__15:16:58
+INFO: Boarder values have been checked at 04/23/23__15:17:18
+INFO: Boarder values have been checked at 04/23/23__15:17:38
+INFO: Boarder values have been checked at 04/23/23__15:17:58
+INFO: Boarder values have been checked at 04/23/23__15:18:18
+INFO: Boarder values have been checked at 04/23/23__15:18:38
+INFO: Boarder values have been checked at 04/23/23__15:18:58
+INFO: Boarder values have been checked at 04/23/23__15:27:36

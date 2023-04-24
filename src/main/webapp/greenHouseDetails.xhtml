@@ -211,7 +211,7 @@
                         <p:dataTable id="myDataTable1" widgetVar="customersDT2" var="measurement"
                                      value="#{measurementListController.getMeasurementsForSensorStation()}"
                                      selectionMode="single" reflow="true"
-                                     rowKey="#{measurement.sensorStation.id}" scrollable="true" scrollHeight="350"
+                                     rowKey="#{measurement.sensorStation.sensorStationName}" scrollable="true" scrollHeight="350"
                                      styleClass="ui-datatable-striped ui-datatable-sm ui-datatable-gridlines">
 
                             <!-- ........THIS CAN BE ADDED TO ANY INTERACTIVE ELEMENT TO REFRESH SOMETHING............ -->
@@ -229,9 +229,9 @@
                                     </span>
                                 </div>
                             </f:facet>
-                            <p:column headerText="Sensor Station" sortBy="#{measurement.sensorStation.id}"
-                                      filterBy="#{measurement.sensorStation.id}">
-                                <h:outputText value="#{measurement.sensorStation.id}"/>
+                            <p:column headerText="Sensor Station" sortBy="#{measurement.sensorStation.sensorStationName}"
+                                      filterBy="#{measurement.sensorStation.sensorStationName}">
+                                <h:outputText value="#{measurement.sensorStation.sensorStationName}"/>
                             </p:column>
                             <p:column headerText="Plant" sortBy="#{measurement.plant.plantName}"
                                       filterBy="#{measurement.plant.plantName}">
@@ -294,7 +294,7 @@
                                 <div class="checkbox">
                                     <p:outputPanel id="sensorStationID" rendered="#{not empty sensorStationDetailController.sensorStation}">
                                         <h:panelGrid columns="1">
-                                            <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationID}" disabled="true" />
+                                            <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
                                         </h:panelGrid>
                                     </p:outputPanel>
                                 </div>

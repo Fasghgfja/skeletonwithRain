@@ -42,9 +42,10 @@ public class MeasurementService {
 
     public Measurement2 addMeasurement(Measurement2 measurement) {
         Measurement2 newMeasurement = new Measurement2();
-        newMeasurement.setSensorStationName(measurement.getSensorStationName());
-        newMeasurement.setUuid(measurement.getUuid());
+        newMeasurement.setSensorStation(measurement.getSensorStation());
+        newMeasurement.setSensor_id(measurement.getSensor_id());
         newMeasurement.setValue(measurement.getValue());
+        newMeasurement.setTime_stamp(measurement.getTime_stamp());
 
         //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
 
@@ -58,8 +59,9 @@ public class MeasurementService {
 
     public Measurement convertMeasurement(Measurement2 measurement) {
         Measurement newMeasurement = new Measurement();
-        newMeasurement.setType(measurement.getUuid());
+        newMeasurement.setType(measurement.getSensor_id());
         newMeasurement.setValue_s(measurement.getValue());
+        newMeasurement.setTimestamp(LocalDate.parse(measurement.getTime_stamp()));
         measurementRepository.save(newMeasurement);
         //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
         System.out.println(newMeasurement);
@@ -126,7 +128,7 @@ public class MeasurementService {
 
 
 
-    public Measurement findFirstMeasurementBySensorStationIdAndType(Long sensorStationId,String type) {
+    public Measurement findFirstMeasurementBySensorStationIdAndType(String sensorStationId,String type) {
         return measurementRepository.findFirstBySensorStationIdAndType(sensorStationId,type);
     }
 

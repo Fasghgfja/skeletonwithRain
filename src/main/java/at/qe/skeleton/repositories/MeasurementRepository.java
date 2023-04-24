@@ -54,7 +54,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
     List<Measurement> findMeasurementsBySensorStationOrderByTimestampDesc(SensorStation sensorStation);
 
 
-    Measurement findFirstBySensorStationIdAndType(Long sensorStationId,String type);
+    Measurement findFirstBySensorStationIdAndType(String sensorStationId,String type);
 
 
     /**

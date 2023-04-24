@@ -34,27 +34,27 @@ public class LogService {
      *
      * @return a Collection of all log entries.
      */
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public Collection<Log> getAllLogs() {
         return logRepository.findAll();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public long getLogsAmount() {
         return logRepository.count();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public long getErrorLogsAmount() {
         return logRepository.countLogByType(LogType.ERROR);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public long getWarningLogsAmount() {
         return logRepository.countLogByType(LogType.WARNING);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public long getSuccessLogsAmount() {
         return logRepository.countLogByType(LogType.SUCCESS);
     }
