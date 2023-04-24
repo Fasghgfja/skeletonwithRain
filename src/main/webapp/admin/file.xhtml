@@ -39,11 +39,12 @@
         </div>
 
 
-        <div class="card">
-            <h:form>
+        <h:form>
+            <p:commandButton value="Open Webcam" />
+            <p:dialog id="webcamDialog" header="Webcam" widgetVar="webcamDialog" modal="true" resizable="false" visible="false">
                 <h:panelGrid columns="3" cellpadding="5">
                     <p:outputPanel id="photoCamPnl">
-                        <p:photoCam widgetVar="pc" listener="#{photoCamView.oncapture}" update="photo"/>
+                        <p:photoCam widgetVar="pc" listener="#{photoCamController.oncapture}" update="photo"/>
                         <select onchange="reload()" class="photoCamDevices">
                             <option value="">Select device</option>
                             <option value="user">"user" device</option>
@@ -52,46 +53,21 @@
                     </p:outputPanel>
                     <p:commandButton type="button" value="Capture" onclick="PF('pc').capture()"/>
                     <p:outputPanel id="photo">
-                        <p:graphicImage name="demo/images/photocam/#{photoCamView.filename}.jpeg"
-                                        rendered="#{not empty photoCamView.filename}"/>
+                        <p:graphicImage name="demo/images/photocam/#{photoCamController.filename}.jpeg"
+                                        rendered="#{not empty photoCamController.filename}"/>
                     </p:outputPanel>
                 </h:panelGrid>
-            </h:form>
-        </div>
+            </p:dialog>
+        </h:form>
 
         <script>
+            $(document).ready(function() {
+                PF('webcamDialog').hide();
+            });
 
-            //<![CDATA[
-
-            function reload() {
-                var cam = PF('pc');
-                var deviceSelector = document.querySelector("select.photoCamDevices");
-                var device = deviceSelector.value;
-                cam.device = device;
-                cam.reload();
-            }
-
-            function populateDeviceMenu() {
-                var photoCam = PF('pc');
-                var deviceSelector = document.querySelector("select");
-                var availableDevices = photoCam.getAvailableDevices();
-                if (availableDevices) {
-                    availableDevices.then(devices => devices.forEach(device => {
-                            var option = document.createElement("option");
-                            option.text = device.label;
-                            option.value = device.deviceId;
-                            deviceSelector.appendChild(option);
-                        })
-                    );
-                } else {
-                    console.log("no devices available");
-                }
-            }
-
-            populateDeviceMenu();
-
-            //]]>
-
+            $('button').click(function() {
+                PF('webcamDialog').show();
+            });
         </script>
 
 
