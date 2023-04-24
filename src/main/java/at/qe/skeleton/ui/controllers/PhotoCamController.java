@@ -1,11 +1,14 @@
 package at.qe.skeleton.ui.controllers;
 
+import at.qe.skeleton.model.Image;
+import at.qe.skeleton.services.ImageService;
 import jakarta.faces.FacesException;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.CaptureEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +22,10 @@ import java.io.Serializable;
 @Component
 @Scope("view")
 public class PhotoCamController implements Serializable {
+
+    @Autowired
+    ImageService imageService;
+
 
     private String filename;
 
@@ -36,6 +43,11 @@ public class PhotoCamController implements Serializable {
     public void oncapture(CaptureEvent captureEvent) {
         filename = getRandomImageName();
         byte[] data = captureEvent.getData();
+        Image image = new at.qe.skeleton.model.Image();
+        image.setImageByte(data);
+        imageService.saveImage(image);
+
+
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         String newFileName = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo"
