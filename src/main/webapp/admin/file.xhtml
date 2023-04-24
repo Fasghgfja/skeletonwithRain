@@ -41,7 +41,7 @@
 
         <h:form>
             <p:commandButton value="Open Webcam" />
-            <p:dialog id="webcamDialog" header="Webcam" widgetVar="webcamDialog" modal="true" resizable="false" visible="false">
+            <p:dialog id="webcamDialog" header="Webcam" widgetVar="webcamDialog" modal="true" resizable="false" visible="false" dynamic="true" >
                 <h:panelGrid columns="3" cellpadding="5">
                     <p:outputPanel id="photoCamPnl">
                         <p:photoCam widgetVar="pc" listener="#{photoCamController.oncapture}" update="photo"/>
