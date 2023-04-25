@@ -23,7 +23,7 @@ public class Measurement implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "plantid", nullable = true)
+    @JoinColumn(name = "plant_id", nullable = true)
     private Plant plant;
 
     //TODO: JDBC is on crack and if this is called value its seen as a primary key and the table will not be created O_o, find a workaround

@@ -33,7 +33,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
 
     //TODO: is it better to implement this in Measurement and search directly by plant?
     //    @ManyToOne
-    //    @JoinColumn(name = "plantid", nullable = false)
+    //    @JoinColumn(name = "plant_id", nullable = false)
     //    private Plant plant;
     // todo paired with the one in measurement
     /**

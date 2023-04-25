@@ -41,7 +41,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     @JoinTable(
             name = "user_plant",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username"),
-            inverseJoinColumns = @JoinColumn(name = "plantid", referencedColumnName = "plantID")
+            inverseJoinColumns = @JoinColumn(name = "plant_id", referencedColumnName = "plantID")
     )
     private Set<Plant> followedPlants = new HashSet<>();
 
