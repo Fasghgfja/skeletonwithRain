@@ -2,6 +2,11 @@
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui" template="/WEB-INF/templates/main.xhtml">
 
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{plantPhotoGalleryController.init}"/>
+    </f:metadata>
+
+
 
     <ui:define name="title">File</ui:define>
 
@@ -41,7 +46,7 @@
 
         <h:form>
             <p:commandButton value="Open Webcam" />
-            <p:dialog id="webcamDialog" header="Webcam" widgetVar="webcamDialog" modal="true" resizable="false" visible="false" dynamic="true" >
+            <p:dialog id="webcamDialog" header="Webcam" widgetVar="webcamDialog" modal="true" resizable="false" visible="false" dynamic="true" onHide="PF('pc').stop()" >
                 <h:panelGrid columns="3" cellpadding="5">
                     <p:outputPanel id="photoCamPnl">
                         <p:photoCam widgetVar="pc" listener="#{photoCamController.oncapture}" update="photo"/>
@@ -53,9 +58,10 @@
                     </p:outputPanel>
                     <p:commandButton type="button" value="Capture" onclick="PF('pc').capture()"/>
                     <p:outputPanel id="photo">
-                        <p:graphicImage name="demo/images/photocam/#{photoCamController.filename}.jpeg"
-                                        rendered="#{not empty photoCamController.filename}"/>
-                    </p:outputPanel>
+                        <p:graphicImage value="#{photoCamController.lastPicture}" alt="#{photoCamController.lastPicture}" style="width: 100%">
+                    </p:graphicImage>
+
+                </p:outputPanel>
                 </h:panelGrid>
             </p:dialog>
         </h:form>

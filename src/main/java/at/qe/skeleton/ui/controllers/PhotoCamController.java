@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.imageio.stream.FileImageOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -25,6 +26,7 @@ public class PhotoCamController implements Serializable {
 
     @Autowired
     ImageService imageService;
+
 
 
     private String filename;
@@ -41,26 +43,30 @@ public class PhotoCamController implements Serializable {
     }
 
     public void oncapture(CaptureEvent captureEvent) {
-        filename = getRandomImageName();
         byte[] data = captureEvent.getData();
         Image image = new at.qe.skeleton.model.Image();
+        image.setId(50100L);
         image.setImageByte(data);
         imageService.saveImage(image);
+    }
 
 
-
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        String newFileName = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo"
-                + File.separator + "images" + File.separator + "photocam" + File.separator + filename + ".jpeg";
-
-        FileImageOutputStream imageOutput;
-        try {
-            imageOutput = new FileImageOutputStream(new File(newFileName));
-            imageOutput.write(data, 0, data.length);
-            imageOutput.close();
-        }
-        catch (IOException e) {
-            throw new FacesException("Error in writing captured image.", e);
+    public ByteArrayInputStream getLastPicture() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        String id = facesContext.getExternalContext().getInitParameterMap().get("id");
+        System.out.println("PhotcamController: IM get last picture and id is " + id);
+        if (id == null) {
+            System.err.println("id = " + id);
+            Image image = imageService.loadImage(1L);
+            byte[] imageBytes = image.getImageByte();
+            return new ByteArrayInputStream(imageBytes);
+        } else {
+            Image image = imageService.loadImage(50100L);
+            byte[] imageBytes = image.getImageByte();
+            return new ByteArrayInputStream(imageBytes);
         }
     }
+
+
+
 }
