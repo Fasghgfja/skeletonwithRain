@@ -28,7 +28,6 @@ public class PhotoCamController implements Serializable {
     ImageService imageService;
 
 
-
     private String filename;
 
 
@@ -54,7 +53,7 @@ public class PhotoCamController implements Serializable {
     public ByteArrayInputStream getLastPicture() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         String id = facesContext.getExternalContext().getInitParameterMap().get("id");
-        System.out.println("PhotcamController: IM get last picture and id is " + id);
+        System.out.println("IM get last picture and id is" + id);
         if (id == null) {
             System.err.println("id = " + id);
             Image image = imageService.loadImage(1L);
