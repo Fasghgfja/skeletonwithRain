@@ -6,61 +6,65 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templates/loginMain.xhtml">
 
-<ui:define name="content">
-    <div style="display:flex;width: 100%; min-height: 100vh; justify-content: right; align-items: center;
+    <ui:define name="content">
+
+        <div style="display:flex;width: 100%; min-height: 100vh; justify-content: right; align-items: center;
     background-image: url('https://c4.wallpaperflare.com/wallpaper/331/66/547/nature-leaves-water-drops-closeup-wallpaper-preview.jpg'); background-size: cover;">
 
+            <div style="display:flex;width: 100%; min-height: 100%; justify-content: center; align-items: center;" >
+                <p style="color: white;">
+                    <p:galleria value="#{galleryController.images}" var="image" numVisible="5" style="max-width: 300px">
+                        <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 100%">
+                            <f:param name="id" value="#{image.id}" />
+                        </p:graphicImage>
+                        <f:facet name="thumbnail">
+                            <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 20%">
+                                <f:param name="id" value="#{image.id}" />
+                            </p:graphicImage>
+                        </f:facet>
+                    </p:galleria>
+                    <h:form id = "id" >
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:button icon="pi pi-upload"
+                                      title="Upload picture" href="/admin/file.xhtml"/>
+                            <p:button icon="pi pi-camera"
+                                      title="Take a picture" href="/admin/takeAPicture.xhtml"/>
+                        </h:panelGrid>
+                    </h:form>
+                    <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
+                </p>
+            </div>
 
 
-        <div style="display:flex;width: 100%; min-height: 100%; justify-content: center; align-items: center;" >
-            <p style="color: white;">
-                <span style="font-size: 34px;margin-right: 40%; margin-left: 30%">CRATE ACCOUNT<br/><br/></span>
-                <span style="font-size: 22px;">
-                Plants are fundamentally sovereign life forms. However, three<br/>
-                challenges prevent most people from growing their own vegetables, herbs and more.<br/>
-                <span style="font-size: 26px;font-weight: bold;">Lack of time</span>: plants must be constantly monitored. However, if the<br/>
-                plant is too.<br/>
-                <span style="font-size: 26px;font-weight: bold;">Knowledge</span>: it takes a trained eye every once in a while to be able to<br/>
-                spot and fix problems.<br/>
-                <span style="font-size: 26px;font-weight: bold;">Enviroment</span>: indoors, conventional growing methods in pots are<br/>
-                often difficult.<br/><br/>
-                register an account to discover all the features...<br/><br/>
-                </span><br/>
-                <h:commandButton style="background-color: #083604; width: 50%; height: 40px; line-height: 40px; font-size: 16px; padding: 0;margin-right: 75%; margin-left: 25%;"
-                                 type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="Upload Picture" action="confirm" />
-            </p>
-        </div>
 
+            <p:card style="width: 30%; min-height: 100vh; margin:5px; justify-content: left;">
+                <h:form>
 
+                    <h:panelGrid columns="1" style="margin-top: 60%; width: 100%" layout="grid">
+                        <h:outputText value="Join Us" styleClass="login-header" style="font-size: 34px; color: black"/>
+                        <h:outputText value="Create Your Account, It´s Free." styleClass="login-header" />
+                    </h:panelGrid>
 
-        <p:card style="width: 30%; min-height: 100vh; margin:5px; justify-content: left;">
-            <h:form>
-
-                <h:panelGrid columns="1" style="margin-top: 60%; width: 100%" layout="grid">
-                <h:outputText value="Join Us" styleClass="login-header" style="font-size: 34px; color: black"/>
-                <h:outputText value="Create Your Account, It´s Free." styleClass="login-header" />
-                </h:panelGrid>
-
-                <h:panelGrid columns="1" style="margin-top: 5%;margin-bottom: 50%; width: 100%" layout="grid">
-                    <h:outputLabel for="username" value="Username:" />
-                    <p:inputText id="username" value="#{userRegistrationBean.userName}" type="text" required="true" style="width: 100%" />
-                    <h:outputLabel for="password" value="Password:" />
-                    <p:inputText id="password" value="#{userRegistrationBean.password}" type="password" required="true" style="width: 100%" />
-                    <p><h:commandButton style="margin-top: 20px; margin-right: 2px; background-color: black; width: 100%; height: 45px; line-height: 40px;
+                    <h:panelGrid columns="1" style="margin-top: 5%;margin-bottom: 50%; width: 100%" layout="grid">
+                        <h:outputLabel for="username" value="Username:" />
+                        <p:inputText id="username" value="#{userRegistrationBean.userName}" type="text" required="true" style="width: 100%" />
+                        <h:outputLabel for="password" value="Password:" />
+                        <p:inputText id="password" value="#{userRegistrationBean.password}" type="password" required="true" style="width: 100%" />
+                        <p><h:commandButton style="margin-top: 20px; margin-right: 2px; background-color: black; width: 100%; height: 45px; line-height: 40px;
                                         font-size: 16px; padding: 0;" type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                                        value="Create account" action="confirm" /></p>
-                </h:panelGrid>
+                                            value="Create account" action="confirm" /></p>
+                    </h:panelGrid>
 
-                <h:commandLink>
-                    <h:graphicImage url="https://i.ibb.co/NxFM4rH/banner.png" style="height:100px;width:350px; align-self: center" />
-                </h:commandLink>
+                    <h:commandLink>
+                        <h:graphicImage url="https://i.ibb.co/NxFM4rH/banner.png" style="height:100px;width:350px; align-self: center" />
+                    </h:commandLink>
 
-            </h:form>
-        </p:card>
-
-
+                </h:form>
+            </p:card>
 
 
-    </div>
-</ui:define>
+
+
+        </div>
+    </ui:define>
 </ui:composition>

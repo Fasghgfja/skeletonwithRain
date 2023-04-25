@@ -26,8 +26,15 @@
                 often difficult.<br/><br/>
                 register an account to discover all the features...<br/><br/>
                 </span><br/>
-                <h:commandButton style="background-color: #083604; width: 50%; height: 40px; line-height: 40px; font-size: 16px; padding: 0;margin-right: 75%; margin-left: 25%;"
-                                 type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="Upload Picture" action="confirm" />
+                <h:form id = "id" >
+                <h:panelGrid columns="2" cellpadding="5">
+                <p:commandButton style="background-color: #083604; width: 50%; height: 40px; line-height: 40px; font-size: 16px; padding: 0;margin-right: 75%; margin-left: 25%;"
+                                 type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="Upload Picture" href="/admin/file.xhtml"/>
+                <p:commandButton style="background-color: #083604; width: 50%; height: 40px; line-height: 40px; font-size: 16px; padding: 0;margin-right: 75%; margin-left: 25%;"
+                                 type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="Take a Picture" href="/admin/takeAPicture.xhtml"/>
+                </h:panelGrid>
+                </h:form>
+                <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
             </p>
         </div>
 
