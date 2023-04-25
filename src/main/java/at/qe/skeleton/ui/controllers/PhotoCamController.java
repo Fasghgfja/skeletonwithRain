@@ -41,6 +41,7 @@ public class PhotoCamController implements Serializable {
         return filename;
     }
 
+    //TODO:change this so that on capture it only shows the preview (similar as the preview of fileupload , and only saves the picture after imput of save (happy with the picture))
     public void oncapture(CaptureEvent captureEvent) {
         byte[] data = captureEvent.getData();
         Image image = new at.qe.skeleton.model.Image();
