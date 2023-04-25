@@ -123,7 +123,6 @@ public class PlantPhotoGalleryController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         params = context.getExternalContext().getRequestParameterMap();
         idString = params.get("id");
-        photoCamController.setFilename("idString");
         System.out.println("Im PLANTH PHOTO GALLERY CONTROLLER ID HERE:--------------->" + idString); // testing ;D
         this.newPlant = false;
         if (idString == null) {

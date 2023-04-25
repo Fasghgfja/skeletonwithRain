@@ -21,7 +21,7 @@ import java.io.*;
  * This class is dependent on the {@link ImageService}, which is injected using Spring's {@code @Autowired} annotation.
  */
 @Component
-@Scope("session")
+@Scope("view")
 public class FileUploadController implements Serializable {
 
     @Autowired
