@@ -24,7 +24,7 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_gen")
-    @SequenceGenerator(name = "id_gen", initialValue = 1)
+    @SequenceGenerator(name = "id_gen", initialValue = 2)
     @Column(nullable = false, unique = true)
     private Long plantID;
 
