@@ -32,10 +32,11 @@ def checkBoarderValues():
                 if (len(current_value_list) - current_value_breaks) < ((len(current_value_list) * 3) / 4):
                     alarm_count += 1
 
-                if alarm_count > 5 and station[2] == "off":
+                if alarm_count > 5 and alarm_switch == "off":
                     asyncio.run(ble_service_connection.writeAlarmSignal(uuid, "ON", station[0]))
                     alarm_count = -1
-                    DB_connection.update_sensor_station_database("on", station[0])
+                    alarm_switch = "on"
+                    DB_connection.update_sensor_station_database(alarm_switch, station[0])
                     # TODO update Sensorstation alarm_switch webapp
                 if alarm_count != sensor[4]:
                     DB_connection.update_sensor_database(alarm_count, sensor[0])
