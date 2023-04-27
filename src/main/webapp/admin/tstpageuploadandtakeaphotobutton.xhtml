@@ -44,41 +44,5 @@
         </div>
 
 
-        <h:form id = "photoid" >
-            <p:commandButton value="Open Webcam" />
-            <p:dialog id="webcamDialog" header="Webcam" widgetVar="webcamDialog" modal="true" resizable="false" visible="false" dynamic="true" onHide="PF('pc').stop()" closeOnEscape="true" >
-                <p:ajax event="close" update="photo @this" onsuccess="Webcam.stream.getTracks().forEach(x=> x.stop());"/>
-                <h:panelGrid columns="3" cellpadding="5">
-                    <p:outputPanel id="photoCamPnl">
-                        <p:photoCam widgetVar="pc" listener="#{photoCamController.oncapture}" update="photo"/>
-                        <select onchange="reload()" class="photoCamDevices">
-                            <option value="">Select device</option>
-                            <option value="user">"user" device</option>
-                            <option value="environment">"environment" device</option>
-                        </select>
-                    </p:outputPanel>
-                    <p:commandButton type="button" value="Capture" onclick="PF('pc').capture()" update="photoid"/>
-                    <p:outputPanel id="photo">
-                        <!-- ...........PHOTO PREVIEW GOES HERE......... -->
-                        <p:graphicImage value="#{photoCamController.previewImage}" rendered="#{not empty photoCamController.previewImage}"/>
-                    </p:outputPanel>
-                </h:panelGrid>
-            </p:dialog>
-        </h:form>
-
-        <script>
-            $(document).ready(function() {
-                PF('webcamDialog').hide();
-            });
-
-            $('button').click(function() {
-                PF('webcamDialog').show();
-            });
-        </script>
-
-
-
-
-
     </ui:define>
 </ui:composition>
