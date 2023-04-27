@@ -3,6 +3,7 @@ package at.qe.skeleton.repositories;
 
 import at.qe.skeleton.model.Image;
 import at.qe.skeleton.model.Plant;
+import at.qe.skeleton.model.Userx;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,6 +26,7 @@ public interface ImageRepository extends AbstractRepository<Image, Long> {
      * @throws IllegalArgumentException If imageID is {@literal null}.
      */
     Image findFirstById(Long imageID);
+    Image findFirstByPlant(Plant plant);
 
 
     /**
