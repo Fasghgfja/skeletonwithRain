@@ -28,7 +28,7 @@
         <div class="col-12">
             <div class="card">
                 <h5>Upload Picture Test , If this is opened from the phone it will ask if we want to upload from file or directyl from camera</h5>
-                <form action="/api/upload" method="post" enctype="multipart/form-data">
+                <form id="myForm" method="post" enctype="multipart/form-data">
                     <p>
                         <input type="file" name="file" size="40000000" onchange="previewFile()" />
                     </p>
@@ -36,6 +36,20 @@
                     <br />
                     <input type="submit" value="Upload It" />
                 </form>
+
+                <script>
+                    // Extract the id parameter from the current URL
+                    const urlParams = new URLSearchParams(window.location.search);
+                     id = urlParams.get('id');
+                    // Check if id is null, set it to "null"
+                    if (!id) {
+                        id = "null";
+                    }
+
+                    // Update the form action attribute with the new URL
+                    const form = document.getElementById('myForm');
+                    form.action = '/api/upload?id=' + id;
+                </script>
 
                 <script>
                     function previewFile() {
