@@ -2,7 +2,10 @@ package at.qe.skeleton.services;
 
 
 import at.qe.skeleton.model.Image;
+import at.qe.skeleton.model.Plant;
+import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.ImageRepository;
+import at.qe.skeleton.repositories.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,6 +23,9 @@ public class ImageService {
 
     @Autowired
     private ImageRepository imageRepository;
+
+    @Autowired
+    private PlantRepository plantRepository;
 
     //TODO: Autowire plant repository to search by plant id and so
 
@@ -54,6 +60,19 @@ public class ImageService {
     @PreAuthorize("hasAuthority('ADMIN')")
     public Image saveImage(Image image) {
         return imageRepository.save(image);
+    }
+
+
+    public void addPictureToPlantPictures(Image image, String plantid) {
+        System.out.println("im image service here plant id " + plantid);
+        Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantid));
+        System.out.println("plant is " + plant);
+        if(image == null || plant == null ) {
+            System.out.println("addPictureToPlantError null");
+            return;}
+        image.setPlant(plant);
+        imageRepository.save(image);
+
     }
 
 
