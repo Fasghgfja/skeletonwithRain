@@ -66,41 +66,73 @@ async def writeAlarmSignal(uuid, switch):
 def checkBoarderValues():
     # TODO
     # select count of sensorstations
-    connected_sensor_stations = 0
-    while connected_sensor_stations > 0:
-        # TODO
-        # foreach Sensorstation
-        # select alarm_switch from sensorstation where name = "G4T2"
-        alarm_switch = "off"
-        if alarm_switch == "off":
-            # TODO
-            # foreach sensor of table Sensor
-            # select the tuple of an sensor
-            upper_value = 0
-            lower_value = 0
-            current_value = 0
-            alarm_count = 0
-            uuid = 0
-            if current_value < lower_value or current_value > upper_value:
-                if alarm_count > 5:
-                    asyncio.run(writeAlarmSignal(uuid, "ON"))
-                    alarm_count = 0
-                else:
+    connected_sensor_stations_list = read_Sensor_Station_Database().fetchall()
+    for station in connected_sensor_stations_list:
+        alarm_switch = station[2]
+        for sensor in read_sensors_database(station[0]).fetchall():
+            print(sensor)
+            upper_value = sensor[5]
+            lower_value = sensor[6]
+            alarm_count = sensor[4]
+            uuid = sensor[1]
+            current_value_breaks = 0
+            current_value_list = read_value_from_database(sensor[0]).fetchall()
+            if alarm_count == -1 and alarm_switch == "on":
+                # TODO call Webapp via REST value alarm_switch
+                # alarm_switch = "getWebappAlarmSwitch"
+                if alarm_switch == "fixed":
+                    asyncio.run(writeAlarmSignal(uuid, "OFF"))
+                    update_sensor_station_database(alarm_switch, station[0])
+                    update_sensor_database(0,sensor[0])
+            else:
+                for value in current_value_list:
+                    if value[0] < lower_value or value[0] > upper_value:
+                        current_value_breaks += 1
+
+                if (len(current_value_list) - current_value_breaks) < ((len(current_value_list) * 3) / 4):
                     alarm_count += 1
-            # update alarm_count if it has been changed
-        elif alarm_switch == "fixed":
-            # TODO
-            # select any sensor uuid of the current sensorstation
-            uuid = 0
-            asyncio.run(writeAlarmSignal(uuid, "OFF"))
-        else:
-            # TODO
-            # check database of webapp via REST if alarm is fixed
-            print("check again")
+
+                if alarm_count > 5 and station[2] == "off":
+                    asyncio.run(writeAlarmSignal(uuid, "ON"))
+                    alarm_count = -1
+                    update_sensor_station_database("on", station[0])
+                    # TODO update Sensorstation alarm_switch webapp
+                if alarm_count != sensor[4]:
+                    update_sensor_database(alarm_count, sensor[0])
+                    # Todo update Sensor at Webapp
+
     # end of while
     file1 = open("logFile.txt", "a")
     file1.write("INFO: Boarder values have been checked at {0}\n".format(datetime.now().strftime("%D__%H:%M:%S")))
     file1.close()
+def update_sensor_station_database(alarm_switch, station_name):
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+                update Sensorstation set alarm_switch='{0}' where name='{1}'
+            '''.format(alarm_switch, station_name))
+        conn.commit()
+        file1 = open("logFile.txt", "a")
+        file1.write("INFO: SensorStation {0} has been updated alarm_switch to {1} \n".format(station_name, alarm_switch))
+        file1.close()
+        print("ok-----------------updateSensor")
+    except Exception as e:
+        logException(e, station_name)
+def update_sensor_database(alarm_count, sensor_id):
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+                update sensor set alarm_count={0} where sensor_id={1}
+            '''.format(alarm_count, sensor_id))
+        conn.commit()
+        file1 = open("logFile.txt", "a")
+        file1.write("INFO: Sensor with sensor_id {0} has been updated alarm_count to {1} \n".format(sensor_id, alarm_count))
+        file1.close()
+        print("ok-----------------updateSensor")
+    except Exception as e:
+        logException(e, sensor_id)
 async def read_sensor_data(new_connection, device_list):
     # scanning for Sensorstation with name "G4T2"
     sensor_index = 0
@@ -222,23 +254,24 @@ def read_Sensor_Station_Database():
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
         c.execute('''
-            select name from Sensorstation
-        '''.format(device_name))
+            select * from Sensorstation
+        ''')
         return c
     except Exception as e:
         logException(e, "SensorStation")
-def read_value_from_database():
+def read_value_from_database(sensor_id):
     try:
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
         c.execute('''
-            select * from value
-        ''')
+            select * from value where sensor_id={0}
+        '''.format(sensor_id))
         return c
     except Exception as e:
         logException(e, "Value")
 def read_sensors_database(name):
     # TODO call in loob all sensorstation name
+    print(name)
     try:
         count = 0
         conn = sqlite3.connect('AccessPoint')
@@ -247,16 +280,16 @@ def read_sensors_database(name):
             select * from Sensor where station_name='{0}'
         '''.format(name))
         # sensor count to get max index
-        for val in c.fetchall():
-            count += 1
-        print(count)
         return c
     except Exception as e:
         logException(e, "Sensor")
 
 if __name__ == '__main__':
     # TODO read config.yaml
-    rest_api.writeValueToWebApp()
+    try:
+        rest_api.writeValueToWebApp()
+    except Exception as e:
+        print(e)
     repeat = 0
     value_count = 0
     new_SensorStation = True
@@ -268,15 +301,18 @@ if __name__ == '__main__':
                 time.sleep(5)
                 program_state = 1
             case 1:
-                new_device_name_list = rest_api.checkIfNewStations()
-                if len(new_device_name_list) == 1:
-                    new_SensorStation = True
-                    asyncio.run(read_sensor_data(new_SensorStation), [new_device_name_list])
-                elif len(new_device_name_list) > 1:
-                    new_SensorStation = True
-                    asyncio.run(read_sensor_data(new_SensorStation), new_device_name_list)
+                try:
+                    new_device_name_list = rest_api.checkIfNewStations()
+                    if len(new_device_name_list) == 1:
+                        new_SensorStation = True
+                        asyncio.run(read_sensor_data(new_SensorStation, [new_device_name_list]))
+                    elif len(new_device_name_list) > 1:
+                        new_SensorStation = True
+                        asyncio.run(read_sensor_data(new_SensorStation, new_device_name_list))
+                except Exception as e:
+                    print(e)
 
-                    print("Call for new Sensorstation")
+                print("Call for new Sensorstation")
 
                 time.sleep(10)
                 program_state = 2
