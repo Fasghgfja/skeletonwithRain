@@ -27,22 +27,25 @@ public class FileUploadControllerRest {
     private ImageService imageService;
 
 
-
+//TODO Fix page id  cannot be null from xhtml to have fileupload with no id aswell
     @PostMapping(value = "api/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public RedirectView uploadFile(@RequestParam MultipartFile file, ModelMap modelMap) throws IOException {
+    public RedirectView uploadFile(@RequestParam MultipartFile file, ModelMap modelMap, @RequestParam("id") String id) throws IOException {
         modelMap.addAttribute("file", file);
 
         System.out.println("RestFileupload");
         Image image = new at.qe.skeleton.model.Image();
         image.setImageByte(file.getBytes());
+
+        if(!id.equals("null")){
+            imageService.addPictureToPlantPictures(image,id);
+            String redirectUrl = "/file.xhtml?id=" + id;
+            return new RedirectView(redirectUrl);
+        }
+
         imageService.saveImage(image);
-        return new RedirectView("/admin/media.xhtml");
 
-    }
-
-    // save uploaded file to new location
-    private void writeToFile(InputStream uploadedInputStream, String uploadedFileLocation) {
-        System.out.println("writing");
+        String redirectUrl = "/file.xhtml";
+        return new RedirectView(redirectUrl);
     }
 
 
