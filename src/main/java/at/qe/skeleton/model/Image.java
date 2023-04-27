@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -13,7 +15,8 @@ import java.time.LocalDate;
 @Entity
 public class Image implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_gen")
+    @SequenceGenerator(name = "id_gen", initialValue = 2)
     @Column(nullable = false, unique = true)
     private Long id;
 
@@ -28,6 +31,7 @@ public class Image implements Serializable {
 
     @Column(length = 50000000)
     private byte[] imageByte;
+
 
     private boolean approved;
 
