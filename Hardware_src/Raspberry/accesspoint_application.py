@@ -16,7 +16,7 @@ if __name__ == '__main__':
     repeat = 0
     value_count = 0
     # new_SensorStation = True
-    program_state = program_status.Is.READ_SENSOR_VALUES.value
+    # program_state = program_status.Is.READ_SENSOR_VALUES.value
     while True:
         match program_state:
 

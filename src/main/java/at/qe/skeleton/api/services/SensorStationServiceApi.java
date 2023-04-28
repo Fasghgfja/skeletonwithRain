@@ -46,7 +46,11 @@ public class SensorStationServiceApi {
         newSensorStation.setName(sensorStation.getName());
         newSensorStation.setService_description(sensorStation.getService_description());
         newSensorStation.setAlarm_switch(sensorStation.getAlarm_switch());
-
+        // read sensorstation
+        SensorStation sensorStation1 = sensorStationRepository.findFirstById(sensorStation.getName());
+        sensorStation1.setDescription(sensorStation.getService_description());
+        sensorStation1.setAlarmSwitch(sensorStation.getAlarm_switch());
+        sensorStationRepository.save(sensorStation1);
         //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
 
         System.out.println(newSensorStation);

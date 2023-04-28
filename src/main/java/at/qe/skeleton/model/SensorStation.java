@@ -23,14 +23,14 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     @Column(length = 100)
     private String location;
     //added to view alarm
-    /*
+
     @Column(length = 100)
     private String alarmSwitch;
 
     //added to view SensorStation description
     @Column(length = 50)
     private String description;
-    */
+
     @OneToOne
     @JoinColumn( nullable = true)
     private Plant plant;
@@ -95,7 +95,7 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
         this.location = location;
     }
     // needed to have a view on alarm
-    /*
+
     public String getAlarmSwitch() {
         return alarmSwitch;
     }
@@ -112,5 +112,5 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
         this.description = description;
     }
 
-     */
+
 }

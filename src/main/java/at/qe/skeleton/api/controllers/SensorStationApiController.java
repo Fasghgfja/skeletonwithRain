@@ -27,9 +27,10 @@ public class SensorStationApiController {
     @PostMapping("/api/sensorstations")
     SensorStationApi createSensorStationApi(@RequestBody SensorStationApi sensorStationApi) {
         System.out.println(sensorStationApi.toString());
+
         //TODO take object sensorStationApi and call:
         // if(decription == null){update SensorStation set description=sensorStationApi.getDescription() where name=sensorStationApi.getName();}
-        // else {update SensorStation set alarm_count=sensorStationApi.getAlarmCount() where name=name=sensorStationApi.getName();}
+        // else {update SensorStation set alarm_switch=sensorStationApi.getAlarmCount() where name=name=sensorStationApi.getName();}
         return sensorStationServiceApi.addSensorStation(sensorStationApi);
     }
 
