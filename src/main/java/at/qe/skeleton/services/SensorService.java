@@ -29,6 +29,12 @@ public class SensorService {
         return sensorRepository.findAll();
     }
 
+    //TODO: if this works implement all similar functions this way
+    public Collection<Sensor> getAllSensorsBySensorStation(SensorStation station) {
+        return sensorRepository.findSensorsBySensorStation(station);
+    }
+
+
     @PreAuthorize("hasAuthority('ADMIN')")
     public Sensor loadSensor(Long id) {
         return sensorRepository.findFirstById(id);

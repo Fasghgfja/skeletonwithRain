@@ -267,102 +267,74 @@
                         <div class="card-header">
                             <h5>Edit Sensor Station (Gardener only panel)</h5>
                         </div>
-                        <ul>
 
-                            <li>
-                                <span class="later">Access Point:</span>
-                                <div class="checkbox">
-                                    <h:form>
-                                        <p:growl>
-                                            <p:autoUpdate/>
-                                        </p:growl>
-                                        <p:selectOneMenu id="sensorStationAccessPoint" value="#{null}" filter="true" emptyLabel="Access Point ID"
-                                                         scrollHeight="250" updateLabel="true" >
-                                            <f:selectItems value="#{accessPointController.accessPoints}"/>
-                                            <f:facet name="footer">
-                                                <p:divider styleClass="mt-0" />
-                                                <h:outputText value="3 options" style="font-weight:bold;"/>
-                                            </f:facet>
-                                        </p:selectOneMenu>
-                                    </h:form>
-                                </div>
-                                <span class="later">PAIR</span>
-                            </li>
+                        <!-- ................ EDIT FIELDS PANEL............-->
+                        <div class="field col-12 md:col-4">
+                            <p:outputPanel id="stationData" rendered="#{not empty sensorStationDetailController.sensorStation}">
+                                <h5 class="mt-0">Sensor Station Data </h5>
+                                <h:panelGrid columns="1">
 
-                            <li>
-                                <span class="later">SensorStation ID:</span>
-                                <div class="checkbox">
-                                    <p:outputPanel id="sensorStationID" rendered="#{not empty sensorStationDetailController.sensorStation}">
-                                        <h:panelGrid columns="1">
-                                            <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
-                                        </h:panelGrid>
-                                    </p:outputPanel>
-                                </div>
-                                <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}" update="@all"/>
-                            </li>
+                                    <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/>
+                                    <p:selectOneMenu id="sensorStationAccessPoint" value="#{null}" filter="true" emptyLabel="Access Point ID"
+                                                     scrollHeight="250" updateLabel="true" >
+                                        <f:selectItems value="#{accessPointController.accessPoints}"/>
+                                        <f:facet name="footer">
+                                            <p:divider styleClass="mt-0" />
+                                            <h:outputText value="3 options" style="font-weight:bold;"/>
+                                        </f:facet>
+                                    </p:selectOneMenu>
 
-                            <li>
-                                <span class="later">Plant:</span>
-                                <div class="checkbox">
-                                    <h:form>
-                                        <p:growl>
-                                            <p:autoUpdate/>
-                                        </p:growl>
-                                        <p:selectOneMenu id="sensorStationPlant" value="#{null}"  filter="true" emptyLabel="Plant: #{sensorStationDetailController.sensorStation.plant.plantName}"
-                                                         scrollHeight="250" updateLabel="true" >
-                                            <f:selectItems value="#{plantController.plants}"/>
-                                            <f:facet name="footer">
-                                                <p:divider styleClass="mt-0" />
-                                                <h:outputText value="3 options" style="font-weight:bold;"/>
-                                            </f:facet>
-                                        </p:selectOneMenu>
-                                    </h:form>
-                                </div>
-                                <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}" update="@all"/>
-                            </li>
+                                    <p:outputLabel for="sensorStationId" value="Sensor-station name:"/>
+                                    <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
 
-                            <li>
-                                <span class="later">Location:</span>
-                                <div class="checkbox">
-                                    <p:outputPanel id="sensorStationLocation" rendered="#{not empty sensorStationDetailController.sensorStation}">
-                                        <h:panelGrid columns="2">
-                                            <p:inputText id="sensorStationlocation" value="#{sensorStationDetailController.sensorStation.location}"/>
-                                        </h:panelGrid>
-                                    </p:outputPanel>
-                                </div>
-                                <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}" update="@all"/>
-                            </li>
+                                    <p:outputLabel for="sensorStationPlant" value="Plant: "/>
+                                    <p:selectOneMenu id="sensorStationPlant" value="#{null}"  filter="true" emptyLabel="Plant: #{sensorStationDetailController.sensorStation.plant.plantName}"
+                                                     scrollHeight="250" updateLabel="true" >
+                                        <f:selectItems value="#{plantController.plants}"/>
+                                        <f:facet name="footer">
+                                            <p:divider styleClass="mt-0" />
+                                            <h:outputText value="3 options" style="font-weight:bold;"/>
+                                        </f:facet>
+                                    </p:selectOneMenu>
 
-                            <li>
-                                <span class="later">Assigned Gardener:</span>
-                                <div class="checkbox">
-                                    <h:form>
-                                        <p:growl>
-                                            <p:autoUpdate/>
-                                        </p:growl>
-                                        <p:selectCheckboxMenu id="multiple" value="#{null}" label="Gardeners" style="min-width: 15rem"
-                                                              multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"
-                                                              emptyLabel="#{null}" updateLabel="true">
-                                            <f:selectItems value="#{userListController.users}"/>
-                                        </p:selectCheckboxMenu>
-                                    </h:form>
-                                </div>
-                                <span>
-                                    <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}" update="@all"/>
-                                </span>
-                            </li>
+                                    <p:outputLabel for="sensorStationlocation" value="Sensor-station location:"/>
+                                    <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
 
-                        </ul>
+                                    <p:outputLabel for="multiple" value="Gardeners: "/>
+                                    <p:selectCheckboxMenu id="multiple" value="#{null}" label="Gardeners" style="min-width: 15rem"
+                                                          multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"
+                                                          emptyLabel="#{null}" updateLabel="true">
+                                        <f:selectItems value="#{userListController.users}"/>
+                                    </p:selectCheckboxMenu>
+
+                                    <p:outputLabel for="sensorStationswitch" value="Alarm Switch:"/>
+
+                                    <p:selectOneMenu id="sensorStationswitch" value="#{null}" rendered="#{not empty sensorStationDetailController.sensorStation}"
+                                                     scrollHeight="250" updateLabel="true" >
+                                        <f:selectItem itemLabel="On" itemValue="#{sensorStationDetailController.sensorStation.alarmSwitch}"/>
+                                        <f:selectItem itemLabel="Off" itemValue="#{sensorStationDetailController.sensorStation.alarmSwitch}"/>
+                                    </p:selectOneMenu>
+
+
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </div>
+
+
+
                     </div>
                 </div>
 
 
-                <!-- .........................................MEMO/TASKS PANEL.............................................................. -->
+
+
+
+                <!-- .........................................SENSORS PANEL.............................................................. -->
 
                 <div class="col-12 md:col-12 xl:col-8">
                     <div class="card transactions">
                         <div class="card-header">
-                            <h5>Panel to add memo/tasks for staff or gardeners</h5>
+                            <h5>Sensors</h5>
                             <div class="header-buttons">
                                 <p:commandButton type="button" icon="pi pi-search"
                                                  styleClass="ui-button-secondary outlined-button  mr-2"/>
@@ -371,23 +343,34 @@
                             </div>
                         </div>
                         <h:form id="form">
-                            <p:dataTable id="ordersTable" var="order" value="#{dashboardView.orders}"
+                            <p:dataTable id="ordersTable" var="sensor" value="#{sensorListController.getSensorsForSensorStation()}"
                                          selectionMode="single" reflow="true" paginatorPosition="bottom"
-                                         rowKey="#{order.id}" paginator="true" rows="5" sortBy="#{order.date}"
+                                         rowKey="#{sensor.id}" paginator="true" rows="5" sortBy="#{sensor.id}"
                                          sortOrder="descending">
-                                <p:column headerText="Task" sortBy="#{order.id}">
-                                    <h:outputText value="Give Water"/>
+
+                                <p:column headerText="id: only in testing phase" sortBy="#{sensor.id}">
+                                    <h:outputText  value="#{sensor.id}"/>
                                 </p:column>
 
-                                <p:column headerText="Due Date" sortBy="#{order.date}">
-                                    <h:outputText value="#{order.date}"/>
+                                <p:column headerText="type" sortBy="#{sensor.type}">
+                                    <h:outputText  value="#{sensor.type}"/>
                                 </p:column>
 
-
-                                <p:column style="width: 3.5rem">
-                                    <p:commandButton icon="pi pi-search"/>
+                                <p:column headerText="upper border(test)" sortBy="#{sensor.upper_border}">
+                                    <h:outputText  value="#{sensor.upper_border}"/>
                                 </p:column>
+
+                                <p:column headerText="lower border(test)" sortBy="#{sensor.lower_border}">
+                                    <h:outputText  value="#{sensor.lower_border}"/>
+                                </p:column>
+
+                                <p:column headerText="Alarm Count" sortBy="#{sensor.alarm_count}">
+                                    <h:outputText value="#{sensor.alarm_count}"/>
+                                </p:column>
+
                             </p:dataTable>
+
+
                         </h:form>
                     </div>
                 </div>

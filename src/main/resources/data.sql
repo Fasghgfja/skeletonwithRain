@@ -101,3 +101,8 @@ INSERT INTO MEASUREMENT(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,PLANT_ID,SENSOR_STATION_
 
 
 
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(1,'000019b1-0000-1000-8000-00805f9b34fb', 'G4T2', 'hygro', 0, 0, 0,'2022-01-02');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(2,'000019b0-0000-1000-8000-00805f9b34fb', 'G4T2', 'light', 0, 0, 0,'2022-01-02');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(3,'000019b2-0000-1000-8000-00805f9b34fb', 'G4T2', 'temp', 0, 0, 0,'2022-01-02');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(4,'000019b3-0000-1000-8000-00805f9b34fb', 'G4T2', 'humidity', 0, 0, 0,'2022-01-02');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(6,'000019b5-0000-1000-8000-00805f9b34fb', 'G4T2', 'gas', 0, 0, 0,'2022-01-02');
