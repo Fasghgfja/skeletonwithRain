@@ -23,9 +23,7 @@ async def writeAlarmSignal(uuid, switch, station_name):
         async with BleakClient(device) as client:
             try:
                 await client.write_gatt_char(uuid, b'1', response=True)
-                file1 = open("logFile.txt", "a")
-                file1.write("WARNING: Send {0} alarm signal at {1} on uuid: {2}\n\n".format(switch, datetime.now().strftime("%D__%H:%M:%S"), uuid))
-                file1.close()
+                exception_logging.log_information("WARNING: Send {0} alarm signal on uuid: {1}".format(switch, uuid))
             except Exception as e:
                 exception_logging.logException(e, uuid)
 
@@ -45,10 +43,8 @@ async def read_sensor_data(new_connection, device_list):
                 for service in client.services: # iterate all defined services on peripheral
                     # print("Serivce: {0}".format(service))
                     if service.uuid != "00001801-0000-1000-8000-00805f9b34fb":
-                        file1 = open("logFile.txt", "a")
-                        file1.write("INFO: Connected to device {0} at {1}\nSerivce uuid:\t{2}\nDescription:\t{3}\n"
-                                    .format(station_name, datetime.now().strftime("%D__%H:%M:%S"), service.uuid, service.description))
-                        file1.close()
+                        exception_logging.log_information("INFO: Connected to device {0}, Serivce uuid:\t{1}, Description:\t{2}"
+                                                          .format(station_name, service.uuid, service.description))
                         if new_connection:
                             DB_connection.insert_new_sensor_station_to_database(service.description, station_name)
                     for characteristic in service.characteristics: # print the characteristics of the service
@@ -72,6 +68,4 @@ async def read_sensor_data(new_connection, device_list):
                                     DB_connection.insert_values_into_database(value, float_value, type, station_name)
                             except Exception as e:
                                 exception_logging.logException(e, characteristic.uuid)
-                file1 = open("logFile.txt", "a")
-                file1.write("INFO: Disconnected at {0}\n\n".format(datetime.now().strftime("%D__%H:%M:%S")))
-                file1.close()
+                exception_logging.log_information("INFO: Disconnected")

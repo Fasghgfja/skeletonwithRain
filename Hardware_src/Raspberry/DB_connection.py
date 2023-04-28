@@ -112,9 +112,7 @@ def insert_new_sensor_to_database(attribute, name, type, sensor_index):
                 insert into Sensor values( {0}, '{1}', '{2}', '{3}', {4}, {5}, {6})
             '''.format(sensor_index, attribute.uuid, name, type.decode(), 0, 0, 0))
         conn.commit()
-        file1 = open("logFile.txt", "a")
-        file1.write("INFO: Sensor with uuid {0} and type {1} from Station {2} has been inserted to the database\n".format(attribute.uuid, type.decode(), name))
-        file1.close()
+        exception_logging.log_information("INFO: Sensor with uuid {0} and type {1} from Station {2} has been inserted to the database".format(attribute.uuid, type.decode(), name))
         print("ok-----------------InsertSensor")
     except Exception as e:
         exception_logging.logException(e, attribute.uuid)
@@ -165,3 +163,15 @@ def read_sensors_database(name):
         return c
     except Exception as e:
         exception_logging.logException(e, "Sensor")
+
+def delete_values(sensor_id, time_stamp):
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+            delete from Value where sensor_id={0} and time_stamp='{1}'
+        '''.format(sensor_id, time_stamp))
+        conn.commit()
+        exception_logging.log_information("Values of sensor_id {0} at time_stamp {1} has been deleted".format(sensor_id, time_stamp))
+    except Exception as e:
+        exception_logging.logException(e, "delete values")

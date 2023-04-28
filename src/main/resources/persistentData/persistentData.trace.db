@@ -2215,3 +2215,15 @@ INSERT INTO SENSOR_STATION(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATI
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "update SENSOR_STATION SENSOR_STATION_NAME[*]='G4T2' where ALARM_SWITCH='off'"; erwartet "SET"
 Syntax error in SQL statement "update SENSOR_STATION SENSOR_STATION_NAME[*]='G4T2' where ALARM_SWITCH='off'"; expected "SET"; SQL statement:
 update SENSOR_STATION SENSOR_STATION_NAME='G4T2' where ALARM_SWITCH='off' [42001-214]
+2023-04-28 12:10:48 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "delete [*]* from MEASUREMENT where ID=5020"; erwartet "identifier"
+Syntax error in SQL statement "delete [*]* from MEASUREMENT where ID=5020"; expected "identifier"; SQL statement:
+delete * from MEASUREMENT where ID=5020 [42001-214]
+2023-04-28 12:11:11 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "delete [*]* from MEASUREMENT where ID='5020'"; erwartet "identifier"
+Syntax error in SQL statement "delete [*]* from MEASUREMENT where ID='5020'"; expected "identifier"; SQL statement:
+delete * from MEASUREMENT where ID='5020' [42001-214]
+2023-04-28 12:11:38 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "delete [*]* from MEASUREMENT where ID='5020'"; erwartet "identifier"
+Syntax error in SQL statement "delete [*]* from MEASUREMENT where ID='5020'"; expected "identifier"; SQL statement:
+delete * from MEASUREMENT where ID='5020' [42001-214]

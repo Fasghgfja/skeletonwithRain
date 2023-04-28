@@ -57,7 +57,6 @@ def writeValueToWebApp():
             values = cur.execute('''
                         SELECT * FROM Value WHERE sensor_id = {0}
                     '''.format(sensor[0])).fetchall()
-
             for value in values:
 
                 sensor_id_string = str(value[2])
@@ -65,11 +64,8 @@ def writeValueToWebApp():
 
                 temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=time_stamp_string)
                 r = requests.post(measurements_url, json=vars(temp_sensor_value), auth=auth)
-                print(r.status_code)
-
-
-
-
+                if r.status_code == 500:
+                    DB_connection.delete_values(sensor[0], value[1])
     cur.close()
     conn.close()
 

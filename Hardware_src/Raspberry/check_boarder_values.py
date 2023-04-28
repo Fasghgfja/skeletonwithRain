@@ -3,7 +3,7 @@ from datetime import datetime
 import ble_service_connection
 import asyncio
 import rest_api
-
+import exception_logging
 def checkBoarderValues():
     # TODO
     # select count of sensorstations
@@ -30,7 +30,7 @@ def checkBoarderValues():
                     if value[0] < lower_value or value[0] > upper_value:
                         current_value_breaks += 1
 
-                if (len(current_value_list) - current_value_breaks) < ((len(current_value_list) * 3) / 4):
+                if alarm_count != -1 and ((len(current_value_list) - current_value_breaks) < ((len(current_value_list) * 3) / 4)):
                     alarm_count += 1
 
                 if alarm_count > 5 and alarm_switch == "off":
@@ -44,6 +44,4 @@ def checkBoarderValues():
                     # Todo update Sensor at Webapp
 
     # end of while
-    file1 = open("logFile.txt", "a")
-    file1.write("INFO: Boarder values have been checked at {0}\n".format(datetime.now().strftime("%D__%H:%M:%S")))
-    file1.close()
+    exception_logging.log_information("INFO: Boarder values have been checked")

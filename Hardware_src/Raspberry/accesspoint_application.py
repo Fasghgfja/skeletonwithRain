@@ -16,6 +16,7 @@ if __name__ == '__main__':
     repeat = 0
     value_count = 0
     # new_SensorStation = True
+    program_state = program_status.Is.READ_SENSOR_VALUES.value
     while True:
         match program_state:
 
@@ -66,7 +67,6 @@ if __name__ == '__main__':
                     rest_api.writeValueToWebApp()
                 except Exception as e:
                     exception_logging.logException(e, "rest_api write values")
-                # TODO call rest to write the values to the database
                 program_state = program_status.Is.CHECK_FOR_NEW_BOARDER_VALUES.value
                 time.sleep(1)
 

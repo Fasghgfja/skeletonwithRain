@@ -14,6 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 import at.qe.skeleton.api.exceptions.MeasurementNotFoundException;
 import at.qe.skeleton.api.services.MeasurementService;
 
+import java.util.List;
+
 @RestController
 public class MeasurementController {
 
@@ -22,9 +24,9 @@ public class MeasurementController {
     MeasurementService measurementService;
 
     @PostMapping("/api/measurements")
-    Measurement2 createMeasurement(@RequestBody Measurement2 measurement) {
+    Measurement2 createMeasurement(@RequestBody Measurement2 measurement2) {
         System.out.println("test123");
-        return measurementService.addMeasurement(measurement);
+        return measurementService.addMeasurement(measurement2);
     }
 
     @GetMapping("/api/measurements/{id}")
