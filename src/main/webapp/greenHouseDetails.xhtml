@@ -275,7 +275,7 @@
                                 <h:panelGrid columns="1">
 
                                     <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/>
-                                    <p:selectOneMenu id="sensorStationAccessPoint" value="#{null}" filter="true" emptyLabel="Access Point ID"
+                                    <p:selectOneMenu id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
                                                      scrollHeight="250" updateLabel="true" >
                                         <f:selectItems value="#{accessPointController.accessPoints}"/>
                                         <f:facet name="footer">
@@ -288,7 +288,7 @@
                                     <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
 
                                     <p:outputLabel for="sensorStationPlant" value="Plant: "/>
-                                    <p:selectOneMenu id="sensorStationPlant" value="#{null}"  filter="true" emptyLabel="Plant: #{sensorStationDetailController.sensorStation.plant.plantName}"
+                                    <p:selectOneMenu id="sensorStationPlant" value="#{sensorStationDetailController.sensorStation.plant}"  filter="true" emptyLabel="Plant: #{sensorStationDetailController.sensorStation.plant.plantName}"
                                                      scrollHeight="250" updateLabel="true" >
                                         <f:selectItems value="#{plantController.plants}"/>
                                         <f:facet name="footer">
@@ -300,19 +300,7 @@
                                     <p:outputLabel for="sensorStationlocation" value="Sensor-station location:"/>
                                     <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
 
-                                    <p:outputLabel for="multiple" value="Gardeners: "/>
-                                    <p:selectCheckboxMenu id="multiple" value="#{null}" label="Gardeners" style="min-width: 15rem"
-                                                          multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"
-                                                          emptyLabel="#{null}" updateLabel="true">
-                                        <f:selectItems value="#{userListController.users}"/>
-                                    </p:selectCheckboxMenu>
 
-                                    <p:outputLabel for="sensorStationswitch" value="Alarm Switch:"/>
-                                    <p:selectOneMenu id="sensorStationswitch" value="#{null}" rendered="#{not empty sensorStationDetailController.sensorStation}"
-                                                     scrollHeight="250" updateLabel="true" >
-                                        <f:selectItem itemLabel="On" itemValue="#{sensorStationDetailController.sensorStation.alarmSwitch}"/>
-                                        <f:selectItem itemLabel="Off" itemValue="#{sensorStationDetailController.sensorStation.alarmSwitch}"/>
-                                    </p:selectOneMenu>
 
 
                                 </h:panelGrid>
