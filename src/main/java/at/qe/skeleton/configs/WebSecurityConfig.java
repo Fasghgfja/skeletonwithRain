@@ -54,7 +54,7 @@ public class WebSecurityConfig {
                             .requestMatchers("/sensorStation/**").permitAll()
                             .requestMatchers("/").permitAll()
                             .requestMatchers("/registration/**").permitAll()
-                            //.requestMatchers("/api/**").permitAll()
+                            //.requestMatchers("/api/**").httpBasic().permitAll()
                             .requestMatchers("/**.jsf").permitAll()
                             .requestMatchers(antMatcher("/h2-console/**")).permitAll()
                             .requestMatchers("/jakarta.faces.resource/**").permitAll()
