@@ -70,8 +70,8 @@ public class SensorStationServiceApi {
         return newSensorStation;
     }
 
-    public SensorStation findOneSensorStation(Long id) throws SensorStationNotFoundException {
-        SensorStation sensorStation = sensorStations.get(id);
+    public SensorStation findOneSensorStation(String id) throws SensorStationNotFoundException {
+        SensorStation sensorStation = sensorStationRepository.findFirstById(id);
         if (sensorStation != null)
             return sensorStation;
         else

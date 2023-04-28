@@ -11,7 +11,7 @@ measurements_url = "http://localhost:8080/api/measurements"
 get_sensorStations_url = "http://localhost:8080/api/sensorstations"
 post_sensorStations_url = "http://localhost:8080/api/sensorstations"
 post_sensor_url = "http://localhost:8080/api/sensors"
-
+get_Station_alarm_switch_url = "http://localhost:8080/api/getsensorstations"
 
 
 
@@ -47,13 +47,13 @@ def writeValueToWebApp():
     all_sensorstations = cur.execute(all_sensorstations_sql).fetchall()
 
     for sensorstations in all_sensorstations:
-
+        # TODO call database querys via DB_connection.xxx
         get_all_sensors = cur.execute('''
                                 SELECT * FROM Sensor WHERE station_name = "{0}"
                             '''.format(sensorstations[0])).fetchall()
 
         for sensor in get_all_sensors:
-
+            # TODO call database querys via DB_connection.xxx
             values = cur.execute('''
                         SELECT * FROM Value WHERE sensor_id = {0}
                     '''.format(sensor[0])).fetchall()
@@ -91,28 +91,36 @@ def write_alarm_switch(name, alarm_switch):
         requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
     except Exception as e:
         exception_logging.logException(e, "write alarm_switch")
-def getSensorstations():
+def getSensorstations(getName, name):
 
     temp_sensorstation_names = []
+    if getName:
+        response = requests.get(get_sensorStations_url, auth=auth)
 
-    response = requests.get(get_sensorStations_url, auth=auth)
+        if response.status_code == 200:
+            data = response.json()
 
-    if response.status_code == 200:
-        data = response.json()
-        for sensor in data:
-            temp_sensorstation_names.append(sensor["sensorStationID"])
+            for sensor in data:
+                temp_sensorstation_names.append(sensor["sensorStationID"])
+            return temp_sensorstation_names
+        else:
+            print("Fehler beim Abrufen der Daten. Status Code:", response.status_code)
     else:
-        print("Fehler beim Abrufen der Daten. Status Code:", response.status_code)
+        try:
+            station_values = StationValue(name=name, service_description="", alarm_switch="")
+            response = requests.get(get_Station_alarm_switch_url,json=vars(station_values), auth=auth)
+            return response.json() # get alarm_switch
 
-    print(temp_sensorstation_names)
-    return temp_sensorstation_names
+        except Exception as e:
+            exception_logging.logException(e, "read alarm_switch from webapp")
+
 
 
 def checkIfNewStations():
 
     conn = sqlite3.connect('AccessPoint')
     cur = conn.cursor()
-
+    # TODO call database querys via DB_connection.xxx
     already_added_sensorstation_list = []
     already_added_SensorStations = cur.execute('''
                                     SELECT name FROM Sensorstation
@@ -121,7 +129,7 @@ def checkIfNewStations():
     for sensorstations in already_added_SensorStations:
         already_added_sensorstation_list.append(sensorstations)
 
-    webapp_sensorstation_names = getSensorstations()
+    webapp_sensorstation_names = getSensorstations(True,"")
 
     tempList =[]
 

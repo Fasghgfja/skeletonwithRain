@@ -939,3 +939,180 @@ INFO: Sensor with sensor_id 0 has been updated alarm_count to 2
 WARNING: Send OFF alarm signal on uuid: 000019b5-0000-1000-8000-00805f9b34fb at 04/28/23__14:23:32
 INFO: SensorStation G4T2 has been updated alarm_switch to off 
 INFO: Sensor with sensor_id 1 has been updated alarm_count to 0 
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/28/23__14:57:44
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/28/23__14:57:44
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type GasSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 4 saved
+INFO: Value for type LigthSensor on id 0 saved
+INFO: Value for type TempSensor on id 5 saved
+INFO: Disconnected at 04/28/23__14:57:46
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 1 
+INFO: Boarder values have been checked at 04/28/23__14:57:49
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/28/23__15:02:59
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type GasSensor on id 1 saved
+INFO: Value for type TempSensor on id 5 saved
+INFO: Value for type LigthSensor on id 0 saved
+INFO: Value for type HygroSensor on id 4 saved
+INFO: Value for type humiditySensor on id 2 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/28/23__15:03:01
+INFO: Disconnected at 04/28/23__15:03:01
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 2 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 2 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 2 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 2 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 2 
+INFO: Boarder values have been checked at 04/28/23__15:03:04
+Values of sensor_id 0 at time_stamp 2023-04-28 12:20:49 has been deleted at 04/28/23__15:03:05
+Values of sensor_id 0 at time_stamp 2023-04-28 12:22:39 has been deleted at 04/28/23__15:03:06
+Values of sensor_id 0 at time_stamp 2023-04-28 12:57:45 has been deleted at 04/28/23__15:03:06
+Values of sensor_id 0 at time_stamp 2023-04-28 13:03:00 has been deleted at 04/28/23__15:03:06
+Values of sensor_id 1 at time_stamp 2023-04-28 12:20:49 has been deleted at 04/28/23__15:03:06
+Values of sensor_id 1 at time_stamp 2023-04-28 12:22:38 has been deleted at 04/28/23__15:03:06
+Values of sensor_id 1 at time_stamp 2023-04-28 12:57:45 has been deleted at 04/28/23__15:03:06
+Values of sensor_id 1 at time_stamp 2023-04-28 13:03:00 has been deleted at 04/28/23__15:03:07
+Values of sensor_id 2 at time_stamp 2023-04-28 12:20:49 has been deleted at 04/28/23__15:03:07
+Values of sensor_id 2 at time_stamp 2023-04-28 12:22:39 has been deleted at 04/28/23__15:03:07
+Values of sensor_id 2 at time_stamp 2023-04-28 12:57:45 has been deleted at 04/28/23__15:03:07
+Values of sensor_id 2 at time_stamp 2023-04-28 13:03:01 has been deleted at 04/28/23__15:03:07
+Values of sensor_id 3 at time_stamp 2023-04-28 12:20:49 has been deleted at 04/28/23__15:03:07
+Values of sensor_id 3 at time_stamp 2023-04-28 12:22:38 has been deleted at 04/28/23__15:03:07
+Values of sensor_id 3 at time_stamp 2023-04-28 12:57:45 has been deleted at 04/28/23__15:03:08
+Values of sensor_id 3 at time_stamp 2023-04-28 13:03:00 has been deleted at 04/28/23__15:03:08
+Values of sensor_id 4 at time_stamp 2023-04-28 12:20:49 has been deleted at 04/28/23__15:03:08
+Values of sensor_id 4 at time_stamp 2023-04-28 12:22:38 has been deleted at 04/28/23__15:03:08
+Values of sensor_id 4 at time_stamp 2023-04-28 12:57:45 has been deleted at 04/28/23__15:03:08
+Values of sensor_id 4 at time_stamp 2023-04-28 13:03:01 has been deleted at 04/28/23__15:03:08
+Values of sensor_id 5 at time_stamp 2023-04-28 12:20:50 has been deleted at 04/28/23__15:03:08
+Values of sensor_id 5 at time_stamp 2023-04-28 12:22:39 has been deleted at 04/28/23__15:03:09
+Values of sensor_id 5 at time_stamp 2023-04-28 12:57:46 has been deleted at 04/28/23__15:03:09
+Values of sensor_id 5 at time_stamp 2023-04-28 13:03:00 has been deleted at 04/28/23__15:03:09
+ERROR: Could not find device with name DDDDD at 04/28/23__15:03:22
+ERROR: Could not find device with name EEEEE at 04/28/23__15:03:32
+ERROR: Could not find device with name FFFFF at 04/28/23__15:03:42
+ERROR: Could not find device with name GGGGG at 04/28/23__15:03:52
+ERROR: Could not find device with name HHHHH at 04/28/23__15:04:02
+ERROR: Could not find device with name IIIII at 04/28/23__15:04:12
+ERROR: Could not find device with name AAAAA at 04/28/23__15:04:22
+ERROR: Could not find device with name BBBBB at 04/28/23__15:04:32
+ERROR: Could not find device with name CCCCC at 04/28/23__15:04:42
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/28/23__15:04:44
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/28/23__15:04:44
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:04:45
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:04:45
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:04:45
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:04:45
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:04:46
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:04:46
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/28/23__15:04:46
+INFO: Disconnected at 04/28/23__15:04:46
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/28/23__15:04:51
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type LigthSensor on id 0 saved
+INFO: Value for type TempSensor on id 5 saved
+INFO: Value for type GasSensor on id 1 saved
+INFO: Value for type HygroSensor on id 4 saved
+INFO: Value for type humiditySensor on id 2 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/28/23__15:04:53
+INFO: Disconnected at 04/28/23__15:04:53
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 5 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 3 
+INFO: Boarder values have been checked at 04/28/23__15:04:56
+Values of sensor_id 0 at time_stamp 2023-04-28 13:04:51 has been deleted at 04/28/23__15:04:57
+Values of sensor_id 1 at time_stamp 2023-04-28 13:04:52 has been deleted at 04/28/23__15:04:57
+Values of sensor_id 2 at time_stamp 2023-04-28 13:04:52 has been deleted at 04/28/23__15:04:57
+Values of sensor_id 3 at time_stamp 2023-04-28 13:04:51 has been deleted at 04/28/23__15:04:58
+Values of sensor_id 4 at time_stamp 2023-04-28 13:04:52 has been deleted at 04/28/23__15:04:58
+Values of sensor_id 5 at time_stamp 2023-04-28 13:04:52 has been deleted at 04/28/23__15:04:58
+ERROR: Could not find device with name DDDDD at 04/28/23__15:05:10
+ERROR: Could not find device with name EEEEE at 04/28/23__15:05:20
+ERROR: Could not find device with name FFFFF at 04/28/23__15:05:30
+ERROR: Could not find device with name GGGGG at 04/28/23__15:05:41
+ERROR: Could not find device with name HHHHH at 04/28/23__15:05:51
+ERROR: Could not find device with name IIIII at 04/28/23__15:06:01
+ERROR: Could not find device with name AAAAA at 04/28/23__15:06:11
+ERROR: Could not find device with name BBBBB at 04/28/23__15:06:21
+ERROR: Could not find device with name CCCCC at 04/28/23__15:06:31
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/28/23__15:06:32
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/28/23__15:06:32
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:06:32
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:06:32
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:06:33
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:06:33
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:06:33
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:06:33
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/28/23__15:06:34
+INFO: Disconnected at 04/28/23__15:06:34
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/28/23__15:06:39
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type LigthSensor on id 0 saved
+INFO: Value for type TempSensor on id 5 saved
+INFO: Value for type GasSensor on id 1 saved
+INFO: Value for type HygroSensor on id 4 saved
+INFO: Value for type humiditySensor on id 2 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/28/23__15:06:41
+INFO: Disconnected at 04/28/23__15:06:41
+WARNING: Send ON alarm signal on uuid: 000019b0-0000-1000-8000-00805f9b34fb at 04/28/23__15:06:45
+INFO: SensorStation G4T2 has been updated alarm_switch to on 
+INFO: Sensor with sensor_id 0 has been updated alarm_count to -1 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 4 
+INFO: Boarder values have been checked at 04/28/23__15:06:48
+Values of sensor_id 0 at time_stamp 2023-04-28 13:06:39 has been deleted at 04/28/23__15:06:49
+Values of sensor_id 1 at time_stamp 2023-04-28 13:06:40 has been deleted at 04/28/23__15:06:50
+Values of sensor_id 2 at time_stamp 2023-04-28 13:06:40 has been deleted at 04/28/23__15:06:50
+Values of sensor_id 3 at time_stamp 2023-04-28 13:06:39 has been deleted at 04/28/23__15:06:50
+Values of sensor_id 4 at time_stamp 2023-04-28 13:06:40 has been deleted at 04/28/23__15:06:50
+Values of sensor_id 5 at time_stamp 2023-04-28 13:06:40 has been deleted at 04/28/23__15:06:50
+ERROR: Could not find device with name DDDDD at 04/28/23__15:07:03
+ERROR: Could not find device with name EEEEE at 04/28/23__15:07:13
+ERROR: Could not find device with name FFFFF at 04/28/23__15:07:23
+ERROR: Could not find device with name GGGGG at 04/28/23__15:07:33
+ERROR: Could not find device with name HHHHH at 04/28/23__15:07:43
+ERROR: Could not find device with name IIIII at 04/28/23__15:07:53
+ERROR: Could not find device with name AAAAA at 04/28/23__15:08:04
+ERROR: Could not find device with name BBBBB at 04/28/23__15:08:14
+ERROR: Could not find device with name CCCCC at 04/28/23__15:08:24
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/28/23__15:08:25
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/28/23__15:08:25
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:08:25
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:08:25
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:08:26
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:08:26
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:08:26
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/28/23__15:08:27
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/28/23__15:08:27
+INFO: Disconnected at 04/28/23__15:08:27
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/28/23__15:08:33
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type LigthSensor on id 0 saved
+INFO: Value for type TempSensor on id 5 saved
+INFO: Value for type GasSensor on id 1 saved
+INFO: Value for type HygroSensor on id 4 saved
+INFO: Value for type humiditySensor on id 2 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/28/23__15:08:34
+INFO: Disconnected at 04/28/23__15:08:34
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/28/23__15:16:51
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type LigthSensor on id 0 saved
+INFO: Value for type TempSensor on id 5 saved
+INFO: Value for type GasSensor on id 1 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/28/23__15:16:53
+INFO: Disconnected at 04/28/23__15:16:53

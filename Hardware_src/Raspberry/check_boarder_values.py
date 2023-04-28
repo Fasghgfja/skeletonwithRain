@@ -19,6 +19,8 @@ def checkBoarderValues():
             current_value_list = DB_connection.read_value_from_database(sensor[0]).fetchall()
             if alarm_count == -1 and alarm_switch == "on":
                 # TODO call Webapp via REST value alarm_switch
+                val = rest_api.getSensorstations(False, station[0])
+                print(val)
                 alarm_switch = "fixed"
                 if alarm_switch == "fixed":
                     alarm_switch = "off"

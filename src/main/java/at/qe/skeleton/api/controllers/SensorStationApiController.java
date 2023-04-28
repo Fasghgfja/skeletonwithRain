@@ -39,10 +39,10 @@ public class SensorStationApiController {
         return sensorStationServiceApi.addSensor(sensorApi);
     }
 
-    @GetMapping("/api/sensorstations/{id}")
-    SensorStation getOneSensorStationApi(@PathVariable Long id) {
+    @GetMapping("/api/getsensorstations")
+    SensorStation getOneSensorStationApi(@RequestBody SensorStationApi sensorStationApi) {
         try {
-            return sensorStationServiceApi.findOneSensorStation(id);
+            return sensorStationServiceApi.findOneSensorStation(sensorStationApi.getName());//.getAlarmSwitch()
         } catch (SensorStationNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
