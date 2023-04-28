@@ -2,8 +2,16 @@
                 xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui" template="/WEB-INF/templates/main.xhtml">
     <ui:define name="content">
+
+
         <p:card styleClass="my-card">
-            <h:form id="userForm">
+
+
+            <h:form id="userForm"><!-- ................USER FORM BEGIN........... ....... -->
+
+
+
+                <!-- .......::::::::::::::::::.............USER TABLE ........... ....::::::::::::.......... -->
                 <p:dataTable id="usersTable" widgetVar="usersTable" var="user" value="#{userListController.users}"
                              reflow="true" styleClass="products-table" rowKey="#{user.username}" paginator="true"
                              rows="10" rowSelectMode="add" paginatorPosition="bottom">
@@ -29,10 +37,14 @@
                         <h:outputText value="#{user.createDate}"/>
                     </p:column>
                     <p:column style="width:100px;text-align: center">
+
+                        <!-- ....................EDIT USER BUTTON ........... .............. -->
                         <p:commandButton style="margin-right: 10px" update=":userForm:userEditDialog"
                                          oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit" title="Edit">
                             <f:setPropertyActionListener value="#{user}" target="#{userDetailController.user}"/>
                         </p:commandButton>
+
+                        <!-- ....................DELETE USER BUTTON ........... .............. -->
                         <p:commandButton disabled="#{user.username == sessionInfoBean.currentUserName}"
                                          styleClass="ui-button-danger"
                                          action="#{userDetailController.doDeleteUser}" icon="pi pi-user-minus"
@@ -43,11 +55,15 @@
                                        message="Are you sure that you want to delete the user '#{user.username}'? You cannot undo this operation."
                                        icon="pi pi-exclamation-triangle"/>
                         </p:commandButton>
+
                     </p:column>
                 </p:dataTable>
 
 
 
+
+
+                <!-- .......::::::::::::::::::.............EDIT USER DIALOG........... ....::::::::::::.......... -->
                 <p:dialog header="Edit User" id="userEditDialog" widgetVar="userEditDialog" modal="true"
                           showEffect="fade" hideEffect="fade" resizable="false">
                     <p:outputPanel id="userData" rendered="#{not empty userDetailController.user}">
@@ -74,21 +90,33 @@
                             <f:selectItem itemLabel="GARDENER" itemValue="GARDENER"/>
                         </p:selectManyCheckbox>
                         <p:separator/>
+
+                        <!-- ....................SAVE AND ABORT EDIT USER BUTTONS ................... -->
                         <h:panelGrid columns="3">
                             <p:commandButton value="Save" action="#{userDetailController.doSaveUser()}"
                                              oncomplete="PF('userEditDialog').hide()" update=":userForm:usersTable"/>
                             <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
                         </h:panelGrid>
+
                     </p:outputPanel>
                 </p:dialog>
 
 
 
+
+
+                <!-- .......::::::::::::::::::.............CONFIRMATION DIALOG........... ....::::::::::::.......... -->
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
                     <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
                 </p:confirmDialog>
-            </h:form>
+
+
+
+            </h:form> <!-- ................USER FORM END........... ....... -->
+
+
+
 
 
 
@@ -97,6 +125,9 @@
                                  icon="pi pi-user-plus" title="New User" class="btn btn-primary">
                     <p:resetInput target=":createDialog:userCreationDialog"/>
                 </p:commandButton>
+
+
+                <!-- .......::::::::::::::::::.............CREATE USER DIALOG........... ....::::::::::::.......... -->
                 <p:dialog header="Create New User" id="userCreationDialog" widgetVar="userCreationDialog" modal="true"
                           showEffect="fade" hideEffect="fade" resizable="false">
                     <p:ajax event="close" update="userCreationDialog"/>
@@ -135,7 +166,13 @@
                     </p:outputPanel>
                 </p:dialog>
 
+
             </h:form>
+
+
+
+
+
         </p:card>
     </ui:define>
 </ui:composition>
