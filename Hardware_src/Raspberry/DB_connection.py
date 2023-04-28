@@ -129,6 +129,18 @@ def read_Sensor_Station_Database():
         return c
     except Exception as e:
         exception_logging.logException(e, "SensorStation")
+
+def read_Sensor_Stationnames_Database():
+    # TODO call in loob all sensorstation name
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+            select name from Sensorstation
+        ''')
+        return c
+    except Exception as e:
+        exception_logging.logException(e, "SensorStation")
 def read_value_from_database(sensor_id):
     try:
         conn = sqlite3.connect('AccessPoint')

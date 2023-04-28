@@ -2,6 +2,7 @@ import DB_connection
 from datetime import datetime
 import ble_service_connection
 import asyncio
+import rest_api
 
 def checkBoarderValues():
     # TODO
@@ -37,7 +38,7 @@ def checkBoarderValues():
                     alarm_count = -1
                     alarm_switch = "on"
                     DB_connection.update_sensor_station_database(alarm_switch, station[0])
-                    # TODO update Sensorstation alarm_switch webapp
+                    rest_api.write_alarm_switch(station[0], alarm_switch)
                 if alarm_count != sensor[4]:
                     DB_connection.update_sensor_database(alarm_count, sensor[0])
                     # Todo update Sensor at Webapp

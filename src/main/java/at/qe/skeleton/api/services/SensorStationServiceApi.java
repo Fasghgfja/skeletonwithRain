@@ -1,11 +1,14 @@
 package at.qe.skeleton.api.services;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
+import at.qe.skeleton.api.model.SensorApi;
 import at.qe.skeleton.api.model.SensorStationApi;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
@@ -74,7 +77,13 @@ public class SensorStationServiceApi {
         else
             throw new SensorStationNotFoundException();
     }
+    //Added to call all sensorstations via rest
+    public List<SensorStation> findAllSensorStation() throws SensorStationNotFoundException {
+        return sensorStationRepository.findAll();
+    }
 
-
-
+    //added to write Sensors
+    public SensorApi addSensor(SensorApi sensorApi){
+        return sensorApi;
+    }
 }

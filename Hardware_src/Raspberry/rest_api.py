@@ -2,11 +2,15 @@ import sqlite3
 
 import cursor as cursor
 import requests
+import DB_connection
+import exception_logging
 
 auth = ("admin", "passwd")
 
 measurements_url = "http://localhost:8080/api/measurements"
-sensorStations_url = "http://localhost:8080/model/SensorStation"
+get_sensorStations_url = "http://localhost:8080/api/sensorstations"
+post_sensorStations_url = "http://localhost:8080/api/sensorstations"
+post_sensor_url = "http://localhost:8080/api/sensors"
 
 
 
@@ -19,13 +23,26 @@ class SensorValue(object):
         self.value = value
         self.time_stamp = time_stamp
 
+class StationValue(object):
+    def __init__(self, name: str, service_description: str, alarm_switch: str):
+        self.name = name
+        self.service_description = service_description
+        self.alarm_switch = alarm_switch
+
+class Sensor(object):
+    def __init__(self, sensor_id: int, uuid: str, station_name: str, type: str, alarm_count: int):
+        self.sensor_id = sensor_id
+        self.uuid = uuid
+        self.station_name = station_name
+        self.type = type
+        self.alarm_count = alarm_count
 
 def writeValueToWebApp():
 
     conn = sqlite3.connect('AccessPoint')
     cur = conn.cursor()
 
-
+    # TODO call database querys via DB_connection.xxx
     all_sensorstations_sql = "SELECT * FROM Sensorstation;"
     all_sensorstations = cur.execute(all_sensorstations_sql).fetchall()
 
@@ -56,12 +73,33 @@ def writeValueToWebApp():
     cur.close()
     conn.close()
 
+def write_sensors_and_station_description(station_names):
+    sensor_stationnames = DB_connection.read_Sensor_Station_Database().fetchall()
 
+    for station in sensor_stationnames:
+        if station[0] in station_names:
+            try:
+                station_values = StationValue(name=station[0], service_description=station[1], alarm_switch=station[2])
+                requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
+                sensor_list = DB_connection.read_sensors_database(station[0]).fetchall()
+                for sensor in sensor_list:
+                    sensor_values = Sensor(sensor_id=sensor[0], uuid=sensor[1], station_name=sensor[2], type=sensor[3], alarm_count=sensor[4])
+                    requests.post(post_sensor_url, json=vars(sensor_values), auth=auth)
+            except Exception as e:
+                exception_logging.logException(e, station[0])
+    # TODO check if all new stations are added
+
+def write_alarm_switch(name, alarm_switch):
+    try:
+        station_values = StationValue(name=name, service_description="", alarm_switch=alarm_switch)
+        requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
+    except Exception as e:
+        exception_logging.logException(e, "write alarm_switch")
 def getSensorstations():
 
     temp_sensorstation_names = []
 
-    response = requests.get(sensorStations_url, auth=auth)
+    response = requests.get(get_sensorStations_url, auth=auth)
 
     if response.status_code == 200:
         data = response.json()

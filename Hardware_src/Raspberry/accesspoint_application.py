@@ -34,6 +34,7 @@ if __name__ == '__main__':
                         asyncio.run(ble_service_connection.read_sensor_data(True, [new_device_name_list]))
                     elif len(new_device_name_list) > 1:
                         asyncio.run(ble_service_connection.read_sensor_data(True, new_device_name_list))
+                    rest_api.write_sensors_and_station_description(new_device_name_list)
                 except Exception as e:
                     exception_logging.logException(e, "rest_api read Station name")
                 time.sleep(1)
@@ -41,11 +42,12 @@ if __name__ == '__main__':
 
             case program_status.Is.READ_SENSOR_VALUES.value:
                 print("Read Sensor data")
-                device_name = DB_connection.read_Sensor_Station_Database().fetchone()[0] # extract from [('G4T2',)]
+                # changed read function
+                device_name = DB_connection.read_Sensor_Stationnames_Database().fetchone()[0] # extract from [('G4T2',)]
                 # print("its the name {0}".format(device_name))
                 asyncio.run(ble_service_connection.read_sensor_data(False, [device_name]))
                 value_count += 1
-                if value_count >= 10:
+                if value_count >= 1:
                     program_state = program_status.Is.CHECK_BOARDER_VALUER.value
                     value_count = 0
                 else:

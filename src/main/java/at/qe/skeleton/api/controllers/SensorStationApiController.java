@@ -1,6 +1,7 @@
 package at.qe.skeleton.api.controllers;
 
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
+import at.qe.skeleton.api.model.SensorApi;
 import at.qe.skeleton.api.model.SensorStationApi;
 import at.qe.skeleton.api.services.SensorStationServiceApi;
 import at.qe.skeleton.model.SensorStation;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 
 @RestController
 public class SensorStationApiController {
@@ -23,14 +26,32 @@ public class SensorStationApiController {
 
     @PostMapping("/api/sensorstations")
     SensorStationApi createSensorStationApi(@RequestBody SensorStationApi sensorStationApi) {
-        System.out.println("test123");
+        System.out.println(sensorStationApi.toString());
+        //TODO take object sensorStationApi and call:
+        // if(decription == null){update SensorStation set description=sensorStationApi.getDescription() where name=sensorStationApi.getName();}
+        // else {update SensorStation set alarm_count=sensorStationApi.getAlarmCount() where name=name=sensorStationApi.getName();}
         return sensorStationServiceApi.addSensorStation(sensorStationApi);
+    }
+
+    @PostMapping("/api/sensors")
+    SensorApi createSensorApi(@RequestBody SensorApi sensorApi) {
+        System.out.println(sensorApi.toString());
+        return sensorStationServiceApi.addSensor(sensorApi);
     }
 
     @GetMapping("/api/sensorstations/{id}")
     SensorStation getOneSensorStationApi(@PathVariable Long id) {
         try {
             return sensorStationServiceApi.findOneSensorStation(id);
+        } catch (SensorStationNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+    //Added to call all sensorstations via rest
+    @GetMapping("/api/sensorstations")
+    List<SensorStation> getAllSensorStationApi() {
+        try {
+            return sensorStationServiceApi.findAllSensorStation();
         } catch (SensorStationNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
