@@ -20,13 +20,17 @@
     <ui:define name ="content">
 
 
+
+
         <!-- .........................................TABLE.............................................................. -->
         <h:form id="userForm">
             <div class="col-12">
 
                 <div class="card">
-                    <h5>Greenhouses</h5>
-                    <p:dataTable var="sensorStation" value="#{sensorStationListController.sensorStations}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{sensorStation.id}">
+                    <h5>Sensor Stations</h5>
+                    <p:dataTable id="sensorStationTable" var="sensorStation" value="#{sensorStationListController.sensorStations}"
+                                 scrollable="true" scrollHeight="550"
+                                 paginatorPosition="bottom" rowKey="#{sensorStation.id}">
 
                         <p:ajax event="rowToggle" listener="#{sensorStationDetailController.onRowToggle}" />
 
@@ -43,7 +47,7 @@
                         </p:column>
 
                         <p:column headerText="Plant" sortBy="#{sensorStation.plant}">
-                            <h:outputText value="$#{sensorStation.plant}"/>
+                            <h:outputText value="#{sensorStation.plant}"/>
                         </p:column>
 
                         <p:column headerText="Planted" sortBy="#{sensorStation.createDate}">
@@ -72,16 +76,21 @@
                         </p:column>
 
                         <p:column headerText="Location" sortBy="#{sensorStation.location}">
-                            <h:outputText value="$#{sensorStation.location}"/>
+                            <h:outputText value="#{sensorStation.location}"/>
                         </p:column>
 
 
-                        <p:column style="width: 3.5rem">
+                        <p:column style="width:100px;text-align: center">
 
                             <!-- DetailView page Button -->
                             <p:button icon="pi pi-search"
                                              title="open Detail-View"
                                              href="/greenHouseDetails.xhtml?id=#{sensorStation.id}" />
+
+                            <p:commandButton style="margin-right: 10px" update=":userForm:userEditDialog"
+                                             oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit" title="Edit">
+                                <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
+                            </p:commandButton>
 
                         </p:column>
 
@@ -118,6 +127,117 @@
                     </p:dataTable>
                 </div>
             </div>
+
+
+
+
+
+
+
+
+            <!-- .......................................DIALOGS...................................................................... -->
+
+
+            <!-- ...................................Sensor station Edit dialog.................................... -->
+            <p:dialog header="Edit Sensor Staion" id="userEditDialog" widgetVar="userEditDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="userData" rendered="#{not empty sensorStationDetailController.sensorStation}">
+                    <h5 class="mt-0">Sensor Station Data </h5>
+                    <h:panelGrid columns="1">
+
+                        <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/>
+                        <p:selectOneMenu id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
+                                         scrollHeight="250" updateLabel="true" >
+                            <f:selectItems value="#{accessPointController.accessPoints}"/>
+                            <f:facet name="footer">
+                                <p:divider styleClass="mt-0" />
+                                <h:outputText value="3 options" style="font-weight:bold;"/>
+                            </f:facet>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="sensorStationId" value="Sensor-station name:"/>
+                        <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
+
+                        <p:outputLabel for="sensorStationPlant" value="Plant: "/>
+                        <p:selectOneMenu id="sensorStationPlant" value="#{sensorStationDetailController.sensorStation.plant}"  filter="true" emptyLabel="Plant: #{sensorStationDetailController.sensorStation.plant.plantName}"
+                                         scrollHeight="250" updateLabel="true" >
+                            <f:selectItems value="#{plantController.plants}"/>
+                            <f:facet name="footer">
+                                <p:divider styleClass="mt-0" />
+                                <h:outputText value="3 options" style="font-weight:bold;"/>
+                            </f:facet>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="sensorStationlocation" value="Sensor-station location:"/>
+                        <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
+
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
+                        <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}"
+                                         oncomplete="PF('userEditDialog').hide()" update=":userForm:sensorStationTable"/>
+                        <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+            </p:confirmDialog>
+
+        </h:form>
+
+
+
+
+        <!-- ...................................Sensor station CREATE dialog.................................... -->
+        <h:form id="createDialog">
+
+            <p:commandButton value="Create new Sensor Station" update=":createDialog:createSSDialog" oncomplete="PF('createSSDialog').show()"
+                             icon="pi pi-user-plus" title="New User" class="btn btn-primary">
+                <p:resetInput target=":createDialog:createSSDialog"/>
+            </p:commandButton>
+
+            <p:dialog header="Create New Sensor Station" id="createSSDialog" widgetVar="createSSDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:ajax event="close" update="createSSDialog"/>
+
+                <p:outputPanel id="createSS">
+                    <h:panelGrid columns="2">
+
+
+                        <p:outputLabel for="usernameCreation" value="Sensor Station Name:"/>
+                        <p:inputText id="usernameCreation"
+                                     placeholder="Required field" value="#{createSensorStationBean.sensorStationName}" required="true"/>
+
+                        <p:outputLabel for="description" value="Description:"/>
+                        <p:inputText id="description"
+                                    placeholder="description" value="#{createSensorStationBean.description}" required="false"/>
+
+                        <p:outputLabel for="location" value="Location:"/>
+                        <p:inputText id="location" value="#{createSensorStationBean.location}"/>
+
+                        <p:outputLabel for="sensorStationswitch2" value="Alarm Switch:"/>
+                        <p:selectOneMenu id="sensorStationswitch2" value="#{createSensorStationBean.alarmSwitch}"
+                                         scrollHeight="250" updateLabel="true" >
+                            <f:selectItem itemLabel="On" value="#{sensorStationDetailController.sensorStation.alarmSwitch}"/>
+                            <f:selectItem itemLabel="Off" value="#{sensorStationDetailController.sensorStation.alarmSwitch}"/>
+                        </p:selectOneMenu>
+
+                        <p:commandButton value="Create"
+                                         action="#{createSensorStationBean.doCreateNewCreateSensorStation()}"
+                                         update=":userForm:sensorStationTable"
+                                         oncomplete="PF('createSSDialog').hide()"/>
+                        <p:commandButton value="Cancel" onclick="PF('createSSDialog').hide()"/>
+
+
+                    </h:panelGrid>
+
+                </p:outputPanel>
+            </p:dialog>
         </h:form>
 
 

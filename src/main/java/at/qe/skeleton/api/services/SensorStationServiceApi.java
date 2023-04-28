@@ -1,11 +1,14 @@
 package at.qe.skeleton.api.services;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
+import at.qe.skeleton.api.model.SensorApi;
 import at.qe.skeleton.api.model.SensorStationApi;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
@@ -43,7 +46,11 @@ public class SensorStationServiceApi {
         newSensorStation.setName(sensorStation.getName());
         newSensorStation.setService_description(sensorStation.getService_description());
         newSensorStation.setAlarm_switch(sensorStation.getAlarm_switch());
-
+        // read sensorstation
+        SensorStation sensorStation1 = sensorStationRepository.findFirstById(sensorStation.getName());
+        sensorStation1.setDescription(sensorStation.getService_description());
+        sensorStation1.setAlarmSwitch(sensorStation.getAlarm_switch());
+        sensorStationRepository.save(sensorStation1);
         //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
 
         System.out.println(newSensorStation);
@@ -67,14 +74,20 @@ public class SensorStationServiceApi {
         return newSensorStation;
     }
 
-    public SensorStation findOneSensorStation(Long id) throws SensorStationNotFoundException {
-        SensorStation sensorStation = sensorStations.get(id);
+    public SensorStation findOneSensorStation(String id) throws SensorStationNotFoundException {
+        SensorStation sensorStation = sensorStationRepository.findFirstById(id);
         if (sensorStation != null)
             return sensorStation;
         else
             throw new SensorStationNotFoundException();
     }
+    //Added to call all sensorstations via rest
+    public List<SensorStation> findAllSensorStation() throws SensorStationNotFoundException {
+        return sensorStationRepository.findAll();
+    }
 
-
-
+    //added to write Sensors
+    public SensorApi addSensor(SensorApi sensorApi){
+        return sensorApi;
+    }
 }
