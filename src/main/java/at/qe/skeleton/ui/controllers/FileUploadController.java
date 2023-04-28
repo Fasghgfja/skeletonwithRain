@@ -87,9 +87,10 @@ public class FileUploadController implements Serializable {
         // Save the picture to the corresponding plant
         if(!id.equals("")){
             imageService.addPictureToPlantPictures(image,id);
+            System.out.println("picture saved" + id);
             return ;
         }
-
+        System.out.println("picture saved" + id);
         imageService.saveImage(image);
 
     }

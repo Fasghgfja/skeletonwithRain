@@ -76,7 +76,7 @@ public class GalleryController implements Serializable {
      */
     @PostConstruct
     public void init() {
-       // images = imageService.getAllImages();
+        images = imageService.getAllImages();
         responsiveOptions1 = new ArrayList<>();
         responsiveOptions1.add(new ResponsiveOption("1024px", 5));
         responsiveOptions1.add(new ResponsiveOption("768px", 3));
@@ -89,10 +89,10 @@ public class GalleryController implements Serializable {
         responsiveOptions2.add(new ResponsiveOption("560px", 1));
 
         responsiveOptions3 = new ArrayList<>();
-        responsiveOptions3.add(new ResponsiveOption("1500px", 5));
-        responsiveOptions3.add(new ResponsiveOption("1024px", 3));
-        responsiveOptions3.add(new ResponsiveOption("768px", 2));
-        responsiveOptions3.add(new ResponsiveOption("560px", 1));
+        responsiveOptions3.add(new ResponsiveOption("1500px", 15));
+        responsiveOptions3.add(new ResponsiveOption("1024px", 15));
+        responsiveOptions3.add(new ResponsiveOption("768px", 15));
+        responsiveOptions3.add(new ResponsiveOption("560px", 15));
     }
 
 

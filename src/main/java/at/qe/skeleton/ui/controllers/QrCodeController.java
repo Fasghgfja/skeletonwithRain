@@ -24,8 +24,8 @@ public class QrCodeController implements Serializable {
 
     public QrCodeController() {
         renderMethod = "canvas";
-        text = "http://localhost:8080/file.xhtml?id=50100#";
-        label = "Plant Upload page: /file.xhtml?id=50100#";
+        text = "http://localhost:8080/registration/register.xhtml/id=50100#";
+        label = "/register.xhtml/id=50100#";
         mode = 2;
         fillColor = "8d888d";
         size = 200;
