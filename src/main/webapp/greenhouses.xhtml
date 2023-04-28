@@ -46,7 +46,7 @@
                             <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
                         </p:column>
 
-                        <p:column headerText="Plant" sortBy="#{sensorStation.plant}">
+                        <p:column headerText="Plant" sortBy="#{sensorStation.plant.plantName}">
                             <h:outputText value="#{sensorStation.plant}"/>
                         </p:column>
 
@@ -77,6 +77,10 @@
 
                         <p:column headerText="Location" sortBy="#{sensorStation.location}">
                             <h:outputText value="#{sensorStation.location}"/>
+                        </p:column>
+
+                        <p:column headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}">
+                            <h:outputText value="#{sensorStation.alarmSwitch}"/>
                         </p:column>
 
 
@@ -220,12 +224,14 @@
                         <p:outputLabel for="location" value="Location:"/>
                         <p:inputText id="location" value="#{createSensorStationBean.location}"/>
 
-                        <p:outputLabel for="sensorStationswitch2" value="Alarm Switch:"/>
-                        <p:selectOneMenu id="sensorStationswitch2" value="#{createSensorStationBean.alarmSwitch}"
-                                         scrollHeight="250" updateLabel="true" >
-                            <f:selectItem itemLabel="On" value="#{sensorStationDetailController.sensorStation.alarmSwitch}"/>
-                            <f:selectItem itemLabel="Off" value="#{sensorStationDetailController.sensorStation.alarmSwitch}"/>
+
+                        <p:outputLabel for="sensorStationswitch" value="Alarm Switch:"/>
+                        <p:selectOneMenu id="sensorStationswitch" value="#{createSensorStationBean.alarmSwitch}"  >
+                            <f:selectItem itemLabel="On" itemValue="On"/>
+                            <f:selectItem itemLabel="Off" itemValue="Off"/>
                         </p:selectOneMenu>
+
+
 
                         <p:commandButton value="Create"
                                          action="#{createSensorStationBean.doCreateNewCreateSensorStation()}"

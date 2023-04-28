@@ -112,5 +112,13 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
         this.description = description;
     }
 
+    public void alarmSwitchOn() {
+        this.alarmSwitch = "on";
+    }
+
+    public void alarmSwitchOff() {
+        this.alarmSwitch = "off";
+    }
+
 
 }
