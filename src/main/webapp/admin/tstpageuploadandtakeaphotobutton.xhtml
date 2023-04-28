@@ -36,9 +36,13 @@
             <div class="card">
                 <h5>Upload Picture Test</h5>
                 <h:form>
+                    <input type="hidden" name="id" value="#{plantPhotoGalleryController.plant.id}" />
                     <p:fileUpload listener="#{fileUploadController.handleFileUpload}" mode="advanced" dragDropSupport="false"
-                                  multiple="true" update="messages" sizeLimit="50000000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width:100%" />
+                                  multiple="true" update="idParam" sizeLimit="50000000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width:100%" />
+
+                    <h:inputHidden id="idParam" value="#{fileUploadController.id}" />
                     <p:growl id="messages" showDetail="true" />
+
                 </h:form>
             </div>
         </div>
