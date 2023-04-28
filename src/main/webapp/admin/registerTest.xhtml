@@ -7,18 +7,15 @@
                 template="/WEB-INF/templates/loginMain.xhtml">
 
     <ui:define name="content">
-
         <div style="display:flex;width: 100%; min-height: 100vh; justify-content: right; align-items: center;
     background-image: url('https://c4.wallpaperflare.com/wallpaper/331/66/547/nature-leaves-water-drops-closeup-wallpaper-preview.jpg'); background-size: cover;">
 
+
+
             <div style="display:flex;width: 100%; min-height: 100%; justify-content: center; align-items: center;" >
                 <p style="color: white;">
-                    <h:form id="myform">
-
-                    <div style="display:flex;width: 100%; min-height: 100%; justify-content: center; align-items: center;" >
-                        <p style="color: white;">
-                            <span style="font-size: 34px;margin-right: 40%; margin-left: 30%">CREATE ACCOUNT<br/><br/></span>
-                            <span style="font-size: 22px;">
+                    <span style="font-size: 34px;margin-right: 40%; margin-left: 30%">CRATE ACCOUNT<br/><br/></span>
+                    <span style="font-size: 22px;">
                 Plants are fundamentally sovereign life forms. However, three<br/>
                 challenges prevent most people from growing their own vegetables, herbs and more.<br/>
                 <span style="font-size: 26px;font-weight: bold;">Lack of time</span>: plants must be constantly monitored. However, if the<br/>
@@ -29,47 +26,20 @@
                 often difficult.<br/><br/>
                 register an account to discover all the features...<br/><br/>
                 </span><br/>
-                            <p:commandButton value="Show Plant Gallery" icon="pi pi-external-link" onclick="PF('galleria1').show()" style="margin-right: 10%;width: 40%;" />
-                            <p:commandButton value="Upload a picture" icon="pi pi-external-link" onclick="PF('submitDialog').show()" style="width: 40%;" />
-                        </p>
-                    </div>
-
-
-                    <!-- .......::::::::::::::::...GALLERY FORM ....::::::::::::::::::::::.......... -->
-
-                    <div class="card">
-                        <p:galleria widgetVar="galleria1" value="#{galleryController.images}" var="image" numVisible="9" responsiveOptions="#{galleryController.responsiveOptions3}"
-                                    circular="true" fullScreen="true" showItemNavigators="true" style="max-width: 50%">
-                            <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 100%; display: block">
-                                <f:param name="id" value="#{image.id}" />
-                            </p:graphicImage>
-                        </p:galleria>
-
-
-                    </div>
+                    <h:form id = "id" >
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:commandButton style="background-color: #083604; width: 50%; height: 40px; line-height: 40px; font-size: 16px; padding: 0;margin-right: 75%; margin-left: 25%;"
+                                             type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="Upload Picture" href="/admin/file.xhtml"/>
+                            <p:commandButton style="background-color: #083604; width: 50%; height: 40px; line-height: 40px; font-size: 16px; padding: 0;margin-right: 75%; margin-left: 25%;"
+                                             type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="Take a Picture" href="/admin/takeAPicture.xhtml"/>
+                        </h:panelGrid>
                     </h:form>
-
-
-                    <!-- ....:::::::::::::::::::::......UPLOAD FORM ......::::::::::::::::::........ -->
-                    <p:dialog  widgetVar="submitDialog" modal="true"  >
-                    <h:form>
-                        <input type="hidden" name="id" value="#{plantPhotoGalleryController.plant.id}" />
-                        <p:fileUpload widgetVar="submitDialog" listener="#{fileUploadController.handleFileUpload}" mode="advanced" dragDropSupport="false"
-                                      multiple="true" update="idParam" sizeLimit="50000000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width:100%" />
-
-                        <h:inputHidden id="idParam" value="#{fileUploadController.id}" />
-                        <p:growl id="messages" showDetail="true" />
-                    </h:form>
-                    </p:dialog>
-
-
-
+                    <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
                 </p>
             </div>
 
 
 
-            <!-- .......::::::::::::::::::...REGISTRATION FORM ....::::::::::::.......... -->
             <p:card style="width: 30%; min-height: 100vh; margin:5px; justify-content: left;">
                 <h:form>
 
