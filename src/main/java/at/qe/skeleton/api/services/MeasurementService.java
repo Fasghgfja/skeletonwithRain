@@ -36,6 +36,7 @@ public class MeasurementService {
     MeasurementRepository measurementRepository;
 
 
+
     private static final AtomicLong ID_COUNTER = new AtomicLong(1);
     private static final ConcurrentHashMap<Long, Measurement> measurements = new ConcurrentHashMap<>();
 
