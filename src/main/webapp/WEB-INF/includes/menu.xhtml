@@ -57,11 +57,9 @@
                         <p:menuitem id="m_input2" value="Manage Sensor Stations" icon="pi pi-check-square" outcome="/greenhouses" />
                         <p:menuitem id="m_table" value="Manage Users" icon="pi pi-users" outcome="/userManagement" />
                         <p:menuitem id="m_list" value="Manage Access Points" icon="pi pi-server" outcome="/accessPointsManagement" />
-                        <p:menuitem id="m_media" value="Image Gallery Test" icon="pi pi-image" url="/admin/media.xhtml" />
-                        <p:menuitem id="m1_button" value="Upload a Picture with Rest WORKING!!!" icon="pi pi-mobile" outcome="/file" styleClass="rotated-icon"/>
+                        <p:menuitem id="m_media" value="Image Gallery" icon="pi pi-image" url="/admin/media.xhtml" />
+                        <p:menuitem id="m1_button2" value="Upload a Picture With Primefaces WORKING!!!" icon="pi pi-mobile" url="/admin/tstpageuploadandtakeaphotobutton.xhtml" styleClass="rotated-icon"/>
                         <p:menuitem id="m_formlayout" value="Audit Log" icon="pi pi-history" outcome="/auditLog" />
-                        <p:menuitem id="m_doc" value="Documentation" icon="pi pi-info-circle" outcome="/documentation"/>
-                        <p:menuitem id="register" value="Register Upload picture page NEW!!" icon="pi pi-info-circle" outcome="/register"/>
                         <p:menuitem id="qrCode" value="Generate Qr Code" icon="pi pi-info-circle" outcome="/generateQrCode"/>
                     </p:submenu>
 
@@ -71,10 +69,21 @@
                         <p:menuitem id="m_allblocks" value="Gardener utility" icon="pi pi-question-circle" outcome="/empty"/>
                     </p:submenu>
 
+
                     <!-- ..........................................OTHER MENU ELEMENTS..................................................... -->
                     <p:menuitem id="m_icons" value="Plants Catalogue" icon="pi pi-question-circle" outcome="/plantCatalogue"/>
                     <p:menuitem id="m_crud" value="Settings" icon="pi pi-question-circle" outcome="/editProfile" />
                     <p:menuitem id="m_help" value="Help" icon="pi pi-question-circle" outcome="/empty" />
+
+
+                    <!-- ..........................................TESTING SUBMENU............................................................... -->
+                    <p:submenu id="m_primeblocks2" label="Testing Features" icon="pi pi-prime" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+                        <p:menuitem id="m_doc" value="Primefaces Css Documentation" icon="pi pi-info-circle" outcome="/documentation"/>
+                        <p:menuitem id="m_media2" value="Image Gallery Test" icon="pi pi-image" url="/admin/testGalleria.xhtml" />
+                        <p:menuitem id="register2" value="Register Test" icon="pi pi-image" url="/admin/registerTest.xhtml" />
+                        <p:menuitem id="register" value="Register Upload picture page NEW!!" icon="pi pi-info-circle" outcome="/register"/>
+                        <p:menuitem id="m1_button" value="Upload a Picture with Rest WORKING!!!" icon="pi pi-mobile" outcome="/file" styleClass="rotated-icon"/>
+                    </p:submenu>
 
 
                 </pr:menu>
