@@ -1,22 +1,38 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/templates/main.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/WEB-INF/templates/main.xhtml">
 
-    <ui:define name ="content">
+
+    <ui:define name="title">Planthealth: Plant Management</ui:define>
+
+    <ui:define name="viewname">
+        <li>Galleria</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li>
+        </li>
+    </ui:define>
+
+    <ui:define name="head">
+
+    </ui:define>
+
+
+    <ui:define name="content">
+
 
 
         <!-- .........................................TABLE.............................................................. -->
         <h:form id="userForm">
             <div class="col-12">
+                <!-- ....................PLANT CREATE button..................... -->
+                <p:commandButton value="Create new Plant" rendered="#{sessionInfoBean.hasRole('ADMIN')}" update="plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
+                                 icon="pi pi-user-plus" title="New User" class="btn btn-primary">
+                    <p:resetInput target=":plantCreateDialog:createPlantDialog"/>
+                </p:commandButton>
 
                 <div class="card">
                     <h5>Plant's Catalogue</h5>
-                    <p:dataTable id="plantsTable" var="plant" value="#{plantController.doGetOnlyPlantsNotYetFollowed()}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
+                    <p:dataTable id="plantsTable" var="plant" value="#{plantController.plants}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 
                         <p:column >
@@ -35,14 +51,14 @@
                             <h:outputText value="#{plant.description}"/>
                         </p:column>
 
-                        <p:column style="width: 3.5rem">
+                        <p:column style="text-align: center">
 
-                            <!-- ....................FOLLOW PLANT BUTTON ........... .............. -->
-                            <p:commandButton icon="pi pi-plus"
-                                      title="Follow Plant"
-                                             update=":userForm:plantsTable">
-                                <p:ajax event="click" listener="#{userDetailController.doAddPlantToFollowedPlants(plant)}"/>
+                            <!-- ....................Plant EDIT BUTTON ........... .............. -->
+                            <p:commandButton style="margin-right: 10px" update=":userForm:plantEditDialog"
+                                             oncomplete="PF('plantEditDialog').show()" icon="pi pi-user-edit" title="Edit">
+                                <f:setPropertyActionListener value="#{plant}" target="#{plantController.plant}"/>
                             </p:commandButton>
+
 
                             <!-- ....................DELETE PLANT BUTTON ...........ONLY ADMIN .............. -->
                             <p:commandButton styleClass="ui-button-danger" rendered="#{sessionInfoBean.hasRole('ADMIN')}"
@@ -63,24 +79,57 @@
             </div>
 
 
-            <!-- ...................................CONFIRMATION DIALOG PLANT DELETE.................................... -->
+
+            <!-- ...................................Plant Edit dialog.................................... -->
+            <p:dialog header="Edit Plant" id="plantEditDialog" widgetVar="plantEditDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="userData" rendered="#{not empty plantController.plant}">
+                    <h5 class="mt-0">Plant Data </h5>
+                    <h:panelGrid columns="1">
+
+                        <p:outputLabel for="plantName" value="Plant name:"/>
+                        <p:inputText id="plantName" value="#{plantController.plant.plantName}" />
+
+                        <p:outputLabel for="plantDesciption" value="Description:"/>
+                        <p:inputText id="plantDesciption" rendered="#{not empty plantController.plant}" value="#{plantController.plant.description}"/>
+
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
+                        <p:commandButton value="Save" action="#{plantController.doSavePlant()}"
+                                         oncomplete="PF('plantEditDialog').hide()" update=":userForm:plantsTable"/>
+                        <p:commandButton value="Abort" onclick="PF('plantEditDialog').hide()"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+
+            <!-- ...................................CONFIRMATION dialog.................................... -->
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+            </p:confirmDialog>
+
+        </h:form>
+
+
+
+
+
+
+
+        <!-- ...................................CONFIRMATION DIALOG .................................... -->
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
                 <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
             </p:confirmDialog>
 
 
-        </h:form>
 
 
 
         <!-- ...................................PLANT CREATE dialog.....ADMIN GARDENER ONLY... -->
         <h:form id="plantCreateDialog">
-            <!-- ....................PLANT CREATE button..................... -->
-            <p:commandButton value="Create new Plant" rendered="#{sessionInfoBean.hasRole('ADMIN')}" update="plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
-                             icon="pi pi-user-plus" title="New User" class="btn btn-primary">
-                <p:resetInput target=":createDialog:createPlantDialog"/>
-            </p:commandButton>
 
             <p:dialog header="Create New Plant" id="createPlantDialog" widgetVar="createPlantDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
