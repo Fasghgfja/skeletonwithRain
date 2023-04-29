@@ -52,15 +52,16 @@ public class SensorService {
     }
 
 
+    //TODO: implement logging , like it was it crashes the db
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteSensorStation(Sensor sensor) {
-        Log deleteLog = new Log();
+       // Log deleteLog = new Log();
 
-        deleteLog.setDate(LocalDate.now());
-        deleteLog.setSubject("SENSOR STATION DELETION");
-        deleteLog.setText("DELETED SENSOR STATION: " + sensor.getId());
+       // deleteLog.setDate(LocalDate.now());
+       // deleteLog.setSubject("SENSOR STATION DELETION");
+       // deleteLog.setText("DELETED SENSOR STATION: " + sensor.getId());
 
-        logRepository.save(deleteLog);
+      //  logRepository.save(deleteLog);
         sensorRepository.delete(sensor);
     }
 

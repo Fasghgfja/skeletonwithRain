@@ -26,6 +26,11 @@ public class PlantController implements Serializable{
     private Collection<Plant> filteredPlants;
 
     /**
+     * Cached plant.
+     */
+    private Plant plant;
+
+    /**
      * Returns a list of all plants.
      */
     public Collection<Plant> getPlants() {
@@ -50,4 +55,26 @@ public class PlantController implements Serializable{
         return this.plantService.getFollowedPlants(user);
 
     }
+
+
+    /**
+     * Action to save the currently cached Plant.
+     */
+    public void doSavePlant() {
+        plant = this.plantService.savePlant(plant);
+    }
+
+
+
+
+    /**
+     * Action to delete the currently cached Sensor Station.
+     */
+    public void doDeletePlant() {
+        this.plantService.deletePlant(plant);
+        plant = null;
+    }
+
+
+
 }
