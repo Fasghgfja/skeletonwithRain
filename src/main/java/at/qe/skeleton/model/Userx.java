@@ -16,7 +16,6 @@ import org.springframework.data.domain.Persistable;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 public class Userx extends Metadata implements Persistable<String>, Serializable, Comparable<Userx> {
 

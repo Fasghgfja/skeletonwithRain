@@ -2,11 +2,11 @@ package at.qe.skeleton.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -28,6 +28,24 @@ public class AccessPoint extends Metadata implements Persistable<Long>, Serializ
     @Override
     public boolean isNew() {
         return (null == super.getCreateDate());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.accessPointID);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof final AccessPoint other)) {
+            return false;
+        }
+        return Objects.equals(this.accessPointID, other.accessPointID);
     }
 
     @Override
