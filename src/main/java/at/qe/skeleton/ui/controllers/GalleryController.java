@@ -182,6 +182,13 @@ public class GalleryController implements Serializable {
 
 
 
+    public List<Image> doGetPlantImages(String idString) {
+        if (idString == null){return new ArrayList<Image>();}
+        return imageService.getAllPlantImages(idString);
+    }
+
+
+
 
 }
 

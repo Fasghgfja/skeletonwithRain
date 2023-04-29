@@ -5,10 +5,7 @@ import at.qe.skeleton.model.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import at.qe.skeleton.repositories.AbstractRepository;
 import at.qe.skeleton.services.ImageService;
@@ -28,7 +25,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 
-//TODO: merge this with galleryController or the other way around register.xhtml uses this
+//TODO: rename this to gallery or landingview and use togheter with galleryController register.xhtml uses this
 
 /**
  * Controller for the sensor stations detail view.
@@ -36,7 +33,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-@Scope("application")
+@Scope("view")
 public class PlantPhotoGalleryController implements Serializable {
 
 
@@ -50,6 +47,11 @@ public class PlantPhotoGalleryController implements Serializable {
 
     @Autowired
     private ImageService imageService;
+
+
+
+    @Autowired
+    private GalleryController galleryController;
 
     @Autowired
     private transient SessionInfoBean sessionInfoBean;
@@ -78,11 +80,10 @@ public class PlantPhotoGalleryController implements Serializable {
 
 
     public List<Image> doGetPlantImages() {
-        return imageService.getAllPlantImages(idString);
+        //if (idString == null){return new ArrayList<Image>();}
+        //return imageService.getAllPlantImages(idString);
+        return galleryController.doGetPlantImages(idString);
     }
-
-
-
 
     public ByteArrayInputStream getPhotoAsStreamedContent() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -96,6 +97,10 @@ public class PlantPhotoGalleryController implements Serializable {
             return new ByteArrayInputStream(imageBytes);
         }
     }
+
+
+
+
 
 
 
