@@ -1,9 +1,8 @@
 package at.qe.skeleton.repositories;
 import at.qe.skeleton.model.Log;
 import at.qe.skeleton.model.LogType;
-import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -15,6 +14,8 @@ import java.util.List;
 public interface LogRepository extends AbstractRepository<Log, Long> {
     long countLogByType(LogType logType);
     long count();
+
+    Log findFirstById(Long id);
 
 
 }
