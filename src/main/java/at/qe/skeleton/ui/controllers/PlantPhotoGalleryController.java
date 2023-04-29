@@ -1,21 +1,23 @@
 package at.qe.skeleton.ui.controllers;
 
 import at.qe.skeleton.api.services.MeasurementService;
-import at.qe.skeleton.model.Measurement;
-import at.qe.skeleton.model.MeasurementType;
-import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.SensorStation;
+import at.qe.skeleton.model.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import at.qe.skeleton.repositories.AbstractRepository;
+import at.qe.skeleton.services.ImageService;
 import at.qe.skeleton.services.PlantService;
 import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.PhaseId;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.ToggleEvent;
@@ -26,13 +28,15 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 
+//TODO: merge this with galleryController or the other way around register.xhtml uses this
+
 /**
  * Controller for the sensor stations detail view.
  */
 @Getter
 @Setter
 @Component
-@Scope("view")
+@Scope("application")
 public class PlantPhotoGalleryController implements Serializable {
 
 
@@ -43,11 +47,13 @@ public class PlantPhotoGalleryController implements Serializable {
     @Autowired
     private PlantService plantService;
 
+
+    @Autowired
+    private ImageService imageService;
+
     @Autowired
     private transient SessionInfoBean sessionInfoBean;
 
-    @Autowired
-    private transient PhotoCamController photoCamController;
 
 
     /**
@@ -71,6 +77,33 @@ public class PlantPhotoGalleryController implements Serializable {
 
 
 
+    public List<Image> doGetPlantImages() {
+        return imageService.getAllPlantImages(idString);
+    }
+
+
+
+
+    public ByteArrayInputStream getPhotoAsStreamedContent() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            byte []a = new byte[0];
+            return new ByteArrayInputStream(a);
+        } else {
+            String imageId = context.getExternalContext().getRequestParameterMap().get("id");
+            Image image = imageService.loadImage(Long.valueOf(imageId));
+            byte[] imageBytes = image.getImageByte();
+            return new ByteArrayInputStream(imageBytes);
+        }
+    }
+
+
+
+
+
+
+
+//TODO: update the javadoc of this page
 
     /**
      * Sets the currently displayed sensor station and reloads it form db. This sensor station is

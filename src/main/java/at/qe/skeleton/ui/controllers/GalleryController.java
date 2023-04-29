@@ -4,6 +4,7 @@ package at.qe.skeleton.ui.controllers;
 import at.qe.skeleton.model.Image;
 import at.qe.skeleton.services.ImageService;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.PhaseId;
 import jakarta.inject.Named;
@@ -20,6 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
+
+//TODO: merge this with plantphotogallerycontroller or the other way around media.xhtml uses this
 /**
  * Basic Session scoped bean for Dynamic content rendering / streaming
  * the bean returns a ByteArrayimput stream which is used in media.xhtml to reproduce images
@@ -137,6 +141,8 @@ public class GalleryController implements Serializable {
     }
 
 
+
+
     /**
      * This method returns an instance of ByteArrayInputStream for the image content requested.
      * It retrieves the image ID from the request parameters and loads the corresponding image using {@link ImageService#loadImage(Long)}.
@@ -145,7 +151,6 @@ public class GalleryController implements Serializable {
      * The method returns the image content as a ByteArrayInputStream.
      * @return An instance of ByteArrayInputStream containing the requested image content.
      */
-    //TODO: multiple null requests bug: when the gallery page is opened it appears multiple requests are made so some carry null while usually the last one carry a real value
     public ByteArrayInputStream getPhotoAsStreamedContent() {
         FacesContext context = FacesContext.getCurrentInstance();
         if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {

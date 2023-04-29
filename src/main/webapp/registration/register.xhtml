@@ -48,12 +48,12 @@
                     <!-- .......::::::::::::::::...GALLERY FORM ....::::::::::::::::::::::.......... -->
 
                     <div class="card">
-                        <p:galleria widgetVar="galleria1" value="#{galleryController.images}" var="image"
+                        <p:galleria widgetVar="galleria1" value="#{plantPhotoGalleryController.doGetPlantImages()}" var="image"
                                     numVisible="9" responsiveOptions="#{galleryController.responsiveOptions3}"
                                     circular="true" fullScreen="true" showItemNavigators="true"
                                     style="max-width: 70%">
-                            <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
-                                            alt="#{galleryController.photoAsStreamedContent}"
+                            <p:graphicImage value="#{plantPhotoGalleryController.photoAsStreamedContent}"
+                                            alt="#{plantPhotoGalleryController.photoAsStreamedContent}"
                                             style="width: 100%; display: block">
                                 <f:param name="id" value="#{image.id}"/>
                             </p:graphicImage>

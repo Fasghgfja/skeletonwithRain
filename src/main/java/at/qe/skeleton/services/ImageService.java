@@ -38,6 +38,20 @@ public class ImageService {
         return imageRepository.findAll();
     }
 
+
+
+    /**
+     * Returns a collection of all images.
+     */
+    @PreAuthorize("permitAll()")
+    public List<Image> getAllPlantImages(String plantId) {
+        Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantId));
+        return imageRepository.findImagesByPlant(plant);
+    }
+
+
+
+
     /**
      * Loads a single image identified by its ID.
      *
