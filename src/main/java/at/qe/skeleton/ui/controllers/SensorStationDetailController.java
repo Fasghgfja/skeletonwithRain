@@ -3,6 +3,7 @@ package at.qe.skeleton.ui.controllers;
 import at.qe.skeleton.api.services.MeasurementService;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.MeasurementType;
+import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
 
 import java.io.Serializable;
@@ -70,9 +71,8 @@ public class SensorStationDetailController implements Serializable {
      */
     private String plantName = "";
     private String description = "";
-    @Autowired
-    @Qualifier("measurementRepository")
-    private AbstractRepository measurementRepository;
+    private Plant plant;
+
 
 
 
