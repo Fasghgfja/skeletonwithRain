@@ -189,6 +189,17 @@ public class GalleryController implements Serializable {
 
 
 
+    public void doDeleteImage(Image image) {
+        imageService.deleteImage(image);
+    }
+
+
+    public void approveImage(Image image) {
+        image.setApproved(true);
+        imageService.saveImage(image);
+    }
+
+
 
 }
 

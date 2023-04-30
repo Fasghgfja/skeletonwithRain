@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 
-//TODO: rename this to gallery or landingview and use togheter with galleryController register.xhtml uses this
+ //TODO: rename this to galleryView  and use togheter with galleryController
 
 /**
  * Controller for the sensor stations detail view.
@@ -76,14 +76,19 @@ public class PlantPhotoGalleryController implements Serializable {
 
     private String idString = "";
 
+    private String plantId = "";
 
 
 
-    public List<Image> doGetPlantImages() {
+
+
+    public List<Image> doGetPlantImages() {//TODO fix the error handling like in sensor station detail controller the method with same name
         //if (idString == null){return new ArrayList<Image>();}
         //return imageService.getAllPlantImages(idString);
         return galleryController.doGetPlantImages(idString);
     }
+
+
 
     public ByteArrayInputStream getPhotoAsStreamedContent() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -176,6 +181,7 @@ public class PlantPhotoGalleryController implements Serializable {
             } // error handling XD
             this.plantName = "" + this.getPlant().getPlantName();
             this.description = this.getPlant().getDescription();
+            this.plantId = this.getPlant().getPlantID().toString();
         }
 
     }
