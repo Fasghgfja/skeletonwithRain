@@ -19,14 +19,14 @@ def checkBoarderValues():
             current_value_list = DB_connection.read_value_from_database(sensor[0]).fetchall()
             if alarm_count == -1 and alarm_switch == "on":
                 # TODO call Webapp via REST value alarm_switch
-                val = rest_api.getSensorstations(False, station[0])
-                print(val)
-                alarm_switch = "fixed"
-                if alarm_switch == "fixed":
+                webapp_alarm_switch = rest_api.getSensorstations(False, station[0])
+                # alarm_switch = "fixed"
+                if webapp_alarm_switch == "fixed":
                     alarm_switch = "off"
                     asyncio.run(ble_service_connection.writeAlarmSignal(uuid, "OFF", station[0]))
                     DB_connection.update_sensor_station_database(alarm_switch, station[0])
                     DB_connection.update_sensor_database(0,sensor[0])
+                    rest_api.write_alarm_switch(station[0], alarm_switch, station[1])
             else:
                 for value in current_value_list:
                     if value[0] < lower_value or value[0] > upper_value:
@@ -40,10 +40,10 @@ def checkBoarderValues():
                     alarm_count = -1
                     alarm_switch = "on"
                     DB_connection.update_sensor_station_database(alarm_switch, station[0])
-                    rest_api.write_alarm_switch(station[0], alarm_switch)
+                    rest_api.write_alarm_switch(station[0], alarm_switch, station[1])
                 if alarm_count != sensor[4]:
                     DB_connection.update_sensor_database(alarm_count, sensor[0])
-                    # Todo update Sensor at Webapp
+                    rest_api.update_Sensor(sensor[0], alarm_count)
 
     # end of while
     exception_logging.log_information("INFO: Boarder values have been checked")

@@ -46,7 +46,10 @@ if __name__ == '__main__':
                 # changed read function
                 device_name = DB_connection.read_Sensor_Stationnames_Database().fetchone()[0] # extract from [('G4T2',)]
                 # print("its the name {0}".format(device_name))
-                asyncio.run(ble_service_connection.read_sensor_data(False, [device_name]))
+                try:
+                    asyncio.run(ble_service_connection.read_sensor_data(False, [device_name]))
+                except Exception as e:
+                    exception_logging.logException(e, "call_read_values")
                 value_count += 1
                 if value_count >= 1:
                     program_state = program_status.Is.CHECK_BOARDER_VALUER.value

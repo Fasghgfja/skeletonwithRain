@@ -1223,3 +1223,1025 @@ ERROR: Could not find device with name EEEEE at 04/28/23__16:08:26
 ERROR: Could not find device with name FFFFF at 04/28/23__16:08:36
 ERROR: Could not find device with name GGGGG at 04/28/23__16:08:46
 ERROR: Could not find device with name HHHHH at 04/28/23__16:08:56
+ERROR: Could not find device with name AAAAA at 04/30/23__10:59:33
+ERROR: Could not find device with name BBBBB at 04/30/23__10:59:43
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__10:59:45
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__10:59:45
+INFO: Sensor Station with name G4T2 has been inserted to the database
+INFO: Sensor with uuid 000019b2-0000-1000-8000-00805f9b34fb and type TempSensor from Station G4T2 has been inserted to the database at 04/30/23__10:59:46
+INFO: Sensor with uuid 000019b0-0000-1000-8000-00805f9b34fb and type LigthSensor from Station G4T2 has been inserted to the database at 04/30/23__10:59:46
+INFO: Sensor with uuid 000019b3-0000-1000-8000-00805f9b34fb and type humiditySensor from Station G4T2 has been inserted to the database at 04/30/23__10:59:46
+INFO: Sensor with uuid 000019b4-0000-1000-8000-00805f9b34fb and type PressureSensor from Station G4T2 has been inserted to the database at 04/30/23__10:59:46
+INFO: Sensor with uuid 000019b5-0000-1000-8000-00805f9b34fb and type GasSensor from Station G4T2 has been inserted to the database at 04/30/23__10:59:47
+INFO: Sensor with uuid 000019b1-0000-1000-8000-00805f9b34fb and type HygroSensor from Station G4T2 has been inserted to the database at 04/30/23__10:59:47
+INFO: Disconnected at 04/30/23__10:59:47
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__10:59:53
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__10:59:53
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__10:59:54
+ERROR: Could not find device with name AAAAA at 04/30/23__11:00:09
+ERROR: Could not find device with name BBBBB at 04/30/23__11:00:19
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:00:22
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:00:22
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:00:22
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:00:22
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:00:22
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:00:23
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:00:23
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:00:23
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:00:23
+INFO: Disconnected at 04/30/23__11:00:23
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:00:29
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:00:29
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:00:31
+ERROR: Could not find device with name AAAAA at 04/30/23__11:00:46
+ERROR: Could not find device with name BBBBB at 04/30/23__11:00:56
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:00:57
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:00:57
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:00:57
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:00:57
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:00:58
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:00:58
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:00:58
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:00:58
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:00:58
+INFO: Disconnected at 04/30/23__11:00:58
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:01:03
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:01:03
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:01:05
+ERROR: Could not find device with name AAAAA at 04/30/23__11:01:19
+ERROR: Could not find device with name BBBBB at 04/30/23__11:01:29
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:01:30
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:01:30
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:01:30
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:01:30
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:01:30
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:01:31
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:01:31
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:01:31
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:01:31
+INFO: Disconnected at 04/30/23__11:01:31
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:01:36
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:01:36
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:01:38
+ERROR: Could not find device with name AAAAA at 04/30/23__11:01:53
+ERROR: Could not find device with name BBBBB at 04/30/23__11:02:03
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:02:05
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:02:05
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:02:05
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:02:05
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:02:05
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:02:05
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:02:06
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:02:06
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:02:06
+INFO: Disconnected at 04/30/23__11:02:06
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:02:14
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:02:14
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:02:15
+ERROR: Could not find device with name AAAAA at 04/30/23__11:02:30
+ERROR: Could not find device with name BBBBB at 04/30/23__11:02:40
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:02:42
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:02:42
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:02:42
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:02:43
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:02:43
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:02:43
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:02:43
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:02:44
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:02:44
+INFO: Disconnected at 04/30/23__11:02:44
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:02:51
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:02:51
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:02:52
+ERROR: Could not find device with name AAAAA at 04/30/23__11:03:07
+ERROR: Could not find device with name BBBBB at 04/30/23__11:03:17
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:03:18
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:03:18
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:03:18
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:03:18
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:03:19
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:03:19
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:03:19
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:03:19
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:03:19
+INFO: Disconnected at 04/30/23__11:03:19
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:03:24
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:03:24
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:03:26
+ERROR: Could not find device with name AAAAA at 04/30/23__11:03:41
+ERROR: Could not find device with name BBBBB at 04/30/23__11:03:51
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:03:55
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:03:55
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:03:55
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:03:55
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:03:56
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:03:56
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:03:56
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:03:56
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:03:56
+INFO: Disconnected at 04/30/23__11:03:56
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:04:01
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:04:01
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:04:03
+ERROR: Could not find device with name AAAAA at 04/30/23__11:04:18
+ERROR: Could not find device with name BBBBB at 04/30/23__11:04:28
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:04:29
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:04:29
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:04:29
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:04:29
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:04:30
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:04:30
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:04:30
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:04:30
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:04:30
+INFO: Disconnected at 04/30/23__11:04:30
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:04:36
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:04:36
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:04:37
+ERROR: Could not find device with name AAAAA at 04/30/23__11:04:52
+ERROR: Could not find device with name BBBBB at 04/30/23__11:05:02
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:05:04
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:05:04
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:05:04
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:05:04
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:05:05
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:05:05
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:05:05
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:05:05
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:05:05
+INFO: Disconnected at 04/30/23__11:05:05
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:05:10
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:05:10
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:05:12
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 1 
+INFO: Boarder values have been checked at 04/30/23__11:05:16
+ERROR: Could not find device with name AAAAA at 04/30/23__11:05:34
+ERROR: Could not find device with name BBBBB at 04/30/23__11:05:44
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:05:45
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:05:45
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:05:45
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:05:46
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:05:46
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:05:46
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:05:46
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:05:47
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:05:47
+INFO: Disconnected at 04/30/23__11:05:47
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:05:54
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:05:54
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:05:55
+ERROR: Could not find device with name AAAAA at 04/30/23__11:06:10
+ERROR: Could not find device with name BBBBB at 04/30/23__11:06:20
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:06:21
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:06:21
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:06:21
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:06:21
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:06:22
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:06:22
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:06:22
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:06:22
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:06:22
+INFO: Disconnected at 04/30/23__11:06:22
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:06:28
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:06:28
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:06:29
+ERROR: Could not find device with name AAAAA at 04/30/23__11:06:44
+ERROR: Could not find device with name BBBBB at 04/30/23__11:06:54
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:06:55
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:06:55
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:06:55
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:06:55
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:06:56
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:06:56
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:06:56
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:06:56
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:06:56
+INFO: Disconnected at 04/30/23__11:06:56
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:07:01
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:07:01
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:07:03
+ERROR: Could not find device with name AAAAA at 04/30/23__11:07:18
+ERROR: Could not find device with name BBBBB at 04/30/23__11:07:28
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:07:29
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:07:29
+ERROR: On characteristic Environmental Sensing. Error is UNIQUE constraint failed: Sensorstation.name at 04/30/23__11:07:29
+ERROR: On characteristic 000019b2-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:07:29
+ERROR: On characteristic 000019b0-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:07:30
+ERROR: On characteristic 000019b3-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:07:30
+ERROR: On characteristic 000019b1-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:07:30
+ERROR: On characteristic 000019b5-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:07:30
+ERROR: On characteristic 000019b4-0000-1000-8000-00805f9b34fb. Error is UNIQUE constraint failed: Sensor.sensor_id at 04/30/23__11:07:30
+INFO: Disconnected at 04/30/23__11:07:30
+ERROR: On characteristic G4T2. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensors (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f25aad2a6b0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 04/30/23__11:07:33
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:07:36
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:07:36
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type GasSensor on id 4 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Disconnected at 04/30/23__11:07:38
+ERROR: On characteristic rest_api read Station name. Error is list.remove(x): x not in list at 04/30/23__11:11:35
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:11:38
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type GasSensor on id 4 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:11:40
+INFO: Disconnected at 04/30/23__11:11:40
+ERROR: On characteristic rest_api read Station name. Error is list.remove(x): x not in list at 04/30/23__11:11:45
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:11:47
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type HygroSensor on id 5 saved
+INFO: Value for type PressureSensor on id 3 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 2 saved
+INFO: Value for type GasSensor on id 4 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:11:49
+INFO: Disconnected at 04/30/23__11:11:49
+ERROR: Could not find device with name AAAAA at 04/30/23__11:21:32
+ERROR: Could not find device with name BBBBB at 04/30/23__11:21:42
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:21:45
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:21:45
+INFO: Sensor Station with name G4T2 has been inserted to the database
+INFO: Sensor with uuid 000019b2-0000-1000-8000-00805f9b34fb and type TempSensor from Station G4T2 has been inserted to the database at 04/30/23__11:21:45
+INFO: Sensor with uuid 000019b0-0000-1000-8000-00805f9b34fb and type LigthSensor from Station G4T2 has been inserted to the database at 04/30/23__11:21:46
+INFO: Sensor with uuid 000019b1-0000-1000-8000-00805f9b34fb and type HygroSensor from Station G4T2 has been inserted to the database at 04/30/23__11:21:46
+INFO: Sensor with uuid 000019b5-0000-1000-8000-00805f9b34fb and type GasSensor from Station G4T2 has been inserted to the database at 04/30/23__11:21:46
+INFO: Sensor with uuid 000019b3-0000-1000-8000-00805f9b34fb and type humiditySensor from Station G4T2 has been inserted to the database at 04/30/23__11:21:46
+INFO: Sensor with uuid 000019b4-0000-1000-8000-00805f9b34fb and type PressureSensor from Station G4T2 has been inserted to the database at 04/30/23__11:21:46
+INFO: Disconnected at 04/30/23__11:21:46
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:21:52
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:21:54
+INFO: Disconnected at 04/30/23__11:21:54
+ERROR: Could not find device with name AAAAA at 04/30/23__11:22:08
+ERROR: Could not find device with name BBBBB at 04/30/23__11:22:18
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:22:20
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:22:21
+INFO: Disconnected at 04/30/23__11:22:21
+ERROR: Could not find device with name AAAAA at 04/30/23__11:22:36
+ERROR: Could not find device with name BBBBB at 04/30/23__11:22:46
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:22:48
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:22:50
+INFO: Disconnected at 04/30/23__11:22:50
+ERROR: Could not find device with name AAAAA at 04/30/23__11:23:05
+ERROR: Could not find device with name BBBBB at 04/30/23__11:23:15
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:23:18
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:23:19
+INFO: Disconnected at 04/30/23__11:23:19
+ERROR: Could not find device with name AAAAA at 04/30/23__11:23:34
+ERROR: Could not find device with name BBBBB at 04/30/23__11:23:44
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:23:46
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:23:47
+INFO: Disconnected at 04/30/23__11:23:47
+ERROR: Could not find device with name AAAAA at 04/30/23__11:24:02
+ERROR: Could not find device with name BBBBB at 04/30/23__11:24:12
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:24:14
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:24:15
+INFO: Disconnected at 04/30/23__11:24:15
+ERROR: Could not find device with name AAAAA at 04/30/23__11:24:30
+ERROR: Could not find device with name BBBBB at 04/30/23__11:24:40
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:24:42
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:24:44
+INFO: Disconnected at 04/30/23__11:24:44
+ERROR: Could not find device with name AAAAA at 04/30/23__11:24:59
+ERROR: Could not find device with name BBBBB at 04/30/23__11:25:09
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:25:14
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:25:15
+INFO: Disconnected at 04/30/23__11:25:15
+ERROR: Could not find device with name AAAAA at 04/30/23__11:25:30
+ERROR: Could not find device with name BBBBB at 04/30/23__11:25:40
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:25:42
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:25:43
+INFO: Disconnected at 04/30/23__11:25:43
+ERROR: Could not find device with name AAAAA at 04/30/23__11:25:58
+ERROR: Could not find device with name BBBBB at 04/30/23__11:26:08
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:26:10
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:26:12
+INFO: Disconnected at 04/30/23__11:26:12
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 1 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 1 
+INFO: Boarder values have been checked at 04/30/23__11:26:15
+ERROR: Could not find device with name AAAAA at 04/30/23__11:26:34
+ERROR: Could not find device with name BBBBB at 04/30/23__11:26:44
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:26:46
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:26:47
+INFO: Disconnected at 04/30/23__11:26:47
+ERROR: Could not find device with name AAAAA at 04/30/23__11:27:02
+ERROR: Could not find device with name BBBBB at 04/30/23__11:27:12
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:27:15
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:27:16
+INFO: Disconnected at 04/30/23__11:27:16
+ERROR: Could not find device with name AAAAA at 04/30/23__11:27:31
+ERROR: Could not find device with name BBBBB at 04/30/23__11:27:41
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:27:43
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:27:44
+INFO: Disconnected at 04/30/23__11:27:44
+ERROR: Could not find device with name AAAAA at 04/30/23__11:27:59
+ERROR: Could not find device with name BBBBB at 04/30/23__11:28:09
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:28:11
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:28:13
+INFO: Disconnected at 04/30/23__11:28:13
+ERROR: Could not find device with name AAAAA at 04/30/23__11:28:27
+ERROR: Could not find device with name BBBBB at 04/30/23__11:28:37
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:28:39
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:28:40
+INFO: Disconnected at 04/30/23__11:28:40
+ERROR: Could not find device with name AAAAA at 04/30/23__11:28:55
+ERROR: Could not find device with name BBBBB at 04/30/23__11:29:05
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:29:08
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:29:10
+INFO: Disconnected at 04/30/23__11:29:10
+ERROR: Could not find device with name AAAAA at 04/30/23__11:29:25
+ERROR: Could not find device with name BBBBB at 04/30/23__11:29:35
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:29:38
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:29:39
+INFO: Disconnected at 04/30/23__11:29:39
+ERROR: Could not find device with name AAAAA at 04/30/23__11:29:54
+ERROR: Could not find device with name BBBBB at 04/30/23__11:30:04
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:30:07
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:30:09
+INFO: Disconnected at 04/30/23__11:30:09
+ERROR: Could not find device with name AAAAA at 04/30/23__11:30:24
+ERROR: Could not find device with name BBBBB at 04/30/23__11:30:34
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:30:36
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:30:37
+INFO: Disconnected at 04/30/23__11:30:37
+ERROR: Could not find device with name AAAAA at 04/30/23__11:30:52
+ERROR: Could not find device with name BBBBB at 04/30/23__11:31:02
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:31:04
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:31:06
+INFO: Disconnected at 04/30/23__11:31:06
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 2 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 2 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 2 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 2 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 2 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 2 
+INFO: Boarder values have been checked at 04/30/23__11:31:10
+ERROR: Could not find device with name AAAAA at 04/30/23__11:31:36
+ERROR: Could not find device with name BBBBB at 04/30/23__11:31:46
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:31:50
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:31:52
+INFO: Disconnected at 04/30/23__11:31:52
+ERROR: Could not find device with name AAAAA at 04/30/23__11:32:07
+ERROR: Could not find device with name BBBBB at 04/30/23__11:32:17
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:32:20
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:32:22
+INFO: Disconnected at 04/30/23__11:32:22
+ERROR: Could not find device with name AAAAA at 04/30/23__11:32:37
+ERROR: Could not find device with name BBBBB at 04/30/23__11:32:47
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:32:55
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:32:56
+INFO: Disconnected at 04/30/23__11:32:56
+ERROR: Could not find device with name AAAAA at 04/30/23__11:33:11
+ERROR: Could not find device with name BBBBB at 04/30/23__11:33:21
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:33:23
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:33:25
+INFO: Disconnected at 04/30/23__11:33:25
+ERROR: Could not find device with name AAAAA at 04/30/23__11:33:40
+ERROR: Could not find device with name BBBBB at 04/30/23__11:33:50
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:33:52
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:33:54
+INFO: Disconnected at 04/30/23__11:33:54
+ERROR: Could not find device with name AAAAA at 04/30/23__11:34:09
+ERROR: Could not find device with name BBBBB at 04/30/23__11:34:19
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:34:21
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:34:23
+INFO: Disconnected at 04/30/23__11:34:23
+ERROR: Could not find device with name AAAAA at 04/30/23__11:34:38
+ERROR: Could not find device with name BBBBB at 04/30/23__11:34:48
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:34:54
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:34:56
+INFO: Disconnected at 04/30/23__11:34:56
+ERROR: Could not find device with name AAAAA at 04/30/23__11:35:11
+ERROR: Could not find device with name BBBBB at 04/30/23__11:35:21
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:35:23
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:35:26
+INFO: Disconnected at 04/30/23__11:35:26
+ERROR: Could not find device with name AAAAA at 04/30/23__11:35:40
+ERROR: Could not find device with name BBBBB at 04/30/23__11:35:50
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:35:52
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:35:53
+INFO: Disconnected at 04/30/23__11:35:53
+ERROR: Could not find device with name AAAAA at 04/30/23__11:36:08
+ERROR: Could not find device with name BBBBB at 04/30/23__11:36:18
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:36:21
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:36:23
+INFO: Disconnected at 04/30/23__11:36:23
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 3 
+INFO: Boarder values have been checked at 04/30/23__11:36:27
+ERROR: Could not find device with name AAAAA at 04/30/23__11:36:58
+ERROR: Could not find device with name BBBBB at 04/30/23__11:37:08
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:37:10
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:37:12
+INFO: Disconnected at 04/30/23__11:37:12
+ERROR: Could not find device with name AAAAA at 04/30/23__11:37:27
+ERROR: Could not find device with name BBBBB at 04/30/23__11:37:37
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:37:39
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:37:41
+INFO: Disconnected at 04/30/23__11:37:41
+ERROR: Could not find device with name AAAAA at 04/30/23__11:37:55
+ERROR: Could not find device with name BBBBB at 04/30/23__11:38:05
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:38:07
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:38:08
+INFO: Disconnected at 04/30/23__11:38:08
+ERROR: Could not find device with name AAAAA at 04/30/23__11:38:23
+ERROR: Could not find device with name BBBBB at 04/30/23__11:38:33
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:38:35
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:38:37
+INFO: Disconnected at 04/30/23__11:38:37
+ERROR: Could not find device with name AAAAA at 04/30/23__11:38:52
+ERROR: Could not find device with name BBBBB at 04/30/23__11:39:02
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:39:05
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:39:06
+INFO: Disconnected at 04/30/23__11:39:06
+ERROR: Could not find device with name AAAAA at 04/30/23__11:39:21
+ERROR: Could not find device with name BBBBB at 04/30/23__11:39:31
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:39:33
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:39:34
+INFO: Disconnected at 04/30/23__11:39:34
+ERROR: Could not find device with name AAAAA at 04/30/23__11:39:49
+ERROR: Could not find device with name BBBBB at 04/30/23__11:39:59
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:40:04
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:40:06
+INFO: Disconnected at 04/30/23__11:40:06
+ERROR: Could not find device with name AAAAA at 04/30/23__11:40:21
+ERROR: Could not find device with name BBBBB at 04/30/23__11:40:31
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:40:35
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:40:36
+INFO: Disconnected at 04/30/23__11:40:36
+ERROR: Could not find device with name AAAAA at 04/30/23__11:40:51
+ERROR: Could not find device with name BBBBB at 04/30/23__11:41:01
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:41:03
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:41:05
+INFO: Disconnected at 04/30/23__11:41:05
+ERROR: Could not find device with name AAAAA at 04/30/23__11:41:19
+ERROR: Could not find device with name BBBBB at 04/30/23__11:41:29
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:41:31
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:41:33
+INFO: Disconnected at 04/30/23__11:41:33
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 4 
+INFO: Boarder values have been checked at 04/30/23__11:41:36
+ERROR: Could not find device with name AAAAA at 04/30/23__11:42:12
+ERROR: Could not find device with name BBBBB at 04/30/23__11:42:22
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:42:25
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:42:26
+INFO: Disconnected at 04/30/23__11:42:26
+ERROR: Could not find device with name AAAAA at 04/30/23__11:42:41
+ERROR: Could not find device with name BBBBB at 04/30/23__11:42:51
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:42:53
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:42:54
+INFO: Disconnected at 04/30/23__11:42:54
+ERROR: Could not find device with name AAAAA at 04/30/23__11:43:09
+ERROR: Could not find device with name BBBBB at 04/30/23__11:43:19
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:43:21
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:43:23
+INFO: Disconnected at 04/30/23__11:43:23
+ERROR: Could not find device with name AAAAA at 04/30/23__11:43:38
+ERROR: Could not find device with name BBBBB at 04/30/23__11:43:48
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:43:51
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:43:53
+INFO: Disconnected at 04/30/23__11:43:53
+ERROR: Could not find device with name AAAAA at 04/30/23__11:44:08
+ERROR: Could not find device with name BBBBB at 04/30/23__11:44:18
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:44:20
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:44:23
+INFO: Disconnected at 04/30/23__11:44:23
+ERROR: Could not find device with name AAAAA at 04/30/23__11:44:38
+ERROR: Could not find device with name BBBBB at 04/30/23__11:44:48
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:44:51
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:44:52
+INFO: Disconnected at 04/30/23__11:44:52
+ERROR: Could not find device with name AAAAA at 04/30/23__11:45:07
+ERROR: Could not find device with name BBBBB at 04/30/23__11:45:17
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:45:20
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:45:22
+INFO: Disconnected at 04/30/23__11:45:22
+ERROR: Could not find device with name AAAAA at 04/30/23__11:45:37
+ERROR: Could not find device with name BBBBB at 04/30/23__11:45:47
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:45:50
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:45:51
+INFO: Disconnected at 04/30/23__11:45:51
+ERROR: Could not find device with name AAAAA at 04/30/23__11:46:06
+ERROR: Could not find device with name BBBBB at 04/30/23__11:46:16
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:46:19
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:46:21
+INFO: Disconnected at 04/30/23__11:46:21
+ERROR: Could not find device with name AAAAA at 04/30/23__11:46:36
+ERROR: Could not find device with name BBBBB at 04/30/23__11:46:46
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:46:49
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:46:51
+INFO: Disconnected at 04/30/23__11:46:51
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 5 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 5 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 5 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 5 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 5 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 5 
+INFO: Boarder values have been checked at 04/30/23__11:46:55
+ERROR: Could not find device with name AAAAA at 04/30/23__11:47:36
+ERROR: Could not find device with name BBBBB at 04/30/23__11:47:46
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__11:47:50
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__11:47:50
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type PressureSensor on id 5 saved
+INFO: Disconnected at 04/30/23__11:47:52
+ERROR: Could not find device with name AAAAA at 04/30/23__11:48:07
+ERROR: Could not find device with name AAAAA at 04/30/23__12:01:20
+ERROR: Could not find device with name AAAAA at 04/30/23__12:01:58
+ERROR: Could not find device with name BBBBB at 04/30/23__12:02:09
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__12:02:13
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__12:02:13
+INFO: Value for type PressureSensor on id 5 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Disconnected at 04/30/23__12:02:16
+WARNING: Send ON alarm signal on uuid: 000019b2-0000-1000-8000-00805f9b34fb at 04/30/23__12:02:25
+INFO: SensorStation G4T2 has been updated alarm_switch to on 
+INFO: Sensor with sensor_id 0 has been updated alarm_count to -1 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 6 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 6 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 6 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 6 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 6 
+INFO: Boarder values have been checked at 04/30/23__12:04:48
+ERROR: Could not find device with name AAAAA at 04/30/23__12:05:34
+ERROR: Could not find device with name BBBBB at 04/30/23__12:05:44
+ERROR: Could not find device with name AAAAA at 04/30/23__12:05:57
+ERROR: Could not find device with name BBBBB at 04/30/23__12:06:07
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__12:06:12
+INFO: Value for type PressureSensor on id 5 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 1 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__12:06:15
+INFO: Disconnected at 04/30/23__12:06:15
+ERROR: On characteristic read alarm_switch from webapp. Error is Expecting value: line 1 column 1 (char 0) at 04/30/23__12:08:04
+ERROR: Could not find device with name AAAAA at 04/30/23__12:13:33
+ERROR: Could not find device with name BBBBB at 04/30/23__12:13:43
+ERROR: Could not find device with name AAAAA at 04/30/23__12:16:00
+ERROR: Could not find device with name BBBBB at 04/30/23__12:16:10
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__12:16:14
+INFO: Value for type PressureSensor on id 5 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type HygroSensor on id 2 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__12:16:17
+INFO: Disconnected at 04/30/23__12:16:17
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 7 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 7 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 7 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 7 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 7 
+INFO: Boarder values have been checked at 04/30/23__12:16:21
+ERROR: Could not find device with name AAAAA at 04/30/23__12:17:24
+ERROR: Could not find device with name BBBBB at 04/30/23__12:17:34
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__12:17:38
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type PressureSensor on id 5 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Value for type LigthSensor on id 1 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__12:17:42
+INFO: Disconnected at 04/30/23__12:17:42
+ERROR: Could not find device with name AAAAA at 04/30/23__12:20:37
+ERROR: Could not find device with name BBBBB at 04/30/23__12:20:48
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__12:20:52
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type PressureSensor on id 5 saved
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type humiditySensor on id 4 saved
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__12:20:55
+INFO: Disconnected at 04/30/23__12:20:55
+ERROR: Could not find device with name AAAAA at 04/30/23__12:22:56
+ERROR: Could not find device with name BBBBB at 04/30/23__12:23:07
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 04/30/23__12:23:12
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 04/30/23__12:23:12
+INFO: Value for type TempSensor on id 0 saved
+INFO: Value for type GasSensor on id 3 saved
+INFO: Value for type LigthSensor on id 1 saved
+INFO: Value for type PressureSensor on id 5 saved
+INFO: Value for type HygroSensor on id 2 saved
+INFO: Value for type humiditySensor on id 4 saved
+INFO: Disconnected at 04/30/23__12:23:14
+ERROR: Could not find device with name AAAAA at 04/30/23__12:24:53
+ERROR: Could not find device with name BBBBB at 04/30/23__12:25:03
+ERROR: On characteristic call_read_values. Error is failed to discover services, device disconnected at 04/30/23__12:25:07
+WARNING: Send OFF alarm signal on uuid: 000019b2-0000-1000-8000-00805f9b34fb at 04/30/23__12:25:28
+INFO: SensorStation G4T2 has been updated alarm_switch to off 
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 0 
