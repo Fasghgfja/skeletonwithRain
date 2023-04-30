@@ -14,6 +14,9 @@ public interface SensorRepository extends AbstractRepository<Sensor, Long>{
     List<Sensor> findSensorsBySensorStation(SensorStation sensorStation);
 
 
+
+
+
     long count();
 
 

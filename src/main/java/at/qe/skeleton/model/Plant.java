@@ -39,6 +39,11 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
     @ManyToMany(mappedBy = "followedPlants", fetch = FetchType.LAZY)
     private Set<Userx> followers = new HashSet<>();
 
+    @ManyToMany(mappedBy = "plantsUnderCare", fetch = FetchType.LAZY)
+    private Set<Userx> gardeners = new HashSet<>();
+
+
+
 
     @Override
     public String toString() {

@@ -1,11 +1,14 @@
 package at.qe.skeleton.ui.controllers;
 
 
+import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
 import java.io.Serializable;
 import java.util.Collection;
 
+import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.services.SensorStationService;
+import at.qe.skeleton.ui.beans.SessionInfoBean;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,10 @@ public class SensorStationListController implements Serializable {
     @Autowired
     private SensorStationService sensorService;
 
+
+    @Autowired
+    private SessionInfoBean sessionInfoBean;
+
     private Collection<SensorStation> filteredSensorStations;
 
 
@@ -32,8 +39,21 @@ public class SensorStationListController implements Serializable {
      * Returns a list of all sensor stations.
      */
     public Collection<SensorStation> getSensorStations() {
-        return sensorService.getAllSensorStations();
+        //if user is gardener get assigned sensor stations
+        return sensorService.getAllSensorStations();//if user is admin return all
     }
+
+    /**
+     * Returns a list of all sensor stations assigned to a gardener.
+     */
+    public Collection<SensorStation> getAssignedSensorStations() {
+        Userx user = sessionInfoBean.getCurrentUser();
+        return sensorService.getAllAssignedSensorStations(user);
+    }
+
+
+
+
 
     /**
      * Returns how many sensor stations are registered in the system.

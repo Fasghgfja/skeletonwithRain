@@ -1,7 +1,9 @@
 package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Log;
+import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
+import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.SensorStationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,20 @@ public class SensorStationService {
     public Collection<SensorStation> getAllSensorStations() {
         return sensorStationRepository.findAll();
     }
+
+
+    public Collection<SensorStation> getAllAssignedSensorStations(Userx user) {
+        return sensorStationRepository.findSensorStationsByGardener(user.getUsername());
+    }
+
+
+
+
+
+
+
+
+
 
     @PreAuthorize("hasAuthority('ADMIN')")
     public SensorStation loadSensorStation(String id) {

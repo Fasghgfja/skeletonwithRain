@@ -35,6 +35,8 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     @JoinColumn( nullable = true)
     private Plant plant;
 
+
+
     public String getSensorStationLocation() {
         return location;
     }

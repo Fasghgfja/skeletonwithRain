@@ -2,6 +2,8 @@ package at.qe.skeleton.model;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,6 +14,8 @@ import java.util.Set;
 /**
  * JPA Entity to Represent an Image.
  */
+@Getter
+@Setter
 @Entity
 public class Image implements Serializable {
     @Id

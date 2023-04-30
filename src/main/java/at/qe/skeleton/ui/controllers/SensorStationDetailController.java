@@ -1,15 +1,10 @@
 package at.qe.skeleton.ui.controllers;
 
 import at.qe.skeleton.api.services.MeasurementService;
-import at.qe.skeleton.model.Measurement;
-import at.qe.skeleton.model.MeasurementType;
-import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.SensorStation;
+import at.qe.skeleton.model.*;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import at.qe.skeleton.repositories.AbstractRepository;
 import at.qe.skeleton.services.SensorStationService;
@@ -50,6 +45,10 @@ public class SensorStationDetailController implements Serializable {
     @Autowired
     private transient GraphController graphController;
 
+//todo:pray this isnt too much
+    @Autowired
+    private transient GalleryController galleryController;
+
 
     /**
      * Tells us if the sensor station is new , replace with a more elegant solution!.
@@ -70,6 +69,8 @@ public class SensorStationDetailController implements Serializable {
      * maybe not needed fields.
      */
     private String plantName = "";
+
+    private String plantId;
     private String description = "";
     private Plant plant;
 
@@ -213,6 +214,16 @@ public class SensorStationDetailController implements Serializable {
     }
 
 
+
+
+
+    public List<Image> doGetPlantImages() {
+        if (plantId == null){return new ArrayList<Image>();}
+        return galleryController.doGetPlantImages(plantId);
+    }
+
+
+
     //TODO: simplify this monstruosity
 
     /**
@@ -224,7 +235,7 @@ public class SensorStationDetailController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         params = context.getExternalContext().getRequestParameterMap();
         String idString = params.get("id");
-        System.out.println("ID HERE:--------------->" + idString); // testing ;D
+        System.out.println("Im sensor station detail controller sensor station ID HERE:>" + idString); // testing ;D
         this.newSensorStation = false;
         if (idString == null) {
             this.newSensorStation = true;
@@ -239,6 +250,7 @@ public class SensorStationDetailController implements Serializable {
             } // error handling XD
             this.plantName = "" + this.getSensorStation().getPlant().getPlantName();
             this.description = this.getSensorStation().getPlant().getDescription();
+            this.plantId = this.getSensorStation().getPlant().getPlantID().toString();
         }
 
     }

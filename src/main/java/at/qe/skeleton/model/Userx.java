@@ -45,6 +45,17 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private Set<Plant> followedPlants = new HashSet<>();
 
 
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "gardener_plant",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username"),
+            inverseJoinColumns = @JoinColumn(name = "plant_id", referencedColumnName = "plantID")
+    )
+    private Set<Plant> plantsUnderCare = new HashSet<>();
+
+
+
     @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "Userx_UserRole")
     @Enumerated(EnumType.STRING)
