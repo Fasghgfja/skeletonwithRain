@@ -4909,3 +4909,9 @@ Caused by: java.lang.IllegalArgumentException: 28-4-2024
 	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:194)
 	at org.h2.value.ValueDate.parse(ValueDate.java:51)
 	... 136 more
+2023-04-30 13:26:30 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]USERX"; expected "UPDATE, USE"; SQL statement:
+USERX [42001-214]
+2023-04-30 13:34:59 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]PLANT"; expected "PREPARE"; SQL statement:
+PLANT [42001-214]
