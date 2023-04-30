@@ -224,6 +224,13 @@ public class SensorStationDetailController implements Serializable {
 
 
 
+    public List<Image> doGetPlantImagesNotYetApproved() {
+        if (plantId == null){return new ArrayList<Image>();}
+        return galleryController.doGetPlantImagesNotYetApproved(plantId);
+    }
+
+
+
     //TODO: simplify this monstruosity
 
     /**

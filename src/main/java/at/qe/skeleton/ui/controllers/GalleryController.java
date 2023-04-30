@@ -58,6 +58,9 @@ public class GalleryController implements Serializable {
 
     private List<Image> images;
 
+    private List<Image> approvedimages;
+
+
 
     private List<ResponsiveOption> responsiveOptions1;
 
@@ -140,6 +143,16 @@ public class GalleryController implements Serializable {
         return imageService.getAllImages();
     }
 
+    public List<Image> getApprovedImages() {
+        return imageService.getApprovedImages();
+    }
+
+    public List<Image> getNotApprovedImages() {
+        return imageService.getNotApprovedImages();
+    }
+
+
+
 
 
 
@@ -186,6 +199,13 @@ public class GalleryController implements Serializable {
         if (idString == null){return new ArrayList<Image>();}
         return imageService.getAllPlantImages(idString);
     }
+
+
+    public List<Image> doGetPlantImagesNotYetApproved(String idString) {
+        if (idString == null){return new ArrayList<Image>();}
+        return imageService.getAllPlantImagesNotYetApproved(idString);
+    }
+
 
 
 

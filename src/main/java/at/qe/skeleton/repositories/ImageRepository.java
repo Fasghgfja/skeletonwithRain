@@ -4,6 +4,8 @@ package at.qe.skeleton.repositories;
 import at.qe.skeleton.model.Image;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Userx;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,6 +38,12 @@ public interface ImageRepository extends AbstractRepository<Image, Long> {
      * @throws IllegalArgumentException If plant is {@literal null}.
      */
     List<Image> findImagesByPlant(Plant plant);
+
+
+    List<Image> findImagesByPlantAndApprovedEquals(Plant plant,boolean approved);
+
+    List<Image> findImagesByApprovedEquals(boolean approved);
+
 
     /**
      * Retrieves all images from a plant created before or equal to the given date

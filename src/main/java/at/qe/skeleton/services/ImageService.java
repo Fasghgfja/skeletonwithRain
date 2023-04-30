@@ -50,6 +50,26 @@ public class ImageService {
     }
 
 
+    /**
+     * Returns a collection of all images.
+     */
+    @PreAuthorize("permitAll()")
+    public List<Image> getAllPlantImagesNotYetApproved(String plantId) {
+        Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantId));
+        return imageRepository.findImagesByPlantAndApprovedEquals(plant,false);
+    }
+
+    @PreAuthorize("permitAll()")
+    public List<Image> getApprovedImages() {
+        return imageRepository.findImagesByApprovedEquals(true);
+    }
+
+    @PreAuthorize("permitAll()")
+    public List<Image> getNotApprovedImages() {
+        return imageRepository.findImagesByApprovedEquals(false);
+    }
+
+
 
 
     /**

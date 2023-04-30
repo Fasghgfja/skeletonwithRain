@@ -110,7 +110,7 @@
                         <h:form id="myform">
                             <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
 
-                                    <p:commandButton rendered="#{not empty sensorStationDetailController.plantId}" id="b1" value="Show Plant Gallery" icon="pi pi-external-link"
+                                    <p:commandButton rendered="#{not empty sensorStationDetailController.doGetPlantImages()}" id="b1" value="Show Plant Gallery" icon="pi pi-external-link"
                                                      onclick="PF('galleria1').show()"/>
 
 
@@ -120,10 +120,7 @@
                                             numVisible="9"
                                             circular="true" fullScreen="true" showItemNavigators="true"
                                             style="max-width: 70%" >
-                                    <p:commandButton icon="fa-regular fa-thumbs-up" title="Approve Image #{image}" style="width: 10%; height: 10%; position: absolute; margin-right: 90%"
-                                                     actionListener="#{galleryController.approveImage(image)}"
-                                                     />
-                                    <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}" style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
+                                    <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}" style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%; margin-bottom: 68%"
                                                      actionListener="#{galleryController.doDeleteImage(image)}"
                                                      />
                                     <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
@@ -184,7 +181,14 @@
                     </div>
 
                     <div class="col-12 md:col-6 xl:col-3">
-                        <!-- ...............................ASSIGNED GARDENER BOX........................................ -->
+
+
+
+
+
+
+
+                        <!-- ...............................Pic Approval Box........................................ -->
                         <div class="card overview-box ">
                             <p:graphicImage name="images/dashboard/effect-filessynced.svg"/>
                             <span class="overview-icon">
@@ -192,11 +196,64 @@
                         </span>
                             <div class="overview">
                                 <span class="overview-title">Pic Awaiting Approval</span>
-                                <h3>Show</h3>
+                                <h3>
+
+
+
+
+
+
+                                    <!-- .......::::::::::::::::...AWAITING APPROVAL GALLERY FORM ....::::::::::::::::::::::.......... -->
+                                    <h:form id="myform2">
+                                        <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
+
+                                        <p:commandButton rendered="#{not empty sensorStationDetailController.doGetPlantImagesNotYetApproved()}" id="b2" value="Show " icon="pi pi-external-link"
+                                                         onclick="PF('galleria2').show()"/>
+
+
+                                        <!-- .......::::::::::::::::...GALLERY ....::::::::::::::::::::::.......... -->
+                                        <div class="card">
+                                            <p:galleria id="awaitingapproval" widgetVar="galleria2" value="#{sensorStationDetailController.doGetPlantImagesNotYetApproved()}" var="image"
+                                                        numVisible="9"
+                                                        circular="true" fullScreen="true" showItemNavigators="true"
+                                                        style="max-width: 70%" >
+                                                <p:commandButton icon="fa-regular fa-thumbs-up" title="Approve Image #{image}" style="width: 10%; height: 10%; position: absolute; margin-right: 90%"
+                                                                 actionListener="#{galleryController.approveImage(image)}"
+                                                                 update="awaitingapproval"
+                                                />
+                                                <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}" style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
+                                                                 actionListener="#{galleryController.doDeleteImage(image)}"
+                                                                 update="awaitingapproval"
+                                                />
+                                                <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
+                                                                alt="#{galleryController.photoAsStreamedContent}"
+                                                                style="width: 100%; display: block">
+                                                    <f:param name="id" value="#{image.id}"/>
+                                                </p:graphicImage>
+                                            </p:galleria>
+                                        </div>
+
+
+                                    </h:form>
+
+
+
+
+
+
+                                </h3>
                                 <span><span>25</span>new increase since last visit</span>
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+
+
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................TIME OF LAST MEASUREMENT BOX.................................... -->
