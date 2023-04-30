@@ -21,77 +21,88 @@
 
 
     <ui:define name="content">
+        <!-- ..........................................PAGE................................................................... -->
+        <div class="layout-dashboard" style="display: grid;">
 
-        <h:form id="userForm">
+                <h:form id="userForm">
 
-            <div class="grid">
-                <div class="col-12" style="column-count: 2" >
+                    <!-- ..........................................GRAPH................................................................... -->
+                        <div class="card chart" style="width: 20%; ">
+                            <div class="card-header">
+                                <h5>Selected Measurement type History Graph</h5>
+                            </div>
+                            <div class="card" >
+                                <p:galleria id="awaitingApproval" value="#{galleryController.approvedImages}"
+                                            var="image" circular="true"
+                                            responsiveOptions="#{galleryController.responsiveOptions3}"
+                                            style="max-width: 100%">
 
-                    <div class="card" >
-                        <h5>Approved Pictures All Plants</h5>
-                        <div class="flex justify-content-center">
-
-                            <p:galleria id = "awaitingApproval" value="#{galleryController.approvedImages}" var="image"  circular="true" responsiveOptions="#{galleryController.responsiveOptions3}" style="max-width: 50%">
-
-                                <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 100%; display: block;">
-                                    <f:param name="id" value="#{image.id}" />
-                                </p:graphicImage>
-
-
-                                <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}" style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%; margin-bottom:68%"
-                                                 actionListener="#{galleryController.doDeleteImage(image)}"
-                                                 update="awaitingApproval" />
-
-                                <f:facet name="thumbnail">
-                                    <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 20%; display: block">
-                                        <f:param name="id" value="#{image.id}" />
-
+                                    <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
+                                                    alt="#{galleryController.photoAsStreamedContent}"
+                                                    style="width: 100%; display: block;">
+                                        <f:param name="id" value="#{image.id}"/>
                                     </p:graphicImage>
-                                </f:facet>
 
-                            </p:galleria>
+
+                                    <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}"
+                                                     style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%; margin-bottom:68%"
+                                                     actionListener="#{galleryController.doDeleteImage(image)}"
+                                                     update="awaitingApproval"/>
+
+                                    <f:facet name="thumbnail">
+                                        <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
+                                                        alt="#{galleryController.photoAsStreamedContent}"
+                                                        style="width: 20%; display: block">
+                                            <f:param name="id" value="#{image.id}"/>
+
+                                        </p:graphicImage>
+                                    </f:facet>
+
+                                </p:galleria>
+                            </div>
                         </div>
-                    </div>
 
 
+                    <!-- ...................simply modify the graph controller do display different data................... -->
+                    <!-- ...................supported charts are .lineModel and .cartesianLinearModel................... -->
 
 
-                    <div class="card" >
-                        <h5>Awaiting Approval All Pictures</h5>
-                        <div class="flex justify-content-center">
+                    <!-- .........................................MEASUREMENTS TABLE...................................................... -->
+                        <div class="card products" style="width: 20%; " >
+                            <p:galleria id="awaitingApproval2"
+                                        rendered="#{not empty galleryController.notApprovedImages}"
+                                        value="#{galleryController.notApprovedImages}" var="image" circular="true"
+                                        responsiveOptions="#{galleryController.responsiveOptions3}"
+                                        style="max-width: 100%">
 
-                            <p:galleria id = "awaitingApproval2" value="#{galleryController.notApprovedImages}" var="image"  circular="true" responsiveOptions="#{galleryController.responsiveOptions3}" style="max-width: 50%">
-
-                                <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 100%; display: block;">
-                                    <f:param name="id" value="#{image.id}" />
+                                <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
+                                                alt="#{galleryController.photoAsStreamedContent}"
+                                                style="width: 100%; display: block;">
+                                    <f:param name="id" value="#{image.id}"/>
                                 </p:graphicImage>
 
-                                <p:commandButton icon="fa-regular fa-thumbs-up" title="Approve Image #{image}" style="width: 10%; height: 10%; position: absolute; margin-right: 90%"
+                                <p:commandButton icon="fa-regular fa-thumbs-up" title="Approve Image #{image}"
+                                                 style="width: 10%; height: 10%; position: absolute; margin-right: 90%"
                                                  actionListener="#{galleryController.approveImage(image)}"
-                                                 update="awaitingApproval2" />
-                                <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}" style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
+                                                 update="awaitingApproval2 userForm:awaitingApproval "/>
+                                <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}"
+                                                 style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
                                                  actionListener="#{galleryController.doDeleteImage(image)}"
-                                                 update="awaitingApproval2" />
+                                                 update="awaitingApproval2"/>
 
                                 <f:facet name="thumbnail">
-                                    <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 20%; display: block">
-                                        <f:param name="id" value="#{image.id}" />
+                                    <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
+                                                    alt="#{galleryController.photoAsStreamedContent}"
+                                                    style="width: 20%; display: block">
+                                        <f:param name="id" value="#{image.id}"/>
 
                                     </p:graphicImage>
                                 </f:facet>
 
                             </p:galleria>
                         </div>
-                    </div>
 
-
-
-
-
-                </div>
-
-            </div>
-        </h:form>
-
+                </h:form>
+        </div>
     </ui:define>
 </ui:composition>
