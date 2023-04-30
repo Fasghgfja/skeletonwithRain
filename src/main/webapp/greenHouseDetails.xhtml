@@ -104,11 +104,46 @@
                             <p:graphicImage name="images/dashboard/icon-messages.png"/>
                         </span>
                     <div class="overview">
-                        <h:link id="galleryRedirect" outcome="/dashboard">
-                            <span class="overview-title">   GALLERY</span>
-                            <h3>CLICK TO VISIT</h3>
-                            <span><span>24</span> new since last visit</span>
-                        </h:link>
+
+
+                        <!-- .......::::::::::::::::...BUTTONS AND GALLERY FORM ....::::::::::::::::::::::.......... -->
+                        <h:form id="myform">
+                            <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
+
+                                    <p:commandButton rendered="#{not empty sensorStationDetailController.plantId}" id="b1" value="Show Plant Gallery" icon="pi pi-external-link"
+                                                     onclick="PF('galleria1').show()"/>
+
+
+                            <!-- .......::::::::::::::::...GALLERY ....::::::::::::::::::::::.......... -->
+                            <div class="card">
+                                <p:galleria widgetVar="galleria1" value="#{sensorStationDetailController.doGetPlantImages()}" var="image"
+                                            numVisible="9"
+                                            circular="true" fullScreen="true" showItemNavigators="true"
+                                            style="max-width: 70%" >
+                                    <p:commandButton icon="fa-regular fa-thumbs-up" title="Approve Image #{image}" style="width: 10%; height: 10%; position: absolute; margin-right: 90%"
+                                                     actionListener="#{galleryController.approveImage(image)}"
+                                                     />
+                                    <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}" style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
+                                                     actionListener="#{galleryController.doDeleteImage(image)}"
+                                                     />
+                                    <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
+                                                    alt="#{galleryController.photoAsStreamedContent}"
+                                                    style="width: 100%; display: block">
+                                        <f:param name="id" value="#{image.id}"/>
+                                    </p:graphicImage>
+                                </p:galleria>
+                            </div>
+
+
+                        </h:form>
+
+
+
+
+
+
+
+
                     </div>
                 </p:toolbarGroup>
 
@@ -156,9 +191,9 @@
                             <p:graphicImage name="images/dashboard/icon-filessynced.png"/>
                         </span>
                             <div class="overview">
-                                <span class="overview-title">ASSIGNED GARDENER</span>
-                                <h3>12.6%</h3>
-                                <span><span>1.8%</span> increase since last visit</span>
+                                <span class="overview-title">Pic Awaiting Approval</span>
+                                <h3>Show</h3>
+                                <span><span>25</span>new increase since last visit</span>
                             </div>
                         </div>
                     </div>
