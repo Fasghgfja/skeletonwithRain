@@ -18,11 +18,12 @@ post_update_sensor_url = "http://localhost:8080/api/updatesensors"
 
 
 class SensorValue(object):
-    def __init__(self, sensorStation: str, sensor_id: str, value: str, time_stamp: str):
+    def __init__(self, sensorStation: str, sensor_id: str, value: str, time_stamp: str, type:str):
         self.sensorStation = sensorStation
         self.sensor_id = sensor_id
         self.value = value
         self.time_stamp = time_stamp
+        self.type = type
 
 class StationValue(object):
     def __init__(self, name: str, service_description: str, alarm_switch: str):
@@ -63,7 +64,7 @@ def writeValueToWebApp():
                 sensor_id_string = str(value[2])
                 time_stamp_string = str(value[1])
 
-                temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=time_stamp_string)
+                temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=time_stamp_string, type=sensor[3])
                 r = requests.post(measurements_url, json=vars(temp_sensor_value), auth=auth)
                 # if r.status_code == 500:
                     # DB_connection.delete_values(sensor[0], value[1])
