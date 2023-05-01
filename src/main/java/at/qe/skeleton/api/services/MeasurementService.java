@@ -58,10 +58,15 @@ public class MeasurementService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDate dateTime = LocalDate.parse(measurement.getTime_stamp(), formatter);
         Measurement measurement1 = new Measurement();
+        SensorStation testnew = sensorStationService.loadSensorStation(measurement.getSensorStation());//TODO: new!
         measurement1.setSensorStation(sensorStationService.loadSensorStation(measurement.getSensorStation()));
+
+        if (testnew.getPlant() != null) { //TODO: new! test this
         measurement1.setPlant(plantRepository.findFirstByPlantName(
                 sensorStationService.loadSensorStation(measurement.getSensorStation()).getPlant().getPlantName()
         ));
+        }//TODO: new!
+
         measurement1.setTimestamp(dateTime);
         measurement1.setValue_s(measurement.getValue());
         measurementRepository.save(measurement1);
