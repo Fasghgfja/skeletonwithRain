@@ -35,7 +35,7 @@ public class Measurement implements Serializable {
     @Override
     public String toString() {
         return "Measurement{" +
-                "id: "+id + " "+  plant.getPlantName() + " "+  timestamp + " "+ type +
+                "id: "+id +
                 '}';
     }
 }

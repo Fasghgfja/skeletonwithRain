@@ -133,6 +133,7 @@ public class ImageService {
     public void addPictureToPlantPictures(Image image, String plantid) {
         System.out.println("im image service here plant id " + plantid);
         Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantid));
+        //Plant plant = plantRepository.findFirstById(Long.parseLong(plantid));//TODO: test this
         System.out.println("plant is " + plant);
         if(image == null || plant == null ) {
             System.out.println("addPictureToPlantError null");

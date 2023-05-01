@@ -5,13 +5,10 @@ import at.qe.skeleton.api.model.SensorApi;
 import at.qe.skeleton.api.model.SensorStationApi;
 import at.qe.skeleton.api.services.SensorStationServiceApi;
 import at.qe.skeleton.model.SensorStation;
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -24,26 +21,58 @@ public class SensorStationApiController {
     @Autowired
     SensorStationServiceApi sensorStationServiceApi;
 
+    /**
+     * This method is called to update SensorStations via Accesspoint
+     * update values: descritption, alarm_switch
+     * @param sensorStationApi
+     * @return Response OK
+     */
     @PostMapping("/api/sensorstations")
-    SensorStationApi createSensorStationApi(@RequestBody SensorStationApi sensorStationApi) {
+    int createSensorStationApi(@RequestBody SensorStationApi sensorStationApi) {
         System.out.println(sensorStationApi.toString());
-
-        //TODO take object sensorStationApi and call:
-        // if(decription == null){update SensorStation set description=sensorStationApi.getDescription() where name=sensorStationApi.getName();}
-        // else {update SensorStation set alarm_switch=sensorStationApi.getAlarmCount() where name=name=sensorStationApi.getName();}
-        return sensorStationServiceApi.addSensorStation(sensorStationApi);
+        try {
+            sensorStationServiceApi.updateSensorStation(sensorStationApi);
+        } catch (SensorStationNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return Response.SC_OK;
     }
 
+    /**
+     * This method is called to save new sensors
+     * @param sensorApi
+     * @return response ok
+     */
     @PostMapping("/api/sensors")
-    SensorApi createSensorApi(@RequestBody SensorApi sensorApi) {
+    int createSensorApi(@RequestBody SensorApi sensorApi) {
         System.out.println(sensorApi.toString());
-        return sensorStationServiceApi.addSensor(sensorApi);
+        try {
+            return sensorStationServiceApi.addSensor(sensorApi);
+        }catch (SensorStationNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
+    @PostMapping("/api/updatesensors")
+    int updateSensorApi(@RequestBody SensorApi sensorApi) {
+        System.out.println(sensorApi.toString());
+        try {
+            sensorStationServiceApi.updateSensor(sensorApi);
+            return Response.SC_OK;
+        }catch (SensorStationNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * This method is called to get the alarm_switch of a given SensorStation
+     * @param sensorStationApi
+     * @return
+     */
     @GetMapping("/api/getsensorstations")
     SensorStation getOneSensorStationApi(@RequestBody SensorStationApi sensorStationApi) {
         try {
-            return sensorStationServiceApi.findOneSensorStation(sensorStationApi.getName());//.getAlarmSwitch()
+            return sensorStationServiceApi.findOneSensorStation(sensorStationApi.getName());
         } catch (SensorStationNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

@@ -2,6 +2,7 @@ package at.qe.skeleton.api.controllers;
 
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.api.model.Measurement2;
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +25,15 @@ public class MeasurementController {
     MeasurementService measurementService;
 
     @PostMapping("/api/measurements")
-    Measurement2 createMeasurement(@RequestBody Measurement2 measurement2) {
+    int createMeasurement(@RequestBody Measurement2 measurement2) {
         System.out.println("test123");
-        return measurementService.addMeasurement(measurement2);
+        try{
+            measurementService.addMeasurement(measurement2);
+            return Response.SC_OK;
+        }catch (MeasurementNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @GetMapping("/api/measurements/{id}")
