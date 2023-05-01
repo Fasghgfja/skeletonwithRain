@@ -21,7 +21,7 @@
     <ui:define name="content">
 
         <!-- ..........................................TOP INFO BOXES................................................................... -->
-        <h:form>
+        <h:form id="detailPage">
             <p:toolbar>
 
                 <p:toolbarGroup> <!-- .....TEMPERATURE AIR HUMIDITY GROUND HUMIDITY LIGHT INTENSITY BOXES............................ -->
@@ -101,6 +101,7 @@
 
 
 
+
                 <!-- ........................................PLANT GALLERY  BOX................................................................ -->
                 <p:toolbarGroup>
                             <span class="overview-icon">
@@ -115,12 +116,12 @@
                                              onclick="PF('galleria1').show()"/>
                             <!-- .......:::::APPROVED PICTURES GALLERY ....:::::.......... -->
                             <div class="card">
-                                <p:galleria widgetVar="galleria1" value="#{sensorStationDetailController.doGetPlantImages()}" var="image"
+                                <p:galleria id="approvedImagesGallery" widgetVar="galleria1" value="#{sensorStationDetailController.doGetPlantImages()}" var="image"
                                             numVisible="9"
                                             circular="true" fullScreen="true" showItemNavigators="true"
                                             style="max-width: 70%" >
                                     <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}" style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%; margin-bottom: 68%"
-                                                     actionListener="#{galleryController.doDeleteImage(image)}"
+                                                     actionListener="#{galleryController.doDeleteImage(image)}" update="approvedImagesGallery detailPage:myform2:awaitingapprovalgallery detailPage "
                                                      />
 
                                     <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
@@ -133,6 +134,9 @@
                         </h:form> <!-- .......::::::::::::::::...PLANT GALLERY FORM END....:::::::::::::::.......... -->
                     </div>
                 </p:toolbarGroup> <!-- ............................PLANT GALLERY  BOX END...................................................... -->
+
+
+
 
 
                 <p:toolbarGroup>
@@ -171,6 +175,8 @@
                         </p:commandLink>
                     </div>
 
+
+
                     <!-- ...............................Pic Approval Box............................................... -->
                     <div class="col-12 md:col-6 xl:col-3">
                         <div class="card overview-box ">
@@ -181,7 +187,6 @@
                             <div class="overview">
                                 <span class="overview-title">Pic Awaiting Approval</span>
                                 <h3>
-
                                     <!-- .......::::::::::::::::...AWAITING APPROVAL GALLERY FORM ....::::::::::::::::::::::.......... -->
                                     <h:form id="myform2">
                                         <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
@@ -189,20 +194,19 @@
                                         <p:commandButton rendered="#{not empty sensorStationDetailController.doGetPlantImagesNotYetApproved()}" id="b2" value="Show " icon="pi pi-external-link"
                                                          onclick="PF('galleria2').show()"/>
 
-
                                         <!-- .......::::::::::::::::...AWAITING APPROVAL GALLERY ....::::::::::::::::::::::.......... -->
                                         <div class="card">
-                                            <p:galleria id="awaitingapproval" widgetVar="galleria2" value="#{sensorStationDetailController.doGetPlantImagesNotYetApproved()}" var="image"
+                                            <p:galleria id="awaitingapprovalgallery" widgetVar="galleria2" value="#{sensorStationDetailController.doGetPlantImagesNotYetApproved()}" var="image"
                                                         numVisible="9"
                                                         circular="true" fullScreen="true" showItemNavigators="true"
                                                         style="max-width: 70%" >
                                                 <p:commandButton icon="fa-regular fa-thumbs-up" title="Approve Image #{image}" style="width: 10%; height: 10%; position: absolute; margin-right: 90%"
                                                                  actionListener="#{galleryController.approveImage(image)}"
-                                                                 update="awaitingapproval"
+                                                                 update="awaitingapprovalgallery detailPage:myform:approvedImagesGallery detailPage"
                                                 />
                                                 <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}" style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
                                                                  actionListener="#{galleryController.doDeleteImage(image)}"
-                                                                 update="awaitingapproval"
+                                                                 update="awaitingapprovalgallery detailPage:myform:approvedImagesGallery detailPage"
                                                 />
                                                 <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
                                                                 alt="#{galleryController.photoAsStreamedContent}"
@@ -218,6 +222,8 @@
                             </div>
                         </div>
                     </div>
+
+
 
 
                     <!-- ...............................TIME OF LAST MEASUREMENT BOX.................................... -->

@@ -60,6 +60,8 @@ public class FileUploadController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
         UploadedFile file = event.getFile();
 
+        System.out.println(file.getFileName());
+
         // Read the input image into a BufferedImage
         InputStream in = file.getInputStream();
         BufferedImage inputImage = ImageIO.read(in);

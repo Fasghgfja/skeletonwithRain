@@ -23,7 +23,6 @@ import java.util.Map;
 
 
 
-//TODO: merge this with plantphotogallerycontroller or the other way around media.xhtml uses this
 /**
  * Basic Session scoped bean for Dynamic content rendering / streaming
  * the bean returns a ByteArrayimput stream which is used in media.xhtml to reproduce images
@@ -48,6 +47,10 @@ import java.util.Map;
  * A common pattern is to pass the information, which is probably stored in your @ViewScoped bean, via request parameters.
  *
  */
+
+
+
+//TODO: mybe this is a service and can all be integrated into image service ... try it out ...do extensive testing
 @Component
 @Named
 @Scope("application")
@@ -70,7 +73,7 @@ public class GalleryController implements Serializable {
 
     private int activeIndex = 0;
 
-    //TODO: use primefaces responsive options for the gallery
+    //TODO: set witch responsive options to use where
     /**
      *  This method initializes the {@link #responsiveOptions1} list of {@link ResponsiveOption} objects for the gallery {@code p:galleria}, using PrimeFaces responsive options.
      *  <p>The method sets up different configurations of {@link ResponsiveOption} objects for different screen sizes,
@@ -83,7 +86,7 @@ public class GalleryController implements Serializable {
      */
     @PostConstruct
     public void init() {
-        images = imageService.getAllImages();
+        images = imageService.getAllImages();//TODO: remove this impossible caching
         responsiveOptions1 = new ArrayList<>();
         responsiveOptions1.add(new ResponsiveOption("1024px", 5));
         responsiveOptions1.add(new ResponsiveOption("768px", 3));
