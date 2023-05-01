@@ -38,6 +38,8 @@ public interface PlantRepository extends AbstractRepository<Plant, Long> {
      */
     Plant findFirstByPlantID(@Param("plantId") Long plantId);
 
+    Plant findFirstById(Long plantId);
+
     /**
      * The method Retrieves a Plant entity by part of its name.
      *

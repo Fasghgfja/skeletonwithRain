@@ -14,6 +14,7 @@ public class Measurement2 implements Serializable {
     private String sensor_id;
     private String value;
     private String time_stamp;
+    private String type;
 
 
     @java.lang.Override

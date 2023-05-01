@@ -42,7 +42,7 @@ public class PlantService {
      */
     @PreAuthorize("permitAll()")
     public Plant loadPlant(Long plantID) {
-        return plantRepository.findFirstByPlantID(plantID);
+        return plantRepository.findFirstById(plantID);//TODO:check which one to use
     }
 
     /**

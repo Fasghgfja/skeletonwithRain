@@ -1,7 +1,10 @@
 package at.qe.skeleton.api.services;
 
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -14,7 +17,12 @@ import at.qe.skeleton.api.model.Measurement2;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.repositories.MeasurementRepository;
+import at.qe.skeleton.repositories.PlantRepository;
+import at.qe.skeleton.services.PlantService;
+import at.qe.skeleton.services.SensorStationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 
@@ -34,14 +42,35 @@ public class MeasurementService {
 
     @Autowired
     MeasurementRepository measurementRepository;
+    @Autowired
+    SensorStationService sensorStationService;
+    @Autowired
+    PlantService plantService;
 
-
-
+    @Autowired
+    PlantRepository plantRepository;
     private static final AtomicLong ID_COUNTER = new AtomicLong(1);
     private static final ConcurrentHashMap<Long, Measurement> measurements = new ConcurrentHashMap<>();
 
 
-    public Measurement2 addMeasurement(Measurement2 measurement) {
+    public void addMeasurement(Measurement2 measurement) throws MeasurementNotFoundException {
+        System.out.println();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDate dateTime = LocalDate.parse(measurement.getTime_stamp(), formatter);
+        Measurement measurement1 = new Measurement();
+        SensorStation sensorStation = sensorStationService.loadSensorStation(measurement.getSensorStation());//TODO: new!
+        measurement1.setSensorStation(sensorStation);
+
+        if (sensorStation.getPlant() != null) { //TODO: new! test this
+        measurement1.setPlant(plantRepository.findFirstByPlantName(sensorStation.getPlant().getPlantName()));
+        }//TODO: new!
+
+        measurement1.setTimestamp(dateTime);
+        measurement1.setValue_s(measurement.getValue());
+        measurementRepository.save(measurement1);
+        System.out.println(measurement1.toString());
+
+        /*
         Measurement2 newMeasurement = new Measurement2();
         newMeasurement.setSensorStation(measurement.getSensorStation());
         newMeasurement.setSensor_id(measurement.getSensor_id());
@@ -56,6 +85,8 @@ public class MeasurementService {
         newMeasurement2 = measurementRepository.findFirstById(newMeasurement2.getId());
 
         return newMeasurement;
+
+         */
     }
 
     public Measurement convertMeasurement(Measurement2 measurement) {

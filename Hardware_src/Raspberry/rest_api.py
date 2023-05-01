@@ -12,6 +12,7 @@ get_sensorStations_url = "http://localhost:8080/api/sensorstations"
 post_sensorStations_url = "http://localhost:8080/api/sensorstations"
 post_sensor_url = "http://localhost:8080/api/sensors"
 get_Station_alarm_switch_url = "http://localhost:8080/api/getsensorstations"
+post_update_sensor_url = "http://localhost:8080/api/updatesensors"
 
 
 
@@ -64,8 +65,9 @@ def writeValueToWebApp():
 
                 temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=time_stamp_string)
                 r = requests.post(measurements_url, json=vars(temp_sensor_value), auth=auth)
-                if r.status_code == 500:
-                    DB_connection.delete_values(sensor[0], value[1])
+                # if r.status_code == 500:
+                    # DB_connection.delete_values(sensor[0], value[1])
+
     cur.close()
     conn.close()
 
@@ -85,9 +87,9 @@ def write_sensors_and_station_description(station_names):
                 exception_logging.logException(e, station[0])
     # TODO check if all new stations are added
 
-def write_alarm_switch(name, alarm_switch):
+def write_alarm_switch(name, alarm_switch, description):
     try:
-        station_values = StationValue(name=name, service_description="", alarm_switch=alarm_switch)
+        station_values = StationValue(name=name, service_description=description, alarm_switch=alarm_switch)
         requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
     except Exception as e:
         exception_logging.logException(e, "write alarm_switch")
@@ -109,7 +111,7 @@ def getSensorstations(getName, name):
         try:
             station_values = StationValue(name=name, service_description="", alarm_switch="")
             response = requests.get(get_Station_alarm_switch_url,json=vars(station_values), auth=auth)
-            return response.json() # get alarm_switch
+            return response.json()["alarmSwitch"] # get alarm_switch
 
         except Exception as e:
             exception_logging.logException(e, "read alarm_switch from webapp")
@@ -126,16 +128,22 @@ def checkIfNewStations():
                                     SELECT name FROM Sensorstation
                                 ''')
 
-    for sensorstations in already_added_SensorStations:
-        already_added_sensorstation_list.append(sensorstations)
+    for sensorstations in already_added_SensorStations.fetchall():
+        already_added_sensorstation_list.append(sensorstations[0])
 
     webapp_sensorstation_names = getSensorstations(True,"")
 
-    tempList =[]
+    for name in already_added_sensorstation_list:
+        try:
+            webapp_sensorstation_names.remove(name)
+        except Exception as e:
+            exception_logging.logException(e, "Filter New Stations")
 
-    for name in webapp_sensorstation_names:
-        if name not in already_added_sensorstation_list:
-            tempList.append(name)
+    return webapp_sensorstation_names
 
-
-    return tempList
+def update_Sensor(sensor_id, alarm_count):
+    try:
+        sensor_value = Sensor(sensor_id=sensor_id, uuid="",station_name="", type="", alarm_count=alarm_count)
+        requests.post(post_update_sensor_url, json=vars(sensor_value), auth=auth)
+    except Exception as e:
+        exception_logging.logException(e, "write alarm_count to webapp")
