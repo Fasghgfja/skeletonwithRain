@@ -3,6 +3,7 @@ package at.qe.skeleton.repositories;
 
 import at.qe.skeleton.model.Image;
 import at.qe.skeleton.model.Plant;
+import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.model.Userx;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -43,6 +44,19 @@ public interface ImageRepository extends AbstractRepository<Image, Long> {
     List<Image> findImagesByPlantAndApprovedEquals(Plant plant,boolean approved);
 
     List<Image> findImagesByApprovedEquals(boolean approved);
+
+    /**
+     * Method to get a collection of all images that are assigned to plants.
+     */
+    @Query("SELECT DISTINCT im FROM Image im WHERE im.plant IS NOT NULL AND im.approved = :value")
+    List<Image> findPlantLinkedImagesAndApprovedEquals(@Param("value") boolean value );
+
+
+
+
+
+
+
 
 
     /**

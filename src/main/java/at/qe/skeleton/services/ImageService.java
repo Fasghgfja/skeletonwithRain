@@ -27,47 +27,71 @@ public class ImageService {
     @Autowired
     private PlantRepository plantRepository;
 
-    //TODO: Autowire plant repository to search by plant id and so
+    //TODO: use the Autowired plant repository to search by plant id and so when needed
 
+    //TODO:fix the preauthorize , whos hould have permission for what?
 
     /**
-     * Returns a collection of all images.
+     * The Method Returns a collection of all images.
      */
     @PreAuthorize("permitAll()")
     public List<Image> getAllImages() {
         return imageRepository.findAll();
     }
+    /**
+     * The Method Returns a collection of all approved images.
+     */
+    @PreAuthorize("permitAll()")
+    public List<Image> getApprovedImages() {
+        return imageRepository.findImagesByApprovedEquals(true);
+    }
+    /**
+     * The Method Returns a collection of all not approved images.
+     */
+    @PreAuthorize("permitAll()")
+    public List<Image> getNotApprovedImages() {
+        return imageRepository.findImagesByApprovedEquals(false);
+    }
+
 
 
 
     /**
-     * Returns a collection of all images.
+     * Method to get a collection of all approved images of all plants.
+     * differently as the method following it this takes no parameters.
+     */
+    @PreAuthorize("permitAll()")
+    public List<Image> doGetAllApprovedPlantImages() {
+        return imageRepository.findPlantLinkedImagesAndApprovedEquals(true);
+    }
+    /**
+     * Method to get a collection of all images for a given plant.
+     * @param plantId the plant id for which to retrieve the images.
      */
     @PreAuthorize("permitAll()")
     public List<Image> getAllPlantImages(String plantId) {
         Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantId));
         return imageRepository.findImagesByPlant(plant);
     }
-
-
     /**
-     * Returns a collection of all images.
+     * Method to get a collection of all not approverd images for a given plant.
+     * @param plantId the plant id for which to retrieve the images.
      */
     @PreAuthorize("permitAll()")
     public List<Image> getAllPlantImagesNotYetApproved(String plantId) {
         Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantId));
         return imageRepository.findImagesByPlantAndApprovedEquals(plant,false);
     }
-
+    /**
+     * Method to get a collection of all approved images for a given plant.
+     * @param plantId the plant id for which to retrieve the images.
+     */
     @PreAuthorize("permitAll()")
-    public List<Image> getApprovedImages() {
-        return imageRepository.findImagesByApprovedEquals(true);
+    public List<Image> getAllApprovedPlantImages(String plantId) {
+        Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantId));
+        return imageRepository.findImagesByPlantAndApprovedEquals(plant,true);
     }
 
-    @PreAuthorize("permitAll()")
-    public List<Image> getNotApprovedImages() {
-        return imageRepository.findImagesByApprovedEquals(false);
-    }
 
 
 
@@ -96,20 +120,6 @@ public class ImageService {
         return imageRepository.save(image);
     }
 
-
-    public void addPictureToPlantPictures(Image image, String plantid) {
-        System.out.println("im image service here plant id " + plantid);
-        Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantid));
-        System.out.println("plant is " + plant);
-        if(image == null || plant == null ) {
-            System.out.println("addPictureToPlantError null");
-            return;}
-        image.setPlant(plant);
-        imageRepository.save(image);
-
-    }
-
-
     /**
      * Deletes the image.
      * @param image the image to delete
@@ -119,6 +129,17 @@ public class ImageService {
         imageRepository.delete(image);
     }
 
+    //TODO: remove the system out when the method is sufficintly tested
+    public void addPictureToPlantPictures(Image image, String plantid) {
+        System.out.println("im image service here plant id " + plantid);
+        Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantid));
+        System.out.println("plant is " + plant);
+        if(image == null || plant == null ) {
+            System.out.println("addPictureToPlantError null");
+            return;}
+        image.setPlant(plant);
+        imageRepository.save(image);
+    }
 
 
 }

@@ -18,6 +18,10 @@ public interface SensorStationRepository extends AbstractRepository<SensorStatio
 
     SensorStation findByLocation(String location);
 
+    /**
+     * Method to get a collection of all sensor stations assigned to a given gardener.
+     * @param username the gardener for which to retrieve the sensor stations.
+     */
     @Query("SELECT DISTINCT ss FROM SensorStation ss WHERE ss.plant IN ( SELECT p FROM Plant p JOIN p.gardeners gp WHERE gp.username = :gardener )")
     List<SensorStation> findSensorStationsByGardener(@Param("gardener") String username );
 

@@ -143,13 +143,7 @@ public class GalleryController implements Serializable {
         return imageService.getAllImages();
     }
 
-    public List<Image> getApprovedImages() {
-        return imageService.getApprovedImages();
-    }
 
-    public List<Image> getNotApprovedImages() {
-        return imageService.getNotApprovedImages();
-    }
 
 
 
@@ -205,6 +199,31 @@ public class GalleryController implements Serializable {
         if (idString == null){return new ArrayList<Image>();}
         return imageService.getAllPlantImagesNotYetApproved(idString);
     }
+
+    public List<Image> doGetApprovedPlantImages(String idString) {
+        if (idString == null){return new ArrayList<Image>();}
+        return imageService.getAllApprovedPlantImages(idString);
+    }
+
+    public List<Image> getApprovedImages() {
+        return imageService.getApprovedImages();
+    }
+
+    public List<Image> getNotApprovedImages() {
+        return imageService.getNotApprovedImages();
+    }
+
+    /**
+     * Method to get all approved images of all plants
+     * this is used in register.xhtml through the planthphotogallerycontroller (view) when it is loaded without opening
+     * a specific plantid from a qr code and it makes possible
+     * to see a gallery containing all approved plant images in the system.
+     * */
+    //TODO: add error handling
+    public List<Image> doGetAllApprovedPlantImages() {
+        return imageService.doGetAllApprovedPlantImages();
+    }
+
 
 
 

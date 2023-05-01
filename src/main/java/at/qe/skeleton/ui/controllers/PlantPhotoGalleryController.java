@@ -79,14 +79,40 @@ public class PlantPhotoGalleryController implements Serializable {
     private String plantId = "";
 
 
-
-
-
-    public List<Image> doGetPlantImages() {//TODO fix the error handling like in sensor station detail controller the method with same name
+    //TODO fix the error handling like in sensor station detail controller the method with same name , inspect this method, is it correct? or does it something else as the name implies?
+    /**
+    * The methods gets all images of the cached idString */
+    public List<Image> doGetPlantImages() {
         //if (idString == null){return new ArrayList<Image>();}
         //return imageService.getAllPlantImages(idString);
         return galleryController.doGetPlantImages(idString);
     }
+
+    /**
+     * Method to get all approved images of all plants
+     * this is used in register.xhtml when it is loaded without opening a specific plantid from a qr code and is made so from there its possible
+     * to see a gallery containing all approved plant images in the system.
+     * */
+    //TODO: add error handling
+    public List<Image> doGetAllApprovedPlantImages() {
+        //if (idString == null){return new ArrayList<Image>();}
+        //return imageService.getAllPlantImages(idString);
+        return galleryController.doGetAllApprovedPlantImages();
+    }
+
+
+    /**
+     * Method to get all images of the cached plantid
+     * */
+    public List<Image> doGetApprovedPlantImages() {//TODO fix the error handling like in sensor station detail controller the method with same name
+        //if (idString == null){return new ArrayList<Image>();}
+        //return imageService.getAllPlantImages(idString);
+        return galleryController.doGetApprovedPlantImages(plantId);
+    }
+
+
+
+
 
 
 

@@ -169,7 +169,6 @@ public class SensorStationDetailController implements Serializable {
      */
     public Collection<Measurement> getLatestMeasurements() {
         latestMeasurements = measurementService.getLatestPlantMeasurements(sensorStation);
-
         return latestMeasurements;
     }
 
@@ -216,18 +215,26 @@ public class SensorStationDetailController implements Serializable {
 
 
 
-
+    /**
+     * Methods to get the images of the plant currently displayed in the sensor station.
+     */
     public List<Image> doGetPlantImages() {
         if (plantId == null){return new ArrayList<Image>();}
         return galleryController.doGetPlantImages(plantId);
     }
-
-
-
     public List<Image> doGetPlantImagesNotYetApproved() {
         if (plantId == null){return new ArrayList<Image>();}
         return galleryController.doGetPlantImagesNotYetApproved(plantId);
     }
+    /**
+     * Method to get all approved images of the cached plantid
+     * */
+    public List<Image> doGetApprovedPlantImages() {//TODO fix the error handling like in sensor station detail controller the method with same name
+        //if (idString == null){return new ArrayList<Image>();}
+        //return imageService.getAllPlantImages(idString);
+        return galleryController.doGetApprovedPlantImages(plantId);
+    }
+
 
 
 
