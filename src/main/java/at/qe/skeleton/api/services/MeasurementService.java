@@ -61,10 +61,19 @@ public class MeasurementService {
         SensorStation sensorStation = sensorStationService.loadSensorStation(measurement.getSensorStation());//TODO: new!
         measurement1.setSensorStation(sensorStation);
 
+
         if (sensorStation.getPlant() != null) { //TODO: new! test this
         measurement1.setPlant(plantRepository.findFirstByPlantName(sensorStation.getPlant().getPlantName()));
+        //measurement1.setType(measurement.getType());
         }//TODO: new!
 
+        String type = measurement.getType();
+        if (type.equals("TempSensor")) {measurement1.setType("SOIL_MOISTURE");}
+        if (type.equals("LigthSensor")) {measurement1.setType("HUMIDITY");}
+        if (type.equals("HygroSensor")) {measurement1.setType("AIR_PRESSURE");}
+        if (type.equals("GasSensor")) {measurement1.setType("TEMPERATURE");}
+        if (type.equals("humiditySensor")) {measurement1.setType("AIR_QUALITY");}
+        if (type.equals("PressureSensor")) {measurement1.setType("LIGHT_INTENSITY");}
         measurement1.setTimestamp(dateTime);
         measurement1.setValue_s(measurement.getValue());
         measurementRepository.save(measurement1);
