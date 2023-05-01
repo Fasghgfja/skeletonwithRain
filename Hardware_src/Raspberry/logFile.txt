@@ -2245,3 +2245,16 @@ ERROR: On characteristic call_read_values. Error is failed to discover services,
 WARNING: Send OFF alarm signal on uuid: 000019b2-0000-1000-8000-00805f9b34fb at 04/30/23__12:25:28
 INFO: SensorStation G4T2 has been updated alarm_switch to off 
 INFO: Sensor with sensor_id 0 has been updated alarm_count to 0 
+ERROR: Could not find device with name AAAAA at 05/01/23__10:23:28
+ERROR: Could not find device with name BBBBB at 05/01/23__10:23:38
+ERROR: Could not find device with name G4T2 at 05/01/23__10:23:49
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 1 
+INFO: SensorStation G4T2 has been updated alarm_switch to on 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to -1 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 8 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 8 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 8 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 8 
+INFO: Boarder values have been checked at 05/01/23__10:27:13
+INFO: SensorStation G4T2 has been updated alarm_switch to off 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 0 

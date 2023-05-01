@@ -77,5 +77,10 @@ if __name__ == '__main__':
                 print("check webapp for new boarder values")
                 # TODO check webapp for new boarder values
                 time.sleep(1)
+                program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
+
+            case program_status.Is.CHECK_SENSOR_STATION_ALARM.value:
+                print("check sensorstation alarm")
+                check_boarder_values.check_sensor_station_alarm()
+                time.sleep(1)
                 program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
-        repeat += 1
