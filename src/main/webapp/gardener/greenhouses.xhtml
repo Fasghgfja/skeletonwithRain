@@ -182,10 +182,7 @@
 
 
                         <p:outputLabel for="sensorStationswitchEdit" value="Alarm Switch:"/>
-                        <p:selectOneMenu id="sensorStationswitchEdit" value="#{sensorStationDetailController.sensorStation.alarmSwitch}"  >
-                            <f:selectItem itemLabel="On" itemValue="On"/>
-                            <f:selectItem itemLabel="Off" itemValue="Off"/>
-                        </p:selectOneMenu>
+                        <p:toggleSwitch id ="sensorStationswitchEdit" value="#{sensorStationDetailController.fixed}"/>
 
                     </h:panelGrid>
                     <h:panelGrid columns="3">
@@ -238,13 +235,6 @@
 
                         <p:outputLabel for="location" value="Location:"/>
                         <p:inputText id="location" value="#{createSensorStationBean.location}"/>
-
-
-                        <p:outputLabel for="sensorStationswitch" value="Alarm Switch:"/>
-                        <p:selectOneMenu id="sensorStationswitch" value="#{createSensorStationBean.alarmSwitch}"  >
-                            <f:selectItem itemLabel="On" itemValue="On"/>
-                            <f:selectItem itemLabel="Off" itemValue="Off"/>
-                        </p:selectOneMenu>
 
 
 

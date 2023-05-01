@@ -58,4 +58,14 @@ public class Sensor  extends Metadata implements Persistable<Long>, Serializable
     public boolean isNew() {
         return (null == super.getCreateDate());
     }
+
+
+    @Override
+    public String toString() {
+        return "Sensor{" +
+                "type='" + type + '\'' +
+                ", upper_border='" + upper_border + '\'' +
+                ", lower_border='" + lower_border + '\'' +
+                '}';
+    }
 }

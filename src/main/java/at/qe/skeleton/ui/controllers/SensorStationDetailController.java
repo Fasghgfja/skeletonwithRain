@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import at.qe.skeleton.repositories.AbstractRepository;
+import at.qe.skeleton.services.ImageService;
 import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import jakarta.faces.context.FacesContext;
@@ -50,6 +51,7 @@ public class SensorStationDetailController implements Serializable {
     private transient GalleryController galleryController;
 
 
+
     /**
      * Tells us if the sensor station is new , replace with a more elegant solution!.
      */
@@ -74,6 +76,7 @@ public class SensorStationDetailController implements Serializable {
     private String description = "";
     private Plant plant;
 
+    boolean fixed = false;
 
 
 
@@ -113,25 +116,25 @@ public class SensorStationDetailController implements Serializable {
         boolean isThresholdExceeded;
         switch(type) {
             case "SOIL_MOISTURE":
-                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 95 || Long.parseLong(measurement.getValue_s()) < 10);
+                isThresholdExceeded = (Double.parseDouble(measurement.getValue_s()) > 95 || Double.parseDouble(measurement.getValue_s()) < 10);
                 return isThresholdExceeded ? 1 : 0;
             case "HUMIDITY":
-                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 80 || Long.parseLong(measurement.getValue_s()) < 20);
+                isThresholdExceeded = (Double.parseDouble(measurement.getValue_s()) > 80 || Double.parseDouble(measurement.getValue_s()) < 20);
                 return isThresholdExceeded ? 1 : 0;
             case "AIR_PRESSURE":
-                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 2 || Long.parseLong(measurement.getValue_s()) < 1);
+                isThresholdExceeded = (Double.parseDouble(measurement.getValue_s()) > 2 || Double.parseDouble(measurement.getValue_s()) < 1);
                 return isThresholdExceeded ? 1 : 0;
             case "TEMPERATURE":
-                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 35 || Long.parseLong(measurement.getValue_s()) < 10);
+                isThresholdExceeded = (Double.parseDouble(measurement.getValue_s()) > 35 || Double.parseDouble(measurement.getValue_s()) < 10);
                 return isThresholdExceeded ? 1 : 0;
             case "AIR_QUALITY":
-                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) < 50);
+                isThresholdExceeded = (Double.parseDouble(measurement.getValue_s()) < 50);
                 return isThresholdExceeded ? 1 : 0;
             case "LIGHT_INTENSITY":
-                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 1500 || Long.parseLong(measurement.getValue_s()) < 100);
+                isThresholdExceeded = (Double.parseDouble(measurement.getValue_s()) > 1500 || Double.parseDouble(measurement.getValue_s()) < 100);
                 return isThresholdExceeded ? 1 : 0;
             default:
-                return 111;
+                return 0;
         }
     }
 
@@ -201,6 +204,7 @@ public class SensorStationDetailController implements Serializable {
      * Action to save the currently cached Sensor Station.
      */
     public void doSaveSensorStation() {
+        if (fixed) sensorStation.setAlarmSwitch("fixed");
         sensorStation = this.sensorService.saveSensorStation(sensorStation);
     }
 
@@ -234,6 +238,8 @@ public class SensorStationDetailController implements Serializable {
         //return imageService.getAllPlantImages(idString);
         return galleryController.doGetApprovedPlantImages(plantId);
     }
+
+
 
 
 

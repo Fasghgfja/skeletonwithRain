@@ -54,7 +54,7 @@ public class SensorService {
 
     //TODO: implement logging , like it was it crashes the db
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void deleteSensorStation(Sensor sensor) {
+    public void deleteSensor(Sensor sensor) {
        // Log deleteLog = new Log();
 
        // deleteLog.setDate(LocalDate.now());

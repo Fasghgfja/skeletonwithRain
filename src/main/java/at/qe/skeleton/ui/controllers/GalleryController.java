@@ -237,9 +237,13 @@ public class GalleryController implements Serializable {
 
 
     public void approveImage(Image image) {
+        System.out.println("gallery controller: approvingImage");
         image.setApproved(true);
         imageService.saveImage(image);
     }
+
+
+
 
 
 

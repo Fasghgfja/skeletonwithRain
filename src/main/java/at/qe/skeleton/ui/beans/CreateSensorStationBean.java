@@ -46,7 +46,7 @@ public class CreateSensorStationBean implements Serializable {
         SensorStation sensorStation = new SensorStation();
         sensorStation.setLocation(location);
         sensorStation.setSensorStationName(sensorStationName);
-        sensorStation.setAlarmSwitch(alarmSwitch);
+        sensorStation.setAlarmSwitch("off");
         sensorStation.setDescription(description);
         sensorStation = sensorStationPointService.saveSensorStation(sensorStation);
 
