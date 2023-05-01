@@ -36,7 +36,7 @@ public interface PlantRepository extends AbstractRepository<Plant, Long> {
      * @return The plant with the given id.
      * @throws IllegalArgumentException If plantId is {@literal null}.
      */
-    Plant findFirstByPlantID(@Param("plantId") Long plantId);
+    Plant findFirstById(Long plantId);
 
     /**
      * The method Retrieves a Plant entity by part of its name.

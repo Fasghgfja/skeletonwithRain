@@ -2269,3 +2269,27 @@ INFO: Sensor with sensor_id 3 has been updated alarm_count to 1
 INFO: Sensor with sensor_id 4 has been updated alarm_count to 1 
 INFO: Sensor with sensor_id 5 has been updated alarm_count to 1 
 INFO: Boarder values have been checked at 05/01/23__11:41:28
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7ff77a18dde0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/01/23__14:13:09
+ERROR: Could not find device with name G4T2 at 05/01/23__14:13:21
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 2 
+ERROR: On characteristic write alarm_count to webapp. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/updatesensors (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7ff779f5f880>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/01/23__14:13:22
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 2 
+ERROR: On characteristic write alarm_count to webapp. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/updatesensors (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7ff779fac070>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/01/23__14:13:22
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 2 
+ERROR: On characteristic write alarm_count to webapp. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/updatesensors (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7ff779fac820>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/01/23__14:13:22
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 2 
+ERROR: On characteristic write alarm_count to webapp. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/updatesensors (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7ff779facfd0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/01/23__14:13:22
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 2 
+ERROR: On characteristic write alarm_count to webapp. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/updatesensors (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7ff779f5faf0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/01/23__14:13:22
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 2 
+ERROR: On characteristic write alarm_count to webapp. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/updatesensors (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7ff779f5f3a0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/01/23__14:13:22
+INFO: Boarder values have been checked at 05/01/23__14:13:22
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fae88245db0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/01/23__14:40:16
+ERROR: Could not find device with name G4T2 at 05/01/23__14:40:27
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 3 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 3 
+INFO: Boarder values have been checked at 05/01/23__14:40:29

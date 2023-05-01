@@ -17,6 +17,7 @@ import at.qe.skeleton.api.model.Measurement2;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.repositories.MeasurementRepository;
+import at.qe.skeleton.repositories.PlantRepository;
 import at.qe.skeleton.services.PlantService;
 import at.qe.skeleton.services.SensorStationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,23 +46,26 @@ public class MeasurementService {
     SensorStationService sensorStationService;
     @Autowired
     PlantService plantService;
+
+    @Autowired
+    PlantRepository plantRepository;
     private static final AtomicLong ID_COUNTER = new AtomicLong(1);
     private static final ConcurrentHashMap<Long, Measurement> measurements = new ConcurrentHashMap<>();
 
 
     public void addMeasurement(Measurement2 measurement) throws MeasurementNotFoundException {
+        System.out.println();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDate dateTime = LocalDate.parse(measurement.getTime_stamp(), formatter);
         Measurement measurement1 = new Measurement();
-        measurement1.setPlant(plantService.loadPlant(Long.getLong("100")));
         measurement1.setSensorStation(sensorStationService.loadSensorStation(measurement.getSensorStation()));
+        measurement1.setPlant(plantRepository.findFirstByPlantName(
+                sensorStationService.loadSensorStation(measurement.getSensorStation()).getPlant().getPlantName()
+        ));
         measurement1.setTimestamp(dateTime);
         measurement1.setValue_s(measurement.getValue());
         measurementRepository.save(measurement1);
         System.out.println(measurement1.toString());
-        if(findMeasurementById(Long.getLong("123456789")) == null){
-            throw new MeasurementNotFoundException();
-        }
 
         /*
         Measurement2 newMeasurement = new Measurement2();
