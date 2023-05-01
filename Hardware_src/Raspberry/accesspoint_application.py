@@ -24,7 +24,8 @@ if __name__ == '__main__':
                 print("Implement database")
                 DB_connection.implement_database()
                 time.sleep(1)
-                program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+                #program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+                program_state = program_status.Is.WRITE_VALUES_TO_WEBAPP.value
 
             case program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value:
                 print("Call for new Sensorstation")
