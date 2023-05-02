@@ -203,7 +203,7 @@ public class SensorStationDetailController implements Serializable {
      * Action to save the currently cached Sensor Station.
      */
     public void doSaveSensorStation() {
-        if (fixed) sensorStation.setAlarmSwitch("fixed");
+        if (fixed || sensorStation.getAlarmSwitch().equals("true")) sensorStation.setAlarmSwitch("fixed");
         sensorStation = this.sensorService.saveSensorStation(sensorStation);
     }
 

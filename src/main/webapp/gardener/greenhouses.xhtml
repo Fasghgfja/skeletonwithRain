@@ -182,7 +182,7 @@
 
 
                         <p:outputLabel for="sensorStationswitchEdit1" value="Alarm Switch to Fixed(if not):" />
-                        <p:toggleSwitch id ="sensorStationswitchEdit1" rendered="#{sensorStationDetailController.sensorStation.alarmSwitch.equals('fixed') == false}" value="#{sensorStationDetailController.fixed}"/>
+                        <p:toggleSwitch id ="sensorStationswitchEdit1" rendered="#{sensorStationDetailController.sensorStation.alarmSwitch.equals('fixed') == false}" value="#{sensorStationDetailController.sensorStation.alarmSwitch}"/>
 
                     </h:panelGrid>
                     <h:panelGrid columns="3">
