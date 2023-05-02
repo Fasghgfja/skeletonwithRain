@@ -22,7 +22,7 @@ public abstract class Metadata {
     private LocalDate createDate;
     @Column(columnDefinition = "DATE")
     private LocalDate updateDate;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Userx createUser;
     @ManyToOne
     private Userx updateUser;

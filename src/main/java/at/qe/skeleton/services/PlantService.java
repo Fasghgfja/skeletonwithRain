@@ -25,9 +25,6 @@ public class PlantService {
     private LogRepository logRepository;
 
 
-
-
-
     public Long getPlantsAmount() {
         return plantRepository.count();
     }
@@ -61,9 +58,7 @@ public class PlantService {
      */
     @PreAuthorize("permitAll()")
     public Plant savePlant(Plant plant) {
-        if (plant.isNew()) {
-            plant.setPlantedDate(LocalDate.now());
-        } else {
+        if (plant.getPlantedDate() == null) {
             plant.setPlantedDate(LocalDate.now());
         }
         return plantRepository.save(plant);

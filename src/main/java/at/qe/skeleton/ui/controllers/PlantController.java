@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.services.PlantService;
+import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,9 @@ import org.springframework.stereotype.Component;
 public class PlantController implements Serializable{
     @Autowired
     private PlantService plantService;
+
+    @Autowired
+    private SensorStationService sensorStationService;
 
     @Autowired
     private SessionInfoBean sessionInfoBean;
@@ -70,9 +74,13 @@ public class PlantController implements Serializable{
     /**
      * Action to delete the currently cached Sensor Station.
      */
+    //TODO: implement stronger error handling
     public void doDeletePlant() {
-        this.plantService.deletePlant(plant);
-        plant = null;
+        if (plant.getSensorStation() == null) {
+            this.plantService.deletePlant(plant);
+            plant = null;
+        }
+        else System.out.println("cannot delete a plant that is currently displayed in a sensor station , im plant controller");
     }
 
 

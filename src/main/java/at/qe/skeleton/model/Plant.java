@@ -16,7 +16,7 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
-public class Plant extends Metadata implements Persistable<Long>, Serializable, Comparable<Plant> {
+public class Plant implements Persistable<Long>, Serializable, Comparable<Plant> {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,7 +56,7 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
 
     @Override
     public boolean isNew() {
-        return (null == super.getCreateDate());
+        return (null == getPlantedDate());
     }
 
     @Override

@@ -56,14 +56,15 @@
                             </p:commandButton>
 
 
-                            <!-- ....................DELETE PLANT BUTTON ...........ONLY ADMIN .............. -->
+                            <!-- ....................DELETE PLANT BUTTON ......... .............. -->
                             <p:commandButton styleClass="ui-button-danger" rendered="#{sessionInfoBean.hasRole('ADMIN')}"
                                              action="#{plantController.doDeletePlant()}" icon="pi pi-user-minus"
                                              title="Delete"
                                              update=":userForm:plantsTable">
                                 <f:setPropertyActionListener value="#{plant}" target="#{plantController.plant}"/>
                                 <p:confirm header="Confirmation"
-                                           message="Are you sure that you want to delete the sensor station '#{plant.plantName}'? You cannot undo this operation."
+                                           message="Are you sure that you want to delete the plant '#{plant.plantName}'? You cannot undo this operation. ,
+                                           PLANTS ACTUALLY DISPLAYED IN A SENSOR STATION WILL NOT BE REMOVED"
                                            icon="pi pi-exclamation-triangle"/>
                             </p:commandButton>
 
