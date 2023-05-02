@@ -79,7 +79,6 @@ public class SensorStationDetailController implements Serializable {
     boolean fixed = false;
 
 
-
     public String getMeasurementStatus(String measurementId,String type) {
         Measurement thisMeasurement = measurementService.findMeasurementById(Long.parseLong(measurementId));
         if (thisMeasurement == null) {return "OK";}
@@ -265,6 +264,7 @@ public class SensorStationDetailController implements Serializable {
         } else {
             this.setSensorStationFromId(idString);
             this.sensorStation = this.getSensorStation();
+            if (this.getSensorStation().getAlarmSwitch().equalsIgnoreCase("fixed")){this.fixed = true;}
             if (this.getSensorStation().getPlant() == null) {
                 return;
             } // error handling XD

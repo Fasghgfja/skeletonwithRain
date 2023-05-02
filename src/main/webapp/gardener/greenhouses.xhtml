@@ -181,13 +181,13 @@
 
 
 
-                        <p:outputLabel for="sensorStationswitchEdit" value="Alarm Switch:"/>
-                        <p:toggleSwitch id ="sensorStationswitchEdit" value="#{sensorStationDetailController.fixed}"/>
+                        <p:outputLabel for="sensorStationswitchEdit1" value="Alarm Switch to Fixed(if not):" />
+                        <p:toggleSwitch id ="sensorStationswitchEdit1" rendered="#{sensorStationDetailController.sensorStation.alarmSwitch.equals('fixed') == false}" value="#{sensorStationDetailController.fixed}"/>
 
                     </h:panelGrid>
                     <h:panelGrid columns="3">
                         <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}"
-                                         oncomplete="PF('userEditDialog').hide()" update=":userForm:sensorStationTable"/>
+                                         oncomplete="PF('userEditDialog').hide()" update=":userForm:sensorStationTable sensorStationswitchEdit1"/>
                         <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
                     </h:panelGrid>
                 </p:outputPanel>

@@ -22,7 +22,7 @@
 
         <!-- ..........................................TOP INFO BOXES................................................................... -->
         <h:form id="detailPage">
-            <p:toolbar >
+            <p:toolbar>
 
                 <p:toolbarGroup> <!-- .....TEMPERATURE AIR HUMIDITY GROUND HUMIDITY LIGHT INTENSITY BOXES............................ -->
 
@@ -102,7 +102,6 @@
                     </h:form> <!-- .......::::::::::::::::...PLANT GALLERY FORM END....:::::::::::::::.......... -->
 
 
-
                 </p:toolbarGroup>
 
                 <p:toolbarGroup>
@@ -162,34 +161,34 @@
                                             onclick="PF('galleria2').show()"/>
 
                                     <!-- .......::::::::::::::::...AWAITING APPROVAL GALLERY ....::::::::::::::::::::::.......... -->
-                                        <p:galleria id="awaitingapprovalgallery" widgetVar="galleria2"
-                                                    value="#{sensorStationDetailController.doGetPlantImagesNotYetApproved()}"
-                                                    var="image"
-                                                    numVisible="9"
-                                                    circular="true" fullScreen="true" showItemNavigators="true"
-                                                    style="max-width: 70%">
-                                            <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
-                                                            alt="#{galleryController.photoAsStreamedContent}"
-                                                            style="width: 100%; display: block">
-                                                <f:param name="id" value="#{image.id}"/>
-                                            </p:graphicImage>
+                                    <p:galleria id="awaitingapprovalgallery" widgetVar="galleria2"
+                                                value="#{sensorStationDetailController.doGetPlantImagesNotYetApproved()}"
+                                                var="image"
+                                                numVisible="9"
+                                                circular="true" fullScreen="true" showItemNavigators="true"
+                                                style="max-width: 70%">
+                                        <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
+                                                        alt="#{galleryController.photoAsStreamedContent}"
+                                                        style="width: 100%; display: block">
+                                            <f:param name="id" value="#{image.id}"/>
+                                        </p:graphicImage>
 
-                                            <p:commandButton icon="fa-regular fa-thumbs-up"
-                                                             title="Approve Image #{image}"
-                                                             style="width: 10%; height: 10%; position: absolute; margin-right: 90%"
-                                                             process="@this"
-                                                             actionListener="#{galleryController.approveImage(image)}"
-                                                             update="awaitingapprovalgallery detailPage:myform3:awaitingapprovalgallery3"
-                                            />
-                                            <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}"
-                                                             style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
-                                                             process="@this"
-                                                             actionListener="#{galleryController.doDeleteImage(image)}"
-                                                             update="awaitingapprovalgallery"
-                                            />
+                                        <p:commandButton icon="fa-regular fa-thumbs-up"
+                                                         title="Approve Image #{image}"
+                                                         style="width: 10%; height: 10%; position: absolute; margin-right: 90%"
+                                                         process="@this"
+                                                         actionListener="#{galleryController.approveImage(image)}"
+                                                         update="awaitingapprovalgallery detailPage:myform3:awaitingapprovalgallery3"
+                                        />
+                                        <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}"
+                                                         style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
+                                                         process="@this"
+                                                         actionListener="#{galleryController.doDeleteImage(image)}"
+                                                         update="awaitingapprovalgallery"
+                                        />
 
 
-                                        </p:galleria>
+                                    </p:galleria>
 
                                 </h:form>
 
@@ -202,24 +201,24 @@
                                             onclick="PF('galleria3').show()"/>
 
                                     <!-- .......::::::::::::::::...APPROVED GALLERY ....::::::::::::::::::::::.......... -->
-                                        <p:galleria id="awaitingapprovalgallery3" widgetVar="galleria3"
-                                                    value="#{sensorStationDetailController.doGetApprovedPlantImages()}"
-                                                    var="image"
-                                                    numVisible="9"
-                                                    circular="true" fullScreen="true" showItemNavigators="true"
-                                                    style="max-width: 70%">
-                                            <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}"
-                                                             style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
-                                                             process="@this"
-                                                             actionListener="#{galleryController.doDeleteImage(image)}"
-                                                             update="awaitingapprovalgallery3 detailPage:myform:approvedImagesGallery"
-                                            />
-                                            <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
-                                                            alt="#{galleryController.photoAsStreamedContent}"
-                                                            style="width: 100%; display: block">
-                                                <f:param name="id" value="#{image.id}"/>
-                                            </p:graphicImage>
-                                        </p:galleria>
+                                    <p:galleria id="awaitingapprovalgallery3" widgetVar="galleria3"
+                                                value="#{sensorStationDetailController.doGetApprovedPlantImages()}"
+                                                var="image"
+                                                numVisible="9"
+                                                circular="true" fullScreen="true" showItemNavigators="true"
+                                                style="max-width: 70%">
+                                        <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}"
+                                                         style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
+                                                         process="@this"
+                                                         actionListener="#{galleryController.doDeleteImage(image)}"
+                                                         update="awaitingapprovalgallery3 detailPage:myform:approvedImagesGallery"
+                                        />
+                                        <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
+                                                        alt="#{galleryController.photoAsStreamedContent}"
+                                                        style="width: 100%; display: block">
+                                            <f:param name="id" value="#{image.id}"/>
+                                        </p:graphicImage>
+                                    </p:galleria>
 
                                 </h:form>
 
@@ -329,63 +328,105 @@
                 </div>
 
 
-                <!-- .........................................GARDENER/STAFF GREENHOUSE SETTINGS PANEL................................................................... -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- ......................................... SENSOR STATION SETTINGS PANEL................................................................... -->
                 <div class="col-12 md:col-6 xl:col-4">
                     <div class="card tasks">
                         <div class="card-header">
-                            <h5>Edit Sensor Station (Gardener only panel)</h5>
+                            <h5>Edit Sensor Station</h5>
                         </div>
 
                         <!-- ................ EDIT FIELDS PANEL............-->
                         <div class="field col-12 md:col-4">
-                            <p:outputPanel id="stationData"
-                                           rendered="#{not empty sensorStationDetailController.sensorStation}">
-                                <h5 class="mt-0">Sensor Station Data </h5>
-                                <h:panelGrid columns="1">
+                            <h:form id="EditThisSensorStation">
 
-                                    <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/>
-                                    <p:selectOneMenu id="sensorStationAccessPoint" filter="true"
-                                                     emptyLabel="Access Point ID"
-                                                     scrollHeight="250" updateLabel="true">
-                                        <f:selectItems value="#{accessPointController.accessPoints}"/>
-                                        <f:facet name="footer">
-                                            <p:divider styleClass="mt-0"/>
-                                            <h:outputText value="3 options" style="font-weight:bold;"/>
-                                        </f:facet>
-                                    </p:selectOneMenu>
+                                <p:outputPanel id="sensorStationData" rendered="#{not empty sensorStationDetailController.sensorStation}">
+                                    <h:panelGrid columns="1">
 
-                                    <p:outputLabel for="sensorStationId" value="Sensor-station name:"/>
-                                    <p:inputText id="sensorStationId"
-                                                 value="#{sensorStationDetailController.sensorStation.sensorStationName}"
-                                                 disabled="true"/>
+                                        <p:outputLabel for="sensorStationId" value="Sensor-station name:"/>
+                                        <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
 
-                                    <p:outputLabel for="sensorStationPlant" value="Plant: "/>
-                                    <p:selectOneMenu id="sensorStationPlant"
-                                                     value="#{sensorStationDetailController.sensorStation.plant}"
-                                                     filter="true"
-                                                     emptyLabel="Plant: #{sensorStationDetailController.sensorStation.plant.plantName}"
-                                                     scrollHeight="250" updateLabel="true">
-                                        <f:selectItems value="#{plantController.plants}"/>
-                                        <f:facet name="footer">
-                                            <p:divider styleClass="mt-0"/>
-                                            <h:outputText value="3 options" style="font-weight:bold;"/>
-                                        </f:facet>
-                                    </p:selectOneMenu>
-
-                                    <p:outputLabel for="sensorStationlocation" value="Sensor-station location:"/>
-                                    <p:inputText id="sensorStationlocation"
-                                                 rendered="#{not empty sensorStationDetailController.sensorStation}"
-                                                 value="#{sensorStationDetailController.sensorStation.location}"/>
+                                        <p:outputLabel for="sensorStationalarmSwitch" value="Sensor-station Switch"/>
+                                        <p:inputText id="sensorStationalarmSwitch" value="#{sensorStationDetailController.sensorStation.alarmSwitch}" disabled="true" />
 
 
-                                </h:panelGrid>
-                            </p:outputPanel>
+                                        <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/>
+                                        <p:selectOneMenu id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
+                                                         scrollHeight="250" updateLabel="true" >
+                                            <f:selectItems value="#{accessPointController.accessPoints}"/>
+                                            <f:facet name="footer">
+                                                <p:divider styleClass="mt-0" />
+                                                <h:outputText value="3 options" style="font-weight:bold;"/>
+                                            </f:facet>
+                                        </p:selectOneMenu>
+
+
+                                        <p:outputLabel for="sensorStationlocation" value="Sensor-station location:"/>
+                                        <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
+
+
+
+                                        <p:outputLabel for="sensorStationswitchEdit" value="Alarm Switch to Fixed(if not):" />
+                                        <p:toggleSwitch id ="sensorStationswitchEdit" rendered="#{sensorStationDetailController.fixed == false}" value="#{sensorStationDetailController.fixed}"/>
+
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="3">
+                                        <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}"
+                                                         update="EditThisSensorStation:sensorStationData"/>
+
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </h:form>
+
                         </div>
 
 
                     </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -400,11 +441,11 @@
 
 
                 <!-- .........................................SENSORS PANEL.............................................................. -->
-
                 <div class="col-12 md:col-12 xl:col-8">
                     <div class="card transactions">
                         <div class="card-header">
                             <h5>Sensors</h5>
+                            <!-- ...................Header buttons................. -->
                             <div class="header-buttons">
                                 <p:commandButton type="button" icon="pi pi-search"
                                                  styleClass="ui-button-secondary outlined-button  mr-2"/>
@@ -413,7 +454,6 @@
                             </div>
                         </div>
 
-
                         <h:form id="form">
                             <p:dataTable id="ordersTable12" var="sensor"
                                          value="#{sensorListController.getSensorsForSensorStation()}"
@@ -421,19 +461,19 @@
                                          rowKey="#{sensor.id}" paginator="true" rows="5" sortBy="#{sensor.id}"
                                          sortOrder="descending">
 
-                                <p:column headerText="id: only in testing phase" sortBy="#{sensor.id}">
+                                <p:column headerText="id(only in testing phase)" sortBy="#{sensor.id}">
                                     <h:outputText value="#{sensor.id}"/>
                                 </p:column>
 
-                                <p:column headerText="type" sortBy="#{sensor.type}">
+                                <p:column headerText="Type" sortBy="#{sensor.type}">
                                     <h:outputText value="#{sensor.type}"/>
                                 </p:column>
 
-                                <p:column headerText="upper border(test)" sortBy="#{sensor.upper_border}">
+                                <p:column headerText="Upper Border" sortBy="#{sensor.upper_border}">
                                     <h:outputText value="#{sensor.upper_border}"/>
                                 </p:column>
 
-                                <p:column headerText="lower border(test)" sortBy="#{sensor.lower_border}">
+                                <p:column headerText="Lower Border" sortBy="#{sensor.lower_border}">
                                     <h:outputText value="#{sensor.lower_border}"/>
                                 </p:column>
 
@@ -443,51 +483,49 @@
 
                                 <p:column>
                                     <p:commandButton style="margin-right: 10px" update="form:userEditDialog12"
-                                                     oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit" title="Edit">
-                                        <f:setPropertyActionListener value="#{sensor}" target="#{sensorDetailController.sensor}"/>
+                                                     oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit"
+                                                     title="Edit">
+                                        <f:setPropertyActionListener value="#{sensor}"
+                                                                     target="#{sensorDetailController.sensor}"/>
                                     </p:commandButton>
                                 </p:column>
 
                             </p:dataTable>
 
-
                             <!-- .......................................DIALOGS...................................................................... -->
                             <!-- ...................................SensorEdit dialog.................................... -->
-                            <p:dialog header="Edit Sensor borders" id="userEditDialog12" widgetVar="userEditDialog" modal="true"
+                            <p:dialog header="Edit Sensor borders" id="userEditDialog12" widgetVar="userEditDialog"
+                                      modal="true"
                                       showEffect="fade" hideEffect="fade" resizable="false">
+
                                 <p:outputPanel id="userData2">
                                     <h5 class="mt-0">Sensor Data </h5>
-                                    <h:panelGrid columns="1">
 
+                                    <h:panelGrid columns="1">
                                         <p:outputLabel for="upper" value="Upper border"/>
                                         <p:inputText id="upper" value="#{sensorDetailController.upper_border}"/>
                                         <p:outputLabel for="lower" value="Lower border"/>
                                         <p:inputText id="lower" value="#{sensorDetailController.lower_border}"/>
-                                        <p:outputLabel for="sensorStationResetSwitch" value="Reset Alarm:"/>
-                                        <p:toggleSwitch id ="sensorStationResetSwitch" value="#{sensorDetailController.resetAlarm}"/>
-
-
+                                        <p:outputLabel for="sensorResetSwitch" value="Reset Alarm Count:"/>
+                                        <p:toggleSwitch id="sensorResetSwitch" value="#{sensorDetailController.resetAlarm}"/>
                                     </h:panelGrid>
+
                                     <h:panelGrid columns="3">
-                                        <p:commandButton value="Save" action="#{sensorDetailController.doSaveSensor()}"
-                                                         update="userEditDialog12 ordersTable12 detailPage" />
+                                        <p:commandButton value="Save Changes" action="#{sensorDetailController.doSaveSensor()}"
+                                                         update="userEditDialog12 ordersTable12 detailPage"/>
                                     </h:panelGrid>
+
                                 </p:outputPanel>
                             </p:dialog>
 
-
-
-
                         </h:form>
 
-
                     </div>
-                </div>
+                </div><!-- .........................................SENSORS PANEL END............................... -->
 
 
             </div>
         </div>
-
 
 
     </ui:define>
