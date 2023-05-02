@@ -29,20 +29,8 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      */
     Measurement findFirstById(Long Id);
 
+    Measurement findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(SensorStation sensorStation, String type);
 
-
-    //TODO: is it better to implement this in Measurement and search directly by plant?
-    //    @ManyToOne
-    //    @JoinColumn(name = "plant_id", nullable = false)
-    //    private Plant plant;
-    // todo paired with the one in measurement
-    /**
-     * Retrieves all measurements from a plant.
-     * @param plant must not be {@literal null}.
-     * @return The measurements belonging to the selected plant as a List.
-     * @throws IllegalArgumentException If plantID is {@literal null}.
-     */
-    List<Measurement> findMeasurementsByPlantOrderByTimestampDesc(Plant plant);
 
 
     /**
@@ -96,99 +84,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
     List<Measurement> findMeasurementsByTimestampGreaterThanOrderByTimestampDesc(LocalDate date);
 
 
-
-
-
-
-
-
-    //Methods to find measurements by PlantId and date.
-    /**
-     * Retrieves all measurements created at a given date for a given plant.
-     * @param plant must not be {@literal null}.
-     * @param date the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID or date is {@literal null}.
-     */
-    List<Measurement> findMeasurementsByPlantAndTimestampOrderByTimestampDesc(Plant plant, LocalDate date);
-
-    /**
-     * Retrieves all measurements from a plant created before or equal to the given date (the measurements)
-     * @param plant must not be {@literal null}.
-     * @param date the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID or date is {@literal null}.
-     */
-    List<Measurement> findMeasurementsByPlantAndTimestampLessThanEqualOrderByTimestampDesc(Plant plant, LocalDate date);
-
-    /**
-     * Retrieves all measurements from a plant created after the given date (the measurements)
-     * @param plant must not be {@literal null}.
-     * @param date the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID or date is {@literal null}.
-     */
-    List<Measurement> findMeasurementsByPlantAndTimestampGreaterThanOrderByTimestampDesc(Plant plant, LocalDate date);
-
-
-
-
-
-
-
-
-
-
-    //Methods to find measurements by PlantId and type and date.
-    /**
-     * Retrieves all measurements of a specific type for a given plant.
-     * @param plant must not be {@literal null}.
-     * @param type the type after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID ot type is {@literal null}.
-     */
-    List<Measurement> findMeasurementsByPlantAndTypeLikeOrderByTimestampDesc(Plant plant, String type);
-
-    /**
-     * Retrieves all measurements of a specific type and date for a given plant.
-     * @param plant must not be {@literal null}.
-     * @param type the type after which it filters, must not be {@literal null}
-     * @param date the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID,type or date is {@literal null}.
-     */
-    List<Measurement> findMeasurementsByPlantAndTypeAndTimestampOrderByTimestampDesc(Plant plant, String type, LocalDate date);
-
-    /**
-     * Retrieves all measurements of a specific type after a date for a given plant.
-     * @param plant must not be {@literal null}.
-     * @param type the type after which it filters, must not be {@literal null}
-     * @param date the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID,type or date is {@literal null}.
-     */
-    List<Measurement> findMeasurementsByPlantAndTypeAndTimestampGreaterThanOrderByTimestampDesc(Plant plant, String type, LocalDate date);
-
-    /**
-     * Retrieves all measurements of a specific type before a date  for a given plant.
-     * @param plant must not be {@literal null}.
-     * @param type the type after which it filters, must not be {@literal null}
-     * @param date the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID,type or date is {@literal null}.
-     */
-    List<Measurement> findMeasurementsByPlantAndTypeAndTimestampLessThanEqualOrderByTimestampDesc(Plant plant, String type, LocalDate date);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //new
-    List<Measurement> findMeasurementsByPlantAndTypeOrderByTimestampDesc(Plant plant, String type);
-
-    Measurement findFirstMeasurementByPlantAndTypeOrderByTimestampDesc(Plant plant, String type);
+    long count();
 
 
 

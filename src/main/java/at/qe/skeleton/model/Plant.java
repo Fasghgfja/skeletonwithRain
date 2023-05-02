@@ -7,10 +7,7 @@ import org.springframework.data.domain.Persistable;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -42,7 +39,7 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
     @ManyToMany(mappedBy = "plantsUnderCare", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private Set<Userx> gardeners = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private SensorStation sensorStation;
 
 

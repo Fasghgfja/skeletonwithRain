@@ -1,5 +1,6 @@
 package at.qe.skeleton.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
@@ -21,7 +22,7 @@ public abstract class Metadata {
     private LocalDate createDate;
     @Column(columnDefinition = "DATE")
     private LocalDate updateDate;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Userx createUser;
     @ManyToOne
     private Userx updateUser;

@@ -40,7 +40,7 @@ public class PlantController implements Serializable{
     /**
      * Returns how many plants are registered in the system.
      */
-    public Integer getPlantsAmount() {
+    public Long getPlantsAmount() {
         return plantService.getPlantsAmount();
     }
 

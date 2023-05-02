@@ -47,7 +47,7 @@ public class UserService {
 
 
     public Integer getUsersAmount() {
-        return userRepository.findAll().stream().toList().size();
+        return userRepository.count();
     }
 
     /**

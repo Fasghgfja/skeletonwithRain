@@ -31,7 +31,7 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     @Column(length = 50)
     private String description;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn( nullable = true)
     private Plant plant;
 

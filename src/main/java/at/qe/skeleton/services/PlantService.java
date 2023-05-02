@@ -26,6 +26,12 @@ public class PlantService {
 
 
 
+
+
+    public Long getPlantsAmount() {
+        return plantRepository.count();
+    }
+
     /**
      * The method Returns a collection of all plants.
      */
@@ -56,9 +62,9 @@ public class PlantService {
     @PreAuthorize("permitAll()")
     public Plant savePlant(Plant plant) {
         if (plant.isNew()) {
-            plant.setCreateDate(LocalDate.now());
+            plant.setPlantedDate(LocalDate.now());
         } else {
-            plant.setUpdateDate(LocalDate.now());
+            plant.setPlantedDate(LocalDate.now());
         }
         return plantRepository.save(plant);
     }
@@ -74,6 +80,16 @@ public class PlantService {
     }
 
 
+
+
+
+
+
+
+
+
+
+
     /**
      * Method to set the plant repository for the service.
      * can be used for testing.
@@ -84,11 +100,6 @@ public class PlantService {
         this.plantRepository = plantRepository;
     }
 
-    //TODO: push this down to repository and queue , it is too expensive here
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public Integer getPlantsAmount() {
-        return plantRepository.findAll().stream().toList().size();
-    }
 
     public Collection<Plant> getFollowedPlants(Userx user) {
         return plantRepository.findPlantsByFollowers(user);
