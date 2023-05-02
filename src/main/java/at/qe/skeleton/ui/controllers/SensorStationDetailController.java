@@ -223,17 +223,26 @@ public class SensorStationDetailController implements Serializable {
         sensorStation = this.sensorService.saveSensorStation(sensorStation);
     }
 
+
     //TODO:Better error handling
     public void doChangeThePlantAndSave() {
         if (selectedPlantName != null){
-            Plant oldPlant = plantService.loadPlant(sensorStation.getPlant().getId());
-            oldPlant.setSensorStation(null);
-            plantService.savePlant(oldPlant);
-            Plant newPlant = new Plant();
-            newPlant.setPlantName(selectedPlantName);
-            newPlant.setSensorStation(sensorStation);
-            sensorStation.setPlant(plantService.savePlant(newPlant));
-            doSaveSensorStation();
+            if(sensorStation.getPlant() != null){
+                Plant oldPlant = plantService.loadPlant(sensorStation.getPlant().getId());
+                oldPlant.setSensorStation(null);
+                plantService.savePlant(oldPlant);
+                Plant newPlant = new Plant();
+                newPlant.setPlantName(selectedPlantName);
+                newPlant.setSensorStation(sensorStation);
+                sensorStation.setPlant(plantService.savePlant(newPlant));
+                doSaveSensorStation();
+            }else{
+                Plant newPlant = new Plant();
+                newPlant.setPlantName(selectedPlantName);
+                newPlant.setSensorStation(sensorStation);
+                sensorStation.setPlant(plantService.savePlant(newPlant));
+                doSaveSensorStation();
+            }
         }
         sensorStation = this.sensorService.saveSensorStation(sensorStation);
     }
