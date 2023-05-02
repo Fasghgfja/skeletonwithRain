@@ -57,6 +57,7 @@ public interface PlantRepository extends AbstractRepository<Plant, Long> {
 
     @Query("SELECT u FROM Userx u WHERE :role MEMBER OF u.roles")
     List<Userx> findByRole(@Param("role") UserRole role);
+
 }
 
 

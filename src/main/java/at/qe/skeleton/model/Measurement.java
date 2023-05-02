@@ -26,6 +26,10 @@ public class Measurement implements Serializable {
     @JoinColumn(name = "plant_id", nullable = true)
     private Plant plant;
 
+
+
+
+
     //TODO: JDBC is on crack and if this is called value its seen as a primary key and the table will not be created O_o, find a workaround
     private String value_s;
     private String unit;

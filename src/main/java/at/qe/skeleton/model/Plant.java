@@ -36,13 +36,14 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
     @Column(length = 100)
     private String plantName;
 
-    @ManyToMany(mappedBy = "followedPlants", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "followedPlants", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private Set<Userx> followers = new HashSet<>();
 
-    @ManyToMany(mappedBy = "plantsUnderCare", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "plantsUnderCare", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private Set<Userx> gardeners = new HashSet<>();
 
-
+    @OneToOne(cascade = CascadeType.ALL)
+    private SensorStation sensorStation;
 
 
     @Override
@@ -66,25 +67,17 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
         return this.plantID.compareTo(o.getPlantID());
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Plant plant)) return false;
 
-        Plant plant = (Plant) o;
-
-        if (!Objects.equals(plantID, plant.plantID)) return false;
-        if (!Objects.equals(description, plant.description)) return false;
-        return Objects.equals(plantName, plant.plantName);
+        return getPlantID().equals(plant.getPlantID());
     }
 
     @Override
     public int hashCode() {
-        int result = plantID != null ? plantID.hashCode() : 0;
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (plantName != null ? plantName.hashCode() : 0);
-        return result;
+        return getPlantID().hashCode();
     }
 }
 

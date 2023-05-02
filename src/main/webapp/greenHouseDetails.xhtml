@@ -354,6 +354,7 @@
                     <div class="card tasks">
                         <div class="card-header">
                             <h5>Edit Sensor Station</h5>
+                            If the alarm is != fixed then a switch will appear to set it to fixed
                         </div>
 
                         <!-- ................ EDIT FIELDS PANEL............-->
@@ -361,17 +362,46 @@
                             <h:form id="EditThisSensorStation">
 
                                 <p:outputPanel id="sensorStationData" rendered="#{not empty sensorStationDetailController.sensorStation}">
-                                    <h:panelGrid columns="1">
+                                    <h:panelGrid columns="2">
 
-                                        <p:outputLabel for="sensorStationId" value="Sensor-station name:"/>
+                                        <!-- ................ FIELDS ONLY TO SHOW ACTUAL VALUES............-->
+                                        <p:outputLabel for="sensorStationId" value="Name:"/>
                                         <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
-
-                                        <p:outputLabel for="sensorStationalarmSwitch" value="Sensor-station Switch"/>
+                                        <p:outputLabel for="sensorStationalarmSwitch" value="Switch"/>
                                         <p:inputText id="sensorStationalarmSwitch" value="#{sensorStationDetailController.sensorStation.alarmSwitch}" disabled="true" />
-
-
-                                        <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/>
+                                        <p:outputLabel for="sensorStationShowPlant" value="Plant"/>
+                                        <p:inputText id="sensorStationShowPlant" value="#{sensorStationDetailController.sensorStation.plant.plantName}" disabled="true" />
+                                        <!-- ................SHOW ACCESS POINT............-->
+                                        <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/> <!-- ....TODO:implement Pairing button like change plant......-->
                                         <p:selectOneMenu id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
+                                                         scrollHeight="250" updateLabel="true" disabled="true">
+                                            <f:selectItems value="#{accessPointController.accessPoints}"/>
+                                            <f:facet name="footer">
+                                                <p:divider styleClass="mt-0" />
+                                                <h:outputText value="3 options" style="font-weight:bold;"/>
+                                            </f:facet>
+                                        </p:selectOneMenu>
+                                        <!-- ................ ............................................-->
+                                        <!-- ................REAL IMPUT FIELDS............................-->
+                                        <p:outputLabel for="sensorStationlocation" value="Location:"/>
+                                        <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
+
+                                        <p:outputLabel for="sensorStationPlant" value="New Plant:"/>
+                                        <p:selectOneMenu id="sensorStationPlant" filter="true" emptyLabel="Plant"
+                                                         scrollHeight="250" updateLabel="true" value="#{sensorStationDetailController.selectedPlantName}">
+                                            <f:selectItems value="#{plantController.plants}" />
+                                            <f:facet name="footer">
+                                                <p:divider styleClass="mt-0" />
+                                                <h:outputText value="3 options" style="font-weight:bold;"/>
+                                            </f:facet>
+                                        </p:selectOneMenu>
+                                        <!-- ...TOGGLESWITCH FOR THE ALARM....-->
+                                        <p:outputLabel rendered="#{sensorStationDetailController.fixed == false}" for="sensorStationswitchEdit" value="Alarm Switch to Fixed(if not):" />
+                                        <p:toggleSwitch id ="sensorStationswitchEdit" rendered="#{sensorStationDetailController.fixed == false}" value="#{sensorStationDetailController.fixed}"/>
+
+                                        <!-- ................SHOW ACCESS POINT............-->
+                                        <p:outputLabel for="pairNewAccessPoint" value="New Access Point:"/> <!-- ....TODO:implement Pairing button like change plant......-->
+                                        <p:selectOneMenu id="pairNewAccessPoint" filter="true" emptyLabel="Access Point ID"
                                                          scrollHeight="250" updateLabel="true" >
                                             <f:selectItems value="#{accessPointController.accessPoints}"/>
                                             <f:facet name="footer">
@@ -380,22 +410,42 @@
                                             </f:facet>
                                         </p:selectOneMenu>
 
-
-                                        <p:outputLabel for="sensorStationlocation" value="Sensor-station location:"/>
-                                        <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
-
-
-
-                                        <p:outputLabel for="sensorStationswitchEdit" value="Alarm Switch to Fixed(if not):" />
-                                        <p:toggleSwitch id ="sensorStationswitchEdit" rendered="#{sensorStationDetailController.fixed == false}" value="#{sensorStationDetailController.fixed}"/>
-
                                     </h:panelGrid>
-                                    <h:panelGrid columns="3">
-                                        <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}"
-                                                         update="EditThisSensorStation:sensorStationData"/>
 
-                                    </h:panelGrid>
+                                    <!-- ....................EDIT THIS SENSOR STATION BUTTONS........... .............. -->
+                                    <h:panelGrid columns="2" >
+
+                                        <!-- ....................SAVE OTHER CHANGES BUTTON ........... .............. -->
+                                        <p:commandButton value="Save Changes" action="#{sensorStationDetailController.doSaveSensorStation()}"
+                                                         update="EditThisSensorStation:sensorStationData" style="margin-right: 200px;" >  <!-- .TODO:replace this absolute value -->
+                                        <p:confirm header="Confirmation"
+                                                   message="Save Changes to Sensor Station ? This operation will not change the plant displayed"
+                                                   icon="pi pi-exclamation-triangle"/>
+                                        </p:commandButton>
+
+                                        <!-- ....................CHANGE PLANT BUTTON ........... .............. -->
+                                        <p:commandButton styleClass="ui-button-danger"
+                                                         action="#{sensorStationDetailController.doChangeThePlantAndSave()}" icon="pi pi-user-minus"
+                                                         value="Change Plant"
+                                                         update="EditThisSensorStation:sensorStationData" >
+                                            <p:confirm header="Confirmation"
+                                                       message="Are you sure that you want to change the Plant ? You cannot undo this operation. A new Plant with the selected type/name will be created."
+                                                       icon="pi pi-exclamation-triangle"/>
+                                        </p:commandButton>
+                                </h:panelGrid>
+
+
                                 </p:outputPanel>
+
+
+                                <!-- .......::::::::::::::::::.............CONFIRMATION DIALOG........... ....::::::::::::.......... -->
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
+                                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+                                </p:confirmDialog>
+
+
+
                             </h:form>
 
                         </div>

@@ -8,6 +8,7 @@ import java.util.*;
 
 import at.qe.skeleton.repositories.AbstractRepository;
 import at.qe.skeleton.services.ImageService;
+import at.qe.skeleton.services.PlantService;
 import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import jakarta.faces.context.FacesContext;
@@ -39,6 +40,9 @@ public class SensorStationDetailController implements Serializable {
     private SensorStationService sensorService;
     @Autowired
     private MeasurementService measurementService;
+
+    @Autowired
+    private PlantService plantService;
 
     @Autowired
     private transient SessionInfoBean sessionInfoBean;
@@ -76,7 +80,19 @@ public class SensorStationDetailController implements Serializable {
     private String description = "";
     private Plant plant;
 
+    private String selectedPlantName;
+
+    public String getSelectedPlantName() {
+        return selectedPlantName;
+    }
+
+    public void setSelectedPlantName(String selectedPlantName) {
+        this.selectedPlantName = selectedPlantName;
+    }
+
+
     boolean fixed = false;
+
 
 
     public String getMeasurementStatus(String measurementId,String type) {
@@ -206,6 +222,18 @@ public class SensorStationDetailController implements Serializable {
         if (fixed || sensorStation.getAlarmSwitch().equals("true")) sensorStation.setAlarmSwitch("fixed");
         sensorStation = this.sensorService.saveSensorStation(sensorStation);
     }
+    public void doChangeThePlantAndSave() {
+        if (selectedPlantName != null){
+            Plant newPlant = new Plant();
+            newPlant.setPlantName(selectedPlantName);
+            sensorStation.setPlant(plantService.savePlant(newPlant));
+            doSaveSensorStation();
+        }
+        sensorStation = this.sensorService.saveSensorStation(sensorStation);
+    }
+
+
+
 
     /**
      * Action to delete the currently cached Sensor Station.
