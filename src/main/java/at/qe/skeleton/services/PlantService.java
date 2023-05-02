@@ -105,6 +105,13 @@ public class PlantService {
     public Collection<Plant> getOnlyPlantsNotYetFollowed(Userx user) {
         return plantRepository.findPlantsInPlantsCatalogueNotYetFollowed(user.getUsername());
     }
+
+    /**
+     * The method is Only used in the scrolldown menu for plant selection.
+     */
+    public Collection<String> getAllPlantsUniqueNames() {
+        return plantRepository.findAllPlantsUniqueNames();
+    }
 }
 
 

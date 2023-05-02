@@ -27,7 +27,7 @@
             <div class="col-12">
 
                 <div class="card">
-                    <h5>Sensor Stations</h5>
+                    <h5>Assigned Greenhouses</h5>
                     <p:dataTable id="sensorStationTable" var="sensorStation" value="#{sensorStationListController.sensorStations}"
                                  scrollable="true" scrollHeight="550"
                                  paginatorPosition="bottom" rowKey="#{sensorStation.id}">
@@ -97,16 +97,6 @@
                                 <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
                             </p:commandButton>
 
-                            <!-- ....................DELETE SENSOR STATION BUTTON ........... .............. -->
-                            <p:commandButton styleClass="ui-button-danger"
-                                             action="#{sensorStationDetailController.doDeleteSensorStation()}" icon="pi pi-user-minus"
-                                             title="Delete"
-                                             update=":userForm:sensorStationTable">
-                                <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
-                                <p:confirm header="Confirmation"
-                                           message="Are you sure that you want to delete the sensor station '#{sensorStation.sensorStationName}'? You cannot undo this operation."
-                                           icon="pi pi-exclamation-triangle"/>
-                            </p:commandButton>
 
                         </p:column>
 
@@ -156,10 +146,9 @@
 
 
             <!-- ...................................Sensor station Edit dialog.................................... -->
-            <p:dialog header="Edit Sensor Staion" id="userEditDialog" widgetVar="userEditDialog" modal="true"
+            <p:dialog header="Edit Sensor Station" id="userEditDialog" widgetVar="userEditDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="userData" rendered="#{not empty sensorStationDetailController.sensorStation}">
-                    <h5 class="mt-0">Sensor Station Data </h5>
                     <h:panelGrid columns="1">
 
                         <p:outputLabel for="sensorStationId" value="Sensor-station name:"/>
@@ -204,61 +193,13 @@
 
 
 
-
-
-
-
-        <!-- ...................................Sensor station CREATE dialog.................................... -->
-        <h:form id="createDialog">
-
-            <!-- ....................Sensor station CREATE button..................... -->
-            <p:commandButton value="Create new Sensor Station" update=":createDialog:createSSDialog" oncomplete="PF('createSSDialog').show()"
-                             icon="pi pi-user-plus" title="New User" class="btn btn-primary">
-                <p:resetInput target=":createDialog:createSSDialog"/>
-            </p:commandButton>
-
-            <p:dialog header="Create New Sensor Station" id="createSSDialog" widgetVar="createSSDialog" modal="true"
-                      showEffect="fade" hideEffect="fade" resizable="false">
-                <p:ajax event="close" update="createSSDialog"/>
-
-                <p:outputPanel id="createSS">
-                    <h:panelGrid columns="2">
-
-
-                        <p:outputLabel for="usernameCreation" value="Sensor Station Name:"/>
-                        <p:inputText id="usernameCreation"
-                                     placeholder="Required field" value="#{createSensorStationBean.sensorStationName}" required="true"/>
-
-                        <p:outputLabel for="description" value="Description:"/>
-                        <p:inputText id="description"
-                                     placeholder="description" value="#{createSensorStationBean.description}" required="false"/>
-
-                        <p:outputLabel for="location" value="Location:"/>
-                        <p:inputText id="location" value="#{createSensorStationBean.location}"/>
-
-
-
-                        <p:commandButton value="Create"
-                                         action="#{createSensorStationBean.doCreateNewCreateSensorStation()}"
-                                         update=":userForm:sensorStationTable"
-                                         oncomplete="PF('createSSDialog').hide()"/>
-                        <p:commandButton value="Cancel" onclick="PF('createSSDialog').hide()"/>
-
-
-                    </h:panelGrid>
-
-                </p:outputPanel>
-            </p:dialog>
-        </h:form>
-
-
         <!-- ...................................PLANT CREATE dialog.................................... -->
         <h:form id="plantCreateDialog">
 
             <!-- ....................PLANT CREATE button..................... -->
             <p:commandButton value="Create new Plant" update=":plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
                              icon="pi pi-user-plus" title="New User" class="btn btn-primary">
-                <p:resetInput target=":createDialog:createPlantDialog"/>
+                <p:resetInput target="plantCreateDialog"/>
             </p:commandButton>
 
             <p:dialog header="Create New Plant" id="createPlantDialog" widgetVar="createPlantDialog" modal="true"

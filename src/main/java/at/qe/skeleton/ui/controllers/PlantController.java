@@ -41,6 +41,14 @@ public class PlantController implements Serializable{
         return plantService.getAllPlants();
     }
 
+
+    /**
+     * The method is Only used in the scrolldown menu for plant selection.
+     */
+    public Collection<String> getPlantsUniqueNames() {
+        return plantService.getAllPlantsUniqueNames();
+    }
+
     /**
      * Returns how many plants are registered in the system.
      */

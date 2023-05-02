@@ -96,12 +96,24 @@
                         </p:commandLink>
                     </div><!-- ...............................LIGHT INTENSITY BOX END.................................. -->
 
-                    <h:form id="myform"> <!-- .......::::::::::::::::...PLANT GALLERY DEBUG FORM if u remove it you fix it....:::::::::::::::.......... -->
-                        <h:form id="approvedImagesGallery">
-                        </h:form>
-                    </h:form> <!-- .......::::::::::::::::...PLANT GALLERY FORM END....:::::::::::::::.......... -->
+                </p:toolbarGroup>
 
-
+                <p:toolbarGroup>
+                        <h:form id="myform"> <!-- .......::::::::::::::::...PLANT GALLERY DEBUG FORM if u remove it you fix it....:::::::::::::::.......... -->
+                            <h:form id="approvedImagesGallery">
+                                <div class="card overview-box">
+                                    <p:graphicImage name="images/dashboard/effect-messages.svg"/>
+                                    <span class="overview-icon">
+                            <p:graphicImage name="images/dashboard/icon-messages.png"/>
+                        </span>
+                                    <div class="overview">
+                                        <span class="overview-title">Contained Plant</span>
+                                        <h3>#{sensorStationDetailController.plantName}</h3>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </h:form> <!-- .......::::::::::::::::...PLANT GALLERY FORM END....:::::::::::::::.......... -->
                 </p:toolbarGroup>
 
                 <p:toolbarGroup>
@@ -301,11 +313,7 @@
                                       filterBy="#{measurement.sensorStation.sensorStationName}">
                                 <h:outputText value="#{measurement.sensorStation.sensorStationName}"/>
                             </p:column>
-                            <p:column headerText="Plant" sortBy="#{measurement.plant.plantName}"
-                                      filterBy="#{measurement.plant.plantName}">
-                                <h:outputText style="vertical-align: middle; margin-left: .5rem"
-                                              value="#{sensorStationDetailController.plantName}"/>
-                            </p:column>
+
                             <p:column headerText="Measurement" sortBy="#{measurement.value_s}"
                                       filterBy="#{measurement.value_s}">
                                 <h:outputText style="vertical-align: middle; margin-left: .5rem"
@@ -389,7 +397,7 @@
                                         <p:outputLabel for="sensorStationPlant" value="New Plant:"/>
                                         <p:selectOneMenu id="sensorStationPlant" filter="true" emptyLabel="Plant"
                                                          scrollHeight="250" updateLabel="true" value="#{sensorStationDetailController.selectedPlantName}">
-                                            <f:selectItems value="#{plantController.plants}" />
+                                            <f:selectItems value="#{plantController.plantsUniqueNames}" />
                                             <f:facet name="footer">
                                                 <p:divider styleClass="mt-0" />
                                                 <h:outputText value="3 options" style="font-weight:bold;"/>
@@ -427,7 +435,7 @@
                                         <p:commandButton styleClass="ui-button-danger"
                                                          action="#{sensorStationDetailController.doChangeThePlantAndSave()}" icon="pi pi-user-minus"
                                                          value="Change Plant"
-                                                         update="EditThisSensorStation:sensorStationData" >
+                                                         update="EditThisSensorStation:sensorStationData " >
                                             <p:confirm header="Confirmation"
                                                        message="Are you sure that you want to change the Plant ? You cannot undo this operation. A new Plant with the selected type/name will be created."
                                                        icon="pi pi-exclamation-triangle"/>
