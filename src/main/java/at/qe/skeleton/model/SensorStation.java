@@ -7,7 +7,8 @@ import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Entity representing Sensor stations.
@@ -34,6 +35,9 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     @OneToOne(fetch = FetchType.LAZY)
     private Plant plant;
 
+
+    @ManyToMany(mappedBy = "sensorStationsUnderCare" , cascade = CascadeType.ALL)//TODO:LAZY OR NOT
+    private Set<Userx> gardener = new HashSet<>();
 
 
     public String getSensorStationLocation() {

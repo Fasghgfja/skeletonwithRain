@@ -10,6 +10,7 @@ import at.qe.skeleton.repositories.AbstractRepository;
 import at.qe.skeleton.services.ImageService;
 import at.qe.skeleton.services.PlantService;
 import at.qe.skeleton.services.SensorStationService;
+import at.qe.skeleton.services.UserService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import jakarta.faces.context.FacesContext;
 import lombok.Getter;
@@ -90,12 +91,34 @@ public class SensorStationDetailController implements Serializable {
         this.selectedPlantName = selectedPlantName;
     }
 
-
     boolean fixed = false;
 
 
 
-    public String getMeasurementStatus(String measurementId,String type) {
+
+    //TODO: simplify this to user javax unselect event to just remove the gardenrs with only one checkbox menu
+    List<String> gardeners;
+    List<Userx> gardenersToRemove;
+
+    public void doAddGardenerToSensorStation(String user) {//TODO:use this
+        this.sensorService.addGardenerToSensorStation(sensorStation,user);
+    }
+    public void doAddGardenersToSensorStation() {//TODO:use this
+        gardeners.forEach(this::doAddGardenerToSensorStation);
+    }
+    public void doRemoveGardenerFromSensorStation(Userx user) {//TODO:use this
+        this.sensorService.removeGardenerFromSensorStation(sensorStation,user);
+    }
+    public void doRemoveGardenersFromSensorStation() {//TODO:use this
+        gardenersToRemove.forEach(this::doRemoveGardenerFromSensorStation);
+    }
+
+
+
+
+
+
+        public String getMeasurementStatus(String measurementId,String type) {//TODO:marco look here : D
         Measurement thisMeasurement = measurementService.findMeasurementById(Long.parseLong(measurementId));
         if (thisMeasurement == null) {return "OK";}
         if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
@@ -219,7 +242,11 @@ public class SensorStationDetailController implements Serializable {
      * Action to save the currently cached Sensor Station.
      */
     public void doSaveSensorStation() {
+        System.out.println("im sensor detail controller im saving sensor station");
         if (fixed || sensorStation.getAlarmSwitch().equals("true")) sensorStation.setAlarmSwitch("fixed");
+        if (gardeners != null) {this.doAddGardenersToSensorStation();}
+        if (gardenersToRemove != null) {this.doRemoveGardenersFromSensorStation();}
+
         sensorStation = this.sensorService.saveSensorStation(sensorStation);
     }
 

@@ -45,14 +45,28 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private Set<Plant> followedPlants = new HashSet<>();
 
 
-
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "gardener_plant",
+            name = "gardener_sensorStation",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username"),
-            inverseJoinColumns = @JoinColumn(name = "plant_id", referencedColumnName = "plantID")
+            inverseJoinColumns = @JoinColumn(name = "sensorStationName", referencedColumnName = "sensorStationName")
     )
-    private Set<Plant> plantsUnderCare = new HashSet<>();
+    private Set<SensorStation> sensorStationsUnderCare = new HashSet<>();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -36,10 +36,8 @@ public class Plant implements Persistable<Long>, Serializable, Comparable<Plant>
     @ManyToMany(mappedBy = "followedPlants", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private Set<Userx> followers = new HashSet<>();
 
-    @ManyToMany(mappedBy = "plantsUnderCare", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
-    private Set<Userx> gardeners = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY )
     private SensorStation sensorStation;
 
 

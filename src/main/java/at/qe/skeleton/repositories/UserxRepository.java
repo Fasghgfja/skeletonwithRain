@@ -1,5 +1,6 @@
 package at.qe.skeleton.repositories;
 
+import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.model.UserRole;
 import java.util.List;
@@ -44,7 +45,7 @@ public interface UserxRepository extends AbstractRepository<Userx, String> {
 
     Userx findFirstById(Long id);
 
-
+    List<Userx> findUserxBySensorStationsUnderCareIsContaining(SensorStation sensorStation);
 
     /**
      * The method Retrieves a List of User entities searching by a string containing both firstname and lastname separated
@@ -67,6 +68,9 @@ public interface UserxRepository extends AbstractRepository<Userx, String> {
      */
     @Query("SELECT u FROM Userx u WHERE :role MEMBER OF u.roles")
     List<Userx> findByRole(@Param("role") UserRole role);
+
+    @Query("SELECT u.username FROM Userx u WHERE :role MEMBER OF u.roles")
+    List<String> findNamesByRole(@Param("role") UserRole role);
 
     Integer count();
 

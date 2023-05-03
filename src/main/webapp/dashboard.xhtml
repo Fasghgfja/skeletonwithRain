@@ -197,7 +197,7 @@
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="card chart">
                         <div class="card-header">
-                            <h5>Selected Plant Details</h5>
+                            <h5>Selected Greenhouse Details</h5>
                         </div>
                         <div class="card">
                             <p:barChart id="myBarChart2" model="#{graphController.barModel}"/>
@@ -209,11 +209,11 @@
                 <!-- ......supported charts are .lineModel and .cartesianLinearModel...... -->
 
 
-                <!-- ..........GREENHOUSES PREVIEW........... -->
+                <!-- ..........GARDENER VIEW........... -->
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="col-12">
                         <div class="card">
-                            <h5>Assigned Plants</h5>
+                            <h5>Assigned Sensor Stations</h5>
                             <p:dataTable id="ordersTable2" var="sensorStation"
                                          value="#{sensorStationListController.assignedSensorStations}" selectionMode="single"
                                          reflow="true" paginatorPosition="bottom"

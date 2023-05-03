@@ -154,7 +154,6 @@ public class UserDetailController implements Serializable {
 
 
 
-
     public void setSelectedRolesEdit(List<String> selectedRolesEdit) {
         this.selectedRolesEdit = selectedRolesEdit;
     }

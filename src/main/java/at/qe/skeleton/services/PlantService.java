@@ -71,6 +71,7 @@ public class PlantService {
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deletePlant(Plant plant) {
+        System.out.println("im plant service : im deleting plant");
         plantRepository.delete(plant);
     }
 

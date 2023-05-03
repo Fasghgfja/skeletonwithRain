@@ -38,23 +38,20 @@
                             <p:rowToggler/>
                         </p:column>
 
-                        <p:column headerText="Id" sortBy="#{sensorStation.id}">
+                        <p:column style="width:6rem" headerText="Id" sortBy="#{sensorStation.id}">
                             <h:outputText value="#{sensorStation.id}"/>
                         </p:column>
 
-                        <p:column >
-                            <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
-                        </p:column>
 
-                        <p:column headerText="Plant" sortBy="#{sensorStation.plant.plantName}">
+                        <p:column style="width:20rem" headerText="Plant" sortBy="#{sensorStation.plant.plantName}">
                             <h:outputText value="#{sensorStation.plant}"/>
                         </p:column>
 
-                        <p:column headerText="Planted" sortBy="#{sensorStation.createDate}">
-                            <h:outputText value="#{product.category}"/>
+                        <p:column headerText="Gardeners" sortBy="#{sensorStation.createDate}">
+                            <h:outputText value="#{sensorStation.gardener}"/>
                         </p:column>
 
-                        <p:column headerText="Status">
+                        <p:column style="width:10rem" headerText="Status">
                             <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_PRESSURE')}"
                                style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_PRESSURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
                                title="Air Pressure"></i>
@@ -75,11 +72,11 @@
                                title="Humidity"></i>
                         </p:column>
 
-                        <p:column headerText="Location" sortBy="#{sensorStation.location}">
+                        <p:column style="width:10rem" headerText="Location" sortBy="#{sensorStation.location}">
                             <h:outputText value="#{sensorStation.location}"/>
                         </p:column>
 
-                        <p:column headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}">
+                        <p:column style="width:10rem" headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}">
                             <h:outputText value="#{sensorStation.alarmSwitch}"/>
                         </p:column>
 
@@ -179,13 +176,34 @@
                         <p:outputLabel for="sensorStationlocation" value="Sensor-station location:"/>
                         <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
 
-
-
                         <p:outputLabel for="sensorStationswitchEdit" value="Alarm Switch:"/>
                         <p:selectOneMenu id="sensorStationswitchEdit" value="#{sensorStationDetailController.sensorStation.alarmSwitch}"  >
                             <f:selectItem itemLabel="Fixed" itemValue="fixed"/>
                             <f:selectItem itemLabel="Off" itemValue="Off"/>
                         </p:selectOneMenu>
+
+
+
+                        <!-- .......TODO:trying to insert the gardener..ADD ajax event on item unselect to first menu.......... -->
+                        <h5>ADD Gardeners NEW!</h5>
+                        <p:selectCheckboxMenu id="AddGardenre" value="#{sensorStationDetailController.gardeners}" label="Gardeners" style="min-width: 15rem"
+                                              multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"
+                                              emptyLabel="Select Gardener..." updateLabel="true">
+                            <f:selectItems value="#{userListController.gardenerNames}"/>
+                        </p:selectCheckboxMenu>
+
+                        <h5>REMOVE Gardeners NEW!</h5>
+                        <p:selectCheckboxMenu id="RemoveGardener" value="#{sensorStationDetailController.gardenersToRemove}" label="Gardeners" style="min-width: 15rem"
+                                              multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"
+                                              emptyLabel="Select Gardener..." updateLabel="true">
+                            <f:selectItems value="#{sensorStationDetailController.sensorStation.gardener}"/>
+                        </p:selectCheckboxMenu>
+
+
+
+
+
+
 
                     </h:panelGrid>
                     <h:panelGrid columns="3">

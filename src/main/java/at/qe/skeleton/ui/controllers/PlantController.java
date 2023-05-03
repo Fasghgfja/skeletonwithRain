@@ -85,6 +85,7 @@ public class PlantController implements Serializable{
     //TODO: implement stronger error handling
     public void doDeletePlant() {
         if (plant.getSensorStation() == null) {
+            System.out.println("No sensor station assigned im deleting the plant");
             this.plantService.deletePlant(plant);
             plant = null;
         }
