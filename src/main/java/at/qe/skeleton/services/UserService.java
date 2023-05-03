@@ -127,7 +127,6 @@ public class UserService {
         if(user == null || plant == null || plant.getFollowers().contains(user)) {return;}
         user = userRepository.findFirstByUsername(user.getUsername());
         user.getFollowedPlants().add(plant);
-        plant.getFollowers().add(user);
         userRepository.save(user);
     }
 

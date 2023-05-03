@@ -3,6 +3,7 @@ package at.qe.skeleton.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.springframework.data.domain.Persistable;
 import java.io.Serial;
 import java.io.Serializable;
@@ -33,11 +34,17 @@ public class Plant implements Persistable<Long>, Serializable, Comparable<Plant>
     @Column(length = 100)
     private String plantName;
 
-    @ManyToMany(mappedBy = "followedPlants", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_plant",
+            joinColumns = @JoinColumn(name = "plant_id", referencedColumnName = "plantID"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username")
+    )
     private Set<Userx> followers = new HashSet<>();
 
 
-    @OneToOne(fetch = FetchType.LAZY )
+    @OneToOne
     private SensorStation sensorStation;
 
 
