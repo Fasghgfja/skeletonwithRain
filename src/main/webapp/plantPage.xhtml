@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:po="http://primefaces.org/rain"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/WEB-INF/templates/main.xhtml">
+
+    <ui:define name="title">Dashboard</ui:define>
+    <ui:define name="head">
+        <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css" />
+    </ui:define>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{plantController.init}"/>
+    </f:metadata>
+    <ui:define name="content">
+        <h:form>
+        <h:outputText style="display: inline-block; margin-right: 1rem;font-size: 24px; font-weight: bold;" value="#{plantController.plant.plantName}" />
+
+        <p:commandButton icon="pi pi-plus"
+                         title="Follow Plant"
+                         style="display: inline-block; "
+                         rendered="#{plantController.getIsPlantAlreadyFollowed(plantController.plant)}">
+        <p:ajax event="click"
+                listener="#{userDetailController.doAddPlantToFollowedPlants(plantController.plant)}"
+                update="@form"/>
+        </p:commandButton>
+        </h:form>
+        <div class="card" style="margin-top: 1rem;">
+            <h:outputText value="#{plantController.plant.description}"/>
+        </div>
+
+
+        <div id="layout" class="layout-dashboard" style="column-count: 2">
+
+            <div >
+                <div class="card" style="max-width: 100%;">
+                    <h5>Gallery</h5>
+                    <div class="flex justify-content-center">
+                        <p:galleria id="awaitingApproval" showItemNavigators="true" value="#{galleryController.doGetApprovedPlantImages(plantController.plant.plantID)}"
+                                    var="image" circular="true" responsiveOptions="#{galleryController.responsiveOptions3}"
+                                    showCaption="true" style="width: 100%;">
+                            <p:graphicImage value="#{galleryController.photoAsStreamedContent}" alt="#{galleryController.photoAsStreamedContent}" style="width: 100%; display: block;">
+                                <f:param name="id" value="#{image.id}" />
+                            </p:graphicImage>
+                        </p:galleria>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <h5>Latest Measurements</h5>
+                    <p:dataTable  var="measurement" value="#{plantController.latestMeasurements}" reflow="true" rowKey="#{measurement.id}">
+                        <p:column headerText="Type" sortBy="#{measurement.type}">
+                            <h:outputText value="#{measurement.type}" />
+                        </p:column>
+
+                        <p:column headerText="Value" sortBy="#{measurement.value_s}">
+                            <h:outputText value="#{measurement.value_s}" />
+                        </p:column>
+
+                        <p:column headerText="Unit" sortBy="#{measurement.unit}">
+                            <h:outputText value="#{measurement.unit}">
+                                <f:convertNumber currencySymbol="$" type="currency" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Status">
+                            <h:form rendered="#{not empty measurement.id}">
+                                <i class="#{plantController.getlastMeasurementStatusIcon(measurement.type)}"
+                                   style="display: flex; justify-content: center; align-items: center; color:#{plantController.getMeasurementStatus(measurement.id,measurement.type) == 'OK' ? 'green' : 'red'}"
+                                   title="#{measurement.type}"></i>
+                            </h:form>
+                        </p:column>
+
+                    </p:dataTable>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
