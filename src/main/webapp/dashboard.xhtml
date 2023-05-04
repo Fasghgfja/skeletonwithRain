@@ -338,16 +338,46 @@
                                         <p:ajax event="click" listener="#{userDetailController.doRemovePlantFromFollowedPlants(plant)}"/>
                                     </p:commandButton>
 
-                                    <p:commandButton value="Show Plant Gallery" icon="pi pi-external-link"
-                                                     onclick="PF('galleria1').show()"/>
+                                </p:column>
+
+                                <p:column>
 
 
+                                <p:button icon="pi pi-search"
+                                          title="Show Plant Page"
+                                          href="/plantPage.xhtml?id=#{plant.plantID} "/>
                                 </p:column>
 
 
                                 <!-- .........................................ROW EXPANSION.......................................................... -->
                                 <p:rowExpansion>
-                                 put it back
+                                    <div class="card">
+                                        <h5>Latest Measurements</h5>
+                                        <p:dataTable var="measurement" value="#{measurementService.getLatestPlantMeasurements(plant)}" reflow="true" rowKey="#{measurement.id}">
+                                            <p:column headerText="Type" sortBy="#{measurement.type}">
+                                                <h:outputText value="#{measurement.type}" />
+                                            </p:column>
+
+                                            <p:column headerText="Value" sortBy="#{measurement.value_s}">
+                                                <h:outputText value="#{measurement.value_s}" />
+                                            </p:column>
+
+                                            <p:column headerText="Unit" sortBy="#{measurement.unit}">
+                                                <h:outputText value="#{measurement.unit}">
+                                                    <f:convertNumber currencySymbol="$" type="currency" />
+                                                </h:outputText>
+                                            </p:column>
+
+                                            <p:column  headerText="Status" >
+                                                <h:form rendered="#{not empty measurement.id}">
+                                                <i class="#{plantController.getlastMeasurementStatusIcon(measurement.type)}"
+                                                   style="display: flex; justify-content: center; align-items: center; color:#{plantController.getMeasurementStatus(measurement.id,measurement.type) == 'OK' ? 'green' : 'red'}"
+                                                   title="#{measurement.type}"></i>
+                                                </h:form>
+                                            </p:column>
+
+                                        </p:dataTable>
+                                    </div>
                                 </p:rowExpansion>
 
                             </p:dataTable>
