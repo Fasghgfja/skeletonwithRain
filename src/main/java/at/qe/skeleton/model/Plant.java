@@ -35,7 +35,7 @@ public class Plant implements Persistable<Long>, Serializable, Comparable<Plant>
     private String plantName;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER) //TODO: EAGER
     @JoinTable(
             name = "user_plant",
             joinColumns = @JoinColumn(name = "plant_id", referencedColumnName = "plantID"),
