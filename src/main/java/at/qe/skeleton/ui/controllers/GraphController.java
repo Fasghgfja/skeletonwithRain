@@ -111,7 +111,7 @@ public class GraphController implements Serializable {
             if (measurement == null) {
                 values.add(0);
             } else {
-                values.add(Integer.parseInt(measurement.getValue_s()));
+                values.add(Double.parseDouble(measurement.getValue_s()));
             }
         });
 
@@ -204,7 +204,7 @@ public class GraphController implements Serializable {
 
         measurements.forEach(measurement -> {
             if (measurement != null) {
-                values.add(Integer.parseInt(measurement.getValue_s()));
+                values.add(Double.parseDouble(measurement.getValue_s()));
                 labels.add(measurement.getTimestamp().toString());
             }
         });

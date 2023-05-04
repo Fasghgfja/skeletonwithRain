@@ -7,7 +7,10 @@ import java.io.Serializable;
 import java.util.*;
 
 import at.qe.skeleton.repositories.AbstractRepository;
+import at.qe.skeleton.services.ImageService;
+import at.qe.skeleton.services.PlantService;
 import at.qe.skeleton.services.SensorStationService;
+import at.qe.skeleton.services.UserService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import jakarta.faces.context.FacesContext;
 import lombok.Getter;
@@ -40,6 +43,9 @@ public class SensorStationDetailController implements Serializable {
     private MeasurementService measurementService;
 
     @Autowired
+    private PlantService plantService;
+
+    @Autowired
     private transient SessionInfoBean sessionInfoBean;
 
     @Autowired
@@ -48,6 +54,7 @@ public class SensorStationDetailController implements Serializable {
 //todo:pray this isnt too much
     @Autowired
     private transient GalleryController galleryController;
+
 
 
     /**
@@ -74,10 +81,44 @@ public class SensorStationDetailController implements Serializable {
     private String description = "";
     private Plant plant;
 
+    private String selectedPlantName;
+
+    public String getSelectedPlantName() {
+        return selectedPlantName;
+    }
+
+    public void setSelectedPlantName(String selectedPlantName) {
+        this.selectedPlantName = selectedPlantName;
+    }
+
+    boolean fixed = false;
 
 
 
-    public String getMeasurementStatus(String measurementId,String type) {
+
+    //TODO: simplify this to user javax unselect event to just remove the gardenrs with only one checkbox menu
+    List<String> gardeners;
+    List<Userx> gardenersToRemove;
+
+    public void doAddGardenerToSensorStation(String user) {//TODO:use this
+        this.sensorService.addGardenerToSensorStation(sensorStation,user);
+    }
+    public void doAddGardenersToSensorStation() {//TODO:use this
+        gardeners.forEach(this::doAddGardenerToSensorStation);
+    }
+    public void doRemoveGardenerFromSensorStation(Userx user) {//TODO:use this
+        this.sensorService.removeGardenerFromSensorStation(sensorStation,user);
+    }
+    public void doRemoveGardenersFromSensorStation() {//TODO:use this
+        gardenersToRemove.forEach(this::doRemoveGardenerFromSensorStation);
+    }
+
+
+
+
+
+
+        public String getMeasurementStatus(String measurementId,String type) {//TODO:marco look here : D
         Measurement thisMeasurement = measurementService.findMeasurementById(Long.parseLong(measurementId));
         if (thisMeasurement == null) {return "OK";}
         if (checkThreshold(thisMeasurement,type) == 0){return "OK";} else {return "Wrong";}
@@ -113,25 +154,25 @@ public class SensorStationDetailController implements Serializable {
         boolean isThresholdExceeded;
         switch(type) {
             case "SOIL_MOISTURE":
-                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 95 || Long.parseLong(measurement.getValue_s()) < 10);
+                isThresholdExceeded = (Double.parseDouble(measurement.getValue_s()) > 95 || Double.parseDouble(measurement.getValue_s()) < 10);
                 return isThresholdExceeded ? 1 : 0;
             case "HUMIDITY":
-                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 80 || Long.parseLong(measurement.getValue_s()) < 20);
+                isThresholdExceeded = (Double.parseDouble(measurement.getValue_s()) > 80 || Double.parseDouble(measurement.getValue_s()) < 20);
                 return isThresholdExceeded ? 1 : 0;
             case "AIR_PRESSURE":
-                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 2 || Long.parseLong(measurement.getValue_s()) < 1);
+                isThresholdExceeded = (Double.parseDouble(measurement.getValue_s()) > 2 || Double.parseDouble(measurement.getValue_s()) < 1);
                 return isThresholdExceeded ? 1 : 0;
             case "TEMPERATURE":
-                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 35 || Long.parseLong(measurement.getValue_s()) < 10);
+                isThresholdExceeded = (Double.parseDouble(measurement.getValue_s()) > 35 || Double.parseDouble(measurement.getValue_s()) < 10);
                 return isThresholdExceeded ? 1 : 0;
             case "AIR_QUALITY":
-                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) < 50);
+                isThresholdExceeded = (Double.parseDouble(measurement.getValue_s()) < 50);
                 return isThresholdExceeded ? 1 : 0;
             case "LIGHT_INTENSITY":
-                isThresholdExceeded = (Long.parseLong(measurement.getValue_s()) > 1500 || Long.parseLong(measurement.getValue_s()) < 100);
+                isThresholdExceeded = (Double.parseDouble(measurement.getValue_s()) > 1500 || Double.parseDouble(measurement.getValue_s()) < 100);
                 return isThresholdExceeded ? 1 : 0;
             default:
-                return 111;
+                return 0;
         }
     }
 
@@ -201,8 +242,40 @@ public class SensorStationDetailController implements Serializable {
      * Action to save the currently cached Sensor Station.
      */
     public void doSaveSensorStation() {
+        System.out.println("im sensor detail controller im saving sensor station");
+        if (fixed || sensorStation.getAlarmSwitch().equals("true")) sensorStation.setAlarmSwitch("fixed");
+        if (gardeners != null) {this.doAddGardenersToSensorStation();}
+        if (gardenersToRemove != null) {this.doRemoveGardenersFromSensorStation();}
+
         sensorStation = this.sensorService.saveSensorStation(sensorStation);
     }
+
+
+    //TODO:Better error handling
+    public void doChangeThePlantAndSave() {
+        if (selectedPlantName != null){
+            if(sensorStation.getPlant() != null){
+                Plant oldPlant = plantService.loadPlant(sensorStation.getPlant().getId());
+                oldPlant.setSensorStation(null);
+                plantService.savePlant(oldPlant);
+                Plant newPlant = new Plant();
+                newPlant.setPlantName(selectedPlantName);
+                newPlant.setSensorStation(sensorStation);
+                sensorStation.setPlant(plantService.savePlant(newPlant));
+                doSaveSensorStation();
+            }else{
+                Plant newPlant = new Plant();
+                newPlant.setPlantName(selectedPlantName);
+                newPlant.setSensorStation(sensorStation);
+                sensorStation.setPlant(plantService.savePlant(newPlant));
+                doSaveSensorStation();
+            }
+        }
+        sensorStation = this.sensorService.saveSensorStation(sensorStation);
+    }
+
+
+
 
     /**
      * Action to delete the currently cached Sensor Station.
@@ -238,6 +311,8 @@ public class SensorStationDetailController implements Serializable {
 
 
 
+
+
     //TODO: simplify this monstruosity
 
     /**
@@ -259,6 +334,7 @@ public class SensorStationDetailController implements Serializable {
         } else {
             this.setSensorStationFromId(idString);
             this.sensorStation = this.getSensorStation();
+            if (this.getSensorStation().getAlarmSwitch().equalsIgnoreCase("fixed")){this.fixed = true;}
             if (this.getSensorStation().getPlant() == null) {
                 return;
             } // error handling XD

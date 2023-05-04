@@ -27,6 +27,10 @@
                             <h:outputText value="#{plant.plantName}"/>
                         </p:column>
 
+                        <p:column headerText="Location" sortBy="#{plant.sensorStation}">
+                            <h:outputText value="#{plant.sensorStation.location}"/>
+                        </p:column>
+
                         <p:column headerText="Planted Date" sortBy="#{plant.plantedDate}">
                             <h:outputText value="#{plant.plantedDate}"/>
                         </p:column>
@@ -44,74 +48,13 @@
                                 <p:ajax event="click" listener="#{userDetailController.doAddPlantToFollowedPlants(plant)}"/>
                             </p:commandButton>
 
-                            <!-- ....................DELETE PLANT BUTTON ...........ONLY ADMIN .............. -->
-                            <p:commandButton styleClass="ui-button-danger" rendered="#{sessionInfoBean.hasRole('ADMIN')}"
-                                             action="#{plantController.doDeletePlant()}" icon="pi pi-user-minus"
-                                             title="Delete"
-                                             update=":userForm:plantsTable">
-                                <f:setPropertyActionListener value="#{plant}" target="#{plantController.plant}"/>
-                                <p:confirm header="Confirmation"
-                                           message="Are you sure that you want to delete the sensor station '#{plant.plantName}'? You cannot undo this operation."
-                                           icon="pi pi-exclamation-triangle"/>
-                            </p:commandButton>
-
-
                         </p:column>
 
                     </p:dataTable>
                 </div>
             </div>
 
-
-            <!-- ...................................CONFIRMATION DIALOG PLANT DELETE.................................... -->
-            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
-                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
-                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
-            </p:confirmDialog>
-
-
         </h:form>
-
-
-
-        <!-- ...................................PLANT CREATE dialog.....ADMIN GARDENER ONLY... -->
-        <h:form id="plantCreateDialog">
-            <!-- ....................PLANT CREATE button..................... -->
-            <p:commandButton value="Create new Plant" rendered="#{sessionInfoBean.hasRole('ADMIN')}" update="plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
-                             icon="pi pi-user-plus" title="New User" class="btn btn-primary">
-                <p:resetInput target=":createDialog:createPlantDialog"/>
-            </p:commandButton>
-
-            <p:dialog header="Create New Plant" id="createPlantDialog" widgetVar="createPlantDialog" modal="true"
-                      showEffect="fade" hideEffect="fade" resizable="false">
-                <p:ajax event="close" update="createPlantDialog"/>
-
-                <p:outputPanel id="createPlant">
-                    <h:panelGrid columns="2">
-
-
-                        <p:outputLabel for="plantNameCreation" value="Plant Name:"/>
-                        <p:inputText id="plantNameCreation"
-                                     placeholder="Required field" value="#{createPlantBean.plantName}" required="true"/>
-
-
-                        <p:outputLabel for="plantDescrptiom" value="Description:"/>
-                        <p:inputText id="plantDescrptiom"
-                                     placeholder="description" value="#{createPlantBean.description}" required="false"/>
-
-
-                        <p:commandButton value="Create"
-                                         action="#{createPlantBean.doCreateNewPlant()}"
-                                         update=":userForm:plantsTable"
-                                         oncomplete="PF('createPlantDialog').hide()"/>
-                        <p:commandButton value="Cancel" onclick="PF('createPlantDialog').hide()"/>
-
-                    </h:panelGrid>
-                </p:outputPanel>
-
-            </p:dialog>
-        </h:form>
-
 
 
 

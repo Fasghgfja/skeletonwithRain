@@ -35,20 +35,20 @@
                     <p:dataTable id="plantsTable" var="plant" value="#{plantController.plants}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 
-                        <p:column >
-                            <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
+                        <p:column headerText="ID" sortBy="#{plant.plantID}">
+                            <h:outputText value="#{plant.plantID}"/>
                         </p:column>
 
-                        <p:column headerText="Plant" sortBy="#{plant.plantName}">
+                        <p:column headerText="Plant Name" sortBy="#{plant.plantName}">
                             <h:outputText value="#{plant.plantName}"/>
                         </p:column>
 
-                        <p:column headerText="Planted Date" sortBy="#{plant.plantedDate}">
-                            <h:outputText value="#{plant.plantedDate}"/>
+                        <p:column headerText="Sensor Station" sortBy="#{plant}">
+                            <h:outputText value="#{plant.sensorStation}"/>
                         </p:column>
 
-                        <p:column headerText="Description" sortBy="#{plant.description}">
-                            <h:outputText value="#{plant.description}"/>
+                        <p:column headerText="Planted Date" sortBy="#{plant}">
+                            <h:outputText value="#{plant.plantedDate}"/>
                         </p:column>
 
                         <p:column style="text-align: center">
@@ -60,14 +60,15 @@
                             </p:commandButton>
 
 
-                            <!-- ....................DELETE PLANT BUTTON ...........ONLY ADMIN .............. -->
+                            <!-- ....................DELETE PLANT BUTTON ......... .............. -->
                             <p:commandButton styleClass="ui-button-danger" rendered="#{sessionInfoBean.hasRole('ADMIN')}"
                                              action="#{plantController.doDeletePlant()}" icon="pi pi-user-minus"
                                              title="Delete"
                                              update=":userForm:plantsTable">
                                 <f:setPropertyActionListener value="#{plant}" target="#{plantController.plant}"/>
                                 <p:confirm header="Confirmation"
-                                           message="Are you sure that you want to delete the sensor station '#{plant.plantName}'? You cannot undo this operation."
+                                           message="Are you sure that you want to delete the plant '#{plant.plantName}'? You cannot undo this operation. ,
+                                           PLANTS ACTUALLY DISPLAYED IN A SENSOR STATION WILL NOT BE REMOVED"
                                            icon="pi pi-exclamation-triangle"/>
                             </p:commandButton>
 

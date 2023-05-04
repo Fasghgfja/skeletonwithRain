@@ -2,6 +2,7 @@ package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Userx;
+import at.qe.skeleton.repositories.ImageRepository;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,15 @@ public class PlantService {
     private PlantRepository plantRepository;
 
     @Autowired
+    private ImageRepository imageRepository;
+
+    @Autowired
     private LogRepository logRepository;
 
 
+    public Long getPlantsAmount() {
+        return plantRepository.count();
+    }
 
     /**
      * The method Returns a collection of all plants.
@@ -55,10 +62,8 @@ public class PlantService {
      */
     @PreAuthorize("permitAll()")
     public Plant savePlant(Plant plant) {
-        if (plant.isNew()) {
-            plant.setCreateDate(LocalDate.now());
-        } else {
-            plant.setUpdateDate(LocalDate.now());
+        if (plant.getPlantedDate() == null) {
+            plant.setPlantedDate(LocalDate.now());
         }
         return plantRepository.save(plant);
     }
@@ -70,8 +75,27 @@ public class PlantService {
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deletePlant(Plant plant) {
+        System.out.println("im plant service : im deleting plant");
         plantRepository.delete(plant);
     }
+
+
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deleteAllImagesByPlant(Plant plant) { //TODO:new i dont think we want this
+        imageRepository.deleteImagesByPlant(plant);
+    }
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void detachAllImagesFromPlant(Plant plant) { //TODO:new!
+        imageRepository.setPlantIdToNull(plant);
+    }
+
+
+
+
+
+
+
 
 
     /**
@@ -84,11 +108,6 @@ public class PlantService {
         this.plantRepository = plantRepository;
     }
 
-    //TODO: push this down to repository and queue , it is too expensive here
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public Integer getPlantsAmount() {
-        return plantRepository.findAll().stream().toList().size();
-    }
 
     public Collection<Plant> getFollowedPlants(Userx user) {
         return plantRepository.findPlantsByFollowers(user);
@@ -98,6 +117,13 @@ public class PlantService {
 
     public Collection<Plant> getOnlyPlantsNotYetFollowed(Userx user) {
         return plantRepository.findPlantsInPlantsCatalogueNotYetFollowed(user.getUsername());
+    }
+
+    /**
+     * The method is Only used in the scrolldown menu for plant selection.
+     */
+    public Collection<String> getAllPlantsUniqueNames() {
+        return plantRepository.findAllPlantsUniqueNames();
     }
 }
 

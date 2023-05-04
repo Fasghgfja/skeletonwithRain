@@ -6,6 +6,8 @@ import at.qe.skeleton.model.Userx;
 import org.springframework.data.jpa.repository.Query;
 import at.qe.skeleton.model.Userx;
 import org.springframework.data.repository.query.Param;
+
+import java.util.Collection;
 import java.util.List;
 
 
@@ -57,6 +59,16 @@ public interface PlantRepository extends AbstractRepository<Plant, Long> {
 
     @Query("SELECT u FROM Userx u WHERE :role MEMBER OF u.roles")
     List<Userx> findByRole(@Param("role") UserRole role);
+
+
+    long count();
+
+
+    /**
+     * The method is Only used in the scrolldown menu for plant selection.
+     */
+    @Query("SELECT DISTINCT p.plantName FROM Plant p")
+    Collection<String> findAllPlantsUniqueNames();
 }
 
 

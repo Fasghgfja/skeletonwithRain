@@ -22,9 +22,15 @@ public interface SensorStationRepository extends AbstractRepository<SensorStatio
      * Method to get a collection of all sensor stations assigned to a given gardener.
      * @param username the gardener for which to retrieve the sensor stations.
      */
+    List<SensorStation> findSensorStationsByGardener(@Param("gardener") Userx username );
+
+
+    /**
+     * Method to get a collection of all sensor stations assigned to a given gardener.
+     * @param username the gardener for which to retrieve the sensor stations.
+
     @Query("SELECT DISTINCT ss FROM SensorStation ss WHERE ss.plant IN ( SELECT p FROM Plant p JOIN p.gardeners gp WHERE gp.username = :gardener )")
     List<SensorStation> findSensorStationsByGardener(@Param("gardener") String username );
-
-
+     */
 
 }

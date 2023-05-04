@@ -30,6 +30,17 @@ public class UserListController implements Serializable {
         return userService.getAllUsers();
     }
 
+    public Collection<Userx> getGardeners() {
+        return userService.getAllGardeners();
+    }
+    /**
+     * Frontend used to selkect a gardenre from a select many menu in sensor station menagement TODO: see if it can work with real gardeners instad
+     */
+    public Collection<String> getGardenerNames() {
+        return userService.getAllGardenerNames();
+    }
+
+
 
     public Integer getUsersAmount() {
         return userService.getUsersAmount();

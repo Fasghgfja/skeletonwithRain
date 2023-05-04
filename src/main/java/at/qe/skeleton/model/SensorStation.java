@@ -7,7 +7,8 @@ import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Entity representing Sensor stations.
@@ -31,10 +32,12 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     @Column(length = 50)
     private String description;
 
-    @OneToOne
-    @JoinColumn( nullable = true)
+    @OneToOne(fetch = FetchType.LAZY)
     private Plant plant;
 
+
+    @ManyToMany(mappedBy = "sensorStationsUnderCare" , cascade = CascadeType.ALL)//TODO:LAZY OR NOT
+    private Set<Userx> gardener = new HashSet<>();
 
 
     public String getSensorStationLocation() {
@@ -63,21 +66,17 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
 
         SensorStation that = (SensorStation) o;
 
-        if (getSensorStationName() != null ? !getSensorStationName().equals(that.getSensorStationName()) : that.getSensorStationName() != null)
-            return false;
-        return getPlant() != null ? getPlant().equals(that.getPlant()) : that.getPlant() == null;
+        return getSensorStationName().equals(that.getSensorStationName());
     }
 
     @Override
     public int hashCode() {
-        int result = getSensorStationName() != null ? getSensorStationName().hashCode() : 0;
-        result = 31 * result + (getPlant() != null ? getPlant().hashCode() : 0);
-        return result;
+        return getSensorStationName().hashCode();
     }
 
     @Override
     public String toString() {
-        return "at.qe.skeleton.model.Text[ id=" + sensorStationName + " , " + sensorStationName + " ]";
+        return sensorStationName;
     }
 
     @Override

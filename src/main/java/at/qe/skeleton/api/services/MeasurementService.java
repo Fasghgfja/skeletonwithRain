@@ -8,10 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
-
 import at.qe.skeleton.api.exceptions.MeasurementNotFoundException;
-
-
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.api.model.Measurement2;
 import at.qe.skeleton.model.Plant;
@@ -21,8 +18,7 @@ import at.qe.skeleton.repositories.PlantRepository;
 import at.qe.skeleton.services.PlantService;
 import at.qe.skeleton.services.SensorStationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-import org.springframework.security.core.parameters.P;
+
 import org.springframework.stereotype.Service;
 
 
@@ -57,15 +53,10 @@ public class MeasurementService {
         System.out.println();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDate dateTime = LocalDate.parse(measurement.getTime_stamp(), formatter);
+
         Measurement measurement1 = new Measurement();
         SensorStation sensorStation = sensorStationService.loadSensorStation(measurement.getSensorStation());//TODO: new!
         measurement1.setSensorStation(sensorStation);
-
-
-        if (sensorStation.getPlant() != null) { //TODO: new! test this
-        measurement1.setPlant(plantRepository.findFirstByPlantName(sensorStation.getPlant().getPlantName()));
-        //measurement1.setType(measurement.getType());
-        }//TODO: new!
 
         String type = measurement.getType();
         if (type.equals("TempSensor")) {measurement1.setType("SOIL_MOISTURE");}
@@ -79,26 +70,9 @@ public class MeasurementService {
         measurementRepository.save(measurement1);
         System.out.println(measurement1.toString());
 
-        /*
-        Measurement2 newMeasurement = new Measurement2();
-        newMeasurement.setSensorStation(measurement.getSensorStation());
-        newMeasurement.setSensor_id(measurement.getSensor_id());
-        newMeasurement.setValue(measurement.getValue());
-        newMeasurement.setTime_stamp(measurement.getTime_stamp());
-
-        //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
-
-        System.out.println(newMeasurement);
-        Measurement newMeasurement2 = convertMeasurement(newMeasurement);
-        measurementRepository.save(newMeasurement2);
-        newMeasurement2 = measurementRepository.findFirstById(newMeasurement2.getId());
-
-        return newMeasurement;
-
-         */
     }
 
-    public Measurement convertMeasurement(Measurement2 measurement) {
+    public Measurement convertMeasurement(Measurement2 measurement) { //TODO: do we need this?
         Measurement newMeasurement = new Measurement();
         newMeasurement.setType(measurement.getSensor_id());
         newMeasurement.setValue_s(measurement.getValue());
@@ -121,11 +95,11 @@ public class MeasurementService {
 
 
     public Measurement updateMeasurement(long id, Measurement measurement) {
-        if (measurement.getPlant() != null)
-            measurements.computeIfPresent(id, (key, value) -> {
-                value.setPlant(measurement.getPlant());
-                return value;
-            });
+      //  if (measurement.getPlant() != null)//TODO: do we need this?what does this even do?
+       //     measurements.computeIfPresent(id, (key, value) -> {
+       //         value.setPlant(measurement.getPlant());
+       //         return value;
+       //     });
 
         if (measurement.getValue_s() != null)
             measurements.computeIfPresent(id, (key, value) -> {
@@ -166,24 +140,22 @@ public class MeasurementService {
     }
 
 
-
-
-
     public Measurement findFirstMeasurementBySensorStationIdAndType(String sensorStationId,String type) {
         return measurementRepository.findFirstBySensorStationIdAndType(sensorStationId,type);
     }
 
 
+
     /**
      * Retrieves all measurements from a plant.
      *
-     * @param plant the plant for which we filter the measurements
+     *  the plant for which we filter the measurements
      * @return The measurements belonging to the selected plant as a Collection.
-     */
+
     public Collection<Measurement> getAllMeasurementsByPlant(Plant plant) {
         return measurementRepository.findMeasurementsByPlantOrderByTimestampDesc(plant);
     }
-
+     */
 
     public Collection<Measurement> getAllMeasurementsBySensorStation(SensorStation sensorStation) {
         return measurementRepository.findMeasurementsBySensorStationOrderByTimestampDesc(sensorStation);
@@ -194,123 +166,7 @@ public class MeasurementService {
     }
 
 
-    //--------------------Methods to find measurements by date.
 
-    /**
-     * Retrieves all measurements created before or equal to the given date as a collection.
-     *
-     * @param date the date after which it filters, must not be {@literal null}
-     * @return a Collection of all Measurements or an Empty one if no measurements have been found
-     */
-    public Collection<Measurement> getAllMeasurementsBefore(LocalDate date) {
-        return measurementRepository.findMeasurementsByTimestampLessThanEqualOrderByTimestampDesc(date);
-    }
-
-    /**
-     * Retrieves all measurements created after the given date as a collection.
-     *
-     * @param date the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID or date is {@literal null}.
-     */
-    public Collection<Measurement> getAllMeasurementsAfter(LocalDate date) {
-        return measurementRepository.findMeasurementsByTimestampGreaterThanOrderByTimestampDesc(date);
-    }
-
-    /**
-     * Retrieves all measurements created at a given date.
-     *
-     * @param date the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID or date is {@literal null}.
-     */
-    public Collection<Measurement> getAllMeasurementsByDate(LocalDate date) {
-        return measurementRepository.findMeasurementsByTimestampOrderByTimestampDesc(date);
-    }
-
-
-    //Methods to find measurements by PlantId and date.
-
-    /**
-     * Retrieves all measurements from a plant created before or equal to the given date (the measurements)
-     *
-     * @param plant must not be {@literal null}.
-     * @param date  the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID or date is {@literal null}.
-     */
-    public Collection<Measurement> getAllMeasurementsByPlantBefore(Plant plant, LocalDate date) {
-        return measurementRepository.findMeasurementsByPlantAndTimestampLessThanEqualOrderByTimestampDesc(plant, date);
-    }
-
-    /**
-     * Retrieves all measurements from a plant created after the given date (the measurements)
-     *
-     * @param plant must not be {@literal null}.
-     * @param date  the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID or date is {@literal null}.
-     */
-    public Collection<Measurement> getAllMeasurementsByPlantAfter(Plant plant, LocalDate date) {
-        return measurementRepository.findMeasurementsByPlantAndTimestampGreaterThanOrderByTimestampDesc(plant, date);
-    }
-
-    /**
-     * Retrieves all measurements created at a given date for a given plant.
-     *
-     * @param plant must not be {@literal null}.
-     * @param date  the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID or date is {@literal null}.
-     */
-    public Collection<Measurement> getAllMeasurementsByPlantAndDate(Plant plant, LocalDate date) {
-        return measurementRepository.findMeasurementsByPlantAndTimestampOrderByTimestampDesc(plant, date);
-    }
-
-
-    //Methods to find measurements by PlantId and type and date.
-
-    /**
-     * Retrieves all measurements of a specific type for a given plant.
-     *
-     * @param plant must not be {@literal null}.
-     * @param type  the type after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID ot type is {@literal null}.
-     */
-    public Collection<Measurement> getAllMeasurementsByPlantAndType(Plant plant, String type) {
-        return measurementRepository.findMeasurementsByPlantAndTypeLikeOrderByTimestampDesc(plant, type);
-    }
-
-    /**
-     * Retrieves all measurements of a specific type and date for a given plant.
-     *
-     * @param plant must not be {@literal null}.
-     * @param type  the type after which it filters, must not be {@literal null}
-     * @param date  the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID,type or date is {@literal null}.
-     */
-    public Collection<Measurement> getAllMeasurementsByPlantAndTypeAndDate(Plant plant, String type, LocalDate date) {
-        return measurementRepository.findMeasurementsByPlantAndTypeAndTimestampOrderByTimestampDesc(plant, type, date);
-    }
-
-    /**
-     * Retrieves all measurements of a specific type after a date for a given plant.
-     *
-     * @param plant must not be {@literal null}.
-     * @param type  the type after which it filters, must not be {@literal null}
-     * @param date  the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID,type or date is {@literal null}.
-     */
-    public Collection<Measurement> getAllMeasurementsByPlantAndTypeAfter(Plant plant, String type, LocalDate date) {
-        return measurementRepository.findMeasurementsByPlantAndTypeAndTimestampGreaterThanOrderByTimestampDesc(plant, type, date);
-    }
-
-    /**
-     * Retrieves all measurements of a specific type before a date  for a given plant.
-     *
-     * @param plant must not be {@literal null}.
-     * @param type  the type after which it filters, must not be {@literal null}
-     * @param date  the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID,type or date is {@literal null}.
-     */
-    public Collection<Measurement> getAllMeasurementsByPlantAndTypeBefore(Plant plant, String type, LocalDate date) {
-        return measurementRepository.findMeasurementsByPlantAndTypeAndTimestampLessThanEqualOrderByTimestampDesc(plant, type, date);
-    }
 
 
     //................methods to delete Measurements with di different parameters
@@ -332,17 +188,6 @@ public class MeasurementService {
         deleteMeasurement(measurement);
     }
 
-    /**
-     * Deletes all measurements for a given plant.
-     *
-     * @param plant the plant from which to delete the measurements
-     */
-    public void deleteMeasurementByPlant(Plant plant) {
-        Collection<Measurement> plantMeasurements = getAllMeasurementsByPlant(plant);
-        for (Measurement m : plantMeasurements) {
-            deleteMeasurement(m);
-        }
-    }
 
     /**
      * Deletes all measurements for a given sensorStation.
@@ -359,34 +204,15 @@ public class MeasurementService {
 
     //................Methods to get all last measurements for a given plant ..............
 
-    /**
-     * Returns the most recent measurments for a given plant (one per type).
-     *
-     * @param plant for which the last measurement will be retrieved.
-     * @return a list with one most recent measurement per type of the given plant
-     */
-    public Collection<Measurement> getLatestPlantMeasurements(Plant plant) {
-        Collection<Measurement> latestMeasurements = new ArrayList<>();
-        Measurement latestAirQulityMeasurement = measurementRepository.findFirstMeasurementByPlantAndTypeOrderByTimestampDesc(plant, "HUMIDITY");
-        Measurement latestTemperatureMeasurement = measurementRepository.findFirstMeasurementByPlantAndTypeOrderByTimestampDesc(plant, "TEMPERATURE");
-        Measurement latestGroundHumidityMeasurement = measurementRepository.findFirstMeasurementByPlantAndTypeOrderByTimestampDesc(plant, "SOIL_MOISTURE");
-        Measurement latestLightMeasurement = measurementRepository.findFirstMeasurementByPlantAndTypeOrderByTimestampDesc(plant, "LIGHT_INTENSITY");
-        Measurement latestAirHumidityMeasurement = measurementRepository.findFirstMeasurementByPlantAndTypeOrderByTimestampDesc(plant, "AIR_QUALITY");
-        latestMeasurements.add(latestAirQulityMeasurement);
-        latestMeasurements.add(latestTemperatureMeasurement);
-        latestMeasurements.add(latestGroundHumidityMeasurement);
-        latestMeasurements.add(latestLightMeasurement);
-        latestMeasurements.add(latestAirHumidityMeasurement);
-        return latestMeasurements;
-    }
+
 
     public Collection<Measurement> getLatestPlantMeasurements(SensorStation sensorStation) {
         Collection<Measurement> latestMeasurements = new ArrayList<>();
-        Measurement latestAirQulityMeasurement = measurementRepository.findFirstMeasurementByPlantAndTypeOrderByTimestampDesc(sensorStation.getPlant(), "HUMIDITY");
-        Measurement latestTemperatureMeasurement = measurementRepository.findFirstMeasurementByPlantAndTypeOrderByTimestampDesc(sensorStation.getPlant(), "TEMPERATURE");
-        Measurement latestGroundHumidityMeasurement = measurementRepository.findFirstMeasurementByPlantAndTypeOrderByTimestampDesc(sensorStation.getPlant(), "SOIL_MOISTURE");
-        Measurement latestLightMeasurement = measurementRepository.findFirstMeasurementByPlantAndTypeOrderByTimestampDesc(sensorStation.getPlant(), "LIGHT_INTENSITY");
-        Measurement latestAirHumidityMeasurement = measurementRepository.findFirstMeasurementByPlantAndTypeOrderByTimestampDesc(sensorStation.getPlant(), "AIR_QUALITY");
+        Measurement latestAirQulityMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "HUMIDITY");
+        Measurement latestTemperatureMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "TEMPERATURE");
+        Measurement latestGroundHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "SOIL_MOISTURE");
+        Measurement latestLightMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "LIGHT_INTENSITY");
+        Measurement latestAirHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "AIR_QUALITY");
         latestMeasurements.add(latestAirQulityMeasurement);
         latestMeasurements.add(latestTemperatureMeasurement);
         latestMeasurements.add(latestGroundHumidityMeasurement);

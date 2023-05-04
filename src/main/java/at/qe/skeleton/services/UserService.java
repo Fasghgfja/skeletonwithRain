@@ -44,10 +44,18 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Collection<Userx> getAllGardeners() {
+        return userRepository.findByRole(UserRole.GARDENER);
+    }
+
+    public Collection<String> getAllGardenerNames() {
+        return userRepository.findNamesByRole(UserRole.GARDENER);
+    }
 
 
     public Integer getUsersAmount() {
-        return userRepository.findAll().stream().toList().size();
+        return userRepository.count();
     }
 
     /**
@@ -119,7 +127,6 @@ public class UserService {
         if(user == null || plant == null || plant.getFollowers().contains(user)) {return;}
         user = userRepository.findFirstByUsername(user.getUsername());
         user.getFollowedPlants().add(plant);
-        plant.getFollowers().add(user);
         userRepository.save(user);
     }
 
