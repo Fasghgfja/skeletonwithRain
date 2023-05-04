@@ -2,6 +2,7 @@ package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Userx;
+import at.qe.skeleton.repositories.ImageRepository;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import java.util.Collection;
 public class PlantService {
     @Autowired
     private PlantRepository plantRepository;
+
+    @Autowired
+    private ImageRepository imageRepository;
 
     @Autowired
     private LogRepository logRepository;
@@ -77,6 +81,14 @@ public class PlantService {
 
 
 
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deleteAllImagesByPlant(Plant plant) { //TODO:new i dont think we want this
+        imageRepository.deleteImagesByPlant(plant);
+    }
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void detachAllImagesFromPlant(Plant plant) { //TODO:new!
+        imageRepository.setPlantIdToNull(plant);
+    }
 
 
 
