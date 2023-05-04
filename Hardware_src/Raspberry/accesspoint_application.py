@@ -6,14 +6,23 @@ import ble_service_connection
 import DB_connection
 import check_boarder_values
 import program_status
+import yaml
+from pprint import pprint
 
 
 #  cronjop to restart
 program_state = 0
 if __name__ == '__main__':
     # TODO read config.yaml
+    try:
+        with open("../config.yaml") as f:
+            cfg = yaml.load(f, Loader=yaml.FullLoader)
 
-    repeat = 0
+        pprint(cfg["webapp-params"])
+    except Exception as e:
+        exception_logging.logException(e, "reading config.yaml")
+    ip = cfg["webapp-params"]["ip"]
+    print(ip)
     value_count = 0
     # new_SensorStation = True
     # program_state = program_status.Is.READ_SENSOR_VALUES.value

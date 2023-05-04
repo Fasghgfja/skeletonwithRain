@@ -1,0 +1,4 @@
+maintainer: Stefan Huter
+
+webapp-params:
+  ip: localhost:8080
