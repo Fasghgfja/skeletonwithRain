@@ -49,6 +49,7 @@ public class PairingController {
     public Long getSensorStationAccessPointId () {
         SensorStation thisSensorStation = sensorStationService.loadSensorStation(sensorStationId);
         if (thisSensorStation == null) {return null;}
+        if (thisSensorStation.getAccessPoint() == null) {return null;}
         return thisSensorStation.getAccessPoint().getAccessPointID();
     }
 

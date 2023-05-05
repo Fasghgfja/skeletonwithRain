@@ -170,8 +170,10 @@
                 <p:outputPanel id="userData2" >
                     <h:panelGrid columns="1">
 
+
                         <p:outputLabel for="pairedWith" value="Paired With:"/>
-                        <p:inputText id="pairedWith" value="#{pairingController.sensorStationAccessPointId}" disabled="true" />
+                        <p:inputText rendered="#{not empty pairingController.sensorStationAccessPointId}" id="pairedWith" value="#{pairingController.sensorStationAccessPointId}" disabled="true" />
+
 
                         <p:outputLabel for="sensorStationAccessPoint" value="Pair to new Access Point:"/>
                         <p:selectOneMenu value="#{pairingController.accessPointId}" id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
@@ -207,6 +209,12 @@
                 <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
             </p:confirmDialog>
+
+
+
+
+
+
 
 
 
