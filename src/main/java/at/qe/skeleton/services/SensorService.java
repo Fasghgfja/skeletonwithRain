@@ -34,6 +34,12 @@ public class SensorService {
         return sensorRepository.findSensorsBySensorStation(station);
     }
 
+    //TODO: check if we have sensor data and answer true or false
+    public boolean areSensorsPresent(SensorStation station) {
+      if (sensorRepository.countSensors(station) > 0) return true;
+      else {return false;}
+    }
+
 
     @PreAuthorize("hasAuthority('ADMIN')")
     public Sensor loadSensor(Long id) {

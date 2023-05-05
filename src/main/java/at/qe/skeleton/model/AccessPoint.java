@@ -18,7 +18,8 @@ public class AccessPoint extends Metadata implements Persistable<Long>, Serializ
     @Column(nullable = false, unique = true)
     private Long accessPointID;
     private String location;
-    private boolean validated;
+    private boolean validated;//TODO: this is gonna be important
+
 
     @Override
     public Long getId() {

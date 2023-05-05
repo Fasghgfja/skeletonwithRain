@@ -187,7 +187,7 @@
 
                         <!-- ...................................PAIR/UNPAIR BUTTONS .................................... -->
                         <h:panelGrid columns="3">
-                        <p:commandButton value="Pair" action="#{pairingController.pair()}"
+                        <p:commandButton value="Pair" action="#{pairingController.pairTest()}"
                                          oncomplete="PF('pairingDialog').hide()" update=":userForm:sensorStationTable"/>
                         <p:commandButton value="UnPair" action="#{pairingController.unpair()}"
                                          oncomplete="PF('pairingDialog').hide()" update=":userForm:sensorStationTable">
@@ -195,8 +195,11 @@
                                    message="Are you sure that you want to unpair the sensor station?"
                                    icon="pi pi-exclamation-triangle"/>
                         </p:commandButton>
-                        <p:commandButton value="Abort" onclick="PF('pairingDialog').hide()"/>
-                    </h:panelGrid>
+                            <p:commandButton ajax="true" value="Abort" action="#{pairingController.abortPairing()}">
+                                <p:ajax event="click" listener="#{pairingController.abortPairing()}" />
+                            </p:commandButton>
+
+                        </h:panelGrid>
 
 
                     </h:panelGrid>

@@ -80,6 +80,7 @@ public class SensorStationApiController {
     //Added to call all sensorstations via rest
     @GetMapping("/api/sensorstations")
     List<SensorStation> getAllSensorStationApi() {
+
         try {
             return sensorStationServiceApi.findAllSensorStation();
         } catch (SensorStationNotFoundException ex) {
