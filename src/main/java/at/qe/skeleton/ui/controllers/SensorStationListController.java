@@ -28,9 +28,11 @@ import org.springframework.stereotype.Component;
 public class SensorStationListController implements Serializable {
 
     private List<SensorStation> sensorStationList;
+    private List<SensorStation> assignedSensorStationList;
 
     @Autowired
     private SensorStationService sensorService;
+
 
 
     @Autowired
@@ -41,6 +43,7 @@ public class SensorStationListController implements Serializable {
     @PostConstruct
     public void init(){
         sensorStationList = (ArrayList<SensorStation>) sensorService.getAllSensorStations();
+        assignedSensorStationList = (ArrayList<SensorStation>) sensorService.getAllAssignedSensorStations(getSessionInfoBean().getCurrentUser());
     }
 
 

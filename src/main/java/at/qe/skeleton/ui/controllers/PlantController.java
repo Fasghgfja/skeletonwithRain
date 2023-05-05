@@ -42,6 +42,7 @@ public class PlantController implements Serializable{
     private Collection<Plant> filteredPlants;
 
     private List<Plant> plantList;
+    private List<Plant> followedPlantsList;
 
     /**
      * Cached plant.
@@ -63,6 +64,7 @@ public class PlantController implements Serializable{
     @PostConstruct
     public void initList(){
         plantList = (ArrayList<Plant>) plantService.getAllPlants();
+        followedPlantsList = (ArrayList<Plant>) plantService.getFollowedPlants(sessionInfoBean.getCurrentUser());
     }
     public Collection<Plant> getPlants() {
         return plantService.getAllPlants();

@@ -115,7 +115,7 @@
                             <div class="card">
                                 <h5>Green Houses</h5>
                                 <p:dataTable id="ordersTable" var="sensorStation"
-                                             value="#{sensorStationListController.sensorStations}" selectionMode="single"
+                                             value="#{sensorStationListController.sensorStationList}" selectionMode="single"
                                              reflow="true" paginatorPosition="bottom"
                                              rowKey="#{sensorStation.sensorStationName}" paginator="true" rows="5"
                                              sortBy="#{sensorStation.sensorStationName}" sortOrder="descending">
@@ -215,7 +215,7 @@
                         <div class="card">
                             <h5>Assigned Sensor Stations</h5>
                             <p:dataTable id="ordersTable2" var="sensorStation"
-                                         value="#{sensorStationListController.assignedSensorStations}" selectionMode="single"
+                                         value="#{sensorStationListController.assignedSensorStationList}" selectionMode="single"
                                          reflow="true" paginatorPosition="bottom"
                                          rowKey="#{sensorStation.sensorStationName}" paginator="true" rows="5"
                                          sortBy="#{sensorStation.sensorStationName}" sortOrder="descending">
@@ -304,7 +304,7 @@
 
                         <div class="card">
                             <h5>Followed plants</h5>
-                            <p:dataTable id="plantsTable" var="plant" value="#{plantController.doGetFollowedPlants()}" paginator="true" rows="3" paginatorPosition="bottom" rowKey="#{plant.id}">
+                            <p:dataTable id="plantsTable" var="plant" value="#{plantController.followedPlantsList}" paginator="true" rows="3" paginatorPosition="bottom" rowKey="#{plant.id}">
 
                                 <p:ajax event="rowToggle"/>
 
