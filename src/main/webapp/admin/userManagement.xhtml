@@ -12,7 +12,7 @@
 
 
                 <!-- .......::::::::::::::::::.............USER TABLE ........... ....::::::::::::.......... -->
-                <p:dataTable id="usersTable" widgetVar="usersTable" var="user" value="#{userListController.users}"
+                <p:dataTable id="usersTable" widgetVar="usersTable" var="user" value="#{userListController.userxList}"
                              reflow="true" styleClass="products-table" rowKey="#{user.username}" paginator="true"
                              rows="10" rowSelectMode="add" paginatorPosition="bottom">
                     <p:column headerText="Username" sortBy="#{user.username}" filterBy="#{user.username}">
@@ -49,7 +49,7 @@
                                          styleClass="ui-button-danger"
                                          action="#{userDetailController.doDeleteUser}" icon="pi pi-user-minus"
                                          title="Delete"
-                                         update=":userForm:usersTable">
+                                         update=":userForm:usersTable" oncomplete="location.reload();">
                             <f:setPropertyActionListener value="#{user}" target="#{userDetailController.user}"/>
                             <p:confirm header="Confirmation"
                                        message="Are you sure that you want to delete the user '#{user.username}'? You cannot undo this operation."
@@ -94,7 +94,7 @@
                         <!-- ....................SAVE AND ABORT EDIT USER BUTTONS ................... -->
                         <h:panelGrid columns="3">
                             <p:commandButton value="Save" action="#{userDetailController.doSaveUser()}"
-                                             oncomplete="PF('userEditDialog').hide()" update=":userForm:usersTable"/>
+                                             oncomplete="PF('userEditDialog').hide(); location.reload();" update=":userForm:usersTable"/>
                             <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
                         </h:panelGrid>
 
@@ -159,7 +159,7 @@
                         </h:panelGrid>
                         <h:panelGrid columns="2">
                             <p:commandButton value="Create" action="#{createUserBean.createNewUser()}"
-                                             oncomplete="PF('userCreationDialog').hide()"
+                                             oncomplete="PF('userCreationDialog').hide(); location.reload();"
                                              update=":userForm:usersTable"/>
                             <p:commandButton value="Cancel" onclick="PF('userCreationDialog').hide()"/>
                         </h:panelGrid>
