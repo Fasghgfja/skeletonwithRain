@@ -54,22 +54,20 @@
 
                     <!-- ..........................................ADMIN SUBMENU............................................................... -->
                     <p:submenu id="m_components" label="Administration Utility" icon="pi pi-pencil" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
-                        <p:menuitem id="m_input2" value="Manage Sensor Stations" icon="pi pi-check-square" outcome="/admin/sensorStationMenagement" />
                         <p:menuitem id="m_table" value="Manage Users" icon="pi pi-users" outcome="/admin/userManagement" />
+                        <p:menuitem id="m_input2" value="Manage Sensor Stations" icon="pi pi-server" outcome="/admin/sensorStationMenagement" />
                         <p:menuitem id="m_list" value="Manage Access Points" icon="pi pi-server" outcome="/accessPointsManagement" />
                         <p:menuitem id="m_list2" value="Manage Plants" icon="pi pi-server" outcome="/admin/plantManagement" />
                         <p:menuitem id="m_media" value="Manage Images" icon="pi pi-image" url="/admin/imageMenagement.xhtml" />
                         <p:menuitem id="m_formlayout" value="Audit Log" icon="pi pi-history" outcome="/admin/auditLog" />
-                        <p:menuitem id="qrCode" value="Generate Qr Code" icon="pi pi-info-circle" outcome="/generateQrCode.xhtml?id=00"/>
+                        <p:menuitem id="qrCode" value="Generate Qr Code" icon="pi pi-qrcode" outcome="/generateQrCode.xhtml?id=00"/>
                         <p:menuitem id="registerT" value="Register/upload/gallery NEW!!!" icon="pi pi-image" url="/registration/register.xhtml" />
                     </p:submenu>
 
                     <!-- ..........................................GARDENER SUBMENU............................................................... -->
                     <p:submenu id="m_primeblocks" label="Gardener Submenu" icon="pi pi-prime" rendered="#{sessionInfoBean.hasRole('GARDENER')}">
                         <p:menuitem id="m_freeblocks" value="Manage Assigned Greenhouses" icon="pi pi-eye" outcome="/gardener/greenhouses"/>
-                        <p:menuitem id="qrCode2" value="Generate Qr Code" icon="pi pi-info-circle" outcome="/generateQrCode"/>
-                        <p:menuitem id="m_allblocks" value="Gardener utility" icon="pi pi-question-circle" outcome="/testpages/empty"/>
-                    </p:submenu>
+                        </p:submenu>
 
 
                     <!-- ..........................................OTHER MENU ELEMENTS..................................................... -->
