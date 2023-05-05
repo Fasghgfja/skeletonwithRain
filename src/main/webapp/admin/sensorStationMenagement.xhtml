@@ -42,6 +42,9 @@
                             <h:outputText value="#{sensorStation.id}"/>
                         </p:column>
 
+                        <p:column style="width:8rem" headerText="Access Point" sortBy="#{sensorStation.accessPoint}">
+                            <h:outputText value="#{sensorStation.accessPoint}"/>
+                        </p:column>
 
                         <p:column style="width:20rem" headerText="Plant" sortBy="#{sensorStation.plant.plantName}">
                             <h:outputText value="#{sensorStation.plant}"/>
@@ -93,6 +96,14 @@
                                              oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit" title="Edit">
                                 <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
                             </p:commandButton>
+
+
+                            <!-- ....................SENSOR STATION pairing BUTTON ........... .............. -->
+                            <p:commandButton style="margin-right: 10px" update=":userForm:pairingDialog"
+                                             oncomplete="PF('pairingDialog').show()" icon="pi pi-user-edit" title="Pair">
+                                <f:setPropertyActionListener value="#{sensorStation.id}" target="#{pairingController.sensorStationId}"/>
+                            </p:commandButton>
+
 
                             <!-- ....................DELETE SENSOR STATION BUTTON ........... .............. -->
                             <p:commandButton styleClass="ui-button-danger"
@@ -152,6 +163,59 @@
             <!-- .......................................DIALOGS...................................................................... -->
 
 
+
+            <!-- ...................................PAIR WITH Access point.................................... -->
+            <p:dialog header="Pairing" id="pairingDialog" widgetVar="pairingDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="userData2" >
+                    <h:panelGrid columns="1">
+
+                        <p:outputLabel for="pairedWith" value="Paired With:"/>
+                        <p:inputText id="pairedWith" value="#{pairingController.sensorStationAccessPointId}" disabled="true" />
+
+                        <p:outputLabel for="sensorStationAccessPoint" value="Pair to new Access Point:"/>
+                        <p:selectOneMenu value="#{pairingController.accessPointId}" id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
+                                         scrollHeight="250" updateLabel="true" >
+                            <f:selectItems value="#{pairingController.accessPointsIds}"/>
+                            <f:facet name="footer">
+                                <p:divider styleClass="mt-0" />
+                                <h:outputText value="3 options" style="font-weight:bold;"/>
+                            </f:facet>
+                        </p:selectOneMenu>
+
+                        <!-- ...................................PAIR/UNPAIR BUTTONS .................................... -->
+                        <h:panelGrid columns="3">
+                        <p:commandButton value="Pair" action="#{pairingController.pair()}"
+                                         oncomplete="PF('pairingDialog').hide()" update=":userForm:sensorStationTable"/>
+                        <p:commandButton value="UnPair" action="#{pairingController.unpair()}"
+                                         oncomplete="PF('pairingDialog').hide()" update=":userForm:sensorStationTable">
+                        <p:confirm header="Confirmation"
+                                   message="Are you sure that you want to unpair the sensor station?"
+                                   icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+                        <p:commandButton value="Abort" onclick="PF('pairingDialog').hide()"/>
+                    </h:panelGrid>
+
+
+                    </h:panelGrid>
+
+                </p:outputPanel>
+            </p:dialog>
+
+            <!-- ...................................CONFIRMATION DIALOG .................................... -->
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+            </p:confirmDialog>
+
+
+
+
+
+
+
+
+
             <!-- ...................................Sensor station Edit dialog.................................... -->
             <p:dialog header="Edit Sensor Staion" id="userEditDialog" widgetVar="userEditDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
@@ -161,16 +225,6 @@
 
                         <p:outputLabel for="sensorStationId" value="Sensor-station name:"/>
                         <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
-
-                        <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/>
-                        <p:selectOneMenu id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
-                                         scrollHeight="250" updateLabel="true" >
-                            <f:selectItems value="#{accessPointController.accessPoints}"/>
-                            <f:facet name="footer">
-                                <p:divider styleClass="mt-0" />
-                                <h:outputText value="3 options" style="font-weight:bold;"/>
-                            </f:facet>
-                        </p:selectOneMenu>
 
 
                         <p:outputLabel for="sensorStationlocation" value="Sensor-station location:"/>
@@ -200,28 +254,23 @@
                         </p:selectCheckboxMenu>
 
 
-
-
-
-
-
                     </h:panelGrid>
                     <h:panelGrid columns="3">
                         <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}"
                                          oncomplete="PF('userEditDialog').hide()" update=":userForm:sensorStationTable"/>
                         <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
+
+
                     </h:panelGrid>
                 </p:outputPanel>
             </p:dialog>
 
 
-            <!-- ...................................CONFIRMATION dialog.................................... -->
-            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
-                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
-                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
-            </p:confirmDialog>
-
         </h:form>
+
+
+
+
 
 
 
@@ -278,6 +327,14 @@
                 </p:outputPanel>
             </p:dialog>
         </h:form>
+
+
+
+
+
+
+
+
 
 
         <!-- ...................................PLANT CREATE dialog.................................... -->

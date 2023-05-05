@@ -36,6 +36,9 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     private Plant plant;
 
 
+    @ManyToOne
+    AccessPoint accessPoint;
+
     @ManyToMany(mappedBy = "sensorStationsUnderCare" , cascade = CascadeType.ALL)//TODO:LAZY OR NOT
     private Set<Userx> gardener = new HashSet<>();
 

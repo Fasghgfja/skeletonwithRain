@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Scope("application")
@@ -21,6 +22,9 @@ public class AccessPointService {
     @PreAuthorize("hasAuthority('ADMIN')")
     public Collection<AccessPoint> getAllAccessPoint() {
         return accessPointRepository.findAll();
+    }
+    public List<Long> getAllAccessPointIds() {
+        return accessPointRepository.getAllAccessPointsId();
     }
 
     public AccessPoint getFirstById(Long id){
@@ -53,4 +57,5 @@ public class AccessPointService {
     public void deleteAccessPoint(AccessPoint accessPoint) {
         accessPointRepository.delete(accessPoint);
     }
+
 }

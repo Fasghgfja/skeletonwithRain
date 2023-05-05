@@ -7,10 +7,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import at.qe.skeleton.repositories.AbstractRepository;
-import at.qe.skeleton.services.ImageService;
-import at.qe.skeleton.services.PlantService;
-import at.qe.skeleton.services.SensorStationService;
-import at.qe.skeleton.services.UserService;
+import at.qe.skeleton.services.*;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import jakarta.faces.context.FacesContext;
 import lombok.Getter;
@@ -41,17 +38,12 @@ public class SensorStationDetailController implements Serializable {
     private SensorStationService sensorService;
     @Autowired
     private MeasurementService measurementService;
-
     @Autowired
     private PlantService plantService;
-
     @Autowired
     private transient SessionInfoBean sessionInfoBean;
-
     @Autowired
     private transient GraphController graphController;
-
-//todo:pray this isnt too much
     @Autowired
     private transient GalleryController galleryController;
 
@@ -61,27 +53,34 @@ public class SensorStationDetailController implements Serializable {
      * Tells us if the sensor station is new , replace with a more elegant solution!.
      */
     private boolean newSensorStation;
-
     /**
      * Attribute to cache the currently displayed sensor station.
      */
     private SensorStation sensorStation;
-
     /**
      * Attribute to cache the latestMEasurements.
      */
     private Collection<Measurement> latestMeasurements;
-
     /**
      * maybe not needed fields.
      */
     private String plantName = "";
-
     private String plantId;
     private String description = "";
     private Plant plant;
-
     private String selectedPlantName;
+
+    boolean fixed = false;
+
+
+
+    //TODO: simplify this to user javax unselect event to just remove the gardenrs with only one checkbox menu use real user and not strings!
+    List<String> gardeners;
+    List<Userx> gardenersToRemove;//TODO:this is the correct way not strings!
+
+
+
+    AccessPoint accessPoint;//TODO:new accessPoint features
 
     public String getSelectedPlantName() {
         return selectedPlantName;
@@ -91,25 +90,18 @@ public class SensorStationDetailController implements Serializable {
         this.selectedPlantName = selectedPlantName;
     }
 
-    boolean fixed = false;
 
 
-
-
-    //TODO: simplify this to user javax unselect event to just remove the gardenrs with only one checkbox menu
-    List<String> gardeners;
-    List<Userx> gardenersToRemove;
-
-    public void doAddGardenerToSensorStation(String user) {//TODO:use this
+    public void doAddGardenerToSensorStation(String user) {
         this.sensorService.addGardenerToSensorStation(sensorStation,user);
     }
     public void doAddGardenersToSensorStation() {//TODO:use this
         gardeners.forEach(this::doAddGardenerToSensorStation);
     }
-    public void doRemoveGardenerFromSensorStation(Userx user) {//TODO:use this
+    public void doRemoveGardenerFromSensorStation(Userx user) {
         this.sensorService.removeGardenerFromSensorStation(sensorStation,user);
     }
-    public void doRemoveGardenersFromSensorStation() {//TODO:use this
+    public void doRemoveGardenersFromSensorStation() {
         gardenersToRemove.forEach(this::doRemoveGardenerFromSensorStation);
     }
 
@@ -251,7 +243,7 @@ public class SensorStationDetailController implements Serializable {
     }
 
 
-    //TODO:Better error handling
+    //TODO:Better error handling , put error handling at beginning and remove nested ifs
     public void doChangeThePlantAndSave() {
         if (selectedPlantName != null){
             if(sensorStation.getPlant() != null){
