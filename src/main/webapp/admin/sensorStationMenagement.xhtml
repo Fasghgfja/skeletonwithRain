@@ -202,11 +202,11 @@
 
 
                         <h:panelGrid columns="2">
-                            <p:commandButton ajax="true" value="PairTest" actionListener="#{pairingController.pairTest()}">
-                                <p:ajax update=":userForm:sensorStationTable" />
-                            </p:commandButton>
-                            <p:commandButton ajax="true" value="Abort Pairing" actionListener="#{pairingController.abortPairing}" update=":userForm:sensorStationTable"  />
-                            <p:ajax event="click" listener="#{pairingController.abortPairing()}" />
+
+                            <p:commandButton id="startBatch" value="PairTest" actionListener="#{pairingController.pairTest}"  />
+
+                            <p:commandButton id="abortbutton"  async="true" value="Abort Pairing" actionListener="#{pairingController.abortPairing()}" update=":userForm:sensorStationTable"  />
+                            <p:ajax event="click" listener="#{pairingController.abortPairing()}"  />
 
                         </h:panelGrid>
 

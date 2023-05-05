@@ -103,6 +103,7 @@ public class PairingController {
                 try {
                     System.out.println("im waiting 5 seconds before checking again");
                     if(interruptFlag){break;}
+                    System.out.println("interurpt flag is" + interruptFlag);
                     // Wait for 5 seconds before checking again
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
