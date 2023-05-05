@@ -106,7 +106,7 @@
                         <p:commandButton value="Create"
                                          action="#{createSensorStationBean.doCreateNewCreateSensorStation()}"
                                          update=":userForm:sensorStationTable"
-                                         oncomplete="PF('createSSDialog').hide()"/>
+                                         oncomplete="PF('createSSDialog').hide(); location.reload()"/>
                         <p:commandButton value="Cancel" onclick="PF('createSSDialog').hide()"/>
 
 
@@ -134,7 +134,7 @@
 
                 <div class="card">
                     <h5>Sensor Stations</h5>
-                    <p:dataTable id="sensorStationTable" var="sensorStation" value="#{sensorStationListController.sensorStations}"
+                    <p:dataTable id="sensorStationTable" var="sensorStation" value="#{sensorStationListController.sensorStationList}"
                                  scrollHeight="550"
                                  paginatorPosition="bottom" rowKey="#{sensorStation.id}">
 
@@ -156,7 +156,7 @@
                             <h:outputText value="#{sensorStation.plant}"/>
                         </p:column>
 
-                        <p:column  headerText="Gardeners" sortBy="#{sensorStation.createDate}">
+                        <p:column  headerText="Gardeners">
                             <h:outputText value="#{sensorStation.gardener}"/>
                         </p:column>
 
@@ -218,7 +218,8 @@
                             <p:commandButton styleClass="ui-button-danger"
                                              action="#{sensorStationDetailController.doDeleteSensorStation()}" icon="pi pi-user-minus"
                                              title="Delete"
-                                             update=":userForm:sensorStationTable">
+                                             update=":userForm:sensorStationTable"
+                                            oncomplete="location.reload()">
                                 <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
                                 <p:confirm header="Confirmation"
                                            message="Are you sure that you want to delete the sensor station '#{sensorStation.sensorStationName}'? You cannot undo this operation."
@@ -296,10 +297,8 @@
 
                         <!-- ...................................PAIR/UNPAIR BUTTONS .................................... -->
                         <h:panelGrid columns="3">
-                        <p:commandButton value="PairOld" action="#{pairingController.pair()}"
-                                         oncomplete="PF('pairingDialog').hide()" update=":userForm:sensorStationTable"/>
-                        <p:commandButton value="UnPairOld" action="#{pairingController.unpair()}"
-                                         oncomplete="PF('pairingDialog').hide()" update=":userForm:sensorStationTable">
+                        <p:commandButton value="Remove current pairing" action="#{pairingController.unpair()}"
+                                         oncomplete="PF('pairingDialog').hide();location.reload()" update=":userForm:sensorStationTable">
                         <p:confirm header="Confirmation"
                                    message="Are you sure that you want to unpair the sensor station?"
                                    icon="pi pi-exclamation-triangle"/>
@@ -312,7 +311,8 @@
 
                         <h:panelGrid columns="2">
 
-                            <p:commandButton id="startBatch" value="PairTest" actionListener="#{pairingController.pairTest}" update=":userForm:sensorStationTable" />
+                            <p:commandButton id="startBatch" value="Pair" actionListener="#{pairingController.pairTest}" update=":userForm:sensorStationTable"
+                                                oncomplete="location.reload()"/>
 
                             <p:commandButton id="abortbutton"  async="true" value="Abort Pairing" actionListener="#{pairingController.abortPairing()}" update=":userForm:sensorStationTable"  />
                             <p:ajax event="click" listener="#{pairingController.abortPairing()}" oncomplete="PF('pairingDialog').hide()" />
@@ -390,7 +390,7 @@
                     </h:panelGrid>
                     <h:panelGrid columns="3">
                         <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}"
-                                         oncomplete="PF('userEditDialog').hide()" update=":userForm:sensorStationTable"/>
+                                         oncomplete="PF('userEditDialog').hide();location.reload()" update=":userForm:sensorStationTable"/>
                         <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
 
 
