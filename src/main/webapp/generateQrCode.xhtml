@@ -14,7 +14,9 @@
             <p:link outcome="/generateQrCode">Generate QrCode</p:link>
         </li>
     </ui:define>
-
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{qrCodeController.init}"/>
+    </f:metadata>
     <ui:define name="content">
         <h:form>
 
@@ -42,8 +44,11 @@
             <h:outputText value="Fill color:" />
             <p:colorPicker value="#{qrCodeController.fillColor}"/>
             <p:inputText id="link" value="#{qrCodeController.text}"/>
+
+            <h:outputText rendered="#{qrCodeController.id == 0}"  value="Insert Plant Id To Generate A Qr Code"/>
             <p:commandButton value="update" update="qrCodeElem">
             </p:commandButton>
+
 
 
 

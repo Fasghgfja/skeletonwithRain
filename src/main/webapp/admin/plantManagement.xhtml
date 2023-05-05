@@ -53,6 +53,14 @@
 
                         <p:column style="text-align: center">
 
+
+                            <!-- ...........BUTTON TO OPEN QR CODE GENERATION PAGE......... -->
+                            <!-- ...........still buggy, the ID doesn t get passed on the qr code generation thingy........ -->
+                            <p:button style="margin-right: 10px" icon="pi pi-qrcode"
+                                      title="Generate QR-Code"
+                                      href="/generateQrCode.xhtml?id=#{plant.plantID}">
+                            </p:button>
+
                             <!-- ....................Plant EDIT BUTTON ........... .............. -->
                             <p:commandButton style="margin-right: 10px" update=":userForm:plantEditDialog"
                                              oncomplete="PF('plantEditDialog').show()" icon="pi pi-user-edit" title="Edit">

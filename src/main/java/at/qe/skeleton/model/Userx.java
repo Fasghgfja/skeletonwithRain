@@ -24,7 +24,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private String username;
     @ManyToOne(optional = false)
     private Userx createUser;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Userx updateUser;
 
     @OneToOne
@@ -45,7 +45,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private Set<Plant> followedPlants = new HashSet<>();
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)//TODO check if this can be lazy
     @JoinTable(
             name = "gardener_sensorStation",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username"),

@@ -21,7 +21,7 @@ public abstract class Metadata {
     private LocalDate updateDate;
     @ManyToOne
     private Userx createUser;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Userx updateUser;
 }
 
