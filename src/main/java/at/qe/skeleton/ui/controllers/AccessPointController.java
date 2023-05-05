@@ -6,6 +6,7 @@ import at.qe.skeleton.model.LogType;
 import at.qe.skeleton.services.AccessPointService;
 import at.qe.skeleton.services.LogService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,17 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
 @Component
 @Scope("view")
 public class AccessPointController implements Serializable {
+
+    private List<AccessPoint> accessPointList;
 
     @Autowired
     private transient AccessPointService accessPointService;
@@ -40,6 +45,11 @@ public class AccessPointController implements Serializable {
      * Returns a list of all access points.
      * @return
      */
+
+    @PostConstruct
+    public void init(){
+        accessPointList = (ArrayList<AccessPoint>) accessPointService.getAllAccessPoint();
+    }
     public Collection<AccessPoint> getAccessPoints(){
         return accessPointService.getAllAccessPoint();
     }

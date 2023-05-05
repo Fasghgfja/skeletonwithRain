@@ -77,7 +77,7 @@
             <div class="grid table-demo">
                 <div class="col-12">
                     <div class="card">
-                        <p:dataTable id="logsTable" var="log" value="#{logController.logs}" allowUnsorting="true" sortMode="single" paginator="true"
+                        <p:dataTable id="logsTable" var="log" value="#{logController.logList}" allowUnsorting="true" sortMode="single" paginator="true"
                                      paginatorPosition="bottom"
                                      rows="20">
                             <p:column headerText="Type" sortBy="#{log.type}" filterBy="#{log.type}">

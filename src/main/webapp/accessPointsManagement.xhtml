@@ -53,7 +53,7 @@
                         <h5>Access Points</h5>
 
                         <p:dataTable id="accessPointsTable" var="accessPoint"
-                                     value="#{accessPointController.accessPoints}"
+                                     value="#{accessPointController.accessPointList}"
                                      paginator="true" paginatorPosition="bottom" rows="10" rowIndexVar="rowIndex"
                                      emptyMessage="No Access Points found.">
                             <p:column style="text-align: center" headerText="Access Point ID" sortBy="#{accessPoint.id}"
@@ -73,7 +73,7 @@
                             <p:column style="text-align: center">
                                 <p:commandButton class="ui-button-danger" icon="pi pi-trash" title="Delete"
                                                  update="accessPointsForm:accessPointsTable"
-                                                 action="#{accessPointController.doDeleteAccessPoint}">
+                                                 action="#{accessPointController.doDeleteAccessPoint}" oncomplete="location.reload()">
                                     <f:setPropertyActionListener value="#{accessPoint}"
                                                                  target="#{accessPointController.accessPoint}"/>
                                     <p:confirm header="Confirmation"
