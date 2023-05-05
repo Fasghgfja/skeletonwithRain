@@ -3,13 +3,11 @@ package at.qe.skeleton.ui.controllers;
 
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.services.PlantService;
-import jakarta.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.util.Map;
 
 @Component
 @Scope("view")
@@ -18,7 +16,6 @@ public class QrCodeController implements Serializable {
     @Autowired
     PlantService plantService;
 
-    private Long id;
     private static final long serialVersionUID = 20120316L;
     private String renderMethod;
     private String text;
@@ -33,8 +30,8 @@ public class QrCodeController implements Serializable {
 
     public QrCodeController() {
         renderMethod = "canvas";
-        text = "http://localhost:8080/registration/register.xhtml?id=";
-        label = "/register.xhtml?id=";
+        text = "http://localhost:8080/registration/register.xhtml?id=54";
+        label = "/register.xhtml?id=54";
         mode = 2;
         fillColor = "8d888d";
         size = 200;
@@ -53,7 +50,12 @@ public class QrCodeController implements Serializable {
     }
 
     public void setText(final String text) { //TODO : if resources become a thing this is unnecessary caching for a stupid thing : )
-        this.text = text;
+        this.text = "http://localhost:8080/registration/register.xhtml?id=" + text;
+        Plant lookingfor = plantService.loadPlant(Long.parseLong(text));
+        if(lookingfor == null) {this.label = "Plant not Found";}
+        else {
+            this.label = lookingfor.getPlantName();
+        }
     }
 
     public String getLabel() {
@@ -98,12 +100,4 @@ public class QrCodeController implements Serializable {
         this.linkInput = linkInput;
     }
 
-    public void init() {
-        Map<String, String> params;
-        FacesContext context = FacesContext.getCurrentInstance();
-        params = context.getExternalContext().getRequestParameterMap();
-        this.id = Long.parseLong(params.get("id"));
-        text = text+id;
-        label = label +id;
-    }
 }
