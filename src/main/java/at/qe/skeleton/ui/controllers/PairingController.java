@@ -7,6 +7,8 @@ import at.qe.skeleton.services.SensorService;
 import at.qe.skeleton.services.SensorStationService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.ActionEvent;
+import jakarta.faces.event.AjaxBehaviorEvent;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +81,7 @@ public class PairingController {
 
 
     private volatile boolean interruptFlag = false;
-
+    public boolean isPairingInProgress = false;
     public void abortPairing(){
         System.out.println("im aborting pairing");
         interruptFlag = true;
@@ -87,7 +89,6 @@ public class PairingController {
 
     public void pairTest() {//TODO new!
         System.out.println("I'm pairing controller new! and I'm executing the pairing logic");
-
         SensorStation sensorStationToPair = sensorStationService.loadSensorStation(sensorStationId);
 
         // Set the maximum time to search for sensors to 5 minutes (300,000 milliseconds)
@@ -118,33 +119,6 @@ public class PairingController {
         }
 
     }
-
-
-
-
-
-
-
-    public void pairTestLazy() {
-        System.out.println("im pairing controller and im executing the pairing logic");
-
-        SensorStation sensorStationToPair = sensorStationService.loadSensorStation(sensorStationId);
-
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleWithFixedDelay(() -> {
-            if (sensorService.areSensorsPresent(sensorStationToPair)) {
-                AccessPoint accessPointToPair = accessPointService.loadAccessPoint(accessPointId);
-                sensorStationToPair.setAccessPoint(accessPointToPair);
-                sensorStationService.saveSensorStation(sensorStationToPair);
-                executor.shutdown(); // stop the periodic checks after finding sensors
-            }
-        }, 0, 10, TimeUnit.SECONDS); // check every 10 seconds
-
-        // continue with other logic as needed
-    }
-
-
-
 
 
 
