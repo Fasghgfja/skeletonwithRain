@@ -32,7 +32,7 @@
 
                 <div class="card">
                     <h5>Plants</h5>
-                    <p:dataTable id="plantsTable" var="plant" value="#{plantController.plants}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
+                    <p:dataTable id="plantsTable" var="plant" value="#{plantController.plantList}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 
                         <p:column headerText="ID" sortBy="#{plant.plantID}">
@@ -71,6 +71,7 @@
                             <!-- ....................DELETE PLANT BUTTON ......... .............. -->
                             <p:commandButton style="margin-right: 10px" styleClass="ui-button-danger" rendered="#{sessionInfoBean.hasRole('ADMIN')}"
                                              action="#{plantController.doDeletePlant()}" icon="pi pi-user-minus"
+                                             oncomplete="location.reload();"
                                              title="Delete"
                                              update=":userForm:plantsTable">
                                 <f:setPropertyActionListener value="#{plant}" target="#{plantController.plant}"/>
@@ -106,7 +107,7 @@
                     </h:panelGrid>
                     <h:panelGrid columns="3">
                         <p:commandButton value="Save" action="#{plantController.doSavePlant()}"
-                                         oncomplete="PF('plantEditDialog').hide()" update=":userForm:plantsTable"/>
+                                         oncomplete="PF('plantEditDialog').hide();location.reload();" update=":userForm:plantsTable"/>
                         <p:commandButton value="Abort" onclick="PF('plantEditDialog').hide()"/>
                     </h:panelGrid>
                 </p:outputPanel>
@@ -161,7 +162,7 @@
                         <p:commandButton value="Create"
                                          action="#{createPlantBean.doCreateNewPlant()}"
                                          update=":userForm:plantsTable"
-                                         oncomplete="PF('createPlantDialog').hide()"/>
+                                         oncomplete="PF('createPlantDialog').hide(); location.reload();"/>
                         <p:commandButton value="Cancel" onclick="PF('createPlantDialog').hide()"/>
 
                     </h:panelGrid>

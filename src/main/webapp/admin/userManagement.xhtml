@@ -44,7 +44,7 @@
                     </h:panelGrid>
                     <h:panelGrid columns="2">
                         <p:commandButton value="Create" action="#{createUserBean.createNewUser()}"
-                                         oncomplete="PF('userCreationDialog').hide()"
+                                         oncomplete="PF('userCreationDialog').hide();location.reload();"
                                          update=":userForm:usersTable"/>
                         <p:commandButton value="Cancel" onclick="PF('userCreationDialog').hide()"/>
                     </h:panelGrid>

@@ -4,6 +4,7 @@ import at.qe.skeleton.model.Image;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,6 +14,7 @@ import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.services.PlantService;
 import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
+import jakarta.annotation.PostConstruct;
 import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,6 +41,8 @@ public class PlantController implements Serializable{
 
     private Collection<Plant> filteredPlants;
 
+    private List<Plant> plantList;
+
     /**
      * Cached plant.
      */
@@ -55,6 +59,11 @@ public class PlantController implements Serializable{
     /**
      * Returns a list of all plants.
      */
+
+    @PostConstruct
+    public void initList(){
+        plantList = (ArrayList<Plant>) plantService.getAllPlants();
+    }
     public Collection<Plant> getPlants() {
         return plantService.getAllPlants();
     }

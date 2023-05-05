@@ -10,7 +10,7 @@
 
         <p:separator>
             <p:commandButton value="Create New Access Point" update=":createDialog:createAPDialog"
-                             oncomplete="PF('createAPDialog').show()"
+                             oncomplete="PF('createAPDialog').show();"
                              icon="pi pi-plus" title="Create new Access Point" class="btn btn-primary">
                 <p:resetInput target=":createDialog:createAPDialog"/>
             </p:commandButton>
@@ -38,7 +38,7 @@
                         <p:commandButton value="Create"
                                          action="#{createAccessPointBean.doCreateNewAccessPoint}"
                                          update=":accessPointsForm:accessPointsTable"
-                                         oncomplete="PF('createAPDialog').hide()"/>
+                                         oncomplete="PF('createAPDialog').hide();location.reload();"/>
                         <p:commandButton value="Cancel" onclick="PF('createAPDialog').hide()"/>
 
                     </h:panelGrid>
