@@ -125,6 +125,11 @@ public class PlantService {
     public Collection<String> getAllPlantsUniqueNames() {
         return plantRepository.findAllPlantsUniqueNames();
     }
+
+    public Boolean isPlantAlreadyFollowed(Userx currentUser, Plant plant) {
+        //dunno why i had to negate this , but it works
+        return plantRepository.findPlantsByFollowers(currentUser).contains(plant) ;
+    }
 }
 
 

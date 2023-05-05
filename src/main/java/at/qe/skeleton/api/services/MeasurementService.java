@@ -221,6 +221,21 @@ public class MeasurementService {
         return latestMeasurements;
     }
 
+    public Collection<Measurement> getLatestPlantMeasurements(Plant plant) {
+        Collection<Measurement> latestMeasurements = new ArrayList<>();
+        Measurement latestAirQulityMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "HUMIDITY");
+        Measurement latestTemperatureMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "TEMPERATURE");
+        Measurement latestGroundHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "SOIL_MOISTURE");
+        Measurement latestLightMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "LIGHT_INTENSITY");
+        Measurement latestAirHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "AIR_QUALITY");
+        latestMeasurements.add(latestAirQulityMeasurement);
+        latestMeasurements.add(latestTemperatureMeasurement);
+        latestMeasurements.add(latestGroundHumidityMeasurement);
+        latestMeasurements.add(latestLightMeasurement);
+        latestMeasurements.add(latestAirHumidityMeasurement);
+        return latestMeasurements;
+    }
+
 
     //TODO: push this down to repository and queue , it is too expensive here
     public Integer getMeasurementsAmount() {
