@@ -25,13 +25,13 @@
         <h:form id="userForm">
             <div class="col-12">
                 <!-- ....................PLANT CREATE button..................... -->
-                <p:commandButton value="Create new Plant" rendered="#{sessionInfoBean.hasRole('ADMIN')}" update="plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
+                <p:commandButton style="margin-bottom: 10px" value="Create new Plant" rendered="#{sessionInfoBean.hasRole('ADMIN')}" update="plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
                                  icon="pi pi-user-plus" title="New User" class="btn btn-primary">
                     <p:resetInput target=":plantCreateDialog:createPlantDialog"/>
                 </p:commandButton>
 
                 <div class="card">
-                    <h5>Plant's Catalogue</h5>
+                    <h5>Plants</h5>
                     <p:dataTable id="plantsTable" var="plant" value="#{plantController.plants}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 
@@ -69,7 +69,7 @@
 
 
                             <!-- ....................DELETE PLANT BUTTON ......... .............. -->
-                            <p:commandButton styleClass="ui-button-danger" rendered="#{sessionInfoBean.hasRole('ADMIN')}"
+                            <p:commandButton style="margin-right: 10px" styleClass="ui-button-danger" rendered="#{sessionInfoBean.hasRole('ADMIN')}"
                                              action="#{plantController.doDeletePlant()}" icon="pi pi-user-minus"
                                              title="Delete"
                                              update=":userForm:plantsTable">

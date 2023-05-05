@@ -39,19 +39,20 @@
                             <h:outputText value="#{plant.description}"/>
                         </p:column>
 
-                        <p:column style="width: 3.5rem">
+                        <p:column >
 
                             <!-- ....................FOLLOW PLANT BUTTON ........... .............. -->
-                            <p:commandButton icon="pi pi-plus"
+                            <p:commandButton style="margin-left: 10px" icon="pi pi-plus"
                                       title="Follow Plant"
                                              update=":userForm:plantsTable">
                                 <p:ajax event="click" listener="#{userDetailController.doAddPlantToFollowedPlants(plant)}"/>
                             </p:commandButton>
 
-                        </p:column>
+
                         <!-- ....................PLANT DETAILS BUTTON ........... .............. -->
-                        <p:column>
-                            <p:button icon="pi pi-search"
+
+                            <p:button style="margin-left: 10px"
+                                      icon="pi pi-search"
                                       title="Show Plant Page"
                                       href="/plantPage.xhtml?id=#{plant.plantID} "/>
                         </p:column>

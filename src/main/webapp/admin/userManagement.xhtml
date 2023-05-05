@@ -4,7 +4,57 @@
     <ui:define name="content">
 
 
+        <!-- .......::::::::::::::::::.............CREATE USER BUTTON........... ....::::::::::::.......... -->
+        <h:form id="createDialog">
+            <p:commandButton style="margin-bottom: 10px" value="Create new user" update=":createDialog:userCreationDialog" oncomplete="PF('userCreationDialog').show()"
+                             icon="pi pi-user-plus" title="New User" class="btn btn-primary">
+                <p:resetInput target=":createDialog:userCreationDialog"/>
+            </p:commandButton>
+
+
+            <!-- .......::::::::::::::::::.............CREATE USER DIALOG........... ....::::::::::::.......... -->
+            <p:dialog header="Create New User" id="userCreationDialog" widgetVar="userCreationDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:ajax event="close" update="userCreationDialog"/>
+                <p:outputPanel id="userCreation">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="usernameCreation" value="Username:"/>
+                        <p:inputText id="usernameCreation"
+                                     placeholder="Required field" value="#{createUserBean.username}" required="true"/>
+                        <p:outputLabel for="passwordCreation" value="Password:"/>
+                        <p:password id="passwordCreation"
+                                    placeholder="Required field" value="#{createUserBean.password}" required="true"/>
+                        <p:outputLabel for="firstNameCreation" value="Firstname:"/>
+                        <p:inputText id="firstNameCreation" value="#{createUserBean.firstName}"/>
+                        <p:outputLabel for="lastNameCreation" value="Lastname:"/>
+                        <p:inputText id="lastNameCreation" value="#{createUserBean.lastName}"/>
+                        <p:outputLabel for="mailCreation" value="Mail:"/>
+                        <p:inputText placeholder="enterMail@mail.com" id="mailCreation"
+                                     validatorMessage="Invalid email format" value="#{createUserBean.email}">
+                            <f:validateRegex
+                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                        </p:inputText>
+                        <p:outputLabel for="phoneCreation" value="Phone number:"/>
+                        <p:inputMask  id="phoneCreation" value="#{createUserBean.phone}" mask="+99 999 9999999"/>
+
+                        <p:selectManyCheckbox id="rolesCreation" value="#{createUserBean.selectedRoles}">
+                            <f:selectItem itemLabel="ADMIN" itemValue="ADMIN"/>
+                            <f:selectItem itemLabel="GARDENER" itemValue="GARDENER"/>
+                        </p:selectManyCheckbox>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <p:commandButton value="Create" action="#{createUserBean.createNewUser()}"
+                                         oncomplete="PF('userCreationDialog').hide()"
+                                         update=":userForm:usersTable"/>
+                        <p:commandButton value="Cancel" onclick="PF('userCreationDialog').hide()"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+
+        </h:form>
         <p:card styleClass="my-card">
+            <h5>Users</h5>
 
 
             <h:form id="userForm"><!-- ................USER FORM BEGIN........... ....... -->
@@ -120,54 +170,7 @@
 
 
 
-            <h:form id="createDialog">
-                <p:commandButton value="Create new user" update=":createDialog:userCreationDialog" oncomplete="PF('userCreationDialog').show()"
-                                 icon="pi pi-user-plus" title="New User" class="btn btn-primary">
-                    <p:resetInput target=":createDialog:userCreationDialog"/>
-                </p:commandButton>
 
-
-                <!-- .......::::::::::::::::::.............CREATE USER DIALOG........... ....::::::::::::.......... -->
-                <p:dialog header="Create New User" id="userCreationDialog" widgetVar="userCreationDialog" modal="true"
-                          showEffect="fade" hideEffect="fade" resizable="false">
-                    <p:ajax event="close" update="userCreationDialog"/>
-                    <p:outputPanel id="userCreation">
-                        <h:panelGrid columns="2">
-                            <p:outputLabel for="usernameCreation" value="Username:"/>
-                            <p:inputText id="usernameCreation"
-                                          placeholder="Required field" value="#{createUserBean.username}" required="true"/>
-                            <p:outputLabel for="passwordCreation" value="Password:"/>
-                            <p:password id="passwordCreation"
-                                        placeholder="Required field" value="#{createUserBean.password}" required="true"/>
-                            <p:outputLabel for="firstNameCreation" value="Firstname:"/>
-                            <p:inputText id="firstNameCreation" value="#{createUserBean.firstName}"/>
-                            <p:outputLabel for="lastNameCreation" value="Lastname:"/>
-                            <p:inputText id="lastNameCreation" value="#{createUserBean.lastName}"/>
-                            <p:outputLabel for="mailCreation" value="Mail:"/>
-                            <p:inputText placeholder="enterMail@mail.com" id="mailCreation"
-                                         validatorMessage="Invalid email format" value="#{createUserBean.email}">
-                                <f:validateRegex
-                                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
-                            </p:inputText>
-                            <p:outputLabel for="phoneCreation" value="Phone number:"/>
-                            <p:inputMask  id="phoneCreation" value="#{createUserBean.phone}" mask="+99 999 9999999"/>
-
-                            <p:selectManyCheckbox id="rolesCreation" value="#{createUserBean.selectedRoles}">
-                                <f:selectItem itemLabel="ADMIN" itemValue="ADMIN"/>
-                                <f:selectItem itemLabel="GARDENER" itemValue="GARDENER"/>
-                            </p:selectManyCheckbox>
-                        </h:panelGrid>
-                        <h:panelGrid columns="2">
-                            <p:commandButton value="Create" action="#{createUserBean.createNewUser()}"
-                                             oncomplete="PF('userCreationDialog').hide()"
-                                             update=":userForm:usersTable"/>
-                            <p:commandButton value="Cancel" onclick="PF('userCreationDialog').hide()"/>
-                        </h:panelGrid>
-                    </p:outputPanel>
-                </p:dialog>
-
-
-            </h:form>
 
 
 
