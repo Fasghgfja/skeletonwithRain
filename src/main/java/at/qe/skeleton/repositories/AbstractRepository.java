@@ -4,7 +4,6 @@ package at.qe.skeleton.repositories;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
 

@@ -11,9 +11,7 @@ public class SensorApi {
     private Long sensor_id;
     private String uuid;
     private String station_name;
-
     private String type;
-
     private int alarm_count;
 
     @Override

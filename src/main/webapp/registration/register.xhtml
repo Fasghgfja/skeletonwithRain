@@ -77,7 +77,7 @@
                     <!-- .......::::::::::::::::...ALL PICTURES GALLERY ....::::::::::::::::::::::.......... -->
                     <div class="card">
                         <p:galleria rendered="#{empty plantPhotoGalleryController.idString or empty plantPhotoGalleryController.doGetApprovedPlantImages()}"
-                                    widgetVar="galleria2" value="#{plantPhotoGalleryController.doGetAllApprovedPlantImages()}" var="image"
+                                    widgetVar="galleria2" value="#{galleryController.doGetAllApprovedPlantImages()}" var="image"
                                     numVisible="40"
                                     circular="true" fullScreen="true" showItemNavigators="true"
                                     style="max-width: 70%">

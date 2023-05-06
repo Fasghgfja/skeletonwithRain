@@ -65,8 +65,8 @@
 
                         <p:column headerText="Status">
                             <h:form rendered="#{not empty measurement.id}">
-                                <i class="#{plantController.getlastMeasurementStatusIcon(measurement.type)}"
-                                   style="display: flex; justify-content: center; align-items: center; color:#{plantController.getMeasurementStatus(measurement.id,measurement.type) == 'OK' ? 'green' : 'red'}"
+                                <i class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"
+                                   style="display: flex; justify-content: center; align-items: center; color:#{measurementListController.getMeasurementStatusForValue(measurement.value_s,measurement.type) == 'OK' ? 'green' : 'red'}"
                                    title="#{measurement.type}"></i>
                             </h:form>
                         </p:column>

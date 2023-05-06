@@ -1,26 +1,12 @@
 package at.qe.skeleton.ui.controllers;
 
-import at.qe.skeleton.api.services.MeasurementService;
 import at.qe.skeleton.model.*;
-
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-
-import at.qe.skeleton.repositories.AbstractRepository;
-import at.qe.skeleton.services.ImageService;
 import at.qe.skeleton.services.SensorService;
-import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
-import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.Setter;
-import org.primefaces.event.ToggleEvent;
-import org.primefaces.model.Visibility;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -35,10 +21,6 @@ import org.springframework.stereotype.Component;
 public class SensorDetailController implements Serializable {
 
 
-    /**
-     * Autowired dependencies.
-     * Spring will automatically resolve and inject a matching bean from the Spring application context at runtime.
-     */
     @Autowired
     private SensorService sensorService;
 
@@ -54,10 +36,8 @@ public class SensorDetailController implements Serializable {
      * Attribute to cache the currently displayed sensor.
      */
     private Sensor sensor;
-
     private String upper_border;
     private String lower_border;
-
     boolean resetAlarm = false;
 
 
@@ -101,14 +81,6 @@ public class SensorDetailController implements Serializable {
         this.sensorService.deleteSensor(sensor);
         sensor = null;
     }
-
-
-
-
-
-
-
-
 
 
 

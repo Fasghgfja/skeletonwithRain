@@ -92,24 +92,24 @@
                             <h:outputText value="#{product.category}"/>
                         </p:column>
 
-                        <p:column headerText="Status">
-                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_PRESSURE')}"
-                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_PRESSURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                        <p:column headerText="Alarm Status">
+                            <i class="#{measurementListController.getMeasurementTypeIcon('AIR_PRESSURE')}"
+                               style="color:#{measurementListController.getSensorStatus('AIR_PRESSURE',sensorStation) == 'OK' ? 'green' : 'red'}"
                                title="Air Pressure"></i>
-                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('TEMPERATURE')}"
-                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('TEMPERATURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                            <i class="#{measurementListController.getMeasurementTypeIcon('TEMPERATURE')}"
+                               style="color:#{measurementListController.getSensorStatus('TEMPERATURE',sensorStation) == 'OK' ? 'green' : 'red'}"
                                title="Temperature"></i>
-                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('SOIL_MOISTURE')}"
-                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('SOIL_MOISTURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                            <i class="#{measurementListController.getMeasurementTypeIcon('SOIL_MOISTURE')}"
+                               style="color:#{measurementListController.getSensorStatus('SOIL_MOISTURE',sensorStation) == 'OK' ? 'green' : 'red'}"
                                title="Soil Moisture"></i>
-                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_QUALITY')}"
-                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_QUALITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                            <i class="#{measurementListController.getMeasurementTypeIcon('AIR_QUALITY')}"
+                               style="color:#{measurementListController.getSensorStatus('AIR_QUALITY',sensorStation) == 'OK' ? 'green' : 'red'}"
                                title="Air Quality"></i>
-                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('LIGHT_INTENSITY')}"
-                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('LIGHT_INTENSITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                            <i class="#{measurementListController.getMeasurementTypeIcon('LIGHT_INTENSITY')}"
+                               style="color:#{measurementListController.getSensorStatus('LIGHT_INTENSITY',sensorStation) == 'OK' ? 'green' : 'red'}"
                                title="Light Intensity"></i>
-                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('HUMIDITY')}"
-                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('HUMIDITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                            <i class="#{measurementListController.getMeasurementTypeIcon('HUMIDITY')}"
+                               style="color:#{measurementListController.getSensorStatus('HUMIDITY',sensorStation) == 'OK' ? 'green' : 'red'}"
                                title="Humidity"></i>
                         </p:column>
 
@@ -161,8 +161,8 @@
                                     </p:column>
 
                                     <p:column headerText="Status">
-                                        <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon(measurement.type)}"
-                                           style="display: flex; justify-content: center; align-items: center; color:#{sensorStationDetailController.getMeasurementStatus(measurement.id,measurement.type) == 'OK' ? 'green' : 'red'}"
+                                        <i class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"
+                                           style="display: flex; justify-content: center; align-items: center; color:#{measurementListController.getSensorStatus(measurement.type,sensorStation) == 'OK' ? 'green' : 'red'}"
                                            title="#{measurement.type}"></i>
                                     </p:column>
 

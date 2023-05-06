@@ -31,7 +31,10 @@
                 </p:commandButton>
 
                 <div class="card">
-                    <h5>Plants</h5>
+                    <h5>Plant Management</h5>
+                    <p>From this page it is possible to create/delete and edit a Plant and Generate Qr codes for them</p>
+                    <p>Note: By deleting a plant all pictures will be detached and go to general gallery , if the plant is actually followed by users then it will be automatically unfollowed,
+                    It is not possible to delete a plant that is currently displayed in a Sensor Station.</p>
                     <p:dataTable id="plantsTable" var="plant" value="#{plantController.plantList}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 

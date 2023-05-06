@@ -6,20 +6,12 @@ import at.qe.skeleton.services.AccessPointService;
 import at.qe.skeleton.services.SensorService;
 import at.qe.skeleton.services.SensorStationService;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.context.FacesContext;
-import jakarta.faces.event.ActionEvent;
-import jakarta.faces.event.AjaxBehaviorEvent;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 
 @Getter
@@ -28,33 +20,26 @@ import java.util.concurrent.TimeUnit;
 @Scope("view")
 public class PairingController {
 
-
     @Autowired
     SensorStationService sensorStationService;
-
     @Autowired
     AccessPointService accessPointService;
-
-
     @Autowired
     SensorService sensorService;
-
-
     String sensorStationId = "";
-
     Long accessPointId;
+    private volatile boolean interruptFlag = false;
+
 
 
     @PostConstruct
     public void init() {
-
     }
-
 
 
     public List<Long> getAccessPointsIds () {
         return accessPointService.getAllAccessPointIds();
-    }
+    }//TODO: move this to AccessPointListController without breaking anything
 
     public Long getSensorStationAccessPointId () {
         SensorStation thisSensorStation = sensorStationService.loadSensorStation(sensorStationId);
@@ -63,31 +48,9 @@ public class PairingController {
         return thisSensorStation.getAccessPoint().getAccessPointID();
     }
 
-    public void pair(){
-        System.out.println("im pairing controller and im executing the pairing logic");
-
-        //for loop
-        //if sensor station sensorservice.threisdata(sensorstation) answers true we have sensors for this sensor station
-        //pairing is succeeed else pairing failed
-        //search for up to 5 minutes to see if you get any information
 
 
-        //TODO: pairing logic here;
-        SensorStation sensorStationToPair = sensorStationService.loadSensorStation(sensorStationId);
-        AccessPoint accessPointToPair = accessPointService.loadAccessPoint(accessPointId);
-        sensorStationToPair.setAccessPoint(accessPointToPair);
-        sensorStationService.saveSensorStation(sensorStationToPair);
-    }
-
-
-    private volatile boolean interruptFlag = false;
-    public boolean isPairingInProgress = false;
-    public void abortPairing(){
-        System.out.println("im aborting pairing");
-        interruptFlag = true;
-    }
-
-    public void pairTest() {//TODO new!
+    public void pair() {
         System.out.println("I'm pairing controller new! and I'm executing the pairing logic");
         SensorStation sensorStationToPair = sensorStationService.loadSensorStation(sensorStationId);
 
@@ -127,7 +90,6 @@ public class PairingController {
     }
 
 
-
     public void unpair(){
         System.out.println("im pairing controller and im executing the UNpairing logic");
         //TODO: UNpairing logic here;
@@ -136,6 +98,10 @@ public class PairingController {
         sensorStationService.saveSensorStation(sensorStationToUnpair);
     }
 
+    public void abortPairing(){
+        System.out.println("im aborting pairing");
+        interruptFlag = true;
+    }
 
 
 }

@@ -4,9 +4,7 @@ import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Userx;
 import org.springframework.data.jpa.repository.Query;
-import at.qe.skeleton.model.Userx;
 import org.springframework.data.repository.query.Param;
-
 import java.util.Collection;
 import java.util.List;
 

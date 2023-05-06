@@ -3,7 +3,6 @@ package at.qe.skeleton.repositories;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -57,36 +56,9 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
     List<Measurement> findMeasurementsBySensorStationAndTypeLikeOrderByTimestampDesc(SensorStation sensorStation, String type);
 
 
+    void deleteMeasurementsBySensorStation(SensorStation sensorStation);
 
-
-
-
-
-
-    //Methods to find measurements by date.
-    /**
-     * Retrieves all measurements created at a given date.
-     * @param date the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID or date is {@literal null}.
-     */
-    List<Measurement> findMeasurementsByTimestampOrderByTimestampDesc(LocalDate date);
-
-    /**
-     * Retrieves all measurements created before or equal to the given date.
-     * @param date the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If date is {@literal null}.
-     */
-    List<Measurement> findMeasurementsByTimestampLessThanEqualOrderByTimestampDesc(LocalDate date);
-
-    /**
-     * Retrieves all measurements created after the given date.
-     * @param date the date after which it filters, must not be {@literal null}
-     * @return IllegalArgumentException If plantID or date is {@literal null}.
-     */
-    List<Measurement> findMeasurementsByTimestampGreaterThanOrderByTimestampDesc(LocalDate date);
-
-
-    long count();
+    Integer count();
 
 
 
