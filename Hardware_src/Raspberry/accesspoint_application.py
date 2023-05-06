@@ -42,7 +42,7 @@ if __name__ == '__main__':
                     new_device_name_list = rest_api.checkIfNewStations()
                     print(new_device_name_list)
                     if len(new_device_name_list) == 1:
-                        asyncio.run(ble_service_connection.read_sensor_data(True, [new_device_name_list]))
+                        asyncio.run(ble_service_connection.read_sensor_data(True, new_device_name_list))
                     elif len(new_device_name_list) > 1:
                         asyncio.run(ble_service_connection.read_sensor_data(True, new_device_name_list))
                     rest_api.write_sensors_and_station_description(new_device_name_list)
@@ -53,19 +53,17 @@ if __name__ == '__main__':
 
             case program_status.Is.READ_SENSOR_VALUES.value:
                 print("Read Sensor data")
-                # changed read function
-                device_name = DB_connection.read_Sensor_Stationnames_Database().fetchone()[0] # extract from [('G4T2',)]
-                # print("its the name {0}".format(device_name))
                 try:
+                    device_name = DB_connection.read_Sensor_Stationnames_Database().fetchone()[0] # extract from [('G4T2',)]
                     asyncio.run(ble_service_connection.read_sensor_data(False, [device_name]))
                 except Exception as e:
                     exception_logging.logException(e, "call_read_values")
                 value_count += 1
-                if value_count >= 1:
+                if value_count >= 10:
                     program_state = program_status.Is.CHECK_BOARDER_VALUER.value
                     value_count = 0
                 else:
-                    program_state = program_status.Is.CHECK_FOR_NEW_BOARDER_VALUES.value
+                    program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
                 time.sleep(1)
 
             case program_status.Is.CHECK_BOARDER_VALUER.value:
@@ -80,17 +78,25 @@ if __name__ == '__main__':
                     rest_api.writeValueToWebApp()
                 except Exception as e:
                     exception_logging.logException(e, "rest_api write values")
-                program_state = program_status.Is.CHECK_FOR_NEW_BOARDER_VALUES.value
-                time.sleep(1)
-
-            case program_status.Is.CHECK_FOR_NEW_BOARDER_VALUES.value:
-                print("check webapp for new boarder values")
-                rest_api.read_sensor_boarder_values()
-                time.sleep(1)
                 program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
+                time.sleep(1)
 
             case program_status.Is.CHECK_SENSOR_STATION_ALARM.value:
                 print("check sensorstation alarm")
-                check_boarder_values.check_sensor_station_alarm()
+                try:
+                    check_boarder_values.check_sensor_station_alarm()
+                except Exception as e:
+                    exception_logging.logException(e, "check alarm")
+                time.sleep(1)
+                program_state = program_status.Is.CHECK_FOR_NEW_BOARDER_VALUES.value
+
+            case program_status.Is.CHECK_FOR_NEW_BOARDER_VALUES.value:
+                print("check webapp for new boarder values")
+                try:
+                    rest_api.read_sensor_boarder_values()
+                except Exception as e:
+                    exception_logging.logException(e, "read boarders")
                 time.sleep(1)
                 program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+
+

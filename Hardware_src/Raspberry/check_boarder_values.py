@@ -1,3 +1,5 @@
+import struct
+
 import define as define
 
 import DB_connection
@@ -14,11 +16,13 @@ def checkBoarderValues():
     for station in connected_sensor_stations_list:
         alarm_switch = station[2]
         for sensor in DB_connection.read_sensors_database(station[NAME]).fetchall():
-            upper_value = sensor[5]
-            lower_value = sensor[6]
+            upper_value = sensor[6]
+            lower_value = sensor[5]
             alarm_count = sensor[4]
             uuid = sensor[1]
+
             current_value_breaks = 0
+
             current_value_list = DB_connection.read_value_from_database(sensor[NAME]).fetchall()
             if alarm_count == -1 and alarm_switch == "on":
                 webapp_alarm_switch = rest_api.getSensorstations(False, station[NAME])
@@ -26,7 +30,10 @@ def checkBoarderValues():
                     alarm_switch = update_alarm_switch(station[NAME], uuid, station[1], sensor[0])
             else:
                 for value in current_value_list:
-                    if value[0] < lower_value or value[0] > upper_value:
+                    upper = num_check(upper_value)
+                    lower = num_check(lower_value)
+                    current_value = num_check(value[0])
+                    if current_value < lower or current_value > upper:
                         current_value_breaks += 1
 
                 if alarm_count != -1 and ((len(current_value_list) - current_value_breaks) < ((len(current_value_list) * 3) / 4)):
@@ -65,3 +72,9 @@ def update_alarm_switch(station_name, uuid, description, sensor_id):
         DB_connection.update_sensor_database(0,sensor_id)
         rest_api.write_alarm_switch(station_name, alarm_switch, description)
         rest_api.update_Sensor(sensor_id, 0)
+
+def num_check(num):
+    if str(num).isalnum():
+        return int(num)
+    else:
+        return float(num)

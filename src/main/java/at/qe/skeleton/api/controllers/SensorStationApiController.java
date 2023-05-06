@@ -70,7 +70,7 @@ public class SensorStationApiController {
      * @return
      */
     @GetMapping("/api/getsensorstations")
-    SensorStation getOneSensorStationApi(@RequestBody SensorStationApi sensorStationApi) {
+    String getOneSensorStationApi(@RequestBody SensorStationApi sensorStationApi) {
         try {
             return sensorStationServiceApi.findOneSensorStation(sensorStationApi.getName());
         } catch (SensorStationNotFoundException ex) {
@@ -78,22 +78,28 @@ public class SensorStationApiController {
         }
     }
     //Added to call all sensorstations via rest
-    @GetMapping("/api/sensorstations")
-    List<SensorStation> getAllSensorStationApi() {
+    @GetMapping("/api/sensorstations/{id}")
+    List<String> getAllSensorStationApi(@PathVariable("id") String id) {
 
         try {
-            return sensorStationServiceApi.findAllSensorStation();
+            System.out.println(id);
+            return sensorStationServiceApi.findAllSensorStation(Long.valueOf(id));
         } catch (SensorStationNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
-/*
-    @PatchMapping("/api/sensorstations/{id}")
-    Measurement updateMeasurement(@PathVariable long id, @RequestBody Measurement measurement) {
-        return measurementService.updateMeasurement(id, measurement);
+
+    @GetMapping("/api/sensorsboardervalue")
+    SensorApi updateMeasurement(@RequestBody SensorApi sensorApi) {
+        try {
+            return sensorStationServiceApi.findOneSensor(sensorApi.getSensor_id());
+        }catch (SensorStationNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
     }
 
- */
+
 
 
 }
