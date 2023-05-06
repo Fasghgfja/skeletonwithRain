@@ -3,12 +3,11 @@ package at.qe.skeleton.api.model;
 import lombok.Getter;
 import lombok.Setter;
 import java.io.Serializable;
-import java.time.LocalDate;
 
 @Getter
 @Setter
 public class Measurement2 implements Serializable {
-
+//TODO: refactor this to MeasurementApi togheter with hw as it could have dependencies in hw src
 
     private String sensorStation;
     private String sensor_id;

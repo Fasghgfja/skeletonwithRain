@@ -1,12 +1,16 @@
 package at.qe.skeleton.ui.controllers;
+import at.qe.skeleton.services.MeasurementService;
+import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
-
-import at.qe.skeleton.model.Userx;
+import java.util.List;
+import java.util.Map;
 import at.qe.skeleton.services.PlantService;
-import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,52 +24,47 @@ import org.springframework.stereotype.Component;
 public class PlantController implements Serializable{
     @Autowired
     private PlantService plantService;
-
     @Autowired
-    private SensorStationService sensorStationService;
-
+    private MeasurementService measurementService;
+    @Autowired
+    private transient GalleryController galleryController;
     @Autowired
     private SessionInfoBean sessionInfoBean;
 
     private Collection<Plant> filteredPlants;
 
+    private List<Plant> plantList;
+    private List<Plant> followedPlantsList;
+
     /**
      * Cached plant.
      */
     private Plant plant;
+    private Collection<Measurement> latestMeasurements;
+    private String plantName = "";
 
-    /**
-     * Returns a list of all plants.
-     */
-    public Collection<Plant> getPlants() {
-        return plantService.getAllPlants();
+    private String plantId;
+    private String description = "";
+
+
+    private String selectedPlantName;
+
+
+    @PostConstruct
+    public void initList(){//TODO: move this in the plantlist controller
+        plantList = (ArrayList<Plant>) plantService.getAllPlants();
+        followedPlantsList = (ArrayList<Plant>) plantService.getFollowedPlants(sessionInfoBean.getCurrentUser());
     }
 
 
-    /**
-     * The method is Only used in the scrolldown menu for plant selection.
-     */
-    public Collection<String> getPlantsUniqueNames() {
-        return plantService.getAllPlantsUniqueNames();
+    //TODO: is it quicker if we look by id or by plant?
+    public void setPlantFromId(Long id) {
+        this.plant = plantService.loadPlant(id);
     }
 
-    /**
-     * Returns how many plants are registered in the system.
-     */
-    public Long getPlantsAmount() {
-        return plantService.getPlantsAmount();
-    }
 
-    public Collection<Plant> doGetOnlyPlantsNotYetFollowed() {
-        Userx user = sessionInfoBean.getCurrentUser();
-        return this.plantService.getOnlyPlantsNotYetFollowed(user);
-
-    }
-
-    public Collection<Plant> doGetFollowedPlants() {
-        Userx user = sessionInfoBean.getCurrentUser();
-        return this.plantService.getFollowedPlants(user);
-
+    public Boolean getIsPlantAlreadyFollowed(Plant plant) {
+        return !plantService.isPlantAlreadyFollowed(sessionInfoBean.getCurrentUser(), plant);
     }
 
 
@@ -75,9 +74,6 @@ public class PlantController implements Serializable{
     public void doSavePlant() {
         plant = this.plantService.savePlant(plant);
     }
-
-
-
 
     /**
      * Action to delete the currently cached Sensor Station.
@@ -94,5 +90,31 @@ public class PlantController implements Serializable{
     }
 
 
+    /**
+     * The method gets the last mesurements for a given sensor station.
+     * the method fetches the latest measurements of the cached Sensor station
+     * When the sensor station row is toggled and the cached sensor station updated.
+     *
+     * @return the latest measurements for the cached sensor station (1 per type).
+     */
+    public Collection<Measurement> getLatestMeasurements() {
+        latestMeasurements = measurementService.getLatestPlantMeasurements(plant);
+        return latestMeasurements;
+    }
+
+
+    /**
+     * Method to initialize a greenhouse/sensor station view for a specific greenhouse taken from facescontext.
+     *
+     * Who calls this: PlantPage,
+     */
+    public void init() {
+        if (this.plant != null) return;
+        Map<String, String> params;
+        FacesContext context = FacesContext.getCurrentInstance();
+        params = context.getExternalContext().getRequestParameterMap();
+        Long id = Long.parseLong(params.get("id"));
+        this.setPlantFromId(id);
+    }
 
 }

@@ -1,7 +1,7 @@
 package at.qe.skeleton.ui.controllers;
 
 
-import at.qe.skeleton.api.services.MeasurementService;
+import at.qe.skeleton.services.MeasurementService;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.services.SensorStationService;

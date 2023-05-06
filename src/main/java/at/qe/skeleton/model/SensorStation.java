@@ -36,6 +36,9 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     private Plant plant;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    AccessPoint accessPoint;
+
     @ManyToMany(mappedBy = "sensorStationsUnderCare" , cascade = CascadeType.ALL)//TODO:LAZY OR NOT
     private Set<Userx> gardener = new HashSet<>();
 
@@ -83,6 +86,7 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     public boolean isNew() {
         return (null == super.getCreateDate());
     }
+
 
     @Override
     public int compareTo(SensorStation o) {

@@ -34,7 +34,7 @@
     <node x="534.6567033478873" y="159.43584486664918">at.qe.skeleton.spring.LoginSuccessHandler</node>
     <node x="-337.6269446949909" y="1183.301188583845">at.qe.skeleton.model.Image</node>
     <node x="-1455.1490174289363" y="-33.935406356359636">at.qe.skeleton.repositories.AbstractRepository</node>
-    <node x="-758.6875185818199" y="-529.8609875017698">at.qe.skeleton.api.services.MeasurementService</node>
+    <node x="-758.6875185818199" y="-529.8609875017698">at.qe.skeleton.services.MeasurementService</node>
     <node x="291.8146359530924" y="329.7892611479151">at.qe.skeleton.ui.controllers.UserDetailController</node>
     <node x="-1336.0" y="1798.721729858703">at.qe.skeleton.spring.CustomizedLogoutSuccessHandler</node>
     <node x="-342.4511518781003" y="48.24761967438917">at.qe.skeleton.ui.beans.UserRegistrationBean</node>
@@ -205,7 +205,7 @@
       <point x="482.086" y="-90.439" />
       <point x="-123.50031440751059" y="4.198546793929836E-4" />
     </edge>
-    <edge source="at.qe.skeleton.ui.controllers.SensorStationDetailController" target="at.qe.skeleton.api.services.MeasurementService" relationship="TO_ONE">
+    <edge source="at.qe.skeleton.ui.controllers.SensorStationDetailController" target="at.qe.skeleton.services.MeasurementService" relationship="TO_ONE">
       <point x="15.0" y="-160.00003899358245" />
       <point x="-1547.5" y="276.0" />
       <point x="-481.688" y="276.0" />
@@ -218,7 +218,7 @@
       <point x="727.827371021378" y="-302.37785607394994" />
       <point x="-2.779022258891928E-4" y="116.00045142190163" />
     </edge>
-    <edge source="at.qe.skeleton.api.services.MeasurementService" target="at.qe.skeleton.model.Measurement" relationship="TO_MANY">
+    <edge source="at.qe.skeleton.services.MeasurementService" target="at.qe.skeleton.model.Measurement" relationship="TO_MANY">
       <point x="-4.814181801293671E-4" y="258.99998750176985" />
       <point x="-496.688" y="213.0" />
       <point x="-1049.0" y="213.0" />
@@ -226,7 +226,7 @@
       <point x="-522.756" y="634.0" />
       <point x="4.4457458704982855E-4" y="-258.9995925223635" />
     </edge>
-    <edge source="at.qe.skeleton.api.services.MeasurementService" target="at.qe.skeleton.repositories.MeasurementRepository" relationship="TO_ONE">
+    <edge source="at.qe.skeleton.services.MeasurementService" target="at.qe.skeleton.repositories.MeasurementRepository" relationship="TO_ONE">
       <point x="-262.0" y="-84.04997345346851" />
       <point x="251.5" y="0.0" />
     </edge>
@@ -334,7 +334,7 @@
       <point x="29.808" y="-1189.5" />
       <point x="14.99985027642925" y="-14.499892165979531" />
     </edge>
-    <edge source="at.qe.skeleton.ui.controllers.GraphController" target="at.qe.skeleton.api.services.MeasurementService" relationship="TO_ONE">
+    <edge source="at.qe.skeleton.ui.controllers.GraphController" target="at.qe.skeleton.services.MeasurementService" relationship="TO_ONE">
       <point x="-157.50004147586088" y="41.54588647195192" />
       <point x="-67.086" y="957.037" />
       <point x="-67.086" y="1608.801" />

@@ -22,9 +22,11 @@
 
         <!-- ..........................................TOP INFO BOXES................................................................... -->
         <h:form id="detailPage">
-            <p:toolbar>
+            <p:toolbar style=" display: flex;
+                flex-wrap: nowrap;">
 
-                <p:toolbarGroup> <!-- .....TEMPERATURE AIR HUMIDITY GROUND HUMIDITY LIGHT INTENSITY BOXES............................ -->
+
+                <p:toolbarGroup > <!-- .....TEMPERATURE AIR HUMIDITY GROUND HUMIDITY LIGHT INTENSITY BOXES............................ -->
 
                     <!-- ...............................TEMPERATURE BOX................................................ -->
                     <div class="col-12 md:col-6 xl:col-3">
@@ -154,7 +156,7 @@
 
 
                     <!-- ...............................Pic Approval Box............................................... -->
-                    <div class="col-12 md:col-6 xl:col-3">
+                    <div class="col-12 md:col-6 xl:col-3" >
                         <span class="overview-title">GALLERY</span>
                         <div class="card overview-box ">
                             <p:graphicImage name="images/dashboard/effect-filessynced.svg"/>
@@ -324,8 +326,8 @@
                                 <h:outputText value="#{measurement.timestamp}"/>
                             </p:column>
                             <p:column headerText="Status">
-                                <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon(measurement.type)}"
-                                   style="display: flex; justify-content: center; align-items: center; color:#{sensorStationDetailController.getMeasurementStatus(measurement.id,measurement.type) == 'OK' ? 'green' : 'red'}"
+                                <i class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"
+                                   style="display: flex; justify-content: center; align-items: center; color:#{measurementListController.getMeasurementStatusForValue(measurement.value_s,measurement.type) == 'OK' ? 'green' : 'red'}"
                                    title="#{measurement.type}"></i>
                             </p:column>
                             <p:column headerText="Type" sortBy="#{measurement.type}">
@@ -397,7 +399,7 @@
                                         <p:outputLabel for="sensorStationPlant" value="New Plant:"/>
                                         <p:selectOneMenu id="sensorStationPlant" filter="true" emptyLabel="Plant"
                                                          scrollHeight="250" updateLabel="true" value="#{sensorStationDetailController.selectedPlantName}">
-                                            <f:selectItems value="#{plantController.plantsUniqueNames}" />
+                                            <f:selectItems value="#{plantListController.plantsUniqueNames}" />
                                             <f:facet name="footer">
                                                 <p:divider styleClass="mt-0" />
                                                 <h:outputText value="3 options" style="font-weight:bold;"/>

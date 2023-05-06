@@ -4,11 +4,9 @@ package at.qe.skeleton.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+
 
 
 /**
@@ -24,7 +22,7 @@ public class Image implements Serializable {
     @Column(nullable = false, unique = true)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Plant plant;
 
     @Column(length = 1000)

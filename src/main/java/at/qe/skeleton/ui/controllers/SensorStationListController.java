@@ -4,11 +4,14 @@ package at.qe.skeleton.ui.controllers;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +27,12 @@ import org.springframework.stereotype.Component;
 @Scope("view")
 public class SensorStationListController implements Serializable {
 
+    private List<SensorStation> sensorStationList;
+    private List<SensorStation> assignedSensorStationList;
+
     @Autowired
     private SensorStationService sensorService;
+
 
 
     @Autowired
@@ -33,6 +40,11 @@ public class SensorStationListController implements Serializable {
 
     private Collection<SensorStation> filteredSensorStations;
 
+    @PostConstruct
+    public void init(){
+        sensorStationList = (ArrayList<SensorStation>) sensorService.getAllSensorStations();
+        assignedSensorStationList = (ArrayList<SensorStation>) sensorService.getAllAssignedSensorStations(getSessionInfoBean().getCurrentUser());
+    }
 
 
     /**

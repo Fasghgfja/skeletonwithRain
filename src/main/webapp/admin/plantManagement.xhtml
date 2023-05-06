@@ -25,14 +25,17 @@
         <h:form id="userForm">
             <div class="col-12">
                 <!-- ....................PLANT CREATE button..................... -->
-                <p:commandButton value="Create new Plant" rendered="#{sessionInfoBean.hasRole('ADMIN')}" update="plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
+                <p:commandButton style="margin-bottom: 10px" value="Create new Plant" rendered="#{sessionInfoBean.hasRole('ADMIN')}" update="plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
                                  icon="pi pi-user-plus" title="New User" class="btn btn-primary">
                     <p:resetInput target=":plantCreateDialog:createPlantDialog"/>
                 </p:commandButton>
 
                 <div class="card">
-                    <h5>Plant's Catalogue</h5>
-                    <p:dataTable id="plantsTable" var="plant" value="#{plantController.plants}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
+                    <h5>Plant Management</h5>
+                    <p>From this page it is possible to create/delete and edit a Plant and Generate Qr codes for them</p>
+                    <p>Note: By deleting a plant all pictures will be detached and go to general gallery , if the plant is actually followed by users then it will be automatically unfollowed,
+                    It is not possible to delete a plant that is currently displayed in a Sensor Station.</p>
+                    <p:dataTable id="plantsTable" var="plant" value="#{plantController.plantList}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 
                         <p:column headerText="ID" sortBy="#{plant.plantID}">
@@ -53,6 +56,14 @@
 
                         <p:column style="text-align: center">
 
+
+                            <!-- ...........BUTTON TO OPEN QR CODE GENERATION PAGE......... -->
+                            <!-- ...........still buggy, the ID doesn t get passed on the qr code generation thingy........ -->
+                            <p:button style="margin-right: 10px" icon="pi pi-qrcode"
+                                      title="Generate QR-Code"
+                                      href="/generateQrCode.xhtml?id=#{plant.plantID}">
+                            </p:button>
+
                             <!-- ....................Plant EDIT BUTTON ........... .............. -->
                             <p:commandButton style="margin-right: 10px" update=":userForm:plantEditDialog"
                                              oncomplete="PF('plantEditDialog').show()" icon="pi pi-user-edit" title="Edit">
@@ -61,8 +72,9 @@
 
 
                             <!-- ....................DELETE PLANT BUTTON ......... .............. -->
-                            <p:commandButton styleClass="ui-button-danger" rendered="#{sessionInfoBean.hasRole('ADMIN')}"
+                            <p:commandButton style="margin-right: 10px" styleClass="ui-button-danger" rendered="#{sessionInfoBean.hasRole('ADMIN')}"
                                              action="#{plantController.doDeletePlant()}" icon="pi pi-user-minus"
+                                             oncomplete="location.reload();"
                                              title="Delete"
                                              update=":userForm:plantsTable">
                                 <f:setPropertyActionListener value="#{plant}" target="#{plantController.plant}"/>
@@ -98,7 +110,7 @@
                     </h:panelGrid>
                     <h:panelGrid columns="3">
                         <p:commandButton value="Save" action="#{plantController.doSavePlant()}"
-                                         oncomplete="PF('plantEditDialog').hide()" update=":userForm:plantsTable"/>
+                                         oncomplete="PF('plantEditDialog').hide();location.reload();" update=":userForm:plantsTable"/>
                         <p:commandButton value="Abort" onclick="PF('plantEditDialog').hide()"/>
                     </h:panelGrid>
                 </p:outputPanel>
@@ -153,7 +165,7 @@
                         <p:commandButton value="Create"
                                          action="#{createPlantBean.doCreateNewPlant()}"
                                          update=":userForm:plantsTable"
-                                         oncomplete="PF('createPlantDialog').hide()"/>
+                                         oncomplete="PF('createPlantDialog').hide(); location.reload();"/>
                         <p:commandButton value="Cancel" onclick="PF('createPlantDialog').hide()"/>
 
                     </h:panelGrid>

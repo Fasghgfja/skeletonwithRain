@@ -8041,3 +8041,27 @@ DROP TABLE PLANT [90107-214]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1589)
+2023-05-04 12:57:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "AAAAA"; SQL statement:
+alter table if exists sensor_station add constraint FK4nmps9wvvrge56dsllk7bjiep foreign key (sensor_station_name) references access_point [22018-214]
+2023-05-04 13:00:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "AAAAA"; SQL statement:
+alter table if exists sensor_station add constraint FK4nmps9wvvrge56dsllk7bjiep foreign key (sensor_station_name) references access_point [22018-214]
+2023-05-06 07:08:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "U&'Alaskan Ice is a unique strain. It was taken off the shelves for two years, a... (335)"; SQL statement:
+insert into plant (description, plant_name, planted_date, sensor_station_sensor_station_name, plantid) values (?, ?, ?, ?, ?) [22001-214]
+2023-05-06 07:08:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "U&'Alaskan Ice is a unique strain. It was taken off the shelves for two years, a... (328)"; SQL statement:
+insert into plant (description, plant_name, planted_date, sensor_station_sensor_station_name, plantid) values (?, ?, ?, ?, ?) [22001-214]
+2023-05-06 07:09:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "U&'Alaskan Ice is a unique strain. It was taken off the shelves for two years, a... (335)"; SQL statement:
+insert into plant (description, plant_name, planted_date, sensor_station_sensor_station_name, plantid) values (?, ?, ?, ?, ?) [22001-214]
+2023-05-06 07:10:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "U&'Alaskan Ice is a unique strain. It was taken off the shelves for two years, a... (335)"; SQL statement:
+insert into plant (description, plant_name, planted_date, sensor_station_sensor_station_name, plantid) values (?, ?, ?, ?, ?) [22001-214]
+2023-05-06 07:11:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "U&'This strain is a classic sativa-dominant hybrid that harnessed the Haze quali... (420)"; SQL statement:
+insert into plant (description, plant_name, planted_date, sensor_station_sensor_station_name, plantid) values (?, ?, ?, ?, ?) [22001-214]
+2023-05-06 07:12:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION CHARACTER VARYING(255)": "U&'A threesome involving Skunk, Northern Light and El Ni\\00f1o genetics resulted... (277)"; SQL statement:
+insert into plant (description, plant_name, planted_date, sensor_station_sensor_station_name, plantid) values (?, ?, ?, ?, ?) [22001-214]

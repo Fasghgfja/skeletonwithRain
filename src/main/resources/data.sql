@@ -1,5 +1,5 @@
 
--- $2y$10$P7im4OMw6hsnPWLpJ1nVKup1jlEFsLIek9D3lglmZv.Tq05GDEhMS -> passwd
+-- predefined accounts -> passwd
 INSERT INTO USERX (ENABLED, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, CREATE_USER_USERNAME, CREATE_DATE) VALUES(TRUE, 'Admin', 'Istrator', '$2a$10$Bm27OvKm5FENObph7xPfnO2L1mbKyjpG3LdeixGrJV0xC7TgcFGX2', 'admin', 'admin', '2016-01-01');
 INSERT INTO USERX_USER_ROLE (USERX_USERNAME, ROLES) VALUES ('admin', 'ADMIN');
 INSERT INTO USERX_USER_ROLE (USERX_USERNAME, ROLES) VALUES ('admin', 'GARDENER');
@@ -10,6 +10,17 @@ INSERT INTO USERX (ENABLED, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, CREATE_US
 INSERT INTO USERX_USER_ROLE (USERX_USERNAME, ROLES) VALUES ('user2', 'USER');
 INSERT INTO USERX (ENABLED, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, CREATE_USER_USERNAME, CREATE_DATE) VALUES(TRUE, 'Elvis', 'The King', '$2a$10$Bm27OvKm5FENObph7xPfnO2L1mbKyjpG3LdeixGrJV0xC7TgcFGX2', 'elvis', 'elvis', '2016-01-01');
 INSERT INTO USERX_USER_ROLE (USERX_USERNAME, ROLES) VALUES ('elvis', 'ADMIN');
+
+-- accessPointAccount -> passwd: 54TvH6M70rprYy8HbVU8
+
+INSERT INTO USERX (ENABLED, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, CREATE_USER_USERNAME, CREATE_DATE) VALUES(TRUE, 'accessPointsaccount', 'accessPointsaccount', '$2a$10$nM19PW5rZHJQ1fHq1BfxoeYgg.PQ7kJVJgbzN4sBahLD.b5vTd6hW', 'accessPointsaccount', 'accessPointsaccount', '2016-01-01');
+INSERT INTO USERX_USER_ROLE (USERX_USERNAME, ROLES) VALUES ('accessPointsaccount', 'ADMIN');
+
+
+
+
+
+
 
 
 INSERT INTO PLANT(PLANTID, PLANT_NAME, CREATE_DATE,UPDATE_DATE) VALUES(50100, 'Atomic Northern Lights','2022-01-01','2022-01-01');
@@ -99,10 +110,53 @@ INSERT INTO MEASUREMENT(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VAL
 INSERT INTO MEASUREMENT(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50033,'2022-01-15','HUMIDITY','%','30','BBBBB');
 INSERT INTO MEASUREMENT(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50034,'2022-01-16','HUMIDITY','%','40','BBBBB');
 
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50501,'2022-08-02','HUMIDITY','%','36','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50502,'2022-07-03','HUMIDITY','%','21','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50503,'2022-06-04','HUMIDITY','%','50','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50504,'2022-05-05','HUMIDITY','%','44','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50505,'2022-04-04','HUMIDITY','%','50','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50506,'2022-02-05','HUMIDITY','%','45','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50507,'2022-02-02','TEMPERATURE','C','26','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50508,'2022-01-02','TEMPERATURE','C','24','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50509,'2022-02-02','TEMPERATURE','C','55','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50510,'2022-02-02','TEMPERATURE','C','24','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50511,'2022-02-02','TEMPERATURE','C','77','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50512,'2022-02-02','SOIL_MOISTURE','%','12','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50513,'2022-01-02','SOIL_MOISTURE','%','22','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50514,'2022-02-02','SOIL_MOISTURE','%','46','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50515,'2022-01-23','SOIL_MOISTURE','%','33','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50516,'2022-01-22','SOIL_MOISTURE','%','47','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50517,'2022-01-22','SOIL_MOISTURE','%','55','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50518,'2022-01-20','LIGHT_INTENSITY','lux','1000','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50519,'2022-01-19','LIGHT_INTENSITY','lux','2200','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50520,'2022-01-18','LIGHT_INTENSITY','lux','500','CCCCC');
+INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(50521,'2022-01-17','AIR_QUALITY','Assessment','330','CCCCC');
 
 
-insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(1,'000019b1-0000-1000-8000-00805f9b34fb', 'G4T2', 'hygro', 0, 0, 0,'2022-01-02');
-insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(2,'000019b0-0000-1000-8000-00805f9b34fb', 'G4T2', 'light', 0, 0, 0,'2022-01-02');
-insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(3,'000019b2-0000-1000-8000-00805f9b34fb', 'G4T2', 'temp', 0, 0, 0,'2022-01-02');
-insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(4,'000019b3-0000-1000-8000-00805f9b34fb', 'G4T2', 'humidity', 0, 0, 0,'2022-01-02');
-insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(6,'000019b5-0000-1000-8000-00805f9b34fb', 'G4T2', 'gas', 0, 0, 0,'2022-01-02');
+
+
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(1,'000019b1-0000-1000-8000-00805f9b34fb', 'G4T2', 'HygroSensor', 1, 0, 0,'2022-01-02');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(2,'000019b0-0000-1000-8000-00805f9b34fb', 'G4T2', 'LigthSensor', 2, 0, 0,'2022-01-02');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(3,'000019b2-0000-1000-8000-00805f9b34fb', 'G4T2', 'TempSensor', 3, 0, 0,'2022-01-03');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(4,'000019b3-0000-1000-8000-00805f9b34fb', 'G4T2', 'humiditySensor', 5, 0, 0,'2022-01-04');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(5,'000019b5-0000-1000-8000-00805f9b34fb', 'G4T2', 'GasSensor', 5, 0, 0,'2022-01-05');
+
+
+
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(6,'000019b6-0000-1000-8000-00805f9b34fb', 'AAAAA', 'HygroSensor', 6, 0, 0,'2022-01-06');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(7,'000019b7-0000-1000-8000-00805f9b34fb', 'AAAAA', 'LigthSensor', 7, 0, 0,'2022-01-07');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(8,'000019b8-0000-1000-8000-00805f9b34fb', 'AAAAA', 'TempSensor', 8, 0, 0,'2022-01-08');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(9,'000019b9-0000-1000-8000-00805f9b34fb', 'AAAAA', 'humiditySensor', 9, 0, 0,'2022-01-09');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(10,'000019b10-0000-1000-8000-00805f9b34fb', 'AAAAA', 'GasSensor', 10, 0, 0,'2022-01-10');
+
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(11,'00001911-0000-1000-8000-00805f9b34fb', 'BBBBB', 'HygroSensor', 10, 0, 0,'2022-01-12');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(12,'00001912-0000-1000-8000-00805f9b34fb', 'BBBBB', 'LigthSensor', 10, 0, 0,'2022-01-01');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(13,'00001913-0000-1000-8000-00805f9b34fb', 'BBBBB', 'TempSensor', 0, 0, 0,'2022-02-04');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(14,'00001914-0000-1000-8000-00805f9b34fb', 'BBBBB', 'humiditySensor', 2, 0, 0,'2022-02-01');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(15,'00001915-0000-1000-8000-00805f9b34fb', 'BBBBB', 'GasSensor', 1, 0, 0,'2022-03-01');
+
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(16,'00001C11-0000-1000-8000-00805f9b34fb', 'CCCCC', 'HygroSensor', 0, 0, 0,'2022-01-12');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(17,'00001C12-0000-1000-8000-00805f9b34fb', 'CCCCC', 'LigthSensor', 10, 0, 0,'2022-01-01');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(18,'00001C13-0000-1000-8000-00805f9b34fb', 'CCCCC', 'TempSensor', 0, 0, 0,'2022-02-04');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(19,'00001C14-0000-1000-8000-00805f9b34fb', 'CCCCC', 'humiditySensor', 2, 0, 0,'2022-02-01');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(20,'00001C15-0000-1000-8000-00805f9b34fb', 'CCCCC', 'GasSensor', 9, 0, 0,'2022-03-01');

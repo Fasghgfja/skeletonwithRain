@@ -1,8 +1,7 @@
 package at.qe.skeleton.repositories;
+
 import at.qe.skeleton.model.Log;
 import at.qe.skeleton.model.LogType;
-
-import java.util.Optional;
 
 
 /**

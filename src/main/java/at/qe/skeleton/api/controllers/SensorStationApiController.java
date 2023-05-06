@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -78,20 +77,11 @@ public class SensorStationApiController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("/api/sensorsboardervalue")
-    SensorApi getSensor(@RequestBody SensorApi sensorApi){
-        try {
-
-            return sensorStationServiceApi.findOneSensor(sensorApi.getSensor_id());
-        } catch (SensorStationNotFoundException ex) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-    }
     //Added to call all sensorstations via rest
     @GetMapping("/api/sensorstations")
-    ArrayList<String> getAllSensorStationApi() {
-        try {
+    List<SensorStation> getAllSensorStationApi() {
 
+        try {
             return sensorStationServiceApi.findAllSensorStation();
         } catch (SensorStationNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

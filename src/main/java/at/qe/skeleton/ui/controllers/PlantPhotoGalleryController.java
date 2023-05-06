@@ -1,31 +1,19 @@
 package at.qe.skeleton.ui.controllers;
 
-import at.qe.skeleton.api.services.MeasurementService;
 import at.qe.skeleton.model.*;
-
-import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.*;
-
-import at.qe.skeleton.repositories.AbstractRepository;
 import at.qe.skeleton.services.ImageService;
 import at.qe.skeleton.services.PlantService;
-import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
-import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
-import jakarta.faces.event.PhaseId;
 import lombok.Getter;
 import lombok.Setter;
-import org.primefaces.event.ToggleEvent;
-import org.primefaces.model.Visibility;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 
- //TODO: rename this to galleryView  and use togheter with galleryController
 
 /**
  * Controller for the sensor stations detail view.
@@ -37,22 +25,12 @@ import org.springframework.stereotype.Component;
 public class PlantPhotoGalleryController implements Serializable {
 
 
-    /**
-     * Autowired dependencies.
-     * Spring will automatically resolve and inject a matching bean from the Spring application context at runtime.
-     */
     @Autowired
     private PlantService plantService;
-
-
     @Autowired
     private ImageService imageService;
-
-
-
     @Autowired
     private GalleryController galleryController;
-
     @Autowired
     private transient SessionInfoBean sessionInfoBean;
 
@@ -88,18 +66,6 @@ public class PlantPhotoGalleryController implements Serializable {
         return galleryController.doGetPlantImages(idString);
     }
 
-    /**
-     * Method to get all approved images of all plants
-     * this is used in register.xhtml when it is loaded without opening a specific plantid from a qr code and is made so from there its possible
-     * to see a gallery containing all approved plant images in the system.
-     * */
-    //TODO: add error handling
-    public List<Image> doGetAllApprovedPlantImages() {
-        //if (idString == null){return new ArrayList<Image>();}
-        //return imageService.getAllPlantImages(idString);
-        return galleryController.doGetAllApprovedPlantImages();
-    }
-
 
     /**
      * Method to get all images of the cached plantid
@@ -111,42 +77,6 @@ public class PlantPhotoGalleryController implements Serializable {
     }
 
 
-
-
-
-
-
-    public ByteArrayInputStream getPhotoAsStreamedContent() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
-            byte []a = new byte[0];
-            return new ByteArrayInputStream(a);
-        } else {
-            String imageId = context.getExternalContext().getRequestParameterMap().get("id");
-            Image image = imageService.loadImage(Long.valueOf(imageId));
-            byte[] imageBytes = image.getImageByte();
-            return new ByteArrayInputStream(imageBytes);
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-//TODO: update the javadoc of this page
-
-    /**
-     * Sets the currently displayed sensor station and reloads it form db. This sensor station is
-     * targeted by any further calls of
-     * {@link #doReloadSensorStation()}, {@link #doSaveSensorStation()} and
-     * {@link #doDeleteSensorStation()}.
-     */
     public void setPlant(Plant plant) {
         this.plant = plant;
         doReloadPlant();
@@ -163,21 +93,6 @@ public class PlantPhotoGalleryController implements Serializable {
      */
     public void doReloadPlant() {
         plant = plantService.loadPlant(plant.getId());
-    }
-
-    /**
-     * Action to save the currently cached Sensor Station.
-     */
-    public void doSavePlant() {
-        plant = this.plantService.savePlant(plant);
-    }
-
-    /**
-     * Action to delete the currently cached Sensor Station.
-     */
-    public void doDeletePlant() {
-        this.plantService.deletePlant(plant);
-        plant = null;
     }
 
 
