@@ -87,6 +87,7 @@ public class PairingController {
                 //sensorStationService.saveSensorStation(sensorStationToPair);
                 break;
             }
+
         }
 
     }
@@ -101,6 +102,10 @@ public class PairingController {
     }
 
     public void abortPairing(){
+        SensorStation sensorStationtodeleteAccessPoint =
+                sensorStationService.loadSensorStation(sensorStationId);
+        sensorStationtodeleteAccessPoint.setAccessPoint(null);
+        sensorStationService.saveSensorStation(sensorStationtodeleteAccessPoint);
         System.out.println("im aborting pairing");
         interruptFlag = true;
     }
