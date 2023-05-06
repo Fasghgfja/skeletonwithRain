@@ -1,0 +1,7 @@
+maintainer: Stefan Huter
+
+webapp-params:
+  ip: localhost:8080
+  id: 50100
+  pswd: 54TvH6M70rprYy8HbVU8
+  usnm: accessPointsaccount

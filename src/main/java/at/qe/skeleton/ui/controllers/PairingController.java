@@ -53,7 +53,9 @@ public class PairingController {
     public void pair() {
         System.out.println("I'm pairing controller new! and I'm executing the pairing logic");
         SensorStation sensorStationToPair = sensorStationService.loadSensorStation(sensorStationId);
-
+        AccessPoint accessPointToPair = accessPointService.loadAccessPoint(accessPointId);
+        sensorStationToPair.setAccessPoint(accessPointToPair);
+        sensorStationService.saveSensorStation(sensorStationToPair);
         // Set the maximum time to search for sensors to 5 minutes (300,000 milliseconds)
         final long MAX_SEARCH_TIME_MS = 300000;
 
@@ -80,9 +82,9 @@ public class PairingController {
                 System.out.println("i found sensors so im pairing");
 
                 System.out.println(interruptFlag);
-                AccessPoint accessPointToPair = accessPointService.loadAccessPoint(accessPointId);
-                sensorStationToPair.setAccessPoint(accessPointToPair);
-                sensorStationService.saveSensorStation(sensorStationToPair);
+                //AccessPoint accessPointToPair = accessPointService.loadAccessPoint(accessPointId);
+                //sensorStationToPair.setAccessPoint(accessPointToPair);
+                //sensorStationService.saveSensorStation(sensorStationToPair);
                 break;
             }
         }

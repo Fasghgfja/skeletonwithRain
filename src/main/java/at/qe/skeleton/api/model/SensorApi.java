@@ -14,6 +14,10 @@ public class SensorApi {
     private String type;
     private int alarm_count;
 
+    private String upperBoarder;
+
+    private String lowerBoarder;
+
     @Override
     public String toString() {
         return "SensorApi{" +

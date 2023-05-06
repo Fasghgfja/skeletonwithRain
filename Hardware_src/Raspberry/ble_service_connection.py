@@ -29,7 +29,7 @@ async def writeAlarmSignal(uuid, switch, station_name):
 
 async def read_sensor_data(new_connection, device_list):
     # scanning for Sensorstation with name "G4T2"
-    sensor_index = 0
+    sensor_index = 1
     for station_name in device_list:
         device = await BleakScanner.find_device_by_name(station_name) # could also have timeout
         if device is None:

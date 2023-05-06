@@ -1,9 +1,12 @@
 package at.qe.skeleton.api.services;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
@@ -94,23 +97,32 @@ public class SensorStationServiceApi {
      * @return
      * @throws SensorStationNotFoundException
      */
-    public SensorStation findOneSensorStation(String id) throws SensorStationNotFoundException {
+    public String findOneSensorStation(String id) throws SensorStationNotFoundException {
+        System.out.println(id);
         SensorStation sensorStation = sensorStationRepository.findFirstById(id);
         if (sensorStation != null)
-            return sensorStation;
+            return sensorStation.getAlarmSwitch();
         else
             throw new SensorStationNotFoundException();
     }
 
     /**
-     * This method is called to find all sensorStations
+     * This method is called to find all sensorStationsby AccessPoint
      * @return
      * @throws SensorStationNotFoundException
      */
-    public List<SensorStation> findAllSensorStation() throws SensorStationNotFoundException {
-        List<SensorStation> sensorStations1 = sensorStationRepository.findAll();
+    public List<String> findAllSensorStation(Long id) throws SensorStationNotFoundException {
+        System.out.println(id);
+        List<SensorStation> sensorStations1 = sensorStationRepository.findAllByAccessPoint_AccessPointID(id);
+
+        ArrayList<String> stationNames = new ArrayList<>();
         if( sensorStations1.size() != NOITEMFOUND){
-            return sensorStations1;
+            for (SensorStation s:
+                 sensorStations1) {
+                System.out.println(s.getSensorStationName());
+                stationNames.add(s.getSensorStationName());
+            }
+            return stationNames;
         }
         else throw new SensorStationNotFoundException();
     }
@@ -128,8 +140,8 @@ public class SensorStationServiceApi {
         sensor.setUuid(sensorApi.getUuid());
         sensor.setType(sensorApi.getType());
         sensor.setAlarm_count(sensorApi.getAlarm_count());
-        sensor.setLower_border(Integer.toString(INITVALUE));
-        sensor.setUpper_border(Integer.toString(INITVALUE));
+        sensor.setLower_border(sensorApi.getLowerBoarder());
+        sensor.setUpper_border(sensorApi.getUpperBoarder());
         sensorService.saveSensor(sensor);
         // to check if it has been saved successfully
         if(sensorService.loadSensor(sensorApi.getSensor_id()) != null){
@@ -149,5 +161,16 @@ public class SensorStationServiceApi {
             sensorService.saveSensor(sensor);
         }else throw new SensorStationNotFoundException();
 
+    }
+
+    public SensorApi findOneSensor(Long id) throws SensorStationNotFoundException{
+        Sensor sensor = sensorService.loadSensor(id);
+        System.out.println(sensor.toString());
+        SensorApi sensorApi = new SensorApi();
+        sensorApi.setSensor_id(sensor.getId());
+        sensorApi.setAlarm_count(sensor.getAlarm_count());
+        sensorApi.setUpperBoarder(sensor.getUpper_border());
+        sensorApi.setLowerBoarder(sensor.getLower_border());
+        return sensorApi;
     }
 }

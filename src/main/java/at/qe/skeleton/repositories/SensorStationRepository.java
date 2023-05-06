@@ -24,6 +24,14 @@ public interface SensorStationRepository extends AbstractRepository<SensorStatio
      */
     List<SensorStation> findSensorStationsByGardener(@Param("gardener") Userx username );
 
+    List<SensorStation> findAllByAccessPoint_AccessPointID(Long id);
+    /* to delete Sensorstation
+    delete from MEASUREMENT where SENSOR_STATION_NAME='G4T2'
+    delete from SENSOR  where SENSOR_STATION_NAME='G4T2'
+    update SENSOR_STATION set ACCESS_POINT_ACCESS_POINTID=null where SENSOR_STATION_NAME='G4T2'
+    delete from SENSOR_STATION where SENSOR_STATION_NAME='G4T2'
+     */
+
 
     /**
      * Method to get a collection of all sensor stations assigned to a given gardener.
