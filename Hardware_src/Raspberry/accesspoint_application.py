@@ -33,8 +33,8 @@ if __name__ == '__main__':
                 print("Implement database")
                 DB_connection.implement_database()
                 time.sleep(1)
-                #program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
-                program_state = program_status.Is.WRITE_VALUES_TO_WEBAPP.value
+                program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+                #program_state = program_status.Is.CHECK_FOR_NEW_BOARDER_VALUES.value
 
             case program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value:
                 print("Call for new Sensorstation")
@@ -85,7 +85,7 @@ if __name__ == '__main__':
 
             case program_status.Is.CHECK_FOR_NEW_BOARDER_VALUES.value:
                 print("check webapp for new boarder values")
-                # TODO check webapp for new boarder values
+                rest_api.read_sensor_boarder_values()
                 time.sleep(1)
                 program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
 

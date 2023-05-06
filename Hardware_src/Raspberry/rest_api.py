@@ -12,8 +12,10 @@ measurements_url = "http://localhost:8080/api/measurements"
 get_sensorStations_url = "http://localhost:8080/api/sensorstations"
 post_sensorStations_url = "http://localhost:8080/api/sensorstations"
 post_sensor_url = "http://localhost:8080/api/sensors"
+get_sensor_boarder_value_url = "http://localhost:8080/api/sensorsboardervalue"
 get_Station_alarm_switch_url = "http://localhost:8080/api/getsensorstations"
 post_update_sensor_url = "http://localhost:8080/api/updatesensors"
+
 # server
 # auth = ("SHAdmin", "SHAdmin")
 #measurements_url = "http://srh-softwaresolutions.com/api/measurements"
@@ -95,6 +97,23 @@ def write_sensors_and_station_description(station_names):
                 exception_logging.logException(e, station[0])
     # TODO check if all new stations are added
 
+def read_sensor_boarder_values():
+    sensor_station_list = DB_connection.read_Sensor_Stationnames_Database().fetchall()
+    for station in sensor_station_list:
+        sensor_list = DB_connection.read_sensors_database(station[0]).fetchall()
+        for sensor in sensor_list:
+            sensor_id = sensor[0]
+            sensor_value = Sensor(sensor_id=sensor_id, uuid="",station_name="", type="", alarm_count=0)
+            response = requests.get(get_sensor_boarder_value_url, json=vars(sensor_value), auth=auth)
+            DB_connection.update_boarder_value(sensor[0],response.json()["upperBoarder"], response.json()["lowerBoarder"])
+            if sensor[4] != response.json()["alarm_count"]:
+                DB_connection.update_sensor_database(response.json()["alarm_count"], sensor[0])
+            print(response.json())
+            print("read_sensor_boarder")
+
+
+
+
 def write_alarm_switch(name, alarm_switch, description):
     try:
         station_values = StationValue(name=name, service_description=description, alarm_switch=alarm_switch)
@@ -106,7 +125,7 @@ def getSensorstations(getName, name):
     temp_sensorstation_names = []
     if getName:
         response = requests.get(get_sensorStations_url, auth=auth)
-
+#-------------------------------------------------------------------------
         if response.status_code == 200:
             data = response.json()
 

@@ -1,9 +1,11 @@
 package at.qe.skeleton.api.services;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
@@ -107,10 +109,15 @@ public class SensorStationServiceApi {
      * @return
      * @throws SensorStationNotFoundException
      */
-    public List<SensorStation> findAllSensorStation() throws SensorStationNotFoundException {
+    public ArrayList<String> findAllSensorStation() throws SensorStationNotFoundException {
         List<SensorStation> sensorStations1 = sensorStationRepository.findAll();
+        ArrayList<String> stationNames = new ArrayList<>();
+        for (SensorStation s:
+             sensorStations1) {
+            stationNames.add(s.getSensorStationName());
+        }
         if( sensorStations1.size() != NOITEMFOUND){
-            return sensorStations1;
+            return stationNames;
         }
         else throw new SensorStationNotFoundException();
     }
@@ -149,5 +156,16 @@ public class SensorStationServiceApi {
             sensorService.saveSensor(sensor);
         }else throw new SensorStationNotFoundException();
 
+    }
+
+    public SensorApi findOneSensor(Long id) throws SensorStationNotFoundException{
+        Sensor sensor = sensorService.loadSensor(id);
+        System.out.println(sensor.toString());
+        SensorApi sensorApi = new SensorApi();
+        sensorApi.setSensor_id(sensor.getId());
+        sensorApi.setAlarm_count(sensor.getAlarm_count());
+        sensorApi.setUpperBoarder(sensor.getUpper_border());
+        sensorApi.setLowerBoarder(sensor.getLower_border());
+        return sensorApi;
     }
 }

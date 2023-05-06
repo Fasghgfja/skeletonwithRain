@@ -57,6 +57,20 @@ def update_sensor_database(alarm_count, sensor_id):
     except Exception as e:
         exception_logging.logException(e, sensor_id)
 
+def update_boarder_value(sensor_id, lower_boarder, upper_boarder):
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+                update sensor set lower_boarder={0}, upper_boarder={1} where sensor_id={2}
+            '''.format(lower_boarder, upper_boarder, sensor_id))
+        conn.commit()
+        file1 = open("logFile.txt", "a")
+        file1.write("INFO: Sensor with sensor_id {0} has been updated upper_boarder to {1} and lower_boarder to {2} \n".format(sensor_id, upper_boarder, lower_boarder))
+        file1.close()
+        print("ok-----------------updateSensor")
+    except Exception as e:
+        exception_logging.logException(e, sensor_id)
 def implement_database():
     # TODO check database connection
 
