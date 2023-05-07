@@ -24,6 +24,7 @@ if __name__ == '__main__':
     ip = cfg["webapp-params"]["ip"]
     print(ip)
     value_count = 0
+    measurement = 0
     # new_SensorStation = True
     # program_state = program_status.Is.READ_SENSOR_VALUES.value
     while True:
@@ -49,7 +50,11 @@ if __name__ == '__main__':
                 except Exception as e:
                     exception_logging.logException(e, "rest_api read Station name")
                 time.sleep(1)
-                program_state = program_status.Is.READ_SENSOR_VALUES.value
+                measurement = + 1
+                if measurement > 100:
+                    program_state = program_status.Is.READ_SENSOR_VALUES.value
+                else:
+                    program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
 
             case program_status.Is.READ_SENSOR_VALUES.value:
                 print("Read Sensor data")

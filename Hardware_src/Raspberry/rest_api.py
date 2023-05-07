@@ -6,24 +6,26 @@ import DB_connection
 import exception_logging
 
 # local
-auth = ("admin", "passwd")
+#auth = ("admin", "passwd")
 
-measurements_url = "http://localhost:8080/api/measurements"
-get_sensorStations_url = "http://localhost:8080/api/sensorstations"
-post_sensorStations_url = "http://localhost:8080/api/sensorstations"
-post_sensor_url = "http://localhost:8080/api/sensors"
-get_sensor_boarder_value_url = "http://localhost:8080/api/sensorsboardervalue"
-get_Station_alarm_switch_url = "http://localhost:8080/api/getsensorstations"
-post_update_sensor_url = "http://localhost:8080/api/updatesensors"
+#measurements_url = "http://localhost:8080/api/measurements"
+#get_sensorStations_url = "http://localhost:8080/api/sensorstations"
+#post_sensorStations_url = "http://localhost:8080/api/sensorstations"
+#post_sensor_url = "http://localhost:8080/api/sensors"
+#get_sensor_boarder_value_url = "http://localhost:8080/api/sensorsboardervalue"
+#get_Station_alarm_switch_url = "http://localhost:8080/api/getsensorstations"
+#post_update_sensor_url = "http://localhost:8080/api/updatesensors"
 
 # server
-# auth = ("SHAdmin", "SHAdmin")
-#measurements_url = "http://srh-softwaresolutions.com/api/measurements"
-#get_sensorStations_url = "http://srh-softwaresolutions.com/api/sensorstations"
-#post_sensorStations_url = "http://srh-softwaresolutions.com/api/sensorstations"
-#post_sensor_url = "http://srh-softwaresolutions.com/api/sensors"
-#get_Station_alarm_switch_url = "http://srh-softwaresolutions.com/api/getsensorstations"
-#post_update_sensor_url = "http://srh-softwaresolutions.com/api/updatesensors"
+auth = ("SHAdmin", "SHAdmin")
+measurements_url = "http://srh-softwaresolutions.com/api/measurements"
+get_sensorStations_url = "http://srh-softwaresolutions.com/api/sensorstations"
+post_sensorStations_url = "http://srh-softwaresolutions.com/api/sensorstations"
+post_sensor_url = "http://srh-softwaresolutions.com/api/sensors"
+get_Station_alarm_switch_url = "http://srh-softwaresolutions.com/api/getsensorstations"
+post_update_sensor_url = "http://srh-softwaresolutions.com/api/updatesensors"
+get_sensor_boarder_value_url = "http://srh-softwaresolutions.com/api/sensorsboardervalue"
+
 id = 50100
 
 class SensorValue(object):
