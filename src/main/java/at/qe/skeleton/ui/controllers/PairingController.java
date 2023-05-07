@@ -28,6 +28,7 @@ public class PairingController {
     SensorService sensorService;
     String sensorStationId = "";
     Long accessPointId;
+    boolean sensorsFound;
     private volatile boolean interruptFlag = false;
 
 
@@ -60,7 +61,7 @@ public class PairingController {
         final long MAX_SEARCH_TIME_MS = 300000;
 
         long startTime = System.currentTimeMillis();
-        boolean sensorsFound = false;
+        sensorsFound = false;
         interruptFlag = false;
         while (!sensorsFound && (System.currentTimeMillis() - startTime < MAX_SEARCH_TIME_MS) && !interruptFlag) {
             sensorsFound = sensorService.areSensorsPresent(sensorStationToPair );
@@ -102,11 +103,13 @@ public class PairingController {
     }
 
     public void abortPairing(){
-        SensorStation sensorStationtodeleteAccessPoint =
-                sensorStationService.loadSensorStation(sensorStationId);
-        sensorStationtodeleteAccessPoint.setAccessPoint(null);
-        sensorStationService.saveSensorStation(sensorStationtodeleteAccessPoint);
-        System.out.println("im aborting pairing");
+        if(!sensorsFound) {
+            SensorStation sensorStationtodeleteAccessPoint =
+                    sensorStationService.loadSensorStation(sensorStationId);
+            sensorStationtodeleteAccessPoint.setAccessPoint(null);
+            sensorStationService.saveSensorStation(sensorStationtodeleteAccessPoint);
+            System.out.println("im aborting pairing");
+        }
         interruptFlag = true;
     }
 
