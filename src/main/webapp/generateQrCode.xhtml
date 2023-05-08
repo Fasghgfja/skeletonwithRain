@@ -5,13 +5,12 @@
                 xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
                 template="/WEB-INF/templates/main.xhtml">
 
-    <ui:define name="title">Empty Page</ui:define>
+    <ui:define name="title">Planthealth: GenerateQrCode</ui:define>
 
     <ui:define name="viewname">
-        <li>PAGES</li>
+        <li>Generate QrCode</li>
         <li><i class="pi pi-chevron-right"></i></li>
         <li>
-            <p:link outcome="/generateQrCode">Generate QrCode</p:link>
         </li>
     </ui:define>
     <f:metadata>
@@ -43,9 +42,12 @@
             </h:panelGrid>
             <h:outputText value="Fill color:" />
             <p:colorPicker value="#{qrCodeController.fillColor}"/>
-            <p:inputText id="link" value="#{qrCodeController.text}"/>
 
+            <h:outputText rendered="#{qrCodeController.id != 0}" value="Link:" />
             <h:outputText rendered="#{qrCodeController.id == 0}"  value="Insert Plant Id To Generate A Qr Code"/>
+
+            <p:inputText style="width: 100%;" disabled="#{qrCodeController.id != 0}" id="link" value="#{qrCodeController.text}"/>
+
             <p:commandButton value="update" update="qrCodeElem">
             </p:commandButton>
 

@@ -224,6 +224,9 @@ public class GalleryController implements Serializable {
 
 
 
+
+
+
     public void doDeleteImage(Image image) {
         imageService.deleteImage(image);
     }
@@ -233,6 +236,23 @@ public class GalleryController implements Serializable {
         System.out.println("gallery controller: approvingImage");
         image.setApproved(true);
         imageService.saveImage(image);
+    }
+
+
+
+
+
+    public Integer getTotalImagesAmount() {
+        return imageService.getTotalImagesAmount();
+    }
+    public Integer getApprovedImagesAmount() {
+        return imageService.getApprovedImagesAmount();
+    }
+    public Integer getNotApprovedImagesAmount() {
+        return imageService.getNotApprovedImagesAmount();
+    }
+    public Integer getApprovedImagesNoPlantAmount() {
+        return imageService.getApprovedImagesNoPlantAmount();
     }
 
 

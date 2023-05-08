@@ -167,4 +167,19 @@ public class ImageService {
     }
 
 
+    public Integer getTotalImagesAmount() {
+        return imageRepository.count();
+    }
+    public Integer getApprovedImagesAmount() {
+       return imageRepository.countImagesByApprovedEquals(true);
+    }
+    public Integer getNotApprovedImagesAmount() {
+        return imageRepository.countImagesByApprovedEquals(false);
+    }
+    public Integer getApprovedImagesNoPlantAmount() {
+        return imageRepository.countImagesByApprovedEqualsAndPlantEquals(true,null);
+    }
+
+
+
 }
