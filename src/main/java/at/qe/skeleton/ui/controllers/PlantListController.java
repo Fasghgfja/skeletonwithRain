@@ -5,19 +5,24 @@ import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.services.PlantService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
 @Component
 @Scope("view")
 public class PlantListController {
+
+    private List<Plant> notYetFollowedPlantsList;
 
     @Autowired
     private SessionInfoBean sessionInfoBean;
@@ -28,6 +33,12 @@ public class PlantListController {
     /**
      * The method is Only used in the scrolldown menu for plant selection.
      */
+
+    @PostConstruct
+    public void init(){
+        Userx user = getSessionInfoBean().getCurrentUser();
+        notYetFollowedPlantsList = (ArrayList<Plant>) plantService.getOnlyPlantsNotYetFollowed(user);
+    }
     public Collection<String> getPlantsUniqueNames() {
         return plantService.getAllPlantsUniqueNames();
     }

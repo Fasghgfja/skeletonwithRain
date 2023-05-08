@@ -16,7 +16,7 @@
 
                 <div class="card">
                     <h5>Plant's Catalogue</h5>
-                    <p:dataTable id="plantsTable" var="plant" value="#{plantListController.doGetOnlyPlantsNotYetFollowed()}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
+                    <p:dataTable id="plantsTable" var="plant" value="#{plantListController.notYetFollowedPlantsList}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 
                         <p:column >
@@ -43,8 +43,9 @@
 
                             <!-- ....................FOLLOW PLANT BUTTON ........... .............. -->
                             <p:commandButton style="margin-left: 10px" icon="pi pi-plus"
-                                      title="Follow Plant"
-                                             update=":userForm:plantsTable">
+                                            title="Follow Plant"
+                                             update=":userForm:plantsTable"
+                                            oncomplete="location.reload();">
                                 <p:ajax event="click" listener="#{userDetailController.doAddPlantToFollowedPlants(plant)}"/>
                             </p:commandButton>
 
