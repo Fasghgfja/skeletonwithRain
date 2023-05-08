@@ -3,7 +3,6 @@ package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Image;
 import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.ImageRepository;
 import at.qe.skeleton.repositories.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;

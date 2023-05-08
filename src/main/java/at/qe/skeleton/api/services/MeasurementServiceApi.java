@@ -53,12 +53,12 @@ public class MeasurementServiceApi {
         measurement1.setSensorStation(sensorStation);
 
         String type = measurement.getType();
-        if (type.equals("TempSensor")) {measurement1.setType("SOIL_MOISTURE");}
-        if (type.equals("LigthSensor")) {measurement1.setType("HUMIDITY");}
-        if (type.equals("HygroSensor")) {measurement1.setType("AIR_PRESSURE");}
-        if (type.equals("GasSensor")) {measurement1.setType("TEMPERATURE");}
-        if (type.equals("humiditySensor")) {measurement1.setType("AIR_QUALITY");}
-        if (type.equals("PressureSensor")) {measurement1.setType("LIGHT_INTENSITY");}
+        if (type.equals("TempSensor")) {measurement1.setType("TEMPERATURE");}
+        if (type.equals("LigthSensor")) {measurement1.setType("LIGHT_INTENSITY");}//TODO: is it correct now? SH pleaqse change the names hw side : D
+        if (type.equals("HygroSensor")) {measurement1.setType("SOIL_MOISTURE");}
+        if (type.equals("GasSensor")) {measurement1.setType("AIR_QUALITY");}
+        if (type.equals("humiditySensor")) {measurement1.setType("HUMIDITY");}
+        if (type.equals("PressureSensor")) {measurement1.setType("AIR_PRESSURE");}
         measurement1.setTimestamp(dateTime);
         measurement1.setValue_s(measurement.getValue());
         measurementRepository.save(measurement1);

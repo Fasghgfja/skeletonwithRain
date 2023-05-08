@@ -31,6 +31,9 @@ public class PlantListController {
     public Collection<String> getPlantsUniqueNames() {
         return plantService.getAllPlantsUniqueNames();
     }
+    public Collection<String> getNotUsedPlantsUniqueNames() {
+        return plantService.getAllNotUsedPlantsUniqueNames();
+    }
 
     public Collection<Plant> getPlants() {
         return plantService.getAllPlants();
@@ -48,6 +51,10 @@ public class PlantListController {
     public Collection<Plant> doGetFollowedPlants() {
         Userx user = sessionInfoBean.getCurrentUser();
         return this.plantService.getFollowedPlants(user);
+    }
+
+    public void deleteAllPlantsWithoutSensorStation() {
+        this.plantService.deleteAllPlantsWithoutSensorStation();
     }
 
 

@@ -55,6 +55,8 @@ public class SensorStationDetailController implements Serializable {
     private Plant plant;
     private String selectedPlantName;
 
+    private Plant selectedPlant; //TODO: new
+
     boolean fixed = false;
 
 
@@ -136,7 +138,7 @@ public class SensorStationDetailController implements Serializable {
 
     //TODO:Better error handling , put error handling at beginning and remove nested ifs
     public void doChangeThePlantAndSave() {
-        if (selectedPlantName != null){
+        if (selectedPlantName != null && !selectedPlantName.equals("")){
             if(sensorStation.getPlant() != null){
                 Plant oldPlant = plantService.loadPlant(sensorStation.getPlant().getId());
                 oldPlant.setSensorStation(null);

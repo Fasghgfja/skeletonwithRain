@@ -39,7 +39,6 @@
                                 <div class="overview">
                                     <span class="overview-title">TEMPERATURE</span>
                                     <h3>query</h3>
-                                    <span><span>72</span> new measurements since last visit</span>
                                 </div>
                             </div>
                         </p:commandLink>
@@ -56,7 +55,6 @@
                                 <div class="overview">
                                     <span class="overview-title">AIR HUMIDITY</span>
                                     <h3>532</h3>
-                                    <span><span>48</span> new city since last visit</span>
                                 </div>
                             </div>
                         </p:commandLink>
@@ -74,7 +72,6 @@
                                 <div class="overview">
                                     <span class="overview-title">GROUND HUMIDITY</span>
                                     <h3>12.6%</h3>
-                                    <span><span>1.8%</span> increase since last visit</span>
                                 </div>
                             </div>
                         </p:commandLink>
@@ -92,7 +89,6 @@
                                 <div class="overview">
                                     <span class="overview-title">LIGHT INTENSITY</span>
                                     <h3>440</h3>
-                                    <span><span>24</span> new since last visit</span>
                                 </div>
                             </div>
                         </p:commandLink>
@@ -131,7 +127,6 @@
                                 <div class="overview">
                                     <span class="overview-title">AIR PRESSURE</span>
                                     <h3>queue</h3>
-                                    <span><span>72</span> new users since last visit</span>
                                 </div>
                             </div>
                         </p:commandLink>
@@ -148,7 +143,6 @@
                                 <div class="overview">
                                     <span class="overview-title">AIR QUALITY</span>
                                     <h3>532</h3>
-                                    <span><span>48</span> new city since last visit</span>
                                 </div>
                             </div>
                         </p:commandLink>
@@ -391,20 +385,20 @@
                                                 <h:outputText value="3 options" style="font-weight:bold;"/>
                                             </f:facet>
                                         </p:selectOneMenu>
+
+
+                                        <p:outputLabel for="newPlant" value="New Plant name:"/>
+                                        <p:inputText id="newPlant" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.selectedPlantName}"/>
                                         <!-- ................ ............................................-->
                                         <!-- ................REAL IMPUT FIELDS............................-->
                                         <p:outputLabel for="sensorStationlocation" value="Location:"/>
                                         <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
 
-                                        <p:outputLabel for="sensorStationPlant" value="New Plant:"/>
-                                        <p:selectOneMenu id="sensorStationPlant" filter="true" emptyLabel="Plant"
-                                                         scrollHeight="250" updateLabel="true" value="#{sensorStationDetailController.selectedPlantName}">
-                                            <f:selectItems value="#{plantListController.plantsUniqueNames}" />
-                                            <f:facet name="footer">
-                                                <p:divider styleClass="mt-0" />
-                                                <h:outputText value="3 options" style="font-weight:bold;"/>
-                                            </f:facet>
-                                        </p:selectOneMenu>
+
+
+
+
+
                                         <!-- ...TOGGLESWITCH FOR THE ALARM....-->
                                         <p:outputLabel rendered="#{sensorStationDetailController.fixed == false}" for="sensorStationswitchEdit" value="Alarm Switch to Fixed(if not):" />
                                         <p:toggleSwitch id ="sensorStationswitchEdit" rendered="#{sensorStationDetailController.fixed == false}" value="#{sensorStationDetailController.fixed}"/>
@@ -436,8 +430,8 @@
                                         <!-- ....................CHANGE PLANT BUTTON ........... .............. -->
                                         <p:commandButton styleClass="ui-button-danger"
                                                          action="#{sensorStationDetailController.doChangeThePlantAndSave()}" icon="pi pi-user-minus"
-                                                         value="Change Plant"
-                                                         update="EditThisSensorStation:sensorStationData " >
+                                                         value="Change Plant" oncomplete="location.reload();"
+                                                          >
                                             <p:confirm header="Confirmation"
                                                        message="Are you sure that you want to change the Plant ? You cannot undo this operation. A new Plant with the selected type/name will be created."
                                                        icon="pi pi-exclamation-triangle"/>

@@ -25,10 +25,21 @@
         <h:form id="userForm">
             <div class="col-12">
                 <!-- ....................PLANT CREATE button..................... -->
-                <p:commandButton style="margin-bottom: 10px" value="Create new Plant" rendered="#{sessionInfoBean.hasRole('ADMIN')}" update="plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
-                                 icon="pi pi-user-plus" title="New User" class="btn btn-primary">
+                <p:commandButton style="margin-bottom: 10px; margin-right: 20px" value="Create new Plant" rendered="#{sessionInfoBean.hasRole('ADMIN')}" update="plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
+                                 icon="pi pi-user-plus" title="New User" class="btn btn-primary" >
                     <p:resetInput target=":plantCreateDialog:createPlantDialog"/>
                 </p:commandButton>
+
+
+                <!-- ....................Delete all plants without Sensor Station button..................... -->
+                <p:commandButton style="margin-bottom: 10px; background-color: red" value="Delete all Plants Without Sensor Station" rendered="#{sessionInfoBean.hasRole('ADMIN')}" oncomplete="location.reload();" action="#{plantListController.deleteAllPlantsWithoutSensorStation()}"
+                                 icon="pi pi-user-minus" title="New User" class="btn btn-primary">
+                    <p:confirm header="Confirmation"
+                               message="Are you sure ? You cannot undo this operation.
+                                        All the pictures linked to this plants will be transferred to general gallery"
+                               icon="pi pi-exclamation-triangle"/>
+                </p:commandButton>
+
 
                 <div class="card">
                     <h5>Plant Management</h5>
