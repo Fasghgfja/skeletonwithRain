@@ -7,6 +7,7 @@ import exception_logging
 
 # local
 auth = ("admin", "passwd")
+log_id = 0
 
 measurements_url = "http://localhost:8080/api/measurements"
 get_sensorStations_url = "http://localhost:8080/api/sensorstations"
@@ -14,6 +15,7 @@ post_sensorStations_url = "http://localhost:8080/api/sensorstations"
 post_sensor_url = "http://localhost:8080/api/sensors"
 get_Station_alarm_switch_url = "http://localhost:8080/api/getsensorstations"
 post_update_sensor_url = "http://localhost:8080/api/updatesensors"
+post_log_url = "http://srh-softwaresolutions.com/admin/auditLog.xhtml"
 # server
 # auth = ("SHAdmin", "SHAdmin")
 #measurements_url = "http://srh-softwaresolutions.com/api/measurements"
@@ -155,3 +157,30 @@ def update_Sensor(sensor_id, alarm_count):
         requests.post(post_update_sensor_url, json=vars(sensor_value), auth=auth)
     except Exception as e:
         exception_logging.logException(e, "write alarm_count to webapp")
+
+
+class Log_data(object):
+    def __init__(self, text: str, subject: str, author: str, date: str, time: str):
+        self.text = text
+        self.subject = subject
+        self.author = author
+        self.date = date
+        self.time = time
+
+
+def send_log_data_to_webapp():
+    file1 = open("logFile.txt", "r")
+    log_data = file1.read()
+
+    values = log_data.split('\n\n')
+
+    for value in values:
+
+        temp_log_data = Log_data(text=values, subject="LogData from Sensorstation", author="ADMIN", date="testdatum", time="testtime")
+
+        r = requests.post(post_log_url, json=vars(temp_log_data), auth=auth)
+        print("test")
+        # if r.status_code == 500:
+        # DB_connection.delete_values(sensor[0], value[1])
+
+
