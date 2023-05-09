@@ -7,8 +7,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -44,15 +42,25 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    /**
+     * Method to get all gardeners currently saved in the database.
+     * @return Collection of Userx with role 'GARDENER'
+     */
     @PreAuthorize("hasAuthority('ADMIN')")
     public Collection<Userx> getAllGardeners() {
         return userRepository.findByRole(UserRole.GARDENER);
     }
 
+    /**
+     * Method to get all names of the user with role 'GARDENER' currently saved in the database.
+     */
     public Collection<String> getAllGardenerNames() {
         return userRepository.findNamesByRole(UserRole.GARDENER);
     }
 
+    /**
+     * Method to get the amount of users currently stored in the database.
+     */
 
     public Integer getUsersAmount() {
         return userRepository.count();
@@ -69,7 +77,7 @@ public class UserService {
         return userRepository.findFirstByUsername(username);
     }
 
-
+    //TODO: Nicht verwendet, LÖSCHEN falls nicht benötigt; NICHT GETESTET
     @PreAuthorize("hasAuthority('ADMIN') or principal.username eq #username")
     public Userx loadUserById(String id) {
         return userRepository.findFirstById(Long.parseLong(id));
@@ -123,6 +131,12 @@ public class UserService {
         return userRepository.findFirstByUsername(auth.getName());
     }
 
+    /**
+     * Method to add a plant to the followed plants of the user
+     * @param user Currently logged in user.
+     * @param plant Plant that user likes to follow.
+     */
+
     public void addPlantToFollowedPlants(Userx user, Plant plant) {
         if(user == null || plant == null || plant.getFollowers().contains(user)) {return;}
         user = userRepository.findFirstByUsername(user.getUsername());
@@ -130,6 +144,11 @@ public class UserService {
         userRepository.save(user);
     }
 
+    /**
+     * Removes an already followed plant from the users followed plants.
+     * @param user Currently logged in user.
+     * @param plant Plant to remove from the followed plants.
+     */
 
     public void removePlantFromFollowedPlants(Userx user, Plant plant) {
         if(user == null || plant == null) {return;}
