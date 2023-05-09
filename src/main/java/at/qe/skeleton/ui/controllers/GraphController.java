@@ -91,6 +91,15 @@ public class GraphController implements Serializable {
     }
 
 
+    public void selectLineGraph(String type, SensorStation sensorStation) {//todo:new
+        createCartesianLinerModel();
+        latestMeasurements = new ArrayList<>(measurementService.getAllMeasurementsBySensorStationAndType(sensorStation,type));
+        if (!latestMeasurements.isEmpty()) {
+            createLineModel(latestMeasurements);
+        }
+    }
+
+
 
 
     /**

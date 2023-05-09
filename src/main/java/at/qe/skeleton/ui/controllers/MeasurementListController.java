@@ -31,6 +31,10 @@ public class MeasurementListController implements Serializable {
     @Autowired
     private SensorStationDetailController sensorStationDetailController;
 
+    @Autowired
+    private GraphController graphController;
+
+
     @PostConstruct
     public void init(){
         SensorStation sensorStation = sensorStationDetailController.getSensorStation();
@@ -41,7 +45,7 @@ public class MeasurementListController implements Serializable {
 
      /**This retieves the status of the alarm of a sensor of a sensor station
       * it will be Ok if alarm count is less then a fix number , and wronng if alarm count too high*/
-    public String getSensorStatus(String type, SensorStation sensorStation) {//TODO:.. new...
+    public String getSensorStatus(String type, SensorStation sensorStation) {
         return sensorService.getSensorStatus(type,sensorStation);
     }
 
@@ -92,40 +96,44 @@ public class MeasurementListController implements Serializable {
         }
     }
 
-    public void onAirQualityClick() {
+
+
+
+    public void onAirQualityClick() {//todo:move them all to graph controller and so
         type = "AIR_QUALITY";
         SensorStation sensorStation = sensorStationDetailController.getSensorStation();
         setMeasurementsForSensorStationList((ArrayList<Measurement>) measurementService.getAllMeasurementsBySensorStationAndType(sensorStation,type));
+        graphController.selectLineGraph("AIR_QUALITY",sensorStation);
     }
-
     public void onTempClick() {
         type = "TEMPERATURE";
         SensorStation sensorStation = sensorStationDetailController.getSensorStation();
         setMeasurementsForSensorStationList((ArrayList<Measurement>) measurementService.getAllMeasurementsBySensorStationAndType(sensorStation,type));
+        graphController.selectLineGraph("TEMPERATURE",sensorStation);
     }
-
     public void onAirHumidityClick() {
         type = "HUMIDITY";
         SensorStation sensorStation = sensorStationDetailController.getSensorStation();
         setMeasurementsForSensorStationList((ArrayList<Measurement>) measurementService.getAllMeasurementsBySensorStationAndType(sensorStation,type));
+        graphController.selectLineGraph("HUMIDITY",sensorStation);
     }
-
     public void onGroundHumidityClick() {
         type = "SOIL_MOISTURE";
         SensorStation sensorStation = sensorStationDetailController.getSensorStation();
         setMeasurementsForSensorStationList((ArrayList<Measurement>) measurementService.getAllMeasurementsBySensorStationAndType(sensorStation,type));
+        graphController.selectLineGraph("SOIL_MOISTURE",sensorStation);
     }
-
     public void onAirPressureClick() {
         type = "AIR_PRESSURE";
         SensorStation sensorStation = sensorStationDetailController.getSensorStation();
         setMeasurementsForSensorStationList((ArrayList<Measurement>) measurementService.getAllMeasurementsBySensorStationAndType(sensorStation,type));
+        graphController.selectLineGraph("AIR_PRESSURE",sensorStation);
     }
-
     public void onLightIntensityClick() {
         type = "LIGHT_INTENSITY";
         SensorStation sensorStation = sensorStationDetailController.getSensorStation();
         setMeasurementsForSensorStationList((ArrayList<Measurement>) measurementService.getAllMeasurementsBySensorStationAndType(sensorStation,type));
+        graphController.selectLineGraph("LIGHT_INTENSITY",sensorStation);
     }
 
 

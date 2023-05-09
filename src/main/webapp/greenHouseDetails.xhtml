@@ -30,7 +30,7 @@
 
                     <!-- ...............................TEMPERATURE BOX................................................ -->
                     <div class="col-12 md:col-6 xl:col-3">
-                        <p:commandLink action="#{measurementListController.onTempClick()}" update="myDataTable1">
+                        <p:commandLink action="#{measurementListController.onTempClick()}" update="myDataTable1 mylineChart">
                             <div class="card  overview-box">
                                 <p:graphicImage name="images/dashboard/effect-useronline.svg"/>
                                 <span class="overview-icon">
@@ -38,7 +38,7 @@
                         </span>
                                 <div class="overview">
                                     <span class="overview-title">TEMPERATURE</span>
-                                    <h3>query</h3>
+                                    <h3>query</h3><!-- ...............TODO:add the query.......... -->
                                 </div>
                             </div>
                         </p:commandLink>
@@ -46,7 +46,7 @@
 
                     <!-- ...............................AIR HUMIDITY BOX............................................... -->
                     <div class="col-12 md:col-6 xl:col-3">
-                        <p:commandLink action="#{measurementListController.onAirHumidityClick()}" update="myDataTable1">
+                        <p:commandLink action="#{measurementListController.onAirHumidityClick()}" update="myDataTable1 mylineChart">
                             <div class="card overview-box">
                                 <p:graphicImage name="images/dashboard/effect-checkins.svg"/>
                                 <span class="overview-icon">
@@ -54,7 +54,7 @@
                         </span>
                                 <div class="overview">
                                     <span class="overview-title">AIR HUMIDITY</span>
-                                    <h3>532</h3>
+                                    <h3>532</h3><!-- ...............TODO:add the query.......... -->
                                 </div>
                             </div>
                         </p:commandLink>
@@ -63,7 +63,7 @@
                     <!-- ...............................GROUND HUMIDITY BOX............................................ -->
                     <div class="col-12 md:col-6 xl:col-3">
                         <p:commandLink action="#{measurementListController.onGroundHumidityClick()}"
-                                       update="myDataTable1">
+                                       update="myDataTable1 mylineChart">
                             <div class="card overview-box ">
                                 <p:graphicImage name="images/dashboard/effect-filessynced.svg"/>
                                 <span class="overview-icon">
@@ -71,7 +71,7 @@
                         </span>
                                 <div class="overview">
                                     <span class="overview-title">GROUND HUMIDITY</span>
-                                    <h3>12.6%</h3>
+                                    <h3>12.6%</h3><!-- ...............TODO:add the query.......... -->
                                 </div>
                             </div>
                         </p:commandLink>
@@ -80,7 +80,7 @@
                     <!-- ...............................LIGHT INTENSITY BOX............................................ -->
                     <div class="col-12 md:col-6 xl:col-3">
                         <p:commandLink action="#{measurementListController.onLightIntensityClick()}"
-                                       update="myDataTable1">
+                                       update="myDataTable1 mylineChart">
                             <div class="card overview-box">
                                 <p:graphicImage name="images/dashboard/effect-messages.svg"/>
                                 <span class="overview-icon">
@@ -88,7 +88,7 @@
                         </span>
                                 <div class="overview">
                                     <span class="overview-title">LIGHT INTENSITY</span>
-                                    <h3>440</h3>
+                                    <h3>440</h3><!-- ...............TODO:add the query.......... -->
                                 </div>
                             </div>
                         </p:commandLink>
@@ -118,7 +118,7 @@
 
                     <!-- ...............................AIR PRESSURE BOX............................................... -->
                     <div class="col-12 md:col-6 xl:col-3">
-                        <p:commandLink action="#{measurementListController.onAirPressureClick()}" update="myDataTable1">
+                        <p:commandLink action="#{measurementListController.onAirPressureClick()}" update="myDataTable1 mylineChart">
                             <div class="card  overview-box">
                                 <p:graphicImage name="images/dashboard/effect-useronline.svg"/>
                                 <span class="overview-icon">
@@ -126,7 +126,7 @@
                         </span>
                                 <div class="overview">
                                     <span class="overview-title">AIR PRESSURE</span>
-                                    <h3>queue</h3>
+                                    <h3>query</h3>                    <!-- ...............TODO:add the query.......... -->
                                 </div>
                             </div>
                         </p:commandLink>
@@ -134,7 +134,7 @@
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................AIR QUALITY BOX............................................ -->
-                        <p:commandLink action="#{measurementListController.onAirQualityClick()}" update="myDataTable1">
+                        <p:commandLink action="#{measurementListController.onAirQualityClick()}" update="myDataTable1 mylineChart">
                             <div class="card overview-box">
                                 <p:graphicImage name="images/dashboard/effect-checkins.svg"/>
                                 <span class="overview-icon">
@@ -142,7 +142,7 @@
                         </span>
                                 <div class="overview">
                                     <span class="overview-title">AIR QUALITY</span>
-                                    <h3>532</h3>
+                                    <h3>532</h3><!-- ...............TODO:add the query.......... -->
                                 </div>
                             </div>
                         </p:commandLink>
@@ -244,7 +244,7 @@
                             <p:graphicImage name="images/dashboard/icon-messages.png"/>
                         </span>
                                 <div class="overview">
-                                    <span class="overview-title">MOST RECENT MEASUREMENT</span>
+                                    <span class="overview-title">ALL TYPES</span>
                                     <h3>440</h3>
                                     <span><span>24</span> new since last visit</span>
                                 </div>
@@ -268,7 +268,8 @@
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="card chart">
                         <div class="card-header">
-                            <h5>Selected Measurement type History Graph</h5>
+                            <h5>SensorStation: #{sensorStationDetailController.sensorStation}</h5>
+                            Press One of the topboxes to show the graph for your choosen measurement type
                         </div>
                         <div class="card">
                             <p:lineChart id="mylineChart" model="#{graphController.lineModel}"/>
@@ -286,7 +287,7 @@
                                      value="#{measurementListController.measurementsForSensorStationList}"
                                      selectionMode="single" reflow="true"
                                      rowKey="#{measurement.sensorStation.sensorStationName}" scrollable="true"
-                                     scrollHeight="350" rows="50" paginator="true" paginatorPosition="bottom"
+                                     scrollHeight="250" rows="50" paginator="true" paginatorPosition="bottom"
                                      styleClass="ui-datatable-striped ui-datatable-sm ui-datatable-gridlines">
 
                             <!-- ........THIS CAN BE ADDED TO ANY INTERACTIVE ELEMENT TO REFRESH SOMETHING............ -->
@@ -295,15 +296,10 @@
 
                             <f:facet name="header">
                                 <div class="customers-table-header">
-                                    <span style="font-weight: bold">Last measurements</span>
-
-                                    <span class="ui-input-icon-left filter-container">
-                                        <i class="pi pi-search"/>
-                                        <p:inputText id="globalFilter" onkeyup="PF('customersDT2').filter()"
-                                                     placeholder="Search"/>
-                                    </span>
+                                    <span> Press on a TopBox to chose a measurement type</span>
                                 </div>
                             </f:facet>
+                            <!-- ........TODO: no reason to see the sensor station here , remove it after debugging phase............ -->
                             <p:column headerText="Sensor Station"
                                       sortBy="#{measurement.sensorStation.sensorStationName}"
                                       filterBy="#{measurement.sensorStation.sensorStationName}">
