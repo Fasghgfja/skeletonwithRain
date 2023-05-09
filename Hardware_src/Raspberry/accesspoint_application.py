@@ -14,6 +14,8 @@ from pprint import pprint
 program_state = 0
 if __name__ == '__main__':
     # TODO read config.yaml
+    rest_api.send_log_data_to_webapp()
+
     try:
         with open("../config.yaml") as f:
             cfg = yaml.load(f, Loader=yaml.FullLoader)

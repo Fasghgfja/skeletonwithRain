@@ -2293,3 +2293,26 @@ INFO: Sensor with sensor_id 3 has been updated alarm_count to 3
 INFO: Sensor with sensor_id 4 has been updated alarm_count to 3 
 INFO: Sensor with sensor_id 5 has been updated alarm_count to 3 
 INFO: Boarder values have been checked at 05/01/23__14:40:29
+ERROR: On characteristic Filter New Stations. Error is 'NoneType' object has no attribute 'remove' at 05/09/23__14:08:25
+ERROR: On characteristic rest_api read Station name. Error is object of type 'NoneType' has no len() at 05/09/23__14:08:25
+ERROR: On characteristic call_read_values. Error is [WinError -2147020577] The device is not ready for use at 05/09/23__14:08:26
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 4 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 4 
+INFO: Boarder values have been checked at 05/09/23__14:08:29
+ERROR: On characteristic Filter New Stations. Error is 'NoneType' object has no attribute 'remove' at 05/09/23__14:08:45
+ERROR: On characteristic rest_api read Station name. Error is object of type 'NoneType' has no len() at 05/09/23__14:08:45
+ERROR: On characteristic call_read_values. Error is [WinError -2147020577] The device is not ready for use at 05/09/23__14:08:46
+INFO: Sensor with sensor_id 0 has been updated alarm_count to 5 
+INFO: Sensor with sensor_id 1 has been updated alarm_count to 5 
+INFO: Sensor with sensor_id 2 has been updated alarm_count to 5 
+INFO: Sensor with sensor_id 3 has been updated alarm_count to 5 
+INFO: Sensor with sensor_id 4 has been updated alarm_count to 5 
+INFO: Sensor with sensor_id 5 has been updated alarm_count to 5 
+INFO: Boarder values have been checked at 05/09/23__14:08:47
+ERROR: On characteristic Filter New Stations. Error is 'NoneType' object has no attribute 'remove' at 05/09/23__14:09:05
+ERROR: On characteristic rest_api read Station name. Error is object of type 'NoneType' has no len() at 05/09/23__14:09:05
+ERROR: On characteristic call_read_values. Error is [WinError -2147020577] The device is not ready for use at 05/09/23__14:09:06

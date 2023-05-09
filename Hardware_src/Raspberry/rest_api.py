@@ -15,7 +15,7 @@ post_sensorStations_url = "http://localhost:8080/api/sensorstations"
 post_sensor_url = "http://localhost:8080/api/sensors"
 get_Station_alarm_switch_url = "http://localhost:8080/api/getsensorstations"
 post_update_sensor_url = "http://localhost:8080/api/updatesensors"
-post_log_url = "http://srh-softwaresolutions.com/admin/auditLog.xhtml"
+post_log_url = "http://localhost:8080/admin/auditLog.xhtml"
 # server
 # auth = ("SHAdmin", "SHAdmin")
 #measurements_url = "http://srh-softwaresolutions.com/api/measurements"
@@ -160,7 +160,7 @@ def update_Sensor(sensor_id, alarm_count):
 
 
 class Log_data(object):
-    def __init__(self, text: str, subject: str, author: str, date: str, time: str):
+    def __init__(self, text: str, subject: str, author: str, date: str, time: str, type: str):
         self.text = text
         self.subject = subject
         self.author = author
@@ -169,18 +169,33 @@ class Log_data(object):
 
 
 def send_log_data_to_webapp():
-    file1 = open("logFile.txt", "r")
-    log_data = file1.read()
 
-    values = log_data.split('\n\n')
+    with open('logfile.txt', 'r') as file:
+        for line in file:
 
-    for value in values:
+            if line.startswith('ERROR: On characteristic'):
+                error_msg = line.split('ERROR:', 1)[1].split('at', 1)[0].strip()
+                datetime_str = line.rsplit('at', 1)[-1].strip()
+                date_str, time_str = datetime_str.split('__')
+                temp_log_data = Log_data(text=error_msg, subject="Characteristics", author="ACCESSPOINT", date=date_str, time=time_str, type="ERROR")
+                response = requests.post(post_log_url, json=vars(temp_log_data), auth=auth)
+                print(response.status_code)
 
-        temp_log_data = Log_data(text=values, subject="LogData from Sensorstation", author="ADMIN", date="testdatum", time="testtime")
+            elif line.startswith('ERROR: Could not'):
+                error_msg = line.split('ERROR:', 1)[1].split('at', 1)[0].strip()
+                datetime_str = line.rsplit('at', 1)[-1].strip()
+                date_str, time_str = datetime_str.split('__')
+                temp_log_data = Log_data(text=error_msg, subject="DEVICE", author="ACCESSPOINT", date=date_str, time=time_str, type="ERROR")
+                response = requests.post(post_log_url, json=vars(temp_log_data), auth=auth)
+                print(response.status_code)
 
-        r = requests.post(post_log_url, json=vars(temp_log_data), auth=auth)
-        print("test")
-        # if r.status_code == 500:
-        # DB_connection.delete_values(sensor[0], value[1])
+            elif line.startswith('WARNING'):
+                error_msg = line.split('WARNING', 1)[1].split('at', 1)[0].strip()
+                datetime_str = line.rsplit('at', 1)[-1].strip()
+                date_str, time_str = datetime_str.split('__')
+                temp_log_data = Log_data(text=error_msg, subject="Characteristics", author="ACCESSPOINT", date=date_str, time=time_str, type="WARNING")
+                response = requests.post(post_log_url, json=vars(temp_log_data), auth=auth)
+                print(response.status_code)
+
 
 
