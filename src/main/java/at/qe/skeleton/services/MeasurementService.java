@@ -32,18 +32,37 @@ public class MeasurementService {
 
 
     //................methods to find a Measurement or a list of measurements with different parameters
+    // TODO: Methoden werden nicht verwendet. Bitte löschen. NICHT GETESTET.
     public Measurement findMeasurementById(Long id) {
         return measurementRepository.findFirstById(id);
     }
     public Measurement findFirstMeasurementBySensorStationIdAndType(String sensorStationId,String type) {
         return measurementRepository.findFirstBySensorStationIdAndType(sensorStationId,type);
     }
+
+    /**
+     * Method to get all measurements currently stored in the database.
+     * @return Collection of all measurements.
+     */
     public Collection<Measurement> getAllMeasurements() {
         return measurementRepository.findAll();
     }
+
+    /**
+     * Method to get all Measurements of a given sensor station from the database.
+     * @param sensorStation measurements of this sensor station will be return in a way that the latest measurements are displayed first.
+     * @return Collection of measurements.
+     */
     public Collection<Measurement> getAllMeasurementsBySensorStation(SensorStation sensorStation) {
         return measurementRepository.findMeasurementsBySensorStationOrderByTimestampDesc(sensorStation);
     }
+
+    /**
+     * Method to get measurements of a single type for a single sensor station.
+     * @param sensorStation Measurements for this sensor station will be returned.
+     * @param type Measurements of this type will be returned.
+     * @return Collection of measurements.
+     */
     public Collection<Measurement> getAllMeasurementsBySensorStationAndType(SensorStation sensorStation, String type) {
         return measurementRepository.findMeasurementsBySensorStationAndTypeLikeOrderByTimestampDesc(sensorStation, type);
     }
@@ -53,6 +72,7 @@ public class MeasurementService {
 
 
     //................methods to delete Measurements with di different parameters
+    // TODO: Methode nicht verwendet. Bitte löschen. NICHT GETESTET.
     public void deleteMeasurement(Measurement measurement) {
         if (measurement == null) {
             throw new NullPointerException("Measurement cant be null");
@@ -60,6 +80,7 @@ public class MeasurementService {
         measurementRepository.delete(measurement);
     }
 
+    //TODO: Methode nicht verwendet. Bitte löschen. NICHT GETESTET.
     /**
      * Deletes all measurements for a given sensorStation.
      * @param sensorStation the sensorStation from which to delete the measurements
@@ -92,6 +113,7 @@ public class MeasurementService {
         latestMeasurements.add(latestAirHumidityMeasurement);
         return latestMeasurements;
     }
+
     /**
      * Method to get the latest measurements for a given plant
      * this method is used from the graph and status indicators to get the latest measurements for a plant
@@ -113,15 +135,33 @@ public class MeasurementService {
         return latestMeasurements;
     }
 
+    /**
+     * Method to get the amount of measurements currently stored in the database.
+     * @return number of measurements.
+     */
     public Integer getMeasurementsAmount() {return measurementRepository.count();}
 
 
+    /**
+     * Method to set the status for a measurement.
+     * This checks if a value is within a certain threshold.
+     * @param measurementValue Value of the measurement
+     * @param type type of the measurement.
+     * @return "OK" or "Wrong"
+     */
     public String getMeasurementStatusForValue(String measurementValue,String type) {
         if (measurementValue == null || measurementValue.equals("")) {return "OK";}
         if (checkThreshold(measurementValue,type) == 0){return "OK";} else {return "Wrong";}
     }
 
-    private int checkThreshold(String measurementValue, String type) {
+    /**
+     * Method to check if a value is within a certain threshold.
+     * @param measurementValue value of the measurement.
+     * @param type type of the measurement.
+     * @return returns either 0 or 1. 0 if the value does not exceed the threshold, otherwise 1 is returned.
+     */
+
+    public int checkThreshold(String measurementValue, String type) {
         boolean isThresholdExceeded;
         switch(type) {
             case "SOIL_MOISTURE":
@@ -147,6 +187,11 @@ public class MeasurementService {
         }
     }
 
+    /**
+     * Method to return an icon for a certain measurement type.
+     * @param type type of the measurement.
+     * @return A string that indicates which icon suits the measurement type is returned.
+     */
 
     public String getMeasurementTypeIcon(String type) {
         switch(type) {

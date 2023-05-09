@@ -28,26 +28,41 @@ public class LogService {
      *
      * @return a Collection of all log entries.
      */
-
     public Collection<Log> getAllLogs() {
         return logRepository.findAll();
     }
 
+    /**
+     * Method to get all logs currently saved in the database.
+     * @return number of all logs.
+     */
 
     public long getLogsAmount() {
         return logRepository.count();
     }
 
 
+    /**
+     * Method to get all logs with type 'ERROR' currently saved in the database.
+     * @return number of all logs of type 'ERROR'.
+     */
     public long getErrorLogsAmount() {
         return logRepository.countLogByType(LogType.ERROR);
     }
 
 
+    /**
+     * Method to get all logs with type 'WARNING' currently saved in the database.
+     * @return number of all logs of type 'WARNING'.
+     */
     public long getWarningLogsAmount() {
         return logRepository.countLogByType(LogType.WARNING);
     }
 
+    /**
+     * Method to get all logs with type 'SUCCESS' currently saved in the database.
+     * @return number of all logs of type 'SUCCESS'.
+     */
 
     public long getSuccessLogsAmount() {
         return logRepository.countLogByType(LogType.SUCCESS);
@@ -60,11 +75,21 @@ public class LogService {
         return logEntry;
     }
 
+    /**
+     * Method to save a log to the database.
+     * @param log The log to be saved.
+     * @return the saved log.
+     */
     @PreAuthorize("permitAll()")
     public Log saveLog(Log log) {
         return logRepository.save(log);
     }
 
+    /**
+     * Method to get the log with the given id from the database.
+     * @param id identifier of the log.
+     * @return Log with given id.
+     */
     public Log getLogById(Long id){
         return logRepository.findFirstById(id);
     }
