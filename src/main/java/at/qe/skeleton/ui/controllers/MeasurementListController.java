@@ -22,6 +22,8 @@ import java.util.List;
 public class MeasurementListController implements Serializable {
 
     private List<Measurement> measurementsForSensorStationList;
+
+
     @Autowired
     private transient MeasurementService measurementService;
 
@@ -49,9 +51,6 @@ public class MeasurementListController implements Serializable {
         return sensorService.getSensorStatus(type,sensorStation);
     }
 
-    public String getMeasurementStatusForValue(String measurementValue,String type) {
-        return measurementService.getMeasurementStatusForValue(measurementValue,type);
-    }
 
     public String getMeasurementTypeIcon(String type) {
         return measurementService.getMeasurementTypeIcon(type);

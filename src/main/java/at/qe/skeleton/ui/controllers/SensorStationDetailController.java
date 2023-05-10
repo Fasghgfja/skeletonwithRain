@@ -26,7 +26,19 @@ import org.springframework.stereotype.Component;
 public class SensorStationDetailController implements Serializable {
 
     @Autowired
-    private SensorStationService sensorService;
+    private SensorStationService sensorStationService;
+
+
+
+
+
+    @Autowired
+    private SensorService sensorService; //TODO:new
+
+
+
+
+
     @Autowired
     private MeasurementService measurementService;
     @Autowired
@@ -37,6 +49,18 @@ public class SensorStationDetailController implements Serializable {
     private transient GraphController graphController;
     @Autowired
     private transient GalleryController galleryController;
+
+
+    /**
+     * Cached Sensors for easy access to border values.
+     */
+    private Sensor soilMoistureSensor;
+    private Sensor airPressureSensor;
+    private Sensor airQualitySensor;
+    private Sensor humiditySensor;
+    private Sensor lightIntesitySensor;
+    private Sensor temperatureSensor;
+
 
 
 
@@ -79,13 +103,13 @@ public class SensorStationDetailController implements Serializable {
 
 
     public void doAddGardenerToSensorStation(String user) {
-        this.sensorService.addGardenerToSensorStation(sensorStation,user);
+        this.sensorStationService.addGardenerToSensorStation(sensorStation,user);
     }
     public void doAddGardenersToSensorStation() {//TODO:use this
         gardeners.forEach(this::doAddGardenerToSensorStation);
     }
     public void doRemoveGardenerFromSensorStation(Userx user) {
-        this.sensorService.removeGardenerFromSensorStation(sensorStation,user);
+        this.sensorStationService.removeGardenerFromSensorStation(sensorStation,user);
     }
     public void doRemoveGardenersFromSensorStation() {
         gardenersToRemove.forEach(this::doRemoveGardenerFromSensorStation);
@@ -132,7 +156,7 @@ public class SensorStationDetailController implements Serializable {
         doReloadSensorStation();
     }
     public void setSensorStationFromId(String id) {
-        this.sensorStation = sensorService.loadSensorStation(id);
+        this.sensorStation = sensorStationService.loadSensorStation(id);
     }
 
 
@@ -156,7 +180,7 @@ public class SensorStationDetailController implements Serializable {
                 doSaveSensorStation();
             }
         }
-        sensorStation = this.sensorService.saveSensorStation(sensorStation);
+        sensorStation = this.sensorStationService.saveSensorStation(sensorStation);
     }
 
 
@@ -165,7 +189,7 @@ public class SensorStationDetailController implements Serializable {
      * Action to force a reload of the currently cached Sensor Station.
      */
     public void doReloadSensorStation() {
-        sensorStation = sensorService.loadSensorStation(sensorStation.getId());
+        sensorStation = sensorStationService.loadSensorStation(sensorStation.getId());
     }
     /**
      * Action to save the currently cached Sensor Station.
@@ -176,12 +200,12 @@ public class SensorStationDetailController implements Serializable {
         if (gardeners != null) {this.doAddGardenersToSensorStation();}
         if (gardenersToRemove != null) {this.doRemoveGardenersFromSensorStation();}
 
-        sensorStation = this.sensorService.saveSensorStation(sensorStation);
+        sensorStation = this.sensorStationService.saveSensorStation(sensorStation);
     }
 
 
     public void doDeleteSensorStation() {
-        this.sensorService.deleteSensorStation(sensorStation);
+        this.sensorStationService.deleteSensorStation(sensorStation);
         sensorStation = null;
     }
 
@@ -200,12 +224,57 @@ public class SensorStationDetailController implements Serializable {
     }
 
 
+    public String getMeasurementStatus(String measurementValue,String type) {//TODO new
+        if (measurementValue == null || measurementValue.equals("")) {return "OK";}
+        if (checkThreshold(measurementValue,type) == 0){return "OK";} else {return "Wrong";}
+    }
+
+
+    /** return 1 if treshold is exceed 0 otherwise*/
+    public int checkThreshold(String measurementValue, String type) {
+        boolean isThresholdExceeded;
+        switch(type) {
+            case "SOIL_MOISTURE":
+                if(soilMoistureSensor != null) {
+                    isThresholdExceeded = (Double.parseDouble(measurementValue) > Double.parseDouble(soilMoistureSensor.getUpper_border()) || Double.parseDouble(measurementValue) < Double.parseDouble(soilMoistureSensor.getLower_border()));
+                    return isThresholdExceeded ? 1 : 0;
+                }else return 0;
+            case "HUMIDITY":
+                if(humiditySensor != null) {
+                    isThresholdExceeded = (Double.parseDouble(measurementValue) > Double.parseDouble(humiditySensor.getUpper_border()) || Double.parseDouble(measurementValue) < Double.parseDouble(humiditySensor.getLower_border()));
+                    return isThresholdExceeded ? 1 : 0;
+                }else return 0;
+
+            case "AIR_PRESSURE":
+                if(humiditySensor != null) {
+                isThresholdExceeded = (Double.parseDouble(measurementValue) > Double.parseDouble(airPressureSensor.getUpper_border()) || Double.parseDouble(measurementValue) < Double.parseDouble(airPressureSensor.getLower_border()));
+                return isThresholdExceeded ? 1 : 0;
+                }else return 0;
+            case "TEMPERATURE":
+                if(humiditySensor != null) {
+                isThresholdExceeded = (Double.parseDouble(measurementValue) > Double.parseDouble(temperatureSensor.getUpper_border()) || Double.parseDouble(measurementValue) < Double.parseDouble(temperatureSensor.getLower_border()));
+                return isThresholdExceeded ? 1 : 0;
+                }else return 0;
+            case "AIR_QUALITY":
+                if(humiditySensor != null) {
+                isThresholdExceeded = (Double.parseDouble(measurementValue) > Double.parseDouble(airQualitySensor.getUpper_border()) || Double.parseDouble(measurementValue) < Double.parseDouble(airQualitySensor.getLower_border()));
+                return isThresholdExceeded ? 1 : 0;
+                }else return 0;
+            case "LIGHT_INTENSITY":
+                if(humiditySensor != null) {
+                isThresholdExceeded = (Double.parseDouble(measurementValue) > Double.parseDouble(lightIntesitySensor.getUpper_border()) || Double.parseDouble(measurementValue) < Double.parseDouble(lightIntesitySensor.getLower_border()));
+                return isThresholdExceeded ? 1 : 0;
+                }else return 0;
+            default:
+                return 0;
+        }
+    }
+
 
 
 
 
     //TODO: simplify this monstruosity
-
     /**
      * Method to initialize a greenhouse/sensor station view for a specific greenhouse taken from facescontext.
      */
@@ -232,6 +301,15 @@ public class SensorStationDetailController implements Serializable {
             this.plantName = "" + this.getSensorStation().getPlant().getPlantName();
             this.description = this.getSensorStation().getPlant().getDescription();
             this.plantId = this.getSensorStation().getPlant().getPlantID().toString();
+
+            //sensors initialized into cache
+            this.soilMoistureSensor = this.sensorService.getSensorForSensorStation(this.sensorStation , "SOIL_MOISTURE");
+            this.airPressureSensor = this.sensorService.getSensorForSensorStation(this.sensorStation , "AIR_PRESSURE");
+            this.airQualitySensor = this.sensorService.getSensorForSensorStation(this.sensorStation , "AIR_QUALITY");
+            this.humiditySensor = this.sensorService.getSensorForSensorStation(this.sensorStation , "HUMIDITY");
+            this.lightIntesitySensor = this.sensorService.getSensorForSensorStation(this.sensorStation , "LIGHT_INTENSITY");
+            this.temperatureSensor = this.sensorService.getSensorForSensorStation(this.sensorStation , "TEMPERATURE");
+
         }
 
     }

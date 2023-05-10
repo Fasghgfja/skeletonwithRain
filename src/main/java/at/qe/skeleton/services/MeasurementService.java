@@ -72,7 +72,7 @@ public class MeasurementService {
 
 
     //................methods to delete Measurements with di different parameters
-    // TODO: Methode nicht verwendet. Bitte löschen. NICHT GETESTET.
+    // TODO: THIS WILL BE NEEDED
     public void deleteMeasurement(Measurement measurement) {
         if (measurement == null) {
             throw new NullPointerException("Measurement cant be null");
@@ -80,7 +80,7 @@ public class MeasurementService {
         measurementRepository.delete(measurement);
     }
 
-    //TODO: Methode nicht verwendet. Bitte löschen. NICHT GETESTET.
+    //TODO: THIS WILL BE NEEDED
     /**
      * Deletes all measurements for a given sensorStation.
      * @param sensorStation the sensorStation from which to delete the measurements
@@ -142,50 +142,6 @@ public class MeasurementService {
     public Integer getMeasurementsAmount() {return measurementRepository.count();}
 
 
-    /**
-     * Method to set the status for a measurement.
-     * This checks if a value is within a certain threshold.
-     * @param measurementValue Value of the measurement
-     * @param type type of the measurement.
-     * @return "OK" or "Wrong"
-     */
-    public String getMeasurementStatusForValue(String measurementValue,String type) {
-        if (measurementValue == null || measurementValue.equals("")) {return "OK";}
-        if (checkThreshold(measurementValue,type) == 0){return "OK";} else {return "Wrong";}
-    }
-
-    /**
-     * Method to check if a value is within a certain threshold.
-     * @param measurementValue value of the measurement.
-     * @param type type of the measurement.
-     * @return returns either 0 or 1. 0 if the value does not exceed the threshold, otherwise 1 is returned.
-     */
-
-    public int checkThreshold(String measurementValue, String type) {
-        boolean isThresholdExceeded;
-        switch(type) {
-            case "SOIL_MOISTURE":
-                isThresholdExceeded = (Double.parseDouble(measurementValue) > 95 || Double.parseDouble(measurementValue) < 10);
-                return isThresholdExceeded ? 1 : 0;
-            case "HUMIDITY":
-                isThresholdExceeded = (Double.parseDouble(measurementValue) > 80 || Double.parseDouble(measurementValue) < 20);
-                return isThresholdExceeded ? 1 : 0;
-            case "AIR_PRESSURE":
-                isThresholdExceeded = (Double.parseDouble(measurementValue) > 2 || Double.parseDouble(measurementValue) < 1);
-                return isThresholdExceeded ? 1 : 0;
-            case "TEMPERATURE":
-                isThresholdExceeded = (Double.parseDouble(measurementValue) > 35 || Double.parseDouble(measurementValue) < 10);
-                return isThresholdExceeded ? 1 : 0;
-            case "AIR_QUALITY":
-                isThresholdExceeded = (Double.parseDouble(measurementValue) < 50);
-                return isThresholdExceeded ? 1 : 0;
-            case "LIGHT_INTENSITY":
-                isThresholdExceeded = (Double.parseDouble(measurementValue) > 1500 || Double.parseDouble(measurementValue) < 100);
-                return isThresholdExceeded ? 1 : 0;
-            default:
-                return 0;
-        }
-    }
 
     /**
      * Method to return an icon for a certain measurement type.

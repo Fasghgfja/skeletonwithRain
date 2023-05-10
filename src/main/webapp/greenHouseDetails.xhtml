@@ -317,7 +317,7 @@
                             </p:column>
                             <p:column headerText="Status">
                                 <i class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"
-                                   style="display: flex; justify-content: center; align-items: center; color:#{measurementListController.getMeasurementStatusForValue(measurement.value_s,measurement.type) == 'OK' ? 'green' : 'red'}"
+                                   style="display: flex; justify-content: center; align-items: center; color:#{sensorStationDetailController.getMeasurementStatus(measurement.value_s,measurement.type) == 'OK' ? 'green' : 'red'}"
                                    title="#{measurement.type}"></i>
                             </p:column>
                             <p:column headerText="Type" sortBy="#{measurement.type}">
@@ -354,12 +354,20 @@
                     <div class="card tasks">
                         <div class="card-header">
                             <h5>Edit Sensor Station</h5>
-                            If the alarm is != fixed then a switch will appear to set it to fixed
+
+                            <div class="header-buttons">
+                                <p:commandButton type="button" icon="pi pi-ellipsis-v" title = "Help"
+                                                 styleClass="ui-button-secondary outlined-button"  onclick="PF('editHelpDialog').show()" />
+                            </div>
+
                         </div>
+                        <!-- ...................Help Button................. -->
+
 
                         <!-- ................ EDIT FIELDS PANEL............-->
                         <div class="field col-12 md:col-4">
                             <h:form id="EditThisSensorStation">
+
 
                                 <p:outputPanel id="sensorStationData" rendered="#{not empty sensorStationDetailController.sensorStation}">
                                     <h:panelGrid columns="2">
@@ -445,6 +453,30 @@
                                 </p:confirmDialog>
 
 
+                                <!-- ...................................Help dialog.................................... -->
+                                <p:dialog header="Edit Sensor Station Help" id="editHelpDialog" widgetVar="editHelpDialog"
+                                          modal="true"
+                                          showEffect="fade" hideEffect="fade" resizable="false">
+
+                                    <p:outputPanel id="EdithelpDialog">
+                                        From this panel you can edit settings for this Sensor Station.<br></br>
+                                        The first 4 fields are intended to show you the actual settings.
+                                        <h6>About Changing Plant:</h6>
+                                        To change the plant you have to put a new Plant Name in the according imput field and click the button Change Plant.<br></br>
+                                        The page will be reloaded and updated accordingly , This action is not reversible as it will detach the old plant from this sensor station.<br></br>
+                                        The plant page for the old plant will continue to be visible to users until it is deleted from a administrator from Plant Menegement.<br></br>
+                                        Setting new border values will also change the values for the alarmcount.
+                                        <h6>About Saving Changes:</h6>
+                                        Save Changes will save changes to Location and Access Point and will make no changes regarding the displayed Plant <br></br>
+                                        <h6>About Changing Access Point:</h6>
+                                        bla bla.
+
+                                    </p:outputPanel>
+                                </p:dialog>
+
+
+
+
 
                             </h:form>
 
@@ -495,13 +527,15 @@
                     <div class="card transactions">
                         <div class="card-header">
                             <h5>Sensors</h5>
-                            <!-- ...................Header buttons................. -->
+
+
+                            <!-- ...................Help Button................. -->
                             <div class="header-buttons">
-                                <p:commandButton type="button" icon="pi pi-search"
-                                                 styleClass="ui-button-secondary outlined-button  mr-2"/>
-                                <p:commandButton type="button" icon="pi pi-ellipsis-v"
-                                                 styleClass="ui-button-secondary outlined-button "/>
+                                <p:commandButton type="button" icon="pi pi-ellipsis-v" title = "Help"
+                                                 styleClass="ui-button-secondary outlined-button"  onclick="PF('sensorhelpDialog').show()" />
                             </div>
+
+
                         </div>
 
                         <h:form id="form">
@@ -562,11 +596,48 @@
 
                                     <h:panelGrid columns="3">
                                         <p:commandButton value="Save Changes" action="#{sensorDetailController.doSaveSensor()}"
-                                                         update="userEditDialog12 ordersTable12 detailPage"/>
+                                                         update="userEditDialog12 ordersTable12 detailPage"
+                                                         oncomplete="location.reload();"/>
                                     </h:panelGrid>
 
                                 </p:outputPanel>
                             </p:dialog>
+
+
+
+
+
+                            <!-- ...................................Help dialog.................................... -->
+                            <p:dialog header="Help" id="sensorhelpDialog" widgetVar="sensorhelpDialog"
+                                      modal="true"
+                                      showEffect="fade" hideEffect="fade" resizable="false">
+
+                                <p:outputPanel id="SensorhelpDialog">
+                                    <h5>Sensors</h5>From this panel you can see the sensors registered for this greenhouse.<br></br>
+                                    For each sensor you can set upper and lower border values and reset the alarm count.
+                                    <h6>About Setting border values:</h6>
+                                    Setting new border values will reload the page and all measurements status will be updated according to your new bordervalues.<br></br>
+                                    Setting new border values will also change the values for the alarmcount.
+                                    <h6>About the Alarm Count:</h6>
+                                    The alarm count rapresent how many times a given sensor treshold has been exceeded.
+                                    If the alarm count is high enough <br></br> the status of the sensor will change from green to red.
+                                    This change will be visible on the corresponding plant page aswell.<br></br>
+                                    If you have solved the problem you can just reset the alarm count by using the toggle in the edit sensors button.
+
+                                </p:outputPanel>
+                            </p:dialog>
+
+
+
+
+
+
+
+
+
+
+
+
 
                         </h:form>
 
