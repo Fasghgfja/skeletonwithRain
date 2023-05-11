@@ -56,7 +56,7 @@ public class SensorStationApiController {
     }
 
     @PostMapping("/api/updatesensors")
-    int updateSensorApi(@RequestBody SensorApi sensorApi) {
+    int updateSensorApi(@RequestBody List<SensorApi> sensorApi) {
         System.out.println(sensorApi.toString());
         try {
             sensorStationServiceApi.updateSensor(sensorApi);

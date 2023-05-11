@@ -55,7 +55,6 @@ def update_sensor_database(alarm_count, sensor_id):
     except Exception as e:
         exception_logging.logException(e, sensor_id)
 
-
 def update_boarder_value(sensor_id, lower_boarder, upper_boarder):
     try:
         conn = sqlite3.connect('AccessPoint')
@@ -146,9 +145,9 @@ def read_Sensor_Stationnames_Database():
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
         c.execute('''
-            select name from Sensorstation
+            select * from Sensorstation
         ''')
-        return c
+        return c.fetchall()
     except Exception as e:
         exception_logging.logException(e, "SensorStation")
 def read_value_from_database(sensor_id):
@@ -162,8 +161,6 @@ def read_value_from_database(sensor_id):
     except Exception as e:
         exception_logging.logException(e, "Value")
 def read_sensors_database(name):
-    # TODO call in loob all sensorstation name
-    print(name)
     try:
         count = 0
         conn = sqlite3.connect('AccessPoint')
@@ -176,14 +173,14 @@ def read_sensors_database(name):
     except Exception as e:
         exception_logging.logException(e, "Sensor")
 
-def delete_values(sensor_id, time_stamp):
+def delete_values():
     try:
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
         c.execute('''
-            delete from Value where sensor_id={0} and time_stamp='{1}'
-        '''.format(sensor_id, time_stamp))
+            delete from Value 
+        ''')
         conn.commit()
-        exception_logging.log_information("Values of sensor_id {0} at time_stamp {1} has been deleted".format(sensor_id, time_stamp))
+        exception_logging.log_information("Values of have been deleted at {0}")
     except Exception as e:
         exception_logging.logException(e, "delete values")

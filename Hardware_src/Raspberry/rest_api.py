@@ -1,3 +1,4 @@
+import json
 import sqlite3
 
 import cursor as cursor
@@ -35,7 +36,9 @@ class SensorValue(object):
         self.value = value
         self.time_stamp = time_stamp
         self.type = type
-
+class Value_List(object):
+    def __int__(self, sensor_value : SensorValue):
+        self.sensor_values = sensor_value
 class StationValue(object):
     def __init__(self, name: str, service_description: str, alarm_switch: str):
         self.name = name
@@ -52,7 +55,7 @@ class Sensor(object):
         self.upperBoarder = upper_boarder
         self.lowerBoarder = lower_boarder
 
-def writeValueToWebApp():
+def write_value_to_web_app():
 
     conn = sqlite3.connect('AccessPoint')
     cur = conn.cursor()
@@ -60,7 +63,7 @@ def writeValueToWebApp():
     # TODO call database querys via DB_connection.xxx
     all_sensorstations_sql = "SELECT * FROM Sensorstation;"
     all_sensorstations = cur.execute(all_sensorstations_sql).fetchall()
-
+    send_value_list = []
     for sensorstations in all_sensorstations:
         # TODO call database querys via DB_connection.xxx
         get_all_sensors = cur.execute('''
@@ -78,10 +81,10 @@ def writeValueToWebApp():
                 time_stamp_string = str(value[1])
 
                 temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=time_stamp_string, type=sensor[3])
-                r = requests.post(measurements_url, json=vars(temp_sensor_value), auth=auth)
-                if r.status_code == 200:
-                    DB_connection.delete_values(sensor[0], value[1])
-
+                send_value_list.append(vars(temp_sensor_value))
+    r = requests.post(measurements_url, json=send_value_list, auth=auth)
+    if r.status_code == 200:
+        DB_connection.delete_values()
     cur.close()
     conn.close()
 
@@ -94,9 +97,12 @@ def write_sensors_and_station_description(station_names):
                 station_values = StationValue(name=station[0], service_description=station[1], alarm_switch=station[2])
                 requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
                 sensor_list = DB_connection.read_sensors_database(station[0]).fetchall()
+                #json_list =[]
                 for sensor in sensor_list:
                     sensor_values = Sensor(sensor_id=sensor[0], uuid=sensor[1], station_name=sensor[2], type=sensor[3], alarm_count=sensor[4], upper_boarder="10000", lower_boarder="0" )
+                 #   json_list.append(vars(sensor_values))
                     requests.post(post_sensor_url, json=vars(sensor_values), auth=auth)
+                #r = requests.post(post_sensor_url, json=json_list,auth=auth)
             except Exception as e:
                 exception_logging.logException(e, station[0])
     # TODO check if all new stations are added
@@ -119,7 +125,7 @@ def write_alarm_switch(name, alarm_switch, description):
         requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
     except Exception as e:
         exception_logging.logException(e, "write alarm_switch")
-def getSensorstations(getName, name):
+def get_sensorstations(getName, name):
 
 
     if getName:
@@ -143,7 +149,7 @@ def getSensorstations(getName, name):
 
 
 
-def checkIfNewStations():
+def check_if_new_stations():
 
     conn = sqlite3.connect('AccessPoint')
     cur = conn.cursor()
@@ -156,7 +162,7 @@ def checkIfNewStations():
     for sensorstations in already_added_SensorStations.fetchall():
         already_added_sensorstation_list.append(sensorstations[0])
 
-    webapp_sensorstation_names = getSensorstations(True,"")
+    webapp_sensorstation_names = get_sensorstations(True, "")
 
     for name in already_added_sensorstation_list:
         try:
@@ -166,9 +172,8 @@ def checkIfNewStations():
 
     return webapp_sensorstation_names
 
-def update_Sensor(sensor_id, alarm_count):
+def update_Sensor(alarm_count_list):
     try:
-        sensor_value = Sensor(sensor_id=sensor_id, uuid="",station_name="", type="", alarm_count=alarm_count, upper_boarder="",lower_boarder="")
-        requests.post(post_update_sensor_url, json=vars(sensor_value), auth=auth)
+        r = requests.post(post_update_sensor_url, json=alarm_count_list, auth=auth)
     except Exception as e:
         exception_logging.logException(e, "write alarm_count to webapp")

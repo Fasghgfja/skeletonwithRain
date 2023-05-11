@@ -155,12 +155,17 @@ public class SensorStationServiceApi {
      * @param sensorApi
      * @throws SensorStationNotFoundException
      */
-    public void updateSensor(SensorApi sensorApi) throws SensorStationNotFoundException{
-        Sensor sensor = sensorService.loadSensor(sensorApi.getSensor_id());
-        if(sensor != null){
-            sensor.setAlarm_count(sensorApi.getAlarm_count());
-            sensorService.saveSensor(sensor);
-        }else throw new SensorStationNotFoundException();
+    public void updateSensor(List<SensorApi> sensorApi) throws SensorStationNotFoundException{
+        for (SensorApi s:
+             sensorApi) {
+            Sensor sensor = sensorService.loadSensor(s.getSensor_id());
+            if(sensor != null){
+                sensor.setAlarm_count(s.getAlarm_count());
+                sensorService.saveSensor(sensor);
+            }else throw new SensorStationNotFoundException();
+        }
+
+
 
     }
 
