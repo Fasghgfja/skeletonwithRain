@@ -51,7 +51,7 @@ async def read_sensor_data(new_connection, device_list):
                         float_value = False
                         # print("Characteristic: {0} \n\twith properties: {1}".format(characteristic, ", ".join(characteristic.properties)))
                             # if characteristic.uuid != "00002a05-0000-1000-8000-00805f9b34fb":
-
+                        # TEMPERATURE, HUMIDITY, AIR_PRESSURE, AIR_QUALITY,
                         for descriptor in characteristic.descriptors:
                             try:
                                 type = await client.read_gatt_descriptor(descriptor.handle)

@@ -15,7 +15,8 @@ def checkBoarderValues():
     connected_sensor_stations_list = DB_connection.read_Sensor_Station_Database().fetchall()
     for station in connected_sensor_stations_list:
         alarm_switch = station[2]
-        for sensor in DB_connection.read_sensors_database(station[NAME]).fetchall():
+        sensor_list = DB_connection.read_sensors_database(station[NAME])
+        for sensor in sensor_list.fetchall():
             upper_value = sensor[6]
             lower_value = sensor[5]
             alarm_count = sensor[4]
@@ -57,11 +58,12 @@ def check_sensor_station_alarm():
     for station in connected_sensor_stations_list:
         alarm_switch = station[2]
         if alarm_switch == "on":
-            for sensor in DB_connection.read_sensors_database(station[NAME]).fetchall():
+            sensor_list = DB_connection.read_sensors_database(station[NAME]).fetchall()
+            for sensor in sensor_list:
                 alarm_count = sensor[4]
                 uuid = sensor[1]
                 if alarm_count == -1:
-                    update_alarm_switch(station[NAME], uuid, station[1], sensor[0])
+                   update_alarm_switch(station[NAME], uuid, station[1], sensor[0])
 
 def update_alarm_switch(station_name, uuid, description, sensor_id):
     webapp_alarm_switch = rest_api.getSensorstations(False, station_name)

@@ -26,7 +26,7 @@ if __name__ == '__main__':
     value_count = 0
     measurement = 0
     # new_SensorStation = True
-    # program_state = program_status.Is.READ_SENSOR_VALUES.value
+    program_state = program_status.Is.READ_SENSOR_VALUES.value
     while True:
         match program_state:
 
@@ -50,9 +50,11 @@ if __name__ == '__main__':
                 except Exception as e:
                     exception_logging.logException(e, "rest_api read Station name")
                 time.sleep(1)
-                measurement = + 1
-                if measurement > 100:
+                measurement += 1
+                print("Measurement: " + str( measurement))
+                if measurement > 1:
                     program_state = program_status.Is.READ_SENSOR_VALUES.value
+                    measurement = 0
                 else:
                     program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
 
@@ -64,7 +66,7 @@ if __name__ == '__main__':
                 except Exception as e:
                     exception_logging.logException(e, "call_read_values")
                 value_count += 1
-                if value_count >= 10:
+                if value_count >= 1:
                     program_state = program_status.Is.CHECK_BOARDER_VALUER.value
                     value_count = 0
                 else:

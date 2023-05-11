@@ -17,7 +17,7 @@ import exception_logging
 #post_update_sensor_url = "http://localhost:8080/api/updatesensors"
 
 # server
-auth = ("SHAdmin", "SHAdmin")
+auth = ("SHAdmin", "gsecret4passwordt2")
 measurements_url = "http://srh-softwaresolutions.com/api/measurements"
 get_sensorStations_url = "http://srh-softwaresolutions.com/api/sensorstations"
 post_sensorStations_url = "http://srh-softwaresolutions.com/api/sensorstations"

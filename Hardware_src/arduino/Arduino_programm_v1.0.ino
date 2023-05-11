@@ -74,12 +74,12 @@ void setup() {
   //---------------------------------------------------------------
   BLE.setAdvertisedService(readSensorDataService);
   //---------------------------------------------------------------
-  BLEDescriptor ligthValueDescriptor("2901", "LigthSensor");
-  BLEDescriptor hygroValueDescriptor("2901", "HygroSensor");
-  BLEDescriptor tempValueDescriptor("2901", "TempSensor");  
-  BLEDescriptor humidityValueDescriptor("2901", "humiditySensor");
-  BLEDescriptor pressureValueDescriptor("2901", "PressureSensor");
-  BLEDescriptor gasValueDescriptor("2901", "GasSensor");
+  BLEDescriptor ligthValueDescriptor("2901", "LIGHT_INTENSITY");
+  BLEDescriptor hygroValueDescriptor("2901", "SOIL_MOISTURE");
+  BLEDescriptor tempValueDescriptor("2901", "TEMPERATURE");
+  BLEDescriptor humidityValueDescriptor("2901", "HUMIDITY");
+  BLEDescriptor pressureValueDescriptor("2901", "AIR_PRESSURE");
+  BLEDescriptor gasValueDescriptor("2901", "AIR_QUALITY");
 
   //---------------------------------------------------------------
   ligthValueCharacteristic.addDescriptor(ligthValueDescriptor);
