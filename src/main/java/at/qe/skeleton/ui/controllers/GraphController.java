@@ -116,11 +116,14 @@ public class GraphController implements Serializable {
 
         //TODO:change this with a query for AirValue GroundValue HumidityValue etc instead of hoping they come out in the correct order
         List<Number> values = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+
         measurements.forEach(measurement -> {
             if (measurement == null) {
                 values.add(0);
             } else {
                 values.add(Double.parseDouble(measurement.getValue_s()));
+                labels.add(measurement.getType());
             }
         });
 
@@ -148,13 +151,13 @@ public class GraphController implements Serializable {
 
         data.addChartDataSet(barDataSet);
 
-        List<String> labels = new ArrayList<>();
-        labels.add("Temperature");
-        labels.add("Air Humidity");
-        labels.add("Ground Humidity");
-        labels.add("Light Intensity");
-        labels.add("Air Quality");
-        labels.add("Air Pressure");
+        //List<String> labels = new ArrayList<>();
+        //labels.add("Temperature");
+        //labels.add("Air Humidity");
+        //labels.add("Ground Humidity");
+        //labels.add("Light Intensity");
+        //labels.add("Air Quality");
+        //labels.add("Air Pressure");
         data.setLabels(labels);
         barModel.setData(data);
 
