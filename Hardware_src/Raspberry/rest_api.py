@@ -106,8 +106,7 @@ def read_sensor_boarder_values():
     data = requests.get(url,auth=auth)
     sensor_list = data.json()
     for sensor in sensor_list:
-        print(sensor)
-        DB_connection.update_boarder_value(sensor["sensor_id"], sensor["lowerBoarder"], sensor["upperBoarder"])
+        DB_connection.update_boarder_value(sensor["sensor_id"], sensor["upperBoarder"], sensor["lowerBoarder"])
 
     print("read_sensor_boarder")
 

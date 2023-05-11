@@ -3538,3 +3538,151 @@ INFO: Sensor with sensor_id 3 has been updated upper_boarder to 12 and lower_boa
 INFO: Sensor with sensor_id 4 has been updated upper_boarder to 10000 and lower_boarder to 0 
 INFO: Sensor with sensor_id 5 has been updated upper_boarder to 10000 and lower_boarder to 0 
 INFO: Sensor with sensor_id 6 has been updated upper_boarder to 10000 and lower_boarder to 0 
+ERROR: Could not find device with name G4T2 at 05/11/23__17:22:10
+INFO: Boarder values have been checked at 05/11/23__17:22:11
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 10000 and lower_boarder to 0 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 10000 and lower_boarder to 0 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 12 and lower_boarder to 0 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 10000 and lower_boarder to 0 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 10000 and lower_boarder to 0 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 10000 and lower_boarder to 0 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 10000 and lower_boarder to 0 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 10000 and lower_boarder to 0 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 12 and lower_boarder to 0 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 10000 and lower_boarder to 0 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 10000 and lower_boarder to 0 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 10000 and lower_boarder to 0 
+ERROR: Could not find device with name G4T2 at 05/11/23__17:24:46
+INFO: Boarder values have been checked at 05/11/23__17:24:47
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 153 lower_boarder to 0 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 12 lower_boarder to 0 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 153 lower_boarder to 0 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 12 lower_boarder to 0 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 10000 lower_boarder to 0 
+ERROR: Could not find device with name G4T2 at 05/11/23__17:25:06
+INFO: Boarder values have been checked at 05/11/23__17:25:07
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 153 lower_boarder to 0 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 12 lower_boarder to 0 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 153 lower_boarder to 0 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 12 lower_boarder to 0 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 10000 lower_boarder to 0 
+ERROR: Could not find device with name G4T2 at 05/11/23__17:25:26
+INFO: Boarder values have been checked at 05/11/23__17:25:27
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 153 lower_boarder to 0 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 12 lower_boarder to 0 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 153 lower_boarder to 0 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 12 lower_boarder to 0 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 10000 lower_boarder to 0 
+ERROR: Could not find device with name G4T2 at 05/11/23__17:25:45
+INFO: Boarder values have been checked at 05/11/23__17:25:46
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 153 lower_boarder to 0 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 12 lower_boarder to 0 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 153 lower_boarder to 0 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 12 lower_boarder to 0 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 10000 lower_boarder to 0 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 10000 lower_boarder to 0 
+ERROR: Could not find device with name G4T2 at 05/11/23__17:26:37
+INFO: Boarder values have been checked at 05/11/23__17:26:38
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 0 and lower_boarder to 153 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 12 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 0 and lower_boarder to 153 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 12 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: Could not find device with name G4T2 at 05/11/23__17:26:57
+INFO: Boarder values have been checked at 05/11/23__17:26:58
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 0 and lower_boarder to 153 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 12 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 0 and lower_boarder to 153 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 12 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: Could not find device with name G4T2 at 05/11/23__17:27:17
+INFO: Boarder values have been checked at 05/11/23__17:27:18
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 0 and lower_boarder to 153 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 12 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 0 and lower_boarder to 153 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 12 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: Could not find device with name G4T2 at 05/11/23__17:27:36
+INFO: Boarder values have been checked at 05/11/23__17:27:37
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 0 and lower_boarder to 153 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 12 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: Could not find device with name G4T2 at 05/11/23__17:27:54
+INFO: Boarder values have been checked at 05/11/23__17:27:55
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 0 and lower_boarder to 153 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 12 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 236 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 0 and lower_boarder to 153 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 12 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 236 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: Could not find device with name G4T2 at 05/11/23__17:28:14
+INFO: Boarder values have been checked at 05/11/23__17:28:15
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 0 and lower_boarder to 153 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 12 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 236 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 2 has been updated upper_boarder to 0 and lower_boarder to 153 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 12 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 236 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 

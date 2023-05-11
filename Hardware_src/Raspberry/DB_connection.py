@@ -38,7 +38,6 @@ def update_sensor_station_database(alarm_switch, station_name):
         file1 = open("logFile.txt", "a")
         file1.write("INFO: SensorStation {0} has been updated alarm_switch to {1} \n".format(station_name, alarm_switch))
         file1.close()
-        print("ok-----------------updateSensor")
     except Exception as e:
         exception_logging.logException(e, station_name)
 
@@ -53,24 +52,10 @@ def update_sensor_database(alarm_count, sensor_id):
         file1 = open("logFile.txt", "a")
         file1.write("INFO: Sensor with sensor_id {0} has been updated alarm_count to {1} \n".format(sensor_id, alarm_count))
         file1.close()
-        print("ok-----------------updateSensor")
     except Exception as e:
         exception_logging.logException(e, sensor_id)
 
-def update_sensor_boarder_values_database(sensor_id, upper_boarder, lower_boarder):
-    try:
-        conn = sqlite3.connect('AccessPoint')
-        c = conn.cursor()
-        c.execute('''
-                update sensor set lower_boarder={0}, upper_boarder={1} where sensor_id={1}
-            '''.format(lower_boarder, upper_boarder, sensor_id))
-        conn.commit()
-        file1 = open("logFile.txt", "a")
-        file1.write("INFO: Sensor with sensor_id {0} has been updated upper_boarder to {1} lower_boarder to {2} \n".format(sensor_id, upper_boarder, lower_boarder))
-        file1.close()
-        print("ok-----------------updateSensor")
-    except Exception as e:
-        exception_logging.logException(e, sensor_id)
+
 def update_boarder_value(sensor_id, lower_boarder, upper_boarder):
     try:
         conn = sqlite3.connect('AccessPoint')
@@ -82,7 +67,6 @@ def update_boarder_value(sensor_id, lower_boarder, upper_boarder):
         file1 = open("logFile.txt", "a")
         file1.write("INFO: Sensor with sensor_id {0} has been updated upper_boarder to {1} and lower_boarder to {2} \n".format(sensor_id, upper_boarder, lower_boarder))
         file1.close()
-        print("ok-----------------updateSensor")
     except Exception as e:
         exception_logging.logException(e, sensor_id)
 def implement_database():
