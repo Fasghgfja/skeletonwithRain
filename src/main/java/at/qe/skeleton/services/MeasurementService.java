@@ -169,20 +169,9 @@ public class MeasurementService {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public String getLastMeasurementBySensorStationAndType(SensorStation sensorStation, String type) {
+        Measurement measurement = measurementRepository.getFirstBySensorStationAndTypeEquals(sensorStation,type);
+        if(measurement == null) {return "--";}
+        return measurementRepository.getFirstBySensorStationAndTypeEquals(sensorStation,type).getValue_s();
+    }
 }

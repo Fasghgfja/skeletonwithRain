@@ -61,9 +61,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
     Integer count();
 
 
-
-
-
+    Measurement getFirstBySensorStationAndTypeEquals(SensorStation sensorStation, String type);
 }
 
 

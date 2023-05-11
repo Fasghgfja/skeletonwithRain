@@ -8,13 +8,12 @@
         <f:event type="preRenderView" listener="#{sensorStationDetailController.init}"/>
     </f:metadata>
 
-    <ui:define name="title">GREENHOUSE DETAILS</ui:define>
+    <ui:define name="title">PlantHealth: Greenhouse Details</ui:define>
     <ui:define name="viewname">
     </ui:define>
     <ui:define name="head">
         <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css"/>
         <h:outputScript name="js/chart.js"/>
-        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
 
     </ui:define>
 
@@ -26,19 +25,23 @@
                 flex-wrap: nowrap;">
 
 
-                <p:toolbarGroup > <!-- .....TEMPERATURE AIR HUMIDITY GROUND HUMIDITY LIGHT INTENSITY BOXES............................ -->
+                <p:toolbarGroup> <!-- .....TEMPERATURE AIR HUMIDITY GROUND HUMIDITY LIGHT INTENSITY BOXES............................ -->
 
                     <!-- ...............................TEMPERATURE BOX................................................ -->
                     <div class="col-12 md:col-6 xl:col-3">
-                        <p:commandLink action="#{measurementListController.onTempClick()}" update="myDataTable1 mylineChart">
+                        <p:commandLink action="#{measurementListController.onTempClick()}"
+                                       update="myDataTable1 mylineChart">
                             <div class="card  overview-box">
                                 <p:graphicImage name="images/dashboard/effect-useronline.svg"/>
                                 <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-usersonline.png"/>
-                        </span>
+                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/termometerTopBox.png"/>
+                                </span>
                                 <div class="overview">
                                     <span class="overview-title">TEMPERATURE</span>
-                                    <h3>query</h3><!-- ...............TODO:add the query.......... -->
+                                    <h3>
+                                        <h:outputText value="#{measurementListController.getLastTemperatureMeasurementValue().length() gt 6 ? measurementListController.getLastTemperatureMeasurementValue().subSequence(0,6) : measurementListController.getLastTemperatureMeasurementValue() }"/>
+                                        C
+                                    </h3>
                                 </div>
                             </div>
                         </p:commandLink>
@@ -46,15 +49,19 @@
 
                     <!-- ...............................AIR HUMIDITY BOX............................................... -->
                     <div class="col-12 md:col-6 xl:col-3">
-                        <p:commandLink action="#{measurementListController.onAirHumidityClick()}" update="myDataTable1 mylineChart">
+                        <p:commandLink action="#{measurementListController.onAirHumidityClick()}"
+                                       update="myDataTable1 mylineChart">
                             <div class="card overview-box">
                                 <p:graphicImage name="images/dashboard/effect-checkins.svg"/>
                                 <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-checkins.png"/>
-                        </span>
+                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/leaf.png"/>
+                                </span>
                                 <div class="overview">
                                     <span class="overview-title">AIR HUMIDITY</span>
-                                    <h3>532</h3><!-- ...............TODO:add the query.......... -->
+                                    <h3>
+                                        <h:outputText value="#{measurementListController.getLastAirHumidityMeasurementValue().length() gt 6 ? measurementListController.getLastAirHumidityMeasurementValue().subSequence(0,6) : measurementListController.getLastAirHumidityMeasurementValue() }"/>
+                                        %
+                                    </h3>
                                 </div>
                             </div>
                         </p:commandLink>
@@ -67,11 +74,14 @@
                             <div class="card overview-box ">
                                 <p:graphicImage name="images/dashboard/effect-filessynced.svg"/>
                                 <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-filessynced.png"/>
-                        </span>
+                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/watering-can3.png"/>
+                                </span>
                                 <div class="overview">
                                     <span class="overview-title">GROUND HUMIDITY</span>
-                                    <h3>12.6%</h3><!-- ...............TODO:add the query.......... -->
+                                    <h3>
+                                        <h:outputText value="#{measurementListController.getLastSoilMeasurementValue().length() gt 6 ? measurementListController.getLastSoilMeasurementValue().subSequence(0,6) : measurementListController.getLastSoilMeasurementValue() }"/>
+                                        %
+                                    </h3>
                                 </div>
                             </div>
                         </p:commandLink>
@@ -84,11 +94,14 @@
                             <div class="card overview-box">
                                 <p:graphicImage name="images/dashboard/effect-messages.svg"/>
                                 <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-messages.png"/>
-                        </span>
+                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/sun2.png"/>
+                                </span>
                                 <div class="overview">
                                     <span class="overview-title">LIGHT INTENSITY</span>
-                                    <h3>440</h3><!-- ...............TODO:add the query.......... -->
+                                    <h3>
+                                        <h:outputText value="#{measurementListController.getLastLightMeasurementValue().length() gt 6 ? measurementListController.getLastLightMeasurementValue().subSequence(0,6) : measurementListController.getLastLightMeasurementValue() }"/>
+                                        lux
+                                    </h3>
                                 </div>
                             </div>
                         </p:commandLink>
@@ -97,36 +110,40 @@
                 </p:toolbarGroup>
 
                 <p:toolbarGroup>
-                        <h:form id="myform"> <!-- .......::::::::::::::::...PLANT GALLERY DEBUG FORM if u remove it you fix it....:::::::::::::::.......... -->
-                            <h:form id="approvedImagesGallery">
-                                <div class="card overview-box">
-                                    <p:graphicImage name="images/dashboard/effect-messages.svg"/>
-                                    <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-messages.png"/>
-                        </span>
-                                    <div class="overview">
-                                        <span class="overview-title">Contained Plant</span>
-                                        <h3>#{sensorStationDetailController.plantName}</h3>
-                                        <span></span>
-                                    </div>
+                    <h:form id="myform"> <!-- .......::::::::::::::::...PLANT GALLERY DEBUG FORM if u remove it you fix it....:::::::::::::::.......... -->
+                        <h:form id="approvedImagesGallery">
+                            <div class="card overview-box">
+                                <p:graphicImage name="images/dashboard/effect-messages.svg"/>
+                                <span class="overview-icon">
+                                <p:graphicImage url="../resources/images/plants.png"/>
+                                </span>
+                                <div class="overview">
+                                    <span class="overview-title">Contained Plant</span>
+                                    <h3>#{sensorStationDetailController.plantName}</h3>
+                                    <span></span>
                                 </div>
-                            </h:form>
-                        </h:form> <!-- .......::::::::::::::::...PLANT GALLERY FORM END....:::::::::::::::.......... -->
+                            </div>
+                        </h:form>
+                    </h:form> <!-- .......::::::::::::::::...PLANT GALLERY FORM END....:::::::::::::::.......... -->
                 </p:toolbarGroup>
 
                 <p:toolbarGroup>
 
                     <!-- ...............................AIR PRESSURE BOX............................................... -->
                     <div class="col-12 md:col-6 xl:col-3">
-                        <p:commandLink action="#{measurementListController.onAirPressureClick()}" update="myDataTable1 mylineChart">
+                        <p:commandLink action="#{measurementListController.onAirPressureClick()}"
+                                       update="myDataTable1 mylineChart">
                             <div class="card  overview-box">
                                 <p:graphicImage name="images/dashboard/effect-useronline.svg"/>
                                 <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-usersonline.png"/>
-                        </span>
+                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/pressure.png"/>
+                                </span>
                                 <div class="overview">
                                     <span class="overview-title">AIR PRESSURE</span>
-                                    <h3>query</h3>                    <!-- ...............TODO:add the query.......... -->
+                                    <h3>
+                                        <h:outputText value="#{measurementListController.getLastPressureMeasurementValue().length() gt 6 ? measurementListController.getLastPressureMeasurementValue().subSequence(0,6) : measurementListController.getLastPressureMeasurementValue() }"/>
+                                        bar
+                                    </h3>
                                 </div>
                             </div>
                         </p:commandLink>
@@ -134,29 +151,33 @@
 
                     <div class="col-12 md:col-6 xl:col-3">
                         <!-- ...............................AIR QUALITY BOX............................................ -->
-                        <p:commandLink action="#{measurementListController.onAirQualityClick()}" update="myDataTable1 mylineChart">
+                        <p:commandLink action="#{measurementListController.onAirQualityClick()}"
+                                       update="myDataTable1 mylineChart">
                             <div class="card overview-box">
                                 <p:graphicImage name="images/dashboard/effect-checkins.svg"/>
                                 <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-checkins.png"/>
-                        </span>
+                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/aqi.png"/>
+                                </span>
                                 <div class="overview">
                                     <span class="overview-title">AIR QUALITY</span>
-                                    <h3>532</h3><!-- ...............TODO:add the query.......... -->
+                                    <h3>
+                                        <h:outputText value="#{measurementListController.getLastAirMeasurementValue().length() gt 6 ? measurementListController.getLastAirMeasurementValue().subSequence(0,6) : measurementListController.getLastAirMeasurementValue() }"/>
+                                        Aqi
+                                    </h3>
                                 </div>
                             </div>
                         </p:commandLink>
                     </div>
 
 
-                    <!-- ...............................Pic Approval Box............................................... -->
-                    <div class="col-12 md:col-6 xl:col-3" >
-                        <span class="overview-title">GALLERY</span>
+                    <div class="col-12 md:col-6 xl:col-3">
+                        <!-- ...............................Pic Approval Box............................................... -->
                         <div class="card overview-box ">
+                            <span class="overview-title">GALLERY</span>
                             <p:graphicImage name="images/dashboard/effect-filessynced.svg"/>
                             <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-filessynced.png"/>
-                        </span>
+                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/gallery.png"/>
+                                </span>
                             <div class="overview" style="column-count: 2">
 
                                 <!-- .......::::::::::::::::...AWAITING APPROVAL GALLERY FORM ....::::::::::::::::::::::.......... -->
@@ -164,15 +185,14 @@
                                     <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
 
                                     <p:commandButton
-                                            rendered="#{not empty sensorStationDetailController.doGetPlantImagesNotYetApproved()}"
-                                            id="b2" value="Awaiting approval" icon="pi pi-external-link"
-                                            onclick="PF('galleria2').show()"/>
+                                            id="b2" value="Awaiting approval" icon="pi pi-external-link" style="margin-right: 90px"
+                                            onclick="PF('galleria2').show()" disabled="#{empty sensorStationDetailController.doGetPlantImagesNotYetApproved()}"/>
 
                                     <!-- .......::::::::::::::::...AWAITING APPROVAL GALLERY ....::::::::::::::::::::::.......... -->
                                     <p:galleria id="awaitingapprovalgallery" widgetVar="galleria2"
                                                 value="#{sensorStationDetailController.doGetPlantImagesNotYetApproved()}"
                                                 var="image"
-                                                numVisible="9"
+                                                numVisible="20"
                                                 circular="true" fullScreen="true" showItemNavigators="true"
                                                 style="max-width: 70%">
                                         <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
@@ -204,9 +224,8 @@
                                 <h:form id="myform3">
                                     <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
                                     <p:commandButton
-                                            rendered="#{not empty sensorStationDetailController.doGetApprovedPlantImages()}"
                                             id="b3" value="Plant Gallery" icon="pi pi-external-link"
-                                            onclick="PF('galleria3').show()"/>
+                                            onclick="PF('galleria3').show()" disabled="#{empty sensorStationDetailController.doGetApprovedPlantImages()}"/>
 
                                     <!-- .......::::::::::::::::...APPROVED GALLERY ....::::::::::::::::::::::.......... -->
                                     <p:galleria id="awaitingapprovalgallery3" widgetVar="galleria3"
@@ -241,12 +260,13 @@
                             <div class="card overview-box">
                                 <p:graphicImage name="images/dashboard/effect-messages.svg"/>
                                 <span class="overview-icon">
-                            <p:graphicImage name="images/dashboard/icon-messages.png"/>
-                        </span>
+                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/measurements.png"/>
+                                </span>
                                 <div class="overview">
                                     <span class="overview-title">ALL TYPES</span>
-                                    <h3>440</h3>
-                                    <span><span>24</span> new since last visit</span>
+                                    <h3>
+                                        <h:outputText value="#{measurementListController.measurementsAmount}"/>
+                                    </h3>
                                 </div>
                             </div>
                         </p:commandLink>
@@ -264,47 +284,52 @@
         <div class="layout-dashboard">
             <div class="grid">
 
+
                 <!-- ..........................................GRAPH................................................................... -->
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="card chart">
                         <div class="card-header">
                             <h5>SensorStation: #{sensorStationDetailController.sensorStation}</h5>
                             Press One of the topboxes to show the graph for your choosen measurement type
+
+                            <div class="header-buttons">
+                                <p:commandButton type="button" icon="pi pi-ellipsis-v" title="Help"
+                                                 styleClass="ui-button-secondary outlined-button"
+                                                 onclick="PF('graphHelpDialog').show()"/>
+                            </div>
+
+
                         </div>
                         <div class="card">
                             <p:lineChart id="mylineChart" model="#{graphController.lineModel}"/>
                         </div>
                     </div>
                 </div>
-                <!-- ...................simply modify the graph controller do display different data................... -->
-                <!-- ...................supported charts are .lineModel and .cartesianLinearModel................... -->
 
 
                 <!-- .........................................MEASUREMENTS TABLE...................................................... -->
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="card products">
-                        <p:dataTable id="myDataTable1" widgetVar="customersDT2" var="measurement"
+                        <!-- ..............Header............. -->
+                        <div class="card-header">
+                            <h5>Measurements:</h5>Press on a TopBox to chose another measurement type.
+                            <!-- ...................Help Button................. -->
+                            <div class="header-buttons">
+                                <p:commandButton type="button" icon="pi pi-ellipsis-v" title="Help"
+                                                 styleClass="ui-button-secondary outlined-button"
+                                                 onclick="PF('measurementHelpDialog').show()"/>
+                            </div>
+                        </div>
+
+                        <p:dataTable id="myDataTable1" var="measurement"
                                      value="#{measurementListController.measurementsForSensorStationList}"
                                      selectionMode="single" reflow="true"
-                                     rowKey="#{measurement.sensorStation.sensorStationName}" scrollable="true"
-                                     scrollHeight="250" rows="50" paginator="true" paginatorPosition="bottom"
+                                     rowKey="#{measurement.id}" scrollable="true"
+                                     scrollHeight="320px" rows="50" paginator="true" paginatorPosition="bottom"
                                      styleClass="ui-datatable-striped ui-datatable-sm ui-datatable-gridlines">
-
-                            <!-- ........THIS CAN BE ADDED TO ANY INTERACTIVE ELEMENT TO REFRESH SOMETHING............ -->
+                            <!-- ........Row select............ -->
                             <p:ajax event="rowSelect" update="mylineChart"
                                     listener="#{graphController.onRowSelectLineChart}"/>
-
-                            <f:facet name="header">
-                                <div class="customers-table-header">
-                                    <span> Press on a TopBox to chose a measurement type</span>
-                                </div>
-                            </f:facet>
-                            <!-- ........TODO: no reason to see the sensor station here , remove it after debugging phase............ -->
-                            <p:column headerText="Sensor Station"
-                                      sortBy="#{measurement.sensorStation.sensorStationName}"
-                                      filterBy="#{measurement.sensorStation.sensorStationName}">
-                                <h:outputText value="#{measurement.sensorStation.sensorStationName}"/>
-                            </p:column>
 
                             <p:column headerText="Measurement" sortBy="#{measurement.value_s}"
                                       filterBy="#{measurement.value_s}">
@@ -332,154 +357,155 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <!-- ......................................... SENSOR STATION SETTINGS PANEL................................................................... -->
                 <div class="col-12 md:col-6 xl:col-4">
                     <div class="card tasks">
                         <div class="card-header">
                             <h5>Edit Sensor Station</h5>
-
+                            <!-- ...................Help Button................. -->
                             <div class="header-buttons">
-                                <p:commandButton type="button" icon="pi pi-ellipsis-v" title = "Help"
-                                                 styleClass="ui-button-secondary outlined-button"  onclick="PF('editHelpDialog').show()" />
+                                <p:commandButton type="button" icon="pi pi-ellipsis-v" title="Help"
+                                                 styleClass="ui-button-secondary outlined-button"
+                                                 onclick="PF('editHelpDialog').show()"/>
                             </div>
-
                         </div>
-                        <!-- ...................Help Button................. -->
-
 
                         <!-- ................ EDIT FIELDS PANEL............-->
                         <div class="field col-12 md:col-4">
                             <h:form id="EditThisSensorStation">
-
-
-                                <p:outputPanel id="sensorStationData" rendered="#{not empty sensorStationDetailController.sensorStation}">
+                                <p:outputPanel id="sensorStationData"
+                                               rendered="#{not empty sensorStationDetailController.sensorStation}">
                                     <h:panelGrid columns="2">
 
                                         <!-- ................ FIELDS ONLY TO SHOW ACTUAL VALUES............-->
                                         <p:outputLabel for="sensorStationId" value="Name:"/>
-                                        <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
+                                        <p:inputText id="sensorStationId"
+                                                     value="#{sensorStationDetailController.sensorStation.sensorStationName}"
+                                                     disabled="true"/>
                                         <p:outputLabel for="sensorStationalarmSwitch" value="Switch"/>
-                                        <p:inputText id="sensorStationalarmSwitch" value="#{sensorStationDetailController.sensorStation.alarmSwitch}" disabled="true" />
+                                        <p:inputText id="sensorStationalarmSwitch"
+                                                     value="#{sensorStationDetailController.sensorStation.alarmSwitch}"
+                                                     disabled="true"/>
                                         <p:outputLabel for="sensorStationShowPlant" value="Plant"/>
-                                        <p:inputText id="sensorStationShowPlant" value="#{sensorStationDetailController.sensorStation.plant.plantName}" disabled="true" />
+                                        <p:inputText id="sensorStationShowPlant"
+                                                     value="#{sensorStationDetailController.sensorStation.plant.plantName}"
+                                                     disabled="true"/>
+                                        <p:outputLabel for="sensorStationShowLocation" value="Location"/>
+                                        <p:inputText id="sensorStationShowLocation"
+                                                     value="#{sensorStationDetailController.sensorStation.location}"
+                                                     disabled="true"/>
                                         <!-- ................SHOW ACCESS POINT............-->
-                                        <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/> <!-- ....TODO:implement Pairing button like change plant......-->
-                                        <p:selectOneMenu id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
-                                                         scrollHeight="250" updateLabel="true" disabled="true">
-                                            <f:selectItems value="#{accessPointController.accessPoints}"/>
-                                            <f:facet name="footer">
-                                                <p:divider styleClass="mt-0" />
-                                                <h:outputText value="3 options" style="font-weight:bold;"/>
-                                            </f:facet>
-                                        </p:selectOneMenu>
-
+                                        <p:outputLabel for="sensorStationAccessPoint" value="Access Point"/>
+                                        <p:inputText id="sensorStationAccessPoint"
+                                                     value="#{sensorStationDetailController.sensorStation.accessPoint.id}"
+                                                     disabled="true"/>
 
                                         <p:outputLabel for="newPlant" value="New Plant name:"/>
-                                        <p:inputText id="newPlant" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.selectedPlantName}"/>
+                                        <p:inputText id="newPlant"
+                                                     rendered="#{not empty sensorStationDetailController.sensorStation}"
+                                                     value="#{sensorStationDetailController.selectedPlantName}"/>
                                         <!-- ................ ............................................-->
                                         <!-- ................REAL IMPUT FIELDS............................-->
                                         <p:outputLabel for="sensorStationlocation" value="Location:"/>
-                                        <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
-
-
-
-
-
+                                        <p:inputText id="sensorStationlocation"
+                                                     rendered="#{not empty sensorStationDetailController.sensorStation}"
+                                                     value="#{sensorStationDetailController.sensorStation.location}"/>
 
                                         <!-- ...TOGGLESWITCH FOR THE ALARM....-->
-                                        <p:outputLabel rendered="#{sensorStationDetailController.fixed == false}" for="sensorStationswitchEdit" value="Alarm Switch to Fixed(if not):" />
-                                        <p:toggleSwitch id ="sensorStationswitchEdit" rendered="#{sensorStationDetailController.fixed == false}" value="#{sensorStationDetailController.fixed}"/>
-
-                                        <!-- ................SHOW ACCESS POINT............-->
-                                        <p:outputLabel for="pairNewAccessPoint" value="New Access Point:"/> <!-- ....TODO:implement Pairing button like change plant......-->
-                                        <p:selectOneMenu id="pairNewAccessPoint" filter="true" emptyLabel="Access Point ID"
-                                                         scrollHeight="250" updateLabel="true" >
-                                            <f:selectItems value="#{accessPointController.accessPoints}"/>
-                                            <f:facet name="footer">
-                                                <p:divider styleClass="mt-0" />
-                                                <h:outputText value="3 options" style="font-weight:bold;"/>
-                                            </f:facet>
-                                        </p:selectOneMenu>
+                                        <p:outputLabel rendered="#{sensorStationDetailController.fixed == false}"
+                                                       for="sensorStationswitchEdit"
+                                                       value="Alarm Switch to Fixed(if not):"/>
+                                        <p:toggleSwitch id="sensorStationswitchEdit"
+                                                        rendered="#{sensorStationDetailController.fixed == false}"
+                                                        value="#{sensorStationDetailController.fixed}"/>
 
                                     </h:panelGrid>
 
                                     <!-- ....................EDIT THIS SENSOR STATION BUTTONS........... .............. -->
-                                    <h:panelGrid columns="2" >
+                                    <h:panelGrid columns="2">
 
                                         <!-- ....................SAVE OTHER CHANGES BUTTON ........... .............. -->
-                                        <p:commandButton value="Save Changes" action="#{sensorStationDetailController.doSaveSensorStation()}"
-                                                         update="EditThisSensorStation:sensorStationData" style="margin-right: 200px;" >  <!-- .TODO:replace this absolute value -->
-                                        <p:confirm header="Confirmation"
-                                                   message="Save Changes to Sensor Station ? This operation will not change the plant displayed"
-                                                   icon="pi pi-exclamation-triangle"/>
+                                        <p:commandButton value="Save Changes"
+                                                         action="#{sensorStationDetailController.doSaveSensorStation()}"
+                                                         update="EditThisSensorStation:sensorStationData"
+                                                         style="margin-right: 50px;">  <!-- .TODO:replace this absolute value -->
+                                            <p:confirm header="Confirmation"
+                                                       message="Save Changes to Sensor Station ? This operation will not change the plant displayed"
+                                                       icon="pi pi-exclamation-triangle"/>
                                         </p:commandButton>
 
                                         <!-- ....................CHANGE PLANT BUTTON ........... .............. -->
                                         <p:commandButton styleClass="ui-button-danger"
-                                                         action="#{sensorStationDetailController.doChangeThePlantAndSave()}" icon="pi pi-user-minus"
+                                                         action="#{sensorStationDetailController.doChangeThePlantAndSave()}"
+                                                         icon="fa fa-duotone fa-seedling"
                                                          value="Change Plant" oncomplete="location.reload();"
-                                                          >
+                                        >
                                             <p:confirm header="Confirmation"
                                                        message="Are you sure that you want to change the Plant ? You cannot undo this operation. A new Plant with the selected type/name will be created."
                                                        icon="pi pi-exclamation-triangle"/>
                                         </p:commandButton>
-                                </h:panelGrid>
 
+                                        <!-- ....................SENSOR STATION pairing BUTTON ........... .............. -->
+                                        <p:commandButton value="Pairing"
+                                                         update="pairingDialog"
+                                                         oncomplete="PF('pairingDialog').show()" icon="pi pi-sync"
+                                                         title="Pair">
+                                            <f:setPropertyActionListener
+                                                    value="#{sensorStationDetailController.sensorStation.id}"
+                                                    target="#{pairingController.sensorStationId}"/>
+                                        </p:commandButton>
+                                    </h:panelGrid>
 
                                 </p:outputPanel>
 
-
-                                <!-- .......::::::::::::::::::.............CONFIRMATION DIALOG........... ....::::::::::::.......... -->
-                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
-                                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
-                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
-                                </p:confirmDialog>
-
-
-                                <!-- ...................................Help dialog.................................... -->
-                                <p:dialog header="Edit Sensor Station Help" id="editHelpDialog" widgetVar="editHelpDialog"
-                                          modal="true"
+                                <!-- ....................SENSOR STATION pairing Dialog ........... .............. -->
+                                <p:dialog header="Pairing" id="pairingDialog" widgetVar="pairingDialog" modal="true"
                                           showEffect="fade" hideEffect="fade" resizable="false">
-
-                                    <p:outputPanel id="EdithelpDialog">
-                                        From this panel you can edit settings for this Sensor Station.<br></br>
-                                        The first 4 fields are intended to show you the actual settings.
-                                        <h6>About Changing Plant:</h6>
-                                        To change the plant you have to put a new Plant Name in the according imput field and click the button Change Plant.<br></br>
-                                        The page will be reloaded and updated accordingly , This action is not reversible as it will detach the old plant from this sensor station.<br></br>
-                                        The plant page for the old plant will continue to be visible to users until it is deleted from a administrator from Plant Menegement.<br></br>
-                                        Setting new border values will also change the values for the alarmcount.
-                                        <h6>About Saving Changes:</h6>
-                                        Save Changes will save changes to Location and Access Point and will make no changes regarding the displayed Plant <br></br>
-                                        <h6>About Changing Access Point:</h6>
-                                        bla bla.
-
+                                    <p:outputPanel id="pairingPanel">
+                                        <h:panelGrid columns="1">
+                                            <p:outputLabel for="pairedWith" value="Paired With:"/>
+                                            <p:inputText
+                                                    rendered="#{not empty pairingController.sensorStationAccessPointId}"
+                                                    id="pairedWith"
+                                                    value="#{pairingController.sensorStationAccessPointId}"
+                                                    disabled="true"/>
+                                            <p:outputLabel for="sensorStationAccessPointId"
+                                                           value="Pair to new Access Point:"/>
+                                            <p:selectOneMenu value="#{pairingController.accessPointId}"
+                                                             id="sensorStationAccessPointId" filter="true"
+                                                             emptyLabel="Access Point ID"
+                                                             scrollHeight="250" updateLabel="true">
+                                                <f:selectItems value="#{pairingController.accessPointsIds}"/>
+                                                <f:facet name="footer">
+                                                    <p:divider styleClass="mt-0"/>
+                                                    <h:outputText value="3 options" style="font-weight:bold;"/>
+                                                </f:facet>
+                                            </p:selectOneMenu>
+                                            <!-- ...................................PAIR/UNPAIR BUTTONS .................................... -->
+                                            <h:panelGrid columns="3">
+                                                <p:commandButton value="Remove current pairing"
+                                                                 action="#{pairingController.unpair()}"
+                                                                 oncomplete="PF('pairingDialog').hide();location.reload()">
+                                                    <p:confirm header="Confirmation"
+                                                               message="Are you sure that you want to unpair the sensor station?"
+                                                               icon="pi pi-exclamation-triangle"/>
+                                                </p:commandButton>
+                                            </h:panelGrid>
+                                            <h:panelGrid columns="2">
+                                                <p:commandButton id="startBatch" value="Pair"
+                                                                 actionListener="#{pairingController.pair}"
+                                                                 oncomplete="location.reload()"/>
+                                                <p:commandButton id="abortbutton" async="true" value="Abort Pairing"
+                                                                 actionListener="#{pairingController.abortPairing()}"/>
+                                                <p:ajax event="click" listener="#{pairingController.abortPairing()}"
+                                                        oncomplete="PF('pairingDialog').hide()"/>
+                                            </h:panelGrid>
+                                        </h:panelGrid>
                                     </p:outputPanel>
                                 </p:dialog>
 
 
-
-
-
                             </h:form>
-
                         </div>
 
 
@@ -492,52 +518,19 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <!-- .........................................SENSORS PANEL.............................................................. -->
                 <div class="col-12 md:col-12 xl:col-8">
                     <div class="card transactions">
+                        <!-- ..........HEADER.......... -->
                         <div class="card-header">
                             <h5>Sensors</h5>
-
-
                             <!-- ...................Help Button................. -->
                             <div class="header-buttons">
-                                <p:commandButton type="button" icon="pi pi-ellipsis-v" title = "Help"
-                                                 styleClass="ui-button-secondary outlined-button"  onclick="PF('sensorhelpDialog').show()" />
+                                <p:commandButton type="button" icon="pi pi-ellipsis-v" title="Help"
+                                                 styleClass="ui-button-secondary outlined-button"
+                                                 onclick="PF('sensorhelpDialog').show()"/>
                             </div>
-
-
                         </div>
-
                         <h:form id="form">
                             <p:dataTable id="ordersTable12" var="sensor"
                                          value="#{sensorListController.getSensorsForSensorStation()}"
@@ -548,26 +541,21 @@
                                 <p:column headerText="id(only in testing phase)" sortBy="#{sensor.id}">
                                     <h:outputText value="#{sensor.id}"/>
                                 </p:column>
-
                                 <p:column headerText="Type" sortBy="#{sensor.type}">
                                     <h:outputText value="#{sensor.type}"/>
                                 </p:column>
-
                                 <p:column headerText="Upper Border" sortBy="#{sensor.upper_border}">
                                     <h:outputText value="#{sensor.upper_border}"/>
                                 </p:column>
-
                                 <p:column headerText="Lower Border" sortBy="#{sensor.lower_border}">
                                     <h:outputText value="#{sensor.lower_border}"/>
                                 </p:column>
-
                                 <p:column headerText="Alarm Count" sortBy="#{sensor.alarm_count}">
                                     <h:outputText value="#{sensor.alarm_count}"/>
                                 </p:column>
-
                                 <p:column>
                                     <p:commandButton style="margin-right: 10px" update="form:userEditDialog12"
-                                                     oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit"
+                                                     oncomplete="PF('userEditDialog').show()" icon="fa fa-solid fa-gear"
                                                      title="Edit">
                                         <f:setPropertyActionListener value="#{sensor}"
                                                                      target="#{sensorDetailController.sensor}"/>
@@ -576,7 +564,10 @@
 
                             </p:dataTable>
 
-                            <!-- .......................................DIALOGS...................................................................... -->
+
+                            <!-- .......................................DIALOGS.............................................................. -->
+
+
                             <!-- ...................................SensorEdit dialog.................................... -->
                             <p:dialog header="Edit Sensor borders" id="userEditDialog12" widgetVar="userEditDialog"
                                       modal="true"
@@ -591,11 +582,13 @@
                                         <p:outputLabel for="lower" value="Lower border"/>
                                         <p:inputText id="lower" value="#{sensorDetailController.lower_border}"/>
                                         <p:outputLabel for="sensorResetSwitch" value="Reset Alarm Count:"/>
-                                        <p:toggleSwitch id="sensorResetSwitch" value="#{sensorDetailController.resetAlarm}"/>
+                                        <p:toggleSwitch id="sensorResetSwitch"
+                                                        value="#{sensorDetailController.resetAlarm}"/>
                                     </h:panelGrid>
 
                                     <h:panelGrid columns="3">
-                                        <p:commandButton value="Save Changes" action="#{sensorDetailController.doSaveSensor()}"
+                                        <p:commandButton value="Save Changes"
+                                                         action="#{sensorDetailController.doSaveSensor()}"
                                                          update="userEditDialog12 ordersTable12 detailPage"
                                                          oncomplete="location.reload();"/>
                                     </h:panelGrid>
@@ -604,39 +597,13 @@
                             </p:dialog>
 
 
-
-
-
-                            <!-- ...................................Help dialog.................................... -->
-                            <p:dialog header="Help" id="sensorhelpDialog" widgetVar="sensorhelpDialog"
-                                      modal="true"
-                                      showEffect="fade" hideEffect="fade" resizable="false">
-
-                                <p:outputPanel id="SensorhelpDialog">
-                                    <h5>Sensors</h5>From this panel you can see the sensors registered for this greenhouse.<br></br>
-                                    For each sensor you can set upper and lower border values and reset the alarm count.
-                                    <h6>About Setting border values:</h6>
-                                    Setting new border values will reload the page and all measurements status will be updated according to your new bordervalues.<br></br>
-                                    Setting new border values will also change the values for the alarmcount.
-                                    <h6>About the Alarm Count:</h6>
-                                    The alarm count rapresent how many times a given sensor treshold has been exceeded.
-                                    If the alarm count is high enough <br></br> the status of the sensor will change from green to red.
-                                    This change will be visible on the corresponding plant page aswell.<br></br>
-                                    If you have solved the problem you can just reset the alarm count by using the toggle in the edit sensors button.
-
-                                </p:outputPanel>
-                            </p:dialog>
-
-
-
-
-
-
-
-
-
-
-
+                            <!-- ...................................CONFIRMATION DIALOG .................................... -->
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"
+                                                 icon="pi pi-check"/>
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"
+                                                 icon="pi pi-times"/>
+                            </p:confirmDialog>
 
 
                         </h:form>
@@ -647,6 +614,80 @@
 
             </div>
         </div>
+
+
+        <!-- ....................................... HELP DIALOGS...................................................................... -->
+
+        <!-- ...................... GRAPH HELP DIALOG................................................. -->
+        <p:dialog header="Graph panel Help" id="graphHelpDialog" widgetVar="graphHelpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+
+            <p:outputPanel id="GraphHelpDialog">
+                From This Panel you can see the The measurement linechart for a given measurement type.<br></br>
+                Click on one of the top boxes to show the graph for you choosen measurement type.<br></br>
+                The measurement list on the right will be updated aswell.<br></br>
+                You can hover over a measurement in the graph to see its value
+
+
+            </p:outputPanel>
+        </p:dialog>
+
+        <!-- ...................................sensor station Help dialog............................. -->
+        <p:dialog header="Help" id="sensorhelpDialog" widgetVar="sensorhelpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+
+            <p:outputPanel id="SensorhelpDialog">
+                <h5>Sensors</h5>From this panel you can see the sensors registered for this greenhouse.<br></br>
+                For each sensor you can set upper and lower border values and reset the alarm count.
+                <h6>About Setting border values:</h6>
+                Setting new border values will reload the page and all measurements status will be updated according to your new bordervalues.<br></br>
+                Setting new border values will also change the values used for counting up the alarmcount.
+                <h6>About the Alarm Count:</h6>
+                The alarm count rapresent how many times a given sensor treshold has been exceeded.
+                If the alarm count is high enough <br></br> the status of the sensor will change from green to red.
+                This change will be visible on the corresponding plant page aswell.<br></br>
+                If you have solved the problem you can just reset the alarm count by using the toggle in the edit sensors button.
+
+            </p:outputPanel>
+        </p:dialog>
+
+        <!-- ...................................Edit Sensor Station Help dialog.................................... -->
+        <p:dialog header="Edit Sensor Station Help" id="editHelpDialog" widgetVar="editHelpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+
+            <p:outputPanel id="EdithelpDialog">
+                From this panel you can edit settings for this Sensor Station.<br></br>
+                The first 5 fields are intended to show you the actual settings.
+                <h6>About Changing Plant:</h6>
+                To change the plant you have to put a new Plant Name in the according imput field and click the button Change Plant.<br></br>
+                The page will be reloaded and updated accordingly , This action is not reversible as it will detach the old plant from this sensor station.<br></br>
+                The plant page for the old plant will continue to be visible to users until it is deleted from a administrator from Plant Menegement.<br></br>
+                Setting new border values will also change the values for the alarmcount.
+                <h6>About Saving Changes:</h6>
+                Save Changes will save changes to Location and Access Point and will make no changes regarding the displayed Plant
+                <br></br>
+                <h6>About Changing Access Point:</h6>
+                From the pairing button it is possible to pair with a new Access Point or remove the current pairing, The pairing process will<br></br>
+                search for the access point for 5 minutes unless interrupted.
+                <h6>About The Switch:</h6>
+                Once the alram switch is on a toggle will appear to deactivate it when the issue is fixed.
+            </p:outputPanel>
+        </p:dialog>
+
+        <!-- ...................................Measurements Table Help Dialog.................................... -->
+        <p:dialog header="Measurement List Help" id="measurementHelpDialog" widgetVar="measurementHelpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+
+            <p:outputPanel id="MeasurementHelpDialog">
+                From this panel you can See measurements of your chosen type.<br></br>
+                Press on a Top Box to chose a measurement type , the data showed in the list and the graph will be updated accordingly.<br></br>
+                Also when pressing on a measurement the graph will update to the show the timeline of that type.
+            </p:outputPanel>
+        </p:dialog>
 
 
     </ui:define>

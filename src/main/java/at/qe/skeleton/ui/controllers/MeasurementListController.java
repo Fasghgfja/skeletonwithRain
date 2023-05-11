@@ -140,6 +140,42 @@ public class MeasurementListController implements Serializable {
 
 
 
+    public String getLastAirMeasurementValue() {
+        type = "AIR_QUALITY";
+        SensorStation sensorStation = sensorStationDetailController.getSensorStation();
+        return measurementService.getLastMeasurementBySensorStationAndType(sensorStation,type);
+    }
+    public String getLastPressureMeasurementValue() {
+        type = "AIR_PRESSURE";
+        SensorStation sensorStation = sensorStationDetailController.getSensorStation();
+        return measurementService.getLastMeasurementBySensorStationAndType(sensorStation,type);
+    }
+    public String getLastLightMeasurementValue() {
+        type = "LIGHT_INTENSITY";
+        SensorStation sensorStation = sensorStationDetailController.getSensorStation();
+        return measurementService.getLastMeasurementBySensorStationAndType(sensorStation,type);
+    }
+    public String getLastSoilMeasurementValue() {
+        type = "SOIL_MOISTURE";
+        SensorStation sensorStation = sensorStationDetailController.getSensorStation();
+        return measurementService.getLastMeasurementBySensorStationAndType(sensorStation,type);
+    }
+    public String getLastAirHumidityMeasurementValue() {
+        type = "HUMIDITY";
+        SensorStation sensorStation = sensorStationDetailController.getSensorStation();
+        return measurementService.getLastMeasurementBySensorStationAndType(sensorStation,type);
+    }
+    public String getLastTemperatureMeasurementValue() {
+        type = "TEMPERATURE";
+        SensorStation sensorStation = sensorStationDetailController.getSensorStation();
+        return measurementService.getLastMeasurementBySensorStationAndType(sensorStation,type);
+    }
+
+
+
+
+
+
 
 }
 
