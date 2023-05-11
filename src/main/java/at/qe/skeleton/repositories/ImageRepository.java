@@ -96,7 +96,10 @@ public interface ImageRepository extends AbstractRepository<Image, Long> {
      */
     List<Image> findImagesByPlantAndCreationDateEquals(Plant plant, LocalDate date);
 
-    long count();
+    Integer count();
 
+    Integer countImagesByApprovedEquals(Boolean approved);
+
+    Integer countImagesByApprovedEqualsAndPlantEquals(Boolean approved, Plant plant);
 }
 

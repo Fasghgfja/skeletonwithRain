@@ -53,6 +53,9 @@ public class QrCodeController implements Serializable {
     }
 
     public void setText(final String text) { //TODO : if resources become a thing this is unnecessary caching for a stupid thing : )
+        if (this.id != 0) {
+            return;
+        }
         this.text = "http://localhost:8080/registration/register.xhtml?id=" + text;
         if (!(text.length() > 0 && text.length() <= 19) || !(text.matches("\\d+"))) {
             this.label = "Plant not Found";
@@ -119,6 +122,11 @@ public class QrCodeController implements Serializable {
         if(params.get("id") == null){return;}
         this.id = Long.parseLong(params.get("id"));
         text = text+id;
-        label = label +id;
+
+        Plant lookingfor = plantService.loadPlant(Long.parseLong(id.toString()));
+        if(lookingfor == null) {this.label = "Plant not Found";}
+        else {
+            this.label = lookingfor.getPlantName();
+        }
     }
 }
