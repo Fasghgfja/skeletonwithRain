@@ -201,7 +201,7 @@
                         <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
 
                         <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/>
-                        <p:selectOneMenu id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
+                        <p:selectOneMenu id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID" disabled="true"
                                          scrollHeight="250" updateLabel="true" >
                             <f:selectItems value="#{accessPointController.accessPoints}"/>
                             <f:facet name="footer">

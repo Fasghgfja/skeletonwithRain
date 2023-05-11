@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,6 +54,8 @@ public class UserListController implements Serializable {
     public Collection<String> getGardenerNames() {
         return userService.getAllGardenerNames();
     }
+
+
 
 
 

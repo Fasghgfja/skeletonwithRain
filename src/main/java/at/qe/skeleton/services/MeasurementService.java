@@ -32,18 +32,41 @@ public class MeasurementService {
 
 
     //................methods to find a Measurement or a list of measurements with different parameters
+    // TODO: Methoden werden nicht verwendet. Bitte löschen. NICHT GETESTET.
     public Measurement findMeasurementById(Long id) {
         return measurementRepository.findFirstById(id);
     }
     public Measurement findFirstMeasurementBySensorStationIdAndType(String sensorStationId,String type) {
         return measurementRepository.findFirstBySensorStationIdAndType(sensorStationId,type);
     }
+
+    /**
+     * Method to get all measurements currently stored in the database.
+     * @return Collection of all measurements.
+     */
     public Collection<Measurement> getAllMeasurements() {
         return measurementRepository.findAll();
     }
+
+    /**
+     * Method to get all Measurements of a given sensor station from the database.
+     * @param sensorStation measurements of this sensor station will be return in a way that the latest measurements are displayed first.
+     * @return Collection of measurements.
+     */
     public Collection<Measurement> getAllMeasurementsBySensorStation(SensorStation sensorStation) {
         return measurementRepository.findMeasurementsBySensorStationOrderByTimestampDesc(sensorStation);
     }
+
+    /**
+     * Method to get measurements of a single type for a single sensor station.
+     * @param sensorStation Measurements for this sensor station will be returned.
+     * @param type Measurements of this type will be returned.
+     * @return Collection of measurements.
+     */
+    public Collection<Measurement> getAllMeasurementsBySensorStationAndTypeAsc(SensorStation sensorStation, String type) {
+        return measurementRepository.findMeasurementsBySensorStationAndTypeLikeOrderByTimestampAsc(sensorStation, type);
+    }
+
     public Collection<Measurement> getAllMeasurementsBySensorStationAndType(SensorStation sensorStation, String type) {
         return measurementRepository.findMeasurementsBySensorStationAndTypeLikeOrderByTimestampDesc(sensorStation, type);
     }
@@ -53,6 +76,7 @@ public class MeasurementService {
 
 
     //................methods to delete Measurements with di different parameters
+    // TODO: THIS WILL BE NEEDED
     public void deleteMeasurement(Measurement measurement) {
         if (measurement == null) {
             throw new NullPointerException("Measurement cant be null");
@@ -60,6 +84,7 @@ public class MeasurementService {
         measurementRepository.delete(measurement);
     }
 
+    //TODO: THIS WILL BE NEEDED
     /**
      * Deletes all measurements for a given sensorStation.
      * @param sensorStation the sensorStation from which to delete the measurements
@@ -92,6 +117,7 @@ public class MeasurementService {
         latestMeasurements.add(latestAirHumidityMeasurement);
         return latestMeasurements;
     }
+
     /**
      * Method to get the latest measurements for a given plant
      * this method is used from the graph and status indicators to get the latest measurements for a plant
@@ -113,40 +139,19 @@ public class MeasurementService {
         return latestMeasurements;
     }
 
+    /**
+     * Method to get the amount of measurements currently stored in the database.
+     * @return number of measurements.
+     */
     public Integer getMeasurementsAmount() {return measurementRepository.count();}
 
 
-    public String getMeasurementStatusForValue(String measurementValue,String type) {
-        if (measurementValue == null || measurementValue.equals("")) {return "OK";}
-        if (checkThreshold(measurementValue,type) == 0){return "OK";} else {return "Wrong";}
-    }
 
-    private int checkThreshold(String measurementValue, String type) {
-        boolean isThresholdExceeded;
-        switch(type) {
-            case "SOIL_MOISTURE":
-                isThresholdExceeded = (Double.parseDouble(measurementValue) > 95 || Double.parseDouble(measurementValue) < 10);
-                return isThresholdExceeded ? 1 : 0;
-            case "HUMIDITY":
-                isThresholdExceeded = (Double.parseDouble(measurementValue) > 80 || Double.parseDouble(measurementValue) < 20);
-                return isThresholdExceeded ? 1 : 0;
-            case "AIR_PRESSURE":
-                isThresholdExceeded = (Double.parseDouble(measurementValue) > 2 || Double.parseDouble(measurementValue) < 1);
-                return isThresholdExceeded ? 1 : 0;
-            case "TEMPERATURE":
-                isThresholdExceeded = (Double.parseDouble(measurementValue) > 35 || Double.parseDouble(measurementValue) < 10);
-                return isThresholdExceeded ? 1 : 0;
-            case "AIR_QUALITY":
-                isThresholdExceeded = (Double.parseDouble(measurementValue) < 50);
-                return isThresholdExceeded ? 1 : 0;
-            case "LIGHT_INTENSITY":
-                isThresholdExceeded = (Double.parseDouble(measurementValue) > 1500 || Double.parseDouble(measurementValue) < 100);
-                return isThresholdExceeded ? 1 : 0;
-            default:
-                return 0;
-        }
-    }
-
+    /**
+     * Method to return an icon for a certain measurement type.
+     * @param type type of the measurement.
+     * @return A string that indicates which icon suits the measurement type is returned.
+     */
 
     public String getMeasurementTypeIcon(String type) {
         switch(type) {
@@ -168,20 +173,9 @@ public class MeasurementService {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public String getLastMeasurementBySensorStationAndType(SensorStation sensorStation, String type) {
+        Measurement measurement = measurementRepository.getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(sensorStation,type);
+        if(measurement == null) {return "--";}
+        return measurementRepository.getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(sensorStation,type).getValue_s();
+    }
 }

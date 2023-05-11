@@ -371,17 +371,15 @@
                             <f:selectItem itemLabel="Off" itemValue="Off"/>
                         </p:selectOneMenu>
 
-
-
-                        <!-- .......TODO:trying to insert the gardener............ -->
-                        <h5>ADD Gardeners NEW!</h5>
+                        <!-- ...................................GARDENER ADD AND REMOVE.................................... -->
+                        <p:outputLabel for="AddGardenre" value="Add Gardeners:"/>
                         <p:selectCheckboxMenu id="AddGardenre" value="#{sensorStationDetailController.gardeners}" label="Gardeners" style="min-width: 15rem"
                                               multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"
                                               emptyLabel="Select Gardener..." updateLabel="true">
                             <f:selectItems value="#{userListController.gardenerNames}"/>
                         </p:selectCheckboxMenu>
 
-                        <h5>REMOVE Gardeners NEW!</h5>
+                        <p:outputLabel for="RemoveGardener" value="Remove Gardeners:"/>
                         <p:selectCheckboxMenu id="RemoveGardener" value="#{sensorStationDetailController.gardenersToRemove}" label="Gardeners" style="min-width: 15rem"
                                               multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"
                                               emptyLabel="Select Gardener..." updateLabel="true">

@@ -53,6 +53,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @return The measurements belonging to the selected sensorStation as a List.
      * @throws IllegalArgumentException If sensorStation is {@literal null}.
      */
+    List<Measurement> findMeasurementsBySensorStationAndTypeLikeOrderByTimestampAsc(SensorStation sensorStation, String type);
     List<Measurement> findMeasurementsBySensorStationAndTypeLikeOrderByTimestampDesc(SensorStation sensorStation, String type);
 
 
@@ -61,9 +62,7 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
     Integer count();
 
 
-
-
-
+    Measurement getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(SensorStation sensorStation, String type);
 }
 
 

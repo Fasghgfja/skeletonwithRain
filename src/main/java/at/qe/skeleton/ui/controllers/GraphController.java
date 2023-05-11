@@ -84,7 +84,16 @@ public class GraphController implements Serializable {
         Measurement measurement = event.getObject();
         sensorStation = measurement.getSensorStation();
         createCartesianLinerModel();
-        latestMeasurements = new ArrayList<>(measurementService.getAllMeasurementsBySensorStationAndType(sensorStation, measurement.getType()));
+        latestMeasurements = new ArrayList<>(measurementService.getAllMeasurementsBySensorStationAndTypeAsc(sensorStation, measurement.getType()));
+        if (!latestMeasurements.isEmpty()) {
+            createLineModel(latestMeasurements);
+        }
+    }
+
+
+    public void selectLineGraph(String type, SensorStation sensorStation) {//todo:new
+        createCartesianLinerModel();
+        latestMeasurements = new ArrayList<>(measurementService.getAllMeasurementsBySensorStationAndTypeAsc(sensorStation,type));
         if (!latestMeasurements.isEmpty()) {
             createLineModel(latestMeasurements);
         }
@@ -107,11 +116,14 @@ public class GraphController implements Serializable {
 
         //TODO:change this with a query for AirValue GroundValue HumidityValue etc instead of hoping they come out in the correct order
         List<Number> values = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+
         measurements.forEach(measurement -> {
             if (measurement == null) {
                 values.add(0);
             } else {
                 values.add(Double.parseDouble(measurement.getValue_s()));
+                labels.add(measurement.getType());
             }
         });
 
@@ -139,13 +151,13 @@ public class GraphController implements Serializable {
 
         data.addChartDataSet(barDataSet);
 
-        List<String> labels = new ArrayList<>();
-        labels.add("Temperature");
-        labels.add("Air Humidity");
-        labels.add("Ground Humidity");
-        labels.add("Light Intensity");
-        labels.add("Air Quality");
-        labels.add("Air Pressure");
+        //List<String> labels = new ArrayList<>();
+        //labels.add("Temperature");
+        //labels.add("Air Humidity");
+        //labels.add("Ground Humidity");
+        //labels.add("Light Intensity");
+        //labels.add("Air Quality");
+        //labels.add("Air Pressure");
         data.setLabels(labels);
         barModel.setData(data);
 
@@ -205,7 +217,7 @@ public class GraphController implements Serializable {
         measurements.forEach(measurement -> {
             if (measurement != null) {
                 values.add(Double.parseDouble(measurement.getValue_s()));
-                labels.add(measurement.getTimestamp().toString());
+                labels.add(measurement.getReadableTimestamp());
             }
         });
 

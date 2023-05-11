@@ -55,7 +55,9 @@ public class SensorService {
         return sensorRepository.save(sensor);
     }
 
-    public String getSensorStatus(String type, SensorStation sensorStation) {//todo new
+
+
+    public String getSensorStatus(String type, SensorStation sensorStation) {//todo:change to real naming for types with SH
         Sensor sensor = null;
         if (type.equals("TEMPERATURE")) { sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"TempSensor");}
         if (type.equals("LIGHT_INTENSITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"LigthSensor");}
@@ -67,6 +69,34 @@ public class SensorService {
         if (sensor.getAlarm_count() < 3 ) {return "OK";} //TODO set the alarm count to chat we want
         else {return "Wrong";}
     }
+
+
+
+    public Sensor getSensorForSensorStation(SensorStation sensorStation, String type) {//todo:change to real naming for types with SH
+        Sensor sensor = null;
+        if (type.equals("TEMPERATURE")) { sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"TempSensor");}
+        if (type.equals("LIGHT_INTENSITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"LigthSensor");}
+        if (type.equals("HUMIDITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"HygroSensor");}
+        if (type.equals("AIR_QUALITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"GasSensor");}
+        if (type.equals("AIR_PRESSURE")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"PressureSensor");}
+        if (type.equals("SOIL_MOISTURE")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"humiditySensor");}
+        return sensor;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //TODO: implement logging , like it was it crashes the db
@@ -88,5 +118,7 @@ public class SensorService {
     public long getSensorStationsAmount() {
         return sensorRepository.count();
     }
+
+
 
 }

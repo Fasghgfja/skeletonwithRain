@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashSet;
 
 
 /**
@@ -78,7 +79,13 @@ public class PlantService {
         System.out.println("im plant service : im deleting plant");
         plantRepository.delete(plant);
     }
+    public void deletePlantWithStation(Plant oldPlant) {
 
+        oldPlant.setSensorStation(null);
+        plantRepository.save(oldPlant);
+        plantRepository.delete(oldPlant);
+
+    }
 
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -126,9 +133,20 @@ public class PlantService {
         return plantRepository.findAllPlantsUniqueNames();
     }
 
+    public Collection<String> getAllNotUsedPlantsUniqueNames() {
+        return plantRepository.findAllNotUsedPlantsUniqueNames();
+    }
+
     public Boolean isPlantAlreadyFollowed(Userx currentUser, Plant plant) {
         //dunno why i had to negate this , but it works
         return plantRepository.findPlantsByFollowers(currentUser).contains(plant) ;
+    }
+
+
+    public void deleteAllPlantsWithoutSensorStation() {
+        HashSet<Plant> toDelete = plantRepository.findAllBySensorStationEquals(null);
+        toDelete.forEach(this::detachAllImagesFromPlant);
+        plantRepository.deleteAllBySensorStationEquals(null);
     }
 }
 
