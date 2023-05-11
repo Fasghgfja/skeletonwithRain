@@ -1,16 +1,18 @@
 package at.qe.skeleton.api.controllers;
 
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
+import at.qe.skeleton.api.model.BoarderValueFrame;
 import at.qe.skeleton.api.model.SensorApi;
 import at.qe.skeleton.api.model.SensorStationApi;
 import at.qe.skeleton.api.services.SensorStationServiceApi;
-import at.qe.skeleton.model.SensorStation;
+import at.qe.skeleton.model.Sensor;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -89,10 +91,10 @@ public class SensorStationApiController {
         }
     }
 
-    @GetMapping("/api/sensorsboardervalue")
-    SensorApi updateMeasurement(@RequestBody SensorApi sensorApi) {
+    @GetMapping("/api/sensorsboardervalue/{id}")
+    ArrayList<BoarderValueFrame> updateMeasurement(@PathVariable("id") String id) {
         try {
-            return sensorStationServiceApi.findOneSensor(sensorApi.getSensor_id());
+            return sensorStationServiceApi.findSensorsByAccesspointID(Long.valueOf(id));
         }catch (SensorStationNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

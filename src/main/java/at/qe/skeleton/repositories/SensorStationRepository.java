@@ -32,7 +32,6 @@ public interface SensorStationRepository extends AbstractRepository<SensorStatio
     delete from SENSOR_STATION where SENSOR_STATION_NAME='G4T2'
      */
 
-
     /**
      * Method to get a collection of all sensor stations assigned to a given gardener.
      * @param username the gardener for which to retrieve the sensor stations.

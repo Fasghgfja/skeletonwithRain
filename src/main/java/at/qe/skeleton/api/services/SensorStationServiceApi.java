@@ -3,21 +3,19 @@ package at.qe.skeleton.api.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
 
 
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
+import at.qe.skeleton.api.model.BoarderValueFrame;
 import at.qe.skeleton.api.model.SensorApi;
 import at.qe.skeleton.api.model.SensorStationApi;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Sensor;
 import at.qe.skeleton.model.SensorStation;
-import at.qe.skeleton.repositories.MeasurementRepository;
-import at.qe.skeleton.repositories.SensorStationRepository;
+import at.qe.skeleton.repositories.*;
 import at.qe.skeleton.services.SensorService;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +40,10 @@ public class SensorStationServiceApi {
     SensorStationRepository sensorStationRepository;
     @Autowired
     SensorService sensorService;
-
+    @Autowired
+    SensorRepository sensorRepository;
+    @Autowired
+    AccessPointRepository accessPointRepository;
     private static final AtomicLong ID_COUNTER = new AtomicLong(1);
     private static final ConcurrentHashMap<Long, SensorStation> sensorStations = new ConcurrentHashMap<>();
     private static final int NOITEMFOUND = 0;
@@ -163,14 +164,25 @@ public class SensorStationServiceApi {
 
     }
 
-    public SensorApi findOneSensor(Long id) throws SensorStationNotFoundException{
-        Sensor sensor = sensorService.loadSensor(id);
-        System.out.println(sensor.toString());
-        SensorApi sensorApi = new SensorApi();
-        sensorApi.setSensor_id(sensor.getId());
-        sensorApi.setAlarm_count(sensor.getAlarm_count());
-        sensorApi.setUpperBoarder(sensor.getUpper_border());
-        sensorApi.setLowerBoarder(sensor.getLower_border());
-        return sensorApi;
+    public ArrayList<BoarderValueFrame> findSensorsByAccesspointID(Long id) throws SensorStationNotFoundException{
+        List<SensorStation> sensorStationList = sensorStationRepository.findAllByAccessPoint_AccessPointID(id);
+        ArrayList<Sensor> sensorList = new ArrayList<>();
+        ArrayList<BoarderValueFrame> boarderValueFrameArrayList = new ArrayList<>();
+        System.out.println(sensorStationList.size());
+        for (SensorStation ss:
+             sensorStationList) {
+            sensorList.addAll(sensorService.getAllSensorsBySensorStation(ss).stream().toList());
+        }
+
+        for (Sensor s:
+             sensorList) {
+            BoarderValueFrame boarderValueFrame = new BoarderValueFrame();
+            boarderValueFrame.setSensor_id(s.getId());
+            boarderValueFrame.setLowerBoarder(s.getLower_border());
+            boarderValueFrame.setUpperBoarder(s.getUpper_border());
+            boarderValueFrame.setStation_name(s.getSensorStation().getSensorStationName());
+            boarderValueFrameArrayList.add(boarderValueFrame);
+        }
+        return boarderValueFrameArrayList;
     }
 }
