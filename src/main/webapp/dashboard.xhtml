@@ -80,7 +80,7 @@
                         <div class="card overview-box">
                             <p:graphicImage url="../resources/images/dashboard/effect-messages.svg"/>
                             <span class="overview-icon">
-                                <p:graphicImage url="../resources/images/dashboard/icon-messages.png"/>
+                                <p:graphicImage url="../resources/images/dashboard/measurements.png"/>
                             </span>
                             <div class="overview">
                                 <span class="overview-title">MEASUREMENTS</span>
@@ -301,12 +301,16 @@
                     <div class="col-12">
                         <div class="card">
 
-                                        <p>User Dashboard</p>
-                                        <h4>Getting Started</h4>
-                                        <p>On this page you can keep track of your followed plants and visit the plant pages to see their gallery and description , or you unfollow them by clicking on the - button</p>
-                                        <p>To add a plant to your followed plants visit Plant Catalogue.</p>
+                            <div class="card-header">
+                                <h4>Followed Plants</h4>
 
-                            <h5>Followed plants</h5>
+                                <div class="header-buttons">
+                                <p:commandButton type="button" icon="pi pi-ellipsis-v" title="Help"
+                                                 styleClass="ui-button-secondary outlined-button"
+                                                 onclick="PF('userDhelpDialog').show()"/>
+                            </div>
+                            </div>
+
                             <p:dataTable id="plantsTable" var="plant" value="#{plantController.followedPlantsList}" paginator="true" rows="3" paginatorPosition="bottom" rowKey="#{plant.id}">
 
                                 <p:ajax event="rowToggle"/>
@@ -527,5 +531,59 @@
                 <!--.....................................................ADMIN LOG FINISHED............................................-->
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- ....................................... HELP DIALOGS...................................................................... -->
+        <!-- ...................................UserDashboard help dialog............................. -->
+        <p:dialog header="User Dashboard Help" id="userDhelpDialog" widgetVar="userDhelpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+
+            <p:outputPanel id="UserDhelpDialog">
+                <h5>Getting Started</h5>
+                <p>On this page you can keep track of your followed plants and visit their respective plant pages to see their gallery description and latest measurements,<br></br>
+                    or you can unfollow them by clicking on the - button.<br></br>
+                To add a plant to your followed plants visit Plant Catalogue.</p>
+                <h6>About following unfollowing</h6>
+                When a plant dies and is finally deleted you will be automatically unfollowed , as long as the plant is not
+                deleted you will still be able to see its gallery and pictures even if it already died<br></br>
+                Use the unfollow button to stop following a plant.<br></br>
+                To see all our plants and add them to your followed list vist the Plants Catalogue page.
+                <h6>About Plant pages</h6>
+                Each of our plants has a dedicated plant page you can visit to see its gallery and latest measurements along with other
+                usefull information!<br></br>
+                Visit it by pressing the "Show Plant Page" button
+
+            </p:outputPanel>
+        </p:dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </ui:define>
 </ui:composition>

@@ -25,11 +25,14 @@
         <h:form id="userForm">
 
         <div class="top-space">
-            <p>From this page you can see all approved and waiting approval pictures for all plants adn manage them.
-        A approved image that has no plant linked to it will go in the general gallery that is visible on all qr plant pages that
-        have no pictures for their plant</p>
-            <br/>
+
+            <div class="card-header" >
+
+            </div>
+
         </div>
+
+
 
 
 
@@ -41,7 +44,7 @@
                 <div class="card  overview-box">
                     <p:graphicImage url="../resources/images/dashboard/effect-useronline.svg"/>
                     <span class="overview-icon">
-                            <p:graphicImage url="../resources/images/dashboard/info.png"/>
+                            <p:graphicImage url="../resources/images/dashboard/success.png"/>
                         </span>
                     <div class="overview">
                         <span class="overview-title">APPROVED IMAGES</span>
@@ -57,7 +60,7 @@
                     <p:graphicImage url="../resources/images/dashboard/effect-filessynced.svg"
                     />
                     <span class="overview-icon">
-                            <p:graphicImage url="../resources/images/dashboard/success.png"/>
+                            <p:graphicImage url="../resources/images/dashboard/info.png"/>
                         </span>
                     <div class="overview">
                         <span class="overview-title">APPROVED NO PLANT</span>
@@ -88,8 +91,8 @@
                 <div class="card overview-box">
                     <p:graphicImage url="../resources/images/dashboard/error-effect.svg"/>
                     <span class="overview-icon">
-                            <p:graphicImage url="../resources/images/dashboard/error.png"/>
-                        </span>
+                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/gallery.png"/>
+                    </span>
                     <div class="overview">
                         <span class="overview-title">TOTAL IMAGES</span>
                         <h3>
@@ -117,6 +120,12 @@
                 <div class="card" style=" min-height: 500px" >
                     <div class="card-header" >
                         <h3>Approved</h3>
+                        <!-- ...................Help Button................. -->
+                        <div class="header-buttons">
+                            <p:commandButton type="button" icon="pi pi-ellipsis-v" title="Help"
+                                             styleClass="ui-button-secondary outlined-button"
+                                             onclick="PF('imageshelpDialog').show()"/>
+                        </div>
                     </div>
 
                         <p:galleria id = "awaitingApproval" showItemNavigators="true" value="#{galleryController.approvedImages}"
@@ -193,14 +202,52 @@
                 </div>
 
 
-
-
-
-
-
-
         </div>
         </h:form>
+
+
+
+
+
+
+
+
+
+
+
+        <!-- ....................................... HELP DIALOGS...................................................................... -->
+        <!-- ...................................Page Help dialog............................. -->
+        <p:dialog header="Image Menagement Help" id="imageshelpDialog" widgetVar="imageshelpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+
+            <p:outputPanel id="ImageshelpDialog">
+                <h5>Image Menagement</h5>From this page you can see all approved and awaiting approval pictures for all plants and manage them.<br></br>
+                A approved image that has no plant linked to it will go in the general gallery that is visible on all plant pages<br></br>
+                and qr linked pages that have no pictures for their plant.<br></br>
+                <h6>About Images without a plant:</h6>
+                When a plant dies or is deleted for other reasons all pictures of that plant will be detached and go in the general gallery<br></br>
+                that can be managed from here.
+
+            </p:outputPanel>
+        </p:dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </ui:define>
 </ui:composition>
