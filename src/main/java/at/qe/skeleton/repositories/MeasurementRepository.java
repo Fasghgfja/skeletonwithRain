@@ -3,6 +3,10 @@ package at.qe.skeleton.repositories;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
+import jakarta.transaction.Transactional;
+import org.springframework.context.ApplicationEvent;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -63,6 +67,13 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
 
 
     Measurement getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(SensorStation sensorStation, String type);
+
+    @Transactional
+    void deleteMeasurementsByTimestampBetween(LocalDateTime from, LocalDateTime to);
+
+    Measurement findFirstByOrderByTimestampAsc();
+
+    Measurement findFirstByOrderByTimestampDesc();
 }
 
 

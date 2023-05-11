@@ -45,7 +45,6 @@ public class MeasurementServiceApi {
 
 
     public void addMeasurement(Measurement2 measurement) throws MeasurementNotFoundException {
-        System.out.println();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(measurement.getTime_stamp(), formatter);
 

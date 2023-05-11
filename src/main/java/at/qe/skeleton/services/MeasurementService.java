@@ -1,5 +1,8 @@
 package at.qe.skeleton.services;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
@@ -177,5 +180,16 @@ public class MeasurementService {
         Measurement measurement = measurementRepository.getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(sensorStation,type);
         if(measurement == null) {return "--";}
         return measurementRepository.getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(sensorStation,type).getValue_s();
+    }
+
+    public void deleteMeasurementsFromTo(LocalDateTime from, LocalDateTime to) {
+        if (from == null){
+            from = measurementRepository.findFirstByOrderByTimestampAsc().getTimestamp();
+        }
+        if (to == null){
+            to = measurementRepository.findFirstByOrderByTimestampDesc().getTimestamp();
+        }
+        if (from.isAfter(to)){return;}
+        measurementRepository.deleteMeasurementsByTimestampBetween(from,to);
     }
 }
