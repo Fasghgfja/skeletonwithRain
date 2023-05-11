@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -46,7 +47,7 @@ public class MeasurementServiceApi {
     public void addMeasurement(Measurement2 measurement) throws MeasurementNotFoundException {
         System.out.println();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDate dateTime = LocalDate.parse(measurement.getTime_stamp(), formatter);
+        LocalDateTime dateTime = LocalDateTime.parse(measurement.getTime_stamp(), formatter);
 
         Measurement measurement1 = new Measurement();
         SensorStation sensorStation = sensorStationService.loadSensorStation(measurement.getSensorStation());//TODO: new!
@@ -74,7 +75,7 @@ public class MeasurementServiceApi {
         Measurement newMeasurement = new Measurement();
         newMeasurement.setType(measurement.getSensor_id());
         newMeasurement.setValue_s(measurement.getValue());
-        newMeasurement.setTimestamp(LocalDate.parse(measurement.getTime_stamp()));
+        newMeasurement.setTimestamp(LocalDateTime.parse(measurement.getTime_stamp()));
         measurementRepository.save(newMeasurement);
         //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
         System.out.println(newMeasurement);

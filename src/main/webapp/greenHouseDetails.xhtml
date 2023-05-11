@@ -336,9 +336,9 @@
                                 <h:outputText style="vertical-align: middle; margin-left: .5rem"
                                               value="#{measurement.value_s} #{measurement.unit}"/>
                             </p:column>
-                            <p:column headerText="Date" sortBy="#{measurement.timestamp}"
+                            <p:column headerText="Time" sortBy="#{measurement.timestamp}"
                                       filterBy="#{measurement.timestamp}">
-                                <h:outputText value="#{measurement.timestamp}"/>
+                                <h:outputText value="#{measurement.readableTimestamp}"/>
                             </p:column>
                             <p:column headerText="Status">
                                 <i class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"

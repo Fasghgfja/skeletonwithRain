@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -26,7 +28,13 @@ public class Measurement implements Serializable {
     private String value_s;
     private String unit;
     private String type;
-    private LocalDate timestamp;
+    private LocalDateTime timestamp;
+
+
+    public String getReadableTimestamp() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return timestamp.format(formatter);
+    }
 
     @Override
     public String toString() {

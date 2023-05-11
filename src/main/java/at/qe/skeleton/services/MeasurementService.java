@@ -63,6 +63,10 @@ public class MeasurementService {
      * @param type Measurements of this type will be returned.
      * @return Collection of measurements.
      */
+    public Collection<Measurement> getAllMeasurementsBySensorStationAndTypeAsc(SensorStation sensorStation, String type) {
+        return measurementRepository.findMeasurementsBySensorStationAndTypeLikeOrderByTimestampAsc(sensorStation, type);
+    }
+
     public Collection<Measurement> getAllMeasurementsBySensorStationAndType(SensorStation sensorStation, String type) {
         return measurementRepository.findMeasurementsBySensorStationAndTypeLikeOrderByTimestampDesc(sensorStation, type);
     }
@@ -170,8 +174,8 @@ public class MeasurementService {
 
 
     public String getLastMeasurementBySensorStationAndType(SensorStation sensorStation, String type) {
-        Measurement measurement = measurementRepository.getFirstBySensorStationAndTypeEquals(sensorStation,type);
+        Measurement measurement = measurementRepository.getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(sensorStation,type);
         if(measurement == null) {return "--";}
-        return measurementRepository.getFirstBySensorStationAndTypeEquals(sensorStation,type).getValue_s();
+        return measurementRepository.getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(sensorStation,type).getValue_s();
     }
 }
