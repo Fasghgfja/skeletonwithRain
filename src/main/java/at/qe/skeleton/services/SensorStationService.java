@@ -30,6 +30,10 @@ public class SensorStationService {
     private LogRepository logRepository;
 
 
+    /**
+     * Method to get all sensor stations currently stored in the database.
+     * @return Collection of all sensor stations.
+     */
     public Collection<SensorStation> getAllSensorStations() {
         return sensorStationRepository.findAll();
     }
