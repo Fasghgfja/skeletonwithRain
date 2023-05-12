@@ -118,15 +118,15 @@
                             <p:rowToggler/>
                         </p:column>
 
-                        <p:column  headerText="Id" sortBy="#{sensorStation.id}">
+                        <p:column  headerText="Id" sortBy="#{sensorStation.id}" filterBy="#{sensorStation.id}">
                             <h:outputText value="#{sensorStation.id}"/>
                         </p:column>
 
-                        <p:column  headerText="Access Point" sortBy="#{sensorStation.accessPoint}">
+                        <p:column  headerText="Access Point" sortBy="#{sensorStation.accessPoint}" filterBy="#{sensorStation.accessPoint}">
                             <h:outputText value="#{sensorStation.accessPoint}"/>
                         </p:column>
 
-                        <p:column  headerText="Plant" sortBy="#{sensorStation.plant.plantName}">
+                        <p:column  headerText="Plant" sortBy="#{sensorStation.plant.plantName}" filterBy="#{sensorStation.plant.plantName}">
                             <h:outputText value="#{sensorStation.plant}"/>
                         </p:column>
 
@@ -155,11 +155,11 @@
                                title="Humidity"></i>
                         </p:column>
 
-                        <p:column  headerText="Location" sortBy="#{sensorStation.location}">
+                        <p:column  headerText="Location" sortBy="#{sensorStation.location}" filterBy="#{sensorStation.location}">
                             <h:outputText value="#{sensorStation.location}"/>
                         </p:column>
 
-                        <p:column  headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}">
+                        <p:column  headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}" filterBy="#{sensorStation.alarmSwitch}">
                             <h:outputText value="#{sensorStation.alarmSwitch}"/>
                         </p:column>
 

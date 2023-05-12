@@ -66,7 +66,7 @@
 
                 <div class="card">
                     <h5>Assigned Greenhouses</h5>
-                    <p:dataTable id="sensorStationTable" var="sensorStation" value="#{sensorStationListController.sensorStations}"
+                    <p:dataTable id="sensorStationTable" var="sensorStation" value="#{sensorStationListController.assignedSensorStationList}"
                                   scrollHeight="550"
                                  paginatorPosition="bottom" rowKey="#{sensorStation.id}">
 
@@ -76,7 +76,7 @@
                             <p:rowToggler/>
                         </p:column>
 
-                        <p:column headerText="Id" sortBy="#{sensorStation.id}">
+                        <p:column headerText="Id" sortBy="#{sensorStation.id}" filterBy="#{sensorStation.id}">
                             <h:outputText value="#{sensorStation.id}"/>
                         </p:column>
 
@@ -84,11 +84,11 @@
                             <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
                         </p:column>
 
-                        <p:column headerText="Plant" sortBy="#{sensorStation.plant.plantName}">
+                        <p:column headerText="Plant" sortBy="#{sensorStation.plant.plantName}" filterBy="#{sensorStation.plant.plantName}">
                             <h:outputText value="#{sensorStation.plant}"/>
                         </p:column>
 
-                        <p:column headerText="Planted" sortBy="#{sensorStation.createDate}">
+                        <p:column headerText="Planted" sortBy="#{sensorStation.createDate}" filterBy="#{sensorStation.createDate}">
                             <h:outputText value="#{product.category}"/>
                         </p:column>
 
@@ -113,11 +113,11 @@
                                title="Humidity"></i>
                         </p:column>
 
-                        <p:column headerText="Location" sortBy="#{sensorStation.location}">
+                        <p:column headerText="Location" sortBy="#{sensorStation.location}" filterBy="#{sensorStation.location}">
                             <h:outputText value="#{sensorStation.location}"/>
                         </p:column>
 
-                        <p:column headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}">
+                        <p:column headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}" filterBy="#{sensorStation.alarmSwitch}">
                             <h:outputText value="#{sensorStation.alarmSwitch}"/>
                         </p:column>
 

@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_gen")
-    @SequenceGenerator(name = "id_gen", initialValue = 2)
+    @SequenceGenerator(name = "id_gen", initialValue = 100)
     @Column(nullable = false, unique = true)
     private Long id;
 

@@ -1,5 +1,6 @@
 package at.qe.skeleton.services;
 
+import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.repositories.UserxRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,9 @@ class UserServiceTest {
     UserService userService;
     @Autowired
     UserxRepository userRepository;
+
+    @Autowired
+    PlantService plantService;
 
     /**
      * Test saveUser() method of userService.
@@ -314,6 +318,32 @@ class UserServiceTest {
         userService.saveUser(userToBeSaved);
 
         assertEquals(userToBeSaved, userService.loadUser("user1"));
+    }
+
+    /**
+     * Testing the addPlantToFollowedPlants(Userx user, Plant plant) and
+     * removePlantFromFollowedPlants(Userx user, Plant plant) methods of the userService.
+     */
+    @DirtiesContext
+    @Test
+    @WithMockUser(username = "user1", authorities = {"User"})
+    void testAddAndRemovePlantFromFollowedPlants(){
+        Userx userToBeSaved = new Userx();
+        userToBeSaved.setUsername("user1");
+        userService.saveUser(userToBeSaved);
+        Plant plant1 = plantService.savePlant(new Plant());
+        Plant plant2 = plantService.savePlant(new Plant());
+
+        assertFalse(userService.loadUser("user1").getFollowedPlants().contains(plant1));
+
+        userService.addPlantToFollowedPlants(userService.loadUser("user1"), plantService.loadPlant(plant1.getPlantID()));
+
+        assertTrue(userService.loadUser("user1").getFollowedPlants().contains(plantService.loadPlant(plant1.getPlantID())));
+        assertFalse(userService.loadUser("user1").getFollowedPlants().contains(plant2));
+
+        userService.removePlantFromFollowedPlants(userService.loadUser("user1"), plantService.loadPlant(plant1.getPlantID()));
+
+        assertFalse(userService.loadUser("user1").getFollowedPlants().contains(plant1));
     }
 
 
