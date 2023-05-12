@@ -23,8 +23,8 @@ if __name__ == '__main__':
         exception_logging.logException(e, "reading config.yaml")
     ip = cfg["webapp-params"]["ip"]
     print(ip)
-    value_count = 0
-    measurement = 0
+    sending_interval = 0
+    measurement_interval = 0
     loop = 10
     while loop > 0:
         DB_connection.insert_values_into_database(b'25',False, b'GasSensor', "G4T2" )
@@ -46,19 +46,17 @@ if __name__ == '__main__':
                 try:
                     new_device_name_list = rest_api.check_if_new_stations()
                     print(new_device_name_list)
-                    if len(new_device_name_list) == 1:
-                        asyncio.run(ble_service_connection.read_sensor_data(True, new_device_name_list))
-                    elif len(new_device_name_list) > 1:
+                    if len(new_device_name_list) > 0:
                         asyncio.run(ble_service_connection.read_sensor_data(True, new_device_name_list))
                     rest_api.write_sensors_and_station_description(new_device_name_list)
                 except Exception as e:
                     exception_logging.logException(e, "rest_api read Station name")
                 time.sleep(1)
-                measurement += 1
-                print("Measurement: " + str( measurement))
-                if measurement > 1:
+                measurement_interval += 1
+                print("Measurement: " + str(measurement_interval))
+                if measurement_interval > 1:
                     program_state = program_status.Is.READ_SENSOR_VALUES.value
-                    measurement = 0
+                    measurement_interval = 0
                 else:
                     program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
 
@@ -73,10 +71,10 @@ if __name__ == '__main__':
                     asyncio.run(ble_service_connection.read_sensor_data(False, name_list))
                 except Exception as e:
                     exception_logging.logException(e, "call_read_values")
-                value_count += 1
-                if value_count >= 1:
+                sending_interval += 1
+                if sending_interval >= 1:
                     program_state = program_status.Is.CHECK_BOARDER_VALUER.value
-                    value_count = 0
+                    sending_interval = 0
                 else:
                     program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
                 time.sleep(1)
@@ -113,5 +111,3 @@ if __name__ == '__main__':
                     exception_logging.logException(e, "read boarders")
                 time.sleep(1)
                 program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
-
-

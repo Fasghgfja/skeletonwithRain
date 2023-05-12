@@ -72,16 +72,17 @@ def write_value_to_web_app():
 
         for sensor in get_all_sensors:
             # TODO call database querys via DB_connection.xxx
-            values = cur.execute('''
-                        SELECT * FROM Value WHERE sensor_id = {0}
-                    '''.format(sensor[0])).fetchall()
-            for value in values:
+            if sensor[3] != "ALARM_STATUS":
+                values = cur.execute('''
+                            SELECT * FROM Value WHERE sensor_id = {0}
+                        '''.format(sensor[0])).fetchall()
+                for value in values:
 
-                sensor_id_string = str(value[2])
-                time_stamp_string = str(value[1])
+                    sensor_id_string = str(value[2])
+                    time_stamp_string = str(value[1])
 
-                temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=time_stamp_string, type=sensor[3])
-                send_value_list.append(vars(temp_sensor_value))
+                    temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=time_stamp_string, type=sensor[3])
+                    send_value_list.append(vars(temp_sensor_value))
     r = requests.post(measurements_url, json=send_value_list, auth=auth)
     if r.status_code == 200:
         DB_connection.delete_values()
@@ -99,9 +100,10 @@ def write_sensors_and_station_description(station_names):
                 sensor_list = DB_connection.read_sensors_database(station[0]).fetchall()
                 #json_list =[]
                 for sensor in sensor_list:
-                    sensor_values = Sensor(sensor_id=sensor[0], uuid=sensor[1], station_name=sensor[2], type=sensor[3], alarm_count=sensor[4], upper_boarder="10000", lower_boarder="0" )
-                 #   json_list.append(vars(sensor_values))
-                    requests.post(post_sensor_url, json=vars(sensor_values), auth=auth)
+                    if sensor[3] != "ALARM_STATUS":
+                        sensor_values = Sensor(sensor_id=sensor[0], uuid=sensor[1], station_name=sensor[2], type=sensor[3], alarm_count=sensor[4], upper_boarder="10000", lower_boarder="0" )
+                 #      json_list.append(vars(sensor_values))
+                        requests.post(post_sensor_url, json=vars(sensor_values), auth=auth)
                 #r = requests.post(post_sensor_url, json=json_list,auth=auth)
             except Exception as e:
                 exception_logging.logException(e, station[0])

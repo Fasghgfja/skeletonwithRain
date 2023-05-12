@@ -26,8 +26,4 @@ public interface SensorRepository extends AbstractRepository<Sensor, Long>{
 
     Sensor findFirstBySensorStationAndType( SensorStation sensorStation,String type);
 
-    @Query("select s.id, s.lower_border, s.upper_border, s.sensorStation.sensorStationName from" +
-            " Sensor s inner join SensorStation ss on s.sensorStation.sensorStationName = ss.sensorStationName " +
-            "where ss.accessPoint.accessPointID = :accessPoint")
-    ArrayList<BoarderValueFrame> getBoarderValuesByAccespointID(@Param("accessPoint")Long id);
 }

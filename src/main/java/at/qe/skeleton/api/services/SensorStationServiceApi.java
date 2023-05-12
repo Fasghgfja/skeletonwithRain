@@ -56,13 +56,7 @@ public class SensorStationServiceApi {
      * @throws SensorStationNotFoundException
      */
     public void updateSensorStation(SensorStationApi sensorStation) throws SensorStationNotFoundException{
-        /*
-        SensorStationApi newSensorStation = new SensorStationApi();
-        newSensorStation.setName(sensorStation.getName());
-        newSensorStation.setService_description(sensorStation.getService_description());
-        newSensorStation.setAlarm_switch(sensorStation.getAlarm_switch());
 
-         */
         // read sensorstation
         SensorStation sensorStation1 = sensorStationRepository.findFirstById(sensorStation.getName());
         if (sensorStation1 != null) {
@@ -70,27 +64,8 @@ public class SensorStationServiceApi {
             sensorStation1.setAlarmSwitch(sensorStation.getAlarm_switch());
             sensorStationRepository.save(sensorStation1);
         }else throw new SensorStationNotFoundException();
-        //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
-        /*
-        System.out.println(newSensorStation);
-        SensorStation newSensorStation2 = convertMeasurement(newSensorStation);
-        sensorStationRepository.save(newSensorStation2);
-        newSensorStation2 = sensorStationRepository.findFirstById(newSensorStation.getName());
-        */
     }
 
-    public SensorStation convertMeasurement(SensorStationApi sensorStationApi) {
-        SensorStation newSensorStation = new SensorStation();
-        newSensorStation.setSensorStationID(sensorStationApi.getName());
-        newSensorStation.setLocation("No Location");
-        //set alarm swith and implement it in java side
-        sensorStationRepository.save(newSensorStation);
-        //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
-        System.out.println(newSensorStation);
-        newSensorStation = sensorStationRepository.findFirstById(newSensorStation.getSensorStationName());
-        System.out.println(newSensorStation);
-        return newSensorStation;
-    }
 
     /**
      * this method is called to find a sensorStation by a given sensorStation name
@@ -164,11 +139,7 @@ public class SensorStationServiceApi {
                 sensorService.saveSensor(sensor);
             }else throw new SensorStationNotFoundException();
         }
-
-
-
     }
-
     public ArrayList<BoarderValueFrame> findSensorsByAccesspointID(Long id) throws SensorStationNotFoundException{
         List<SensorStation> sensorStationList = sensorStationRepository.findAllByAccessPoint_AccessPointID(id);
         ArrayList<Sensor> sensorList = new ArrayList<>();

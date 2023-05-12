@@ -172,7 +172,18 @@ def read_sensors_database(name):
         return c
     except Exception as e:
         exception_logging.logException(e, "Sensor")
-
+def read_sensors_alarm_characteristic(name):
+    try:
+        count = 0
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+            select uuid from Sensor where station_name='{0}' and sensor_type='ALARM_STATUS'
+        '''.format(name))
+        # sensor count to get max index
+        return c.fetchone()
+    except Exception as e:
+        exception_logging.logException(e, "Sensor")
 def delete_values():
     try:
         conn = sqlite3.connect('AccessPoint')
