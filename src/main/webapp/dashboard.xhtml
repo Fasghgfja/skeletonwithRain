@@ -233,13 +233,13 @@
                                 <p:ajax event="rowSelect" update="myBarChart2"
                                         listener="#{graphController.onRowSelect}"/>
 
-                                <p:column headerText="Id" sortBy="#{sensorStation.sensorStationName}">
+                                <p:column headerText="Id" sortBy="#{sensorStation.sensorStationName}" filterBy="#{sensorStation.sensorStationName}">
                                     <h:outputText value="#{sensorStation.id}"/>
                                 </p:column>
-                                <p:column headerText="Plant" sortBy="#{sensorStation.plant}">
+                                <p:column headerText="Plant" sortBy="#{sensorStation.plant}" filterBy="#{sensorStation.plant}">
                                     <h:outputText value="#{sensorStation.plant}"/>
                                 </p:column>
-                                <p:column headerText="Location" sortBy="#{sensorStation.location}">
+                                <p:column headerText="Location" sortBy="#{sensorStation.location}" filterBy="#{sensorStation.location}">
                                     <h:outputText value="#{sensorStation.location}">
                                     </h:outputText>
                                 </p:column>
@@ -315,13 +315,13 @@
                                 <p:column >
                                     <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
                                 </p:column>
-                                <p:column headerText="Plant" sortBy="#{plant.plantName}">
+                                <p:column headerText="Plant" sortBy="#{plant.plantName}" filterBy="#{plant.plantName}">
                                     <h:outputText value="#{plant.plantName}"/>
                                 </p:column>
-                                <p:column headerText="Planted Date" sortBy="#{plant.plantedDate}">
+                                <p:column headerText="Planted Date" sortBy="#{plant.plantedDate}" filterBy="#{plant.plantedDate}">
                                     <h:outputText value="#{plant.plantedDate}"/>
                                 </p:column>
-                                <p:column headerText="Description" sortBy="#{plant.description}">
+                                <p:column headerText="Description" sortBy="#{plant.description}" filterBy="#{plant.description}">
                                     <h:outputText value="#{plant.description}"/>
                                 </p:column>
                                 <p:column >

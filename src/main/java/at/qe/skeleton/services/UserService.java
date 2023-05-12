@@ -77,12 +77,6 @@ public class UserService {
         return userRepository.findFirstByUsername(username);
     }
 
-    //TODO: Nicht verwendet, LÖSCHEN falls nicht benötigt; NICHT GETESTET
-    @PreAuthorize("hasAuthority('ADMIN') or principal.username eq #username")
-    public Userx loadUserById(String id) {
-        return userRepository.findFirstById(Long.parseLong(id));
-    }
-
     /**
      Saves a user to the database. If the user is new, his create date and user are set. If the
      user already exists, his update date and user are set instead.
@@ -136,7 +130,7 @@ public class UserService {
      * @param user Currently logged in user.
      * @param plant Plant that user likes to follow.
      */
-
+    @PreAuthorize("permitAll()")
     public void addPlantToFollowedPlants(Userx user, Plant plant) {
         if(user == null || plant == null || plant.getFollowers().contains(user)) {return;}
         user = userRepository.findFirstByUsername(user.getUsername());
@@ -150,6 +144,7 @@ public class UserService {
      * @param plant Plant to remove from the followed plants.
      */
 
+    @PreAuthorize("permitAll()")
     public void removePlantFromFollowedPlants(Userx user, Plant plant) {
         if(user == null || plant == null) {return;}
         user = userRepository.findFirstByUsername(user.getUsername());
