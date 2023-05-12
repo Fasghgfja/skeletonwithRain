@@ -70,10 +70,18 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
 
     @Transactional
     void deleteMeasurementsByTimestampBetween(LocalDateTime from, LocalDateTime to);
+    @Transactional
+    void deleteMeasurementsBySensorStationAndTimestampBetween(SensorStation sensorStationToDeleteFrom, LocalDateTime from, LocalDateTime to);
+
 
     Measurement findFirstByOrderByTimestampAsc();
 
     Measurement findFirstByOrderByTimestampDesc();
+
+
+    Measurement findFirstBySensorStationOrderByTimestampAsc(SensorStation sensorStation);
+
+    Measurement findFirstBySensorStationOrderByTimestampDesc(SensorStation sensorStation);
 }
 
 

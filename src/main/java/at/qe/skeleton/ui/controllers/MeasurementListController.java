@@ -4,6 +4,7 @@ import at.qe.skeleton.services.MeasurementService;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.services.SensorService;
+import at.qe.skeleton.services.SensorStationService;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,12 +36,38 @@ public class MeasurementListController implements Serializable {
 
     @Autowired
     private transient SensorService sensorService;
+    @Autowired
+    private transient SensorStationService sensorStationService;
 
     @Autowired
     private SensorStationDetailController sensorStationDetailController;
 
     @Autowired
     private GraphController graphController;
+
+
+    private String sensorStationToDeleteFromId;
+
+
+    public void deleteFromToForSensorStation() {//TODO: new
+        System.out.println(sensorStationToDeleteFromId);
+        if(sensorStationToDeleteFromId == null){
+            System.out.println("sensorstation is null");
+            return;}
+        measurementService.deleteMeasurementsFromToForSensorStation(event.getStartDate(),event.getEndDate(),sensorStationToDeleteFromId);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -60,8 +87,11 @@ public class MeasurementListController implements Serializable {
 
 
 
+
+
     @PostConstruct
     public void init(){
+
         eventModel = new DefaultScheduleModel();//deletion of measurements calendar
         measurements =  (ArrayList<Measurement>) measurementService.getAllMeasurements();
         SensorStation sensorStation = sensorStationDetailController.getSensorStation();

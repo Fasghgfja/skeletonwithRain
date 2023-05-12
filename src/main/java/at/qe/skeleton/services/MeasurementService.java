@@ -8,9 +8,12 @@ import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Sensor;
 import at.qe.skeleton.model.SensorStation;
+import at.qe.skeleton.repositories.AbstractRepository;
 import at.qe.skeleton.repositories.MeasurementRepository;
 import at.qe.skeleton.repositories.SensorRepository;
+import at.qe.skeleton.repositories.SensorStationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +34,8 @@ public class MeasurementService {
 
     @Autowired
     SensorRepository sensorRepository;
-
+    @Autowired
+    private SensorStationRepository sensorStationRepository;
 
 
     //................methods to find a Measurement or a list of measurements with different parameters
@@ -184,12 +188,31 @@ public class MeasurementService {
 
     public void deleteMeasurementsFromTo(LocalDateTime from, LocalDateTime to) {
         if (from == null){
-            from = measurementRepository.findFirstByOrderByTimestampAsc().getTimestamp();
+            Measurement firstMeasurement = measurementRepository.findFirstByOrderByTimestampAsc();
+            if (firstMeasurement == null) {return;}
+            from = firstMeasurement.getTimestamp();
         }
         if (to == null){
-            to = measurementRepository.findFirstByOrderByTimestampDesc().getTimestamp();
+            to = LocalDateTime.now();
         }
-        if (from.isAfter(to)){return;}
+        if ( from != null && from.isAfter(to)){return;}
         measurementRepository.deleteMeasurementsByTimestampBetween(from,to);
     }
+
+    public void deleteMeasurementsFromToForSensorStation(LocalDateTime from, LocalDateTime to, String sensorStationToDeleteFromId) {
+        SensorStation sensorStation = sensorStationRepository.findFirstById(sensorStationToDeleteFromId);
+        if (from == null) {
+            Measurement firstMeasurement = measurementRepository.findFirstBySensorStationOrderByTimestampAsc(sensorStation);
+            if (firstMeasurement == null) {return;}
+            from = firstMeasurement.getTimestamp();
+
+        }
+        if (to == null) {
+            to = LocalDateTime.now();
+        }
+        if (from != null&& from.isAfter(to)){return;}
+
+        measurementRepository.deleteMeasurementsBySensorStationAndTimestampBetween(sensorStation, from, to);
+    }
+
 }

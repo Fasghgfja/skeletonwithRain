@@ -16,104 +16,78 @@
     </ui:define>
 
 
-
     <ui:define name ="content">
 
 
 
         <!-- ...................................PLANT CREATE dialog.................................... -->
         <h:form id="plantCreateDialog">
-
             <!-- ....................PLANT CREATE button..................... -->
-
             <p:commandButton style="margin-bottom: 10px; margin-left: 7px" value="Create new Plant" update=":plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
                              icon="pi pi-user-plus" title="New User" class="btn btn-primary">
                 <p:resetInput target="createPlantDialog"/>
             </p:commandButton>
-
-
             <p:dialog header="Create New Plant" id="createPlantDialog" widgetVar="createPlantDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
                 <p:ajax event="close" update="createPlantDialog"/>
-
                 <p:outputPanel id="createPlant">
                     <h:panelGrid columns="2">
-
-
                         <p:outputLabel for="plantNameCreation" value="Plant Name:"/>
                         <p:inputText id="plantNameCreation"
                                      placeholder="Required field" value="#{createPlantBean.plantName}" required="true"/>
-
-
                         <p:outputLabel for="plantDescrptiom" value="Description:"/>
                         <p:inputText id="plantDescrptiom"
                                      placeholder="description" value="#{createPlantBean.description}" required="false"/>
-
-
                         <p:commandButton value="Create"
                                          action="#{createPlantBean.doCreateNewPlant()}"
                                          update=":userForm:sensorStationTable"
                                          oncomplete="PF('createPlantDialog').hide()"/>
                         <p:commandButton value="Cancel" onclick="PF('createPlantDialog').hide()"/>
-
-
                     </h:panelGrid>
-
                 </p:outputPanel>
             </p:dialog>
         </h:form>
 
-        <!-- ...................................Sensor station CREATE dialog.................................... -->
+
+
+
+
+        <!-- ...................................Sensor station CREATE dialog Form.................................... -->
         <h:form id="createDialog">
-
             <!-- ....................Sensor station CREATE button..................... -->
-
             <p:commandButton  style="margin-left: 7px" value="Create new Sensor Station" update=":createDialog:createSSDialog" oncomplete="PF('createSSDialog').show()"
                              icon="pi pi-user-plus" title="New Sensor Station" class="btn btn-primary">
                 <p:resetInput target=":createDialog:createSSDialog"/>
             </p:commandButton>
-
-
-
+            <!-- ....................Create sensor station dialog.................................................... -->
             <p:dialog header="Create New Sensor Station" id="createSSDialog" widgetVar="createSSDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
                 <p:ajax event="close" update="createSSDialog"/>
-
                 <p:outputPanel id="createSS">
                     <h:panelGrid columns="2">
-
-
                         <p:outputLabel for="usernameCreation" value="Sensor Station Name:"/>
                         <p:inputText id="usernameCreation"
                                      placeholder="Required field" value="#{createSensorStationBean.sensorStationName}" required="true"/>
-
                         <p:outputLabel for="description" value="Description:"/>
                         <p:inputText id="description"
                                      placeholder="description" value="#{createSensorStationBean.description}" required="false"/>
-
                         <p:outputLabel for="location" value="Location:"/>
                         <p:inputText id="location" value="#{createSensorStationBean.location}"/>
-
-
                         <p:outputLabel for="sensorStationswitch" value="Alarm Switch:"/>
                         <p:selectOneMenu id="sensorStationswitch" value="#{createSensorStationBean.alarmSwitch}"  >
                             <f:selectItem itemLabel="On" itemValue="On"/>
                             <f:selectItem itemLabel="Off" itemValue="Off"/>
                         </p:selectOneMenu>
-
-
-
+                        <!-- ................Create Sensor Station Button....................... -->
                         <p:commandButton value="Create"
                                          action="#{createSensorStationBean.doCreateNewCreateSensorStation()}"
                                          update=":userForm:sensorStationTable"
                                          oncomplete="PF('createSSDialog').hide(); location.reload()"/>
                         <p:commandButton value="Cancel" onclick="PF('createSSDialog').hide()"/>
-
-
                     </h:panelGrid>
-
                 </p:outputPanel>
             </p:dialog>
+
         </h:form>
 
 
@@ -197,7 +171,6 @@
                                              title="open Detail-View"
                                              href="/greenHouseDetails.xhtml?id=#{sensorStation.id}" />
 
-
                             <!-- ....................SENSOR STATION pairing BUTTON ........... .............. -->
                             <p:commandButton  update=":userForm:pairingDialog"
                                               oncomplete="PF('pairingDialog').show()" icon="pi pi-sync" title="Pair">
@@ -209,10 +182,6 @@
                                              oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit" title="Edit">
                                 <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
                             </p:commandButton>
-
-
-
-
 
                             <!-- ....................DELETE SENSOR STATION BUTTON ........... .............. -->
                             <p:commandButton styleClass="ui-button-danger"
@@ -227,8 +196,6 @@
                             </p:commandButton>
 
                         </p:column>
-
-
 
                         <!-- .........................................ROW EXPANSION.......................................................... -->
                         <p:rowExpansion>
@@ -272,21 +239,22 @@
 
 
 
+
+
+
+
             <!-- .......................................DIALOGS...................................................................... -->
 
 
 
-            <!-- ...................................PAIR WITH Access point.................................... -->
+            <!-- ...................................PAIR WITH Access point..DIALOG.................................. -->
             <p:dialog header="Pairing" id="pairingDialog" widgetVar="pairingDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="userData2" >
                     <h:panelGrid columns="1">
 
-
                         <p:outputLabel for="pairedWith" value="Paired With:"/>
                         <p:inputText rendered="#{not empty pairingController.sensorStationAccessPointId}" id="pairedWith" value="#{pairingController.sensorStationAccessPointId}" disabled="true" />
-
-
                         <p:outputLabel for="sensorStationAccessPoint" value="Pair to new Access Point:"/>
                         <p:selectOneMenu value="#{pairingController.accessPointId}" id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
                                          scrollHeight="250" updateLabel="true" >
@@ -296,7 +264,6 @@
                                 <h:outputText value="3 options" style="font-weight:bold;"/>
                             </f:facet>
                         </p:selectOneMenu>
-
                         <!-- ...................................PAIR/UNPAIR BUTTONS .................................... -->
                         <h:panelGrid columns="3">
                         <p:commandButton value="Remove current pairing" action="#{pairingController.unpair()}"
@@ -305,11 +272,7 @@
                                    message="Are you sure that you want to unpair the sensor station?"
                                    icon="pi pi-exclamation-triangle"/>
                         </p:commandButton>
-
-
                         </h:panelGrid>
-
-
 
                         <h:panelGrid columns="2">
 
@@ -320,11 +283,6 @@
                             <p:ajax event="click" listener="#{pairingController.abortPairing()}" oncomplete="PF('pairingDialog').hide()" />
 
                         </h:panelGrid>
-
-
-
-
-
 
                     </h:panelGrid>
 

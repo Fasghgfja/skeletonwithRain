@@ -55,6 +55,12 @@ public class SensorStationListController implements Serializable {
         return sensorService.getAllSensorStations();//if user is admin return all
     }
 
+
+    public Collection<String> getSensorStationsIds() {
+        //if user is gardener get assigned sensor stations
+        return sensorService.getAllSensorStationsIds();//if user is admin return all
+    }
+
     /**
      * Returns a list of all sensor stations assigned to a gardener.
      */

@@ -96,12 +96,12 @@ public class SensorStationService {
     }
 
 
-    //TODO: push this down to repository and queue , it is too expensive here
-
     public long getSensorStationsAmount() {
         return sensorStationRepository.count();
     }
 
 
-
+    public Collection<String> getAllSensorStationsIds() {//this is used to return a list of sensorstations ids to delete from when deleting measurements
+        return sensorStationRepository.getAllSensorStationsIds();
+    }
 }
