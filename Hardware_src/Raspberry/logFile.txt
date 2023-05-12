@@ -8966,3 +8966,571 @@ ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localh
 ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7ff15c481570>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:01:01
 ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7ff15c480b50>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:01:03
 ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7ff15c64b7f0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:01:04
+ERROR: On characteristic b'GasSensor'. Error is 'NoneType' object is not subscriptable at 05/12/23__13:14:16
+ERROR: On characteristic b'GasSensor'. Error is 'NoneType' object is not subscriptable at 05/12/23__13:14:16
+ERROR: On characteristic b'GasSensor'. Error is 'NoneType' object is not subscriptable at 05/12/23__13:14:16
+ERROR: On characteristic b'GasSensor'. Error is 'NoneType' object is not subscriptable at 05/12/23__13:14:16
+ERROR: On characteristic b'GasSensor'. Error is 'NoneType' object is not subscriptable at 05/12/23__13:14:16
+ERROR: On characteristic b'GasSensor'. Error is 'NoneType' object is not subscriptable at 05/12/23__13:14:16
+ERROR: On characteristic b'GasSensor'. Error is 'NoneType' object is not subscriptable at 05/12/23__13:14:16
+ERROR: On characteristic b'GasSensor'. Error is 'NoneType' object is not subscriptable at 05/12/23__13:14:16
+ERROR: On characteristic b'GasSensor'. Error is 'NoneType' object is not subscriptable at 05/12/23__13:14:16
+ERROR: On characteristic b'GasSensor'. Error is 'NoneType' object is not subscriptable at 05/12/23__13:14:16
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:14:20
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:14:20
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Disconnected at 05/12/23__13:14:21
+INFO: Boarder values have been checked at 05/12/23__13:14:24
+Values of have been deleted at {0} at 05/12/23__13:14:27
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:14:36
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:14:36
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:14:38
+INFO: Boarder values have been checked at 05/12/23__13:14:42
+Values of have been deleted at {0} at 05/12/23__13:14:43
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:14:52
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:14:52
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:14:53
+INFO: Boarder values have been checked at 05/12/23__13:14:56
+Values of have been deleted at {0} at 05/12/23__13:14:58
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:15:06
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:15:06
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:15:08
+INFO: Boarder values have been checked at 05/12/23__13:15:12
+Values of have been deleted at {0} at 05/12/23__13:15:13
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:15:24
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:15:24
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:15:26
+INFO: Boarder values have been checked at 05/12/23__13:15:29
+Values of have been deleted at {0} at 05/12/23__13:15:31
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:15:46
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:15:46
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:15:49
+INFO: Boarder values have been checked at 05/12/23__13:15:51
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76a37a60>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:15:52
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae0280>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:15:54
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae09d0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:15:55
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae11b0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:15:57
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76a37880>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:15:58
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:16:02
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:16:02
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:16:04
+INFO: Boarder values have been checked at 05/12/23__13:16:08
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae0be0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:09
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae02e0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:11
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae1b10>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:12
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76a378e0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:14
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae08e0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:15
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:16:18
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:16:18
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:16:20
+INFO: Boarder values have been checked at 05/12/23__13:16:23
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae19c0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:24
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae1d20>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:26
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae2440>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:27
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae2c20>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:29
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76a37370>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:30
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:16:36
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:16:36
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:16:38
+INFO: Boarder values have been checked at 05/12/23__13:16:42
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae1e40>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:43
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae19f0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:45
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae3550>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:46
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae1960>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:48
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae0850>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:49
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:16:52
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:16:52
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:16:55
+INFO: Boarder values have been checked at 05/12/23__13:16:57
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae3040>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:16:58
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae3ee0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:00
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae2c20>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:01
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae13c0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:03
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae06d0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:04
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:17:08
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:17:08
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:17:10
+INFO: Boarder values have been checked at 05/12/23__13:17:14
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae3070>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:15
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae16f0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:17
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ec100>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:18
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ec820>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:20
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ecf70>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:21
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:17:24
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:17:24
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:17:25
+INFO: Boarder values have been checked at 05/12/23__13:17:28
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae11b0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:29
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ec550>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:31
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ed150>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:32
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae1ed0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:34
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae2ec0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:35
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:17:38
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:17:38
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:17:40
+INFO: Boarder values have been checked at 05/12/23__13:17:43
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760eda20>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:44
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ee1a0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:46
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae11b0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:47
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76a37dc0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:49
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ed5d0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:50
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:17:54
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:17:54
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:17:55
+INFO: Boarder values have been checked at 05/12/23__13:17:58
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760edff0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:17:59
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ee1a0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:01
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ee350>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:02
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760eead0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:04
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ef220>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:05
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:18:10
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:18:10
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:18:12
+INFO: Boarder values have been checked at 05/12/23__13:18:15
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ee200>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:16
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760edff0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:18
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ef400>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:19
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ede10>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:21
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ee140>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:22
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:18:25
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:18:25
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:18:26
+INFO: Boarder values have been checked at 05/12/23__13:18:29
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ee950>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:30
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ef610>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:32
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760efd30>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:33
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d761ac550>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:35
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760eff10>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:36
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:18:39
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:18:39
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:18:40
+INFO: Boarder values have been checked at 05/12/23__13:18:43
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760edcf0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:44
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d761ac610>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:46
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d761aceb0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:47
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ef490>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:49
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ef6d0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:50
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:18:54
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:18:54
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:18:55
+INFO: Boarder values have been checked at 05/12/23__13:18:58
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d761d81c0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:18:59
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d761d8910>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:19:01
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d761d9060>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:19:02
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d761d97e0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:19:04
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d76ae3130>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:19:05
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:19:08
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:19:08
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:19:09
+INFO: Boarder values have been checked at 05/12/23__13:19:12
+ERROR: On characteristic rest_api write values. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/measurements (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ecd60>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:19:13
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d761d9810>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:19:15
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: On characteristic call_read_values. Error is  at 05/12/23__13:19:34
+INFO: Boarder values have been checked at 05/12/23__13:19:35
+Values of have been deleted at {0} at 05/12/23__13:19:36
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: Could not find device with name G4T2 at 05/12/23__13:19:54
+INFO: Boarder values have been checked at 05/12/23__13:19:55
+Values of have been deleted at {0} at 05/12/23__13:19:56
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: Could not find device with name G4T2 at 05/12/23__13:20:14
+INFO: Boarder values have been checked at 05/12/23__13:20:15
+Values of have been deleted at {0} at 05/12/23__13:20:16
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: Could not find device with name G4T2 at 05/12/23__13:20:34
+INFO: Boarder values have been checked at 05/12/23__13:20:35
+Values of have been deleted at {0} at 05/12/23__13:20:36
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: Could not find device with name G4T2 at 05/12/23__13:20:54
+INFO: Boarder values have been checked at 05/12/23__13:20:55
+Values of have been deleted at {0} at 05/12/23__13:20:56
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: Could not find device with name G4T2 at 05/12/23__13:21:13
+INFO: Boarder values have been checked at 05/12/23__13:21:14
+Values of have been deleted at {0} at 05/12/23__13:21:16
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: Could not find device with name G4T2 at 05/12/23__13:21:33
+INFO: Boarder values have been checked at 05/12/23__13:21:34
+Values of have been deleted at {0} at 05/12/23__13:21:35
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760ec340>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:21:37
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d760efdf0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:21:38
+ERROR: On characteristic read boarders. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorsboardervalue/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d761d94e0>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:21:40
+ERROR: On characteristic rest_api read Station name. Error is HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /api/sensorstations/50100 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5d761d9930>: Failed to establish a new connection: [Errno 111] Connection refused')) at 05/12/23__13:21:41
+ERROR: Could not find device with name G4T2 at 05/12/23__13:21:53
+INFO: Boarder values have been checked at 05/12/23__13:21:54
+Values of have been deleted at {0} at 05/12/23__13:21:55
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: Could not find device with name G4T2 at 05/12/23__13:22:13
+INFO: Boarder values have been checked at 05/12/23__13:22:14
+Values of have been deleted at {0} at 05/12/23__13:22:15
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:22:30
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:22:30
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Disconnected at 05/12/23__13:22:31
+INFO: Boarder values have been checked at 05/12/23__13:22:34
+Values of have been deleted at {0} at 05/12/23__13:22:36
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:22:45
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:22:45
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:22:46
+INFO: Boarder values have been checked at 05/12/23__13:22:49
+Values of have been deleted at {0} at 05/12/23__13:22:51
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:22:59
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:22:59
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:23:01
+INFO: Boarder values have been checked at 05/12/23__13:23:05
+Values of have been deleted at {0} at 05/12/23__13:23:06
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 1 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 3 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 4 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 5 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 6 has been updated upper_boarder to 0 and lower_boarder to 10000 
+INFO: Sensor with sensor_id 7 has been updated upper_boarder to 0 and lower_boarder to 10000 
+ERROR: On characteristic 00002a05-0000-1000-8000-00805f9b34fb. Error is [org.bluez.Error.NotPermitted] Read not permitted at 05/12/23__13:23:14
+INFO: Connected to device G4T2, Serivce uuid:	0000181a-0000-1000-8000-00805f9b34fb, Description:	Environmental Sensing at 05/12/23__13:23:14
+INFO: Value for type SOIL_MOISTURE on id 6 saved
+INFO: Value for type LIGHT_INTENSITY on id 7 saved
+INFO: Value for type TEMPERATURE on id 5 saved
+INFO: Value for type AIR_QUALITY on id 3 saved
+INFO: Value for type AIR_PRESSURE on id 1 saved
+INFO: Value for type HUMIDITY on id 4 saved
+INFO: Value for type ALARM_STATUS on id 2 saved
+INFO: Disconnected at 05/12/23__13:23:16
+INFO: Boarder values have been checked at 05/12/23__13:23:20
+Values of have been deleted at {0} at 05/12/23__13:23:21
