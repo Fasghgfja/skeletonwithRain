@@ -1,33 +1,33 @@
-import struct
-
-import define as define
-
 import DB_connection
-from datetime import datetime
 import ble_service_connection
 import asyncio
 import rest_api
 import exception_logging
 NAME = 0
-
+ID = 0
+DESCRIPTION = 1
+ALARM_SWITCH = 2
+ALARM_COUNT = 4
+UPPER = 6
+LOWER = 5
+TYPE = 3
+UUID = 1
 def checkBoarderValues():
     connected_sensor_stations_list = DB_connection.read_Sensor_Stationnames_Database()
     update_alarm_count_list = []
     for station in connected_sensor_stations_list:
-        alarm_switch = station[2]
+        alarm_switch = station[ALARM_SWITCH]#2
         sensor_list = DB_connection.read_sensors_database(station[NAME])
         for sensor in sensor_list.fetchall():
-            if sensor[3] != "ALARM_STATUS":
-                upper_value = sensor[5]
-                lower_value = sensor[6]
-                alarm_count = sensor[4]
-                uuid = sensor[1]
+            if sensor[TYPE] != "ALARM_STATUS":#3
+                upper_value = sensor[UPPER]#6
+                lower_value = sensor[LOWER]#5
+                alarm_count = sensor[ALARM_COUNT]#4
+                uuid = sensor[1]#1
                 current_value_breaks = 0
                 current_value_list = DB_connection.read_value_from_database(sensor[NAME]).fetchall()
                 if alarm_count == -1 and alarm_switch == "on":
-                    #webapp_alarm_switch = rest_api.get_sensorstations(False, station[NAME])
-                    #if webapp_alarm_switch == "fixed":
-                    alarm_switch = update_alarm_switch(station[NAME], uuid, station[1], sensor[0])
+                    alarm_switch = update_alarm_switch(station[NAME], uuid, station[DESCRIPTION], sensor[ID])
                 else:
                     for value in current_value_list:
                         upper = num_check(upper_value)
@@ -44,10 +44,10 @@ def checkBoarderValues():
                         alarm_count = -1
                         alarm_switch = "on"
                         DB_connection.update_sensor_station_database(alarm_switch, station[NAME])
-                        rest_api.write_alarm_switch(station[NAME], alarm_switch, station[1])
-                    if alarm_count != sensor[4]:
-                        DB_connection.update_sensor_database(alarm_count, sensor[0])
-                        sensor_value = rest_api.Sensor(sensor_id=sensor[0], uuid="",station_name="", type="", alarm_count=alarm_count, upper_boarder="",lower_boarder="")
+                        rest_api.write_alarm_switch(station[NAME], alarm_switch, station[DESCRIPTION])
+                    if alarm_count != sensor[ALARM_COUNT]:
+                        DB_connection.update_sensor_database(alarm_count, sensor[ID])
+                        sensor_value = rest_api.Sensor(sensor_id=sensor[ID], uuid="",station_name="", type="", alarm_count=alarm_count, upper_boarder="",lower_boarder="")
                         update_alarm_count_list.append(vars(sensor_value))
 
 
@@ -59,10 +59,10 @@ def checkBoarderValues():
 def check_sensor_station_alarm():
     connected_sensor_stations_list = DB_connection.read_Sensor_Stationnames_Database()
     for station in connected_sensor_stations_list:
-        alarm_switch = station[2]
+        alarm_switch = station[ALARM_SWITCH]
         if alarm_switch == "on":
             sensor = DB_connection.read_sensors_alarm_count(station[NAME]).fetchone()
-            update_alarm_switch(station[NAME], sensor[1], station[1], sensor[0])
+            update_alarm_switch(station[NAME], sensor[UUID], station[DESCRIPTION], sensor[ID])
 
 def update_alarm_switch(station_name, uuid, description, sensor_id):
     webapp_alarm_switch =""

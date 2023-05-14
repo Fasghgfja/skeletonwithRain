@@ -168,7 +168,7 @@ public class SensorStationServiceApi {
         // TODO call sendingintervalls
         SendingIntervalFrame sendingIntervalFrame = new SendingIntervalFrame();
         sendingIntervalFrame.setMeasurementInterval(5);
-        sendingIntervalFrame.setWebappSendInterval(5);
+        sendingIntervalFrame.setWebappSendInterval(2);
         return  sendingIntervalFrame;
     }
 }

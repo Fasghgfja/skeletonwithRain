@@ -84,7 +84,7 @@ async def read_sensor_data(new_connection, device_list):
 
                                     DB_connection.insert_new_sensor_to_database(characteristic, station_name, type, sensor_index)
                                     sensor_index += 1
-                                elif type != "ALARM_STATUS":
+                                elif type != b'ALARM_STATUS':
                                     DB_connection.insert_values_into_database(value, float_value, type, station_name)
                             except Exception as e:
                                 exception_logging.logException(e, characteristic.uuid)
