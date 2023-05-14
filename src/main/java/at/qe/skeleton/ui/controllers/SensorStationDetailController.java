@@ -180,6 +180,7 @@ public class SensorStationDetailController implements Serializable {
                 doSaveSensorStation();
             }
         }
+        this.gardeners = new ArrayList<>();
         sensorStation = this.sensorStationService.saveSensorStation(sensorStation);
     }
 
