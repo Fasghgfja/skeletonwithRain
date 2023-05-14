@@ -17,7 +17,6 @@ BLEFloatCharacteristic gasValueCharacteristic("19b5", BLERead | BLEWrite);
 BLEBoolCharacteristic alarmCharacteristic("19b6", BLERead );
 //----------------------------------------------------------------------------------------------------init pins--------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//dev: means development and all function and attributes that marked with that are just for the development phase
 //Define the pins to identify
 const int button_state = D12;
 const int ligth_sensor = A0;
@@ -43,7 +42,7 @@ bool alarm_on = false;
 //Timer variablen für Zeitmessung
 unsigned long readSensor_timer_start;
 unsigned long piezo_timer_start;
-unsigned long readAir_condition_timer_delta = 3000;       //to test it is set to 9s, need to change to x-mins?
+unsigned long readAir_condition_timer_delta = 3000;
 unsigned long Alarm_timer_start;
 unsigned long timer_current;
 unsigned long Alarm_time_delta = 0;
@@ -67,8 +66,7 @@ void setup() {
     pinMode(hygro_sensor, INPUT);
     pinMode(piezo, OUTPUT);
     pinMode(ligth_sensor, INPUT);
-    //BluetoothLE setup
-    //while (!Serial);
+    //--------------------------------------------------------------BluetoothLE setup
     if (!BLE.begin()) {
         while(1);
     }
@@ -77,7 +75,7 @@ void setup() {
     BLE.setDeviceName("G4T2");
     //---------------------------------------------------------------
     BLE.setAdvertisedService(readSensorDataService);
-    //---------------------------------------------------------------
+    //---------------------------------------------------------------BLEDescriptor
     BLEDescriptor ligthValueDescriptor("2901", "LIGHT_INTENSITY");
     BLEDescriptor hygroValueDescriptor("2901", "SOIL_MOISTURE");
     BLEDescriptor tempValueDescriptor("2901", "TEMPERATURE");
@@ -86,7 +84,7 @@ void setup() {
     BLEDescriptor gasValueDescriptor("2901", "AIR_QUALITY");
     BLEDescriptor alarmDescriptor("2901", "ALARM_STATUS");
 
-    //---------------------------------------------------------------
+    //---------------------------------------------------------------addDescriptor
     ligthValueCharacteristic.addDescriptor(ligthValueDescriptor);
     hygroValueCharacteristic.addDescriptor(hygroValueDescriptor);
     tempValueCharacteristic.addDescriptor(tempValueDescriptor);
@@ -94,7 +92,7 @@ void setup() {
     pressureValueCharacteristic.addDescriptor(pressureValueDescriptor);
     gasValueCharacteristic.addDescriptor(gasValueDescriptor);
     alarmCharacteristic.addDescriptor(alarmDescriptor);
-    //---------------------------------------------------------------
+    //---------------------------------------------------------------set init values
     ligthValueCharacteristic.writeValue(0);
     hygroValueCharacteristic.writeValue(0);
     tempValueCharacteristic.writeValue(0);
@@ -102,12 +100,12 @@ void setup() {
     pressureValueCharacteristic.writeValue(0);
     gasValueCharacteristic.writeValue(0);
     alarmCharacteristic.writeValue(false);
-    //---------------------------------------------------------------
+    //---------------------------------------------------------------setEventHandler
     ligthValueCharacteristic.setEventHandler(BLERead, readLigthValue);
     hygroValueCharacteristic.setEventHandler(BLERead, readHygroValue);
     tempValueCharacteristic.setEventHandler(BLERead, readAirValues);
     alarmCharacteristic.setEventHandler(BLERead,readAlarmStatus);
-    //---------------------------------------------------------------
+    //---------------------------------------------------------------addCharacteristic to Service
     readSensorDataService.addCharacteristic(ligthValueCharacteristic);
     readSensorDataService.addCharacteristic(hygroValueCharacteristic);
     readSensorDataService.addCharacteristic(tempValueCharacteristic);
@@ -122,8 +120,8 @@ void setup() {
     BLE.setEventHandler(BLEDisconnected, blePeripheralDisconnectHandler);
     //---------------------------------------------------------------
     BLE.advertise();
-//BME688 setup
-    //while (!Serial);
+    //---------------------------------------------------------------BME688 setup
+
     if (!bme.begin()) {
         while (1);
     }
@@ -139,17 +137,19 @@ void setup() {
 void loop(){
     readButton = digitalRead(button_state);
     timer_current = millis();
+    //----------------------------------------------connection activ
     if(connection_on){
         BLE.poll();
 
     }
-    if((timer_current - Pairing_timer_start) >= Pairing_time_delta){
+    //----------------------------------------------reset if 5 mins no connection
+    if((timer_current - Pairing_timer_start) >= Pairing_time_delta && connection_on == false){
         connection_on = false;
         piezo_on = false;
         noTone(piezo);
     }
 
-    //----------------------------------------------
+    //----------------------------------------------pairing tone
     if(piezo_on && (timer_current - piezo_timer_start) >= 1000){
         if(piep){
             noTone(piezo);
@@ -160,6 +160,31 @@ void loop(){
             piep = true;
         }
         piezo_timer_start = millis();
+    }
+    //---------------------------------------------First button push, connection activ
+    if(readButton == HIGH && connection_on == false){
+        connection_on = true;
+        piezo_on = true;
+        readButton = LOW;
+        piezo_timer_start = millis();
+        Pairing_timer_start = millis();
+    }
+    //---------------------------------------------Button push to deactivate the alarm if is active
+    else if(readButton == HIGH && connection_on == true && Alarm == true){
+        alarm_on = true;
+        alarm_controller();
+    }
+    //---------------------------------------------Button push to reset/stop offering signal
+    else if(readButton == HIGH && connection_on == true && piezo_on == false){
+        connection_on = false;
+        readButton = LOW;
+        delay(2000);
+    }
+    //----------------------------------------------Is called to evaluate if air cond is reat successfull
+    if( (timer_current - readSensor_timer_start) >= readAir_condition_timer_delta && read_sensor_state == 1){
+        readAir_condition_sensor();
+        readSensor_timer_start = millis();
+        read_sensor_state = 0;
     }
     //-------------------------------------------------------------------------------------check alarm signal----------------------------------------------------------------------------------------------
     if(hygroValueCharacteristic.written()){
@@ -180,27 +205,7 @@ void loop(){
     if(gasValueCharacteristic.written()){
         gasAlarm();
     }
-    if(readButton == HIGH && connection_on == false){
-        connection_on = true;
-        piezo_on = true;
-        piezo_timer_start = millis();
-        Pairing_timer_start = millis();
-    }
-    if(readButton == HIGH && connection_on == true && Alarm == true){
-        alarm_on = true;
-        alarm_controller();
-    }
-    if(readButton == HIGH && connection_on == true && piezo_on == false){
-        connection_on = false;
-    }
-    //Is called to evaluate if air cond is reat successfull
-    if( (timer_current - readSensor_timer_start) >= readAir_condition_timer_delta && read_sensor_state == 1){
-        readAir_condition_sensor();
-        readSensor_timer_start = millis();
-        read_sensor_state = 0;
-    }
-
-    //Is called if an alarm signal is dedected
+    //--------------------------------------------Is called if an alarm signal is dedected
     if(Alarm && (timer_current - Alarm_timer_start) >= Alarm_time_delta){
 
         switch(alarm_ligth_type){
@@ -220,32 +225,32 @@ void loop(){
 void gasAlarm(){
     alarm_ligth_type = 5;
     Alarm_time_delta = 1000;
-    alarm_controller(); //uncomment for ligth sequence //test ok
+    alarm_controller();
 }
 void pessAlarm(){
     alarm_ligth_type = 4;
-    Alarm_time_delta = 3000;
-    alarm_controller(); //uncomment for ligth sequence
+    Alarm_time_delta = 6000;
+    alarm_controller();
 }
 void humAlarm(){
     alarm_ligth_type = 3;
-    Alarm_time_delta = 3000;
-    alarm_controller(); //uncomment for ligth sequence // test ok
+    Alarm_time_delta = 6000;
+    alarm_controller();
 }
 void tempAlarm(){
     alarm_ligth_type = 2;
-    Alarm_time_delta = 3000;
-    alarm_controller(); //uncomment for ligth sequence
+    Alarm_time_delta = 6000;
+    alarm_controller();
 }
 void ligthAlarm(){
     alarm_ligth_type = 1;
     Alarm_time_delta = 1000;
-    alarm_controller(); //uncomment for ligth sequence
+    alarm_controller();
 }
 void hygroAlarm(){
     alarm_ligth_type = 0;
     Alarm_time_delta = 1000;
-    alarm_controller(); //uncomment for ligth sequence
+    alarm_controller();
 }
 void alarm_controller(){
     if(Alarm){
@@ -264,28 +269,27 @@ void alarm_controller(){
 void readAir_condition_sensor(){
 
     if (!bme.endReading()) {
-        //Serial.println(F("Failed to complete reading :("));
         return;
     }
 
 }
 //---------------------------------------------------------------------------------------sequence functions for alarmligth-------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//green ligth with delay 3sec +
+//green ligth with delay 6sec +
 void sequence_temp_alarm(){
     switch(alarm_ligth_state){
         case 0: lightOn(0, 0, ligth_on); alarm_ligth_state++; break;
         case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
     }
 }
-//blue ligth with delay 3sec +
+//blue ligth with delay 6sec +
 void sequence_humidy_alarm(){
     switch(alarm_ligth_state){
         case 0: lightOn(0, ligth_on, 0); alarm_ligth_state++; break;
         case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
     }
 }
-// red ligth with delay 3sec +
+// red ligth with delay 6sec +
 void sequence_pressure_alarm(){
     switch(alarm_ligth_state){
         case 0: lightOn(ligth_on, 0, 0); alarm_ligth_state++; break;

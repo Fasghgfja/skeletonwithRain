@@ -127,20 +127,8 @@ def insert_new_sensor_to_database(attribute, name, type, sensor_index):
         print("ok-----------------InsertSensor")
     except Exception as e:
         exception_logging.logException(e, attribute.uuid)
-def read_Sensor_Station_Database():
-    # TODO call in loob all sensorstation name
-    try:
-        conn = sqlite3.connect('AccessPoint')
-        c = conn.cursor()
-        c.execute('''
-            select * from Sensorstation
-        ''')
-        return c
-    except Exception as e:
-        exception_logging.logException(e, "SensorStation")
 
 def read_Sensor_Stationnames_Database():
-    # TODO call in loob all sensorstation name
     try:
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
@@ -162,13 +150,22 @@ def read_value_from_database(sensor_id):
         exception_logging.logException(e, "Value")
 def read_sensors_database(name):
     try:
-        count = 0
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
         c.execute('''
             select * from Sensor where station_name='{0}'
         '''.format(name))
-        # sensor count to get max index
+        return c
+    except Exception as e:
+        exception_logging.logException(e, "Sensor")
+
+def read_sensors_alarm_count(name):
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+            select * from Sensor where station_name='{0}' and alarm_count=-1
+        '''.format(name))
         return c
     except Exception as e:
         exception_logging.logException(e, "Sensor")
@@ -195,3 +192,29 @@ def delete_values():
         exception_logging.log_information("Values of have been deleted at {0}")
     except Exception as e:
         exception_logging.logException(e, "delete values")
+
+def delete_sensor_station(name):
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+            delete from Sensorstation where name='{0}'
+        '''.format(name))
+        c.execute('''
+            delete from Sensor where station_name='{0}'
+        '''.format(name))
+        conn.commit()
+        exception_logging.log_information("Sensor Station {0} has been deleted".format(name))
+    except Exception as e:
+        exception_logging.logException(e, "delete Station")
+
+def read_sensors():
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+            select sensor_id from Sensor 
+        ''')
+        return c.fetchall()
+    except Exception as e:
+        exception_logging.logException(e, "Sensor")

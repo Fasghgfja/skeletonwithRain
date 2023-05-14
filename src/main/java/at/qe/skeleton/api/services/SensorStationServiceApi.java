@@ -7,8 +7,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 
+import at.qe.skeleton.api.exceptions.SensorNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
 import at.qe.skeleton.api.model.BoarderValueFrame;
+import at.qe.skeleton.api.model.SendingIntervalFrame;
 import at.qe.skeleton.api.model.SensorApi;
 import at.qe.skeleton.api.model.SensorStationApi;
 import at.qe.skeleton.model.Measurement;
@@ -74,7 +76,6 @@ public class SensorStationServiceApi {
      * @throws SensorStationNotFoundException
      */
     public String findOneSensorStation(String id) throws SensorStationNotFoundException {
-        System.out.println(id);
         SensorStation sensorStation = sensorStationRepository.findFirstById(id);
         if (sensorStation != null)
             return sensorStation.getAlarmSwitch();
@@ -88,9 +89,7 @@ public class SensorStationServiceApi {
      * @throws SensorStationNotFoundException
      */
     public List<String> findAllSensorStation(Long id) throws SensorStationNotFoundException {
-        System.out.println(id);
         List<SensorStation> sensorStations1 = sensorStationRepository.findAllByAccessPoint_AccessPointID(id);
-
         ArrayList<String> stationNames = new ArrayList<>();
         if( sensorStations1.size() != NOITEMFOUND){
             for (SensorStation s:
@@ -109,20 +108,24 @@ public class SensorStationServiceApi {
      * @return
      * @throws SensorStationNotFoundException
      */
-    public int addSensor(SensorApi sensorApi) throws SensorStationNotFoundException{
-        Sensor sensor = new Sensor();
-        sensor.setId(sensorApi.getSensor_id());
-        sensor.setSensorStation(sensorStationRepository.findFirstById(sensorApi.getStation_name()));
-        sensor.setUuid(sensorApi.getUuid());
-        sensor.setType(sensorApi.getType());
-        sensor.setAlarm_count(sensorApi.getAlarm_count());
-        sensor.setLower_border(sensorApi.getLowerBoarder());
-        sensor.setUpper_border(sensorApi.getUpperBoarder());
-        sensorService.saveSensor(sensor);
-        // to check if it has been saved successfully
-        if(sensorService.loadSensor(sensorApi.getSensor_id()) != null){
-            return Response.SC_OK;
-        }else throw new SensorStationNotFoundException();
+    public int addSensor(List<SensorApi> sensorApi) throws SensorNotFoundException {
+        try {
+            for (SensorApi s :
+                    sensorApi) {
+                Sensor sensor = new Sensor();
+                sensor.setId(s.getSensor_id());
+                sensor.setSensorStation(sensorStationRepository.findFirstById(s.getStation_name()));
+                sensor.setUuid(s.getUuid());
+                sensor.setType(s.getType());
+                sensor.setAlarm_count(s.getAlarm_count());
+                sensor.setLower_border(s.getLowerBoarder());
+                sensor.setUpper_border(s.getUpperBoarder());
+                sensorService.saveSensor(sensor);
+            }
+        }catch (Exception e){
+            throw new SensorNotFoundException();
+        }
+        return Response.SC_OK;
     }
 
     /**
@@ -160,5 +163,12 @@ public class SensorStationServiceApi {
             boarderValueFrameArrayList.add(boarderValueFrame);
         }
         return boarderValueFrameArrayList;
+    }
+    public SendingIntervalFrame findSendingIntervalByAccesspointID(Long id) throws SensorStationNotFoundException{
+        // TODO call sendingintervalls
+        SendingIntervalFrame sendingIntervalFrame = new SendingIntervalFrame();
+        sendingIntervalFrame.setMeasurementInterval(5);
+        sendingIntervalFrame.setWebappSendInterval(5);
+        return  sendingIntervalFrame;
     }
 }

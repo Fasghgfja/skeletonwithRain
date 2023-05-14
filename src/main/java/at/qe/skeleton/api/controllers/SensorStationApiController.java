@@ -1,7 +1,9 @@
 package at.qe.skeleton.api.controllers;
 
+import at.qe.skeleton.api.exceptions.SensorNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
 import at.qe.skeleton.api.model.BoarderValueFrame;
+import at.qe.skeleton.api.model.SendingIntervalFrame;
 import at.qe.skeleton.api.model.SensorApi;
 import at.qe.skeleton.api.model.SensorStationApi;
 import at.qe.skeleton.api.services.SensorStationServiceApi;
@@ -31,7 +33,6 @@ public class SensorStationApiController {
      */
     @PostMapping("/api/sensorstations")
     int createSensorStationApi(@RequestBody SensorStationApi sensorStationApi) {
-        System.out.println(sensorStationApi.toString());
         try {
             sensorStationServiceApi.updateSensorStation(sensorStationApi);
         } catch (SensorStationNotFoundException ex){
@@ -46,11 +47,15 @@ public class SensorStationApiController {
      * @return response ok
      */
     @PostMapping("/api/sensors")
-    int createSensorApi(@RequestBody SensorApi sensorApi) {
-        System.out.println(sensorApi.toString());
+    int createSensorApi(@RequestBody List<SensorApi> sensorApi) {
+        for (SensorApi s:
+             sensorApi) {
+            System.out.println(s.toString());
+        }
+
         try {
             return sensorStationServiceApi.addSensor(sensorApi);
-        }catch (SensorStationNotFoundException ex){
+        }catch (SensorNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -84,7 +89,6 @@ public class SensorStationApiController {
     List<String> getAllSensorStationApi(@PathVariable("id") String id) {
 
         try {
-            System.out.println(id);
             return sensorStationServiceApi.findAllSensorStation(Long.valueOf(id));
         } catch (SensorStationNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -95,6 +99,16 @@ public class SensorStationApiController {
     ArrayList<BoarderValueFrame> updateMeasurement(@PathVariable("id") String id) {
         try {
             return sensorStationServiceApi.findSensorsByAccesspointID(Long.valueOf(id));
+        }catch (SensorStationNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @GetMapping("/api/sendinterval/{id}")
+    SendingIntervalFrame getSendingInterval(@PathVariable("id") String id) {
+        try {
+            return sensorStationServiceApi.findSendingIntervalByAccesspointID(Long.valueOf(id));
         }catch (SensorStationNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

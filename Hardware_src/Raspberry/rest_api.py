@@ -1,14 +1,13 @@
-import json
 import sqlite3
-
+import asyncio
 import cursor as cursor
 import requests
 import DB_connection
 import exception_logging
-
+import config_yaml
 # local
 auth = ("admin", "passwd")
-
+# config_yaml.read_wepapp_ip()
 measurements_url = "http://localhost:8080/api/measurements"
 get_sensorStations_url = "http://localhost:8080/api/sensorstations"
 post_sensorStations_url = "http://localhost:8080/api/sensorstations"
@@ -16,7 +15,7 @@ post_sensor_url = "http://localhost:8080/api/sensors"
 get_sensor_boarder_value_url = "http://localhost:8080/api/sensorsboardervalue"
 get_Station_alarm_switch_url = "http://localhost:8080/api/getsensorstations"
 post_update_sensor_url = "http://localhost:8080/api/updatesensors"
-
+get_sendinterval_url = "http://localhost:8080/api/sendinterval"
 # server
 #auth = ("SHAdmin", "gsecret4passwordt2")
 #measurements_url = "http://srh-softwaresolutions.com/api/measurements"
@@ -89,8 +88,8 @@ def write_value_to_web_app():
     cur.close()
     conn.close()
 
-def write_sensors_and_station_description(station_names):
-    sensor_stationnames = DB_connection.read_Sensor_Station_Database().fetchall()
+async def write_sensors_and_station_description(station_names):
+    sensor_stationnames = DB_connection.read_Sensor_Stationnames_Database()
 
     for station in sensor_stationnames:
         if station[0] in station_names:
@@ -98,24 +97,25 @@ def write_sensors_and_station_description(station_names):
                 station_values = StationValue(name=station[0], service_description=station[1], alarm_switch=station[2])
                 requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
                 sensor_list = DB_connection.read_sensors_database(station[0]).fetchall()
-                #json_list =[]
+                json_list =[]
                 for sensor in sensor_list:
                     if sensor[3] != "ALARM_STATUS":
                         sensor_values = Sensor(sensor_id=sensor[0], uuid=sensor[1], station_name=sensor[2], type=sensor[3], alarm_count=sensor[4], upper_boarder="10000", lower_boarder="0" )
-                 #      json_list.append(vars(sensor_values))
-                        requests.post(post_sensor_url, json=vars(sensor_values), auth=auth)
-                #r = requests.post(post_sensor_url, json=json_list,auth=auth)
+                        json_list.append(vars(sensor_values))
+                r = requests.post(post_sensor_url, json=json_list,auth=auth)
+                if r.status_code != 200:
+                    exception_logging.log_connection_exception("Did not write Sensors to webapp")
             except Exception as e:
                 exception_logging.logException(e, station[0])
     # TODO check if all new stations are added
 
 def read_sensor_boarder_values():
-    url = "{0}/{1}".format(get_sensor_boarder_value_url, id)
+    url = "{0}/{1}".format(get_sensor_boarder_value_url, config_yaml.read_accesspoint_id())
     data = requests.get(url,auth=auth)
     sensor_list = data.json()
     for sensor in sensor_list:
         DB_connection.update_boarder_value(sensor["sensor_id"], sensor["upperBoarder"], sensor["lowerBoarder"])
-
+    # config_yaml.write_sending_intervalls(5,2)
     print("read_sensor_boarder")
 
 
@@ -127,12 +127,12 @@ def write_alarm_switch(name, alarm_switch, description):
         requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
     except Exception as e:
         exception_logging.logException(e, "write alarm_switch")
-def get_sensorstations(getName, name):
+async def get_sensorstations(getName, name):
 
 
     if getName:
 
-        url = "{0}/{1}".format(get_sensorStations_url, id)
+        url = "{0}/{1}".format(get_sensorStations_url, config_yaml.read_accesspoint_id())
         response = requests.get(url, auth=auth)
         if response.status_code == 200:
             data = response.json()
@@ -153,23 +153,17 @@ def get_sensorstations(getName, name):
 
 def check_if_new_stations():
 
-    conn = sqlite3.connect('AccessPoint')
-    cur = conn.cursor()
-    # TODO call database querys via DB_connection.xxx
     already_added_sensorstation_list = []
-    already_added_SensorStations = cur.execute('''
-                                    SELECT name FROM Sensorstation
-                                ''')
+    for sensor_stations in DB_connection.read_Sensor_Stationnames_Database():
+        already_added_sensorstation_list.append(sensor_stations[0])
 
-    for sensorstations in already_added_SensorStations.fetchall():
-        already_added_sensorstation_list.append(sensorstations[0])
-
-    webapp_sensorstation_names = get_sensorstations(True, "")
+    webapp_sensorstation_names = asyncio.run(get_sensorstations(True, ""))
 
     for name in already_added_sensorstation_list:
         try:
             webapp_sensorstation_names.remove(name)
         except Exception as e:
+            DB_connection.delete_sensor_station(name)
             exception_logging.logException(e, "Filter New Stations")
 
     return webapp_sensorstation_names
@@ -179,3 +173,13 @@ def update_Sensor(alarm_count_list):
         r = requests.post(post_update_sensor_url, json=alarm_count_list, auth=auth)
     except Exception as e:
         exception_logging.logException(e, "write alarm_count to webapp")
+
+def read_sending_interval():
+    url = "{0}/{1}".format(get_sendinterval_url, config_yaml.read_accesspoint_id())
+    try:
+        r = requests.get(url, auth=auth)
+        mes_int = r.json()["measurementInterval"]
+        web_int = r.json()["webappSendInterval"]
+        config_yaml.write_sending_intervalls(mes_int, web_int)
+    except Exception as e:
+        exception_logging.logException(e, "call sending interval")

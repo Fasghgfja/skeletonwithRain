@@ -57,16 +57,12 @@ def checkBoarderValues():
     exception_logging.log_information("INFO: Boarder values have been checked")
 
 def check_sensor_station_alarm():
-    connected_sensor_stations_list = DB_connection.read_Sensor_Station_Database().fetchall()
+    connected_sensor_stations_list = DB_connection.read_Sensor_Stationnames_Database()
     for station in connected_sensor_stations_list:
         alarm_switch = station[2]
         if alarm_switch == "on":
-            sensor_list = DB_connection.read_sensors_database(station[NAME]).fetchall()
-            for sensor in sensor_list:
-                alarm_count = sensor[4]
-                uuid = sensor[1]
-                if alarm_count == -1:
-                   update_alarm_switch(station[NAME], uuid, station[1], sensor[0])
+            sensor = DB_connection.read_sensors_alarm_count(station[NAME]).fetchone()
+            update_alarm_switch(station[NAME], sensor[1], station[1], sensor[0])
 
 def update_alarm_switch(station_name, uuid, description, sensor_id):
     webapp_alarm_switch =""
@@ -82,7 +78,7 @@ def update_alarm_switch(station_name, uuid, description, sensor_id):
         DB_connection.update_sensor_station_database(alarm_switch, station_name)
         DB_connection.update_sensor_database(0,sensor_id)
         rest_api.write_alarm_switch(station_name, alarm_switch, description)
-        #rest_api.update_Sensor(sensor_id, 0)
+        # rest_api.update_Sensor(sensor_id, 0)
 
 def num_check(num):
     if str(num).isalnum():
