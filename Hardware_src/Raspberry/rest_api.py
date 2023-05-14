@@ -7,15 +7,14 @@ import exception_logging
 import config_yaml
 # local
 auth = ("admin", "passwd")
-# config_yaml.read_wepapp_ip()
-measurements_url = "http://localhost:8080/api/measurements"
-get_sensorStations_url = "http://localhost:8080/api/sensorstations"
-post_sensorStations_url = "http://localhost:8080/api/sensorstations"
-post_sensor_url = "http://localhost:8080/api/sensors"
-get_sensor_boarder_value_url = "http://localhost:8080/api/sensorsboardervalue"
-get_Station_alarm_switch_url = "http://localhost:8080/api/getsensorstations"
-post_update_sensor_url = "http://localhost:8080/api/updatesensors"
-get_sendinterval_url = "http://localhost:8080/api/sendinterval"
+
+
+
+
+
+
+
+
 # server
 #auth = ("SHAdmin", "gsecret4passwordt2")
 #measurements_url = "http://srh-softwaresolutions.com/api/measurements"
@@ -35,9 +34,6 @@ class SensorValue(object):
         self.value = value
         self.time_stamp = time_stamp
         self.type = type
-class Value_List(object):
-    def __int__(self, sensor_value : SensorValue):
-        self.sensor_values = sensor_value
 class StationValue(object):
     def __init__(self, name: str, service_description: str, alarm_switch: str):
         self.name = name
@@ -54,43 +50,28 @@ class Sensor(object):
         self.upperBoarder = upper_boarder
         self.lowerBoarder = lower_boarder
 
+def url_builder(link):
+    url = "http://{0}/api/{1}".format(config_yaml.read_wepapp_ip(),link, config_yaml.read_accesspoint_id())
+    return url
 def write_value_to_web_app():
-
-    conn = sqlite3.connect('AccessPoint')
-    cur = conn.cursor()
-
-    # TODO call database querys via DB_connection.xxx
-    all_sensorstations_sql = "SELECT * FROM Sensorstation;"
-    all_sensorstations = cur.execute(all_sensorstations_sql).fetchall()
+    measurements_url = url_builder("measurements")
     send_value_list = []
-    for sensorstations in all_sensorstations:
-        # TODO call database querys via DB_connection.xxx
-        get_all_sensors = cur.execute('''
-                                SELECT * FROM Sensor WHERE station_name = "{0}"
-                            '''.format(sensorstations[0])).fetchall()
-
-        for sensor in get_all_sensors:
-            # TODO call database querys via DB_connection.xxx
+    for sensorstations in DB_connection.read_Sensor_Stationnames_Database():
+        for sensor in DB_connection.read_sensors_database(sensorstations[0]).fetchall():
             if sensor[3] != "ALARM_STATUS":
-                values = cur.execute('''
-                            SELECT * FROM Value WHERE sensor_id = {0}
-                        '''.format(sensor[0])).fetchall()
-                for value in values:
-
+                for value in DB_connection.read_value_from_database(sensor[0]):
                     sensor_id_string = str(value[2])
                     time_stamp_string = str(value[1])
-
                     temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=time_stamp_string, type=sensor[3])
                     send_value_list.append(vars(temp_sensor_value))
     r = requests.post(measurements_url, json=send_value_list, auth=auth)
     if r.status_code == 200:
         DB_connection.delete_values()
-    cur.close()
-    conn.close()
 
 async def write_sensors_and_station_description(station_names):
     sensor_stationnames = DB_connection.read_Sensor_Stationnames_Database()
-
+    post_sensorStations_url = url_builder("sensorstations")
+    post_sensor_url = url_builder("sensors")
     for station in sensor_stationnames:
         if station[0] in station_names:
             try:
@@ -110,18 +91,21 @@ async def write_sensors_and_station_description(station_names):
     # TODO check if all new stations are added
 
 def read_sensor_boarder_values():
-    url = "{0}/{1}".format(get_sensor_boarder_value_url, config_yaml.read_accesspoint_id())
+    url = "{0}/{1}".format(url_builder("sensorsboardervalue"), config_yaml.read_accesspoint_id())
     data = requests.get(url,auth=auth)
     sensor_list = data.json()
     for sensor in sensor_list:
-        DB_connection.update_boarder_value(sensor["sensor_id"], sensor["upperBoarder"], sensor["lowerBoarder"])
-    # config_yaml.write_sending_intervalls(5,2)
+        to_update_sensor = DB_connection.read_sensors_by_id(sensor["sensor_id"])
+        if to_update_sensor[5] != sensor["lowerBoarder"] or to_update_sensor[6] != sensor["upperBoarder"]:
+            DB_connection.update_boarder_value(sensor["sensor_id"], sensor["upperBoarder"], sensor["lowerBoarder"])
+
     print("read_sensor_boarder")
 
 
 
 
 def write_alarm_switch(name, alarm_switch, description):
+    post_sensorStations_url = url_builder("sensorstations")
     try:
         station_values = StationValue(name=name, service_description=description, alarm_switch=alarm_switch)
         requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
@@ -129,10 +113,8 @@ def write_alarm_switch(name, alarm_switch, description):
         exception_logging.logException(e, "write alarm_switch")
 async def get_sensorstations(getName, name):
 
-
     if getName:
-
-        url = "{0}/{1}".format(get_sensorStations_url, config_yaml.read_accesspoint_id())
+        url = "{0}/{1}".format(url_builder("sensorstations"), config_yaml.read_accesspoint_id())
         response = requests.get(url, auth=auth)
         if response.status_code == 200:
             data = response.json()
@@ -140,6 +122,7 @@ async def get_sensorstations(getName, name):
         else:
             print("Fehler beim Abrufen der Daten. Status Code:", response.status_code)
     else:
+        get_Station_alarm_switch_url = url_builder("getsensorstations")
         try:
             station_values = StationValue(name=name, service_description="", alarm_switch="")
             response = requests.get(get_Station_alarm_switch_url,json=vars(station_values), auth=auth)
@@ -169,13 +152,14 @@ def check_if_new_stations():
     return webapp_sensorstation_names
 
 def update_Sensor(alarm_count_list):
+    post_update_sensor_url = url_builder("updatesensors")
     try:
         r = requests.post(post_update_sensor_url, json=alarm_count_list, auth=auth)
     except Exception as e:
         exception_logging.logException(e, "write alarm_count to webapp")
 
 def read_sending_interval():
-    url = "{0}/{1}".format(get_sendinterval_url, config_yaml.read_accesspoint_id())
+    url = "{0}/{1}".format(url_builder("sendinterval"), config_yaml.read_accesspoint_id())
     try:
         r = requests.get(url, auth=auth)
         mes_int = r.json()["measurementInterval"]

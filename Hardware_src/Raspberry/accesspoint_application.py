@@ -15,8 +15,8 @@ if __name__ == '__main__':
     # TODO read config.yaml
 
 
-    sending_interval = 0
-    measurement_interval = 0
+    sending_interval_counter = 0
+    measurement_interval_counter = 0
     program_state = 0#program_status.Is.READ_SENSOR_VALUES.value
     while True:
         match program_state:
@@ -38,11 +38,11 @@ if __name__ == '__main__':
                 except Exception as e:
                     exception_logging.logException(e, "rest_api read Station name")
                 time.sleep(SECTION_SLEEP)
-                measurement_interval += 1
-                print("Measurement: " + str(measurement_interval))
-                if measurement_interval > config_yaml.read_sending_intervalls()[0]:
+                measurement_interval_counter += 1
+                print("Measurement: " + str(measurement_interval_counter))
+                if measurement_interval_counter > config_yaml.read_sending_intervalls()[0]:
                     program_state = program_status.Is.READ_SENSOR_VALUES.value
-                    measurement_interval = 0
+                    measurement_interval_counter = 0
                 else:
                     program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
 
@@ -56,10 +56,10 @@ if __name__ == '__main__':
                     asyncio.run(ble_service_connection.read_sensor_data(False, name_list))
                 except Exception as e:
                     exception_logging.logException(e, "call_read_values")
-                sending_interval += 1
-                if sending_interval >= config_yaml.read_sending_intervalls()[1]:
+                sending_interval_counter += 1
+                if sending_interval_counter >= config_yaml.read_sending_intervalls()[1]:
                     program_state = program_status.Is.CHECK_BOARDER_VALUER.value
-                    sending_interval = 0
+                    sending_interval_counter = 0
                 else:
                     program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
                 time.sleep(SECTION_SLEEP)

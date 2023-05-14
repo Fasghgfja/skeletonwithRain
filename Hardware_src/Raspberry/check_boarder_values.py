@@ -11,7 +11,7 @@ import exception_logging
 NAME = 0
 
 def checkBoarderValues():
-    connected_sensor_stations_list = DB_connection.read_Sensor_Station_Database().fetchall()
+    connected_sensor_stations_list = DB_connection.read_Sensor_Stationnames_Database()
     update_alarm_count_list = []
     for station in connected_sensor_stations_list:
         alarm_switch = station[2]

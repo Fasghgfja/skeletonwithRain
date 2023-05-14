@@ -2,72 +2,7 @@ import sqlite3
 import struct
 import exception_logging
 
-
-def insert_values_into_database(value, float_value, type, deviceName):
-    if float_value:
-        float_val = struct.unpack('f', value)[0]
-        string_value = float_val
-    else:
-        string_value = int.from_bytes(value, "little")
-    try:
-        conn = sqlite3.connect('AccessPoint')
-        c = conn.cursor()
-        c.execute('''
-                select sensor_id from sensor where sensor_type='{0}' and station_name='{1}'
-        '''.format(type.decode(), deviceName))
-        sensor_id = c.fetchone()[0]
-        c = conn.cursor()
-        c.execute('''
-                insert into value values('{0}', CURRENT_TIMESTAMP, {1})
-            '''.format(string_value, sensor_id))
-        conn.commit()
-        file1 = open("logFile.txt", "a")
-        file1.write("INFO: Value for type {0} on id {1} saved\n".format(type.decode(), sensor_id))
-        file1.close()
-    except Exception as e:
-        exception_logging.logException(e, type)
-
-def update_sensor_station_database(alarm_switch, station_name):
-    try:
-        conn = sqlite3.connect('AccessPoint')
-        c = conn.cursor()
-        c.execute('''
-                update Sensorstation set alarm_switch='{0}' where name='{1}'
-            '''.format(alarm_switch, station_name))
-        conn.commit()
-        file1 = open("logFile.txt", "a")
-        file1.write("INFO: SensorStation {0} has been updated alarm_switch to {1} \n".format(station_name, alarm_switch))
-        file1.close()
-    except Exception as e:
-        exception_logging.logException(e, station_name)
-
-def update_sensor_database(alarm_count, sensor_id):
-    try:
-        conn = sqlite3.connect('AccessPoint')
-        c = conn.cursor()
-        c.execute('''
-                update sensor set alarm_count={0} where sensor_id={1}
-            '''.format(alarm_count, sensor_id))
-        conn.commit()
-        file1 = open("logFile.txt", "a")
-        file1.write("INFO: Sensor with sensor_id {0} has been updated alarm_count to {1} \n".format(sensor_id, alarm_count))
-        file1.close()
-    except Exception as e:
-        exception_logging.logException(e, sensor_id)
-
-def update_boarder_value(sensor_id, lower_boarder, upper_boarder):
-    try:
-        conn = sqlite3.connect('AccessPoint')
-        c = conn.cursor()
-        c.execute('''
-                update sensor set lower_boarder={0}, upper_boarder={1} where sensor_id={2}
-            '''.format(lower_boarder, upper_boarder, sensor_id))
-        conn.commit()
-        file1 = open("logFile.txt", "a")
-        file1.write("INFO: Sensor with sensor_id {0} has been updated upper_boarder to {1} and lower_boarder to {2} \n".format(sensor_id, upper_boarder, lower_boarder))
-        file1.close()
-    except Exception as e:
-        exception_logging.logException(e, sensor_id)
+#----------------------------------------Create Database
 def implement_database():
     # TODO check database connection
 
@@ -100,8 +35,33 @@ def implement_database():
             FOREIGN KEY (sensor_id) REFERENCES Sensor(sensor_id) ON DELETE CASCADE);
         ''')
     conn.commit()
+
+#----------------------------------------Insert Database
+def insert_values_into_database(value, float_value, type, deviceName):
+    if float_value:
+        float_val = struct.unpack('f', value)[0]
+        string_value = float_val
+    else:
+        string_value = int.from_bytes(value, "little")
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+                select sensor_id from sensor where sensor_type='{0}' and station_name='{1}'
+        '''.format(type.decode(), deviceName))
+        sensor_id = c.fetchone()[0]
+        c = conn.cursor()
+        c.execute('''
+                insert into value values('{0}', CURRENT_TIMESTAMP, {1})
+            '''.format(string_value, sensor_id))
+        conn.commit()
+        file1 = open("logFile.txt", "a")
+        file1.write("INFO: Value for type {0} on id {1} saved\n".format(type.decode(), sensor_id))
+        file1.close()
+    except Exception as e:
+        exception_logging.logException(e, type)
+
 def insert_new_sensor_station_to_database(attribute, name):
-    # TODO get number of max index of sensor
     try:
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
@@ -115,6 +75,7 @@ def insert_new_sensor_station_to_database(attribute, name):
         print("saved")
     except Exception as e:
         exception_logging.logException(e, attribute)
+
 def insert_new_sensor_to_database(attribute, name, type, sensor_index):
     try:
         conn = sqlite3.connect('AccessPoint')
@@ -124,10 +85,53 @@ def insert_new_sensor_to_database(attribute, name, type, sensor_index):
             '''.format(sensor_index, attribute.uuid, name, type.decode(), 0, 0, 0))
         conn.commit()
         exception_logging.log_information("INFO: Sensor with uuid {0} and type {1} from Station {2} has been inserted to the database".format(attribute.uuid, type.decode(), name))
-        print("ok-----------------InsertSensor")
     except Exception as e:
         exception_logging.logException(e, attribute.uuid)
 
+#----------------------------------------Update Database
+def update_sensor_station_database(alarm_switch, station_name):
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+                update Sensorstation set alarm_switch='{0}' where name='{1}'
+            '''.format(alarm_switch, station_name))
+        conn.commit()
+        file1 = open("logFile.txt", "a")
+        file1.write("INFO: SensorStation {0} has been updated alarm_switch to {1} \n".format(station_name, alarm_switch))
+        file1.close()
+    except Exception as e:
+        exception_logging.logException(e, station_name)
+
+def update_sensor_database(alarm_count, sensor_id):
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+                update sensor set alarm_count={0} where sensor_id={1}
+            '''.format(alarm_count, sensor_id))
+        conn.commit()
+        file1 = open("logFile.txt", "a")
+        file1.write("INFO: Sensor with sensor_id {0} has been updated alarm_count to {1} \n".format(sensor_id, alarm_count))
+        file1.close()
+    except Exception as e:
+        exception_logging.logException(e, sensor_id)
+
+def update_boarder_value(sensor_id, upper_boarder, lower_boarder):
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+                update sensor set lower_boarder={0}, upper_boarder={1} where sensor_id={2}
+            '''.format(lower_boarder, upper_boarder, sensor_id))
+        conn.commit()
+        file1 = open("logFile.txt", "a")
+        file1.write("INFO: Sensor with sensor_id {0} has been updated upper_boarder to {1} and lower_boarder to {2} \n".format(sensor_id, upper_boarder, lower_boarder))
+        file1.close()
+    except Exception as e:
+        exception_logging.logException(e, sensor_id)
+
+#----------------------------------------Read Database
 def read_Sensor_Stationnames_Database():
     try:
         conn = sqlite3.connect('AccessPoint')
@@ -159,6 +163,17 @@ def read_sensors_database(name):
     except Exception as e:
         exception_logging.logException(e, "Sensor")
 
+def read_sensors_by_id(id):
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+            select * from Sensor where sensor_id='{0}'
+        '''.format(id))
+        return c.fetchone()
+    except Exception as e:
+        exception_logging.logException(e, "Sensor")
+
 def read_sensors_alarm_count(name):
     try:
         conn = sqlite3.connect('AccessPoint')
@@ -181,6 +196,19 @@ def read_sensors_alarm_characteristic(name):
         return c.fetchone()
     except Exception as e:
         exception_logging.logException(e, "Sensor")
+
+def read_sensors():
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+            select sensor_id from Sensor 
+        ''')
+        return c.fetchall()
+    except Exception as e:
+        exception_logging.logException(e, "Sensor")
+
+#----------------------------------------delete Database
 def delete_values():
     try:
         conn = sqlite3.connect('AccessPoint')
@@ -189,7 +217,7 @@ def delete_values():
             delete from Value 
         ''')
         conn.commit()
-        exception_logging.log_information("Values of have been deleted at {0}")
+        exception_logging.log_information("INFO: Values of have been deleted at")
     except Exception as e:
         exception_logging.logException(e, "delete values")
 
@@ -208,13 +236,4 @@ def delete_sensor_station(name):
     except Exception as e:
         exception_logging.logException(e, "delete Station")
 
-def read_sensors():
-    try:
-        conn = sqlite3.connect('AccessPoint')
-        c = conn.cursor()
-        c.execute('''
-            select sensor_id from Sensor 
-        ''')
-        return c.fetchall()
-    except Exception as e:
-        exception_logging.logException(e, "Sensor")
+
