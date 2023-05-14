@@ -8,6 +8,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -100,5 +102,22 @@ class AccessPointServiceTest {
 
         assertNull(accessPointService.getFirstById(1L));
         assertEquals(startValue, accessPointService.getAccessPointsAmount());
+    }
+
+    /**
+     * Testing getAllAccessPointIds() method of the accessPointService.
+     */
+    @DirtiesContext
+    @Test
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    void testGetAllAccessPointIds(){
+        int initialAccessPointIds = accessPointService.getAllAccessPointIds().size();
+
+        AccessPoint accessPoint = new AccessPoint();
+        accessPoint.setAccessPointID(1L);
+        accessPointService.saveAccessPoint(accessPoint);
+
+        assertEquals(initialAccessPointIds + 1, accessPointService.getAllAccessPointIds().size());
+
     }
 }

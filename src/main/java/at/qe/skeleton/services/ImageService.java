@@ -133,7 +133,7 @@ public class ImageService {
 
 
 
-
+    //TODO: Remove this if possible. Fails on tesing.
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteAllImagesByPlant(Plant plant) { //TODO:new, reroute all methods wanting this to here and add detach , they are in plantservice atm
         imageRepository.deleteImagesByPlant(plant);
@@ -153,6 +153,7 @@ public class ImageService {
 
 
     //TODO: remove the system out when the method is sufficintly tested
+    // TESTED
     public void addPictureToPlantPictures(Image image, String plantid) {
         System.out.println("im image service here plant id " + plantid);
         Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantid));

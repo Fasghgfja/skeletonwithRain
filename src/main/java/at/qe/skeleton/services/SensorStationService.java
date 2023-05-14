@@ -30,6 +30,10 @@ public class SensorStationService {
     private LogRepository logRepository;
 
 
+    /**
+     * Method to get all sensor stations currently stored in the database.
+     * @return Collection of all sensor stations.
+     */
     public Collection<SensorStation> getAllSensorStations() {
         return sensorStationRepository.findAll();
     }
@@ -96,12 +100,12 @@ public class SensorStationService {
     }
 
 
-    //TODO: push this down to repository and queue , it is too expensive here
-
     public long getSensorStationsAmount() {
         return sensorStationRepository.count();
     }
 
 
-
+    public Collection<String> getAllSensorStationsIds() {//this is used to return a list of sensorstations ids to delete from when deleting measurements
+        return sensorStationRepository.getAllSensorStationsIds();
+    }
 }

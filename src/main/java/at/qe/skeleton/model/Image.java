@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import java.io.Serializable;
 import java.time.LocalDate;
-
+import java.util.Objects;
 
 
 /**
@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_gen")
-    @SequenceGenerator(name = "id_gen", initialValue = 2)
+    @SequenceGenerator(name = "id_gen", initialValue = 100)
     @Column(nullable = false, unique = true)
     private Long id;
 
@@ -72,5 +72,23 @@ public class Image implements Serializable {
 
     public void setDate(LocalDate date) {
         this.creationDate = date;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof final Image other)) {
+            return false;
+        }
+        return Objects.equals(this.id, other.id);
     }
 }

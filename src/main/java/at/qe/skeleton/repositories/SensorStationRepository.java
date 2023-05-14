@@ -7,6 +7,7 @@ import at.qe.skeleton.model.Userx;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -25,6 +26,13 @@ public interface SensorStationRepository extends AbstractRepository<SensorStatio
     List<SensorStation> findSensorStationsByGardener(@Param("gardener") Userx username );
 
     List<SensorStation> findAllByAccessPoint_AccessPointID(Long id);
+
+    @Query("SELECT s.sensorStationName FROM SensorStation s")
+    Collection<String> getAllSensorStationsIds();
+
+
+
+
     /* to delete Sensorstation
     delete from MEASUREMENT where SENSOR_STATION_NAME='G4T2'
     delete from SENSOR  where SENSOR_STATION_NAME='G4T2'

@@ -213,9 +213,16 @@
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="col-12">
                         <div class="card">
-                            <h5>Assigned Sensor Stations</h5>
-                            <p>From this panel it is possible to monitor the assigned sensor station , if a status indicator is red it means
-                            that the alarm count is more then the allowed amount for the corresponding sensor</p>
+                            <div class="card-header">
+                                <h5>Assigned Sensor Stations</h5>
+                                <div class="header-buttons">
+                                    <!-- ........................Help Button ....................... -->
+                                    <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
+                                                     styleClass="ui-button-secondary outlined-button"
+                                                     onclick="PF('gardenerDhelpDialog').show()"/>
+                                </div>
+                            </div>
+
                             <p:dataTable id="ordersTable2" var="sensorStation"
                                          value="#{sensorStationListController.assignedSensorStationList}" selectionMode="single"
                                          reflow="true" paginatorPosition="bottom"
@@ -226,21 +233,16 @@
                                 <p:ajax event="rowSelect" update="myBarChart2"
                                         listener="#{graphController.onRowSelect}"/>
 
-                                <p:column headerText="Id" sortBy="#{sensorStation.sensorStationName}">
+                                <p:column headerText="Id" sortBy="#{sensorStation.sensorStationName}" filterBy="#{sensorStation.sensorStationName}">
                                     <h:outputText value="#{sensorStation.id}"/>
                                 </p:column>
-
-                                <p:column headerText="Plant" sortBy="#{sensorStation.plant}">
+                                <p:column headerText="Plant" sortBy="#{sensorStation.plant}" filterBy="#{sensorStation.plant}">
                                     <h:outputText value="#{sensorStation.plant}"/>
                                 </p:column>
-
-
-                                <p:column headerText="Location" sortBy="#{sensorStation.location}">
+                                <p:column headerText="Location" sortBy="#{sensorStation.location}" filterBy="#{sensorStation.location}">
                                     <h:outputText value="#{sensorStation.location}">
                                     </h:outputText>
                                 </p:column>
-
-
                                 <p:column headerText="Alarm Status">
                                     <i class="#{measurementListController.getMeasurementTypeIcon('AIR_PRESSURE')}"
                                        style="color:#{measurementListController.getSensorStatus('AIR_PRESSURE',sensorStation) == 'OK' ? 'green' : 'red'}"
@@ -261,24 +263,17 @@
                                        style="color:#{measurementListController.getSensorStatus('HUMIDITY',sensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Humidity"></i>
                                 </p:column>
-
                                 <p:column style="width: 3.5rem">
-
                                     <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
                                     <p:button icon="pi pi-search"
                                               title="open Detail-View"
                                               href="/greenHouseDetails.xhtml?id=#{sensorStation.sensorStationName}"/>
-
                                 </p:column>
                             </p:dataTable>
                         </div>
                     </div>
                 </div>
             </c:if>
-
-
-
-
                 <!-- ....................................GARDENER VIEW FINISH................................... -->
 
 
@@ -296,19 +291,18 @@
 
 
                 <!-- ....................................USER VIEW ................................... -->
-
                 <h:form id="userForm">
                     <div class="col-12">
                         <div class="card">
 
                             <div class="card-header">
                                 <h4>Followed Plants</h4>
-
                                 <div class="header-buttons">
-                                <p:commandButton type="button" icon="pi pi-ellipsis-v" title="Help"
+                                    <!-- ........................Help Button ....................... -->
+                                    <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
                                                  styleClass="ui-button-secondary outlined-button"
                                                  onclick="PF('userDhelpDialog').show()"/>
-                            </div>
+                                </div>
                             </div>
 
                             <p:dataTable id="plantsTable" var="plant" value="#{plantController.followedPlantsList}" paginator="true" rows="3" paginatorPosition="bottom" rowKey="#{plant.id}">
@@ -318,43 +312,33 @@
                                 <p:column style="width:2rem">
                                     <p:rowToggler/>
                                 </p:column>
-
-
                                 <p:column >
                                     <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
                                 </p:column>
-
-                                <p:column headerText="Plant" sortBy="#{plant.plantName}">
+                                <p:column headerText="Plant" sortBy="#{plant.plantName}" filterBy="#{plant.plantName}">
                                     <h:outputText value="#{plant.plantName}"/>
                                 </p:column>
-
-                                <p:column headerText="Planted Date" sortBy="#{plant.plantedDate}">
+                                <p:column headerText="Planted Date" sortBy="#{plant.plantedDate}" filterBy="#{plant.plantedDate}">
                                     <h:outputText value="#{plant.plantedDate}"/>
                                 </p:column>
-
-                                <p:column headerText="Description" sortBy="#{plant.description}">
+                                <p:column headerText="Description" sortBy="#{plant.description}" filterBy="#{plant.description}">
                                     <h:outputText value="#{plant.description}"/>
                                 </p:column>
-
                                 <p:column >
-
+                                    <!-- ........................Unfollow Button ....................... -->
                                     <p:commandButton style="border-color: red; background-color: red"
                                                      icon="pi pi-minus"
                                                      title="Unfollow Plant"
                                                      update=":userForm:plantsTable">
                                         <p:ajax event="click" listener="#{userDetailController.doRemovePlantFromFollowedPlants(plant)}"/>
                                     </p:commandButton>
-
                                 </p:column>
-
+                                <!-- ........................Plant Page Button ....................... -->
                                 <p:column>
-
-
                                 <p:button icon="pi pi-search"
                                           title="Show Plant Page"
                                           href="/plantPage.xhtml?id=#{plant.plantID} "/>
                                 </p:column>
-
 
                                 <!-- .........................................ROW EXPANSION.......................................................... -->
                                 <p:rowExpansion>
@@ -403,11 +387,6 @@
                                     </p:graphicImage>
                                 </p:galleria>
                             </div>
-
-
-
-
-
 
 
                         </div>
@@ -564,7 +543,31 @@
                 Each of our plants has a dedicated plant page you can visit to see its gallery and latest measurements along with other
                 usefull information!<br></br>
                 Visit it by pressing the "Show Plant Page" button
+            </p:outputPanel>
+        </p:dialog>
 
+        <!-- ...................................Gardener Dashboard help dialog............................. -->
+        <p:dialog header="Gardener Dashboard Help" id="gardenerDhelpDialog" widgetVar="gardenerDhelpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+
+            <p:outputPanel id="GardenerDhelpDialog">
+                <p>On this page you can keep track of the Sensor Stations that have been assigned to you, see their Sensors Status and corresponding Graph.</p>
+                <h6>About The Details Page</h6>
+                By clicking on the associated button you can open the DetailPage , in the detailpage you will have the possibility to:<br></br>
+                <br></br>
+                See all measurements for the chosen Sensor Station with the corresponding Graphs.<br></br>
+                Manage the pictures users take of the plants , Pictures will need your approval before going to the public Plant Gallery.<br></br>
+                Edit Things like the location of the sensorStation and the plant displayed.<br></br>
+                Remove The Current Pairing And/Or Pair to a new Access Point.<br></br>
+                Reset the Alarm Switch .<br></br>
+                See all Sensors of the chosen Sensor Station with their relative information<br></br>
+                Edit Sensors bordervalues aswell as resetting the respective Alarm Counts.<br></br>
+                More Detailed Usage infos can be found on the page itself.
+                <h6>About The Sensors Status</h6>
+                The Status Icons Show if the corresponding Sensor has reached his set treshold alarm count.
+                <h6>About The Graph</h6>
+                By selecting a Sensor Station the panel on the left will show a graph for the Sensor Station Last Measurements (one per type).
             </p:outputPanel>
         </p:dialog>
 

@@ -36,7 +36,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private String phone;
     boolean enabled;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_plant",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username"),
