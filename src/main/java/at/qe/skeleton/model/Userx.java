@@ -45,30 +45,13 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private Set<Plant> followedPlants = new HashSet<>();
 
 
-    @ManyToMany(cascade = CascadeType.ALL)//TODO check if this can be lazy
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "gardener_sensorStation",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username"),
             inverseJoinColumns = @JoinColumn(name = "sensorStationName", referencedColumnName = "sensorStationName")
     )
     private Set<SensorStation> sensorStationsUnderCare = new HashSet<>();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "Userx_UserRole")
@@ -95,7 +78,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
 
     @Override
     public String toString() {
-        return "" + username;
+        return username;
     }
 
     @Override

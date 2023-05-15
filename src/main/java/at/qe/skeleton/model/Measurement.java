@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -23,8 +23,6 @@ public class Measurement implements Serializable {
     @JoinColumn(name = "sensorStationName", nullable = true)
     private SensorStation sensorStation;
 
-
-    //TODO: JDBC is on crack and if this is called value its seen as a primary key and the table will not be created O_o, find a workaround
     private String value_s;
     private String unit;
     private String type;
@@ -41,5 +39,23 @@ public class Measurement implements Serializable {
         return "Measurement{" +
                 "id: "+id +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof final Measurement other)) {
+            return false;
+        }
+        return Objects.equals(this.id, other.getId());
     }
 }
