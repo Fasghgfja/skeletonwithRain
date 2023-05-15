@@ -12,6 +12,9 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
 <div class="layout-topbar">
 
     <div class="layout-topbar-wrapper">
+
+
+
         <div class="layout-topbar-left">
             <h:outputLink id="logolink" value="/dashboard.xhtml" styleClass="layout-topbar-logo">
                 <p:graphicImage url="../resources/images/logo-wonti.svg" style="width: 90px; height: 90px;" />
@@ -31,15 +34,26 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
                     </div>
                 </a>
             </div>
+
             <ul class="layout-topbar-actions">
                 <li class="search-item topbar-item">
-                    <h:form onsubmit="return false;">
+                    <h:form onsubmit="#{searchBean.search()}">
+
                         <h:panelGroup styleClass="md-inputfield search-input-wrapper">
-                            <p:inputText placeholder="Search..." />
-                            <i class="pi pi-search"></i>
+
+                            <p:inputText placeholder="Search Plant" value="#{searchBean.plantNameToSearchFor}" />
+
+                            <i  class="pi pi-search"></i>
+
                         </h:panelGroup>
+
                     </h:form>
+
+
                 </li>
+
+
+
                 <li class="topbar-item notifications">
                     <a href="#">
                         <i class="topbar-icon pi pi-bell"></i>
@@ -50,17 +64,19 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
                         </li>
                         <li>
                             <a tabindex="0">
-                                <i class="pi pi-shopping-cart"></i>
+                                <h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('GARDENER') }">
+                                <i class="pi pi-image"></i>
                                 <div class="notification-item">
                                     <div class="notification-summary">Pics Awaiting Approval</div>
-                                    <div class="notification-detail">You have <strong>3</strong> pics awaiting approval.</div>
+                                    <div class="notification-detail">You have <strong>#{notificationsController.picturesAwaitingApprovalCount}</strong> pics awaiting approval.</div>
                                 </div>
+                                </h:panelGroup>
                             </a>
                         </li>
                         <li>
                             <a tabindex="0">
                                 <h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('GARDENER') }"> <!-- .//TODO:check if this makes problem when a user is logged in -->
-                                    <i class="pi pi-check-square"></i>
+                                    <i class="fa fa-regular fa-bell"></i>
                                 <div class="notification-item" >
                                     <div class="notification-summary">Assigned SS Alarms</div>
                                     <div class="notification-detail"> #{notificationsController.assignedSensorStationsAlarms} Alarms On.</div>
@@ -70,7 +86,7 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
                         </li>
                         <li>
                             <a tabindex="0">
-                                <i class="pi pi-chart-line"></i>
+                                <i class="fa fa-regular fa-comment"></i>
                                 <div class="notification-item">
                                     <div class="notification-summary">Messages</div>
                                     <div class="notification-detail">New Messages.</div>
@@ -81,7 +97,11 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
                     </ul>
                 </li>
 
+
+
+
                 <ui:fragment rendered="#{guestPreferences.profileMode == 'popup' ? true : false}">
+
                     <li class="topbar-item user-profile">
                         <a href="#">
 
@@ -115,6 +135,7 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
 
         </div>
     </div>
+    <p:growl sticky="false" globalOnly="true" layout="table" styleClass="error-message" />
 
 </div>
 

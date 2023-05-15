@@ -31,15 +31,18 @@ public class SessionInfoBean implements Serializable {
      */
     private Userx currentUser;
 
-    private boolean hasShownAssignedAlarms = false;
 
-    public boolean isHasShownAssignedAlarms() {
-        return hasShownAssignedAlarms;
-    }
 
-    public void setHasShownAssignedAlarms(boolean hasShownAssignedAlarms) {
-        this.hasShownAssignedAlarms = hasShownAssignedAlarms;
-    }
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Returns the currently logged on user, null if no user is authenticated

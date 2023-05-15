@@ -126,7 +126,7 @@
 
 
                             <!-- ...........BUTTON TO OPEN QR CODE GENERATION PAGE......... -->
-                            <p:button style="margin-right: 10px" icon="pi pi-qrcode"
+                            <p:button style="margin-right: 10px" icon="pi pi-qrcode" disabled="#{sensorStation.plant == null}"
                                       title="Generate QR-Code"
                                       href="/generateQrCode.xhtml?id=#{sensorStation.plant.plantID}">
                             </p:button>

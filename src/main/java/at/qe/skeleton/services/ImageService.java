@@ -181,5 +181,7 @@ public class ImageService {
     }
 
 
-
+    public long getNotApprovedImagesAmountForPlant(Plant plant) {
+        return imageRepository.countImagesByPlantAndApprovedEquals(plant,false);
+    }
 }

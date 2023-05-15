@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -41,7 +42,10 @@ public class CreateSensorStationBean implements Serializable {
         sensorStation.setSensorStationName(sensorStationName);
         sensorStation.setAlarmSwitch("off");
         sensorStation.setDescription(description);
-        sensorStation.setAlarmCountThreshold(alarmCountThreshold);
+        sensorStation.setAlarmCountThreshold(Objects.requireNonNullElse(alarmCountThreshold, 5));
+
+
+
         sensorStation = sensorStationPointService.saveSensorStation(sensorStation);
 
         //TODO: log sensor station creation

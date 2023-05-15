@@ -165,6 +165,10 @@ public class PlantService {
         toDelete.forEach(this::detachAllImagesFromPlant);
         plantRepository.deleteAllBySensorStationEquals(null);
     }
+
+    public Plant findFirstByName(String plantName) {
+        return plantRepository.findFirstByPlantName(plantName);
+    }
 }
 
 
