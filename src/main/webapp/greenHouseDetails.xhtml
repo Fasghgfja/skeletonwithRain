@@ -523,7 +523,8 @@
                     <div class="card transactions">
                         <!-- ..........HEADER.......... -->
                         <div class="card-header">
-                            <h5>Sensors</h5>
+                            <h5>Sensors:     </h5>
+                            <h6> Alarm Count Treshold = #{sensorStationDetailController.sensorStation.alarmCountThreshold} </h6>
                             <!-- ...................Help Button................. -->
                             <div class="header-buttons">
                                 <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
@@ -535,7 +536,7 @@
                             <p:dataTable id="ordersTable12" var="sensor"
                                          value="#{sensorListController.getSensorsForSensorStation()}"
                                          selectionMode="single" reflow="true" paginatorPosition="bottom"
-                                         rowKey="#{sensor.id}" paginator="true" rows="5" sortBy="#{sensor.id}"
+                                         rowKey="#{sensor.id}" paginator="true" rows="6" sortBy="#{sensor.id}"
                                          sortOrder="descending">
 
                                 <p:column headerText="id(only in testing phase)" sortBy="#{sensor.id}">

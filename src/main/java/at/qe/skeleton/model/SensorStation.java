@@ -42,6 +42,10 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     @ManyToMany(mappedBy = "sensorStationsUnderCare")//TODO:LAZY OR NOT
     private Set<Userx> gardener = new HashSet<>();
 
+    @Column
+    private Integer alarmCountThreshold;
+
+
 
     public String getSensorStationLocation() {
         return location;

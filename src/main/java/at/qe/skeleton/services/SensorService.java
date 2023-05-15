@@ -57,29 +57,30 @@ public class SensorService {
 
 
 
-    public String getSensorStatus(String type, SensorStation sensorStation) {//todo:change to real naming for types with SH
+    public String getSensorStatus(String type, SensorStation sensorStation) {
         Sensor sensor = null;
-        if (type.equals("TEMPERATURE")) { sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"TempSensor");}
-        if (type.equals("LIGHT_INTENSITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"LigthSensor");}
-        if (type.equals("HUMIDITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"HygroSensor");}
-        if (type.equals("AIR_QUALITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"GasSensor");}
-        if (type.equals("AIR_PRESSURE")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"PressureSensor");}
-        if (type.equals("SOIL_MOISTURE")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"humiditySensor");}
+        if (type.equals("TEMPERATURE")) { sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"TEMPERATURE");}
+        if (type.equals("LIGHT_INTENSITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"LIGHT_INTENSITY");}
+        if (type.equals("HUMIDITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"HUMIDITY");}
+        if (type.equals("AIR_QUALITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"AIR_QUALITY");}
+        if (type.equals("AIR_PRESSURE")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"AIR_PRESSURE");}
+        if (type.equals("SOIL_MOISTURE")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"SOIL_MOISTURE");}
         if (sensor == null ) {return "OK";}
-        if (sensor.getAlarm_count() < 3 ) {return "OK";} //TODO set the alarm count to chat we want
+        Integer alarmCountThreshold =  sensor.getSensorStation().getAlarmCountThreshold();
+        if (alarmCountThreshold != null &&  sensor.getAlarm_count() < alarmCountThreshold  ) {return "OK";} //TODO new, this is better, still we probably want this to be per sensor?!
         else {return "Wrong";}
     }
 
 
 
-    public Sensor getSensorForSensorStation(SensorStation sensorStation, String type) {//todo:change to real naming for types with SH
+    public Sensor getSensorForSensorStation(SensorStation sensorStation, String type) {
         Sensor sensor = null;
-        if (type.equals("TEMPERATURE")) { sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"TempSensor");}
-        if (type.equals("LIGHT_INTENSITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"LigthSensor");}
-        if (type.equals("HUMIDITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"HygroSensor");}
-        if (type.equals("AIR_QUALITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"GasSensor");}
-        if (type.equals("AIR_PRESSURE")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"PressureSensor");}
-        if (type.equals("SOIL_MOISTURE")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"humiditySensor");}
+        if (type.equals("TEMPERATURE")) { sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"TEMPERATURE");}
+        if (type.equals("LIGHT_INTENSITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"LIGHT_INTENSITY");}
+        if (type.equals("HUMIDITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"HUMIDITY");}
+        if (type.equals("AIR_QUALITY")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"AIR_QUALITY");}
+        if (type.equals("AIR_PRESSURE")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"AIR_PRESSURE");}
+        if (type.equals("SOIL_MOISTURE")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"SOIL_MOISTURE");}
         return sensor;
     }
 
@@ -113,7 +114,6 @@ public class SensorService {
     }
 
 
-    //TODO: push this down to repository and queue , it is too expensive here
 
     public long getSensorStationsAmount() {
         return sensorRepository.count();

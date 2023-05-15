@@ -123,12 +123,7 @@ public class MeasurementListController implements Serializable {
     private String type = "all";
 
 
-    /**
-     * Returns a list of all measurements.
-     */
-   // public Collection<Measurement> getMeasurements() {
-       // return measurementService.getAllMeasurements();
-    //}
+
 
 
     /**

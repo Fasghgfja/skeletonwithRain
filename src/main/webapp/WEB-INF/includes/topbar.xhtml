@@ -1,5 +1,6 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+
+xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui" xmlns:po="http://primefaces.org/rain">
 
     <style>
@@ -64,7 +65,7 @@
                                     <div class="notification-summary">Assigned SS Alarms</div>
                                     <div class="notification-detail"> #{notificationsController.assignedSensorStationsAlarms} Alarms On.</div>
                                 </div>
-                             </h:panelGroup>
+                                </h:panelGroup>
                             </a>
                         </li>
                         <li>

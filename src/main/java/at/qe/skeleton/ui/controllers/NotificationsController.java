@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Getter
@@ -32,19 +29,27 @@ public class NotificationsController {
     @Autowired
     private transient SensorStationService sensorStationService;
 
-    private String alarmcount;
+    private long alarmcount;
 
-    public String getAssignedSensorStationsAlarms() {//TODO: verify how expensive this is resourcewise and maybe pushdfown to service layer
-       Set<SensorStation> assignedSensorList = sessionInfoBean.getCurrentUser().getSensorStationsUnderCare();
-        System.out.println("im called");
-       HashSet<Sensor> sensors = new HashSet<>();
-       assignedSensorList.forEach(x->sensors.addAll(sensorService.getAllSensorsBySensorStation(x)));
-       long count = sensors.stream().filter(x->x.getAlarm_count() > 4).count();
-       return  alarmcount = count + "";
+    public long getAssignedSensorStationsAlarms() {//TODO: lol test this if u can
+        if(sessionInfoBean.isHasShownAssignedAlarms() == false) {
+            HashMap<SensorStation,Integer> assignedSensorStationMap = new HashMap<>();
+            sessionInfoBean.getCurrentUser().getSensorStationsUnderCare().forEach(x->{
+                    assignedSensorStationMap.put(x,x.getAlarmCountThreshold());});
+
+            ArrayList<Sensor> sensors = new ArrayList<>();
+           // assignedSensorStationMap.forEach((x,y) -> {
+              //  sensors.addAll(sensorService.getAllSensorsBySensorStation(x));});
+        //   alarmcount = 0;
+                  // sensors.forEach(x -> System.out.println(assignedSensorStationMap.get(x.getSensorStation())));
+            sessionInfoBean.setHasShownAssignedAlarms(true);
+            return alarmcount;
+        }
+        else return alarmcount;
     }
 
 
-    public String getPicturesAwaitingApprovalCount() {//TODO: verify how expensive this is resourcewise and maybe pushdfown to service layer
+    public String getPicturesAwaitingApprovalCount() {//TODO:implement like the one above verify how expensive this is resourcewise and maybe pushdfown to service layer
         return  "";
     }
 

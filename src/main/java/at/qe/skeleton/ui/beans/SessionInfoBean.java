@@ -4,6 +4,9 @@ import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.services.UserService;
 import java.io.Serializable;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
@@ -16,6 +19,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("session")
+@Getter
+@Setter
 public class SessionInfoBean implements Serializable {
 
     @Autowired
@@ -25,6 +30,16 @@ public class SessionInfoBean implements Serializable {
      * Attribute to cache the current user.
      */
     private Userx currentUser;
+
+    private boolean hasShownAssignedAlarms = false;
+
+    public boolean isHasShownAssignedAlarms() {
+        return hasShownAssignedAlarms;
+    }
+
+    public void setHasShownAssignedAlarms(boolean hasShownAssignedAlarms) {
+        this.hasShownAssignedAlarms = hasShownAssignedAlarms;
+    }
 
     /**
      * Returns the currently logged on user, null if no user is authenticated
