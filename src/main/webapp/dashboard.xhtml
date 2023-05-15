@@ -404,21 +404,12 @@
                 <c:if test="#{sessionInfoBean.hasRole('ADMIN')}">
 
                     <!-- ..........OUTER FRAME LOG SYSTEM MESSAGES AND LOGS .............. -->
-                    <div class="col-12 md:col-12 xl:col-8">
+                    <div class="col-12">
                         <div class="grid">
-
-                            <!-- ........SYSTEM MESSAGES.......... -->
-                            <div class="col-12 md:col-6">
-                                <div class="card feedbacks">
-                                    <div class="card-header">
-                                        <h5>Work in Progress</h5>
-                                    </div>
-                                </div>
-                            </div>
 
 
                             <!-- ...........AUDIT LOG FRAME ........... -->
-                            <div class="col-12 md:col-6">
+                            <div >
                                 <div class="card status">
                                     <h:outputLink value="/admin/auditLog.xhtml">
                                         <h5 style="text-align: center; color: grey;">Audit Logs</h5>
@@ -497,14 +488,7 @@
                     </div><!-- ..END OF OUTER FRAME SYSTEM MESSAGES AND LOGS .......-->
 
 
-                    <!-- ..........EXTRA FRAME.......... -->
-                    <div class="col-12 md:col-6 xl:col-4">
-                        <div class="card sales">
-                            <div class="card-header">
-                                <h5>Work in Progress</h5>
-                            </div>
-                        </div>
-                    </div>
+
                 </c:if>
                 <!--.....................................................ADMIN LOG FINISHED............................................-->
             </div>
