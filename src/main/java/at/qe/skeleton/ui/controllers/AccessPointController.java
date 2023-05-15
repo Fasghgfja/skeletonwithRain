@@ -4,7 +4,9 @@ import at.qe.skeleton.model.AccessPoint;
 import at.qe.skeleton.model.Log;
 import at.qe.skeleton.model.LogType;
 import at.qe.skeleton.services.AccessPointService;
+import at.qe.skeleton.services.IntervalService;
 import at.qe.skeleton.services.LogService;
+import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
@@ -31,6 +33,14 @@ public class AccessPointController implements Serializable {
 
     @Autowired
     private transient AccessPointService accessPointService;
+
+
+    @Autowired
+    private transient SensorStationService sensorStationService;
+
+    @Autowired
+    private transient IntervalService intervalService;
+
 
     @Autowired
     private transient LogService logService;
@@ -76,10 +86,19 @@ public class AccessPointController implements Serializable {
         deleteLog.setAuthor(sessionInfoBean.getCurrentUserName());
         deleteLog.setSubject("AP DELETION");
         deleteLog.setText("DELETED AP: " + accessPoint.getId());
-        deleteLog.setType(LogType.SUCCESS);
+        deleteLog.setType(LogType.SUCCESS); //TODO: do real logging , this has the possibility to fail
         logService.saveLog(deleteLog);
+
+        intervalService.deleteIntervalByAccessPoint(accessPoint);
+        sensorStationService.removeAccessPointFromSensorStations(accessPoint);
+
         accessPointService.deleteAccessPoint(accessPoint);
         accessPoint = null;
+
+
+
+
+
     }
 }
 

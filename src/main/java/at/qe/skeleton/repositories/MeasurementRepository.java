@@ -61,7 +61,6 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
     List<Measurement> findMeasurementsBySensorStationAndTypeLikeOrderByTimestampDesc(SensorStation sensorStation, String type);
 
 
-    void deleteMeasurementsBySensorStation(SensorStation sensorStation);
 
     Integer count();
 
@@ -72,7 +71,8 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
     void deleteMeasurementsByTimestampBetween(LocalDateTime from, LocalDateTime to);
     @Transactional
     void deleteMeasurementsBySensorStationAndTimestampBetween(SensorStation sensorStationToDeleteFrom, LocalDateTime from, LocalDateTime to);
-
+    @Transactional
+    void deleteMeasurementsBySensorStation(SensorStation sensorStation);
 
     Measurement findFirstByOrderByTimestampAsc();
 

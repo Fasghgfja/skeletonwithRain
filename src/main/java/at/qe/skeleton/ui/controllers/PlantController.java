@@ -86,7 +86,7 @@ public class PlantController implements Serializable{
             this.plantService.deletePlant(plant);
             plant = null;
         }
-        else System.out.println("cannot delete a plant that is currently displayed in a sensor station , im plant controller");
+        else plantService.deletePlantWithStation(plant);
     }
 
 

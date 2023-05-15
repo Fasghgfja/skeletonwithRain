@@ -92,7 +92,7 @@ public class PlantService {
      * This first removes the plant from the sensor station and then deletes it.
      * @param plant to be deleted
      */
-    @PreAuthorize("permitAll()") // TODO: Not implemented but tested
+    @PreAuthorize("permitAll()")
     public void deletePlantWithStation(Plant plant) {
 
         SensorStation sensorStation = plant.getSensorStation();

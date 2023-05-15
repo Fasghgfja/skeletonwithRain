@@ -4,6 +4,9 @@ import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.model.UserRole;
 import java.util.List;
+
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -71,6 +74,8 @@ public interface UserxRepository extends AbstractRepository<Userx, String> {
 
     @Query("SELECT u.username FROM Userx u WHERE :role MEMBER OF u.roles")
     List<String> findNamesByRole(@Param("role") UserRole role);
+
+
 
     Integer count();
 

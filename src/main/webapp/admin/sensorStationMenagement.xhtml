@@ -132,11 +132,6 @@
                         <p:column style="width: 5%" headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}" filterBy="#{sensorStation.alarmSwitch}">
                             <h:outputText value="#{sensorStation.alarmSwitch}"/>
                         </p:column>
-                        <p:column style="width: 5%" headerText="Intervals" sortBy="#{sensorStation.alarmSwitch}" filterBy="#{sensorStation.alarmSwitch}">
-                            <h:outputText value="M:#{SSIntervalController.getActualMIntervalForSensorStation(sensorStation)} "/>
-                            <h:outputText value="S:#{SSIntervalController.getActualSIntervalForSensorStation(sensorStation)}"/>
-                        </p:column>
-
 
                         <p:column style="text-align: center">
 
@@ -151,11 +146,6 @@
                                 <f:setPropertyActionListener value="#{sensorStation.id}" target="#{pairingController.sensorStationId}"/>
                             </p:commandButton>
 
-                            <!-- ....................SENSOR STATION INTERVALS BUTTON ........... .............. -->
-                            <p:commandButton style="margin-right: 2px; background-color: orange" update=":userForm:userEditDialog"
-                                             oncomplete="PF('intervalEditDialog').show()" icon="fa fa-solid fa-sliders" title="Intervals">
-                                <f:setPropertyActionListener value="#{sensorStation.id}" target="#{SSIntervalController.sensorStationId}"/>
-                            </p:commandButton>
 
                             <!-- ....................SENSOR STATION EDIT BUTTON ........... .............. -->
                             <p:commandButton style="margin-right: 2px; background-color: grey" update=":userForm:userEditDialog"
@@ -277,37 +267,6 @@
 
 
 
-
-
-
-            <!-- ...................................Interval Edit dialog.................................... -->
-            <p:dialog header="Edit SS Intervals" id="intervalEditDialog" widgetVar="intervalEditDialog" modal="true"
-                      showEffect="fade" hideEffect="fade" resizable="false">
-                <p:outputPanel id="intervalData">
-                    <h:panelGrid columns="1">
-
-                        <p:outputLabel for="mInterval" value="New Interval S: (minutes):"/>
-                        <p:inputText id="mInterval" value="#{SSIntervalController.sinterval}" />
-                        <p:outputLabel for="sinterval" value="New Interval M: (minutes)"/>
-                        <p:inputText id="sinterval"  value="#{SSIntervalController.minterval}"/>
-
-                    </h:panelGrid>
-                    <h:panelGrid columns="3">
-                        <p:commandButton value="Save New Intervals" action="#{SSIntervalController.doSaveInterval()}"
-                                         oncomplete="PF('intervalEditDialog').hide();location.reload()" update=":userForm:sensorStationTable"/>
-                        <p:commandButton value="Abort" onclick="PF('intervalEditDialog').hide()"/>
-
-
-                    </h:panelGrid>
-                </p:outputPanel>
-            </p:dialog>
-
-
-
-
-
-
-
             <!-- ...................................Sensor station Edit dialog.................................... -->
             <p:dialog header="Edit Sensor Station" id="userEditDialog" widgetVar="userEditDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
@@ -364,9 +323,8 @@
                   showEffect="fade" hideEffect="fade" resizable="false">
             <p:outputPanel id="SSHelp">
                 <h6>About Deleting a Sensor Station:</h6>
-                You can delete a Sensor station by pressing the dedicated button. At the moment a sensor station that has gardener or other<br></br>
-                attached fields cannot be deleted directly , all gardeners/plants/sensors need to be deleted manually first.<br></br>
-                Feature in Development: when deleting a SS all related fields gonna be detached automatically.<br></br>
+                You can delete a Sensor station by pressing the dedicated button. when deleting a SS all related entities gonna be detached automatically:<br></br>
+                Gardeners will be unassigned , plants detached , sensors deleted and measurements detached;
                 <h6>About Creating a sensor station:</h6>
                 By Pressing the appropriate button a Dialog to create a Sensor Station will open.<br></br>
                 From this panel you will be able to select sensor-station name , description and Location<br></br>
@@ -377,9 +335,6 @@
                 Edit the Location.<br></br>
                 Assign and unassign the SS to Gardeners(many gardeners can work on the same sensor station if necessary).<br></br>
                 Note: Alarm switch will be on if one of the alarm count of a sensosr station triggered it , you can manually set it to fixed from here.<br></br>
-                <h6>About Setting Interals:</h6>
-                M and S intervals rapresent how often measurements will be sent to ... and how ofter they willl be sent to....
-                You can edit them from the dedicated button.
                 <h6>About Pairing:</h6>
                 From the pairing Dialog it is possible to pair the sensor station to a new access point or remove the current one.<br></br>
                 Upon initiating the pairing process the system will start to try to pair the selected sensorStation with the access point for 5 minutes.<br></br>

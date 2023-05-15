@@ -51,47 +51,32 @@
                             <a tabindex="0">
                                 <i class="pi pi-shopping-cart"></i>
                                 <div class="notification-item">
-                                    <div class="notification-summary">New Order</div>
-                                    <div class="notification-detail">You have <strong>3</strong> new orders.</div>
+                                    <div class="notification-summary">Pics Awaiting Approval</div>
+                                    <div class="notification-detail">You have <strong>3</strong> pics awaiting approval.</div>
                                 </div>
                             </a>
                         </li>
                         <li>
                             <a tabindex="0">
-                                <i class="pi pi-check-square"></i>
-                                <div class="notification-item">
-                                    <div class="notification-summary">Withdrawn Completed</div>
-                                    <div class="notification-detail">Funds are on their way.</div>
+                                <h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('GARDENER') }"> <!-- .//TODO:check if this makes problem when a user is logged in -->
+                                    <i class="pi pi-check-square"></i>
+                                <div class="notification-item" >
+                                    <div class="notification-summary">Assigned SS Alarms</div>
+                                    <div class="notification-detail"> #{notificationsController.assignedSensorStationsAlarms} Alarms On.</div>
                                 </div>
+                             </h:panelGroup>
                             </a>
                         </li>
                         <li>
                             <a tabindex="0">
                                 <i class="pi pi-chart-line"></i>
                                 <div class="notification-item">
-                                    <div class="notification-summary">Monthly Reports</div>
-                                    <div class="notification-detail">New reports are ready.</div>
+                                    <div class="notification-summary">Messages</div>
+                                    <div class="notification-detail">New Messages.</div>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a tabindex="0">
-                                <i class="pi pi-comment"></i>
-                                <div class="notification-item">
-                                    <div class="notification-summary">Comments</div>
-                                    <div class="notification-detail"><strong>2</strong> new comments.</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a tabindex="0">
-                                <i class="pi pi-refresh"></i>
-                                <div class="notification-item">
-                                    <div class="notification-summary">Chargeback Request</div>
-                                    <div class="notification-detail"><strong>1</strong> to review.</div>
-                                </div>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
 
@@ -106,20 +91,14 @@
 
                         </a>
                         <ul >
-                            <li >
-                                <a href="/editProfile.xhtml">
-                                    <i class="pi pi-user"></i>
-                                    <span>Profile</span>
-                                </a>
-                            </li>
-                            <li>
+                            <li onclick="location.href='/editProfile.xhtml'" >
                                 <a href="#">
-                                    <i class="pi pi-bell"></i>
-                                    <span>Notifications</span>
+                                    <i class="pi pi-user"></i>
+                                    <span>Profile Settings</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="/logout">
+                            <li onclick="location.href='/logout'" >
+                                <a href="#">
                                     <i class="topbar-icon pi pi-power-off"></i>
                                     <span>Log out</span>
                                 </a>

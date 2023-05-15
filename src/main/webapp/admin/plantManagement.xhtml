@@ -6,14 +6,14 @@
     <ui:define name="title">Planthealth: Plant Management</ui:define>
 
     <ui:define name="viewname">
-        <li>Galleria</li>
+        <li>Plant Menagement</li>
         <li><i class="pi pi-chevron-right"></i></li>
         <li>
         </li>
     </ui:define>
 
     <ui:define name="head">
-
+        <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css" />
     </ui:define>
 
 
@@ -24,28 +24,31 @@
         <!-- .........................................TABLE.............................................................. -->
         <h:form id="userForm">
             <div class="col-12">
-                <!-- ....................PLANT CREATE button..................... -->
-                <p:commandButton style="margin-bottom: 10px; margin-right: 20px" value="Create new Plant" rendered="#{sessionInfoBean.hasRole('ADMIN')}" update="plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
-                                 icon="pi pi-user-plus" title="New User" class="btn btn-primary" >
-                    <p:resetInput target=":plantCreateDialog:createPlantDialog"/>
-                </p:commandButton>
 
-
-                <!-- ....................Delete all plants without Sensor Station button..................... -->
-                <p:commandButton style="margin-bottom: 10px; background-color: red" value="Delete all Plants Without Sensor Station" rendered="#{sessionInfoBean.hasRole('ADMIN')}" oncomplete="location.reload();" action="#{plantListController.deleteAllPlantsWithoutSensorStation()}"
-                                 icon="pi pi-user-minus" title="New User" class="btn btn-primary">
-                    <p:confirm header="Confirmation"
-                               message="Are you sure ? You cannot undo this operation.
-                                        All the pictures linked to this plants will be transferred to general gallery"
-                               icon="pi pi-exclamation-triangle"/>
-                </p:commandButton>
 
 
                 <div class="card">
-                    <h5>Plant Management</h5>
-                    <p>From this page it is possible to create/delete and edit a Plant and Generate Qr codes for them</p>
-                    <p>Note: By deleting a plant all pictures will be detached and go to general gallery , if the plant is actually followed by users then it will be automatically unfollowed,
-                    It is not possible to delete a plant that is currently displayed in a Sensor Station.</p>
+                    <!-- ....................PLANT CREATE button..................... -->
+                    <p:commandButton style=" margin-right: 5px" value="Create new Plant" rendered="#{sessionInfoBean.hasRole('ADMIN')}" update="plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
+                                     icon="fa fa-solid fa-leaf" title="New User" class="btn btn-primary" >
+                        <p:resetInput target=":plantCreateDialog:createPlantDialog"/>
+                    </p:commandButton>
+
+
+                    <!-- ....................Delete all plants without Sensor Station button..................... -->
+                    <p:commandButton style="margin-right: 5px; background-color: red" value="Delete all Plants Without Sensor Station" rendered="#{sessionInfoBean.hasRole('ADMIN')}" oncomplete="location.reload();" action="#{plantListController.deleteAllPlantsWithoutSensorStation()}"
+                                     icon="fa fa-solid fa-trash-can" title="New User" class="btn btn-primary">
+                        <p:confirm header="Confirmation"
+                                   message="Are you sure ? You cannot undo this operation.
+                                        All the pictures linked to this plants will be transferred to general gallery"
+                                   icon="pi pi-exclamation-triangle"/>
+                    </p:commandButton>
+
+                    <!-- ....................Help button...........................BUTTON................................. -->
+                    <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
+                                     styleClass="ui-button-secondary outlined-button"
+                                     onclick="PF('SSDialog').show()"/>
+
                     <p:dataTable id="plantsTable" var="plant" value="#{plantController.plantList}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 
@@ -69,28 +72,28 @@
 
 
                             <!-- ...........BUTTON TO OPEN QR CODE GENERATION PAGE......... -->
-                            <p:button style="margin-right: 10px" icon="pi pi-qrcode"
+                            <p:button style="margin-right: 5px" icon="pi pi-qrcode"
                                       title="Generate QR-Code"
                                       href="/generateQrCode.xhtml?id=#{plant.plantID}">
                             </p:button>
 
                             <!-- ....................Plant EDIT BUTTON ........... .............. -->
-                            <p:commandButton style="margin-right: 10px" update=":userForm:plantEditDialog"
-                                             oncomplete="PF('plantEditDialog').show()" icon="pi pi-user-edit" title="Edit">
+                            <p:commandButton style="margin-right: 5px" update=":userForm:plantEditDialog"
+                                             oncomplete="PF('plantEditDialog').show()" icon="fa fa-solid fa-pen-to-square" title="Edit">
                                 <f:setPropertyActionListener value="#{plant}" target="#{plantController.plant}"/>
                             </p:commandButton>
 
 
                             <!-- ....................DELETE PLANT BUTTON ......... .............. -->
                             <p:commandButton style="margin-right: 10px" styleClass="ui-button-danger" rendered="#{sessionInfoBean.hasRole('ADMIN')}"
-                                             action="#{plantController.doDeletePlant()}" icon="pi pi-user-minus"
+                                             action="#{plantController.doDeletePlant()}" icon="fa fa-solid fa-trash-can"
                                              oncomplete="location.reload();"
                                              title="Delete"
                                              update=":userForm:plantsTable">
                                 <f:setPropertyActionListener value="#{plant}" target="#{plantController.plant}"/>
                                 <p:confirm header="Confirmation"
                                            message="Are you sure that you want to delete the plant '#{plant.plantName}'? You cannot undo this operation. ,
-                                           PLANTS ACTUALLY DISPLAYED IN A SENSOR STATION WILL NOT BE REMOVED"
+                                           PLANTS ACTUALLY DISPLAYED IN A SENSOR STATION WILL BE REMOVED"
                                            icon="pi pi-exclamation-triangle"/>
                             </p:commandButton>
 
@@ -183,6 +186,34 @@
 
             </p:dialog>
         </h:form>
+
+
+        <!-- .................................. Help dialog............................................................................... -->
+        <p:dialog header="Plant Menagement Help" id="SSDialog" widgetVar="SSDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+            <p:outputPanel id="SSHelp">
+                From this page it is possible to create/delete and edit a Plant and Generate Qr codes for them
+                <h6>About Deleting all Plants without a Sensor Station:</h6>
+                You can delete a Plant by pressing the dedicated buttont.<br></br>
+                By deleting a plant all pictures will be automatically detached and go to the general gallery ,<br></br>
+                if the plant is actually followed by users then it will be automatically unfollowed,
+                If you delete a plant currently exposed in a sesnsor station it will be automatically detached.<br></br>
+                <h6>About Creating a Plant:</h6>
+                By Pressing the appropriate button a Dialog to create a Plant will open.<br></br>
+                Note: When creating a plant from here it wont be assigned to any sensor station by default allowing you to fine tune the page.<br></br>
+                and maybe upload some pictures before setting it in a sensor station.
+                <h6>About Editing A Plant</h6>
+                By Pressing the appropriate button a Dialog to edit the selected Plant will open.<br></br>
+                From this panel you will be able to change Plant Name , Description and (assign it to a Sensor Station in development)
+                <h6>About The Qr Codes</h6>
+                By pressign the dedicated button you can generate a Qr code for the plant , by clicking on it you will be redirected
+                to the Qr generation page for this plant where you can edit the qr code or find a direct link to visit the plant Page.<br></br>
+
+            </p:outputPanel>
+        </p:dialog>
+
+
 
 
 
