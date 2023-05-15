@@ -105,7 +105,7 @@ insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, 
 insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(2,'000019b0-0000-1000-8000-00805f9b34fb', 'AAAAA', 'HUMIDITY', 0, 0, 0,'2022-01-02');
 insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(3,'000019b2-0000-1000-8000-00805f9b34fb', 'AAAAA', 'AIR_PRESSURE', 0, 0, 0,'2022-01-02');
 insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(4,'000019b3-0000-1000-8000-00805f9b34fb', 'AAAAA', 'TEMPERATURE', 0, 0, 0,'2022-01-02');
-insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(6,'010019b5-0000-1000-8000-00805f9b34fb', 'AAAAA', 'AIR_QUALITY', 0, 0, 0,'2022-01-02');
+insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(5,'010019b5-0000-1000-8000-00805f9b34fb', 'AAAAA', 'AIR_QUALITY', 0, 0, 0,'2022-01-02');
 insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(6,'100019b5-0000-1000-8000-00805f9b34fb', 'AAAAA', 'LIGHT_INTENSITY', 0, 0, 0,'2022-01-02');
 
 insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(7,'000019b6-0000-1000-8000-00805f9b34fb', 'BBBBB', 'SOIL_MOISTURE', 6, 0, 0,'2022-01-06');
