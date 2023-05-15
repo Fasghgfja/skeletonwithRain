@@ -80,7 +80,7 @@ public class SensorStationService {
 
 
 
-    public void removeAccessPointFromSensorStations(AccessPoint accessPoint) {//TODO:New , Test this
+    public void removeAccessPointFromSensorStations(AccessPoint accessPoint) {
         if(accessPoint == null) {return;}
         AccessPoint accessLoad = accessPointRepository.findFirstById(accessPoint.getId());
         sensorStationRepository.setAccessPointToNull(accessLoad);

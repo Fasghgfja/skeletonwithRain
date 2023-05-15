@@ -37,34 +37,9 @@ public class Image implements Serializable {
 
     private boolean approved;
 
-    public String getImageName() {
-        return imageName;
-    }
-
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
-
-    public Plant getPlant() {
-        return plant;
-    }
-
-    public void setPlant(Plant plant) {
-        this.plant = plant;
-    }
-
     public Long getId() {return id;}
 
     public void setId(Long id) {this.id = id;}
-
-    public byte[] getImageByte() {
-        return imageByte;
-    }
-
-    public void setImageByte(byte[] imageByte) {
-        this.imageByte = imageByte;
-    }
-
 
     public LocalDate getDate() {
         return creationDate;
