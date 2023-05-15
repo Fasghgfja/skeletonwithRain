@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import at.qe.skeleton.api.exceptions.MeasurementNotFoundException;
 
+import java.util.List;
+
 
 //TODO: this class is to be renamed to MeasurementControllerApi but it should be done with Sh as it probably need changes in the hw src aswell
 @RestController
@@ -24,10 +26,15 @@ public class MeasurementController {
     MeasurementServiceApi measurementServiceApi;
 
     @PostMapping("/api/measurements")
-    int createMeasurement(@RequestBody Measurement2 measurement2) {
+    int createMeasurement(@RequestBody List<Measurement2> measurement2) {
         System.out.println("test123");
         try{
-            measurementServiceApi.addMeasurement(measurement2);
+            for (Measurement2 m:
+                 measurement2) {
+                System.out.println(measurement2);
+                measurementServiceApi.addMeasurement(m);
+            }
+
             return Response.SC_OK;
         }catch (MeasurementNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
