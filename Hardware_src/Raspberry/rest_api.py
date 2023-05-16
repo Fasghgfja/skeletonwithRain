@@ -1,9 +1,12 @@
+import math
 import sqlite3
 
 import cursor as cursor
 import requests
 import DB_connection
 import exception_logging
+import datetime
+import json
 
 # local
 auth = ("admin", "passwd")
@@ -15,7 +18,7 @@ post_sensorStations_url = "http://localhost:8080/api/sensorstations"
 post_sensor_url = "http://localhost:8080/api/sensors"
 get_Station_alarm_switch_url = "http://localhost:8080/api/getsensorstations"
 post_update_sensor_url = "http://localhost:8080/api/updatesensors"
-post_log_url = "http://localhost:8080/admin/auditLog.xhtml"
+post_log_url = "http://localhost:8080/admin/auditLog"
 # server
 # auth = ("SHAdmin", "SHAdmin")
 #measurements_url = "http://srh-softwaresolutions.com/api/measurements"
@@ -160,13 +163,19 @@ def update_Sensor(sensor_id, alarm_count):
 
 
 class Log_data(object):
-    def __init__(self, text: str, subject: str, author: str, date: str, time: str, type: str):
+    def __init__(self, text: str, subject: str, author: str, time_stamp: str, type: str):
         self.text = text
         self.subject = subject
         self.author = author
-        self.date = date
-        self.time = time
+        self.time_stamp = time_stamp
+        self.type = type
 
+
+def handle_special_values(obj):
+    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return str(obj)
+    else:
+        return None
 
 def send_log_data_to_webapp():
 
@@ -175,27 +184,30 @@ def send_log_data_to_webapp():
 
             if line.startswith('ERROR: On characteristic'):
                 error_msg = line.split('ERROR:', 1)[1].split('at', 1)[0].strip()
-                datetime_str = line.rsplit('at', 1)[-1].strip()
-                date_str, time_str = datetime_str.split('__')
-                temp_log_data = Log_data(text=error_msg, subject="Characteristics", author="ACCESSPOINT", date=date_str, time=time_str, type="ERROR")
-                response = requests.post(post_log_url, json=vars(temp_log_data), auth=auth)
+                datetime_str = line.rsplit('at', 1)[-1].strip().replace('__', ' ')
+                time_stamp_string = datetime.datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S')
+
+                temp_log_data = Log_data(text=error_msg, subject="Characteristics", author="ACCESSPOINT", time_stamp=time_stamp_string, type="ERROR")
+                log_data_json = json.dumps(vars(temp_log_data), default=handle_special_values)
+                response = requests.post(post_log_url, json=log_data_json, auth=auth)
                 print(response.status_code)
 
             elif line.startswith('ERROR: Could not'):
                 error_msg = line.split('ERROR:', 1)[1].split('at', 1)[0].strip()
-                datetime_str = line.rsplit('at', 1)[-1].strip()
-                date_str, time_str = datetime_str.split('__')
-                temp_log_data = Log_data(text=error_msg, subject="DEVICE", author="ACCESSPOINT", date=date_str, time=time_str, type="ERROR")
-                response = requests.post(post_log_url, json=vars(temp_log_data), auth=auth)
+                datetime_str = line.rsplit('at', 1)[-1].strip().replace('__', ' ')
+                time_stamp_string = datetime.datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S')
+
+                temp_log_data = Log_data(text=error_msg, subject="DEVICE", author="ACCESSPOINT", time_stamp=time_stamp_string, type="ERROR")
+                log_data_json = json.dumps(vars(temp_log_data), default=handle_special_values)
+                response = requests.post(post_log_url, json=log_data_json, auth=auth)
                 print(response.status_code)
 
             elif line.startswith('WARNING'):
                 error_msg = line.split('WARNING', 1)[1].split('at', 1)[0].strip()
-                datetime_str = line.rsplit('at', 1)[-1].strip()
-                date_str, time_str = datetime_str.split('__')
-                temp_log_data = Log_data(text=error_msg, subject="Characteristics", author="ACCESSPOINT", date=date_str, time=time_str, type="WARNING")
-                response = requests.post(post_log_url, json=vars(temp_log_data), auth=auth)
+                datetime_str = line.rsplit('at', 1)[-1].strip().replace('__', ' ')
+                time_stamp_string = datetime.datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S')
+
+                temp_log_data = Log_data(text=error_msg, subject="Characteristics", author="ACCESSPOINT", time_stamp=time_stamp_string, type="WARNING")
+                log_data_json = json.dumps(vars(temp_log_data), default=handle_special_values)
+                response = requests.post(post_log_url, json=log_data_json, auth=auth)
                 print(response.status_code)
-
-
-
