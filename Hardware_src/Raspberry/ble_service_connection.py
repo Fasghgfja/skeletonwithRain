@@ -3,10 +3,7 @@
 import DB_connection
 import exception_logging
 
-import sqlite3
-import array as devices
 from bleak import BleakClient, BleakScanner
-from datetime import datetime
 
 
 

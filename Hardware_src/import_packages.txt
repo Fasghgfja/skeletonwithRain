@@ -1,0 +1,21 @@
+
+Python3.10 minimum
+Packages needed:
+- cursor
+- request
+- time
+- asyncio
+- yaml
+- from bleak import BleakClient, BleakScanner
+- sqlite3
+- struct
+- datetime
+- enum from Enum
+- math
+- json
+
+
+
+
+
+

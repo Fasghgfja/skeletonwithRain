@@ -111,6 +111,10 @@ The following code shows the program states. At the beginning the database will 
             case program_status.Is.CHECK_FOR_NEW_BOARDER_AND_INTERVAL_VALUES
             case program_status.Is.SEND_LOG_TO_WEBAPP
 
+### Packages
+   The Directory [Raspberry](Raspberry) contains all the necessary file to run the access point.
+   Be sure that you copy the config.yaml into this directory.
+   And here [import_packages.txt](import_packages.txt) you find a list of all the Packages you need to run the application.
 ## Run script
 The run script is the file start_access_point.sh and it is developed to start and observe the raspberry programm. 
 It also must copyed onto the raspberry to log if the programm is terminated or to start the accespoint programm.
