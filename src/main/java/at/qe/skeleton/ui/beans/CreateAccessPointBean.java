@@ -30,8 +30,6 @@ public class CreateAccessPointBean implements Serializable {
     @Autowired
     private transient LogRepository logRepository;
 
-
-
     private String location;
 
     public void doCreateNewAccessPoint(){

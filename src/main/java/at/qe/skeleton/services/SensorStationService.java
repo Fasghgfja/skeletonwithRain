@@ -1,15 +1,17 @@
 package at.qe.skeleton.services;
 
-import at.qe.skeleton.model.AccessPoint;
-import at.qe.skeleton.model.Log;
-import at.qe.skeleton.model.SensorStation;
-import at.qe.skeleton.model.Userx;
+import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.*;
+import at.qe.skeleton.ui.beans.SessionInfoBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 
@@ -35,7 +37,6 @@ public class SensorStationService {
 
     @Autowired
     private AccessPointRepository accessPointRepository;
-
 
 
     @Autowired
@@ -86,14 +87,6 @@ public class SensorStationService {
         sensorStationRepository.setAccessPointToNull(accessLoad);
     }
 
-
-
-
-
-
-
-
-
     @PreAuthorize("hasAuthority('ADMIN')")
     public SensorStation loadSensorStation(String id) {
         return sensorStationRepository.findFirstById(id);
@@ -116,12 +109,6 @@ public class SensorStationService {
     public void deleteSensorStation(SensorStation sensorStation) {
         Log deleteLog = new Log();
 
-        deleteLog.setDate(LocalDate.now());
-        deleteLog.setSubject("SENSOR STATION DELETION");
-        deleteLog.setText("DELETED SENSOR STATION: " + sensorStation.getSensorStationID());
-
-        logRepository.save(deleteLog);
-
         //delete measurements for sensor station
         measurementRepository.deleteMeasurementsBySensorStation(sensorStation);
         //detach Plants from sensor station
@@ -132,6 +119,13 @@ public class SensorStationService {
         sensorRepository.deleteAllBySensorStationEquals(sensorStation);
 
         sensorStationRepository.delete(sensorStation);
+        deleteLog.setDate(LocalDate.now());
+        deleteLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        deleteLog.setAuthor(getCurrentUser());
+        deleteLog.setSubject("SENSOR STATION DELETION");
+        deleteLog.setText("DELETED SENSOR STATION: " + sensorStation.getSensorStationID());
+        deleteLog.setType(LogType.SUCCESS);
+        logRepository.save(deleteLog);
     }
 
 
@@ -142,5 +136,18 @@ public class SensorStationService {
 
     public Collection<String> getAllSensorStationsIds() {//this is used to return a list of sensorstations ids to delete from when deleting measurements
         return sensorStationRepository.getAllSensorStationsIds();
+    }
+
+    /**
+     * Method to get the name of the user currently logged in.
+     * This is needed for logging.
+     * @return username.
+     */
+    public String getCurrentUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null && authentication.isAuthenticated()){
+            return authentication.getName();
+        }
+        return null;
     }
 }

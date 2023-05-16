@@ -36,26 +36,19 @@ public class CreatePlantBean implements Serializable {
     private String plantName;
     private String description;
 
-    //TODO: add planted date;
-    //TODO: add logging
-
     public void doCreateNewPlant(){
         Plant plant = new Plant();
         plant.setPlantName(plantName);
         plant.setDescription(description);
-        //TODO: add planted date
-        plant.setDescription(description);
         plant = plantService.savePlant(plant);
 
-        //TODO: log sensor station creation
-        //Log createLog = new Log();
-        //createLog.setDate(LocalDate.now());
-        // createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-        //createLog.setAuthor(sessionInfoBean.getCurrentUser().getUsername());
-        // createLog.setSubject("AP CREATION");
-        //createLog.setText("CREATED AP: " + sensorStation.getId());
-        //createLog.setType(LogType.SUCCESS);
-        //logRepository.save(createLog);
-
+        Log createLog = new Log();
+        createLog.setDate(LocalDate.now());
+        createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        createLog.setAuthor(sessionInfoBean.getCurrentUser().getUsername());
+        createLog.setSubject("PLANT CREATION");
+        createLog.setText("CREATED PLANT: " + plant.getPlantID());
+        createLog.setType(LogType.SUCCESS);
+        logRepository.save(createLog);
     }
 }
