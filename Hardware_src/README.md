@@ -78,38 +78,38 @@ As a nex feature the data gets transfered to the webapp via REAST POST/GET reque
 ### Class overview
 
 
-| Class                                                                 |      description      | properties |
-|-----------------------------------------------------------------------|:---------------------:|:----------:|
-| [accesspoint_application.py](Raspberry%2Faccesspoint_application.py)  | environmental sensing |  service   |
-| ligthValue                                                            |    LIGHT_INTENSITY    | READ/WRITE |
-| hygroValue                                                            |       HUMIDITY        | READ/WRITE |
-| tempValue                                                             |      TEMPERATURE      | READ/WRITE |
-| humidityValue                                                         |     SOIL_MOISTURE     | READ/WRITE |
-| pressureValue                                                         |     AIR_PRESSURE      | READ/WRITE |
-| gasValue                                                              |      AIR_QUALITY      | READ/WRITE |
-| alarm                                                                 |     ALARM_STATUS      |    READ    |
+| Class                                                                |                                                                                                                                        description                                                                                                                                        | properties |
+|----------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:----------:|
+| [accesspoint_application.py](Raspberry%2Faccesspoint_application.py) |                                                                              main application it calls the different classes<br/> in the way that it has been describe in section<br/> Application sequence                                                                               |  service   |
+| [ble_service_connection.py](Raspberry%2Fble_service_connection.py)   |                   read and write via bluetooth LE.<br/>It reads the Service and the characteristics if a connection is new.<br/>If a connection is existing it reads the values of the sensors.<br/>In addition it writes an alarm and reads the alarm characteristic.                    | READ/WRITE |
+| [check_boarder_values.py](Raspberry%2Fcheck_boarder_values.py)       |                                                                        This class evaluates if sensor boarders are broken. Moreover if an alarm is switch on it checks if the alarm has been switched off or not.                                                                         | READ/WRITE |
+| [config_yaml.py](Raspberry%2Fconfig_yaml.py)                         |                                                                                                          In this class the read/write functions for the config.yaml are placed.                                                                                                           | READ/WRITE |
+| [DB_connection.py](Raspberry%2FDB_connection.py)                     | This class is the database connection. There are different insert/update/read functions for the database.<br/>The database is developed as an sqLite.The model is shown in [E-R_sensorstation.pdf](Database_sql%2FE-R_sensorstation.pdf) and will be build up at the start if not exists. | READ/WRITE |
+| [rest_api.py](Raspberry%2Frest_api.py)                               |                                                                                                 This class contains the different POST/GET function to read and write data to the Webapp.                                                                                                 | READ/WRITE |
+| [program_status.py](Raspberry%2Fprogram_status.py)                   |                                                                                                                             Is a enum for the program states.                                                                                                                             | READ/WRITE |
+| [exception_logging.py](Raspberry%2Fexception_logging.py)             |                                                                                   At this class the exceptions get connected and saved to a logfile that gets transfer to the webapp from time to time                                                                                    |    READ    |
 
 
-The following code shows the program states. At the prorgam start the database will be implemented automatically.
-
-
+### Application sequence
+The following code shows the program states. At the beginning the database will be implemented automatically.
         
         match program_state:
             case program_status.Is.IMPLEMENT_DATABASE
             case program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION
-            if measurement_interval > 1:
-                    program_state = program_status.Is.READ_SENSOR_VALUES
-                else:
-                    program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM
+               if measurement_interval > "is set by the Gardener at Webapp":
+                       program_state = program_status.Is.READ_SENSOR_VALUES
+                   else:
+                       program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM
             case program_status.Is.READ_SENSOR_VALUES
-             if sending_interval >= 1:
-                    program_state = program_status.Is.CHECK_BOARDER_VALUER
-                else:
-                    program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM
+                if sending_interval >= "Is set by the Gardener at Webapp":
+                       program_state = program_status.Is.CHECK_BOARDER_VALUER
+                   else:
+                       program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM
             case program_status.Is.CHECK_BOARDER_VALUER
             case program_status.Is.WRITE_VALUES_TO_WEBAPP
             case program_status.Is.CHECK_SENSOR_STATION_ALARM
             case program_status.Is.CHECK_FOR_NEW_BOARDER_AND_INTERVAL_VALUES
+            case program_status.Is.SEND_LOG_TO_WEBAPP
 
 ## Run script
 The run script is the file start_access_point.sh and it is developed to start and observe the raspberry programm. 
