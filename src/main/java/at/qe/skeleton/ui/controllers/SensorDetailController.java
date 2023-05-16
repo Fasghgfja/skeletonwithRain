@@ -57,9 +57,7 @@ public class SensorDetailController implements Serializable {
      */
  //TODO: implement logging maybe? this is doen form the sensor station automatically (maybe)
     public void doSaveSensor() {
-        if (resetAlarm != true) {
-        sensor.setAlarm_count(0);
-        }
+        if (resetAlarm) {sensor.setAlarm_count(0);}
         sensor.setUpper_border(upper_border);
         sensor.setLower_border(lower_border);
         if(resetAlarm){sensor.setAlarm_count(0);}

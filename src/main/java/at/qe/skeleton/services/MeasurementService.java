@@ -82,16 +82,7 @@ public class MeasurementService {
 
 
 
-    //................methods to delete Measurements with di different parameters
-    // TODO: THIS WILL BE NEEDED
-    public void deleteMeasurement(Measurement measurement) {
-        if (measurement == null) {
-            throw new NullPointerException("Measurement cant be null");
-        }
-        measurementRepository.delete(measurement);
-    }
-
-    //TODO: THIS WILL BE NEEDED
+    //TODO: maybe not needed , check what is used on manage measurement page .
     /**
      * Deletes all measurements for a given sensorStation.
      * @param sensorStation the sensorStation from which to delete the measurements

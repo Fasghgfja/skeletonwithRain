@@ -19,11 +19,11 @@ public class SSInterval implements Persistable<Long>, Serializable, Comparable<S
     private Long intervalId;
 
     @OneToOne
-    private SensorStation sensorStation;
+    private AccessPoint accessPoint;
     @Column(length = 100)
-    private String MInterval;
+    private String measurementInterval;
     @Column(length = 100)
-    private String SInterval;
+    private String webAppInterval;
 
 
     @Override
@@ -41,7 +41,7 @@ public class SSInterval implements Persistable<Long>, Serializable, Comparable<S
 
     @Override
     public String toString() {
-       return "MI: "+getMInterval() + "SI: " + getSInterval();
+       return "MI: "+getMeasurementInterval() + "SI: " + getWebAppInterval();
     }
 
 

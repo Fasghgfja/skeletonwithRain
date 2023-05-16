@@ -39,8 +39,12 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     @ManyToOne(fetch = FetchType.LAZY)
     AccessPoint accessPoint;
 
-    @ManyToMany(mappedBy = "sensorStationsUnderCare" , cascade = CascadeType.ALL)//TODO:LAZY OR NOT
+    @ManyToMany(mappedBy = "sensorStationsUnderCare")//TODO:LAZY OR NOT
     private Set<Userx> gardener = new HashSet<>();
+
+    @Column
+    private Integer alarmCountThreshold;
+
 
 
     public String getSensorStationLocation() {

@@ -1,15 +1,24 @@
 package at.qe.skeleton.services;
 
+import at.qe.skeleton.model.AccessPoint;
 import at.qe.skeleton.model.SensorStation;
+import at.qe.skeleton.model.UserRole;
+import at.qe.skeleton.model.Userx;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Transactional
 @SpringBootTest
 @WebAppConfiguration
 class SensorStationServiceTest {
@@ -19,6 +28,9 @@ class SensorStationServiceTest {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    AccessPointService accessPointService;
 
     /**
      * Method to test the getAllSensorStations() method of the sensorStationService.
@@ -45,7 +57,28 @@ class SensorStationServiceTest {
     @Test
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
     void testGetAllAssignedSensorStations(){
-       //TODO: clean these methods in the service.
+       Userx user1 = new Userx();
+       user1.setUsername("user1");
+       user1.setRoles(Set.of(UserRole.GARDENER));
+       user1 = userService.saveUser(user1);
+
+       SensorStation sensorStation = new SensorStation();
+       sensorStation.setSensorStationID("SensorStationTest");
+       sensorStation = sensorStationService.saveSensorStation(sensorStation);
+
+       sensorStationService.addGardenerToSensorStation(sensorStationService.loadSensorStation("SensorStationTest"), "user1");
+       sensorStation = sensorStationService.saveSensorStation(sensorStation);
+       user1 = userService.saveUser(user1);
+
+       List<SensorStation> sensorStationsExpectedList = new ArrayList<>();
+       sensorStationsExpectedList.add(sensorStation);
+
+       assertEquals(sensorStationsExpectedList,sensorStationService.getAllAssignedSensorStations(user1));
+
+       sensorStationService.removeGardenerFromSensorStation(sensorStation, user1);
+       sensorStationsExpectedList.remove(sensorStation);
+
+       assertEquals(sensorStationsExpectedList, sensorStationService.getAllAssignedSensorStations(user1));
     }
 
     /**

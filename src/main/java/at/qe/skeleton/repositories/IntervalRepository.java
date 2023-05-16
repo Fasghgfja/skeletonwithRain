@@ -1,5 +1,6 @@
 package at.qe.skeleton.repositories;
 
+import at.qe.skeleton.model.AccessPoint;
 import at.qe.skeleton.model.SSInterval;
 import at.qe.skeleton.model.SensorStation;
 import jakarta.transaction.Transactional;
@@ -11,16 +12,16 @@ public interface IntervalRepository extends AbstractRepository<SSInterval, Long>
 
     SSInterval findFirstById(Long id);
 
-    SSInterval findFirstBySensorStation(SensorStation sensorStation);
+    SSInterval findFirstByAccessPoint(AccessPoint accessPoint);
 
-    SSInterval findFirstBySensorStationId (String sensorStationId);
+    SSInterval findFirstByAccessPointId (Long accessPointId);
 
-
-    @Transactional
-    void deleteIntervalBySensorStation(SensorStation sensorStation);
 
     @Transactional
-    void deleteIntervalBySensorStationId(String sensorStationId);
+    void deleteIntervalByAccessPoint(AccessPoint accessPoint);
+
+    @Transactional
+    void deleteIntervalByAccessPointId(Long accessPointId);
 
 
 

@@ -1,10 +1,8 @@
 package at.qe.skeleton.repositories;
 
-import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.SensorStation;
-import at.qe.skeleton.model.UserRole;
-import at.qe.skeleton.model.Userx;
+import at.qe.skeleton.model.*;
 import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.Collection;
@@ -78,6 +76,17 @@ public interface PlantRepository extends AbstractRepository<Plant, Long> {
 
     @Transactional
     void deleteAllBySensorStationEquals(SensorStation sensorStation);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Plant pp SET pp.sensorStation = null WHERE pp.sensorStation = :sensorStation")
+    void detachFromSensorStation(@Param("sensorStation") SensorStation sensorStation);
+
+
+
+
+
+
 }
 
 

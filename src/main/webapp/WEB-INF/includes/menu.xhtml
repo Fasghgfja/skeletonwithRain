@@ -53,16 +53,16 @@
                     <p:menuitem id="m_dashboard" value="Dashboard" icon="pi pi-home" outcome="/dashboard.xhtml" />
 
                     <!-- ..........................................ADMIN SUBMENU............................................................... -->
-                    <p:submenu id="m_components" label="Administration Utility" icon="pi pi-pencil" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+                    <p:submenu id="m_components" label="Administration Utility" icon="fa fa-solid fa-toolbox" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
                         <p:menuitem id="m_table" value="Manage Users" icon="pi pi-users" outcome="/admin/userManagement" />
-                        <p:menuitem id="m_input2" value="Manage Sensor Stations" icon="pi pi-server" outcome="/admin/sensorStationMenagement" />
-                        <p:menuitem id="m_list" value="Manage Access Points" icon="pi pi-server" outcome="/accessPointsManagement" />
-                        <p:menuitem id="m_list2" value="Manage Plants" icon="pi pi-server" outcome="/admin/plantManagement" />
+                        <p:menuitem id="m_input2" value="Manage Sensor Stations" icon="fa fa-brands fa-codepen" outcome="/admin/sensorStationMenagement" />
+                        <p:menuitem id="m_list" value="Manage Access Points" icon="fa fa-solid fa-tower-broadcast" outcome="/admin/accessPointsManagement" />
+                        <p:menuitem id="m_list2" value="Manage Plants" icon="fa fa-solid fa-leaf" outcome="/admin/plantManagement" />
                         <p:menuitem id="m_media" value="Manage Images" icon="pi pi-image" url="/admin/imageMenagement.xhtml" />
-                        <p:menuitem id="m_table2" value="Manage Measurements" icon="pi pi-users" outcome="/admin/measurementManagement" />
+                        <p:menuitem id="m_table2" value="Manage Measurements" icon="fa fa-solid fa-chart-line" outcome="/admin/measurementManagement" />
                         <p:menuitem id="m_formlayout" value="Audit Log" icon="pi pi-history" outcome="/admin/auditLog" />
                         <p:menuitem id="qrCode" value="Generate Qr Code" icon="pi pi-qrcode" outcome="/generateQrCode.xhtml?id=00"/>
-                        <p:menuitem id="registerT" value="Register/upload/gallery NEW!!!" icon="pi pi-image" url="/registration/register.xhtml" />
+                        <p:menuitem id="registerT" value="Register/Landing Showcase" icon="pi pi-image" url="/registration/register.xhtml" />
                     </p:submenu>
 
                     <!-- ..........................................GARDENER SUBMENU............................................................... -->
@@ -72,16 +72,11 @@
 
 
                     <!-- ..........................................OTHER MENU ELEMENTS..................................................... -->
-                    <p:menuitem id="m_icons" value="Plants Catalogue" icon="pi pi-question-circle" outcome="/plantCatalogue"/>
-                    <p:menuitem id="m_crud" value="Settings" icon="pi pi-question-circle" outcome="/editProfile" />
-                    <p:menuitem id="m_help" value="Help" icon="pi pi-question-circle" outcome="/testpages/empty" />
+                    <p:menuitem id="m_icons" value="Plants Catalogue" icon="fa fa-solid fa-leaf" outcome="/plantCatalogue"/>
+                    <p:menuitem id="m_help" value="Help" icon="pi pi-question-circle" outcome="/help" />
 
 
-                    <!-- ..........................................TESTING SUBMENU............................................................... -->
-                    <p:submenu id="m_primeblocks2" label="New Features Testing" icon="pi pi-prime" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
-                        <p:menuitem id="m_doc" value="Primefaces Css Documentation" icon="pi pi-info-circle" outcome="/testpages/documentation"/>
-                        <p:menuitem id="m1_button2" value="Upload Profile Picture Tests" icon="pi pi-mobile" url="/testpages/tstpageuploadandtakeaphotobutton.xhtml" styleClass="rotated-icon"/>
-                    </p:submenu>
+
 
 
                 </pr:menu>

@@ -3,17 +3,13 @@ package at.qe.skeleton.ui.controllers;
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.services.AccessPointService;
 import at.qe.skeleton.services.IntervalService;
-import at.qe.skeleton.services.SensorService;
-import at.qe.skeleton.services.SensorStationService;
-import at.qe.skeleton.ui.beans.SessionInfoBean;
-import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import java.io.Serializable;
-import java.util.List;
+
 
 @Getter
 @Setter
@@ -24,46 +20,49 @@ public class SSIntervalController implements Serializable {
     @Autowired
     private transient IntervalService intervalService;
     @Autowired
-    private transient SensorStationService sSservice;
+    private transient AccessPointService accessPointService;
 
 
-    private Integer minterval;
-    private Integer sinterval;
+    private Integer measurementInterval;
+    private Integer webAppInterval;
 
     private SSInterval sSinterval;
-    private String sensorStationId = "";
+    private Long accessPointId;
 
 
     public void doSaveInterval(){
         sSinterval = new SSInterval();
-        SensorStation sensorStation = sSservice.loadSensorStation(sensorStationId);
-        SSInterval oldInterval = intervalService.getFirstBySensorStationId(sensorStationId);
+        AccessPoint accessPoint = accessPointService.loadAccessPoint(accessPointId);
+        SSInterval oldInterval = intervalService.getFirstByAccessPointId(accessPointId);
 
+        System.out.println(accessPoint+""+webAppInterval+""+measurementInterval);
         if(oldInterval == null) {
-            sSinterval.setSensorStation(sensorStation);
-            if(minterval != null ) {sSinterval.setMInterval(minterval.toString());}
-            if(sinterval != null ) {sSinterval.setSInterval(sinterval.toString());}
+            sSinterval.setAccessPoint(accessPoint);
+            if(measurementInterval != null ) {sSinterval.setMeasurementInterval(measurementInterval.toString());}
+            if(webAppInterval != null ) {sSinterval.setWebAppInterval(webAppInterval.toString());}
             sSinterval = this.intervalService.saveInterval(sSinterval);
         }
         else {
-            if(minterval != null ) {oldInterval.setMInterval(minterval.toString());}
-            if(sinterval != null ) {oldInterval.setSInterval(sinterval.toString());}
-            oldInterval = this.intervalService.saveInterval(oldInterval);
+            if(measurementInterval != null ) {oldInterval.setMeasurementInterval(measurementInterval.toString());}
+            if(webAppInterval != null ) {oldInterval.setWebAppInterval(webAppInterval.toString());}
+            this.intervalService.saveInterval(oldInterval);
         }
     }
 
-    public String getActualMIntervalForSensorStation(String tsensorStationId){
-        SensorStation sensorStation = sSservice.loadSensorStation(tsensorStationId);
-        SSInterval oldInterval = intervalService.getFirstBySensorStationId(tsensorStationId);
+    public String getActualMeasurementIntervalForAccessPoint(Long tAccessPointId){
+        AccessPoint accessPoint = accessPointService.loadAccessPoint(tAccessPointId);
+        SSInterval oldInterval = intervalService.getFirstByAccessPointId(tAccessPointId);
         if(oldInterval != null){
-            return oldInterval.getMInterval();}
+            if(oldInterval.getMeasurementInterval() == null){return "Default";}
+            return oldInterval.getMeasurementInterval();}
         else return "Default";
     }
 
-    public String getActualSIntervalForSensorStation(String tsensorStationId){
-        SSInterval oldInterval = intervalService.getFirstBySensorStationId(tsensorStationId);
+    public String getActualWebAppIntervalForAccessPoint(Long tAccessPointId){
+        SSInterval oldInterval = intervalService.getFirstByAccessPointId(tAccessPointId);
         if(oldInterval != null){
-            return oldInterval.getSInterval();}
+            if (oldInterval.getWebAppInterval() == null) {return "Default";}
+            return oldInterval.getWebAppInterval();}
         else return "Default";
     }
 

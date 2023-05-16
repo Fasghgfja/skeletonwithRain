@@ -61,7 +61,7 @@ public class SensorStationDetailController implements Serializable {
     private Sensor lightIntesitySensor;
     private Sensor temperatureSensor;
 
-
+   private String alarmCountTreshold;
 
 
     /**
@@ -200,6 +200,7 @@ public class SensorStationDetailController implements Serializable {
         if (fixed || sensorStation.getAlarmSwitch().equals("true")) sensorStation.setAlarmSwitch("fixed");
         if (gardeners != null) {this.doAddGardenersToSensorStation();}
         if (gardenersToRemove != null) {this.doRemoveGardenersFromSensorStation();}
+        if(alarmCountTreshold != null){sensorStation.setAlarmCountThreshold(Integer.parseInt(alarmCountTreshold));}//TODO:new
 
         sensorStation = this.sensorStationService.saveSensorStation(sensorStation);
     }

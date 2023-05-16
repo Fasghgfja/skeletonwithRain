@@ -1,11 +1,10 @@
 package at.qe.skeleton.services;
 
+import at.qe.skeleton.model.AccessPoint;
 import at.qe.skeleton.model.Log;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.model.Userx;
-import at.qe.skeleton.repositories.LogRepository;
-import at.qe.skeleton.repositories.SensorStationRepository;
-import at.qe.skeleton.repositories.UserxRepository;
+import at.qe.skeleton.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +22,20 @@ public class SensorStationService {
     private SensorStationRepository sensorStationRepository;
 
     @Autowired
+    private SensorRepository sensorRepository;
+
+    @Autowired
     private UserxRepository userRepository;
+
+    @Autowired
+    private MeasurementRepository measurementRepository;
+
+    @Autowired
+    private PlantRepository plantRepository;
+
+    @Autowired
+    private AccessPointRepository accessPointRepository;
+
 
 
     @Autowired
@@ -43,7 +55,7 @@ public class SensorStationService {
         return sensorStationRepository.findSensorStationsByGardener(user);
     }
 
-    public void addGardenerToSensorStation(SensorStation sensorStation, String user) {//TODO:New , test this
+    public void addGardenerToSensorStation(SensorStation sensorStation, String user) {
         if(user == null || sensorStation == null  ) {return;}//need to remove lazy for this , check if its doable speedwise userloa || sensorStation.getGardener().contains(user)
         sensorStation = sensorStationRepository.findFirstById(sensorStation.getSensorStationName());
         Userx userload = userRepository.findFirstByUsername(user);
@@ -55,7 +67,7 @@ public class SensorStationService {
         userRepository.save(userload);
     }
 
-    public void removeGardenerFromSensorStation(SensorStation sensorStation, Userx user) {//TODO:New , Test this
+    public void removeGardenerFromSensorStation(SensorStation sensorStation, Userx user) {
         if(user == null || sensorStation == null  ) {return;}//need to remove lazy for this , check if its doable speedwise userloa || sensorStation.getGardener().contains(user)
         Userx userload = userRepository.findFirstByUsername(user.getId());
         sensorStation = sensorStationRepository.findFirstById(sensorStation.getSensorStationName());
@@ -65,6 +77,18 @@ public class SensorStationService {
         userRepository.save(userload);
        // sensorStationRepository.save(sensorStation);// not needed i think
     }
+
+
+
+    public void removeAccessPointFromSensorStations(AccessPoint accessPoint) {
+        if(accessPoint == null) {return;}
+        AccessPoint accessLoad = accessPointRepository.findFirstById(accessPoint.getId());
+        sensorStationRepository.setAccessPointToNull(accessLoad);
+    }
+
+
+
+
 
 
 
@@ -87,7 +111,8 @@ public class SensorStationService {
     }
 
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')") //TODO: new! test this
+    // TODO:add proper logging maybe with more info on what happened during the process or eventual exception messages, this can fail!
     public void deleteSensorStation(SensorStation sensorStation) {
         Log deleteLog = new Log();
 
@@ -96,6 +121,16 @@ public class SensorStationService {
         deleteLog.setText("DELETED SENSOR STATION: " + sensorStation.getSensorStationID());
 
         logRepository.save(deleteLog);
+
+        //delete measurements for sensor station
+        measurementRepository.deleteMeasurementsBySensorStation(sensorStation);
+        //detach Plants from sensor station
+        plantRepository.detachFromSensorStation(sensorStation);
+        //unassign gardeners from sensor station
+        sensorStation.getGardener().forEach(x->this.removeGardenerFromSensorStation(sensorStation,x));
+        //delete Sensors
+        sensorRepository.deleteAllBySensorStationEquals(sensorStation);
+
         sensorStationRepository.delete(sensorStation);
     }
 

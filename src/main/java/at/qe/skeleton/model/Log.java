@@ -12,8 +12,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-
-//TODO: Fix like the example in the demo
 /**
  * Entity representing an audit log entry.
  */

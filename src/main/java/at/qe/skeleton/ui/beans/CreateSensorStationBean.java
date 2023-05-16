@@ -1,14 +1,8 @@
 package at.qe.skeleton.ui.beans;
 
-import at.qe.skeleton.model.AccessPoint;
-import at.qe.skeleton.model.Log;
-import at.qe.skeleton.model.LogType;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.repositories.LogRepository;
-import at.qe.skeleton.services.AccessPointService;
 import at.qe.skeleton.services.SensorStationService;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -40,6 +32,8 @@ public class CreateSensorStationBean implements Serializable {
     private String alarmSwitch;
     private String description;
 
+    private Integer alarmCountThreshold;
+
 
 
     public void doCreateNewCreateSensorStation(){
@@ -48,6 +42,10 @@ public class CreateSensorStationBean implements Serializable {
         sensorStation.setSensorStationName(sensorStationName);
         sensorStation.setAlarmSwitch("off");
         sensorStation.setDescription(description);
+        sensorStation.setAlarmCountThreshold(Objects.requireNonNullElse(alarmCountThreshold, 5));
+
+
+
         sensorStation = sensorStationPointService.saveSensorStation(sensorStation);
 
         //TODO: log sensor station creation

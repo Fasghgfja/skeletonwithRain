@@ -20,11 +20,11 @@ public class IntervalService {
     public SSInterval getFirstById(Long id){
         return intervalRepository.findFirstById(id);
     }
-    public SSInterval getFirstBySensorStationId(String ssId){
-        return intervalRepository.findFirstBySensorStationId(ssId);
+    public SSInterval getFirstByAccessPointId(Long acId){
+        return intervalRepository.findFirstByAccessPointId(acId);
     }
-    public SSInterval getFirstBySensorStation(SensorStation sensorStation){
-        return intervalRepository.findFirstBySensorStation(sensorStation);
+    public SSInterval getFirstByAccessPoint(AccessPoint accessPoint){
+        return intervalRepository.findFirstByAccessPoint(accessPoint);
     }
 
 
@@ -41,13 +41,13 @@ public class IntervalService {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void deleteIntervalBySensorStation(SensorStation sensorStation) {
-        intervalRepository.deleteIntervalBySensorStation(sensorStation);
+    public void deleteIntervalByAccessPoint(AccessPoint accessPoint) {
+        intervalRepository.deleteIntervalByAccessPoint(accessPoint);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void deleteIntervalBySensorStationId(String ssid) {
-        intervalRepository.deleteIntervalBySensorStationId(ssid);
+    public void deleteIntervalByAccessPointId(Long acId) {
+        intervalRepository.deleteIntervalByAccessPointId(acId);
     }
 
 }

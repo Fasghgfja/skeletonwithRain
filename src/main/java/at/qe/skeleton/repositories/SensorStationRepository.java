@@ -1,9 +1,8 @@
 package at.qe.skeleton.repositories;
 
-import at.qe.skeleton.model.Measurement;
-import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.SensorStation;
-import at.qe.skeleton.model.Userx;
+import at.qe.skeleton.model.*;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -30,7 +29,10 @@ public interface SensorStationRepository extends AbstractRepository<SensorStatio
     @Query("SELECT s.sensorStationName FROM SensorStation s")
     Collection<String> getAllSensorStationsIds();
 
-
+    @Transactional
+    @Modifying
+    @Query("UPDATE SensorStation ss SET ss.accessPoint = null WHERE ss.accessPoint = :accessPoint")
+    void setAccessPointToNull(@Param("accessPoint") AccessPoint accessPoint);
 
 
     /* to delete Sensorstation
@@ -39,6 +41,7 @@ public interface SensorStationRepository extends AbstractRepository<SensorStatio
     update SENSOR_STATION set ACCESS_POINT_ACCESS_POINTID=null where SENSOR_STATION_NAME='G4T2'
     delete from SENSOR_STATION where SENSOR_STATION_NAME='G4T2'
      */
+
 
     /**
      * Method to get a collection of all sensor stations assigned to a given gardener.

@@ -100,5 +100,7 @@ public interface ImageRepository extends AbstractRepository<Image, Long> {
     Integer countImagesByApprovedEquals(Boolean approved);
 
     Integer countImagesByApprovedEqualsAndPlantEquals(Boolean approved, Plant plant);
+
+    long countImagesByPlantAndApprovedEquals(Plant plant,boolean b);
 }
 
