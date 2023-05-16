@@ -34,8 +34,7 @@ public class SensorService {
 
     //TODO: check if we have sensor data and answer true or false
     public boolean areSensorsPresent(SensorStation station) {
-      if (sensorRepository.countSensors(station) > 0) return true;
-      else {return false;}
+      return sensorRepository.countSensors(station) > 0;
     }
 
 

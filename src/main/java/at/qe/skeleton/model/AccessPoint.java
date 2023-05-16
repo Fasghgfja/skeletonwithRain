@@ -8,6 +8,10 @@ import org.springframework.data.domain.Persistable;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * This is the entity model for the accessPoint.
+ */
+
 @Getter
 @Setter
 @Entity
@@ -19,7 +23,6 @@ public class AccessPoint extends Metadata implements Persistable<Long>, Serializ
     private Long accessPointID;
     private String location;
     private boolean validated;//TODO: this is gonna be important
-
 
     @Override
     public Long getId() {
@@ -56,7 +59,7 @@ public class AccessPoint extends Metadata implements Persistable<Long>, Serializ
 
     @Override
     public String toString() {
-        return ""+accessPointID;
+        return accessPointID.toString();
     }
 
 

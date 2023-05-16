@@ -1,5 +1,6 @@
 package at.qe.skeleton.services;
 
+import at.qe.skeleton.model.AccessPoint;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Userx;
@@ -27,6 +28,9 @@ class SensorStationServiceTest {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    AccessPointService accessPointService;
 
     /**
      * Method to test the getAllSensorStations() method of the sensorStationService.
