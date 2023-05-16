@@ -22,6 +22,8 @@ The program *Arduino_programm_v1.0.ino* has the following functionalities:
 - One button for three functionalities.
 - Warnlight system
 
+The characteristic to read if the alarm has been switch off with the button is:
+- "ALARM_STATUS"
 1) The sensors are represented by the characteristics point out above.
    - "LIGHT_INTENSITY"
    - "SOIL_MOISTURE"
@@ -29,17 +31,17 @@ The program *Arduino_programm_v1.0.ino* has the following functionalities:
    - "HUMIDITY"
    - "AIR_PRESSURE"
    - "AIR_QUALITY"
-   The characteristic to read if the alarm has been switch off with the button is:
-   - "ALARM_STATUS"  
    
+
 2) The button has the following sequences
     - If the arduino gets switch on it is in standby mode. The first push starts the pairing tone.
       In this case it is ready for pairing. If then 5 minutes are passing without connection 
       the arduino goes back into standby.
     - If there is a connection and the arduino operates as usual there is the option to but the arduino back to standby.
       This is like a reset and can be done with a button push while operating time.
-    - If an alarm is on, with a push on the button it can switched of. This can also done via the webapp.
+    - If an alarm is on, with a push on the button it can switch of. This can also be done via the webapp.
    
+
 3) The warning ligth system switches depending on the alarm different colours on and off.
    - AIR_QUALITY ......1sec intervall in green
    - AIR_PRESSURE......6sec intervall in red
@@ -47,6 +49,21 @@ The program *Arduino_programm_v1.0.ino* has the following functionalities:
    - TEMPERATURE.......6sec intervall in green
    - LIGHT_INTENSITY...1sec intervall in blue
    - HUMIDITY..........1sec intervall in red
+
+### Arduino properties
+
+| service/characteristic |  uuid   |      description      | properties | alarm interval | alarm light |
+|------------------------|:-------:|:---------------------:|:----------:|:--------------:|:-----------:|
+| readSensorData         |  181A   | environmental sensing |  service   |       -        |      -      |
+| ligthValue             |  19b0   |    LIGHT_INTENSITY    | READ/WRITE |      1sec      |    blue     |
+| hygroValue             |  19b1   |       HUMIDITY        | READ/WRITE |      1sec      |     red     |
+| tempValue              |  19b2   |      TEMPERATURE      | READ/WRITE |      6sec      |    green    |
+| humidityValue          |  19b3   |     SOIL_MOISTURE     | READ/WRITE |      6sec      |    blue     |
+| pressureValue          |  19b4   |     AIR_PRESSURE      | READ/WRITE |      6sec      |     red     |
+| gasValue               |  19b5   |      AIR_QUALITY      | READ/WRITE |      1sec      |    green    |
+| alarm                  |  19b6   |     ALARM_STATUS      |    READ    |       -        |      -      |
+
+
 
 ## Raspberry
 The raspberry source code is located in the /Raspberry directory. It is developt to read via BLE the sensor data from the arduino and writes them into a database.
