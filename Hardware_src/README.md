@@ -2,8 +2,9 @@
 
 This readme should describe the handle of the raspberry pi and the arduino uno LE.
 ## Arduino
-In the directory */Hardware_src/arduino* is the source code for the sensor station.
+In the directory [arduino](arduino) is the source code for the sensor station [Arduino_programm_v1.0.ino](arduino%2FArduino_programm_v1.0.ino).
 This program is prepared to load onto an arduinoUnoLE.
+The current name is "G4T2" but you can change it to another one if you like.
 The following service and characteristic are implemented:
 
     BLEService readSensorDataService("181A");
@@ -16,8 +17,13 @@ The following service and characteristic are implemented:
     BLEFloatCharacteristic gasValueCharacteristic("19b5", BLERead | BLEWrite);
     BLEBoolCharacteristic alarmCharacteristic("19b6", BLERead );
 
-The connection plan is stored in the directory  */Arduino*.
-The program *Arduino_programm_v1.0.ino* has the following functionalities: 
+### Arduino connection Plan
+[Arduino_Schaltplan_aktuell.png](..%2FArduino%2FArduino_Schaltplan_aktuell.png) 
+
+There are additional plans in directory [Arduino](..%2FArduino)
+### Arduino functionalities
+
+The program has the following functionalities: 
 - It offers 6 different sensor values.
 - One button for three functionalities.
 - Warnlight system
@@ -66,7 +72,23 @@ The characteristic to read if the alarm has been switch off with the button is:
 
 
 ## Raspberry
-The raspberry source code is located in the /Raspberry directory. It is developt to read via BLE the sensor data from the arduino and writes them into a database.
+The raspberry source code is located in the /Raspberry directory. It is developed in python3.10 to read via BLE the sensor data from the arduino and writes them into a database.
+As a nex feature the data gets transfered to the webapp via REAST POST/GET requests.
+
+### Class overview
+
+
+| Class                                                                 |      description      | properties |
+|-----------------------------------------------------------------------|:---------------------:|:----------:|
+| [accesspoint_application.py](Raspberry%2Faccesspoint_application.py)  | environmental sensing |  service   |
+| ligthValue                                                            |    LIGHT_INTENSITY    | READ/WRITE |
+| hygroValue                                                            |       HUMIDITY        | READ/WRITE |
+| tempValue                                                             |      TEMPERATURE      | READ/WRITE |
+| humidityValue                                                         |     SOIL_MOISTURE     | READ/WRITE |
+| pressureValue                                                         |     AIR_PRESSURE      | READ/WRITE |
+| gasValue                                                              |      AIR_QUALITY      | READ/WRITE |
+| alarm                                                                 |     ALARM_STATUS      |    READ    |
+
 
 The following code shows the program states. At the prorgam start the database will be implemented automatically.
 

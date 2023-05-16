@@ -70,7 +70,7 @@ void setup() {
     if (!BLE.begin()) {
         while(1);
     }
-
+    //Change this to the name of your choise
     BLE.setLocalName("G4T2");
     BLE.setDeviceName("G4T2");
     //---------------------------------------------------------------

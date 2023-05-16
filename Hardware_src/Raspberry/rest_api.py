@@ -1,7 +1,5 @@
 import math
-import sqlite3
 import asyncio
-import cursor as cursor
 import requests
 import DB_connection
 import exception_logging
