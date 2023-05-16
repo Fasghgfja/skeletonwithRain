@@ -122,7 +122,7 @@
                         <h3>Approved</h3>
                         <!-- ...................Help Button................. -->
                         <div class="header-buttons">
-                            <p:commandButton type="button" icon="pi pi-ellipsis-v" title="Help"
+                            <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
                                              styleClass="ui-button-secondary outlined-button"
                                              onclick="PF('imageshelpDialog').show()"/>
                         </div>
@@ -142,8 +142,10 @@
                                              update="awaitingApproval userForm" />
 
                             <f:facet name="caption">
-                                <h4 class="mb-1" style="font-size: 10px;">#{image.plant}</h4>
+                                <h5 class="mb-1" style="font-size: 10px;">#{image.plant}</h5>
+                                <h:form rendered="#{ image.plant == null}">
                                 <p class="mb-0" style="font-size: 10px;">This picture is not associated with a plant</p>
+                                </h:form>
 
                             </f:facet>
                             <f:facet name="thumbnail">
@@ -185,9 +187,10 @@
                                              update="awaitingApproval2 userForm " />
 
                             <f:facet name="caption">
-                                <h4 class="mb-1" style="font-size: 10px;">#{image.plant}</h4>
+                               <h4 class="mb-1" style="font-size: 10px;">#{image.plant}</h4>
+                                <h:form rendered="#{ image.plant == null}">
                                 <p class="mb-0" style="font-size: 10px;">This picture is not associated with a plant</p>
-
+                                </h:form>
                             </f:facet>
 
                             <f:facet name="thumbnail">

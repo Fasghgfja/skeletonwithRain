@@ -28,15 +28,12 @@
             <p:selectOneButton value="#{qrCodeController.renderMethod}">
                 <f:selectItem itemLabel="canvas" itemValue="canvas" />
                 <f:selectItem itemLabel="image" itemValue="img" />
-                <f:selectItem itemLabel="div" itemValue="div" />
             </p:selectOneButton>
             <h:outputText value="Render mode:" />
             <p:selectOneButton value="#{qrCodeController.mode}">
                 <f:selectItem itemLabel="normal" itemValue="0" />
                 <f:selectItem itemLabel="label strip" itemValue="1" />
                 <f:selectItem itemLabel="label box" itemValue="2" />
-                <f:selectItem itemLabel="image strip" itemValue="3" />
-                <f:selectItem itemLabel="image box" itemValue="4" />
             </p:selectOneButton>
             <h:outputText value="Size:" />
             <h:panelGrid columns="1">
