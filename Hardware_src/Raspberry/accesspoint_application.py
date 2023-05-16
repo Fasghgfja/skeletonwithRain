@@ -13,7 +13,7 @@ SECTION_SLEEP = 5
 program_state = 0
 if __name__ == '__main__':
     # TODO read config.yaml
-    rest_api.send_log_data_to_webapp()
+
     sending_interval_counter = 0
     measurement_interval_counter = 0
     program_state = 0#program_status.Is.READ_SENSOR_VALUES.value
@@ -94,5 +94,14 @@ if __name__ == '__main__':
                     rest_api.read_sending_interval()
                 except Exception as e:
                     exception_logging.logException(e, "read boarders")
+                time.sleep(SECTION_SLEEP)
+                program_state = program_status.Is.SEND_LOG_TO_WEBAPP.value
+
+            case program_status.Is.SEND_LOG_TO_WEBAPP.value:
+                print("Send log to webapp")
+                try:
+                    rest_api.send_log_data_to_webapp()
+                except Exception as e:
+                    exception_logging.logException(e, "send Log to Webapp")
                 time.sleep(SECTION_SLEEP)
                 program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value

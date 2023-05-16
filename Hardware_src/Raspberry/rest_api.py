@@ -185,7 +185,7 @@ def handle_special_values(obj):
 
 def send_log_data_to_webapp():
 
-    with open('logfile.txt', 'r') as file:
+    with open('logFile.txt', 'r') as file:
         for line in file:
 
             if line.startswith('ERROR: On characteristic'):
