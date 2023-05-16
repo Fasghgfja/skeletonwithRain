@@ -13,19 +13,6 @@ import config_yaml
 auth = ("admin", "passwd")
 log_id = 0
 
-
-
-
-
-
-
-
-measurements_url = "http://localhost:8080/api/measurements"
-get_sensorStations_url = "http://localhost:8080/api/sensorstations"
-post_sensorStations_url = "http://localhost:8080/api/sensorstations"
-post_sensor_url = "http://localhost:8080/api/sensors"
-get_Station_alarm_switch_url = "http://localhost:8080/api/getsensorstations"
-post_update_sensor_url = "http://localhost:8080/api/updatesensors"
 post_log_url = "http://localhost:8080/admin/auditLog"
 # server
 #auth = ("SHAdmin", "gsecret4passwordt2")

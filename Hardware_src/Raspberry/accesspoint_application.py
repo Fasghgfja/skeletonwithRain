@@ -14,12 +14,6 @@ program_state = 0
 if __name__ == '__main__':
     # TODO read config.yaml
     rest_api.send_log_data_to_webapp()
-
-    try:
-        with open("../config.yaml") as f:
-            cfg = yaml.load(f, Loader=yaml.FullLoader)
-
-
     sending_interval_counter = 0
     measurement_interval_counter = 0
     program_state = 0#program_status.Is.READ_SENSOR_VALUES.value
