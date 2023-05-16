@@ -45,16 +45,6 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     @Column
     private Integer alarmCountThreshold;
 
-
-
-    public String getSensorStationLocation() {
-        return location;
-    }
-
-    public void setSensorStationLocation(String location) {
-        this.location = location;
-    }
-
     public String getSensorStationID() {
         return sensorStationName;
     }
@@ -94,40 +84,7 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
 
     @Override
     public int compareTo(SensorStation o) {
-        return this.sensorStationName.compareTo(o.getSensorStationID());
+        return this.sensorStationName.compareTo(o.getSensorStationName());
     }
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-    // needed to have a view on alarm
-
-    public String getAlarmSwitch() {
-        return alarmSwitch;
-    }
-
-    public void setAlarmSwitch(String alarmSwitch) {
-        this.alarmSwitch = alarmSwitch;
-    }
-    // needed for description
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void alarmSwitchOn() {
-        this.alarmSwitch = "on";
-    }
-
-    public void alarmSwitchOff() {
-        this.alarmSwitch = "off";
-    }
-
 
 }
