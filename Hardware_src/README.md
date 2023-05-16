@@ -73,7 +73,7 @@ The characteristic to read if the alarm has been switch off with the button is:
 
 ## Raspberry
 The raspberry source code is located in the /Raspberry directory. It is developed in python3.10 to read via BLE the sensor data from the arduino and writes them into a database.
-As a nex feature the data gets transfered to the webapp via REAST POST/GET requests.
+As a next feature the data gets transferred to the webapp via REST POST/GET requests.
 
 ### Class overview
 
