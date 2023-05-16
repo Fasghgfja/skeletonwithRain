@@ -21,7 +21,7 @@
 
 
                 <!-- ....................................ADMIN VIEW START................................... -->
-                <c:if test="#{sessionInfoBean.hasRole('ADMIN')}">
+                <c:if test="#{sessionInfoBean.hasRole('ADMIN')}">   <!-- ...//TODO: topboxes for everyone not only admin!... -->
                     <!-- ................TOP INFO BOXES.......... -->
                     <!-- ...........USERS SIGNED UP............ -->
 
@@ -80,7 +80,7 @@
                         <div class="card overview-box">
                             <p:graphicImage url="../resources/images/dashboard/effect-messages.svg"/>
                             <span class="overview-icon">
-                                <p:graphicImage url="../resources/images/dashboard/icon-messages.png"/>
+                                <p:graphicImage url="../resources/images/dashboard/measurements.png"/>
                             </span>
                             <div class="overview">
                                 <span class="overview-title">MEASUREMENTS</span>
@@ -115,9 +115,9 @@
                             <div class="card">
                                 <h5>Green Houses</h5>
                                 <p:dataTable id="ordersTable" var="sensorStation"
-                                             value="#{sensorStationListController.sensorStations}" selectionMode="single"
+                                             value="#{sensorStationListController.sensorStationList}" selectionMode="single"
                                              reflow="true" paginatorPosition="bottom"
-                                             rowKey="#{sensorStation.sensorStationName}" paginator="true" rows="5"
+                                             rowKey="#{sensorStation.sensorStationName}" paginator="true" rows="6"
                                              sortBy="#{sensorStation.sensorStationName}" sortOrder="descending">
 
                                     <!-- ...........ROW SELECTION EVENT................ -->
@@ -132,7 +132,7 @@
                                         <h:outputText value="#{sensorStation.plant}"/>
                                     </p:column>
 
-                                    <!-- ...........THIS HAS TO CHANGE WITH PLANT DATE!!!!!!!!......... -->
+                                    <!-- ...TODO........THIS HAS TO CHANGE WITH PLANT DATE!!!!!!!!......... -->
                                     <p:column headerText="Date" sortBy="#{sensorStation.createDate}">
                                         <h:outputText value="#{sensorStation.createDate}"/>
                                     </p:column>
@@ -143,24 +143,24 @@
                                     </p:column>
 
 
-                                    <p:column headerText="Status">
-                                        <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_PRESSURE')}"
-                                           style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_PRESSURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                    <p:column headerText="Alarm Status">
+                                        <i class="#{measurementListController.getMeasurementTypeIcon('AIR_PRESSURE')}"
+                                           style="color:#{measurementListController.getSensorStatus('AIR_PRESSURE',sensorStation) == 'OK' ? 'green' : 'red'}"
                                            title="Air Pressure"></i>
-                                        <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('TEMPERATURE')}"
-                                           style="color:#{sensorStationDetailController.getlastMeasurementStatus('TEMPERATURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                        <i class="#{measurementListController.getMeasurementTypeIcon('TEMPERATURE')}"
+                                           style="color:#{measurementListController.getSensorStatus('TEMPERATURE',sensorStation) == 'OK' ? 'green' : 'red'}"
                                            title="Temperature"></i>
-                                        <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('SOIL_MOISTURE')}"
-                                           style="color:#{sensorStationDetailController.getlastMeasurementStatus('SOIL_MOISTURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                        <i class="#{measurementListController.getMeasurementTypeIcon('SOIL_MOISTURE')}"
+                                           style="color:#{measurementListController.getSensorStatus('SOIL_MOISTURE',sensorStation) == 'OK' ? 'green' : 'red'}"
                                            title="Soil Moisture"></i>
-                                        <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_QUALITY')}"
-                                           style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_QUALITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                        <i class="#{measurementListController.getMeasurementTypeIcon('AIR_QUALITY')}"
+                                           style="color:#{measurementListController.getSensorStatus('AIR_QUALITY',sensorStation) == 'OK' ? 'green' : 'red'}"
                                            title="Air Quality"></i>
-                                        <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('LIGHT_INTENSITY')}"
-                                           style="color:#{sensorStationDetailController.getlastMeasurementStatus('LIGHT_INTENSITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                        <i class="#{measurementListController.getMeasurementTypeIcon('LIGHT_INTENSITY')}"
+                                           style="color:#{measurementListController.getSensorStatus('LIGHT_INTENSITY',sensorStation) == 'OK' ? 'green' : 'red'}"
                                            title="Light Intensity"></i>
-                                        <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('HUMIDITY')}"
-                                           style="color:#{sensorStationDetailController.getlastMeasurementStatus('HUMIDITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                        <i class="#{measurementListController.getMeasurementTypeIcon('HUMIDITY')}"
+                                           style="color:#{measurementListController.getSensorStatus('HUMIDITY',sensorStation) == 'OK' ? 'green' : 'red'}"
                                            title="Humidity"></i>
                                     </p:column>
 
@@ -197,7 +197,7 @@
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="card chart">
                         <div class="card-header">
-                            <h5>Selected Plant Details</h5>
+                            <h5>Selected Sensor Station Details</h5>
                         </div>
                         <div class="card">
                             <p:barChart id="myBarChart2" model="#{graphController.barModel}"/>
@@ -209,13 +209,22 @@
                 <!-- ......supported charts are .lineModel and .cartesianLinearModel...... -->
 
 
-                <!-- ..........GREENHOUSES PREVIEW........... -->
+                <!-- ..........GARDENER VIEW........... -->
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="col-12">
                         <div class="card">
-                            <h5>Assigned Plants</h5>
+                            <div class="card-header">
+                                <h5>Assigned Sensor Stations</h5>
+                                <div class="header-buttons">
+                                    <!-- ........................Help Button ....................... -->
+                                    <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
+                                                     styleClass="ui-button-secondary outlined-button"
+                                                     onclick="PF('gardenerDhelpDialog').show()"/>
+                                </div>
+                            </div>
+
                             <p:dataTable id="ordersTable2" var="sensorStation"
-                                         value="#{sensorStationListController.assignedSensorStations}" selectionMode="single"
+                                         value="#{sensorStationListController.assignedSensorStationList}" selectionMode="single"
                                          reflow="true" paginatorPosition="bottom"
                                          rowKey="#{sensorStation.sensorStationName}" paginator="true" rows="5"
                                          sortBy="#{sensorStation.sensorStationName}" sortOrder="descending">
@@ -224,63 +233,47 @@
                                 <p:ajax event="rowSelect" update="myBarChart2"
                                         listener="#{graphController.onRowSelect}"/>
 
-                                <p:column headerText="Id" sortBy="#{sensorStation.sensorStationName}">
+                                <p:column headerText="Id" sortBy="#{sensorStation.sensorStationName}" filterBy="#{sensorStation.sensorStationName}">
                                     <h:outputText value="#{sensorStation.id}"/>
                                 </p:column>
-
-                                <p:column headerText="Plant" sortBy="#{sensorStation.plant}">
+                                <p:column headerText="Plant" sortBy="#{sensorStation.plant}" filterBy="#{sensorStation.plant}">
                                     <h:outputText value="#{sensorStation.plant}"/>
                                 </p:column>
-
-                                <!-- ...........THIS HAS TO CHANGE WITH PLANT DATE!!!!!!!!......... -->
-                                <p:column headerText="Date" sortBy="#{sensorStation.createDate}">
-                                    <h:outputText value="#{sensorStation.createDate}"/>
-                                </p:column>
-
-                                <p:column headerText="Location" sortBy="#{sensorStation.location}">
+                                <p:column headerText="Location" sortBy="#{sensorStation.location}" filterBy="#{sensorStation.location}">
                                     <h:outputText value="#{sensorStation.location}">
                                     </h:outputText>
                                 </p:column>
-
-
-                                <p:column headerText="Status">
-                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_PRESSURE')}"
-                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_PRESSURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                <p:column headerText="Alarm Status">
+                                    <i class="#{measurementListController.getMeasurementTypeIcon('AIR_PRESSURE')}"
+                                       style="color:#{measurementListController.getSensorStatus('AIR_PRESSURE',sensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Air Pressure"></i>
-                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('TEMPERATURE')}"
-                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('TEMPERATURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                    <i class="#{measurementListController.getMeasurementTypeIcon('TEMPERATURE')}"
+                                       style="color:#{measurementListController.getSensorStatus('TEMPERATURE',sensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Temperature"></i>
-                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('SOIL_MOISTURE')}"
-                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('SOIL_MOISTURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                    <i class="#{measurementListController.getMeasurementTypeIcon('SOIL_MOISTURE')}"
+                                       style="color:#{measurementListController.getSensorStatus('SOIL_MOISTURE',sensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Soil Moisture"></i>
-                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_QUALITY')}"
-                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_QUALITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                    <i class="#{measurementListController.getMeasurementTypeIcon('AIR_QUALITY')}"
+                                       style="color:#{measurementListController.getSensorStatus('AIR_QUALITY',sensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Air Quality"></i>
-                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('LIGHT_INTENSITY')}"
-                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('LIGHT_INTENSITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                    <i class="#{measurementListController.getMeasurementTypeIcon('LIGHT_INTENSITY')}"
+                                       style="color:#{measurementListController.getSensorStatus('LIGHT_INTENSITY',sensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Light Intensity"></i>
-                                    <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('HUMIDITY')}"
-                                       style="color:#{sensorStationDetailController.getlastMeasurementStatus('HUMIDITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
+                                    <i class="#{measurementListController.getMeasurementTypeIcon('HUMIDITY')}"
+                                       style="color:#{measurementListController.getSensorStatus('HUMIDITY',sensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Humidity"></i>
                                 </p:column>
-
                                 <p:column style="width: 3.5rem">
-
                                     <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
                                     <p:button icon="pi pi-search"
                                               title="open Detail-View"
                                               href="/greenHouseDetails.xhtml?id=#{sensorStation.sensorStationName}"/>
-
                                 </p:column>
                             </p:dataTable>
                         </div>
                     </div>
                 </div>
             </c:if>
-
-
-
-
                 <!-- ....................................GARDENER VIEW FINISH................................... -->
 
 
@@ -298,56 +291,84 @@
 
 
                 <!-- ....................................USER VIEW ................................... -->
-
                 <h:form id="userForm">
                     <div class="col-12">
-
                         <div class="card">
-                            <h5>Followed plants</h5>
-                            <p:dataTable id="plantsTable" var="plant" value="#{plantController.doGetFollowedPlants()}" paginator="true" rows="3" paginatorPosition="bottom" rowKey="#{plant.id}">
+
+                            <div class="card-header">
+                                <h4>Followed Plants</h4>
+                                <div class="header-buttons">
+                                    <!-- ........................Help Button ....................... -->
+                                    <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
+                                                 styleClass="ui-button-secondary outlined-button"
+                                                 onclick="PF('userDhelpDialog').show()"/>
+                                </div>
+                            </div>
+
+                            <p:dataTable id="plantsTable" var="plant" value="#{plantController.followedPlantsList}" paginator="true" rows="3" paginatorPosition="bottom" rowKey="#{plant.id}">
 
                                 <p:ajax event="rowToggle"/>
 
                                 <p:column style="width:2rem">
                                     <p:rowToggler/>
                                 </p:column>
-
-
                                 <p:column >
                                     <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
                                 </p:column>
-
-                                <p:column headerText="Plant" sortBy="#{plant.plantName}">
+                                <p:column headerText="Plant" sortBy="#{plant.plantName}" filterBy="#{plant.plantName}">
                                     <h:outputText value="#{plant.plantName}"/>
                                 </p:column>
-
-                                <p:column headerText="Planted Date" sortBy="#{plant.plantedDate}">
+                                <p:column headerText="Planted Date" sortBy="#{plant.plantedDate}" filterBy="#{plant.plantedDate}">
                                     <h:outputText value="#{plant.plantedDate}"/>
                                 </p:column>
-
-                                <p:column headerText="Description" sortBy="#{plant.description}">
+                                <p:column headerText="Description" sortBy="#{plant.description}" filterBy="#{plant.description}">
                                     <h:outputText value="#{plant.description}"/>
                                 </p:column>
-
                                 <p:column >
-
+                                    <!-- ........................Unfollow Button ....................... -->
                                     <p:commandButton style="border-color: red; background-color: red"
                                                      icon="pi pi-minus"
                                                      title="Unfollow Plant"
                                                      update=":userForm:plantsTable">
                                         <p:ajax event="click" listener="#{userDetailController.doRemovePlantFromFollowedPlants(plant)}"/>
                                     </p:commandButton>
-
-                                    <p:commandButton value="Show Plant Gallery" icon="pi pi-external-link"
-                                                     onclick="PF('galleria1').show()"/>
-
-
                                 </p:column>
-
+                                <!-- ........................Plant Page Button ....................... -->
+                                <p:column>
+                                <p:button icon="pi pi-search"
+                                          title="Show Plant Page"
+                                          href="/plantPage.xhtml?id=#{plant.plantID} "/>
+                                </p:column>
 
                                 <!-- .........................................ROW EXPANSION.......................................................... -->
                                 <p:rowExpansion>
-                                 put it back
+                                    <div class="card">
+                                        <h5>Latest Measurements</h5>
+                                        <p:dataTable var="measurement" value="#{measurementService.getLatestPlantMeasurements(plant)}" reflow="true" rowKey="#{measurement.id}">
+                                            <p:column headerText="Type" sortBy="#{measurement.type}">
+                                                <h:outputText value="#{measurement.type}" />
+                                            </p:column>
+
+                                            <p:column headerText="Value" sortBy="#{measurement.value_s}">
+                                                <h:outputText value="#{measurement.value_s}" />
+                                            </p:column>
+
+                                            <p:column headerText="Unit" sortBy="#{measurement.unit}">
+                                                <h:outputText value="#{measurement.unit}">
+                                                    <f:convertNumber currencySymbol="$" type="currency" />
+                                                </h:outputText>
+                                            </p:column>
+
+                                            <p:column  headerText="Status" >
+                                                <h:form rendered="#{not empty measurement.id}">
+                                                <i class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"
+                                                   style="display: flex; justify-content: center; align-items: center; color:#{measurementListController.getSensorStatus(measurement.type,measurement.sensorStation) == 'OK' ? 'green' : 'red'}"
+                                                   title="#{measurement.type}"></i>
+                                                </h:form>
+                                            </p:column>
+
+                                        </p:dataTable>
+                                    </div>
                                 </p:rowExpansion>
 
                             </p:dataTable>
@@ -366,11 +387,6 @@
                                     </p:graphicImage>
                                 </p:galleria>
                             </div>
-
-
-
-
-
 
 
                         </div>
@@ -405,7 +421,7 @@
                             <!-- ...........AUDIT LOG FRAME ........... -->
                             <div class="col-12 md:col-6">
                                 <div class="card status">
-                                    <h:outputLink value="/auditLog.xhtml">
+                                    <h:outputLink value="/admin/auditLog.xhtml">
                                         <h5 style="text-align: center; color: grey;">Audit Logs</h5>
                                     </h:outputLink>
 
@@ -494,5 +510,83 @@
                 <!--.....................................................ADMIN LOG FINISHED............................................-->
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- ....................................... HELP DIALOGS...................................................................... -->
+        <!-- ...................................UserDashboard help dialog............................. -->
+        <p:dialog header="User Dashboard Help" id="userDhelpDialog" widgetVar="userDhelpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+
+            <p:outputPanel id="UserDhelpDialog">
+                <h5>Getting Started</h5>
+                <p>On this page you can keep track of your followed plants and visit their respective plant pages to see their gallery description and latest measurements,<br></br>
+                    or you can unfollow them by clicking on the - button.<br></br>
+                To add a plant to your followed plants visit Plant Catalogue.</p>
+                <h6>About following unfollowing</h6>
+                When a plant dies and is finally deleted you will be automatically unfollowed , as long as the plant is not
+                deleted you will still be able to see its gallery and pictures even if it already died<br></br>
+                Use the unfollow button to stop following a plant.<br></br>
+                To see all our plants and add them to your followed list vist the Plants Catalogue page.
+                <h6>About Plant pages</h6>
+                Each of our plants has a dedicated plant page you can visit to see its gallery and latest measurements along with other
+                usefull information!<br></br>
+                Visit it by pressing the "Show Plant Page" button
+            </p:outputPanel>
+        </p:dialog>
+
+        <!-- ...................................Gardener Dashboard help dialog............................. -->
+        <p:dialog header="Gardener Dashboard Help" id="gardenerDhelpDialog" widgetVar="gardenerDhelpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+
+            <p:outputPanel id="GardenerDhelpDialog">
+                <p>On this page you can keep track of the Sensor Stations that have been assigned to you, see their Sensors Status and corresponding Graph.</p>
+                <h6>About The Details Page</h6>
+                By clicking on the associated button you can open the DetailPage , in the detailpage you will have the possibility to:<br></br>
+                <br></br>
+                See all measurements for the chosen Sensor Station with the corresponding Graphs.<br></br>
+                Manage the pictures users take of the plants , Pictures will need your approval before going to the public Plant Gallery.<br></br>
+                Edit Things like the location of the sensorStation and the plant displayed.<br></br>
+                Remove The Current Pairing And/Or Pair to a new Access Point.<br></br>
+                Reset the Alarm Switch .<br></br>
+                See all Sensors of the chosen Sensor Station with their relative information<br></br>
+                Edit Sensors bordervalues aswell as resetting the respective Alarm Counts.<br></br>
+                More Detailed Usage infos can be found on the page itself.
+                <h6>About The Sensors Status</h6>
+                The Status Icons Show if the corresponding Sensor has reached his set treshold alarm count.
+                <h6>About The Graph</h6>
+                By selecting a Sensor Station the panel on the left will show a graph for the Sensor Station Last Measurements (one per type).
+            </p:outputPanel>
+        </p:dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </ui:define>
 </ui:composition>

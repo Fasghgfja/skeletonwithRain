@@ -1,8 +1,6 @@
 package at.qe.skeleton.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +21,7 @@ public abstract class Metadata {
     private LocalDate updateDate;
     @ManyToOne
     private Userx createUser;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Userx updateUser;
 }
 

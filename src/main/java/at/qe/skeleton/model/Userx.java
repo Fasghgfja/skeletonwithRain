@@ -24,7 +24,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private String username;
     @ManyToOne(optional = false)
     private Userx createUser;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Userx updateUser;
 
     @OneToOne
@@ -36,7 +36,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private String phone;
     boolean enabled;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_plant",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username"),
@@ -45,14 +45,28 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private Set<Plant> followedPlants = new HashSet<>();
 
 
-
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL)//TODO check if this can be lazy
     @JoinTable(
-            name = "gardener_plant",
+            name = "gardener_sensorStation",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username"),
-            inverseJoinColumns = @JoinColumn(name = "plant_id", referencedColumnName = "plantID")
+            inverseJoinColumns = @JoinColumn(name = "sensorStationName", referencedColumnName = "sensorStationName")
     )
-    private Set<Plant> plantsUnderCare = new HashSet<>();
+    private Set<SensorStation> sensorStationsUnderCare = new HashSet<>();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

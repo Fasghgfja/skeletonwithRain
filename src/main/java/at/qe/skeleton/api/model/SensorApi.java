@@ -4,17 +4,21 @@ package at.qe.skeleton.api.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class SensorApi {
+public class SensorApi implements Serializable {
 
     private Long sensor_id;
     private String uuid;
     private String station_name;
-
     private String type;
-
     private int alarm_count;
+
+    private String upperBoarder;
+
+    private String lowerBoarder;
 
     @Override
     public String toString() {

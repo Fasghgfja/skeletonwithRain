@@ -6,13 +6,54 @@
     <ui:define name="title">Plant Health - Access Points Management</ui:define>
 
     <ui:define name="content">
+        <!-- CREATE ACCESS POINT BUTTON -->
+
+        <p:separator>
+            <p:commandButton value="Create New Access Point" update=":createDialog:createAPDialog"
+                             oncomplete="PF('createAPDialog').show();"
+                             icon="pi pi-plus" title="Create new Access Point" class="btn btn-primary">
+                <p:resetInput target=":createDialog:createAPDialog"/>
+            </p:commandButton>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="350"
+                             widgetVar="confirmDialog">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"
+                                 icon="pi pi-check"/>
+                <p:commandButton value="No" type="button"
+                                 styleClass="ui-confirmdialog-no ui-button-secondary"
+                                 icon="pi pi-times"/>
+            </p:confirmDialog>
+        </p:separator>
+
+        <!-- CREATE ACCESS POINT DIALOG -->
+        <h:form id="createDialog">
+            <p:dialog header="Create New Access Point" id="createAPDialog" widgetVar="createAPDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:ajax event="close" update="createAPDialog"/>
+                <p:outputPanel id="createAP">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="location" value="Location:"/>
+                        <p:inputText id="location" value="#{createAccessPointBean.location}"
+                                     required="true"/>
+
+                        <p:commandButton value="Create"
+                                         action="#{createAccessPointBean.doCreateNewAccessPoint}"
+                                         update=":accessPointsForm:accessPointsTable"
+                                         oncomplete="PF('createAPDialog').hide();location.reload();"/>
+                        <p:commandButton value="Cancel" onclick="PF('createAPDialog').hide()"/>
+
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+
         <h:form id="accessPointsForm">
             <div class="grid table-demo">
                 <div class="col-12">
                     <div class="card">
+                        <h5>Access Points</h5>
 
                         <p:dataTable id="accessPointsTable" var="accessPoint"
-                                     value="#{accessPointController.accessPoints}"
+                                     value="#{accessPointController.accessPointList}"
                                      paginator="true" paginatorPosition="bottom" rows="10" rowIndexVar="rowIndex"
                                      emptyMessage="No Access Points found.">
                             <p:column style="text-align: center" headerText="Access Point ID" sortBy="#{accessPoint.id}"
@@ -32,7 +73,7 @@
                             <p:column style="text-align: center">
                                 <p:commandButton class="ui-button-danger" icon="pi pi-trash" title="Delete"
                                                  update="accessPointsForm:accessPointsTable"
-                                                 action="#{accessPointController.doDeleteAccessPoint}">
+                                                 action="#{accessPointController.doDeleteAccessPoint}" oncomplete="location.reload()">
                                     <f:setPropertyActionListener value="#{accessPoint}"
                                                                  target="#{accessPointController.accessPoint}"/>
                                     <p:confirm header="Confirmation"
@@ -41,45 +82,10 @@
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
-                    </div></div></div></h:form>
-                        <!-- CREATE ACCESS POINT BUTTON -->
+                    </div>
+                </div>
+            </div>
+        </h:form>
 
-                        <p:separator>
-                            <p:commandButton value="Create New Access Point" update=":createDialog:createAPDialog"
-                                             oncomplete="PF('createAPDialog').show()"
-                                             icon="pi pi-plus" title="Create new Access Point" class="btn btn-primary">
-                                    <p:resetInput target=":createDialog:createAPDialog"/>
-                            </p:commandButton>
-                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="350"
-                                             widgetVar="confirmDialog">
-                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"
-                                                 icon="pi pi-check"/>
-                                <p:commandButton value="No" type="button"
-                                                 styleClass="ui-confirmdialog-no ui-button-secondary"
-                                                 icon="pi pi-times"/>
-                            </p:confirmDialog>
-                        </p:separator>
-
-                        <!-- CREATE ACCESS POINT DIALOG -->
-                        <h:form id="createDialog">
-                            <p:dialog header="Create New Access Point" id="createAPDialog" widgetVar="createAPDialog" modal="true"
-                                      showEffect="fade" hideEffect="fade" resizable="false">
-                                <p:ajax event="close" update="createAPDialog"/>
-                                <p:outputPanel id="createAP">
-                                    <h:panelGrid columns="2">
-                                        <p:outputLabel for="location" value="Location:"/>
-                                        <p:inputText id="location" value="#{createAccessPointBean.location}"
-                                                     required="true"/>
-
-                                        <p:commandButton value="Create"
-                                                         action="#{createAccessPointBean.doCreateNewAccessPoint}"
-                                                         update=":accessPointsForm:accessPointsTable"
-                                                         oncomplete="PF('createAPDialog').hide()"/>
-                                        <p:commandButton value="Cancel" onclick="PF('createAPDialog').hide()"/>
-
-                                    </h:panelGrid>
-                                </p:outputPanel>
-                            </p:dialog>
-                        </h:form>
     </ui:define>
 </ui:composition>

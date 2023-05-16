@@ -4,18 +4,14 @@ package at.qe.skeleton.ui.controllers;
 import at.qe.skeleton.model.Image;
 import at.qe.skeleton.services.ImageService;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.PhaseId;
 import jakarta.inject.Named;
-import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.ResponsiveOption;
-import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +46,6 @@ import java.util.Map;
 
 
 
-//TODO: mybe this is a service and can all be integrated into image service ... try it out ...do extensive testing
 @Component
 @Named
 @Scope("application")
@@ -58,9 +53,7 @@ public class GalleryController implements Serializable {
 
     @Autowired
     private ImageService imageService;
-
     private List<Image> images;
-
     private List<Image> approvedimages;
 
 
@@ -231,15 +224,39 @@ public class GalleryController implements Serializable {
 
 
 
+
+
+
     public void doDeleteImage(Image image) {
         imageService.deleteImage(image);
     }
 
 
     public void approveImage(Image image) {
+        System.out.println("gallery controller: approvingImage");
         image.setApproved(true);
         imageService.saveImage(image);
     }
+
+
+
+
+
+    public Integer getTotalImagesAmount() {
+        return imageService.getTotalImagesAmount();
+    }
+    public Integer getApprovedImagesAmount() {
+        return imageService.getApprovedImagesAmount();
+    }
+    public Integer getNotApprovedImagesAmount() {
+        return imageService.getNotApprovedImagesAmount();
+    }
+    public Integer getApprovedImagesNoPlantAmount() {
+        return imageService.getApprovedImagesNoPlantAmount();
+    }
+
+
+
 
 
 

@@ -1,4 +1,8 @@
-maintainer: Stefan Huter
-
+accesspoint-params:
+  id: 50100
+  measurement-intervall: 5
+  webapp-intervall: 2
 webapp-params:
   ip: localhost:8080
+  pswd: passwd
+  usnm: admin

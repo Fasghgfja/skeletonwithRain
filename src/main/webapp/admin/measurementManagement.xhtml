@@ -1,0 +1,227 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/WEB-INF/templates/main.xhtml">
+
+
+    <ui:define name="title">Planthealth: Measurement Management</ui:define>
+
+    <ui:define name="viewname">
+        <li>Measurement Management</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li>
+        </li>
+    </ui:define>
+
+    <ui:define name="head">
+        <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css"/>
+
+    </ui:define>
+
+
+    <ui:define name="content">
+
+
+        <!-- .........................................TABLE.............................................................. -->
+        <h:form id="measurementForm">
+            <div class="col-12">
+
+
+
+
+
+                <div class="card">
+                    <!-- ..........HEADER.......... -->
+                    <div class="card-header">
+                        <div class="header-buttons">
+
+
+                            <div class="col-12 md:col-6 xl:col-3">
+                                <div class="card overview-box">
+                                    <p:graphicImage url="../resources/images/dashboard/effect-messages.svg"/>
+                                    <span class="overview-icon">
+                                <p:graphicImage url="../resources/images/dashboard/measurements.png"/>
+                            </span>
+                                    <div class="overview">
+                                        <span class="overview-title">MEASUREMENTS</span>
+                                        <h3>
+                                            <h:outputText value="#{measurementListController.measurementsAmount}"/>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- ....................Delete all Measurement for a given time....BUTTON............................ -->
+                            <p:commandButton style="margin-left:5px; background-color: black; margin-right: 10px" value="Delete all Measurements from to" rendered="#{sessionInfoBean.hasRole('ADMIN')}"  oncomplete="PF('deleteFromToDialog').show()"
+                                             icon="fa-solid fa-trash-can" title="Delete measurements" class="btn btn-primary" update=":deleteFromToForm:DeleteMeasurements" >
+                            </p:commandButton>
+
+                            <!-- ....................Delete all Measurement for a given sensor station..........BUTTON............ -->
+                            <p:commandButton style="margin-left:5px; background-color: red; margin-right: 10px" value="Delete for Sensor Station" rendered="#{sessionInfoBean.hasRole('ADMIN')}"  oncomplete="PF('deleteForSensorStationDialog').show()"
+                                             icon="fa-solid fa-calendar-xmark" title="Delete measurements" class="btn btn-primary" update=":deleteForSensorStationForm:DeleteForSensorStationDialog" >
+                            </p:commandButton>
+
+                            <!-- ....................Help button...........................BUTTON................................. -->
+                            <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
+                                             styleClass="ui-button-secondary outlined-button"
+                                             onclick="PF('helpDialog').show()"/>
+
+                        </div>
+                    </div>
+
+                    <p:dataTable id="myDataTable1" var="measurement"
+                                 value="#{measurementListController.measurements}"
+                                 selectionMode="single" reflow="true"
+                                 rowKey="#{measurement.id}" scrollable="true" sortBy="#{measurement.timestamp}"
+                                 scrollHeight="500px" rows="100" paginator="true" paginatorPosition="bottom"
+                                 styleClass="ui-datatable-striped ui-datatable-sm ui-datatable-gridlines">
+
+                        <p:column headerText="Sensor Station" sortBy="#{measurement.sensorStation}" filterBy="#{measurement.sensorStation.sensorStationName}">
+                            <h:outputText value="#{measurement.sensorStation}"/>
+                        </p:column>
+                        <p:column headerText="Measurement" sortBy="#{measurement.value_s}"
+                                  filterBy="#{measurement.value_s}">
+                            <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                          value="#{measurement.value_s} #{measurement.unit}"/>
+                        </p:column>
+                        <p:column headerText="Time" sortBy="#{measurement.timestamp}"
+                                  filterBy="#{measurement.timestamp}">
+                            <h:outputText value="#{measurement.readableTimestamp}"/>
+                        </p:column>
+                        <p:column headerText="Type" sortBy="#{measurement.type}">
+                            <h:outputText value="#{measurement.type}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+
+
+        </h:form>
+
+
+
+
+
+
+        <!-- ...................................Dialogs................................................................................. -->
+
+
+        <!-- ...................................CONFIRMATION DIALOG .................................... -->
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+        </p:confirmDialog>
+
+
+        <!-- ...................................Delete from To dialog.......................................................... -->
+        <h:form id="deleteFromToForm">
+            <p:dialog header="delete From Date To Date" id="deleteFromToDialog" widgetVar="deleteFromToDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:ajax event="close" update="deleteFromToForm"/>
+                <!-- ...................................Dialog Contents........................ -->
+                <p:outputPanel id="DeleteMeasurements">
+                    <h:panelGrid columns="1">
+                        <p:outputPanel id="eventDetails" styleClass="ui-fluid">
+                            <div class="field">
+                                <p:outputLabel for="fromDate" value="fromDate" />
+                                <p:datePicker id="fromDate" value="#{measurementListController.event.startDate}" pattern="yyyy-MM-dd" showTime="true"  appendTo="@(body)"  />
+                            </div>
+                            <div class="field">
+                                <p:outputLabel for="toDate" value="toDate" />
+                                <p:datePicker id="toDate" value="#{measurementListController.event.endDate}" pattern="yyyy-MM-dd" showTime="true"  appendTo="@(body)" />
+                            </div>
+                        </p:outputPanel>
+                        <!-- ...................................Buttons........................ -->
+                        <p:commandButton value="Delete"
+                                         action="#{measurementListController.deleteFromTo()}"
+                                         oncomplete="PF('deleteFromToDialog').hide(); location.reload();">
+                            <!-- ................Confirm dialog................... -->
+                        <p:confirm header="Confirmation"
+                                   message="Are you sure ? You cannot undo this operation.
+                                        All measurement up to your selected date will be deleted"
+                                   icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+                        <p:commandButton value="Cancel" onclick="PF('createPlantDialog').hide()"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+
+
+
+
+        <!-- ...................................Delete for sensor station dialog....................................................... -->
+        <h:form id="deleteForSensorStationForm">
+            <p:dialog header="delete For Sensor Station" id="deleteForSensorStationDialog" widgetVar="deleteForSensorStationDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:ajax event="close" update="deleteForSensorStationForm"/>
+                <!-- ...................................Dialog Contents........................ -->
+                <p:outputPanel id="DeleteForSensorStationDialog">
+                    <h:panelGrid columns="1">
+                        <p:outputLabel for="sensorStationId" value="Sensor-station name:"/>
+                        <p:selectOneMenu value="#{measurementListController.sensorStationToDeleteFromId}" id="sensorStationId" filter="true" emptyLabel="Sensor-station name"
+                                         scrollHeight="250" updateLabel="true" >
+                            <f:selectItems value="#{sensorStationListController.sensorStationsIds}"/>
+                            <f:facet name="footer">
+                                <p:divider styleClass="mt-0" />
+                                <h:outputText value="3 options" style="font-weight:bold;"/>
+                            </f:facet>
+                        </p:selectOneMenu>
+                        <p:outputPanel id="Details" styleClass="ui-fluid">
+                            <div class="field">
+                                <p:outputLabel for="fromDateS" value="fromDate" />
+                                <p:datePicker id="fromDateS" value="#{measurementListController.event.startDate}" pattern="yyyy-MM-dd" showTime="true"  appendTo="@(body)"  />
+                            </div>
+                            <div class="field">
+                                <p:outputLabel for="toDateS" value="toDate" />
+                                <p:datePicker id="toDateS" value="#{measurementListController.event.endDate}" pattern="yyyy-MM-dd" showTime="true"  appendTo="@(body)" />
+                            </div>
+                        </p:outputPanel>
+                        <!-- ...................................Buttons.....TODO:is it really necessary to reload the location?................... -->
+                        <p:commandButton value="Delete"
+                                         action="#{measurementListController.deleteFromToForSensorStation()}"
+                                         oncomplete="PF('deleteForSensorStationDialog').hide(); location.reload();">
+                            <!-- ................Confirm dialog................... -->
+                            <p:confirm header="Confirmation"
+                                       message="Are you sure ? You cannot undo this operation.
+                                        All measurement up to your selected date will be deleted"
+                                       icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+                        <p:commandButton value="Cancel" onclick="PF('deleteForSensorStationDialog').hide()"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+
+
+
+
+        <!-- .................................. Help dialog............................................................................... -->
+        <p:dialog header="Measurement Management Help" id="helpDialog" widgetVar="helpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="measurementPageHelp">
+            From This page you can cancel measurement for a given timeslot or for a sensor station.<br></br>
+            <h6>About Deleting for a timeframe:</h6>
+            To delete measurement for a given timeframe press the "Delete all Measurements From To" button.<br></br>
+            This will open a dialog that will ask you for starting date and an end date.
+            If u leave both fields empty nothing will happen.<br></br>
+            If u only fill in the "To" field then all measurement in the system up to your given date will be deleted.<br></br>
+            If u only fill in the field "From" then all measurement in the system starting from your date up to today will be deleted.<br></br>
+            <h6>About Deleting For a sensor station:</h6>
+            By Pressing the appropriate button you will be asked to chose a sensor station and a timeframe.<br></br>
+            all measurement for that sensorstation in your specified timeframe will be deleted.<br></br>
+            WARNING: By leaving both fields empty all measurements for that sensor station will be deleted.<br></br>
+            the rest of the delete logic works like the one for deleting for a timeframe explained above.
+        </p:outputPanel>
+        </p:dialog>
+
+
+
+
+
+
+
+
+    </ui:define>
+</ui:composition>

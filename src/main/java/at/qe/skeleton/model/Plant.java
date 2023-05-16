@@ -3,14 +3,12 @@ package at.qe.skeleton.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.springframework.data.domain.Persistable;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -19,12 +17,12 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class Plant extends Metadata implements Persistable<Long>, Serializable, Comparable<Plant> {
+public class Plant implements Persistable<Long>, Serializable, Comparable<Plant> {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_gen")
-    @SequenceGenerator(name = "id_gen", initialValue = 2)
+    @SequenceGenerator(name = "id_gen", initialValue = 100)
     @Column(nullable = false, unique = true)
     private Long plantID;
 
@@ -36,13 +34,18 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
     @Column(length = 100)
     private String plantName;
 
-    @ManyToMany(mappedBy = "followedPlants", fetch = FetchType.LAZY)
+
+    @ManyToMany(fetch = FetchType.EAGER) //TODO: EAGER , do not touch
+    @JoinTable(
+            name = "user_plant",
+            joinColumns = @JoinColumn(name = "plant_id", referencedColumnName = "plantID"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username")
+    )
     private Set<Userx> followers = new HashSet<>();
 
-    @ManyToMany(mappedBy = "plantsUnderCare", fetch = FetchType.LAZY)
-    private Set<Userx> gardeners = new HashSet<>();
 
-
+    @OneToOne
+    private SensorStation sensorStation;
 
 
     @Override
@@ -58,7 +61,7 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
 
     @Override
     public boolean isNew() {
-        return (null == super.getCreateDate());
+        return (null == getPlantedDate());
     }
 
     @Override
@@ -66,25 +69,17 @@ public class Plant extends Metadata implements Persistable<Long>, Serializable, 
         return this.plantID.compareTo(o.getPlantID());
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Plant plant)) return false;
 
-        Plant plant = (Plant) o;
-
-        if (!Objects.equals(plantID, plant.plantID)) return false;
-        if (!Objects.equals(description, plant.description)) return false;
-        return Objects.equals(plantName, plant.plantName);
+        return getPlantID().equals(plant.getPlantID());
     }
 
     @Override
     public int hashCode() {
-        int result = plantID != null ? plantID.hashCode() : 0;
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (plantName != null ? plantName.hashCode() : 0);
-        return result;
+        return getPlantID().hashCode();
     }
 }
 

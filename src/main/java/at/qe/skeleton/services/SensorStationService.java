@@ -1,17 +1,17 @@
 package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Log;
-import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.SensorStationRepository;
+import at.qe.skeleton.repositories.UserxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.*;
 
 
 @Service
@@ -21,23 +21,50 @@ public class SensorStationService {
 
     @Autowired
     private SensorStationRepository sensorStationRepository;
+
+    @Autowired
+    private UserxRepository userRepository;
+
+
     @Autowired
     private LogRepository logRepository;
 
 
+    /**
+     * Method to get all sensor stations currently stored in the database.
+     * @return Collection of all sensor stations.
+     */
     public Collection<SensorStation> getAllSensorStations() {
         return sensorStationRepository.findAll();
     }
 
 
     public Collection<SensorStation> getAllAssignedSensorStations(Userx user) {
-        return sensorStationRepository.findSensorStationsByGardener(user.getUsername());
+        return sensorStationRepository.findSensorStationsByGardener(user);
     }
 
+    public void addGardenerToSensorStation(SensorStation sensorStation, String user) {//TODO:New , test this
+        if(user == null || sensorStation == null  ) {return;}//need to remove lazy for this , check if its doable speedwise userloa || sensorStation.getGardener().contains(user)
+        sensorStation = sensorStationRepository.findFirstById(sensorStation.getSensorStationName());
+        Userx userload = userRepository.findFirstByUsername(user);
 
+        userload.getSensorStationsUnderCare().add(sensorStation);
+        Set<Userx> gardeners = new HashSet<>(userRepository.findUserxBySensorStationsUnderCareIsContaining(sensorStation));
+        sensorStation.setGardener(gardeners);
+       // sensorStationRepository.save(sensorStation);// not needed i think
+        userRepository.save(userload);
+    }
 
-
-
+    public void removeGardenerFromSensorStation(SensorStation sensorStation, Userx user) {//TODO:New , Test this
+        if(user == null || sensorStation == null  ) {return;}//need to remove lazy for this , check if its doable speedwise userloa || sensorStation.getGardener().contains(user)
+        Userx userload = userRepository.findFirstByUsername(user.getId());
+        sensorStation = sensorStationRepository.findFirstById(sensorStation.getSensorStationName());
+        userload.getSensorStationsUnderCare().remove(sensorStation);
+        Set<Userx> gardeners = new HashSet<>(userRepository.findUserxBySensorStationsUnderCareIsContaining(sensorStation));
+        sensorStation.setGardener(gardeners);
+        userRepository.save(userload);
+       // sensorStationRepository.save(sensorStation);// not needed i think
+    }
 
 
 
@@ -73,10 +100,12 @@ public class SensorStationService {
     }
 
 
-    //TODO: push this down to repository and queue , it is too expensive here
-
     public long getSensorStationsAmount() {
         return sensorStationRepository.count();
     }
 
+
+    public Collection<String> getAllSensorStationsIds() {//this is used to return a list of sensorstations ids to delete from when deleting measurements
+        return sensorStationRepository.getAllSensorStationsIds();
+    }
 }

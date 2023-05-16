@@ -3,11 +3,10 @@ package at.qe.skeleton.repositories;
 
 import at.qe.skeleton.model.Image;
 import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.SensorStation;
-import at.qe.skeleton.model.Userx;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -41,7 +40,20 @@ public interface ImageRepository extends AbstractRepository<Image, Long> {
     List<Image> findImagesByPlant(Plant plant);
 
 
-    List<Image> findImagesByPlantAndApprovedEquals(Plant plant,boolean approved);
+
+    void deleteImagesByPlant(Plant plant);
+
+    Integer countImagesByPlant(Plant plant);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Image i SET i.plant = null WHERE i.plant = :plant")
+    void setPlantIdToNull(@Param("plant") Plant plant);
+
+
+
+
+    List<Image> findImagesByPlantAndApprovedEquals(Plant plant, boolean approved);
 
     List<Image> findImagesByApprovedEquals(boolean approved);
 
@@ -83,5 +95,10 @@ public interface ImageRepository extends AbstractRepository<Image, Long> {
      */
     List<Image> findImagesByPlantAndCreationDateEquals(Plant plant, LocalDate date);
 
+    Integer count();
+
+    Integer countImagesByApprovedEquals(Boolean approved);
+
+    Integer countImagesByApprovedEqualsAndPlantEquals(Boolean approved, Plant plant);
 }
 

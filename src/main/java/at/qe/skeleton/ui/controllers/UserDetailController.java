@@ -2,6 +2,7 @@ package at.qe.skeleton.ui.controllers;
 
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.LogRepository;
+import at.qe.skeleton.services.PlantService;
 import at.qe.skeleton.services.UserService;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -48,6 +49,12 @@ public class UserDetailController implements Serializable {
 
     @Autowired
     private transient LogRepository logRepository;
+
+    @Autowired
+    private transient PlantController plantController;
+
+    @Autowired
+    private transient PlantService plantService;
 
     private List<String> selectedRoles;
 
@@ -154,7 +161,6 @@ public class UserDetailController implements Serializable {
 
 
 
-
     public void setSelectedRolesEdit(List<String> selectedRolesEdit) {
         this.selectedRolesEdit = selectedRolesEdit;
     }
@@ -178,6 +184,7 @@ public class UserDetailController implements Serializable {
     public void doRemovePlantFromFollowedPlants(Plant plant) {
         user = sessionInfoBean.getCurrentUser();
         this.userService.removePlantFromFollowedPlants(user,plant);
+        plantController.setFollowedPlantsList((ArrayList<Plant>)plantService.getFollowedPlants(user));
     }
 
 }

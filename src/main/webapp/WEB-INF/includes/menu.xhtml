@@ -54,22 +54,21 @@
 
                     <!-- ..........................................ADMIN SUBMENU............................................................... -->
                     <p:submenu id="m_components" label="Administration Utility" icon="pi pi-pencil" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
-                        <p:menuitem id="m_input2" value="Manage Sensor Stations" icon="pi pi-check-square" outcome="/admin/sensorStationMenagement" />
                         <p:menuitem id="m_table" value="Manage Users" icon="pi pi-users" outcome="/admin/userManagement" />
+                        <p:menuitem id="m_input2" value="Manage Sensor Stations" icon="pi pi-server" outcome="/admin/sensorStationMenagement" />
                         <p:menuitem id="m_list" value="Manage Access Points" icon="pi pi-server" outcome="/accessPointsManagement" />
                         <p:menuitem id="m_list2" value="Manage Plants" icon="pi pi-server" outcome="/admin/plantManagement" />
                         <p:menuitem id="m_media" value="Manage Images" icon="pi pi-image" url="/admin/imageMenagement.xhtml" />
-                        <p:menuitem id="m1_button2" value="Upload a Picture With Primefaces WORKING!!!" icon="pi pi-mobile" url="/admin/tstpageuploadandtakeaphotobutton.xhtml" styleClass="rotated-icon"/>
+                        <p:menuitem id="m_table2" value="Manage Measurements" icon="pi pi-users" outcome="/admin/measurementManagement" />
                         <p:menuitem id="m_formlayout" value="Audit Log" icon="pi pi-history" outcome="/admin/auditLog" />
-                        <p:menuitem id="qrCode" value="Generate Qr Code" icon="pi pi-info-circle" outcome="/generateQrCode"/>
+                        <p:menuitem id="qrCode" value="Generate Qr Code" icon="pi pi-qrcode" outcome="/generateQrCode.xhtml?id=00"/>
                         <p:menuitem id="registerT" value="Register/upload/gallery NEW!!!" icon="pi pi-image" url="/registration/register.xhtml" />
                     </p:submenu>
 
                     <!-- ..........................................GARDENER SUBMENU............................................................... -->
                     <p:submenu id="m_primeblocks" label="Gardener Submenu" icon="pi pi-prime" rendered="#{sessionInfoBean.hasRole('GARDENER')}">
-                        <p:menuitem id="m_freeblocks" value="Manage Greenhouses" icon="pi pi-eye" outcome="/gardener/greenhouses"/>
-                        <p:menuitem id="m_allblocks" value="Gardener utility" icon="pi pi-question-circle" outcome="/testpages/empty"/>
-                    </p:submenu>
+                        <p:menuitem id="m_freeblocks" value="Manage Assigned Greenhouses" icon="pi pi-eye" outcome="/gardener/greenhouses"/>
+                        </p:submenu>
 
 
                     <!-- ..........................................OTHER MENU ELEMENTS..................................................... -->
@@ -79,11 +78,9 @@
 
 
                     <!-- ..........................................TESTING SUBMENU............................................................... -->
-                    <p:submenu id="m_primeblocks2" label="Testing Pages" icon="pi pi-prime" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+                    <p:submenu id="m_primeblocks2" label="New Features Testing" icon="pi pi-prime" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
                         <p:menuitem id="m_doc" value="Primefaces Css Documentation" icon="pi pi-info-circle" outcome="/testpages/documentation"/>
-                        <p:menuitem id="m_media2" value="Image Gallery Test" icon="pi pi-image" outcome="/testpages/testGalleria" />
-                        <p:menuitem id="register2" value="Register Test" icon="pi pi-image" outcome="/testpages/registerTest" />
-                        <p:menuitem id="m1_button" value="Upload a Picture with Rest WORKING!!!" icon="pi pi-mobile" outcome="/testpages/file" styleClass="rotated-icon"/>
+                        <p:menuitem id="m1_button2" value="Upload Profile Picture Tests" icon="pi pi-mobile" url="/testpages/tstpageuploadandtakeaphotobutton.xhtml" styleClass="rotated-icon"/>
                     </p:submenu>
 
 

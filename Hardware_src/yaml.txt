@@ -1,0 +1,9 @@
+webapp-params:
+  ip: localhost:8080
+  usnm: admin
+  pswd: passwd
+
+accesspoint-params:
+  measurement-intervall: 10
+  webapp-intervall: 10
+  id: 50100

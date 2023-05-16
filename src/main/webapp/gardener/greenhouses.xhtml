@@ -19,256 +19,13 @@
 
     <ui:define name ="content">
 
-
-
-
-        <!-- .........................................TABLE.............................................................. -->
-        <h:form id="userForm">
-            <div class="col-12">
-
-                <div class="card">
-                    <h5>Sensor Stations</h5>
-                    <p:dataTable id="sensorStationTable" var="sensorStation" value="#{sensorStationListController.sensorStations}"
-                                 scrollable="true" scrollHeight="550"
-                                 paginatorPosition="bottom" rowKey="#{sensorStation.id}">
-
-                        <p:ajax event="rowToggle" listener="#{sensorStationDetailController.onRowToggle}" />
-
-                        <p:column style="width:2rem">
-                            <p:rowToggler/>
-                        </p:column>
-
-                        <p:column headerText="Id" sortBy="#{sensorStation.id}">
-                            <h:outputText value="#{sensorStation.id}"/>
-                        </p:column>
-
-                        <p:column >
-                            <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
-                        </p:column>
-
-                        <p:column headerText="Plant" sortBy="#{sensorStation.plant.plantName}">
-                            <h:outputText value="#{sensorStation.plant}"/>
-                        </p:column>
-
-                        <p:column headerText="Planted" sortBy="#{sensorStation.createDate}">
-                            <h:outputText value="#{product.category}"/>
-                        </p:column>
-
-                        <p:column headerText="Status">
-                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_PRESSURE')}"
-                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_PRESSURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
-                               title="Air Pressure"></i>
-                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('TEMPERATURE')}"
-                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('TEMPERATURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
-                               title="Temperature"></i>
-                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('SOIL_MOISTURE')}"
-                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('SOIL_MOISTURE',sensorStation.id) == 'OK' ? 'green' : 'red'}"
-                               title="Soil Moisture"></i>
-                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('AIR_QUALITY')}"
-                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('AIR_QUALITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
-                               title="Air Quality"></i>
-                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('LIGHT_INTENSITY')}"
-                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('LIGHT_INTENSITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
-                               title="Light Intensity"></i>
-                            <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon('HUMIDITY')}"
-                               style="color:#{sensorStationDetailController.getlastMeasurementStatus('HUMIDITY',sensorStation.id) == 'OK' ? 'green' : 'red'}"
-                               title="Humidity"></i>
-                        </p:column>
-
-                        <p:column headerText="Location" sortBy="#{sensorStation.location}">
-                            <h:outputText value="#{sensorStation.location}"/>
-                        </p:column>
-
-                        <p:column headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}">
-                            <h:outputText value="#{sensorStation.alarmSwitch}"/>
-                        </p:column>
-
-
-                        <p:column style="text-align: center">
-
-                            <!-- DetailView page Button -->
-                            <p:button icon="pi pi-search"
-                                      title="open Detail-View"
-                                      href="/greenHouseDetails.xhtml?id=#{sensorStation.id}" />
-
-                            <!-- ....................SENSOR STATION EDIT BUTTON ........... .............. -->
-                            <p:commandButton style="margin-right: 10px" update=":userForm:userEditDialog"
-                                             oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit" title="Edit">
-                                <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
-                            </p:commandButton>
-
-                            <!-- ....................DELETE SENSOR STATION BUTTON ........... .............. -->
-                            <p:commandButton styleClass="ui-button-danger"
-                                             action="#{sensorStationDetailController.doDeleteSensorStation()}" icon="pi pi-user-minus"
-                                             title="Delete"
-                                             update=":userForm:sensorStationTable">
-                                <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
-                                <p:confirm header="Confirmation"
-                                           message="Are you sure that you want to delete the sensor station '#{sensorStation.sensorStationName}'? You cannot undo this operation."
-                                           icon="pi pi-exclamation-triangle"/>
-                            </p:commandButton>
-
-                        </p:column>
-
-
-
-                        <!-- .........................................ROW EXPANSION.......................................................... -->
-                        <p:rowExpansion>
-                            <div class="orders-subtable">
-                                <h5>Latest Measurements for Greenhouse #{sensorStation.id}</h5>
-                                <p:dataTable var="measurement" value="#{sensorStationDetailController.latestMeasurements}" reflow="true" rowKey="#{measurement.id}">
-                                    <p:column headerText="Type" sortBy="#{measurement.type}">
-                                        <h:outputText value="#{measurement.type}" />
-                                    </p:column>
-
-                                    <p:column headerText="Value" sortBy="#{measurement.value_s}">
-                                        <h:outputText value="#{measurement.value_s}" />
-                                    </p:column>
-
-                                    <p:column headerText="Unit" sortBy="#{measurement.unit}">
-                                        <h:outputText value="#{measurement.unit}">
-                                            <f:convertNumber currencySymbol="$" type="currency" />
-                                        </h:outputText>
-                                    </p:column>
-
-                                    <p:column headerText="Status">
-                                        <i class="#{sensorStationDetailController.getlastMeasurementStatusIcon(measurement.type)}"
-                                           style="display: flex; justify-content: center; align-items: center; color:#{sensorStationDetailController.getMeasurementStatus(measurement.id,measurement.type) == 'OK' ? 'green' : 'red'}"
-                                           title="#{measurement.type}"></i>
-                                    </p:column>
-
-                                </p:dataTable>
-                            </div>
-                        </p:rowExpansion>
-
-                    </p:dataTable>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-            <!-- .......................................DIALOGS...................................................................... -->
-
-
-            <!-- ...................................Sensor station Edit dialog.................................... -->
-            <p:dialog header="Edit Sensor Staion" id="userEditDialog" widgetVar="userEditDialog" modal="true"
-                      showEffect="fade" hideEffect="fade" resizable="false">
-                <p:outputPanel id="userData" rendered="#{not empty sensorStationDetailController.sensorStation}">
-                    <h5 class="mt-0">Sensor Station Data </h5>
-                    <h:panelGrid columns="1">
-
-                        <p:outputLabel for="sensorStationId" value="Sensor-station name:"/>
-                        <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
-
-                        <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/>
-                        <p:selectOneMenu id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
-                                         scrollHeight="250" updateLabel="true" >
-                            <f:selectItems value="#{accessPointController.accessPoints}"/>
-                            <f:facet name="footer">
-                                <p:divider styleClass="mt-0" />
-                                <h:outputText value="3 options" style="font-weight:bold;"/>
-                            </f:facet>
-                        </p:selectOneMenu>
-
-
-                        <p:outputLabel for="sensorStationlocation" value="Sensor-station location:"/>
-                        <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
-
-
-
-                        <p:outputLabel for="sensorStationswitchEdit" value="Alarm Switch:"/>
-                        <p:selectOneMenu id="sensorStationswitchEdit" value="#{sensorStationDetailController.sensorStation.alarmSwitch}"  >
-                            <f:selectItem itemLabel="On" itemValue="On"/>
-                            <f:selectItem itemLabel="Off" itemValue="Off"/>
-                        </p:selectOneMenu>
-
-                    </h:panelGrid>
-                    <h:panelGrid columns="3">
-                        <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}"
-                                         oncomplete="PF('userEditDialog').hide()" update=":userForm:sensorStationTable"/>
-                        <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
-                    </h:panelGrid>
-                </p:outputPanel>
-            </p:dialog>
-
-
-            <!-- ...................................CONFIRMATION dialog.................................... -->
-            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
-                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
-                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
-            </p:confirmDialog>
-
-        </h:form>
-
-
-
-
-
-
-
-        <!-- ...................................Sensor station CREATE dialog.................................... -->
-        <h:form id="createDialog">
-
-            <!-- ....................Sensor station CREATE button..................... -->
-            <p:commandButton value="Create new Sensor Station" update=":createDialog:createSSDialog" oncomplete="PF('createSSDialog').show()"
-                             icon="pi pi-user-plus" title="New User" class="btn btn-primary">
-                <p:resetInput target=":createDialog:createSSDialog"/>
-            </p:commandButton>
-
-            <p:dialog header="Create New Sensor Station" id="createSSDialog" widgetVar="createSSDialog" modal="true"
-                      showEffect="fade" hideEffect="fade" resizable="false">
-                <p:ajax event="close" update="createSSDialog"/>
-
-                <p:outputPanel id="createSS">
-                    <h:panelGrid columns="2">
-
-
-                        <p:outputLabel for="usernameCreation" value="Sensor Station Name:"/>
-                        <p:inputText id="usernameCreation"
-                                     placeholder="Required field" value="#{createSensorStationBean.sensorStationName}" required="true"/>
-
-                        <p:outputLabel for="description" value="Description:"/>
-                        <p:inputText id="description"
-                                     placeholder="description" value="#{createSensorStationBean.description}" required="false"/>
-
-                        <p:outputLabel for="location" value="Location:"/>
-                        <p:inputText id="location" value="#{createSensorStationBean.location}"/>
-
-
-                        <p:outputLabel for="sensorStationswitch" value="Alarm Switch:"/>
-                        <p:selectOneMenu id="sensorStationswitch" value="#{createSensorStationBean.alarmSwitch}"  >
-                            <f:selectItem itemLabel="On" itemValue="On"/>
-                            <f:selectItem itemLabel="Off" itemValue="Off"/>
-                        </p:selectOneMenu>
-
-
-
-                        <p:commandButton value="Create"
-                                         action="#{createSensorStationBean.doCreateNewCreateSensorStation()}"
-                                         update=":userForm:sensorStationTable"
-                                         oncomplete="PF('createSSDialog').hide()"/>
-                        <p:commandButton value="Cancel" onclick="PF('createSSDialog').hide()"/>
-
-
-                    </h:panelGrid>
-
-                </p:outputPanel>
-            </p:dialog>
-        </h:form>
-
-
         <!-- ...................................PLANT CREATE dialog.................................... -->
         <h:form id="plantCreateDialog">
 
             <!-- ....................PLANT CREATE button..................... -->
-            <p:commandButton value="Create new Plant" update=":plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
+            <p:commandButton style="margin-left: 7px" value="Create New Plant" update=":plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
                              icon="pi pi-user-plus" title="New User" class="btn btn-primary">
-                <p:resetInput target=":createDialog:createPlantDialog"/>
+                <p:resetInput target="plantCreateDialog"/>
             </p:commandButton>
 
             <p:dialog header="Create New Plant" id="createPlantDialog" widgetVar="createPlantDialog" modal="true"
@@ -301,6 +58,188 @@
                 </p:outputPanel>
             </p:dialog>
         </h:form>
+
+
+        <!-- .........................................TABLE.............................................................. -->
+        <h:form id="userForm">
+            <div class="col-12">
+
+                <div class="card">
+                    <h5>Assigned Greenhouses</h5>
+                    <p:dataTable id="sensorStationTable" var="sensorStation" value="#{sensorStationListController.assignedSensorStationList}"
+                                  scrollHeight="550"
+                                 paginatorPosition="bottom" rowKey="#{sensorStation.id}">
+
+                        <p:ajax event="rowToggle" listener="#{sensorStationDetailController.onRowToggle}" />
+
+                        <p:column style="width:2rem">
+                            <p:rowToggler/>
+                        </p:column>
+
+                        <p:column headerText="Id" sortBy="#{sensorStation.id}" filterBy="#{sensorStation.id}">
+                            <h:outputText value="#{sensorStation.id}"/>
+                        </p:column>
+
+                        <p:column >
+                            <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
+                        </p:column>
+
+                        <p:column headerText="Plant" sortBy="#{sensorStation.plant.plantName}" filterBy="#{sensorStation.plant.plantName}">
+                            <h:outputText value="#{sensorStation.plant}"/>
+                        </p:column>
+
+                        <p:column headerText="Planted" sortBy="#{sensorStation.createDate}" filterBy="#{sensorStation.createDate}">
+                            <h:outputText value="#{product.category}"/>
+                        </p:column>
+
+                        <p:column headerText="Alarm Status">
+                            <i class="#{measurementListController.getMeasurementTypeIcon('AIR_PRESSURE')}"
+                               style="color:#{measurementListController.getSensorStatus('AIR_PRESSURE',sensorStation) == 'OK' ? 'green' : 'red'}"
+                               title="Air Pressure"></i>
+                            <i class="#{measurementListController.getMeasurementTypeIcon('TEMPERATURE')}"
+                               style="color:#{measurementListController.getSensorStatus('TEMPERATURE',sensorStation) == 'OK' ? 'green' : 'red'}"
+                               title="Temperature"></i>
+                            <i class="#{measurementListController.getMeasurementTypeIcon('SOIL_MOISTURE')}"
+                               style="color:#{measurementListController.getSensorStatus('SOIL_MOISTURE',sensorStation) == 'OK' ? 'green' : 'red'}"
+                               title="Soil Moisture"></i>
+                            <i class="#{measurementListController.getMeasurementTypeIcon('AIR_QUALITY')}"
+                               style="color:#{measurementListController.getSensorStatus('AIR_QUALITY',sensorStation) == 'OK' ? 'green' : 'red'}"
+                               title="Air Quality"></i>
+                            <i class="#{measurementListController.getMeasurementTypeIcon('LIGHT_INTENSITY')}"
+                               style="color:#{measurementListController.getSensorStatus('LIGHT_INTENSITY',sensorStation) == 'OK' ? 'green' : 'red'}"
+                               title="Light Intensity"></i>
+                            <i class="#{measurementListController.getMeasurementTypeIcon('HUMIDITY')}"
+                               style="color:#{measurementListController.getSensorStatus('HUMIDITY',sensorStation) == 'OK' ? 'green' : 'red'}"
+                               title="Humidity"></i>
+                        </p:column>
+
+                        <p:column headerText="Location" sortBy="#{sensorStation.location}" filterBy="#{sensorStation.location}">
+                            <h:outputText value="#{sensorStation.location}"/>
+                        </p:column>
+
+                        <p:column headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}" filterBy="#{sensorStation.alarmSwitch}">
+                            <h:outputText value="#{sensorStation.alarmSwitch}"/>
+                        </p:column>
+
+
+                        <p:column style="text-align: center">
+
+
+                            <!-- ...........BUTTON TO OPEN QR CODE GENERATION PAGE......... -->
+                            <p:button style="margin-right: 10px" icon="pi pi-qrcode"
+                                      title="Generate QR-Code"
+                                      href="/generateQrCode.xhtml?id=#{sensorStation.plant.plantID}">
+                            </p:button>
+
+                            <!-- DetailView page Button -->
+                            <p:button style="margin-right: 10px"
+                                      icon="pi pi-search"
+                                      title="open Detail-View"
+                                      href="/greenHouseDetails.xhtml?id=#{sensorStation.id}" />
+
+                            <!-- ....................SENSOR STATION EDIT BUTTON ........... .............. -->
+                            <p:commandButton style="margin-right: 10px" update=":userForm:userEditDialog"
+                                             oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit" title="Edit">
+                                <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
+                            </p:commandButton>
+
+
+                        </p:column>
+
+
+
+                        <!-- .........................................ROW EXPANSION.......................................................... -->
+                        <p:rowExpansion>
+                            <div class="orders-subtable">
+                                <h5>Latest Measurements for Greenhouse #{sensorStation.id}</h5>
+                                <p:dataTable var="measurement" value="#{sensorStationDetailController.latestMeasurements}" reflow="true" rowKey="#{measurement.id}">
+                                    <p:column headerText="Type" sortBy="#{measurement.type}">
+                                        <h:outputText value="#{measurement.type}" />
+                                    </p:column>
+
+                                    <p:column headerText="Value" sortBy="#{measurement.value_s}">
+                                        <h:outputText value="#{measurement.value_s}" />
+                                    </p:column>
+
+                                    <p:column headerText="Unit" sortBy="#{measurement.unit}">
+                                        <h:outputText value="#{measurement.unit}">
+                                            <f:convertNumber currencySymbol="$" type="currency" />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="Status">
+                                        <i class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"
+                                           style="display: flex; justify-content: center; align-items: center; color:#{measurementListController.getSensorStatus(measurement.type,sensorStation) == 'OK' ? 'green' : 'red'}"
+                                           title="#{measurement.type}"></i>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </div>
+                        </p:rowExpansion>
+
+                    </p:dataTable>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <!-- .......................................DIALOGS...................................................................... -->
+
+
+            <!-- ...................................Sensor station Edit dialog.................................... -->
+            <p:dialog header="Edit Sensor Station" id="userEditDialog" widgetVar="userEditDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="userData" rendered="#{not empty sensorStationDetailController.sensorStation}">
+                    <h:panelGrid columns="1">
+
+                        <p:outputLabel for="sensorStationId" value="Sensor-station name:"/>
+                        <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
+
+                        <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/>
+                        <p:selectOneMenu id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID" disabled="true"
+                                         scrollHeight="250" updateLabel="true" >
+                            <f:selectItems value="#{accessPointController.accessPoints}"/>
+                            <f:facet name="footer">
+                                <p:divider styleClass="mt-0" />
+                                <h:outputText value="3 options" style="font-weight:bold;"/>
+                            </f:facet>
+                        </p:selectOneMenu>
+
+
+                        <p:outputLabel for="sensorStationlocation" value="Sensor-station location:"/>
+                        <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
+
+
+
+                        <p:outputLabel for="sensorStationswitchEdit1" value="Alarm Switch to Fixed(if not):" />
+                        <p:toggleSwitch id ="sensorStationswitchEdit1" rendered="#{sensorStationDetailController.sensorStation.alarmSwitch.equals('fixed') == false}" value="#{sensorStationDetailController.sensorStation.alarmSwitch}"/>
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
+                        <p:commandButton value="Save" action="#{sensorStationDetailController.doSaveSensorStation()}"
+                                         oncomplete="PF('userEditDialog').hide()" update=":userForm:sensorStationTable sensorStationswitchEdit1"/>
+                        <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+
+            <!-- ...................................CONFIRMATION dialog.................................... -->
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+            </p:confirmDialog>
+
+        </h:form>
+
+
+
+
 
 
 

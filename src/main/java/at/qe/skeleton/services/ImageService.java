@@ -3,7 +3,6 @@ package at.qe.skeleton.services;
 
 import at.qe.skeleton.model.Image;
 import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.ImageRepository;
 import at.qe.skeleton.repositories.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +64,7 @@ public class ImageService {
         return imageRepository.findPlantLinkedImagesAndApprovedEquals(true);
     }
     /**
-     * Method to get a collection of all images for a given plant.
+     * Method to get a collection of all images for a given plant.*
      * @param plantId the plant id for which to retrieve the images.
      */
     @PreAuthorize("permitAll()")
@@ -74,22 +73,22 @@ public class ImageService {
         return imageRepository.findImagesByPlant(plant);
     }
     /**
-     * Method to get a collection of all not approverd images for a given plant.
+     * Method to get a collection of all not approverd images for a given plant.*
      * @param plantId the plant id for which to retrieve the images.
      */
     @PreAuthorize("permitAll()")
     public List<Image> getAllPlantImagesNotYetApproved(String plantId) {
         Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantId));
-        return imageRepository.findImagesByPlantAndApprovedEquals(plant,false);
+        return imageRepository.findImagesByPlantAndApprovedEquals(plant, false);
     }
     /**
-     * Method to get a collection of all approved images for a given plant.
+     * Method to get a collection of all approved images for a given plant.*
      * @param plantId the plant id for which to retrieve the images.
      */
     @PreAuthorize("permitAll()")
     public List<Image> getAllApprovedPlantImages(String plantId) {
         Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantId));
-        return imageRepository.findImagesByPlantAndApprovedEquals(plant,true);
+        return imageRepository.findImagesByPlantAndApprovedEquals(plant, true);
     }
 
 
@@ -112,7 +111,7 @@ public class ImageService {
      * If the image is new then creation date will be saved along, if it is not then
      * the method will change the update date for this image.
      *
-     * @param image   the image to save
+     * @param image the image to save
      * @return the saved image
      */
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -122,6 +121,7 @@ public class ImageService {
 
     /**
      * Deletes the image.
+     *
      * @param image the image to delete
      */
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -129,7 +129,31 @@ public class ImageService {
         imageRepository.delete(image);
     }
 
+
+
+
+
+    //TODO: Remove this if possible. Fails on tesing.
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deleteAllImagesByPlant(Plant plant) { //TODO:new, reroute all methods wanting this to here and add detach , they are in plantservice atm
+        imageRepository.deleteImagesByPlant(plant);
+    }
+    public Integer countAllImagesByPlant(Plant plant) {
+        return imageRepository.countImagesByPlant(plant);
+    }
+
+
+
+
+
+
+
+
+
+
+
     //TODO: remove the system out when the method is sufficintly tested
+    // TESTED
     public void addPictureToPlantPictures(Image image, String plantid) {
         System.out.println("im image service here plant id " + plantid);
         Plant plant = plantRepository.findFirstByPlantID(Long.parseLong(plantid));
@@ -141,6 +165,21 @@ public class ImageService {
         image.setPlant(plant);
         imageRepository.save(image);
     }
+
+
+    public Integer getTotalImagesAmount() {
+        return imageRepository.count();
+    }
+    public Integer getApprovedImagesAmount() {
+       return imageRepository.countImagesByApprovedEquals(true);
+    }
+    public Integer getNotApprovedImagesAmount() {
+        return imageRepository.countImagesByApprovedEquals(false);
+    }
+    public Integer getApprovedImagesNoPlantAmount() {
+        return imageRepository.countImagesByApprovedEqualsAndPlantEquals(true,null);
+    }
+
 
 
 }

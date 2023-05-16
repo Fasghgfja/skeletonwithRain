@@ -13,9 +13,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * Session information bean to retrieve session-specific parameters.
- *
- * This class is part of the skeleton project provided for students of the
- * course "Software Engineering" offered by the University of Innsbruck.
  */
 @Component
 @Scope("session")
