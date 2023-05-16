@@ -3,11 +3,19 @@ package at.qe.skeleton.services;
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.AccessPointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
@@ -18,6 +26,8 @@ public class AccessPointService {
 
     @Autowired
     private AccessPointRepository accessPointRepository;
+    @Autowired
+    private ServletWebServerApplicationContext webServerAppCtxt;
 
     /**
      * Method to get all access points currently stored in the database.
@@ -71,14 +81,61 @@ public class AccessPointService {
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public AccessPoint saveAccessPoint(AccessPoint accessPoint) {
+        boolean isNew = false;
         if (accessPoint.isNew()) {
             accessPoint.setCreateDate(LocalDate.now());
+            isNew = true;
         } else {
             accessPoint.setUpdateDate(LocalDate.now());
         }
-        return accessPointRepository.save(accessPoint);
+        AccessPoint accessPoint1 = accessPointRepository.save(accessPoint);
+
+        try {
+            createYaml(accessPoint1, isNew);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        return accessPoint1;
     }
 
+    /**
+     * This method is used to creat a config.yaml for a new accessPoint
+     * @param accessPoint
+     */
+    private void createYaml(AccessPoint accessPoint, boolean isNew) throws IOException {
+        if(isNew){
+            File file = new File("./config.yaml");
+            FileWriter writer = new FileWriter(file);
+            file.setWritable(file.setReadable(file.setExecutable(true)));
+            System.out.println();
+            String content = String.format("""
+                    accesspoint-params:
+                      id: %d
+                      measurement-intervall: 5
+                      webapp-intervall: 5
+                    webapp-params:
+                      ip: %s:%d
+                      pswd: passwd
+                      usnm: admin""", accessPoint.getAccessPointID(), getIP(), webServerAppCtxt.getWebServer().getPort());
+            writer.write(content);
+            writer.flush();
+            writer.close();
+        }
+    }
+
+    /**
+     * This method is used to get the current ip address
+     * @return
+     */
+    private String getIP(){
+        try (final DatagramSocket datagramSocket = new DatagramSocket()) {
+            datagramSocket.connect(InetAddress.getByName("8.8.8.8"), 12345);
+            return datagramSocket.getLocalAddress().getHostAddress();
+        } catch (UnknownHostException | SocketException e) {
+            throw new RuntimeException(e);
+        }
+    }
     /**
      * Deletes an access point and creates a delete log.
      * @param accessPoint

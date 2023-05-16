@@ -38,7 +38,7 @@ def write_sending_intervalls(measurment_intervall, webapp_intervall):
             cfg = yaml.load(r_f, Loader=yaml.FullLoader)
         cfg["accesspoint-params"]["measurement-intervall"] = measurment_intervall
         cfg["accesspoint-params"]["webapp-intervall"] = webapp_intervall
-        with open("../config.yaml","w") as w_f:
+        with open("config.yaml","w") as w_f:
             yaml.dump(cfg, w_f)
     except Exception as e:
         exception_logging.logException(e, "reading config.yaml")
