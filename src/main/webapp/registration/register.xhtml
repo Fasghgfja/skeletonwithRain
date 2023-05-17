@@ -23,12 +23,13 @@
                 <!-- .......::::::::::::::::...TEXT AND BUTTONS AND GALLERY FORM ....::::::::::::::::::::::.......... -->
                 <h:form id="myform" >
                     <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
-                    <div style="display:flex;width: 100%; min-height: 100%; justify-content: center; align-items: center;">
+                    <div style="display:flex; margin-left: 5%; min-width: 100%; min-height: 100%; justify-content: center; align-items: center;">
                         <p style="color: white;">
                             <span rendered="#{not empty plantPhotoGalleryController.idString}" style="font-size: 34px;margin-right: 40%; margin-left: 30%">#{plantPhotoGalleryController.plant.plantName}<br/><br/></span>
                             <span style="font-size: 22px;">
                                 Plants are fundamentally sovereign life forms. However, three<br/>
-                                challenges prevent most people from growing their own vegetables, herbs and more.<br/>
+                                challenges prevent most people from growing their own vegetables<br/>
+                                herbs and more.<br/>
                                 <span style="font-size: 26px;font-weight: bold;">Lack of time</span>: plants must be constantly monitored. However, if the<br/>
                                 plant is too.<br/>
                                 <span style="font-size: 26px;font-weight: bold;">Knowledge</span>: it takes a trained eye every once in a while to be able to<br/>
@@ -36,10 +37,6 @@
                                 <span style="font-size: 26px;font-weight: bold;">Enviroment</span>: indoors, conventional growing methods in pots are<br/>
                                  often difficult.<br/><br/>
                                  register an account to discover all the features...<br/><br/>
-                            <span style="font-size: 26px; color: indianred">Development Comments:</span>
-                                  Uploading a picture is not allowed without selecting a plant<br/>
-                                 If the page has no plantId Plant Gallery button is replaced with the<br/>
-                                 All Plants Gallery Button showing pictures of all plants if there are plants in the general gallery <br/> <!--TODO:revome this comment after dev phase  -->
                                  </span><br/>
                             <!-- ........BUTTON TO SEE PLANT GALLERY ....::::::::::::::::::::::.......... -->
                             <p:commandButton rendered="#{not empty plantPhotoGalleryController.idString and not empty plantPhotoGalleryController.doGetApprovedPlantImages()}"
@@ -131,7 +128,7 @@
                 </h:panelGrid>
 
                 <h:graphicImage url="https://i.ibb.co/NxFM4rH/banner.png"
-                                    style="height:100px;width:350px; align-self: center"/>
+                                    style="height:100px;width:80%; align-self: center"/>
 
             </h:form>
         </p:card>

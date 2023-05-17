@@ -95,10 +95,19 @@ public class AccessPointController implements Serializable {
         accessPointService.deleteAccessPoint(accessPoint);
         accessPoint = null;
 
-
-
-
-
     }
+
+
+    public void doValidateAccessPoint(){//TODO : logging or not?
+        accessPoint.setValidated(true);
+        accessPointService.saveAccessPoint(accessPoint);
+    }
+
+
+
+
+
+
+
 }
 
