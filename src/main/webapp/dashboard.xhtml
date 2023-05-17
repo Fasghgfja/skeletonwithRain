@@ -17,8 +17,6 @@
 
 
 
-
-
                 <!-- ....................................ADMIN VIEW START................................... -->
                 <c:if test="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('GARDENER')}">
                     <!-- ................TOP INFO BOXES.......... -->
@@ -107,8 +105,11 @@
                     <!-- ......simply modify the graph controller do display different data....... -->
                     <!-- ......supported charts are .lineModel and .cartesianLinearModel...... -->
 
+                </c:if>
 
-                    <!-- ..........GREENHOUSES PREVIEW........... -->
+                <c:if test="#{sessionInfoBean.hasRole('ADMIN')}">
+
+                <!-- ..........GREENHOUSES PREVIEW........... -->
                     <div class="col-12 md:col-12 xl:col-6">
                         <div class="col-12">
                             <div class="card">
