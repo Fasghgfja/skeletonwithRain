@@ -20,7 +20,7 @@
 
 
                 <!-- ....................................ADMIN VIEW START................................... -->
-                <c:if test="#{sessionInfoBean.hasRole('ADMIN')}">   <!-- ...//TODO: topboxes for everyone not only admin!... -->
+                <c:if test="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('GARDENER')}">
                     <!-- ................TOP INFO BOXES.......... -->
                     <!-- ...........USERS SIGNED UP............ -->
 

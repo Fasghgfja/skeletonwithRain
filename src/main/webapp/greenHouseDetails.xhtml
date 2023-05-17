@@ -21,14 +21,13 @@
 
         <!-- ..........................................TOP INFO BOXES................................................................... -->
         <h:form id="detailPage">
-            <p:toolbar style=" display: flex;
-                flex-wrap: nowrap;">
 
 
-                <p:toolbarGroup> <!-- .....TEMPERATURE AIR HUMIDITY GROUND HUMIDITY LIGHT INTENSITY BOXES............................ -->
+
+                    <div class="ui-toolbar ui-widget ui-widget-header ui-corner-all" role="toolbar" style=" display: flex;     flex-wrap: nowrap;">
 
                     <!-- ...............................TEMPERATURE BOX................................................ -->
-                    <div class="col-12 md:col-6 xl:col-3">
+                    <div class="col-12 md:col-6 xl:col-1">
                         <p:commandLink action="#{measurementListController.onTempClick()}"
                                        update="myDataTable1 mylineChart">
                             <div class="card  overview-box">
@@ -48,7 +47,7 @@
                     </div>
 
                     <!-- ...............................AIR HUMIDITY BOX............................................... -->
-                    <div class="col-12 md:col-6 xl:col-3">
+                    <div class="col-12 md:col-6 xl:col-1">
                         <p:commandLink action="#{measurementListController.onAirHumidityClick()}"
                                        update="myDataTable1 mylineChart">
                             <div class="card overview-box">
@@ -68,7 +67,7 @@
                     </div>
 
                     <!-- ...............................GROUND HUMIDITY BOX............................................ -->
-                    <div class="col-12 md:col-6 xl:col-3">
+                    <div class="col-12 md:col-6 xl:col-1">
                         <p:commandLink action="#{measurementListController.onGroundHumidityClick()}"
                                        update="myDataTable1 mylineChart">
                             <div class="card overview-box ">
@@ -77,7 +76,7 @@
                                 <p:graphicImage url="../resources/images/pages/greenhouseDetails/watering-can3.png"/>
                                 </span>
                                 <div class="overview">
-                                    <span class="overview-title">GROUND HUMIDITY</span>
+                                    <span class="overview-title">SOIL HUMIDITY</span>
                                     <h3>
                                         <h:outputText value="#{measurementListController.getLastSoilMeasurementValue().length() gt 6 ? measurementListController.getLastSoilMeasurementValue().subSequence(0,6) : measurementListController.getLastSoilMeasurementValue() }"/>
                                         %
@@ -88,7 +87,7 @@
                     </div>
 
                     <!-- ...............................LIGHT INTENSITY BOX............................................ -->
-                    <div class="col-12 md:col-6 xl:col-3">
+                    <div class="col-12 md:col-6 xl:col-1">
                         <p:commandLink action="#{measurementListController.onLightIntensityClick()}"
                                        update="myDataTable1 mylineChart">
                             <div class="card overview-box">
@@ -97,7 +96,7 @@
                                 <p:graphicImage url="../resources/images/pages/greenhouseDetails/sun2.png"/>
                                 </span>
                                 <div class="overview">
-                                    <span class="overview-title">LIGHT INTENSITY</span>
+                                    <span class="overview-title">LIGHT</span>
                                     <h3>
                                         <h:outputText value="#{measurementListController.getLastLightMeasurementValue().length() gt 6 ? measurementListController.getLastLightMeasurementValue().subSequence(0,6) : measurementListController.getLastLightMeasurementValue() }"/>
                                         lux
@@ -107,10 +106,12 @@
                         </p:commandLink>
                     </div><!-- ...............................LIGHT INTENSITY BOX END.................................. -->
 
-                </p:toolbarGroup>
 
-                <p:toolbarGroup>
-                    <h:form id="myform"> <!-- .......::::::::::::::::...PLANT GALLERY DEBUG FORM if u remove it you fix it....:::::::::::::::.......... -->
+                    <div class="px-1">
+                    </div>
+
+                    <div class="col-12 md:col-6 xl:col-2">
+                    <h:form id="myform"> <!-- .......::::::::::::::::...PLANTNAME....:::::::::::::::.......... -->
                         <h:form id="approvedImagesGallery">
                             <div class="card overview-box">
                                 <p:graphicImage name="images/dashboard/effect-messages.svg"/>
@@ -125,12 +126,14 @@
                             </div>
                         </h:form>
                     </h:form> <!-- .......::::::::::::::::...PLANT GALLERY FORM END....:::::::::::::::.......... -->
-                </p:toolbarGroup>
+                    </div>
 
-                <p:toolbarGroup>
+                    <div class="px-1">
+                    </div>
+
 
                     <!-- ...............................AIR PRESSURE BOX............................................... -->
-                    <div class="col-12 md:col-6 xl:col-3">
+                    <div class="col-12 md:col-6 xl:col-1">
                         <p:commandLink action="#{measurementListController.onAirPressureClick()}"
                                        update="myDataTable1 mylineChart">
                             <div class="card  overview-box">
@@ -149,7 +152,7 @@
                         </p:commandLink>
                     </div>
 
-                    <div class="col-12 md:col-6 xl:col-3">
+                    <div class="col-12 md:col-6 xl:col-1">
                         <!-- ...............................AIR QUALITY BOX............................................ -->
                         <p:commandLink action="#{measurementListController.onAirQualityClick()}"
                                        update="myDataTable1 mylineChart">
@@ -170,23 +173,29 @@
                     </div>
 
 
-                    <div class="col-12 md:col-6 xl:col-3">
+                    <div class="col-12 md:col-6 xl:col-1">
                         <!-- ...............................Pic Approval Box............................................... -->
                         <div class="card overview-box ">
-                            <span class="overview-title">GALLERY</span>
                             <p:graphicImage name="images/dashboard/effect-filessynced.svg"/>
                             <span class="overview-icon">
                                 <p:graphicImage url="../resources/images/pages/greenhouseDetails/gallery.png"/>
                             </span>
-                            <div class="overview" style="column-count: 2">
+                            <div class="overview">
+                                <span class="overview-title">PLANT GALLERY</span>
+                                <h3>
+                                    <p:commandButton style="margin-right: 5px;"
+                                            id="b3" icon="fa fa-solid fa-check" title="Approved"
+                                            onclick="PF('galleria3').show()" disabled="#{empty sensorStationDetailController.doGetApprovedPlantImages()}"/>
 
+                                    <p:commandButton
+                                            id="b2" icon="fa fa-solid fa-question" title="Awaiting Approval"
+                                            onclick="PF('galleria2').show()" disabled="#{empty sensorStationDetailController.doGetPlantImagesNotYetApproved()}"/>
+                                </h3>
                                 <!-- .......::::::::::::::::...AWAITING APPROVAL GALLERY FORM ....::::::::::::::::::::::.......... -->
                                 <h:form id="myform2">
                                     <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
 
-                                    <p:commandButton
-                                            id="b2" value="Awaiting approval" icon="pi pi-external-link" style="margin-right: 90px"
-                                            onclick="PF('galleria2').show()" disabled="#{empty sensorStationDetailController.doGetPlantImagesNotYetApproved()}"/>
+
 
                                     <!-- .......::::::::::::::::...AWAITING APPROVAL GALLERY ....::::::::::::::::::::::.......... -->
                                     <p:galleria id="awaitingapprovalgallery" widgetVar="galleria2"
@@ -223,9 +232,7 @@
                                 <!-- .......::::::::::::::::...APPROVED GALLERY FORM....::::::::::::::::::::::.......... -->
                                 <h:form id="myform3">
                                     <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
-                                    <p:commandButton
-                                            id="b3" value="Plant Gallery" icon="pi pi-external-link"
-                                            onclick="PF('galleria3').show()" disabled="#{empty sensorStationDetailController.doGetApprovedPlantImages()}"/>
+
 
                                     <!-- .......::::::::::::::::...APPROVED GALLERY ....::::::::::::::::::::::.......... -->
                                     <p:galleria id="awaitingapprovalgallery3" widgetVar="galleria3"
@@ -255,7 +262,7 @@
 
 
                     <!-- ...............................TIME OF LAST MEASUREMENT BOX.................................... -->
-                    <div class="col-12 md:col-6 xl:col-3">
+                    <div class="col-12 md:col-6 xl:col-1">
                         <p:commandLink action="#{measurementListController.reSetType()}" update="myDataTable1">
                             <div class="card overview-box">
                                 <p:graphicImage name="images/dashboard/effect-messages.svg"/>
@@ -273,10 +280,9 @@
                     </div>
 
 
-                </p:toolbarGroup>
+                    </div>
 
 
-            </p:toolbar>
         </h:form><!-- ..........................................TOP INFO BOXES FORM END................................................ -->
 
 
