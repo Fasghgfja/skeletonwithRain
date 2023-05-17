@@ -87,13 +87,13 @@ public class SensorStationService {
         sensorStationRepository.setAccessPointToNull(accessLoad);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public SensorStation loadSensorStation(String id) {
         return sensorStationRepository.findFirstById(id);
     }
 
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public SensorStation saveSensorStation(SensorStation sensorStation) {
         if (sensorStation.isNew()) {
             sensorStation.setCreateDate(LocalDate.now());
@@ -104,7 +104,7 @@ public class SensorStationService {
     }
 
 
-    @PreAuthorize("hasAuthority('ADMIN')") //TODO: new! test this
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     // TODO:add proper logging maybe with more info on what happened during the process or eventual exception messages, this can fail!
     public void deleteSensorStation(SensorStation sensorStation) {
         Log deleteLog = new Log();

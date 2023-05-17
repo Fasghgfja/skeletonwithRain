@@ -38,13 +38,13 @@ public class SensorService {
     }
 
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public Sensor loadSensor(Long id) {
         return sensorRepository.findFirstById(id);
     }
 
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public Sensor saveSensor(Sensor sensor) {
         if (sensor.isNew()) {
             sensor.setCreateDate(LocalDate.now());
@@ -100,7 +100,7 @@ public class SensorService {
 
 
     //TODO: implement logging , like it was it crashes the db
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public void deleteSensor(Sensor sensor) {
        // Log deleteLog = new Log();
 
