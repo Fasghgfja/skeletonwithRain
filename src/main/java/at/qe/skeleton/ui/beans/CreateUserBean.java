@@ -23,12 +23,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
- @Getter
+@Getter
  @Setter
  @Component
  @Named
@@ -61,7 +58,7 @@ public class CreateUserBean implements Serializable {
 
     public void createNewUser() {
         Userx user = new Userx();
-
+        roles = new HashSet<>();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setFirstName(firstName);
@@ -73,7 +70,6 @@ public class CreateUserBean implements Serializable {
             if(x.equals("ADMIN")) {
                 roles.add(UserRole.ADMIN);
                 roles.add(UserRole.GARDENER);
-
             } else if(x.equals("GARDENER")) {
                 roles.add(UserRole.GARDENER);
             }
@@ -90,7 +86,8 @@ public class CreateUserBean implements Serializable {
             creationFailLog.setText("ENTERED USERNAME ALREADY TAKEN: " + user.getUsername());
             creationFailLog.setType(LogType.WARNING);
             logRepository.save(creationFailLog);
-        } else {
+        }
+        else {
             Log createLog = new Log();
             createLog.setDate(LocalDate.now());
             createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
