@@ -4,14 +4,17 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
-
 import java.io.Serializable;
 import java.util.Objects;
 
+
 /**
  * This is the entity model for the accessPoint.
+ * The entity inherit the fields for create user(who created it) , update user(who last updated it) create date and update date from metadata.
+ *
+ * An Access Point can Be validated or not (not by default)
+ * Access Point is Validated when...
  */
-
 @Getter
 @Setter
 @Entity

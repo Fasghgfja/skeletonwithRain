@@ -10,7 +10,7 @@ import java.util.Objects;
 
 
 /**
- * JPA Entity to Represent an Image.
+ * JPA Entity to Represent an Image , this is used for profile pictures and plant images.
  */
 @Getter
 @Setter

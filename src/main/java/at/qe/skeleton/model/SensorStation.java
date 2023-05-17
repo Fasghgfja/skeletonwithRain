@@ -10,8 +10,22 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * Entity representing Sensor stations.
+ * <p>
+ * Sensor stations have an Alarm-switch that can be On or Fixed,
+ * The Alarm-switch is ON when any of the Alarm count of the Sensors of this Sensor Station
+ * has exceeded the Sensor Station alarm count threshold(a light signal will be displayed on the sensor station).
+ * The Alarm-switch is fixed when a gardener has solved the problem and manually sets it to fixed through the webapp
+ * (light will stop blinking on the real sensor station).
+ * When a admin or gardener sets the alarmswitch to fixed the respective alarmcount (-1) of the sensor causing it will be reset to 0 automatically
+ * Sensor stations have an alarm count Threshold that is initialized with 5 by default
+ * (this means that if any of its sensor alarm count reaches 5 then the alarm will be set to ON and on the sensor station a light will blink).
+ * The alarm count threshold represents how high the alarm count of any given sensor of this sensor station can go before the system displays a warning light(at this point the alarmcount value of the sensor is changed to -1)
+ *  and can be changed from manage sensor station page from an Admin (the real sensor station behaviour will be updated accordingly when this is done).
+
+ The alarmcount of a given sensor can be resetted manually by a gardener or admin from the sensor station page aswell.
  */
 @Getter
 @Setter
@@ -28,7 +42,6 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     @Column(length = 100)
     private String alarmSwitch;
 
-    //added to view SensorStation description
     @Column(length = 50)
     private String description;
 
@@ -48,6 +61,7 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     public String getSensorStationID() {
         return sensorStationName;
     }
+
     public String getId() {
         return this.getSensorStationID();
     }

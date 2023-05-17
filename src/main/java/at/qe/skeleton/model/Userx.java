@@ -4,15 +4,11 @@ import java.io.Serializable;
 import java.util.*;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
 /**
  * Entity representing users.
- * <p>
- * This class is part of the skeleton project provided for students of the
- * course "Software Engineering" offered by the University of Innsbruck.
  */
 @Getter
 @Setter

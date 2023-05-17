@@ -8,6 +8,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+
+
+
+/**
+ * This class represents the entity model for measurements.
+ */
 @Getter
 @Setter
 @Entity
