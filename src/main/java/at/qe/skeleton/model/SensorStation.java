@@ -24,8 +24,7 @@ import java.util.Set;
  * (this means that if any of its sensor alarm count reaches 5 then the alarm will be set to ON and on the sensor station a light will blink).
  * The alarm count threshold represents how high the alarm count of any given sensor of this sensor station can go before the system displays a warning light(at this point the alarmcount value of the sensor is changed to -1)
  *  and can be changed from manage sensor station page from an Admin (the real sensor station behaviour will be updated accordingly when this is done).
-
- The alarmcount of a given sensor can be resetted manually by a gardener or admin from the sensor station page aswell.
+ * The alarmcount of a given sensor can be resetted manually by a gardener or admin from the sensor station page aswell.
  */
 @Getter
 @Setter
