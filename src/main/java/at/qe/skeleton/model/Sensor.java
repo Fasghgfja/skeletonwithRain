@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
+
 import java.io.Serializable;
 
 
@@ -28,7 +29,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-public class Sensor  extends Metadata implements Persistable<Long>, Serializable {
+public class Sensor extends Metadata implements Persistable<Long>, Serializable {
     @Id
     private Long id;
     @Column(length = 100)
