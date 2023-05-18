@@ -20,7 +20,7 @@ public class MeasurementTest {
         String values = "1,2,3";
         SensorStation sensorStation = new SensorStation();
         String unit = "Celsius";
-        String type = "HUMIDITY";
+        String type = MeasurementType.HUMIDITY.getValue();
         LocalDateTime timestamp = LocalDateTime.now();
 
         assertNull(measurement.getId());
@@ -42,6 +42,8 @@ public class MeasurementTest {
         assertEquals(values, measurement.getValue_s());
         assertEquals(unit, measurement.getUnit());
         assertEquals(type, measurement.getType());
+        measurement.setType(MeasurementType.AIR_QUALITY.getValue());
+        assertEquals(MeasurementType.AIR_QUALITY.toString(), measurement.getType());
         assertEquals(timestamp, measurement.getTimestamp());
         assertNotNull(measurement.getReadableTimestamp());
     }

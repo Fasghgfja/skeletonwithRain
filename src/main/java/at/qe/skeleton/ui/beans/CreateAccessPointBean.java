@@ -34,13 +34,13 @@ import java.util.logging.SimpleFormatter;
 public class CreateAccessPointBean implements Serializable {
 
     @Autowired
-    transient AccessPointService accessPointService;
+    private transient AccessPointService accessPointService;
 
     @Autowired
     private SessionInfoBean sessionInfoBean;
 
     @Autowired
-    private IntervalService intervalService;
+    private transient IntervalService intervalService;
 
 
     @Autowired

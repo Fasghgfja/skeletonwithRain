@@ -62,7 +62,7 @@ public class SSInterval implements Persistable<Long>, Serializable, Comparable<S
     }
 
     @Override
-    public int compareTo(SSInterval o) {
-        return 0;
+    public int compareTo(SSInterval other) {
+        return getId().compareTo(other.getId());
     }
 }
