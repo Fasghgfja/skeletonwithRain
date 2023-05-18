@@ -108,11 +108,14 @@ public class MeasurementService {
         Measurement latestGroundHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "SOIL_MOISTURE");
         Measurement latestLightMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "LIGHT_INTENSITY");
         Measurement latestAirHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "AIR_QUALITY");
+        Measurement latestPressureMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "AIR_PRESSURE");
+
         latestMeasurements.add(latestAirQulityMeasurement);
         latestMeasurements.add(latestTemperatureMeasurement);
         latestMeasurements.add(latestGroundHumidityMeasurement);
         latestMeasurements.add(latestLightMeasurement);
         latestMeasurements.add(latestAirHumidityMeasurement);
+        latestMeasurements.add(latestPressureMeasurement);
         return latestMeasurements;
     }
 
@@ -129,11 +132,15 @@ public class MeasurementService {
         Measurement latestGroundHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "SOIL_MOISTURE");
         Measurement latestLightMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "LIGHT_INTENSITY");
         Measurement latestAirHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "AIR_QUALITY");
+        Measurement latestPressureMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "AIR_PRESSURE");
+
         latestMeasurements.add(latestAirQulityMeasurement);
         latestMeasurements.add(latestTemperatureMeasurement);
         latestMeasurements.add(latestGroundHumidityMeasurement);
         latestMeasurements.add(latestLightMeasurement);
         latestMeasurements.add(latestAirHumidityMeasurement);
+        latestMeasurements.add(latestPressureMeasurement);
+
         return latestMeasurements;
     }
 

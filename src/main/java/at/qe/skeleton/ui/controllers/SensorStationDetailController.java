@@ -248,22 +248,22 @@ public class SensorStationDetailController implements Serializable {
                 }else return 0;
 
             case "AIR_PRESSURE":
-                if(humiditySensor != null) {
+                if(airPressureSensor != null) {
                 isThresholdExceeded = (Double.parseDouble(measurementValue) > Double.parseDouble(airPressureSensor.getUpper_border()) || Double.parseDouble(measurementValue) < Double.parseDouble(airPressureSensor.getLower_border()));
                 return isThresholdExceeded ? 1 : 0;
                 }else return 0;
             case "TEMPERATURE":
-                if(humiditySensor != null) {
+                if(temperatureSensor != null) {
                 isThresholdExceeded = (Double.parseDouble(measurementValue) > Double.parseDouble(temperatureSensor.getUpper_border()) || Double.parseDouble(measurementValue) < Double.parseDouble(temperatureSensor.getLower_border()));
                 return isThresholdExceeded ? 1 : 0;
                 }else return 0;
             case "AIR_QUALITY":
-                if(humiditySensor != null) {
+                if(airQualitySensor != null) {
                 isThresholdExceeded = (Double.parseDouble(measurementValue) > Double.parseDouble(airQualitySensor.getUpper_border()) || Double.parseDouble(measurementValue) < Double.parseDouble(airQualitySensor.getLower_border()));
                 return isThresholdExceeded ? 1 : 0;
                 }else return 0;
             case "LIGHT_INTENSITY":
-                if(humiditySensor != null) {
+                if(lightIntesitySensor != null) {
                 isThresholdExceeded = (Double.parseDouble(measurementValue) > Double.parseDouble(lightIntesitySensor.getUpper_border()) || Double.parseDouble(measurementValue) < Double.parseDouble(lightIntesitySensor.getLower_border()));
                 return isThresholdExceeded ? 1 : 0;
                 }else return 0;
