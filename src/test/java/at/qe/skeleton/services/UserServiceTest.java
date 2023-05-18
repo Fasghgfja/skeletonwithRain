@@ -137,9 +137,8 @@ class UserServiceTest {
      */
     @DirtiesContext
     @Test
-    @WithMockUser(username = "admin", authorities = {"GARDENER", "USER"})
+    @WithMockUser(username = "admin", authorities = {"USER"})
     void testGetAllUsersNonAdmin(){
-
         assertThrows(AccessDeniedException.class, userService::getAllUsers);
     }
 
@@ -183,7 +182,7 @@ class UserServiceTest {
 
     @DirtiesContext
     @Test
-    @WithMockUser(username = "admin", authorities = {"GARDENER", "USER"})
+    @WithMockUser(username = "admin", authorities = {"USER"})
     void testGetAllGardenersNonAdmin(){
 
         assertThrows(AccessDeniedException.class, userService::getAllGardeners);

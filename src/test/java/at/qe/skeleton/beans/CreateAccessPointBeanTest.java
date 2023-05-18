@@ -3,6 +3,7 @@ package at.qe.skeleton.beans;
 import at.qe.skeleton.model.AccessPoint;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.services.AccessPointService;
+import at.qe.skeleton.services.IntervalService;
 import at.qe.skeleton.ui.beans.CreateAccessPointBean;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +27,9 @@ class CreateAccessPointBeanTest {
     @Autowired
     private LogRepository logRepository;
 
+    @Autowired
+    private IntervalService intervalService;
+
     private CreateAccessPointBean createAccessPointBean;
 
     @BeforeEach
@@ -34,8 +38,7 @@ class CreateAccessPointBeanTest {
         createAccessPointBean.setAccessPointService(accessPointService);
         createAccessPointBean.setSessionInfoBean(sessionInfoBean);
         createAccessPointBean.setLogRepository(logRepository);
-
-
+        createAccessPointBean.setIntervalService(intervalService);
     }
 
     @DirtiesContext

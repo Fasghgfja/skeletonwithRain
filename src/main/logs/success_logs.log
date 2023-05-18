@@ -126,3 +126,53 @@ Mai 18, 2023 9:14:30 PM at.qe.skeleton.ui.controllers.FileUploadController handl
 INFORMATION: UPLOADED IMAGE: 1253
 Mai 18, 2023 9:14:46 PM at.qe.skeleton.ui.controllers.GalleryController approveImage
 INFORMATION: IMAGE APPROVED: 1253
+Mai 18, 2023 9:21:03 PM at.qe.skeleton.ui.beans.CreatePlantBean doCreateNewPlant
+INFORMATION: CREATED PLANT: 100
+Mai 18, 2023 9:21:13 PM at.qe.skeleton.ui.beans.CreateSensorStationBean doCreateNewCreateSensorStation
+INFORMATION: CREATED SENSOR STATION: SensorStation
+Mai 18, 2023 9:21:45 PM at.qe.skeleton.ui.beans.CreateUserBean createNewUser
+INFORMATION: CREATED USER: username
+Mai 18, 2023 9:24:46 PM at.qe.skeleton.ui.beans.CreateAccessPointBean doCreateNewAccessPoint
+INFORMATION: CREATED ACCESSPOINT: 1
+Mai 18, 2023 9:27:40 PM at.qe.skeleton.ui.beans.CreatePlantBean doCreateNewPlant
+INFORMATION: CREATED PLANT: 100
+Mai 18, 2023 9:27:54 PM at.qe.skeleton.ui.beans.CreateSensorStationBean doCreateNewCreateSensorStation
+INFORMATION: CREATED SENSOR STATION: SensorStation
+Mai 18, 2023 9:28:15 PM at.qe.skeleton.ui.beans.CreateAccessPointBean doCreateNewAccessPoint
+INFORMATION: CREATED ACCESSPOINT: 1
+Mai 18, 2023 9:28:30 PM at.qe.skeleton.ui.beans.CreateUserBean createNewUser
+INFORMATION: CREATED USER: username
+Mai 18, 2023 9:32:13 PM at.qe.skeleton.ui.beans.CreateUserBean createNewUser
+INFORMATION: CREATED USER: username
+Mai 18, 2023 9:33:11 PM at.qe.skeleton.ui.beans.CreatePlantBean doCreateNewPlant
+INFORMATION: CREATED PLANT: 100
+Mai 18, 2023 9:33:24 PM at.qe.skeleton.ui.beans.CreateSensorStationBean doCreateNewCreateSensorStation
+INFORMATION: CREATED SENSOR STATION: SensorStation
+Mai 18, 2023 9:33:47 PM at.qe.skeleton.ui.beans.CreateAccessPointBean doCreateNewAccessPoint
+INFORMATION: CREATED ACCESSPOINT: 1
+Mai 18, 2023 9:34:02 PM at.qe.skeleton.ui.beans.CreateUserBean createNewUser
+INFORMATION: CREATED USER: username
+Mai 18, 2023 9:41:09 PM at.qe.skeleton.ui.beans.CreatePlantBean doCreateNewPlant
+INFORMATION: CREATED PLANT: 100
+Mai 18, 2023 9:41:21 PM at.qe.skeleton.ui.beans.CreateSensorStationBean doCreateNewCreateSensorStation
+INFORMATION: CREATED SENSOR STATION: SensorStation
+Mai 18, 2023 9:41:58 PM at.qe.skeleton.ui.beans.CreateAccessPointBean doCreateNewAccessPoint
+INFORMATION: CREATED ACCESSPOINT: 1
+Mai 18, 2023 9:42:24 PM at.qe.skeleton.ui.beans.CreateUserBean createNewUser
+INFORMATION: CREATED USER: username
+Mai 18, 2023 9:49:25 PM at.qe.skeleton.ui.beans.CreatePlantBean doCreateNewPlant
+INFORMATION: CREATED PLANT: 100
+Mai 18, 2023 9:49:36 PM at.qe.skeleton.ui.beans.CreateSensorStationBean doCreateNewCreateSensorStation
+INFORMATION: CREATED SENSOR STATION: SensorStation
+Mai 18, 2023 9:49:59 PM at.qe.skeleton.ui.beans.CreateAccessPointBean doCreateNewAccessPoint
+INFORMATION: CREATED ACCESSPOINT: 1
+Mai 18, 2023 9:50:13 PM at.qe.skeleton.ui.beans.CreateUserBean createNewUser
+INFORMATION: CREATED USER: username
+Mai 18, 2023 10:08:23 PM at.qe.skeleton.ui.beans.CreatePlantBean doCreateNewPlant
+INFORMATION: CREATED PLANT: 100
+Mai 18, 2023 10:08:34 PM at.qe.skeleton.ui.beans.CreateSensorStationBean doCreateNewCreateSensorStation
+INFORMATION: CREATED SENSOR STATION: SensorStation
+Mai 18, 2023 10:08:56 PM at.qe.skeleton.ui.beans.CreateAccessPointBean doCreateNewAccessPoint
+INFORMATION: CREATED ACCESSPOINT: 1
+Mai 18, 2023 10:09:11 PM at.qe.skeleton.ui.beans.CreateUserBean createNewUser
+INFORMATION: CREATED USER: username
