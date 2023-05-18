@@ -114,7 +114,7 @@ public class AccessPointService {
                       id: %d
                       measurement-intervall: 5
                       webapp-intervall: 5
-                      alarmCountThreshold: 5
+                      alarmCountThreshold: 1
                     webapp-params:
                       ip: %s:%d
                       pswd: passwd

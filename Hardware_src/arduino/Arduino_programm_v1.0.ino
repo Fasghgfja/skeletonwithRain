@@ -143,7 +143,7 @@ void loop(){
 
     }
     //----------------------------------------------reset if 5 mins no connection
-    if((timer_current - Pairing_timer_start) >= Pairing_time_delta && connection_on == false){
+    if((timer_current - Pairing_timer_start) >= Pairing_time_delta && piezo_on == true){
         connection_on = false;
         piezo_on = false;
         noTone(piezo);
@@ -169,12 +169,12 @@ void loop(){
         piezo_timer_start = millis();
         Pairing_timer_start = millis();
     }
-    //---------------------------------------------Button push to deactivate the alarm if is active
+        //---------------------------------------------Button push to deactivate the alarm if is active
     else if(readButton == HIGH && connection_on == true && Alarm == true){
         alarm_on = true;
         alarm_controller();
     }
-    //---------------------------------------------Button push to reset/stop offering signal
+        //---------------------------------------------Button push to reset/stop offering signal
     else if(readButton == HIGH && connection_on == true && piezo_on == false){
         connection_on = false;
         readButton = LOW;
