@@ -1,16 +1,8 @@
-# https://github.com/hbldh/bleak
-# https://github.com/hbldh/bleak/blob/master/examples/service_explorer.py
+
 import DB_connection
 import exception_logging
 
 from bleak import BleakClient, BleakScanner
-
-
-
-
-# writeValue is used to write the values to the database
-
-        # added
 # send signal to switch on/off alarm ligth on a given uuid
 async def writeAlarmSignal(uuid, switch, station_name):
     device = await BleakScanner.find_device_by_name(station_name)
