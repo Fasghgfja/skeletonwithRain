@@ -114,3 +114,11 @@ Mai 18, 2023 8:20:41 PM at.qe.skeleton.ui.controllers.FileUploadController handl
 INFORMATION: UPLOADED IMAGE: 1153
 Mai 18, 2023 8:20:53 PM at.qe.skeleton.ui.controllers.GalleryController approveImage
 INFORMATION: IMAGE APPROVED: 1153
+Mai 18, 2023 8:49:29 PM at.qe.skeleton.ui.beans.CreateSensorStationBean doCreateNewCreateSensorStation
+INFORMATION: CREATED SENSOR STATION: testss
+Mai 18, 2023 8:49:41 PM at.qe.skeleton.ui.controllers.SensorStationDetailController doChangeThePlantAndSave
+INFORMATION: PLANT CREATED: 1203
+Mai 18, 2023 8:49:48 PM at.qe.skeleton.services.SensorStationService deleteSensorStation
+INFORMATION: SENSOR STATION DELETED: testss
+Mai 18, 2023 8:49:48 PM at.qe.skeleton.ui.controllers.SensorStationDetailController doDeleteSensorStation
+INFORMATION: SENSOR STATION DELETED: testss

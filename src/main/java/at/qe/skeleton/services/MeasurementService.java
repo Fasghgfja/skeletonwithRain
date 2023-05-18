@@ -1,24 +1,20 @@
 package at.qe.skeleton.services;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import at.qe.skeleton.model.Measurement;
+import at.qe.skeleton.model.MeasurementType;
 import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.Sensor;
 import at.qe.skeleton.model.SensorStation;
-import at.qe.skeleton.repositories.AbstractRepository;
 import at.qe.skeleton.repositories.MeasurementRepository;
 import at.qe.skeleton.repositories.SensorRepository;
 import at.qe.skeleton.repositories.SensorStationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -42,11 +38,12 @@ public class MeasurementService {
     @Autowired
     private SensorStationRepository sensorStationRepository;
 
-    private final transient Logger successLogger = Logger.getLogger("SuccessLogger");
-    private transient FileHandler successFileHandler;
+    private final Logger successLogger = Logger.getLogger("SuccessLogger");
+    private FileHandler successFileHandler;
 
     /**
      * Method to get all measurements currently stored in the database.
+     *
      * @return Collection of all measurements.
      */
     public Collection<Measurement> getAllMeasurements() {
@@ -55,6 +52,7 @@ public class MeasurementService {
 
     /**
      * Method to get all Measurements of a given sensor station from the database.
+     *
      * @param sensorStation measurements of this sensor station will be return in a way that the latest measurements are displayed first.
      * @return Collection of measurements.
      */
@@ -64,8 +62,9 @@ public class MeasurementService {
 
     /**
      * Method to get measurements of a single type for a single sensor station.
+     *
      * @param sensorStation Measurements for this sensor station will be returned.
-     * @param type Measurements of this type will be returned.
+     * @param type          Measurements of this type will be returned.
      * @return Collection of measurements.
      */
     public Collection<Measurement> getAllMeasurementsBySensorStationAndTypeAsc(SensorStation sensorStation, String type) {
@@ -80,17 +79,18 @@ public class MeasurementService {
     /**
      * Method to get the latest measurements for a given sensorStation
      * this method is used from the graph and status indicators to get the latest measurements for a plant
+     *
      * @param sensorStation the sensorStation from which to find the last measurements , 1 per type
      * @return a collection of the last measurements , one per type
      */
     public Collection<Measurement> getLatestPlantMeasurements(SensorStation sensorStation) {
         Collection<Measurement> latestMeasurements = new ArrayList<>();
-        Measurement latestAirQulityMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "HUMIDITY");
-        Measurement latestTemperatureMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "TEMPERATURE");
-        Measurement latestGroundHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "SOIL_MOISTURE");
-        Measurement latestLightMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "LIGHT_INTENSITY");
-        Measurement latestAirHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "AIR_QUALITY");
-        Measurement latestPressureMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, "AIR_PRESSURE");
+        Measurement latestAirQulityMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, MeasurementType.HUMIDITY.getValue());
+        Measurement latestTemperatureMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, MeasurementType.TEMPERATURE.getValue());
+        Measurement latestGroundHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, MeasurementType.SOIL_MOISTURE.getValue());
+        Measurement latestLightMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, MeasurementType.LIGHT_INTENSITY.getValue());
+        Measurement latestAirHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, MeasurementType.AIR_QUALITY.getValue());
+        Measurement latestPressureMeasurement = measurementRepository.findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(sensorStation, MeasurementType.AIR_PRESSURE.getValue());
 
         latestMeasurements.add(latestAirQulityMeasurement);
         latestMeasurements.add(latestTemperatureMeasurement);
@@ -104,17 +104,18 @@ public class MeasurementService {
     /**
      * Method to get the latest measurements for a given plant
      * this method is used from the graph and status indicators to get the latest measurements for a plant
+     *
      * @param plant the sensorStation from which to find the last measurements , 1 per type
      * @return a collection of the last measurements , one per type
      */
     public Collection<Measurement> getLatestPlantMeasurements(Plant plant) {
         Collection<Measurement> latestMeasurements = new ArrayList<>();
-        Measurement latestAirQulityMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "HUMIDITY");
-        Measurement latestTemperatureMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "TEMPERATURE");
-        Measurement latestGroundHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "SOIL_MOISTURE");
-        Measurement latestLightMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "LIGHT_INTENSITY");
-        Measurement latestAirHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "AIR_QUALITY");
-        Measurement latestPressureMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, "AIR_PRESSURE");
+        Measurement latestAirQulityMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, MeasurementType.HUMIDITY.getValue());
+        Measurement latestTemperatureMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, MeasurementType.TEMPERATURE.getValue());
+        Measurement latestGroundHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, MeasurementType.SOIL_MOISTURE.getValue());
+        Measurement latestLightMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, MeasurementType.LIGHT_INTENSITY.getValue());
+        Measurement latestAirHumidityMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, MeasurementType.AIR_QUALITY.getValue());
+        Measurement latestPressureMeasurement = measurementRepository.findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(plant, MeasurementType.AIR_PRESSURE.getValue());
 
         latestMeasurements.add(latestAirQulityMeasurement);
         latestMeasurements.add(latestTemperatureMeasurement);
@@ -128,55 +129,57 @@ public class MeasurementService {
 
     /**
      * Method to get the amount of measurements currently stored in the database.
+     *
      * @return number of measurements.
      */
-    public Integer getMeasurementsAmount() {return measurementRepository.count();}
-
+    public Integer getMeasurementsAmount() {
+        return measurementRepository.count();
+    }
 
 
     /**
      * Method to return an icon for a certain measurement type.
+     *
      * @param type type of the measurement.
      * @return A string that indicates which icon suits the measurement type is returned.
      */
 
     public String getMeasurementTypeIcon(String type) {
-        switch(type) {
-            case "HUMIDITY":
-                return "fa-solid fa-droplet fa-lg";
-            case "TEMPERATURE":
-                return "fa-solid fa-thermometer-three-quarters fa-lg";
-            case "AIR_PRESSURE":
-                return "fa-sharp fa-solid fa-arrows-to-circle fa-lg";
-            case "LIGHT_INTENSITY":
-                return "fa-solid fa-sun fa-lg";
-            case "SOIL_MOISTURE":
-                return "fa-solid fa-water fa-lg";
-            case "AIR_QUALITY":
-                return "fa-solid fa-wind fa-lg";
-            default:
-                return "";
-        }
+        return switch (type) {
+            case "HUMIDITY" -> "fa-solid fa-droplet fa-lg";
+            case "TEMPERATURE" -> "fa-solid fa-thermometer-three-quarters fa-lg";
+            case "AIR_PRESSURE" -> "fa-sharp fa-solid fa-arrows-to-circle fa-lg";
+            case "LIGHT_INTENSITY" -> "fa-solid fa-sun fa-lg";
+            case "SOIL_MOISTURE" -> "fa-solid fa-water fa-lg";
+            case "AIR_QUALITY" -> "fa-solid fa-wind fa-lg";
+            default -> "";
+        };
     }
 
 
     public String getLastMeasurementBySensorStationAndType(SensorStation sensorStation, String type) {
-        Measurement measurement = measurementRepository.getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(sensorStation,type);
-        if(measurement == null) {return "--";}
-        return measurementRepository.getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(sensorStation,type).getValue_s();
+        Measurement measurement = measurementRepository.getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(sensorStation, type);
+        if (measurement == null) {
+            return "--";
+        }
+        return measurementRepository.getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(sensorStation, type).getValue_s();
     }
 
     public void deleteMeasurementsFromTo(LocalDateTime from, LocalDateTime to) {
-        if (from == null){
+        if (from == null) {
             Measurement firstMeasurement = measurementRepository.findFirstByOrderByTimestampAsc();
-            if (firstMeasurement == null) {return;}
+            if (firstMeasurement == null) {
+                return;
+            }
             from = firstMeasurement.getTimestamp();
         }
-        if (to == null){
+        if (to == null) {
             to = LocalDateTime.now();
         }
-        if ( from != null && from.isAfter(to)){return;}
-        measurementRepository.deleteMeasurementsByTimestampBetween(from,to);
+        if (from != null && from.isAfter(to)) {
+            return;
+        }
+        measurementRepository.deleteMeasurementsByTimestampBetween(from, to);
         try {
             successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);
             successFileHandler.setFormatter(new SimpleFormatter());
@@ -192,14 +195,18 @@ public class MeasurementService {
         SensorStation sensorStation = sensorStationRepository.findFirstById(sensorStationToDeleteFromId);
         if (from == null) {
             Measurement firstMeasurement = measurementRepository.findFirstBySensorStationOrderByTimestampAsc(sensorStation);
-            if (firstMeasurement == null) {return;}
+            if (firstMeasurement == null) {
+                return;
+            }
             from = firstMeasurement.getTimestamp();
 
         }
         if (to == null) {
             to = LocalDateTime.now();
         }
-        if (from != null&& from.isAfter(to)){return;}
+        if (from != null && from.isAfter(to)) {
+            return;
+        }
 
         measurementRepository.deleteMeasurementsBySensorStationAndTimestampBetween(sensorStation, from, to);
         try {

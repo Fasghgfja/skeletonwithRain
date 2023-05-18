@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
@@ -28,14 +29,12 @@ public class PlantService {
     private ImageRepository imageRepository;
 
     @Autowired
-    private LogRepository logRepository;
-
-    @Autowired
     private SensorStationService sensorStationService;
 
 
     /**
      * Method to get the amount of all plants currently stored in the database.
+     *
      * @return amount of all plants.
      */
 
@@ -59,7 +58,7 @@ public class PlantService {
      */
     @PreAuthorize("permitAll()")
     public Plant loadPlant(Long plantID) {
-        return plantRepository.findFirstById(plantID);//TODO:check which one to use
+        return plantRepository.findFirstById(plantID);
     }
 
     /**
@@ -80,6 +79,7 @@ public class PlantService {
 
     /**
      * Deletes the plant.
+     *
      * @param plant the plant to delete.
      */
     @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
@@ -90,6 +90,7 @@ public class PlantService {
     /**
      * Deletes a plant that is currently in a sensor station.
      * This first removes the plant from the sensor station and then deletes it.
+     *
      * @param plant to be deleted
      */
     @PreAuthorize("permitAll()")
@@ -104,6 +105,7 @@ public class PlantService {
 
     /**
      * This method detaches all images assigned to a plant from the plant and keeps them stored in the database.
+     *
      * @param plant The plant that all images should be detached from.
      */
 
@@ -114,6 +116,7 @@ public class PlantService {
 
     /**
      * Method to get all followed plants for a specific user.
+     *
      * @param user to get the followed plants for.
      * @return A Collection of all plants followed by the given user.
      */
@@ -121,8 +124,6 @@ public class PlantService {
     public Collection<Plant> getFollowedPlants(Userx user) {
         return plantRepository.findPlantsByFollowers(user);
     }
-
-    //TODO:find plant by gardener
 
     public Collection<Plant> getOnlyPlantsNotYetFollowed(Userx user) {
         return plantRepository.findPlantsInPlantsCatalogueNotYetFollowed(user.getUsername());
@@ -137,6 +138,7 @@ public class PlantService {
 
     /**
      * Get all the names of the plants that are currently not linked to a sensor station.
+     *
      * @return Collection of names.
      */
     public Collection<String> getAllNotUsedPlantsUniqueNames() {
@@ -145,14 +147,15 @@ public class PlantService {
 
     /**
      * Method to check if a plant is already follwed by a user.
+     *
      * @param currentUser the user currently logged in.
-     * @param plant the plant to check if it is already followed.
+     * @param plant       the plant to check if it is already followed.
      * @return boolean that represents wheter the plant is followed or not.
      */
 
     @PreAuthorize("permitAll()")
     public Boolean isPlantAlreadyFollowed(Userx currentUser, Plant plant) {
-        return plantRepository.findPlantsByFollowers(currentUser).contains(plant) ;
+        return plantRepository.findPlantsByFollowers(currentUser).contains(plant);
     }
 
     /**
