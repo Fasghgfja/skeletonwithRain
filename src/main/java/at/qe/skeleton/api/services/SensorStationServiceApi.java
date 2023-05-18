@@ -178,7 +178,7 @@ public class SensorStationServiceApi {
         SendingIntervalFrame sendingIntervalFrame = new SendingIntervalFrame();
         sendingIntervalFrame.setMeasurementInterval(Integer.parseInt(ssInterval.getMeasurementInterval()));
         sendingIntervalFrame.setWebappSendInterval(Integer.parseInt(ssInterval.getWebAppInterval()));
-        sendingIntervalFrame.setAlarmCountThreshold(sensorStation.get(0).getAlarmCountThreshold().intValue());
+        sendingIntervalFrame.setAlarmCountThreshold(1);
         return  sendingIntervalFrame;
     }
 

@@ -29,7 +29,7 @@ public class AccessPointService {
     /*
     @Autowired
     private ServletWebServerApplicationContext webServerAppCtxt;
-*/
+    */
     /**
      * Method to get all access points currently stored in the database.
      * @return Collection of all access points.
@@ -113,8 +113,8 @@ public class AccessPointService {
             String content = String.format("""
                     accesspoint-params:
                       id: %d
-                      measurement-intervall: 5
-                      webapp-intervall: 5
+                      measurement-intervall: 1
+                      webapp-intervall: 1
                       alarmCountThreshold: 1
                       validation: False
                     webapp-params:

@@ -22,7 +22,7 @@ if __name__ == '__main__':
                 case program_status.Is.IMPLEMENT_DATABASE.value:
                     print("Implement database")
                     DB_connection.implement_database()
-                    time.sleep(SECTION_SLEEP)
+                    time.sleep(5)
                     program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
                     #program_state = program_status.Is.CHECK_FOR_NEW_BOARDER_VALUES.value
 
@@ -31,6 +31,7 @@ if __name__ == '__main__':
                     try:
                         new_device_name_list = rest_api.check_if_new_stations()
                         if len(new_device_name_list) > 0:
+                            print(new_device_name_list)
                             asyncio.run(ble_service_connection.read_sensor_data(True, new_device_name_list))
                             asyncio.run(rest_api.write_sensors_and_station_description(new_device_name_list))
                     except Exception as e:

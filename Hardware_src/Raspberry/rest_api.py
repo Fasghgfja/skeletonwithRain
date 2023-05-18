@@ -251,7 +251,7 @@ def send_log_data_to_webapp():
 
         response = requests.post(url, json=log_send_list, auth=auth)
         if response.status_code == 200:
-            with open('logFile.txt', 'w') as file:
+             with open('logFile.txt', 'w') as file:
                 file.write("New File")
                 file.close()
     else:
