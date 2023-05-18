@@ -1,8 +1,8 @@
 package at.qe.skeleton.ui.controllers;
 
 
-import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,9 +31,7 @@ public class SensorStationListController implements Serializable {
     private List<SensorStation> assignedSensorStationList;
 
     @Autowired
-    private SensorStationService sensorService;
-
-
+    private transient SensorStationService sensorService;
 
     @Autowired
     private SessionInfoBean sessionInfoBean;
@@ -41,11 +39,10 @@ public class SensorStationListController implements Serializable {
     private Collection<SensorStation> filteredSensorStations;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         sensorStationList = (ArrayList<SensorStation>) sensorService.getAllSensorStations();
         assignedSensorStationList = (ArrayList<SensorStation>) sensorService.getAllAssignedSensorStations(getSessionInfoBean().getCurrentUser());
     }
-
 
     /**
      * Returns a list of all sensor stations.
@@ -68,10 +65,6 @@ public class SensorStationListController implements Serializable {
         Userx user = sessionInfoBean.getCurrentUser();
         return sensorService.getAllAssignedSensorStations(user);
     }
-
-
-
-
 
     /**
      * Returns how many sensor stations are registered in the system.
