@@ -3,8 +3,10 @@ package at.qe.skeleton.ui.beans;
 import at.qe.skeleton.model.AccessPoint;
 import at.qe.skeleton.model.Log;
 import at.qe.skeleton.model.LogType;
+import at.qe.skeleton.model.SSInterval;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.services.AccessPointService;
+import at.qe.skeleton.services.IntervalService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,10 @@ public class CreateAccessPointBean implements Serializable {
     private SessionInfoBean sessionInfoBean;
 
     @Autowired
+    private IntervalService intervalService;
+
+
+    @Autowired
     private transient LogRepository logRepository;
 
     private String location;
@@ -36,7 +42,13 @@ public class CreateAccessPointBean implements Serializable {
         AccessPoint accessPoint = new AccessPoint();
         accessPoint.setValidated(false);
         accessPoint.setLocation(location);
+        SSInterval interval = new SSInterval();
+        interval.setWebAppInterval("1");
+        interval.setMeasurementInterval("1");
+
         accessPoint = accessPointService.saveAccessPoint(accessPoint);
+        interval.setAccessPoint(accessPoint);
+        intervalService.saveInterval(interval);
 
         Log createLog = new Log();
         createLog.setDate(LocalDate.now());
