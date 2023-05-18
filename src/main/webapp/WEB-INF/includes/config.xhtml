@@ -12,16 +12,28 @@
                     <h3>Theme Customization</h3>
                 </div>
                 <p:outputPanel id="lightdark-panel" styleClass="layout-config-section options">
-                    <span class="section-name">Layout Mode</span>
+                    <span class="section-name">Set Dark Mode</span>
                     <div class="grid layout-config-options">
-                        <p:selectOneRadio layout="responsive" columns="2" value="#{guestPreferences.darkMode}" onchange="PrimeFaces.RainConfigurator.changeLayout('#{guestPreferences.layoutPrimaryColor}', '#{guestPreferences.componentTheme}', event.target.value)"   >
-                            <f:selectItem itemLabel="Light" itemValue="light" />
+                        <p:selectOneRadio value="#{guestPreferences.darkMode}" layout="responsive"
+                                           columns="2" update="@all" >
                             <f:selectItem itemLabel="Dark" itemValue="dark" />
+                            <f:selectItem itemLabel="Light" itemValue="light" />
+
                             <p:ajax onstart="PrimeFaces.RainConfigurator.beforeResourceChange()" update="config-form logolink footerlogolink  rightpanellogo"/>
                         </p:selectOneRadio>
+                        <p:commandButton value="Refresh" oncomplete="location.reload();" />
+
                     </div>
                 </p:outputPanel>
             </h:form>
         </div>
     </div>
+
+
+    <script>
+        window.onload =function() {PrimeFaces.RainConfigurator.changeComponentsTheme('#{guestPreferences.componentTheme}','#{guestPreferences.darkMode}');
+        }
+    </script>
+
+
 </ui:composition>

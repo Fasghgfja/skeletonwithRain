@@ -12,13 +12,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-
-//TODO: Fix like the example in the demo
 /**
  * Entity representing an audit log entry.
  */
- @Getter
- @Setter
+@Getter
+@Setter
 @Entity
 public class Log implements Persistable<Long>, Serializable, Comparable<Log> {
 

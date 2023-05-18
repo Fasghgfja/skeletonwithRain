@@ -1,5 +1,3 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3c.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -10,110 +8,46 @@
     <!-- ........OF THE SENSOR STATION(GREENHOUSE) OF THE CORRESPONDING GREENHOUSE IS OPENED::::::::::::::::::::::::::::::::............... -->
 
 
-    <ui:define name="title">Dashboard</ui:define>
+    <ui:define name="title">Plant Health: Sensor Station Management</ui:define>
     <ui:define name="head">
         <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css" />
     </ui:define>
-
 
 
     <ui:define name ="content">
 
 
 
-        <!-- ...................................PLANT CREATE dialog.................................... -->
-        <h:form id="plantCreateDialog">
 
-            <!-- ....................PLANT CREATE button..................... -->
-
-            <p:commandButton style="margin-bottom: 10px; margin-left: 7px" value="Create new Plant" update=":plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
-                             icon="pi pi-user-plus" title="New User" class="btn btn-primary">
-                <p:resetInput target="createPlantDialog"/>
-            </p:commandButton>
-
-
-            <p:dialog header="Create New Plant" id="createPlantDialog" widgetVar="createPlantDialog" modal="true"
-                      showEffect="fade" hideEffect="fade" resizable="false">
-                <p:ajax event="close" update="createPlantDialog"/>
-
-                <p:outputPanel id="createPlant">
-                    <h:panelGrid columns="2">
-
-
-                        <p:outputLabel for="plantNameCreation" value="Plant Name:"/>
-                        <p:inputText id="plantNameCreation"
-                                     placeholder="Required field" value="#{createPlantBean.plantName}" required="true"/>
-
-
-                        <p:outputLabel for="plantDescrptiom" value="Description:"/>
-                        <p:inputText id="plantDescrptiom"
-                                     placeholder="description" value="#{createPlantBean.description}" required="false"/>
-
-
-                        <p:commandButton value="Create"
-                                         action="#{createPlantBean.doCreateNewPlant()}"
-                                         update=":userForm:sensorStationTable"
-                                         oncomplete="PF('createPlantDialog').hide()"/>
-                        <p:commandButton value="Cancel" onclick="PF('createPlantDialog').hide()"/>
-
-
-                    </h:panelGrid>
-
-                </p:outputPanel>
-            </p:dialog>
-        </h:form>
-
-        <!-- ...................................Sensor station CREATE dialog.................................... -->
+        <!-- ...................................Sensor station CREATE dialog Form.................................... -->
         <h:form id="createDialog">
 
-            <!-- ....................Sensor station CREATE button..................... -->
-
-            <p:commandButton  style="margin-left: 7px" value="Create new Sensor Station" update=":createDialog:createSSDialog" oncomplete="PF('createSSDialog').show()"
-                             icon="pi pi-user-plus" title="New Sensor Station" class="btn btn-primary">
-                <p:resetInput target=":createDialog:createSSDialog"/>
-            </p:commandButton>
-
-
-
+            <!-- ....................Create sensor station dialog.................................................... -->
             <p:dialog header="Create New Sensor Station" id="createSSDialog" widgetVar="createSSDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
                 <p:ajax event="close" update="createSSDialog"/>
-
                 <p:outputPanel id="createSS">
                     <h:panelGrid columns="2">
-
-
                         <p:outputLabel for="usernameCreation" value="Sensor Station Name:"/>
                         <p:inputText id="usernameCreation"
                                      placeholder="Required field" value="#{createSensorStationBean.sensorStationName}" required="true"/>
-
                         <p:outputLabel for="description" value="Description:"/>
                         <p:inputText id="description"
                                      placeholder="description" value="#{createSensorStationBean.description}" required="false"/>
-
                         <p:outputLabel for="location" value="Location:"/>
                         <p:inputText id="location" value="#{createSensorStationBean.location}"/>
-
-
-                        <p:outputLabel for="sensorStationswitch" value="Alarm Switch:"/>
-                        <p:selectOneMenu id="sensorStationswitch" value="#{createSensorStationBean.alarmSwitch}"  >
-                            <f:selectItem itemLabel="On" itemValue="On"/>
-                            <f:selectItem itemLabel="Off" itemValue="Off"/>
-                        </p:selectOneMenu>
-
-
-
+                        <p:outputLabel for="AlarmCountTreshold" value="Alarm Count Treshold:"/>
+                        <p:inputText id="AlarmCountTreshold" value="#{createSensorStationBean.alarmCountThreshold}"/>
+                        <!-- ................Create Sensor Station Button....................... -->
                         <p:commandButton value="Create"
                                          action="#{createSensorStationBean.doCreateNewCreateSensorStation()}"
                                          update=":userForm:sensorStationTable"
                                          oncomplete="PF('createSSDialog').hide(); location.reload()"/>
                         <p:commandButton value="Cancel" onclick="PF('createSSDialog').hide()"/>
-
-
                     </h:panelGrid>
-
                 </p:outputPanel>
             </p:dialog>
+
         </h:form>
 
 
@@ -133,26 +67,38 @@
             <div class="col-12">
 
                 <div class="card">
-                    <h5>Sensor Stations</h5>
+
+                    <!-- ....................Sensor station CREATE button..................... -->
+                    <p:commandButton  style="margin-right: 5px" value="Create new Sensor Station" update=":createDialog:createSSDialog" oncomplete="PF('createSSDialog').show()"
+                                      icon="pi pi-user-plus" title="New Sensor Station" class="btn btn-primary">
+                        <p:resetInput target=":createDialog:createSSDialog"/>
+                    </p:commandButton>
+
+                    <!-- ....................Help button...........................BUTTON................................. -->
+                    <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
+                                     styleClass="ui-button-secondary outlined-button"
+                                     onclick="PF('SSDialog').show()"/>
+
                     <p:dataTable id="sensorStationTable" var="sensorStation" value="#{sensorStationListController.sensorStationList}"
                                  scrollHeight="550"
                                  paginatorPosition="bottom" rowKey="#{sensorStation.id}">
 
                         <p:ajax event="rowToggle" listener="#{sensorStationDetailController.onRowToggle}" />
 
-                        <p:column >
+
+                        <p:column style="width: 7%" headerText="Sensor Stations: #{sensorStationListController.sensorStationsAmount}" >
                             <p:rowToggler/>
                         </p:column>
 
-                        <p:column  headerText="Id" sortBy="#{sensorStation.id}">
+                        <p:column style="width: 7%" headerText="Id" sortBy="#{sensorStation.id}" filterBy="#{sensorStation.id}">
                             <h:outputText value="#{sensorStation.id}"/>
                         </p:column>
 
-                        <p:column  headerText="Access Point" sortBy="#{sensorStation.accessPoint}">
+                        <p:column style="width: 5%" headerText="Access Point" sortBy="#{sensorStation.accessPoint}" filterBy="#{sensorStation.accessPoint}">
                             <h:outputText value="#{sensorStation.accessPoint}"/>
                         </p:column>
 
-                        <p:column  headerText="Plant" sortBy="#{sensorStation.plant.plantName}">
+                        <p:column  headerText="Plant" sortBy="#{sensorStation.plant.plantName}" filterBy="#{sensorStation.plant.plantName}">
                             <h:outputText value="#{sensorStation.plant}"/>
                         </p:column>
 
@@ -160,7 +106,7 @@
                             <h:outputText value="#{sensorStation.gardener}"/>
                         </p:column>
 
-                        <p:column headerText="Alarm Status">
+                        <p:column style="width: 8%" headerText="Alarm Status">
                             <i class="#{measurementListController.getMeasurementTypeIcon('AIR_PRESSURE')}"
                                style="color:#{measurementListController.getSensorStatus('AIR_PRESSURE',sensorStation) == 'OK' ? 'green' : 'red'}"
                                title="Air Pressure"></i>
@@ -181,42 +127,41 @@
                                title="Humidity"></i>
                         </p:column>
 
-                        <p:column  headerText="Location" sortBy="#{sensorStation.location}">
+                        <p:column style="width: 6%; text-align: left " headerText="Location" sortBy="#{sensorStation.location}" filterBy="#{sensorStation.location}">
                             <h:outputText value="#{sensorStation.location}"/>
                         </p:column>
 
-                        <p:column  headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}">
+                        <p:column style="width: 5%" headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}" filterBy="#{sensorStation.alarmSwitch}">
                             <h:outputText value="#{sensorStation.alarmSwitch}"/>
                         </p:column>
 
+                        <p:column style="width: 5%" headerText="Alarm Treshold" sortBy="#{sensorStation.alarmCountThreshold}" filterBy="#{sensorStation.alarmCountThreshold}">
+                            <h:outputText value="#{sensorStation.alarmCountThreshold}"/>
+                        </p:column>
 
                         <p:column style="text-align: center">
 
                             <!-- DetailView page Button -->
-                            <p:button icon="pi pi-search"
+                            <p:button style="margin-right: 2px" icon="pi pi-search"
                                              title="open Detail-View"
                                              href="/greenHouseDetails.xhtml?id=#{sensorStation.id}" />
 
-
                             <!-- ....................SENSOR STATION pairing BUTTON ........... .............. -->
-                            <p:commandButton  update=":userForm:pairingDialog"
+                            <p:commandButton  style="margin-right: 2px; background-color: darkorange" update=":userForm:pairingDialog"
                                               oncomplete="PF('pairingDialog').show()" icon="pi pi-sync" title="Pair">
                                 <f:setPropertyActionListener value="#{sensorStation.id}" target="#{pairingController.sensorStationId}"/>
                             </p:commandButton>
 
+
                             <!-- ....................SENSOR STATION EDIT BUTTON ........... .............. -->
-                            <p:commandButton  update=":userForm:userEditDialog"
-                                             oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit" title="Edit">
+                            <p:commandButton style="margin-right: 2px; background-color: grey" update=":userForm:userEditDialog"
+                                             oncomplete="PF('userEditDialog').show()" icon="fa fa-solid fa-gear" title="Edit">
                                 <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
                             </p:commandButton>
 
-
-
-
-
                             <!-- ....................DELETE SENSOR STATION BUTTON ........... .............. -->
                             <p:commandButton styleClass="ui-button-danger"
-                                             action="#{sensorStationDetailController.doDeleteSensorStation()}" icon="pi pi-user-minus"
+                                             action="#{sensorStationDetailController.doDeleteSensorStation()}" icon="fa fa-solid fa-trash-can"
                                              title="Delete"
                                              update=":userForm:sensorStationTable"
                                             oncomplete="location.reload()">
@@ -227,8 +172,6 @@
                             </p:commandButton>
 
                         </p:column>
-
-
 
                         <!-- .........................................ROW EXPANSION.......................................................... -->
                         <p:rowExpansion>
@@ -272,21 +215,22 @@
 
 
 
+
+
+
+
             <!-- .......................................DIALOGS...................................................................... -->
 
 
 
-            <!-- ...................................PAIR WITH Access point.................................... -->
+            <!-- ...................................PAIR WITH Access point..DIALOG.................................. -->
             <p:dialog header="Pairing" id="pairingDialog" widgetVar="pairingDialog" modal="true"
-                      showEffect="fade" hideEffect="fade" resizable="false">
+                      showEffect="fade" hideEffect="fade" resizable="false" closable="false">
                 <p:outputPanel id="userData2" >
                     <h:panelGrid columns="1">
 
-
                         <p:outputLabel for="pairedWith" value="Paired With:"/>
                         <p:inputText rendered="#{not empty pairingController.sensorStationAccessPointId}" id="pairedWith" value="#{pairingController.sensorStationAccessPointId}" disabled="true" />
-
-
                         <p:outputLabel for="sensorStationAccessPoint" value="Pair to new Access Point:"/>
                         <p:selectOneMenu value="#{pairingController.accessPointId}" id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
                                          scrollHeight="250" updateLabel="true" >
@@ -296,7 +240,6 @@
                                 <h:outputText value="3 options" style="font-weight:bold;"/>
                             </f:facet>
                         </p:selectOneMenu>
-
                         <!-- ...................................PAIR/UNPAIR BUTTONS .................................... -->
                         <h:panelGrid columns="3">
                         <p:commandButton value="Remove current pairing" action="#{pairingController.unpair()}"
@@ -305,11 +248,7 @@
                                    message="Are you sure that you want to unpair the sensor station?"
                                    icon="pi pi-exclamation-triangle"/>
                         </p:commandButton>
-
-
                         </h:panelGrid>
-
-
 
                         <h:panelGrid columns="2">
 
@@ -320,11 +259,6 @@
                             <p:ajax event="click" listener="#{pairingController.abortPairing()}" oncomplete="PF('pairingDialog').hide()" />
 
                         </h:panelGrid>
-
-
-
-
-
 
                     </h:panelGrid>
 
@@ -339,49 +273,32 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
             <!-- ...................................Sensor station Edit dialog.................................... -->
-            <p:dialog header="Edit Sensor Staion" id="userEditDialog" widgetVar="userEditDialog" modal="true"
+            <p:dialog header="Edit Sensor Station" id="userEditDialog" widgetVar="userEditDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="userData" rendered="#{not empty sensorStationDetailController.sensorStation}">
-                    <h5 class="mt-0">Sensor Station Data </h5>
                     <h:panelGrid columns="1">
 
                         <p:outputLabel for="sensorStationId" value="Sensor-station name:"/>
                         <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
-
-
                         <p:outputLabel for="sensorStationlocation" value="Sensor-station location:"/>
                         <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
-
+                        <p:outputLabel for="alarmCountTreshold" value="Alarm Count Treshold:"/>
+                        <p:inputText id="alarmCountTreshold" value="#{sensorStationDetailController.sensorStation.alarmCountThreshold}" />
                         <p:outputLabel for="sensorStationswitchEdit" value="Alarm Switch:"/>
                         <p:selectOneMenu id="sensorStationswitchEdit" value="#{sensorStationDetailController.sensorStation.alarmSwitch}"  >
                             <f:selectItem itemLabel="Fixed" itemValue="fixed"/>
                             <f:selectItem itemLabel="Off" itemValue="Off"/>
                         </p:selectOneMenu>
-
-
-
-                        <!-- .......TODO:trying to insert the gardener............ -->
-                        <h5>ADD Gardeners NEW!</h5>
+                        <!-- ...................................GARDENER ADD AND REMOVE.................................... -->
+                        <p:outputLabel for="AddGardenre" value="Add Gardeners:"/>
                         <p:selectCheckboxMenu id="AddGardenre" value="#{sensorStationDetailController.gardeners}" label="Gardeners" style="min-width: 15rem"
                                               multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"
                                               emptyLabel="Select Gardener..." updateLabel="true">
                             <f:selectItems value="#{userListController.gardenerNames}"/>
                         </p:selectCheckboxMenu>
 
-                        <h5>REMOVE Gardeners NEW!</h5>
+                        <p:outputLabel for="RemoveGardener" value="Remove Gardeners:"/>
                         <p:selectCheckboxMenu id="RemoveGardener" value="#{sensorStationDetailController.gardenersToRemove}" label="Gardeners" style="min-width: 15rem"
                                               multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250"
                                               emptyLabel="Select Gardener..." updateLabel="true">
@@ -400,7 +317,6 @@
                 </p:outputPanel>
             </p:dialog>
 
-
         </h:form>
 
 
@@ -409,6 +325,50 @@
 
 
 
+        <!-- .................................. Help dialog............................................................................... -->
+        <p:dialog header="Sensor Station Management Help" id="SSDialog" widgetVar="SSDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+            <p:outputPanel id="SSHelp">
+                <h6>About Deleting a Sensor Station:</h6>
+                You can delete a Sensor station by pressing the dedicated button. when deleting a SS all related entities gonna be detached automatically:<br></br>
+                Gardeners will be unassigned , plants detached , sensors deleted and measurements detached;
+                <h6>About Sensor Station Trashold:</h6>
+                the trashold determines when a alarm status will be red or green.
+                <h6>About Creating a sensor station:</h6>
+                By Pressing the appropriate button a Dialog to create a Sensor Station will open.<br></br>
+                From this panel you will be able to select sensor-station name , description and Location<br></br>
+                Note: a newly created SS will always have The Alarm switch set to off by default.<br></br>
+                <h6>About Editing A Sensor Station</h6>
+                By Pressing the appropriate button a Dialog to edit the selected Sensor Station will open.<br></br>
+                From this panel you will see the selected sensor-station name and will be able to:
+                Edit the Location.<br></br>
+                Assign and unassign the SS to Gardeners(many gardeners can work on the same sensor station if necessary).<br></br>
+                Note: Alarm switch will be on if one of the alarm count of a sensosr station triggered it , you can manually set it to fixed from here.<br></br>
+                <h6>About Pairing:</h6>
+                From the pairing Dialog it is possible to pair the sensor station to a new access point or remove the current one.<br></br>
+                Upon initiating the pairing process the system will start to try to pair the selected sensorStation with the access point for 5 minutes.<br></br>
+                until interrupted by pressing the dedicated button.
+                <h6>About The Status:</h6>
+                The status Icon show the alarm status and not the last measurement status. A alarm status will only be red if the alarm count is hight enough.
+                <h6>About The Dropdown Menu</h6>
+                The Dropdown menu will show the last 6 measurements(1 per type) and the Alarm status for the given type.<br></br>
+                NOTE: even a water measurement of 100% can be Ok (green) if its not repeated (for example after a plant is irrigated)<br></br>
+                thats the reasonw hy the status shows the alarm status and not if the displaye dmeasurement has exceeded the set tresholds on his own.
+                <h6>About The Details View</h6>
+                By clicking on the associated button you can open the DetailPage , in the detailpage you will have the possibility to:<br></br>
+                <br></br>
+                See all measurements for the chosen Sensor Station with the corresponding Graphs.<br></br>
+                Manage the pictures users take of the plants , Pictures will need your approval before going to the public Plant Gallery.<br></br>
+                Edit Things like the location of the sensorStation and the plant displayed.<br></br>
+                Remove The Current Pairing And/Or Pair to a new Access Point.<br></br>
+                Reset the Alarm Switch .<br></br>
+                See all Sensors of the chosen Sensor Station with their relative information<br></br>
+                Edit Sensors bordervalues aswell as resetting the respective Alarm Counts.<br></br>
+                More Detailed Usage infos can be found on the page itself.
+
+            </p:outputPanel>
+        </p:dialog>
 
 
 

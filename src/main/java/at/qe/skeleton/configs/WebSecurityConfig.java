@@ -19,9 +19,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * Spring configuration for web security.
- *
- * This class is part of the skeleton project provided for students of the
- * course "Software Engineering" offered by the University of Innsbruck.
  */
 @Configuration
 @EnableWebSecurity()
@@ -48,13 +45,11 @@ public class WebSecurityConfig {
             http.headers().frameOptions().disable(); // needed for H2 console
 
             http
-                    .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/**").authenticated()).httpBasic().and()
                     .authorizeHttpRequests(authorize -> authorize
-                            //Permit access for all to the sensor stations for now
+                            // Permit access for all to the sensor stations for now
                             .requestMatchers("/sensorStation/**").permitAll()
                             .requestMatchers("/").permitAll()
                             .requestMatchers("/registration/**").permitAll()
-                            //.requestMatchers("/api/**").httpBasic().permitAll()
                             .requestMatchers("/**.jsf").permitAll()
                             .requestMatchers(antMatcher("/h2-console/**")).permitAll()
                             .requestMatchers("/jakarta.faces.resource/**").permitAll()
@@ -63,14 +58,16 @@ public class WebSecurityConfig {
                             .requestMatchers("/admin/**").hasAnyAuthority(ADMIN)
                             .requestMatchers("/secured/**").hasAnyAuthority(ADMIN, GARDENER, USER)
                             .requestMatchers("/omnifaces.push/**").hasAnyAuthority(ADMIN, GARDENER, USER)
-                            .anyRequest().authenticated())
+                            .requestMatchers("/api/**").authenticated() // requires authentication for /api/ endpoints only
+                            .anyRequest().permitAll()
+                    )
+                    .httpBasic().and()
                     .formLogin()
                     .loginPage("/login.xhtml")
+                    .loginProcessingUrl("/login")
                     .permitAll()
                     .failureUrl("/login.xhtml?error=true")
                     .defaultSuccessUrl("/dashboard.xhtml")
-                    .loginProcessingUrl("/")
-                    .successForwardUrl("/dashboard.xhtml")
                     .and()
                     .logout()
                     .logoutSuccessUrl("/login.xhtml")

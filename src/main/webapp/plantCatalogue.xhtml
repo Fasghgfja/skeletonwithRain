@@ -1,11 +1,14 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3c.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templates/main.xhtml">
+
+    <ui:define name="head">
+        <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css" />
+    </ui:define>
+
 
     <ui:define name ="content">
 
@@ -16,26 +19,26 @@
 
                 <div class="card">
                     <h5>Plant's Catalogue</h5>
-                    <p:dataTable id="plantsTable" var="plant" value="#{plantListController.doGetOnlyPlantsNotYetFollowed()}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
+                    <p:dataTable id="plantsTable" var="plant" value="#{plantListController.notYetFollowedPlantsList}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 
                         <p:column >
                             <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
                         </p:column>
 
-                        <p:column headerText="Plant" sortBy="#{plant.plantName}">
+                        <p:column headerText="Plant" sortBy="#{plant.plantName}" filterBy="#{plant.plantName}">
                             <h:outputText value="#{plant.plantName}"/>
                         </p:column>
 
-                        <p:column headerText="Location" sortBy="#{plant.sensorStation}">
+                        <p:column headerText="Location" sortBy="#{plant.sensorStation}" filterBy="#{plant.sensorStation}">
                             <h:outputText value="#{plant.sensorStation.location}"/>
                         </p:column>
 
-                        <p:column headerText="Planted Date" sortBy="#{plant.plantedDate}">
+                        <p:column headerText="Planted Date" sortBy="#{plant.plantedDate}" filterBy="#{plant.plantedDate}">
                             <h:outputText value="#{plant.plantedDate}"/>
                         </p:column>
 
-                        <p:column headerText="Description" sortBy="#{plant.description}">
+                        <p:column headerText="Description" sortBy="#{plant.description}" filterBy="#{plant.description}">
                             <h:outputText value="#{plant.description}"/>
                         </p:column>
 
@@ -43,8 +46,9 @@
 
                             <!-- ....................FOLLOW PLANT BUTTON ........... .............. -->
                             <p:commandButton style="margin-left: 10px" icon="pi pi-plus"
-                                      title="Follow Plant"
-                                             update=":userForm:plantsTable">
+                                            title="Follow Plant"
+                                             update=":userForm:plantsTable"
+                                            oncomplete="location.reload();">
                                 <p:ajax event="click" listener="#{userDetailController.doAddPlantToFollowedPlants(plant)}"/>
                             </p:commandButton>
 

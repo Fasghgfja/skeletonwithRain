@@ -7,7 +7,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -101,5 +100,7 @@ public interface ImageRepository extends AbstractRepository<Image, Long> {
     Integer countImagesByApprovedEquals(Boolean approved);
 
     Integer countImagesByApprovedEqualsAndPlantEquals(Boolean approved, Plant plant);
+
+    long countImagesByPlantAndApprovedEquals(Plant plant,boolean b);
 }
 

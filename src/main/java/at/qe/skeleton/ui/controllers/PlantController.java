@@ -1,12 +1,25 @@
 package at.qe.skeleton.ui.controllers;
+
+import at.qe.skeleton.model.Log;
+import at.qe.skeleton.model.LogType;
+import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.services.MeasurementService;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
+
+import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
 import at.qe.skeleton.services.PlantService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import jakarta.annotation.PostConstruct;
@@ -21,15 +34,22 @@ import org.springframework.stereotype.Component;
 @Setter
 @Component
 @Scope("view")
-public class PlantController implements Serializable{
+public class PlantController implements Serializable {
+
+    private static final String PLANT_DELETED = "PLANT DELETED: ";
     @Autowired
-    private PlantService plantService;
+    private transient PlantService plantService;
     @Autowired
-    private MeasurementService measurementService;
+    private transient MeasurementService measurementService;
     @Autowired
     private transient GalleryController galleryController;
     @Autowired
     private SessionInfoBean sessionInfoBean;
+    @Autowired
+    private transient LogRepository logRepository;
+
+    private final transient Logger successLogger = Logger.getLogger("SuccessLogger");
+    private transient FileHandler successFileHandler;
 
     private Collection<Plant> filteredPlants;
 
@@ -51,13 +71,12 @@ public class PlantController implements Serializable{
 
 
     @PostConstruct
-    public void initList(){//TODO: move this in the plantlist controller
+    public void initList() {
         plantList = (ArrayList<Plant>) plantService.getAllPlants();
         followedPlantsList = (ArrayList<Plant>) plantService.getFollowedPlants(sessionInfoBean.getCurrentUser());
     }
 
 
-    //TODO: is it quicker if we look by id or by plant?
     public void setPlantFromId(Long id) {
         this.plant = plantService.loadPlant(id);
     }
@@ -78,15 +97,48 @@ public class PlantController implements Serializable{
     /**
      * Action to delete the currently cached Sensor Station.
      */
-    //TODO: implement stronger error handling
     public void doDeletePlant() {
         if (plant.getSensorStation() == null) {
-            System.out.println("No sensor station assigned im deleting the plant");
             plantService.detachAllImagesFromPlant(plant);
             this.plantService.deletePlant(plant);
+            try {
+                successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);
+                successFileHandler.setFormatter(new SimpleFormatter());
+                successLogger.addHandler(successFileHandler);
+                successLogger.info(PLANT_DELETED + plant.getId());
+                successFileHandler.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log createLog = new Log();
+            createLog.setDate(LocalDate.now());
+            createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+            createLog.setAuthor(sessionInfoBean.getCurrentUserName());
+            createLog.setSubject("PLANT DELETION");
+            createLog.setText(PLANT_DELETED + plant.getId());
+            createLog.setType(LogType.SUCCESS);
+            logRepository.save(createLog);
             plant = null;
+        } else {
+            plantService.deletePlantWithStation(plant);
+            try {
+                successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);
+                successFileHandler.setFormatter(new SimpleFormatter());
+                successLogger.addHandler(successFileHandler);
+                successLogger.info(PLANT_DELETED + plant.getId());
+                successFileHandler.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log createLog = new Log();
+            createLog.setDate(LocalDate.now());
+            createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+            createLog.setAuthor(sessionInfoBean.getCurrentUserName());
+            createLog.setSubject("PLANT DELETION");
+            createLog.setText(PLANT_DELETED + plant.getId());
+            createLog.setType(LogType.SUCCESS);
+            logRepository.save(createLog);
         }
-        else System.out.println("cannot delete a plant that is currently displayed in a sensor station , im plant controller");
     }
 
 
@@ -105,7 +157,7 @@ public class PlantController implements Serializable{
 
     /**
      * Method to initialize a greenhouse/sensor station view for a specific greenhouse taken from facescontext.
-     *
+     * <p>
      * Who calls this: PlantPage,
      */
     public void init() {

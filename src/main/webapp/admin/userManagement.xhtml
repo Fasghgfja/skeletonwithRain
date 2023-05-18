@@ -1,15 +1,18 @@
 <ui:composition xmlns="http://www.w3c.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui" template="/WEB-INF/templates/main.xhtml">
+
+
+    <ui:define name="head">
+        <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css"/>
+    </ui:define>
+
+
     <ui:define name="content">
 
 
         <!-- .......::::::::::::::::::.............CREATE USER BUTTON........... ....::::::::::::.......... -->
         <h:form id="createDialog">
-            <p:commandButton style="margin-bottom: 10px" value="Create new user" update=":createDialog:userCreationDialog" oncomplete="PF('userCreationDialog').show()"
-                             icon="pi pi-user-plus" title="New User" class="btn btn-primary">
-                <p:resetInput target=":createDialog:userCreationDialog"/>
-            </p:commandButton>
 
 
             <!-- .......::::::::::::::::::.............CREATE USER DIALOG........... ....::::::::::::.......... -->
@@ -35,7 +38,7 @@
                                     pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                         </p:inputText>
                         <p:outputLabel for="phoneCreation" value="Phone number:"/>
-                        <p:inputMask  id="phoneCreation" value="#{createUserBean.phone}" mask="+99 999 9999999"/>
+                        <p:inputMask id="phoneCreation" value="#{createUserBean.phone}" mask="+99 999 9999999"/>
 
                         <p:selectManyCheckbox id="rolesCreation" value="#{createUserBean.selectedRoles}">
                             <f:selectItem itemLabel="ADMIN" itemValue="ADMIN"/>
@@ -53,12 +56,43 @@
 
 
         </h:form>
-        <p:card styleClass="my-card">
-            <h5>Users</h5>
 
+        <div class="card">
+            <div class="card-header">
+                <div class="header-buttons">
+
+
+                    <div class="col-12 md:col-6 xl:col-4">
+
+                        <div class="card overview-box">
+                            <p:graphicImage url="../resources/images/dashboard/effect-messages.svg"/>
+                            <span class="overview-icon">
+                                <p:graphicImage url="../resources/images/dashboard/icon-usersonline.png"/>
+                            </span>
+                            <div class="overview">
+                                <span class="overview-title">USERS</span>
+                                <h3>
+                                    <h:outputText value="#{userListController.usersAmount}"/>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <p:commandButton style="margin-right: 5px" value="Create new user"
+                                     update=":createDialog:userCreationDialog"
+                                     oncomplete="PF('userCreationDialog').show()"
+                                     icon="pi pi-user-plus" title="New User" class="btn btn-primary">
+                        <p:resetInput target=":createDialog:userCreationDialog"/>
+                    </p:commandButton>
+                    <!-- ....................Help button...........................BUTTON................................. -->
+                    <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
+                                     styleClass="ui-button-secondary outlined-button"
+                                     onclick="PF('helpDialog').show()"/>
+
+
+                </div>
+            </div>
 
             <h:form id="userForm"><!-- ................USER FORM BEGIN........... ....... -->
-
 
 
                 <!-- .......::::::::::::::::::.............USER TABLE ........... ....::::::::::::.......... -->
@@ -110,9 +144,6 @@
                 </p:dataTable>
 
 
-
-
-
                 <!-- .......::::::::::::::::::.............EDIT USER DIALOG........... ....::::::::::::.......... -->
                 <p:dialog header="Edit User" id="userEditDialog" widgetVar="userEditDialog" modal="true"
                           showEffect="fade" hideEffect="fade" resizable="false">
@@ -144,15 +175,13 @@
                         <!-- ....................SAVE AND ABORT EDIT USER BUTTONS ................... -->
                         <h:panelGrid columns="3">
                             <p:commandButton value="Save" action="#{userDetailController.doSaveUser()}"
-                                             oncomplete="PF('userEditDialog').hide(); location.reload();" update=":userForm:usersTable"/>
+                                             oncomplete="PF('userEditDialog').hide(); location.reload();"
+                                             update=":userForm:usersTable"/>
                             <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
                         </h:panelGrid>
 
                     </p:outputPanel>
                 </p:dialog>
-
-
-
 
 
                 <!-- .......::::::::::::::::::.............CONFIRMATION DIALOG........... ....::::::::::::.......... -->
@@ -162,20 +191,21 @@
                 </p:confirmDialog>
 
 
-
             </h:form> <!-- ................USER FORM END........... ....... -->
 
 
+        </div>
 
 
+        <!-- .................................. Help dialog............................................................................... -->
+        <p:dialog header="User Management Help" id="helpDialog" widgetVar="helpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+            <p:outputPanel id="measurementPageHelp">
+                write it
+            </p:outputPanel>
+        </p:dialog>
 
 
-
-
-
-
-
-
-        </p:card>
     </ui:define>
 </ui:composition>

@@ -3,6 +3,10 @@ package at.qe.skeleton.repositories;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
+import jakarta.transaction.Transactional;
+import org.springframework.context.ApplicationEvent;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -53,17 +57,31 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
      * @return The measurements belonging to the selected sensorStation as a List.
      * @throws IllegalArgumentException If sensorStation is {@literal null}.
      */
+    List<Measurement> findMeasurementsBySensorStationAndTypeLikeOrderByTimestampAsc(SensorStation sensorStation, String type);
     List<Measurement> findMeasurementsBySensorStationAndTypeLikeOrderByTimestampDesc(SensorStation sensorStation, String type);
 
 
-    void deleteMeasurementsBySensorStation(SensorStation sensorStation);
 
     Integer count();
 
 
+    Measurement getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(SensorStation sensorStation, String type);
+
+    @Transactional
+    void deleteMeasurementsByTimestampBetween(LocalDateTime from, LocalDateTime to);
+    @Transactional
+    void deleteMeasurementsBySensorStationAndTimestampBetween(SensorStation sensorStationToDeleteFrom, LocalDateTime from, LocalDateTime to);
+    @Transactional
+    void deleteMeasurementsBySensorStation(SensorStation sensorStation);
+
+    Measurement findFirstByOrderByTimestampAsc();
+
+    Measurement findFirstByOrderByTimestampDesc();
 
 
+    Measurement findFirstBySensorStationOrderByTimestampAsc(SensorStation sensorStation);
 
+    Measurement findFirstBySensorStationOrderByTimestampDesc(SensorStation sensorStation);
 }
 
 

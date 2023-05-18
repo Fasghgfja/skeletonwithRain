@@ -1,7 +1,6 @@
 package at.qe.skeleton.ui.controllers;
 
 
-import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Sensor;
 import java.io.Serializable;
 import java.util.Collection;
@@ -24,12 +23,10 @@ import org.springframework.stereotype.Component;
 public class SensorListController implements Serializable {
 
     @Autowired
-    private SensorService sensorsService;
+    private transient SensorService sensorsService;
 
     @Autowired
     private SensorStationDetailController sensorStationDetailController;
-
-
 
     private Collection<Sensor> filteredSensorStations;
 
@@ -43,13 +40,17 @@ public class SensorListController implements Serializable {
     }
 
 
+    /**
+     * Returns a list of all sensors for a specific sensor station.
+     * @return Collection of sensors of a sensor station.
+     */
     public Collection<Sensor> getSensorsForSensorStation() {
         SensorStation sensorStation = sensorStationDetailController.getSensorStation();
         return sensorsService.getAllSensorsBySensorStation(sensorStation);
     }
 
     /**
-     * Returns how many sensors are registered in the system.
+     * Returns how many sensors are registered in the database.
      */
     public long getSensorsAmount() {
         return sensorsService.getSensorStationsAmount();

@@ -3,9 +3,16 @@ package at.qe.skeleton.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import java.io.Serializable;
-import java.time.LocalDate;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+
+
+/**
+ * This class represents the entity model for measurements.
+ */
 @Getter
 @Setter
 @Entity
@@ -17,21 +24,43 @@ public class Measurement implements Serializable {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sensorStationName", nullable = true)
     private SensorStation sensorStation;
 
-
-    //TODO: JDBC is on crack and if this is called value its seen as a primary key and the table will not be created O_o, find a workaround
     private String value_s;
     private String unit;
     private String type;
-    private LocalDate timestamp;
+    private LocalDateTime timestamp;
+
+
+    public String getReadableTimestamp() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return timestamp.format(formatter);
+    }
 
     @Override
     public String toString() {
         return "Measurement{" +
-                "id: "+id +
+                "id: " + id +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof final Measurement other)) {
+            return false;
+        }
+        return Objects.equals(this.id, other.getId());
     }
 }

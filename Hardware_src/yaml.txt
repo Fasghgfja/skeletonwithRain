@@ -1,0 +1,8 @@
+accesspoint-params:
+  id: 102
+  measurement-intervall: 1
+  webapp-intervall: 1
+webapp-params:
+  ip: srh-softwaresolutions.com
+  pswd: SHAdmin
+  usnm: secretpwg4t2

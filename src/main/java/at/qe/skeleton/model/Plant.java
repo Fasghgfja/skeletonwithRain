@@ -3,8 +3,8 @@ package at.qe.skeleton.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 import org.springframework.data.domain.Persistable;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ import java.util.*;
 
 
 /**
- * Entity representing Plants.
+ * This class represents the Entity model for Plants.
  */
 @Getter
 @Setter
@@ -22,7 +22,7 @@ public class Plant implements Persistable<Long>, Serializable, Comparable<Plant>
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_gen")
-    @SequenceGenerator(name = "id_gen", initialValue = 2)
+    @SequenceGenerator(name = "id_gen", initialValue = 100)
     @Column(nullable = false, unique = true)
     private Long plantID;
 
@@ -35,7 +35,7 @@ public class Plant implements Persistable<Long>, Serializable, Comparable<Plant>
     private String plantName;
 
 
-    @ManyToMany(fetch = FetchType.EAGER) //TODO: EAGER
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_plant",
             joinColumns = @JoinColumn(name = "plant_id", referencedColumnName = "plantID"),
@@ -50,7 +50,7 @@ public class Plant implements Persistable<Long>, Serializable, Comparable<Plant>
 
     @Override
     public String toString() {
-        return  plantName ;
+        return plantName;
     }
 
 

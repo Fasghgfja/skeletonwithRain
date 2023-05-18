@@ -22,11 +22,6 @@
         <!-- ...................................PLANT CREATE dialog.................................... -->
         <h:form id="plantCreateDialog">
 
-            <!-- ....................PLANT CREATE button..................... -->
-            <p:commandButton style="margin-left: 7px" value="Create New Plant" update=":plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
-                             icon="pi pi-user-plus" title="New User" class="btn btn-primary">
-                <p:resetInput target="plantCreateDialog"/>
-            </p:commandButton>
 
             <p:dialog header="Create New Plant" id="createPlantDialog" widgetVar="createPlantDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
@@ -53,6 +48,10 @@
                         <p:commandButton value="Cancel" onclick="PF('createPlantDialog').hide()"/>
 
 
+
+
+
+
                     </h:panelGrid>
 
                 </p:outputPanel>
@@ -66,7 +65,7 @@
 
                 <div class="card">
                     <h5>Assigned Greenhouses</h5>
-                    <p:dataTable id="sensorStationTable" var="sensorStation" value="#{sensorStationListController.sensorStations}"
+                    <p:dataTable id="sensorStationTable" var="sensorStation" value="#{sensorStationListController.assignedSensorStationList}"
                                   scrollHeight="550"
                                  paginatorPosition="bottom" rowKey="#{sensorStation.id}">
 
@@ -76,7 +75,7 @@
                             <p:rowToggler/>
                         </p:column>
 
-                        <p:column headerText="Id" sortBy="#{sensorStation.id}">
+                        <p:column headerText="Id" sortBy="#{sensorStation.id}" filterBy="#{sensorStation.id}">
                             <h:outputText value="#{sensorStation.id}"/>
                         </p:column>
 
@@ -84,12 +83,13 @@
                             <p:graphicImage url="../resources/images/plant1.jpg" styleClass="shadow-2" width="100"/>
                         </p:column>
 
-                        <p:column headerText="Plant" sortBy="#{sensorStation.plant.plantName}">
+                        <p:column headerText="Plant" sortBy="#{sensorStation.plant.plantName}" filterBy="#{sensorStation.plant.plantName}">
                             <h:outputText value="#{sensorStation.plant}"/>
                         </p:column>
 
-                        <p:column headerText="Planted" sortBy="#{sensorStation.createDate}">
-                            <h:outputText value="#{product.category}"/>
+                        <p:column style="" headerText="Intervals">
+                            <h:outputText value="W:#{SSIntervalController.getActualWebAppIntervalForAccessPoint(sensorStation.accessPoint.id)}  "/>
+                            <h:outputText value=" M:#{SSIntervalController.getActualMeasurementIntervalForAccessPoint(sensorStation.accessPoint.id)} "/>
                         </p:column>
 
                         <p:column headerText="Alarm Status">
@@ -113,11 +113,11 @@
                                title="Humidity"></i>
                         </p:column>
 
-                        <p:column headerText="Location" sortBy="#{sensorStation.location}">
+                        <p:column headerText="Location" sortBy="#{sensorStation.location}" filterBy="#{sensorStation.location}">
                             <h:outputText value="#{sensorStation.location}"/>
                         </p:column>
 
-                        <p:column headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}">
+                        <p:column headerText="Alarm switch" sortBy="#{sensorStation.alarmSwitch}" filterBy="#{sensorStation.alarmSwitch}">
                             <h:outputText value="#{sensorStation.alarmSwitch}"/>
                         </p:column>
 
@@ -126,7 +126,7 @@
 
 
                             <!-- ...........BUTTON TO OPEN QR CODE GENERATION PAGE......... -->
-                            <p:button style="margin-right: 10px" icon="pi pi-qrcode"
+                            <p:button style="margin-right: 10px" icon="pi pi-qrcode" disabled="#{sensorStation.plant == null}"
                                       title="Generate QR-Code"
                                       href="/generateQrCode.xhtml?id=#{sensorStation.plant.plantID}">
                             </p:button>
@@ -142,6 +142,16 @@
                                              oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit" title="Edit">
                                 <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
                             </p:commandButton>
+
+                            <!-- .................... INTERVALS BUTTON ........... .............. -->
+                            <p:commandButton style="margin-right: 2px; background-color: orange" update=":userForm:intervalEditDialog"
+                                             oncomplete="PF('intervalEditDialog').show()" icon="fa fa-solid fa-sliders" title="Intervals">
+                                <f:setPropertyActionListener value="#{sensorStation.accessPoint.id}" target="#{SSIntervalController.accessPointId}"/>
+                            </p:commandButton>
+
+
+
+
 
 
                         </p:column>
@@ -190,6 +200,31 @@
 
             <!-- .......................................DIALOGS...................................................................... -->
 
+            <!-- ...................................Interval Edit dialog.................................... -->
+            <p:dialog header="Edit Access Point Intervals" id="intervalEditDialog" widgetVar="intervalEditDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="intervalData">
+                    <h:panelGrid columns="1">
+
+                        <p:outputLabel for="mInterval" value="New Interval Webapp: (minutes):"/>
+                        <p:inputText id="mInterval" value="#{SSIntervalController.webAppInterval}" />
+                        <p:outputLabel for="sinterval" value="New Interval Measurements: (minutes)"/>
+                        <p:inputText id="sinterval"  value="#{SSIntervalController.measurementInterval}"/>
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
+                        <p:commandButton value="Save New Intervals" action="#{SSIntervalController.doSaveInterval()}"
+                                         oncomplete="PF('intervalEditDialog').hide();location.reload()" update="sensorStationTable"/>
+                        <p:commandButton value="Abort" onclick="PF('intervalEditDialog').hide()"/>
+
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+
+
+
+
 
             <!-- ...................................Sensor station Edit dialog.................................... -->
             <p:dialog header="Edit Sensor Station" id="userEditDialog" widgetVar="userEditDialog" modal="true"
@@ -201,7 +236,7 @@
                         <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
 
                         <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/>
-                        <p:selectOneMenu id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID"
+                        <p:selectOneMenu id="sensorStationAccessPoint" filter="true" emptyLabel="Access Point ID" disabled="true"
                                          scrollHeight="250" updateLabel="true" >
                             <f:selectItems value="#{accessPointController.accessPoints}"/>
                             <f:facet name="footer">

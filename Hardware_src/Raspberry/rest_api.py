@@ -1,30 +1,26 @@
-import sqlite3
-
-import cursor as cursor
+import math
+import asyncio
 import requests
 import DB_connection
 import exception_logging
+import datetime
+import json
 
+import config_yaml
 # local
-#auth = ("admin", "passwd")
+auth = ("admin", "passwd")
+log_id = 0
 
-#measurements_url = "http://localhost:8080/api/measurements"
-#get_sensorStations_url = "http://localhost:8080/api/sensorstations"
-#post_sensorStations_url = "http://localhost:8080/api/sensorstations"
-#post_sensor_url = "http://localhost:8080/api/sensors"
-#get_sensor_boarder_value_url = "http://localhost:8080/api/sensorsboardervalue"
-#get_Station_alarm_switch_url = "http://localhost:8080/api/getsensorstations"
-#post_update_sensor_url = "http://localhost:8080/api/updatesensors"
-
+post_log_url = "http://localhost:8080/admin/auditLog"
 # server
-auth = ("SHAdmin", "SHAdmin")
-measurements_url = "http://srh-softwaresolutions.com/api/measurements"
-get_sensorStations_url = "http://srh-softwaresolutions.com/api/sensorstations"
-post_sensorStations_url = "http://srh-softwaresolutions.com/api/sensorstations"
-post_sensor_url = "http://srh-softwaresolutions.com/api/sensors"
-get_Station_alarm_switch_url = "http://srh-softwaresolutions.com/api/getsensorstations"
-post_update_sensor_url = "http://srh-softwaresolutions.com/api/updatesensors"
-get_sensor_boarder_value_url = "http://srh-softwaresolutions.com/api/sensorsboardervalue"
+#auth = ("SHAdmin", "gsecret4passwordt2")
+#measurements_url = "http://srh-softwaresolutions.com/api/measurements"
+#get_sensorStations_url = "http://srh-softwaresolutions.com/api/sensorstations"
+#post_sensorStations_url = "http://srh-softwaresolutions.com/api/sensorstations"
+#post_sensor_url = "http://srh-softwaresolutions.com/api/sensors"
+#get_Station_alarm_switch_url = "http://srh-softwaresolutions.com/api/getsensorstations"
+#post_update_sensor_url = "http://srh-softwaresolutions.com/api/updatesensors"
+#get_sensor_boarder_value_url = "http://srh-softwaresolutions.com/api/sensorsboardervalue"
 
 id = 50100
 
@@ -35,7 +31,6 @@ class SensorValue(object):
         self.value = value
         self.time_stamp = time_stamp
         self.type = type
-
 class StationValue(object):
     def __init__(self, name: str, service_description: str, alarm_switch: str):
         self.name = name
@@ -52,94 +47,85 @@ class Sensor(object):
         self.upperBoarder = upper_boarder
         self.lowerBoarder = lower_boarder
 
-def writeValueToWebApp():
+def url_builder(link):
+    url = "http://{0}/api/{1}".format(config_yaml.read_wepapp_ip(),link, config_yaml.read_accesspoint_id())
+    return url
+def get_auth():
+    auth = (config_yaml.read_auth_params()[1], config_yaml.read_auth_params()[0])
+    return auth
+def write_value_to_web_app():
+    measurements_url = url_builder("measurements")
+    send_value_list = []
+    for sensorstations in DB_connection.read_Sensor_Stationnames_Database():
+        for sensor in DB_connection.read_sensors_database(sensorstations[0]).fetchall():
+            if sensor[3] != "ALARM_STATUS":
+                for value in DB_connection.read_value_from_database(sensor[0]):
+                    sensor_id_string = str(value[2])
+                    time_stamp_string = str(value[1])
+                    temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=time_stamp_string, type=sensor[3])
+                    send_value_list.append(vars(temp_sensor_value))
+    r = requests.post(measurements_url, json=send_value_list, auth=get_auth())
+    if r.status_code == 200:
+        DB_connection.delete_values()
 
-    conn = sqlite3.connect('AccessPoint')
-    cur = conn.cursor()
-
-    # TODO call database querys via DB_connection.xxx
-    all_sensorstations_sql = "SELECT * FROM Sensorstation;"
-    all_sensorstations = cur.execute(all_sensorstations_sql).fetchall()
-
-    for sensorstations in all_sensorstations:
-        # TODO call database querys via DB_connection.xxx
-        get_all_sensors = cur.execute('''
-                                SELECT * FROM Sensor WHERE station_name = "{0}"
-                            '''.format(sensorstations[0])).fetchall()
-
-        for sensor in get_all_sensors:
-            # TODO call database querys via DB_connection.xxx
-            values = cur.execute('''
-                        SELECT * FROM Value WHERE sensor_id = {0}
-                    '''.format(sensor[0])).fetchall()
-            for value in values:
-
-                sensor_id_string = str(value[2])
-                time_stamp_string = str(value[1])
-
-                temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=time_stamp_string, type=sensor[3])
-                r = requests.post(measurements_url, json=vars(temp_sensor_value), auth=auth)
-                if r.status_code == 200:
-                    DB_connection.delete_values(sensor[0], value[1])
-
-    cur.close()
-    conn.close()
-
-def write_sensors_and_station_description(station_names):
-    sensor_stationnames = DB_connection.read_Sensor_Station_Database().fetchall()
-
+async def write_sensors_and_station_description(station_names):
+    sensor_stationnames = DB_connection.read_Sensor_Stationnames_Database()
+    post_sensorStations_url = url_builder("sensorstations")
+    post_sensor_url = url_builder("sensors")
     for station in sensor_stationnames:
         if station[0] in station_names:
             try:
                 station_values = StationValue(name=station[0], service_description=station[1], alarm_switch=station[2])
                 requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
                 sensor_list = DB_connection.read_sensors_database(station[0]).fetchall()
+                json_list =[]
                 for sensor in sensor_list:
-                    sensor_values = Sensor(sensor_id=sensor[0], uuid=sensor[1], station_name=sensor[2], type=sensor[3], alarm_count=sensor[4], upper_boarder="10000", lower_boarder="0" )
-                    requests.post(post_sensor_url, json=vars(sensor_values), auth=auth)
+                    if sensor[3] != "ALARM_STATUS":
+                        sensor_values = Sensor(sensor_id=sensor[0], uuid=sensor[1], station_name=sensor[2], type=sensor[3], alarm_count=sensor[4], upper_boarder="10000", lower_boarder="0" )
+                        json_list.append(vars(sensor_values))
+                r = requests.post(post_sensor_url, json=json_list,auth=get_auth())
+                if r.status_code != 200:
+                    exception_logging.log_connection_exception("Did not write Sensors to webapp")
             except Exception as e:
                 exception_logging.logException(e, station[0])
     # TODO check if all new stations are added
 
 def read_sensor_boarder_values():
-    sensor_station_list = DB_connection.read_Sensor_Stationnames_Database().fetchall()
-    for station in sensor_station_list:
-        sensor_list = DB_connection.read_sensors_database(station[0]).fetchall()
-        for sensor in sensor_list:
-            sensor_id = sensor[0]
-            sensor_value = Sensor(sensor_id=sensor_id, uuid="",station_name="", type="", alarm_count=0, upper_boarder="", lower_boarder="")
-            response = requests.get(get_sensor_boarder_value_url, json=vars(sensor_value), auth=auth)
-            if response.json()["lowerBoarder"] != sensor[5] or response.json()["upperBoarder"] != sensor[6]:
-                DB_connection.update_boarder_value(sensor[0], response.json()["lowerBoarder"], response.json()["upperBoarder"])
-            #if (sensor[4] != response.json()["alarm_count"]):
-                #DB_connection.update_sensor_database(response.json()["alarm_count"], sensor[0])
-            print("read_sensor_boarder")
+    url = "{0}/{1}".format(url_builder("sensorsboardervalue"), config_yaml.read_accesspoint_id())
+    data = requests.get(url,auth=get_auth())
+    sensor_list = data.json()
+    for sensor in sensor_list:
+        to_update_sensor = DB_connection.read_sensors_by_id(sensor["sensor_id"])
+        if to_update_sensor[5] != sensor["lowerBoarder"] or to_update_sensor[6] != sensor["upperBoarder"]:
+            DB_connection.update_boarder_value(sensor["sensor_id"], sensor["upperBoarder"], sensor["lowerBoarder"])
+
+    print("read_sensor_boarder")
 
 
 
 
 def write_alarm_switch(name, alarm_switch, description):
+    post_sensorStations_url = url_builder("sensorstations")
     try:
         station_values = StationValue(name=name, service_description=description, alarm_switch=alarm_switch)
-        requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
+        requests.post(post_sensorStations_url, json=vars(station_values), auth=get_auth())
     except Exception as e:
         exception_logging.logException(e, "write alarm_switch")
-def getSensorstations(getName, name):
-
+async def get_sensorstations(getName, name):
 
     if getName:
-
-        url = "{0}/{1}".format(get_sensorStations_url, id)
-        response = requests.get(url, auth=auth)
+        url = "{0}/{1}".format(url_builder("sensorstations"), config_yaml.read_accesspoint_id())
+        response = requests.get(url, auth=get_auth())
         if response.status_code == 200:
             data = response.json()
             return data
         else:
             print("Fehler beim Abrufen der Daten. Status Code:", response.status_code)
     else:
+        get_Station_alarm_switch_url = url_builder("getsensorstations")
         try:
             station_values = StationValue(name=name, service_description="", alarm_switch="")
-            response = requests.get(get_Station_alarm_switch_url,json=vars(station_values), auth=auth)
+            response = requests.get(get_Station_alarm_switch_url,json=vars(station_values), auth=get_auth())
             switch = response.content.decode()
             return switch # get alarm_switch
 
@@ -148,32 +134,90 @@ def getSensorstations(getName, name):
 
 
 
-def checkIfNewStations():
+def check_if_new_stations():
 
-    conn = sqlite3.connect('AccessPoint')
-    cur = conn.cursor()
-    # TODO call database querys via DB_connection.xxx
     already_added_sensorstation_list = []
-    already_added_SensorStations = cur.execute('''
-                                    SELECT name FROM Sensorstation
-                                ''')
+    for sensor_stations in DB_connection.read_Sensor_Stationnames_Database():
+        already_added_sensorstation_list.append(sensor_stations[0])
 
-    for sensorstations in already_added_SensorStations.fetchall():
-        already_added_sensorstation_list.append(sensorstations[0])
-
-    webapp_sensorstation_names = getSensorstations(True,"")
+    webapp_sensorstation_names = asyncio.run(get_sensorstations(True, ""))
 
     for name in already_added_sensorstation_list:
         try:
             webapp_sensorstation_names.remove(name)
         except Exception as e:
+            DB_connection.delete_sensor_station(name)
             exception_logging.logException(e, "Filter New Stations")
 
     return webapp_sensorstation_names
 
-def update_Sensor(sensor_id, alarm_count):
+def update_Sensor(alarm_count_list):
+    post_update_sensor_url = url_builder("updatesensors")
     try:
-        sensor_value = Sensor(sensor_id=sensor_id, uuid="",station_name="", type="", alarm_count=alarm_count, upper_boarder="",lower_boarder="")
-        requests.post(post_update_sensor_url, json=vars(sensor_value), auth=auth)
+        r = requests.post(post_update_sensor_url, json=alarm_count_list, auth=get_auth())
     except Exception as e:
         exception_logging.logException(e, "write alarm_count to webapp")
+
+def read_sending_interval():
+    url = "{0}/{1}".format(url_builder("sendinterval"), config_yaml.read_accesspoint_id())
+    try:
+        r = requests.get(url, auth=get_auth())
+        mes_int = r.json()["measurementInterval"]
+        web_int = r.json()["webappSendInterval"]
+        tr_ho = r.json()["alarmCountThreshold"]
+        config_yaml.write_sending_intervalls(mes_int, web_int, tr_ho)
+
+
+    except Exception as e:
+        exception_logging.logException(e, "call sending interval")
+
+
+class Log_data(object):
+    def __init__(self, text: str, subject: str, author: str, time_stamp: str, type: str):
+        self.text = text
+        self.subject = subject
+        self.author = author
+        self.time_stamp = time_stamp
+        self.type = type
+
+
+def handle_special_values(obj):
+    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return str(obj)
+    else:
+        return None
+
+def send_log_data_to_webapp():
+
+    with open('logFile.txt', 'r') as file:
+        for line in file:
+
+            if line.startswith('ERROR: On characteristic'):
+                error_msg = line.split('ERROR:', 1)[1].split('at', 1)[0].strip()
+                datetime_str = line.rsplit('at', 1)[-1].strip().replace('__', ' ')
+                time_stamp_string = datetime.datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S')
+
+                temp_log_data = Log_data(text=error_msg, subject="Characteristics", author="ACCESSPOINT", time_stamp=time_stamp_string, type="ERROR")
+                log_data_json = json.dumps(vars(temp_log_data), default=handle_special_values)
+                response = requests.post(post_log_url, json=log_data_json, auth=auth)
+                print(response.status_code)
+
+            elif line.startswith('ERROR: Could not'):
+                error_msg = line.split('ERROR:', 1)[1].split('at', 1)[0].strip()
+                datetime_str = line.rsplit('at', 1)[-1].strip().replace('__', ' ')
+                time_stamp_string = datetime.datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S')
+
+                temp_log_data = Log_data(text=error_msg, subject="DEVICE", author="ACCESSPOINT", time_stamp=time_stamp_string, type="ERROR")
+                log_data_json = json.dumps(vars(temp_log_data), default=handle_special_values)
+                response = requests.post(post_log_url, json=log_data_json, auth=auth)
+                print(response.status_code)
+
+            elif line.startswith('WARNING'):
+                error_msg = line.split('WARNING', 1)[1].split('at', 1)[0].strip()
+                datetime_str = line.rsplit('at', 1)[-1].strip().replace('__', ' ')
+                time_stamp_string = datetime.datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S')
+
+                temp_log_data = Log_data(text=error_msg, subject="Characteristics", author="ACCESSPOINT", time_stamp=time_stamp_string, type="WARNING")
+                log_data_json = json.dumps(vars(temp_log_data), default=handle_special_values)
+                response = requests.post(post_log_url, json=log_data_json, auth=auth)
+                print(response.status_code)

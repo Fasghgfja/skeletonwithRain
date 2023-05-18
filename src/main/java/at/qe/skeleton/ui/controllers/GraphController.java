@@ -25,6 +25,7 @@ import org.primefaces.model.charts.optionconfig.title.Title;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +36,10 @@ import java.util.List;
 @Scope("view")
 public class GraphController implements Serializable {
 
-    //TODO: is it better to map controllers to controllers or controllers to services?
     @Autowired
-    MeasurementService measurementService;
+    private transient MeasurementService measurementService;
     @Autowired
-    SensorStationService sensorService;
-
+    private transient SensorStationService sensorService;
 
 
     /**
@@ -51,14 +50,16 @@ public class GraphController implements Serializable {
     private LineChartModel cartesianLinerModel;
     private BarChartModel barModel = new BarChartModel();
 
-
-    //TODO: is it good/necessary to cache this attributes or should we avoid it and just call it from the SENSOR DETAIL CONTROLLER?
-    /**Attribute to cache the currently displayed sensor station.*/
+    /**
+     * Attribute to cache the currently displayed sensor station.
+     */
     private SensorStation sensorStation;
 
-    /**Attribute to cache the latest Measurements loaded which are loaded into the graph.*/
-    private List<Measurement> latestMeasurements;
+    /**
+     * Attribute to cache the latest Measurements loaded which are loaded into the graph.
+     */
 
+    private List<Measurement> latestMeasurements;
 
 
     /**
@@ -84,20 +85,26 @@ public class GraphController implements Serializable {
         Measurement measurement = event.getObject();
         sensorStation = measurement.getSensorStation();
         createCartesianLinerModel();
-        latestMeasurements = new ArrayList<>(measurementService.getAllMeasurementsBySensorStationAndType(sensorStation, measurement.getType()));
+        latestMeasurements = new ArrayList<>(measurementService.getAllMeasurementsBySensorStationAndTypeAsc(sensorStation, measurement.getType()));
         if (!latestMeasurements.isEmpty()) {
             createLineModel(latestMeasurements);
         }
     }
 
 
+    public void selectLineGraph(String type, SensorStation sensorStation) {
+        createCartesianLinerModel();
+        latestMeasurements = new ArrayList<>(measurementService.getAllMeasurementsBySensorStationAndTypeAsc(sensorStation, type));
+        if (!latestMeasurements.isEmpty()) {
+            createLineModel(latestMeasurements);
+        }
+    }
 
 
     /**
      * Method to create a barchart from a list of measurements.
      * used in the dashboard
      */
-    //TODO: hide y axis values for dashboard graph as with different measures it doesent make any sense
     public void createBarModel(List<Measurement> measurements) {
         barModel = new BarChartModel();
         ChartData data = new ChartData();
@@ -105,13 +112,15 @@ public class GraphController implements Serializable {
         BarChartDataSet barDataSet = new BarChartDataSet();
         barDataSet.setLabel("Selected Sensor Station Last Measurements");
 
-        //TODO:change this with a query for AirValue GroundValue HumidityValue etc instead of hoping they come out in the correct order
         List<Number> values = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+
         measurements.forEach(measurement -> {
             if (measurement == null) {
                 values.add(0);
             } else {
                 values.add(Double.parseDouble(measurement.getValue_s()));
+                labels.add(measurement.getType());
             }
         });
 
@@ -139,13 +148,6 @@ public class GraphController implements Serializable {
 
         data.addChartDataSet(barDataSet);
 
-        List<String> labels = new ArrayList<>();
-        labels.add("Temperature");
-        labels.add("Air Humidity");
-        labels.add("Ground Humidity");
-        labels.add("Light Intensity");
-        labels.add("Air Quality");
-        labels.add("Air Pressure");
         data.setLabels(labels);
         barModel.setData(data);
 
@@ -186,7 +188,6 @@ public class GraphController implements Serializable {
     }
 
 
-
     /**
      * Method to create a linechart from a list of measurements.
      * used in the sensor station detail view.
@@ -197,7 +198,6 @@ public class GraphController implements Serializable {
         LineChartDataSet dataSet = new LineChartDataSet();
 
 
-
         List<Object> values = new ArrayList<>();
         //actually the timestamps
         List<String> labels = new ArrayList<>();
@@ -205,7 +205,7 @@ public class GraphController implements Serializable {
         measurements.forEach(measurement -> {
             if (measurement != null) {
                 values.add(Double.parseDouble(measurement.getValue_s()));
-                labels.add(measurement.getTimestamp().toString());
+                labels.add(measurement.getReadableTimestamp());
             }
         });
 
@@ -231,18 +231,6 @@ public class GraphController implements Serializable {
         lineModel.setData(Air_Temperature);
     }
 
-
-
-
-
-
-
-
-
-
-
-    //TODO:standard mock implementation without paramenters to avoid null values , find a more elegant solution and just diplay a empty graph
-    //then remove this metod
     public void createLineModel() {
         lineModel = new LineChartModel();
         ChartData Air_Temperature = new ChartData();
@@ -281,8 +269,6 @@ public class GraphController implements Serializable {
     }
 
 
-
-    //TODO:other type of graph basic implementation , implement or remove as needed
     public void createCartesianLinerModel() {
         cartesianLinerModel = new LineChartModel();
         ChartData data = new ChartData();
@@ -349,7 +335,4 @@ public class GraphController implements Serializable {
 
         cartesianLinerModel.setOptions(options);
     }
-
-
-
 }

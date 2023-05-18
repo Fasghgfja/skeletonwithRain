@@ -7,15 +7,29 @@ import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serializable;
-import java.util.Objects;
+
 
 /**
- * Entity representing Sensor stations.
+ * Entity representing The Sensors of the Sensor Stations.
+ * The entity inherit the fields for create user(who created it) , update user(who last updated it) create date and update date from metadata.
+ * A sensor is added to the system by its respective sensor station.
+ * Each Sensor Station has actual sensors that take the measurements.
+ * Sensors have a type:
+ * SOIL_MOISTURE,
+ * HUMIDITY,
+ * AIR_PRESSURE,
+ * TEMPERATURE,
+ * AIR_QUALITY,
+ * LIGHT_INTENSITY
+ * Sensors have a Upper border and a Lower border representing their respective thresholds and
+ * Sensors have a alarm count that goes up every time they take a measurement that exceeds the threshold
+ * When a alarmcount exceeds its threshold then its value will be set to -1 and a light will start blinking on the sensor station (alarmswitch of the sensor station will be ON).
+ * When a gardener sets the alarmswitch to fixed then the -1 of the respective sensor alarmcount will be set to 0...
  */
 @Getter
 @Setter
 @Entity
-public class Sensor  extends Metadata implements Persistable<Long>, Serializable {
+public class Sensor extends Metadata implements Persistable<Long>, Serializable {
     @Id
     private Long id;
     @Column(length = 100)

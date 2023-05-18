@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -25,8 +26,6 @@ public class LogController {
 
     private List<Log> latestLogs;
 
-    private List<Log> logList;
-
 
 
     @Autowired
@@ -34,24 +33,47 @@ public class LogController {
 
     @PostConstruct
     public void init(){
-        logList = (ArrayList<Log>) logService.getAllLogs();
+        latestLogs = (ArrayList<Log>) logService.getAllLogs();
+        latestLogs.sort(Comparator.comparing(Log::getTime).reversed());
     }
+
+    /**
+     * Method to return all logs.
+     * @return Collection of all logs stored in the database.
+     */
 
     public Collection<Log> getLogs() {
         return logService.getAllLogs();
     }
 
-
+    /**
+     * Get the amount of all logs in the database.
+     * @return long of the amount of logs.
+     */
     public long getLogsAmount() {
         return logService.getLogsAmount();
     }
 
+    /**
+     * Get the amount of all error logs.
+     * @return long of the amount of error logs.
+     */
     public long getErrorLogsAmount(){
         return logService.getErrorLogsAmount();
     }
+
+    /**
+     * Get the amount of all warning logs.
+     * @return long of the amount of warninig logs.
+     */
     public long getWarningLogsAmount(){
         return logService.getWarningLogsAmount();
     }
+
+    /**
+     * Get the amount of all success logs.
+     * @return long of the amount of success logs.
+     */
     public long getSuccessLogsAmount(){
         return logService.getSuccessLogsAmount();
     }

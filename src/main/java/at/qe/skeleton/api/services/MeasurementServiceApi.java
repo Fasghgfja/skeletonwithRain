@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -44,21 +45,13 @@ public class MeasurementServiceApi {
 
 
     public void addMeasurement(Measurement2 measurement) throws MeasurementNotFoundException {
-        System.out.println();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDate dateTime = LocalDate.parse(measurement.getTime_stamp(), formatter);
+        LocalDateTime dateTime = LocalDateTime.parse(measurement.getTime_stamp(), formatter);
 
         Measurement measurement1 = new Measurement();
         SensorStation sensorStation = sensorStationService.loadSensorStation(measurement.getSensorStation());//TODO: new!
         measurement1.setSensorStation(sensorStation);
-
-        String type = measurement.getType();
-        if (type.equals("TempSensor")) {measurement1.setType("SOIL_MOISTURE");}
-        if (type.equals("LigthSensor")) {measurement1.setType("HUMIDITY");}
-        if (type.equals("HygroSensor")) {measurement1.setType("AIR_PRESSURE");}
-        if (type.equals("GasSensor")) {measurement1.setType("TEMPERATURE");}
-        if (type.equals("humiditySensor")) {measurement1.setType("AIR_QUALITY");}
-        if (type.equals("PressureSensor")) {measurement1.setType("LIGHT_INTENSITY");}
+        measurement1.setType(measurement.getType());
         measurement1.setTimestamp(dateTime);
         measurement1.setValue_s(measurement.getValue());
         measurementRepository.save(measurement1);
@@ -74,7 +67,7 @@ public class MeasurementServiceApi {
         Measurement newMeasurement = new Measurement();
         newMeasurement.setType(measurement.getSensor_id());
         newMeasurement.setValue_s(measurement.getValue());
-        newMeasurement.setTimestamp(LocalDate.parse(measurement.getTime_stamp()));
+        newMeasurement.setTimestamp(LocalDateTime.parse(measurement.getTime_stamp()));
         measurementRepository.save(newMeasurement);
         //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
         System.out.println(newMeasurement);

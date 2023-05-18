@@ -2,17 +2,14 @@ package at.qe.skeleton.model;
 
 import java.io.Serializable;
 import java.util.*;
+
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
 /**
  * Entity representing users.
- * <p>
- * This class is part of the skeleton project provided for students of the
- * course "Software Engineering" offered by the University of Innsbruck.
  */
 @Getter
 @Setter
@@ -36,7 +33,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private String phone;
     boolean enabled;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_plant",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username"),
@@ -45,30 +42,13 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private Set<Plant> followedPlants = new HashSet<>();
 
 
-    @ManyToMany(cascade = CascadeType.ALL)//TODO check if this can be lazy
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "gardener_sensorStation",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username"),
             inverseJoinColumns = @JoinColumn(name = "sensorStationName", referencedColumnName = "sensorStationName")
     )
     private Set<SensorStation> sensorStationsUnderCare = new HashSet<>();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "Userx_UserRole")
@@ -95,7 +75,7 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
 
     @Override
     public String toString() {
-        return "" + username;
+        return username;
     }
 
     @Override
@@ -112,9 +92,9 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
         return (null == super.getCreateDate());
     }
 
-	@Override
-	public int compareTo(Userx o) {
-		return this.username.compareTo(o.getUsername());
-	}
+    @Override
+    public int compareTo(Userx o) {
+        return this.username.compareTo(o.getUsername());
+    }
 
 }

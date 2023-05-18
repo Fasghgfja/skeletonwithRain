@@ -5,6 +5,10 @@
 
     <ui:define name="title">Plant Health - Audit Logs</ui:define>
 
+    <ui:define name="head">
+        <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css" />
+    </ui:define>
+
     <ui:define name="content">
         <h:form id="logForm">
             <div class="grid">
@@ -77,7 +81,7 @@
             <div class="grid table-demo">
                 <div class="col-12">
                     <div class="card">
-                        <p:dataTable id="logsTable" var="log" value="#{logController.logList}" allowUnsorting="true" sortMode="single" paginator="true"
+                        <p:dataTable id="logsTable" var="log" value="#{logController.latestLogs}" sortMode="single" paginator="true"
                                      paginatorPosition="bottom"
                                      rows="20">
                             <p:column headerText="Type" sortBy="#{log.type}" filterBy="#{log.type}">

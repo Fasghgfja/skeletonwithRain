@@ -4,6 +4,9 @@ import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.services.UserService;
 import java.io.Serializable;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
@@ -13,16 +16,15 @@ import org.springframework.stereotype.Component;
 
 /**
  * Session information bean to retrieve session-specific parameters.
- *
- * This class is part of the skeleton project provided for students of the
- * course "Software Engineering" offered by the University of Innsbruck.
  */
 @Component
 @Scope("session")
+@Getter
+@Setter
 public class SessionInfoBean implements Serializable {
 
     @Autowired
-    private UserService userService;
+    private transient UserService userService;
 
     /**
      * Attribute to cache the current user.

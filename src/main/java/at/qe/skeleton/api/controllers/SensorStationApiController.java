@@ -1,16 +1,20 @@
 package at.qe.skeleton.api.controllers;
 
+import at.qe.skeleton.api.exceptions.SensorNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
+import at.qe.skeleton.api.model.BoarderValueFrame;
+import at.qe.skeleton.api.model.SendingIntervalFrame;
 import at.qe.skeleton.api.model.SensorApi;
 import at.qe.skeleton.api.model.SensorStationApi;
 import at.qe.skeleton.api.services.SensorStationServiceApi;
-import at.qe.skeleton.model.SensorStation;
+import at.qe.skeleton.model.Sensor;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,7 +33,6 @@ public class SensorStationApiController {
      */
     @PostMapping("/api/sensorstations")
     int createSensorStationApi(@RequestBody SensorStationApi sensorStationApi) {
-        System.out.println(sensorStationApi.toString());
         try {
             sensorStationServiceApi.updateSensorStation(sensorStationApi);
         } catch (SensorStationNotFoundException ex){
@@ -44,17 +47,21 @@ public class SensorStationApiController {
      * @return response ok
      */
     @PostMapping("/api/sensors")
-    int createSensorApi(@RequestBody SensorApi sensorApi) {
-        System.out.println(sensorApi.toString());
+    int createSensorApi(@RequestBody List<SensorApi> sensorApi) {
+        for (SensorApi s:
+             sensorApi) {
+            System.out.println(s.toString());
+        }
+
         try {
             return sensorStationServiceApi.addSensor(sensorApi);
-        }catch (SensorStationNotFoundException ex){
+        }catch (SensorNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("/api/updatesensors")
-    int updateSensorApi(@RequestBody SensorApi sensorApi) {
+    int updateSensorApi(@RequestBody List<SensorApi> sensorApi) {
         System.out.println(sensorApi.toString());
         try {
             sensorStationServiceApi.updateSensor(sensorApi);
@@ -82,17 +89,26 @@ public class SensorStationApiController {
     List<String> getAllSensorStationApi(@PathVariable("id") String id) {
 
         try {
-            System.out.println(id);
             return sensorStationServiceApi.findAllSensorStation(Long.valueOf(id));
         } catch (SensorStationNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping("/api/sensorsboardervalue")
-    SensorApi updateMeasurement(@RequestBody SensorApi sensorApi) {
+    @GetMapping("/api/sensorsboardervalue/{id}")
+    ArrayList<BoarderValueFrame> updateMeasurement(@PathVariable("id") String id) {
         try {
-            return sensorStationServiceApi.findOneSensor(sensorApi.getSensor_id());
+            return sensorStationServiceApi.findSensorsByAccesspointID(Long.valueOf(id));
+        }catch (SensorStationNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @GetMapping("/api/sendinterval/{id}")
+    SendingIntervalFrame getSendingInterval(@PathVariable("id") String id) {
+        try {
+            return sensorStationServiceApi.findSendingIntervalByAccesspointID(Long.valueOf(id));
         }catch (SensorStationNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

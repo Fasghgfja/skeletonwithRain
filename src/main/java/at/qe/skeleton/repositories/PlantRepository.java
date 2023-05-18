@@ -1,11 +1,12 @@
 package at.qe.skeleton.repositories;
 
-import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.UserRole;
-import at.qe.skeleton.model.Userx;
+import at.qe.skeleton.model.*;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -67,6 +68,25 @@ public interface PlantRepository extends AbstractRepository<Plant, Long> {
      */
     @Query("SELECT DISTINCT p.plantName FROM Plant p")
     Collection<String> findAllPlantsUniqueNames();
+
+    @Query("SELECT DISTINCT p.plantName FROM Plant p WHERE p.sensorStation IS NULL")
+    Collection<String> findAllNotUsedPlantsUniqueNames();
+
+    HashSet<Plant> findAllBySensorStationEquals(SensorStation sensorStation);
+
+    @Transactional
+    void deleteAllBySensorStationEquals(SensorStation sensorStation);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Plant pp SET pp.sensorStation = null WHERE pp.sensorStation = :sensorStation")
+    void detachFromSensorStation(@Param("sensorStation") SensorStation sensorStation);
+
+
+
+
+
+
 }
 
 

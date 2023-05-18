@@ -1,132 +1,119 @@
 package at.qe.skeleton.ui.beans;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import jakarta.annotation.ManagedBean;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.SessionScoped;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * This class represents guest preferences for the UI theme, color schemes, menu and profile modes, and other settings.
- * It is a session-scoped managed bean and can be injected into other beans or JSF views.
- * if a layout variable is changed then the nexessary theme css has to be included in the css folder.
+ * Class to switch between dark mode and light mode.
  */
-@Component
-@Scope("session")
+@Getter
+@Setter
+@ManagedBean
+@SessionScoped
 public class GuestPreferences implements Serializable {
 
+    private static final String LIGHT = "light";
+    private static final String CHATEAU_GREEN = "chateau-green";
+
     private String menuMode = "layout-horizontal layout-static-active";
-    private String darkMode = "light";
-    private String layoutPrimaryColor = "chateau-green";
-    private String componentTheme = "chateau-green";
+    private String darkMode = LIGHT;
+    private String layoutPrimaryColor = CHATEAU_GREEN;
+    private String componentTheme = CHATEAU_GREEN;
     private String topbarTheme = "colored";
     private String menuTheme = "dim";
     private String profileMode = "popup";
     private String inputStyle = "outlined";
     private boolean lightLogo = true;
 
+    private transient List<ComponentTheme> componentThemes = new ArrayList<>();
 
-    /**
-     * Sets the current dark mode and updates the menu and topbar themes accordingly.
-     * If the topbar theme is set to "light", the logo is set to dark mode; otherwise, it is set to light mode.
-     */
-    public void setDarkMode(String darkMode) {
-        this.darkMode = darkMode;
-        this.menuTheme = darkMode;
-        this.topbarTheme = darkMode;
-        this.lightLogo = !this.topbarTheme.equals("light");
-    }
+    private transient List<LayoutPrimaryColor> layoutPrimaryColors = new ArrayList<>();
 
-    /**
-     * Returns the CSS class for the current layout.
-     */
-    public String getLayout() {
-        return "layout-" + this.layoutPrimaryColor + '-' + this.darkMode ;
+    @PostConstruct
+    public void init() {
+        componentThemes.add(new ComponentTheme("Chateau Green", CHATEAU_GREEN, "#3C9462"));
+
+        layoutPrimaryColors.add(new LayoutPrimaryColor("Chateau Green", CHATEAU_GREEN, "#3C9462"));
+
     }
 
     public boolean isLightLogo() {
         return lightLogo;
     }
-    public String getLayoutPrimaryColor() {
-        return layoutPrimaryColor;
+
+
+    public void setDarkMode(String darkMode) {
+        this.darkMode = darkMode;
+        this.menuTheme = "dim";
+        this.topbarTheme = "colored";
+        this.lightLogo = true;
     }
-    public String getDarkMode() {
-        return darkMode;
+
+    public String getLayout() {
+        return "layout-" + this.layoutPrimaryColor + '-' + this.darkMode;
     }
-    public String getComponentTheme() {
-        return componentTheme;
+
+    public String getTheme() {
+        return this.componentTheme + '-' + this.darkMode;
     }
-    public String getMenuTheme() {
-        return menuTheme;
+
+    public void setLayoutPrimaryColor(String layoutPrimaryColor) {
+        this.layoutPrimaryColor = layoutPrimaryColor;
+        this.componentTheme = layoutPrimaryColor;
     }
-    public String getTopbarTheme() {
-        return topbarTheme;
+
+    public void setTopbarTheme(String topbarTheme) {
+        this.topbarTheme = topbarTheme;
+        this.lightLogo = !this.topbarTheme.equals(LIGHT);
     }
-    public String getMenuMode() {
-        return this.menuMode;
-    }
-    public void setMenuMode(String menuMode) {
-        this.menuMode = menuMode;
-    }
-    public String getProfileMode() {
-        return this.profileMode;
-    }
-    public void setProfileMode(String profileMode) {
-        this.profileMode = profileMode;
-    }
-    public String getInputStyle() {
-        return inputStyle;
-    }
-    public void setInputStyle(String inputStyle) {
-        this.inputStyle = inputStyle;
-    }
+
     public String getInputStyleClass() {
         return this.inputStyle.equals("filled") ? "ui-input-filled" : "";
     }
+
+    /**
+     * Inner class to get the component theme.
+     */
+    @Getter
+    @Setter
+    public class ComponentTheme {
+        String name;
+        String file;
+        String color;
+
+        public ComponentTheme(String name, String file, String color) {
+            this.name = name;
+            this.file = file;
+            this.color = color;
+        }
+    }
+
     public List<LayoutPrimaryColor> getLayoutPrimaryColors() {
         return layoutPrimaryColors;
     }
 
-
-
     /**
-     * A list of available layout primary colors.
+     * Inner class to get the Layout primary color.
      */
-    private List<LayoutPrimaryColor> layoutPrimaryColors = new ArrayList<>();
-
-    /**
-     This class represents a primary color that can be used for layout themes.
-     */
+    @Getter
+    @Setter
     public class LayoutPrimaryColor {
         String name;
         String file;
         String color;
 
-        /**
-        * Constructs a new LayoutPrimaryColor object.
-        * @param name the name of the primary color
-        * @param file the name of the file associated with the primary color
-        * @param color the hexadecimal code for the primary color
-         */
         public LayoutPrimaryColor(String name, String file, String color) {
             this.name = name;
             this.file = file;
             this.color = color;
         }
-
-        public String getName() {
-            return this.name;
-        }
-
-        public String getFile() {
-            return this.file;
-        }
-
-        public String getColor() {
-            return this.color;
-        }
     }
-
 
 }
