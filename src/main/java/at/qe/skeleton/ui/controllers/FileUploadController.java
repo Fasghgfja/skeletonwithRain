@@ -15,6 +15,7 @@ import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -62,7 +63,9 @@ public class FileUploadController implements Serializable {
     /**
      * Handles the uploaded file by converting it to a byte array, saving it as an {@link at.qe.skeleton.model.Image} object using the
      * {@link ImageService}, and displaying a {@code FacesMessage} upon successful upload.
-     * @param event the file upload event triggered by the user */
+     *
+     * @param event the file upload event triggered by the user
+     */
     public void handleFileUpload(FileUploadEvent event) throws IOException {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         id = externalContext.getRequestParameterMap().get("id");
@@ -96,8 +99,8 @@ public class FileUploadController implements Serializable {
         image.setImageByte(fileBytes);
 
         // Save the picture to the corresponding plant
-        if(!id.equals("")){
-            imageService.addPictureToPlantPictures(image,id);
+        if (!id.equals("")) {
+            imageService.addPictureToPlantPictures(image, id);
             try {
                 successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);
                 successFileHandler.setFormatter(new SimpleFormatter());
@@ -110,16 +113,16 @@ public class FileUploadController implements Serializable {
             Log createLog = new Log();
             createLog.setDate(LocalDate.now());
             createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-            if(sessionInfoBean.getCurrentUser() != null) {
+            if (sessionInfoBean.getCurrentUser() != null) {
                 createLog.setAuthor(sessionInfoBean.getCurrentUserName());
-            } else{
+            } else {
                 createLog.setAuthor("GUEST");
             }
             createLog.setSubject("PICTURE UPLOAD");
             createLog.setText(UPLOADED_IMAGE + image.getId());
             createLog.setType(LogType.SUCCESS);
             logRepository.save(createLog);
-            return ;
+            return;
         }
         imageService.saveImage(image);
 
@@ -135,9 +138,9 @@ public class FileUploadController implements Serializable {
         Log createLog = new Log();
         createLog.setDate(LocalDate.now());
         createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-        if(sessionInfoBean.getCurrentUser() != null) {
+        if (sessionInfoBean.getCurrentUser() != null) {
             createLog.setAuthor(sessionInfoBean.getCurrentUserName());
-        } else{
+        } else {
             createLog.setAuthor("GUEST");
         }
         createLog.setSubject("PICTURE UPLOAD");
@@ -145,9 +148,6 @@ public class FileUploadController implements Serializable {
         createLog.setType(LogType.SUCCESS);
         logRepository.save(createLog);
     }
-
-
-
 }
 
 
