@@ -53,14 +53,13 @@ public class AccessPointController implements Serializable {
     private transient SessionInfoBean sessionInfoBean;
 
     private final transient Logger successLogger = Logger.getLogger("SuccessLogger");
-    private static FileHandler successFileHandler;
+    private transient FileHandler successFileHandler;
 
     private AccessPoint accessPoint;
     private String location;
 
     /**
-     * Returns a list of all access points.
-     * @return
+     * Constructs a list of all access points in the database for sorting and filtering on the datatable.
      */
 
     @PostConstruct
@@ -70,7 +69,7 @@ public class AccessPointController implements Serializable {
 
     /**
      * Method to get all access points stored in the database.
-     * @return
+     * @return Collection of all access points in the database.
      */
     public Collection<AccessPoint> getAccessPoints(){
         return accessPointService.getAllAccessPoint();
