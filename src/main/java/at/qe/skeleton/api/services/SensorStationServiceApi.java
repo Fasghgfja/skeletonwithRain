@@ -173,9 +173,12 @@ public class SensorStationServiceApi {
     public SendingIntervalFrame findSendingIntervalByAccesspointID(Long id) throws SensorStationNotFoundException{
 
         SSInterval ssInterval = intervalService.getFirstByAccessPointId(id);
+        List<SensorStation> sensorStation = sensorStationRepository.findAllByAccessPoint_AccessPointID(id);
+
         SendingIntervalFrame sendingIntervalFrame = new SendingIntervalFrame();
         sendingIntervalFrame.setMeasurementInterval(Integer.parseInt(ssInterval.getMeasurementInterval()));
         sendingIntervalFrame.setWebappSendInterval(Integer.parseInt(ssInterval.getWebAppInterval()));
+        sendingIntervalFrame.setAlarmCountThreshold(sensorStation.get(0).getAlarmCountThreshold().intValue());
         return  sendingIntervalFrame;
     }
 }

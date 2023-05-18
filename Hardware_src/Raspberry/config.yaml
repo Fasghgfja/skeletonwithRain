@@ -1,5 +1,6 @@
 accesspoint-params:
-  id: 352
+  alarmCountThreshold: 5
+  id: 452
   measurement-intervall: 1
   webapp-intervall: 1
 webapp-params:

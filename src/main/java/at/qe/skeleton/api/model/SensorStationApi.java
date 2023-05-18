@@ -12,7 +12,6 @@ public class SensorStationApi {
     private String name;
     private String service_description;
     private String alarm_switch;
-
     @Override
     public String toString() {
         return "Measurement{" +

@@ -3,6 +3,7 @@ import ble_service_connection
 import asyncio
 import rest_api
 import exception_logging
+import config_yaml
 NAME = 0
 ID = 0
 DESCRIPTION = 1
@@ -15,6 +16,7 @@ UUID = 1
 def checkBoarderValues():
     connected_sensor_stations_list = DB_connection.read_Sensor_Stationnames_Database()
     update_alarm_count_list = []
+    alarmCountThreshold = config_yaml.read_trashhold_params()
     for station in connected_sensor_stations_list:
         alarm_switch = station[ALARM_SWITCH]#2
         sensor_list = DB_connection.read_sensors_database(station[NAME])
@@ -39,7 +41,7 @@ def checkBoarderValues():
                     if alarm_count != -1 and ((len(current_value_list) - current_value_breaks) < ((len(current_value_list) * 3) / 4)):
                         alarm_count += 1
 
-                    if alarm_count > 5 and alarm_switch == "off":
+                    if alarm_count > alarmCountThreshold and alarm_switch == "off":
                         asyncio.run(ble_service_connection.writeAlarmSignal(uuid, "ON", station[NAME]))
                         alarm_count = -1
                         alarm_switch = "on"
