@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -25,8 +26,6 @@ public class LogController {
 
     private List<Log> latestLogs;
 
-    private List<Log> logList;
-
 
 
     @Autowired
@@ -34,7 +33,8 @@ public class LogController {
 
     @PostConstruct
     public void init(){
-        logList = (ArrayList<Log>) logService.getAllLogs();
+        latestLogs = (ArrayList<Log>) logService.getAllLogs();
+        latestLogs.sort(Comparator.comparing(Log::getTime).reversed());
     }
 
     /**

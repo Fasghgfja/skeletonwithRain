@@ -1,9 +1,14 @@
 package at.qe.skeleton.services;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.Sensor;
@@ -37,15 +42,8 @@ public class MeasurementService {
     @Autowired
     private SensorStationRepository sensorStationRepository;
 
-
-    //................methods to find a Measurement or a list of measurements with different parameters
-    // TODO: Methoden werden nicht verwendet. Bitte löschen. NICHT GETESTET.
-    public Measurement findMeasurementById(Long id) {
-        return measurementRepository.findFirstById(id);
-    }
-    public Measurement findFirstMeasurementBySensorStationIdAndType(String sensorStationId,String type) {
-        return measurementRepository.findFirstBySensorStationIdAndType(sensorStationId,type);
-    }
+    private final transient Logger successLogger = Logger.getLogger("SuccessLogger");
+    private transient FileHandler successFileHandler;
 
     /**
      * Method to get all measurements currently stored in the database.
@@ -77,22 +75,6 @@ public class MeasurementService {
     public Collection<Measurement> getAllMeasurementsBySensorStationAndType(SensorStation sensorStation, String type) {
         return measurementRepository.findMeasurementsBySensorStationAndTypeLikeOrderByTimestampDesc(sensorStation, type);
     }
-
-
-
-
-
-    //TODO: maybe not needed , check what is used on manage measurement page .
-    /**
-     * Deletes all measurements for a given sensorStation.
-     * @param sensorStation the sensorStation from which to delete the measurements
-     */
-    public void deleteMeasurementsBySensorStation(SensorStation sensorStation) {
-        measurementRepository.deleteMeasurementsBySensorStation(sensorStation);
-    }
-
-
-
 
 
     /**
@@ -195,6 +177,15 @@ public class MeasurementService {
         }
         if ( from != null && from.isAfter(to)){return;}
         measurementRepository.deleteMeasurementsByTimestampBetween(from,to);
+        try {
+            successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);
+            successFileHandler.setFormatter(new SimpleFormatter());
+            successLogger.addHandler(successFileHandler);
+            successLogger.info("ALL MEASUREMENTS DELETED FROM " + from + " TO " + to);
+            successFileHandler.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteMeasurementsFromToForSensorStation(LocalDateTime from, LocalDateTime to, String sensorStationToDeleteFromId) {
@@ -211,6 +202,15 @@ public class MeasurementService {
         if (from != null&& from.isAfter(to)){return;}
 
         measurementRepository.deleteMeasurementsBySensorStationAndTimestampBetween(sensorStation, from, to);
+        try {
+            successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);
+            successFileHandler.setFormatter(new SimpleFormatter());
+            successLogger.addHandler(successFileHandler);
+            successLogger.info("MEASUREMENTS FOR SENSOR STATION " + sensorStation.getSensorStationID() + " DELETED FROM " + from + " TO " + to);
+            successFileHandler.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
