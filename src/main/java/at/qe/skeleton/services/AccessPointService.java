@@ -3,7 +3,6 @@ package at.qe.skeleton.services;
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.AccessPointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,11 @@ import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
+
+/**
+ * Service class for the model AccessPoint.
+ * This class is application scoped since it is only created once for the entire application.
+ */
 
 @Service
 @Scope("application")
@@ -92,7 +96,7 @@ public class AccessPointService {
         try {
             createYaml(accessPoint1, isNew);
         }catch (IOException e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return accessPoint1;
@@ -137,8 +141,8 @@ public class AccessPointService {
         }
     }
     /**
-     * Deletes an access point and creates a delete log.
-     * @param accessPoint
+     * Deletes an access point.
+     * @param accessPoint to be deleted
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteAccessPoint(AccessPoint accessPoint) {
