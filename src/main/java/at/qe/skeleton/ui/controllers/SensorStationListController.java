@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * The class is responsible for handling Sensor Stations.
+ * The class is responsible for handling sensor stations lists.
  */
 @Getter
 @Setter
@@ -38,6 +38,9 @@ public class SensorStationListController implements Serializable {
 
     private Collection<SensorStation> filteredSensorStations;
 
+    /**
+     * Caching the lists of sensor stations and assigned sensor stations in order to filter and sort them.
+     */
     @PostConstruct
     public void init() {
         sensorStationList = (ArrayList<SensorStation>) sensorService.getAllSensorStations();
@@ -48,14 +51,16 @@ public class SensorStationListController implements Serializable {
      * Returns a list of all sensor stations.
      */
     public Collection<SensorStation> getSensorStations() {
-        //if user is gardener get assigned sensor stations
-        return sensorService.getAllSensorStations();//if user is admin return all
+        return sensorService.getAllSensorStations();
     }
 
+    /**
+     * Returns a collection of all sensor station ids as strings.
+     * @return Collection of string containing all ids.
+     */
 
     public Collection<String> getSensorStationsIds() {
-        //if user is gardener get assigned sensor stations
-        return sensorService.getAllSensorStationsIds();//if user is admin return all
+        return sensorService.getAllSensorStationsIds();
     }
 
     /**

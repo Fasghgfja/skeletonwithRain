@@ -4,6 +4,7 @@ package at.qe.skeleton.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -36,10 +37,6 @@ public class Image implements Serializable {
 
 
     private boolean approved;
-
-    public Long getId() {return id;}
-
-    public void setId(Long id) {this.id = id;}
 
     public LocalDate getDate() {
         return creationDate;

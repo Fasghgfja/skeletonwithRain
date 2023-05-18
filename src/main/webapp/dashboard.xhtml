@@ -421,9 +421,9 @@
 
                                         <!-- .......AUDIT LOG PREVIEW ....... -->
                                         <div class="card">
-                                            <p:dataTable id="logs" var="log" value="#{logController.logs}"
+                                            <p:dataTable id="logs" var="log" value="#{logController.latestLogs}"
                                                          reflow="true" paginatorPosition="bottom"
-                                                         rowKey="#{log.id}" paginator="true" rows="5" sortBy="#{log.id}"
+                                                         rowKey="#{log.id}" paginator="true" rows="10" sortBy="#{log.id}"
                                                          sortOrder="descending">
                                                 <p:column>
                                                     <h:outputText value="#{log.type}"

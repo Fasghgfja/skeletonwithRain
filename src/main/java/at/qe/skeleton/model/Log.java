@@ -15,8 +15,8 @@ import java.util.Objects;
 /**
  * Entity representing an audit log entry.
  */
- @Getter
- @Setter
+@Getter
+@Setter
 @Entity
 public class Log implements Persistable<Long>, Serializable, Comparable<Log> {
 

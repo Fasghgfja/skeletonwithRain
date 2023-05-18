@@ -2,6 +2,7 @@ package at.qe.skeleton.model;
 
 import java.io.Serializable;
 import java.util.*;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -91,9 +92,9 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
         return (null == super.getCreateDate());
     }
 
-	@Override
-	public int compareTo(Userx o) {
-		return this.username.compareTo(o.getUsername());
-	}
+    @Override
+    public int compareTo(Userx o) {
+        return this.username.compareTo(o.getUsername());
+    }
 
 }

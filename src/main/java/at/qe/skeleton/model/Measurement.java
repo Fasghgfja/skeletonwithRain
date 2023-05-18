@@ -3,12 +3,11 @@ package at.qe.skeleton.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-
-
 
 
 /**
@@ -25,7 +24,7 @@ public class Measurement implements Serializable {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sensorStationName", nullable = true)
     private SensorStation sensorStation;
 
@@ -43,7 +42,7 @@ public class Measurement implements Serializable {
     @Override
     public String toString() {
         return "Measurement{" +
-                "id: "+id +
+                "id: " + id +
                 '}';
     }
 

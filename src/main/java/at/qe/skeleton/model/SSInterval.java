@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
+
 import java.io.Serializable;
 
 
@@ -16,7 +17,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-public class SSInterval implements Persistable<Long>, Serializable, Comparable<SSInterval>{
+public class SSInterval implements Persistable<Long>, Serializable, Comparable<SSInterval> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -46,7 +47,7 @@ public class SSInterval implements Persistable<Long>, Serializable, Comparable<S
 
     @Override
     public String toString() {
-       return "MI: "+getMeasurementInterval() + "SI: " + getWebAppInterval();
+        return "MI: " + getMeasurementInterval() + "SI: " + getWebAppInterval();
     }
 
 

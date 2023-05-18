@@ -68,11 +68,8 @@ public class LogService {
         return logRepository.countLogByType(LogType.SUCCESS);
     }
 
-
-    //TODO: implement this placeholder method
-    public Log createLogEntry(){
-        Log logEntry = new Log();
-        return logEntry;
+    public void createLogEntry(){
+        new Log();
     }
 
     /**
