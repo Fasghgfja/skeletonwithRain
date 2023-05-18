@@ -29,23 +29,23 @@ public class IntervalService {
 
 
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public SSInterval saveInterval(SSInterval interval) {
         return intervalRepository.save(interval);
     }
 
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public void deleteInterval(SSInterval interval) {
         intervalRepository.delete(interval);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public void deleteIntervalByAccessPoint(AccessPoint accessPoint) {
         intervalRepository.deleteIntervalByAccessPoint(accessPoint);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public void deleteIntervalByAccessPointId(Long acId) {
         intervalRepository.deleteIntervalByAccessPointId(acId);
     }

@@ -4,10 +4,15 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
-
 import java.io.Serializable;
 
 
+/**
+ * This class represents the Entity model for Intervals.
+ * Intervals are set per Access Point
+ * Measurement Interval represents: how often in minutes all conncted sensor station will ....
+ * WebApp interval represents: how often the Access Point will send data to the Webapp.
+ */
 @Getter
 @Setter
 @Entity

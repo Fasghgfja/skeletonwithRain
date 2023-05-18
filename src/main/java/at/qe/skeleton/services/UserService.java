@@ -37,7 +37,7 @@ public class UserService {
     /**
      * Returns a collection of all users.
      */
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('GARDENER')")
     public Collection<Userx> getAllUsers() {
         return userRepository.findAll();
     }
@@ -46,7 +46,7 @@ public class UserService {
      * Method to get all gardeners currently saved in the database.
      * @return Collection of Userx with role 'GARDENER'
      */
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('GARDENER')")
     public Collection<Userx> getAllGardeners() {
         return userRepository.findByRole(UserRole.GARDENER);
     }
@@ -72,7 +72,7 @@ public class UserService {
      * @param username the username to search for
      * @return the user with the given username
      */
-    @PreAuthorize("hasAuthority('ADMIN') or principal.username eq #username")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('GARDENER') or principal.username eq #username ")
     public Userx loadUser(String username) {
         return userRepository.findFirstByUsername(username);
     }

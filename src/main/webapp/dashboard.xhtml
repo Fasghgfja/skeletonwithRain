@@ -17,10 +17,7 @@
 
 
 
-
-
-                <!-- ....................................ADMIN VIEW START................................... -->
-                <c:if test="#{sessionInfoBean.hasRole('ADMIN')}">   <!-- ...//TODO: topboxes for everyone not only admin!... -->
+                <c:if test="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('GARDENER')}">
                     <!-- ................TOP INFO BOXES.......... -->
                     <!-- ...........USERS SIGNED UP............ -->
 
@@ -90,7 +87,11 @@
                         </div>
                     </div>
 
+                </c:if>
 
+
+                <!-- ....................................ADMIN VIEW START................................... -->
+                <c:if test="#{sessionInfoBean.hasRole('ADMIN')}">
 
                     <!-- ..........GRAPH................ -->
                     <div class="col-12 md:col-12 xl:col-6">
@@ -104,11 +105,11 @@
                             </div>
                         </div>
                     </div>
-                    <!-- ......simply modify the graph controller do display different data....... -->
-                    <!-- ......supported charts are .lineModel and .cartesianLinearModel...... -->
 
 
-                    <!-- ..........GREENHOUSES PREVIEW........... -->
+
+
+                <!-- ..........GREENHOUSES PREVIEW........... -->
                     <div class="col-12 md:col-12 xl:col-6">
                         <div class="col-12">
                             <div class="card">

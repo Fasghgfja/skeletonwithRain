@@ -114,7 +114,7 @@ public class ImageService {
      * @param image the image to save
      * @return the saved image
      */
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public Image saveImage(Image image) {
         return imageRepository.save(image);
     }
@@ -124,7 +124,7 @@ public class ImageService {
      *
      * @param image the image to delete
      */
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public void deleteImage(Image image) {
         imageRepository.delete(image);
     }
@@ -134,7 +134,7 @@ public class ImageService {
 
 
     //TODO: Remove this if possible. Fails on tesing.
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public void deleteAllImagesByPlant(Plant plant) { //TODO:new, reroute all methods wanting this to here and add detach , they are in plantservice atm
         imageRepository.deleteImagesByPlant(plant);
     }

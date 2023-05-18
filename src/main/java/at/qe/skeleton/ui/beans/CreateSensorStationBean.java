@@ -1,5 +1,7 @@
 package at.qe.skeleton.ui.beans;
 
+import at.qe.skeleton.model.Log;
+import at.qe.skeleton.model.LogType;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.services.SensorStationService;
@@ -10,6 +12,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 @Getter
@@ -18,7 +23,7 @@ import java.util.Objects;
 @Scope("view")
 public class CreateSensorStationBean implements Serializable {
 
-    @Autowired transient SensorStationService sensorStationPointService;
+    @Autowired transient SensorStationService sensorStationService;
 
     @Autowired
     private SessionInfoBean sessionInfoBean;
@@ -31,10 +36,7 @@ public class CreateSensorStationBean implements Serializable {
     private String sensorStationName;
     private String alarmSwitch;
     private String description;
-
     private Integer alarmCountThreshold;
-
-
 
     public void doCreateNewCreateSensorStation(){
         SensorStation sensorStation = new SensorStation();
@@ -44,19 +46,16 @@ public class CreateSensorStationBean implements Serializable {
         sensorStation.setDescription(description);
         sensorStation.setAlarmCountThreshold(Objects.requireNonNullElse(alarmCountThreshold, 5));
 
+        sensorStation = sensorStationService.saveSensorStation(sensorStation);
 
-
-        sensorStation = sensorStationPointService.saveSensorStation(sensorStation);
-
-        //TODO: log sensor station creation
-        //Log createLog = new Log();
-        //createLog.setDate(LocalDate.now());
-       // createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-        //createLog.setAuthor(sessionInfoBean.getCurrentUser().getUsername());
-       // createLog.setSubject("AP CREATION");
-        //createLog.setText("CREATED AP: " + sensorStation.getId());
-        //createLog.setType(LogType.SUCCESS);
-        //logRepository.save(createLog);
+        Log createLog = new Log();
+        createLog.setDate(LocalDate.now());
+        createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        createLog.setAuthor(sessionInfoBean.getCurrentUser().getUsername());
+        createLog.setSubject("SENSOR STATION CREATION");
+        createLog.setText("CREATED SENSOR STATION: " + sensorStation.getId());
+        createLog.setType(LogType.SUCCESS);
+        logRepository.save(createLog);
 
     }
 }

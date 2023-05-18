@@ -33,7 +33,7 @@ public class AccessPointService {
      * Method to get all access points currently stored in the database.
      * @return Collection of all access points.
      */
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public Collection<AccessPoint> getAllAccessPoint() {
         return accessPointRepository.findAll();
     }
@@ -69,7 +69,7 @@ public class AccessPointService {
      * @param id of the access point to load.
      * @return Access point with given id.
      */
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')" )
     public AccessPoint loadAccessPoint(Long id) {
         return accessPointRepository.findFirstById(id);
     }

@@ -29,32 +29,28 @@ public class GuestPreferences implements Serializable {
 
     @PostConstruct
     public void init() {
-        componentThemes.add(new ComponentTheme("Chateau Green", "chateau-green", "dark"));
+        componentThemes.add(new ComponentTheme("Chateau Green", "chateau-green", "#3C9462"));
 
         layoutPrimaryColors.add(new LayoutPrimaryColor("Chateau Green", "chateau-green", "#3C9462"));
 
     }
 
     public String getDarkMode() {
-        if (this.darkMode=="light") {
-            this.darkMode = "dark";
-            return "dark";
-        }
-        else {this.darkMode = "light"; return "light";}
-
+        return darkMode;
     }
 
     public boolean isLightLogo() {
         return lightLogo;
     }
 
-    public void setDarkMode(String darkMode) {
-        this.darkMode = darkMode;
-        this.menuTheme = darkMode;
-        this.topbarTheme = darkMode;
-        this.lightLogo = !this.topbarTheme.equals("light");
-        this.componentTheme = componentTheme+"dark";
-    }
+
+        public void setDarkMode(String darkMode) {
+            System.out.println("im setting darkmode");
+            this.darkMode = darkMode;
+            this.menuTheme = "dim";
+            this.topbarTheme = "colored";
+            this.lightLogo = !this.topbarTheme.equals("light");
+        }
 
     public String getLayout() {
         return "layout-" + this.layoutPrimaryColor + '-' + this.darkMode ;

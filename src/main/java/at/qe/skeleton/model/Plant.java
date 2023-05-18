@@ -3,7 +3,6 @@ package at.qe.skeleton.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 import org.springframework.data.domain.Persistable;
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,7 +11,7 @@ import java.util.*;
 
 
 /**
- * Entity representing Plants.
+ * This class represents the Entity model for Plants.
  */
 @Getter
 @Setter

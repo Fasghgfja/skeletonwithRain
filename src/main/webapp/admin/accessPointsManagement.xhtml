@@ -86,13 +86,21 @@
                             <p:column style="text-align: right">
 
 
+
+                                <!-- .................... VALIDATE BUTTON ........... .............. -->
+                                <p:commandButton  style="margin-right: 2px; background-color: forestgreen" icon="fa fa-solid fa-check" title="Delete"
+                                                 update="accessPointsForm:accessPointsTable"
+                                                 action="#{accessPointController.doValidateAccessPoint}" >
+                                    <f:setPropertyActionListener value="#{accessPoint}" target="#{accessPointController.accessPoint}"/>
+                                </p:commandButton>
+
                                 <!-- .................... INTERVALS BUTTON ........... .............. -->
                                 <p:commandButton style="margin-right: 2px; background-color: orange" update="accessPointsForm:intervalEditDialog"
                                                  oncomplete="PF('intervalEditDialog').show()" icon="fa fa-solid fa-sliders" title="Intervals">
                                     <f:setPropertyActionListener value="#{accessPoint.id}" target="#{SSIntervalController.accessPointId}"/>
                                 </p:commandButton>
 
-
+                                <!-- .................... DELETE BUTTON ........... .............. -->
                                 <p:commandButton class="ui-button-danger" icon="pi pi-trash" title="Delete"
                                                  update="accessPointsForm:accessPointsTable"
                                                  action="#{accessPointController.doDeleteAccessPoint}" oncomplete="location.reload()">

@@ -82,7 +82,7 @@ public class PlantService {
      * Deletes the plant.
      * @param plant the plant to delete.
      */
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public void deletePlant(Plant plant) {
         plantRepository.delete(plant);
     }
@@ -107,7 +107,7 @@ public class PlantService {
      * @param plant The plant that all images should be detached from.
      */
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public void detachAllImagesFromPlant(Plant plant) {
         imageRepository.setPlantIdToNull(plant);
     }
