@@ -13,11 +13,10 @@ import at.qe.skeleton.api.model.BoarderValueFrame;
 import at.qe.skeleton.api.model.SendingIntervalFrame;
 import at.qe.skeleton.api.model.SensorApi;
 import at.qe.skeleton.api.model.SensorStationApi;
-import at.qe.skeleton.model.Measurement;
-import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.Sensor;
-import at.qe.skeleton.model.SensorStation;
+import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.*;
+import at.qe.skeleton.services.AccessPointService;
+import at.qe.skeleton.services.IntervalService;
 import at.qe.skeleton.services.SensorService;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +44,9 @@ public class SensorStationServiceApi {
     @Autowired
     SensorRepository sensorRepository;
     @Autowired
-    AccessPointRepository accessPointRepository;
+    AccessPointService accessPointService;
+    @Autowired
+    IntervalService intervalService;
     private static final AtomicLong ID_COUNTER = new AtomicLong(1);
     private static final ConcurrentHashMap<Long, SensorStation> sensorStations = new ConcurrentHashMap<>();
     private static final int NOITEMFOUND = 0;
@@ -89,6 +90,11 @@ public class SensorStationServiceApi {
      * @throws SensorStationNotFoundException
      */
     public List<String> findAllSensorStation(Long id) throws SensorStationNotFoundException {
+        AccessPoint toValidateaccessPoint = accessPointService.loadAccessPoint(id);
+        if(!toValidateaccessPoint.isValidated()){
+            toValidateaccessPoint.setValidated(true);
+            accessPointService.saveAccessPoint(toValidateaccessPoint);
+        }
         List<SensorStation> sensorStations1 = sensorStationRepository.findAllByAccessPoint_AccessPointID(id);
         ArrayList<String> stationNames = new ArrayList<>();
         if( sensorStations1.size() != NOITEMFOUND){
@@ -165,10 +171,11 @@ public class SensorStationServiceApi {
         return boarderValueFrameArrayList;
     }
     public SendingIntervalFrame findSendingIntervalByAccesspointID(Long id) throws SensorStationNotFoundException{
-        // TODO call sendingintervalls
+
+        SSInterval ssInterval = intervalService.getFirstByAccessPointId(id);
         SendingIntervalFrame sendingIntervalFrame = new SendingIntervalFrame();
-        sendingIntervalFrame.setMeasurementInterval(5);
-        sendingIntervalFrame.setWebappSendInterval(2);
+        sendingIntervalFrame.setMeasurementInterval(Integer.parseInt(ssInterval.getMeasurementInterval()));
+        sendingIntervalFrame.setWebappSendInterval(Integer.parseInt(ssInterval.getWebAppInterval()));
         return  sendingIntervalFrame;
     }
 }

@@ -105,7 +105,7 @@ public class AccessPointService {
      */
     private void createYaml(AccessPoint accessPoint, boolean isNew) throws IOException {
         if(isNew){
-            File file = new File("./config.yaml");
+            File file = new File("./Hardware_src/Raspberry/config.yaml");
             FileWriter writer = new FileWriter(file);
             file.setWritable(file.setReadable(file.setExecutable(true)));
             System.out.println();
