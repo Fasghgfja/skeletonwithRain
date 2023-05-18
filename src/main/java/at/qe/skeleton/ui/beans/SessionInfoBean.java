@@ -24,25 +24,12 @@ import org.springframework.stereotype.Component;
 public class SessionInfoBean implements Serializable {
 
     @Autowired
-    private UserService userService;
+    private transient UserService userService;
 
     /**
      * Attribute to cache the current user.
      */
     private Userx currentUser;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Returns the currently logged on user, null if no user is authenticated
