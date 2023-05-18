@@ -13,6 +13,7 @@ public class SendingIntervalFrame implements Serializable {
 
     private int measurementInterval;
     private int webappSendInterval;
+    private int alarmCountThreshold;
     @Override
     public String toString() {
         return "SensorApi{" +

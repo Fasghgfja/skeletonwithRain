@@ -1,9 +1,8 @@
-webapp-params:
-  ip: localhost:8080
-  usnm: admin
-  pswd: passwd
-
 accesspoint-params:
-  measurement-intervall: 10
-  webapp-intervall: 10
-  id: 50100
+  id: 102
+  measurement-intervall: 1
+  webapp-intervall: 1
+webapp-params:
+  ip: srh-softwaresolutions.com
+  pswd: SHAdmin
+  usnm: secretpwg4t2

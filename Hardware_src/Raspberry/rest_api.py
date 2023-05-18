@@ -1,20 +1,17 @@
-import sqlite3
+import math
 import asyncio
-import cursor as cursor
 import requests
 import DB_connection
 import exception_logging
+import datetime
+import json
+
 import config_yaml
 # local
 auth = ("admin", "passwd")
+log_id = 0
 
-
-
-
-
-
-
-
+post_log_url = "http://localhost:8080/admin/auditLog"
 # server
 #auth = ("SHAdmin", "gsecret4passwordt2")
 #measurements_url = "http://srh-softwaresolutions.com/api/measurements"
@@ -53,6 +50,9 @@ class Sensor(object):
 def url_builder(link):
     url = "http://{0}/api/{1}".format(config_yaml.read_wepapp_ip(),link, config_yaml.read_accesspoint_id())
     return url
+def get_auth():
+    auth = (config_yaml.read_auth_params()[1], config_yaml.read_auth_params()[0])
+    return auth
 def write_value_to_web_app():
     measurements_url = url_builder("measurements")
     send_value_list = []
@@ -64,7 +64,7 @@ def write_value_to_web_app():
                     time_stamp_string = str(value[1])
                     temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=time_stamp_string, type=sensor[3])
                     send_value_list.append(vars(temp_sensor_value))
-    r = requests.post(measurements_url, json=send_value_list, auth=auth)
+    r = requests.post(measurements_url, json=send_value_list, auth=get_auth())
     if r.status_code == 200:
         DB_connection.delete_values()
 
@@ -83,7 +83,7 @@ async def write_sensors_and_station_description(station_names):
                     if sensor[3] != "ALARM_STATUS":
                         sensor_values = Sensor(sensor_id=sensor[0], uuid=sensor[1], station_name=sensor[2], type=sensor[3], alarm_count=sensor[4], upper_boarder="10000", lower_boarder="0" )
                         json_list.append(vars(sensor_values))
-                r = requests.post(post_sensor_url, json=json_list,auth=auth)
+                r = requests.post(post_sensor_url, json=json_list,auth=get_auth())
                 if r.status_code != 200:
                     exception_logging.log_connection_exception("Did not write Sensors to webapp")
             except Exception as e:
@@ -92,7 +92,7 @@ async def write_sensors_and_station_description(station_names):
 
 def read_sensor_boarder_values():
     url = "{0}/{1}".format(url_builder("sensorsboardervalue"), config_yaml.read_accesspoint_id())
-    data = requests.get(url,auth=auth)
+    data = requests.get(url,auth=get_auth())
     sensor_list = data.json()
     for sensor in sensor_list:
         to_update_sensor = DB_connection.read_sensors_by_id(sensor["sensor_id"])
@@ -108,14 +108,14 @@ def write_alarm_switch(name, alarm_switch, description):
     post_sensorStations_url = url_builder("sensorstations")
     try:
         station_values = StationValue(name=name, service_description=description, alarm_switch=alarm_switch)
-        requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
+        requests.post(post_sensorStations_url, json=vars(station_values), auth=get_auth())
     except Exception as e:
         exception_logging.logException(e, "write alarm_switch")
 async def get_sensorstations(getName, name):
 
     if getName:
         url = "{0}/{1}".format(url_builder("sensorstations"), config_yaml.read_accesspoint_id())
-        response = requests.get(url, auth=auth)
+        response = requests.get(url, auth=get_auth())
         if response.status_code == 200:
             data = response.json()
             return data
@@ -125,7 +125,7 @@ async def get_sensorstations(getName, name):
         get_Station_alarm_switch_url = url_builder("getsensorstations")
         try:
             station_values = StationValue(name=name, service_description="", alarm_switch="")
-            response = requests.get(get_Station_alarm_switch_url,json=vars(station_values), auth=auth)
+            response = requests.get(get_Station_alarm_switch_url,json=vars(station_values), auth=get_auth())
             switch = response.content.decode()
             return switch # get alarm_switch
 
@@ -154,16 +154,70 @@ def check_if_new_stations():
 def update_Sensor(alarm_count_list):
     post_update_sensor_url = url_builder("updatesensors")
     try:
-        r = requests.post(post_update_sensor_url, json=alarm_count_list, auth=auth)
+        r = requests.post(post_update_sensor_url, json=alarm_count_list, auth=get_auth())
     except Exception as e:
         exception_logging.logException(e, "write alarm_count to webapp")
 
 def read_sending_interval():
     url = "{0}/{1}".format(url_builder("sendinterval"), config_yaml.read_accesspoint_id())
     try:
-        r = requests.get(url, auth=auth)
+        r = requests.get(url, auth=get_auth())
         mes_int = r.json()["measurementInterval"]
         web_int = r.json()["webappSendInterval"]
-        config_yaml.write_sending_intervalls(mes_int, web_int)
+        tr_ho = r.json()["alarmCountThreshold"]
+        config_yaml.write_sending_intervalls(mes_int, web_int, tr_ho)
+
+
     except Exception as e:
         exception_logging.logException(e, "call sending interval")
+
+
+class Log_data(object):
+    def __init__(self, text: str, subject: str, author: str, time_stamp: str, type: str):
+        self.text = text
+        self.subject = subject
+        self.author = author
+        self.time_stamp = time_stamp
+        self.type = type
+
+
+def handle_special_values(obj):
+    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return str(obj)
+    else:
+        return None
+
+def send_log_data_to_webapp():
+
+    with open('logFile.txt', 'r') as file:
+        for line in file:
+
+            if line.startswith('ERROR: On characteristic'):
+                error_msg = line.split('ERROR:', 1)[1].split('at', 1)[0].strip()
+                datetime_str = line.rsplit('at', 1)[-1].strip().replace('__', ' ')
+                time_stamp_string = datetime.datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S')
+
+                temp_log_data = Log_data(text=error_msg, subject="Characteristics", author="ACCESSPOINT", time_stamp=time_stamp_string, type="ERROR")
+                log_data_json = json.dumps(vars(temp_log_data), default=handle_special_values)
+                response = requests.post(post_log_url, json=log_data_json, auth=auth)
+                print(response.status_code)
+
+            elif line.startswith('ERROR: Could not'):
+                error_msg = line.split('ERROR:', 1)[1].split('at', 1)[0].strip()
+                datetime_str = line.rsplit('at', 1)[-1].strip().replace('__', ' ')
+                time_stamp_string = datetime.datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S')
+
+                temp_log_data = Log_data(text=error_msg, subject="DEVICE", author="ACCESSPOINT", time_stamp=time_stamp_string, type="ERROR")
+                log_data_json = json.dumps(vars(temp_log_data), default=handle_special_values)
+                response = requests.post(post_log_url, json=log_data_json, auth=auth)
+                print(response.status_code)
+
+            elif line.startswith('WARNING'):
+                error_msg = line.split('WARNING', 1)[1].split('at', 1)[0].strip()
+                datetime_str = line.rsplit('at', 1)[-1].strip().replace('__', ' ')
+                time_stamp_string = datetime.datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S')
+
+                temp_log_data = Log_data(text=error_msg, subject="Characteristics", author="ACCESSPOINT", time_stamp=time_stamp_string, type="WARNING")
+                log_data_json = json.dumps(vars(temp_log_data), default=handle_special_values)
+                response = requests.post(post_log_url, json=log_data_json, auth=auth)
+                print(response.status_code)
