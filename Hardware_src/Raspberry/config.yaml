@@ -1,9 +1,9 @@
 accesspoint-params:
   alarmCountThreshold: 5
-  id: 452
-  measurement-intervall: 1
-  webapp-intervall: 1
+  id: 50100
+  measurement-intervall: 5
+  webapp-intervall: 2
 webapp-params:
-  ip: 192.168.0.106:8080
+  ip: srh-softwaresolutions.com
   pswd: passwd
   usnm: admin

@@ -11,8 +11,8 @@ INSERT INTO userx_user_role (USERX_USERNAME, ROLES) VALUES ('admin', 'GARDENER')
 INSERT INTO userx_user_role (USERX_USERNAME, ROLES) VALUES ('Susi', 'USER');
 INSERT INTO userx_user_role (USERX_USERNAME, ROLES) VALUES ('Susi', 'GARDENER');
 # AccessPoints
-INSERT INTO access_point(ACCESS_POINTID, LOCATION, VALIDATED, CREATE_DATE, UPDATE_DATE) VALUES(50100, 'Room1', TRUE, '2023-01-01', '2022-01-01');
-INSERT INTO access_point(ACCESS_POINTID, LOCATION, VALIDATED, CREATE_DATE, UPDATE_DATE) VALUES(50101, 'Room2', TRUE, '2023-01-01', '2022-01-01');
+INSERT INTO access_point(ACCESS_POINTID, LOCATION, VALIDATED, CREATE_DATE, UPDATE_DATE) VALUES(1, 'Room1', TRUE, '2023-01-01', '2022-01-01');
+INSERT INTO access_point(ACCESS_POINTID, LOCATION, VALIDATED, CREATE_DATE, UPDATE_DATE) VALUES(2, 'Room2', TRUE, '2023-01-01', '2022-01-01');
 # Plants
 INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(1, 'Atomic Northern Lights','2022-01-01');
 INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(2, 'Charlotte''s Web','2022-01-02');
@@ -20,10 +20,10 @@ INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(3, 'Alpine Rocket', 
 INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(4, 'Blue Dream', '2022-01-04');
 INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(5, 'Sour Diesel', '2022-01-05');
 #SensorStations
-INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION ,alarm_switch, plant_plantid) VALUES('G4T2','2022-01-01','2022-01-05','Room1', 'off',1);
-INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION,alarm_switch, plant_plantid) VALUES('G4T1','2022-01-01','2022-02-05','Room2', 'off',2);
-INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION ,alarm_switch, plant_plantid) VALUES('G4T3','2022-01-01','2022-02-01','Room3', 'off',3);
-INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION,alarm_switch, plant_plantid ) VALUES('G4T4','2022-03-01','2022-02-01','Room4', 'off',4);
+INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION ,alarm_switch, plant_plantid, alarm_count_threshold) VALUES('G4T2','2022-01-01','2022-01-05','Room1', 'off',1, 1);
+INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION,alarm_switch, plant_plantid, alarm_count_threshold) VALUES('G4T1','2022-01-01','2022-02-05','Room2', 'off',2, 1);
+INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION ,alarm_switch, plant_plantid, alarm_count_threshold) VALUES('G4T3','2022-01-01','2022-02-01','Room3', 'off',3, 1);
+INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION,alarm_switch, plant_plantid, alarm_count_threshold ) VALUES('G4T4','2022-03-01','2022-02-01','Room4', 'off',4, 1);
 #Sensors
 insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(1,'000019b1-0000-1000-8000-00805f9b34fb', 'G4T2', 'SOIL_MOISTURE', 0, 0, 0,'2022-01-02');
 insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(2,'000019b0-0000-1000-8000-00805f9b34fb', 'G4T2', 'HUMIDITY', 0, 0, 0,'2022-01-02');
@@ -110,3 +110,6 @@ INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VAL
 INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(55,'2022-01-19 00:39:03','LIGHT_INTENSITY','lux','1200','G4T1');
 INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(56,'2022-01-18 01:40:02','LIGHT_INTENSITY','lux','900','G4T1');
 INSERT INTO measurement(ID ,TIMESTAMP,TYPE,UNIT,VALUE_S,SENSOR_STATION_NAME) VALUES(57,'2022-01-17 02:41:01','AIR_QUALITY','Assessment','350','G4T1');
+# Sending interval
+insert into ssinterval(ID, web_app_interval, measurement_interval, access_point_access_pointid)values (1, '1', '1',1)
+insert into ssinterval(ID, web_app_interval, measurement_interval, access_point_access_pointid)values (2, '1', '1',2)
