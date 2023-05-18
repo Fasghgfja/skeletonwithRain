@@ -88,3 +88,13 @@ Mai 18, 2023 4:37:50 PM at.qe.skeleton.ui.beans.CreateSensorStationBean doCreate
 INFORMATION: CREATED SENSOR STATION: testss
 Mai 18, 2023 4:38:16 PM at.qe.skeleton.ui.controllers.PlantController doDeletePlant
 INFORMATION: PLANT DELETED: 956
+Mai 18, 2023 5:28:04 PM at.qe.skeleton.ui.beans.CreateSensorStationBean doCreateNewCreateSensorStation
+INFORMATION: CREATED SENSOR STATION: tests
+Mai 18, 2023 5:29:28 PM at.qe.skeleton.ui.controllers.PlantController doDeletePlant
+INFORMATION: PLANT DELETED: 1003
+Mai 18, 2023 5:40:19 PM at.qe.skeleton.ui.beans.CreatePlantBean doCreateNewPlant
+INFORMATION: CREATED PLANT: 100
+Mai 18, 2023 5:44:17 PM at.qe.skeleton.ui.controllers.AccessPointController doValidateAccessPoint
+INFORMATION: ACCESS POINT VALIDATED: 352
+Mai 18, 2023 5:44:19 PM at.qe.skeleton.ui.controllers.AccessPointController doDeleteAccessPoint
+INFORMATION: DELETED AP: 352
