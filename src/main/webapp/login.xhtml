@@ -11,7 +11,7 @@
         <div style="display:flex;width: 100%; min-height: 100vh; justify-content: center; align-items: center; background-image: url('https://c0.wallpaperflare.com/path/750/852/868/4k-wallpaper-close-up-growth-leaves-facfdb0eca583ca4e1e41e4d0d0c71e1.jpg'); background-size: cover;">
 
             <p:card style="width: 25em; margin:10px" rendered="#{not sessionInfoBean.loggedIn}">
-                <form id="login_form" action="#{request.contextPath}/" method="post">
+                <form id="login_form" action="#{request.contextPath}/login" method="post">
                     <p:staticMessage style="width: 100%"  rendered="${!empty param['error']}" severity="error" summary="ERROR" detail="Username or password invalid!" />
 
 
@@ -31,7 +31,7 @@
                             <span class="ui-button-text">Login</span>
                         </button>
 
-                        <p><a href="http://localhost:8080/registration/register.xhtml"><h3>Or Create a New Account </h3></a></p>
+                        <p><a style="color: #3C9462" href="http://localhost:8080/registration/register.xhtml"><h3>Register new Account</h3></a></p>
 
 
 
