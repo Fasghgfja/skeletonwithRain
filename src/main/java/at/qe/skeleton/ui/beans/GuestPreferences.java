@@ -3,40 +3,45 @@ package at.qe.skeleton.ui.beans;
 import jakarta.annotation.ManagedBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Class to switch between dark mode and light mode.
+ */
+@Getter
+@Setter
 @ManagedBean
 @SessionScoped
 public class GuestPreferences implements Serializable {
 
+    private static final String LIGHT = "light";
+    private static final String CHATEAU_GREEN = "chateau-green";
+
     private String menuMode = "layout-horizontal layout-static-active";
-    private String darkMode = "light";
-    private String layoutPrimaryColor = "chateau-green";
-    private String componentTheme = "chateau-green";
+    private String darkMode = LIGHT;
+    private String layoutPrimaryColor = CHATEAU_GREEN;
+    private String componentTheme = CHATEAU_GREEN;
     private String topbarTheme = "colored";
     private String menuTheme = "dim";
     private String profileMode = "popup";
     private String inputStyle = "outlined";
     private boolean lightLogo = true;
 
-    private List<ComponentTheme> componentThemes = new ArrayList<ComponentTheme>();
+    private transient List<ComponentTheme> componentThemes = new ArrayList<>();
 
-    private List<LayoutPrimaryColor> layoutPrimaryColors = new ArrayList<LayoutPrimaryColor>();
+    private transient List<LayoutPrimaryColor> layoutPrimaryColors = new ArrayList<>();
 
     @PostConstruct
     public void init() {
-        componentThemes.add(new ComponentTheme("Chateau Green", "chateau-green", "#3C9462"));
+        componentThemes.add(new ComponentTheme("Chateau Green", CHATEAU_GREEN, "#3C9462"));
 
-        layoutPrimaryColors.add(new LayoutPrimaryColor("Chateau Green", "chateau-green", "#3C9462"));
+        layoutPrimaryColors.add(new LayoutPrimaryColor("Chateau Green", CHATEAU_GREEN, "#3C9462"));
 
-    }
-
-    public String getDarkMode() {
-        return darkMode;
     }
 
     public boolean isLightLogo() {
@@ -44,24 +49,19 @@ public class GuestPreferences implements Serializable {
     }
 
 
-        public void setDarkMode(String darkMode) {
-            System.out.println("im setting darkmode");
-            this.darkMode = darkMode;
-            this.menuTheme = "dim";
-            this.topbarTheme = "colored";
-            this.lightLogo = !this.topbarTheme.equals("light");
-        }
+    public void setDarkMode(String darkMode) {
+        this.darkMode = darkMode;
+        this.menuTheme = "dim";
+        this.topbarTheme = "colored";
+        this.lightLogo = true;
+    }
 
     public String getLayout() {
-        return "layout-" + this.layoutPrimaryColor + '-' + this.darkMode ;
+        return "layout-" + this.layoutPrimaryColor + '-' + this.darkMode;
     }
 
     public String getTheme() {
-        return this.componentTheme + '-' + this.darkMode ;
-    }
-
-    public String getLayoutPrimaryColor() {
-        return layoutPrimaryColor;
+        return this.componentTheme + '-' + this.darkMode;
     }
 
     public void setLayoutPrimaryColor(String layoutPrimaryColor) {
@@ -69,64 +69,20 @@ public class GuestPreferences implements Serializable {
         this.componentTheme = layoutPrimaryColor;
     }
 
-    public String getComponentTheme() {
-        return componentTheme;
-    }
-
-    public void setComponentTheme(String componentTheme) {
-        this.componentTheme = componentTheme;
-    }
-
-    public String getMenuTheme() {
-        return menuTheme;
-    }
-
-    public void setMenuTheme(String menuTheme) {
-        this.menuTheme = menuTheme;
-    }
-
-    public String getTopbarTheme() {
-        return topbarTheme;
-    }
-
     public void setTopbarTheme(String topbarTheme) {
         this.topbarTheme = topbarTheme;
-        this.lightLogo = !this.topbarTheme.equals("light");
-    }
-
-    public String getMenuMode() {
-        return this.menuMode;
-    }
-
-    public void setMenuMode(String menuMode) {
-        this.menuMode = menuMode;
-    }
-
-    public String getProfileMode() {
-        return this.profileMode;
-    }
-
-    public void setProfileMode(String profileMode) {
-        this.profileMode = profileMode;
-    }
-
-    public String getInputStyle() {
-        return inputStyle;
-    }
-
-    public void setInputStyle(String inputStyle) {
-        this.inputStyle = inputStyle;
+        this.lightLogo = !this.topbarTheme.equals(LIGHT);
     }
 
     public String getInputStyleClass() {
         return this.inputStyle.equals("filled") ? "ui-input-filled" : "";
     }
 
-
-    public List<ComponentTheme> getComponentThemes() {
-        return componentThemes;
-    }
-
+    /**
+     * Inner class to get the component theme.
+     */
+    @Getter
+    @Setter
     public class ComponentTheme {
         String name;
         String file;
@@ -137,24 +93,17 @@ public class GuestPreferences implements Serializable {
             this.file = file;
             this.color = color;
         }
-
-        public String getName() {
-            return this.name;
-        }
-
-        public String getFile() {
-            return this.file;
-        }
-
-        public String getColor() {
-            return this.color;
-        }
     }
 
     public List<LayoutPrimaryColor> getLayoutPrimaryColors() {
         return layoutPrimaryColors;
     }
 
+    /**
+     * Inner class to get the Layout primary color.
+     */
+    @Getter
+    @Setter
     public class LayoutPrimaryColor {
         String name;
         String file;
@@ -164,18 +113,6 @@ public class GuestPreferences implements Serializable {
             this.name = name;
             this.file = file;
             this.color = color;
-        }
-
-        public String getName() {
-            return this.name;
-        }
-
-        public String getFile() {
-            return this.file;
-        }
-
-        public String getColor() {
-            return this.color;
         }
     }
 
