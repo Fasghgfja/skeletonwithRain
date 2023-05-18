@@ -26,9 +26,10 @@ public class AccessPointService {
 
     @Autowired
     private AccessPointRepository accessPointRepository;
+    /*
     @Autowired
     private ServletWebServerApplicationContext webServerAppCtxt;
-
+*/
     /**
      * Method to get all access points currently stored in the database.
      * @return Collection of all access points.
@@ -115,10 +116,11 @@ public class AccessPointService {
                       measurement-intervall: 5
                       webapp-intervall: 5
                       alarmCountThreshold: 1
+                      validation: False
                     webapp-params:
                       ip: %s:%d
                       pswd: passwd
-                      usnm: admin""", accessPoint.getAccessPointID(), getIP(), webServerAppCtxt.getWebServer().getPort());
+                      usnm: admin""", accessPoint.getAccessPointID(), getIP(),8080 );//webServerAppCtxt.getWebServer().getPort()
             writer.write(content);
             writer.flush();
             writer.close();

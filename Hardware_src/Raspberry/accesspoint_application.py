@@ -94,7 +94,7 @@ if __name__ == '__main__':
                     except Exception as e:
                         exception_logging.logException(e, "read boarders")
                     time.sleep(SECTION_SLEEP)
-                    program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+                    program_state = program_status.Is.SEND_LOG_TO_WEBAPP.value
 
                 case program_status.Is.SEND_LOG_TO_WEBAPP.value:
                     print("Send log to webapp")
