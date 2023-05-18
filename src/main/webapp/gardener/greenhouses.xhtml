@@ -22,11 +22,6 @@
         <!-- ...................................PLANT CREATE dialog.................................... -->
         <h:form id="plantCreateDialog">
 
-            <!-- ....................PLANT CREATE button..................... -->
-            <p:commandButton style="margin-left: 7px" value="Create New Plant" update=":plantCreateDialog:createPlantDialog" oncomplete="PF('createPlantDialog').show()"
-                             icon="pi pi-user-plus" title="New User" class="btn btn-primary">
-                <p:resetInput target="plantCreateDialog"/>
-            </p:commandButton>
 
             <p:dialog header="Create New Plant" id="createPlantDialog" widgetVar="createPlantDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
@@ -51,6 +46,10 @@
                                          update=":userForm:sensorStationTable"
                                          oncomplete="PF('createPlantDialog').hide()"/>
                         <p:commandButton value="Cancel" onclick="PF('createPlantDialog').hide()"/>
+
+
+
+
 
 
                     </h:panelGrid>
@@ -88,8 +87,9 @@
                             <h:outputText value="#{sensorStation.plant}"/>
                         </p:column>
 
-                        <p:column headerText="Planted" sortBy="#{sensorStation.createDate}" filterBy="#{sensorStation.createDate}">
-                            <h:outputText value="#{product.category}"/>
+                        <p:column style="" headerText="Intervals">
+                            <h:outputText value="W:#{SSIntervalController.getActualWebAppIntervalForAccessPoint(sensorStation.accessPoint.id)}  "/>
+                            <h:outputText value=" M:#{SSIntervalController.getActualMeasurementIntervalForAccessPoint(sensorStation.accessPoint.id)} "/>
                         </p:column>
 
                         <p:column headerText="Alarm Status">
@@ -143,6 +143,16 @@
                                 <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
                             </p:commandButton>
 
+                            <!-- .................... INTERVALS BUTTON ........... .............. -->
+                            <p:commandButton style="margin-right: 2px; background-color: orange" update=":userForm:intervalEditDialog"
+                                             oncomplete="PF('intervalEditDialog').show()" icon="fa fa-solid fa-sliders" title="Intervals">
+                                <f:setPropertyActionListener value="#{sensorStation.accessPoint.id}" target="#{SSIntervalController.accessPointId}"/>
+                            </p:commandButton>
+
+
+
+
+
 
                         </p:column>
 
@@ -189,6 +199,31 @@
 
 
             <!-- .......................................DIALOGS...................................................................... -->
+
+            <!-- ...................................Interval Edit dialog.................................... -->
+            <p:dialog header="Edit Access Point Intervals" id="intervalEditDialog" widgetVar="intervalEditDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="intervalData">
+                    <h:panelGrid columns="1">
+
+                        <p:outputLabel for="mInterval" value="New Interval Webapp: (minutes):"/>
+                        <p:inputText id="mInterval" value="#{SSIntervalController.webAppInterval}" />
+                        <p:outputLabel for="sinterval" value="New Interval Measurements: (minutes)"/>
+                        <p:inputText id="sinterval"  value="#{SSIntervalController.measurementInterval}"/>
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
+                        <p:commandButton value="Save New Intervals" action="#{SSIntervalController.doSaveInterval()}"
+                                         oncomplete="PF('intervalEditDialog').hide();location.reload()" update="sensorStationTable"/>
+                        <p:commandButton value="Abort" onclick="PF('intervalEditDialog').hide()"/>
+
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+
+
+
 
 
             <!-- ...................................Sensor station Edit dialog.................................... -->
