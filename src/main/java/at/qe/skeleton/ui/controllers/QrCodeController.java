@@ -4,6 +4,8 @@ package at.qe.skeleton.ui.controllers;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.services.PlantService;
 import jakarta.faces.context.FacesContext;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -11,12 +13,15 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.util.Map;
 
+@Getter
+@Setter
 @Component
 @Scope("view")
 public class QrCodeController implements Serializable {
 
+    private static final String PLANT_NOT_FOUND = "Plant not Found";
     @Autowired
-    PlantService plantService;
+    private transient PlantService plantService;
 
     private Long id;
     private static final long serialVersionUID = 20120316L;
@@ -27,9 +32,7 @@ public class QrCodeController implements Serializable {
     private int size;
     private String fillColor;
 
-    private String linkInput; // Add this field to hold the new link input
-
-
+    private String linkInput;
 
     public QrCodeController() {
         renderMethod = "canvas";
@@ -40,78 +43,21 @@ public class QrCodeController implements Serializable {
         size = 200;
     }
 
-    public String getRenderMethod() {
-        return renderMethod;
-    }
-
-    public void setRenderMethod(final String renderMethod) {
-        this.renderMethod = renderMethod;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(final String text) { //TODO : if resources become a thing this is unnecessary caching for a stupid thing : )
+    public void setText(final String text) {
         if (this.id != 0) {
             return;
         }
         this.text = "http://localhost:8080/registration/register.xhtml?id=" + text;
         if (!(text.length() > 0 && text.length() <= 19) || !(text.matches("\\d+"))) {
-            this.label = "Plant not Found";
+            this.label = PLANT_NOT_FOUND;
             return;
         }
         Plant lookingfor = plantService.loadPlant(Long.parseLong(text));
-        if(lookingfor == null) {this.label = "Plant not Found";}
-        else {
+        if (lookingfor == null) {
+            this.label = PLANT_NOT_FOUND;
+        } else {
             this.label = lookingfor.getPlantName();
         }
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(final String label) {
-        this.label = label;
-    }
-
-    public int getMode() {
-        return mode;
-    }
-
-    public void setMode(final int mode) {
-        this.mode = mode;
-    }
-
-    public String getFillColor() {
-        return fillColor;
-    }
-
-    public void setFillColor(final String fillColor) {
-        this.fillColor = fillColor;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(final int size) {
-        this.size = size;
-    }
-
-
-
-    public String getLinkInput() {
-        return linkInput;
-    }
-
-    public void setLinkInput(final String linkInput) {
-        this.linkInput = linkInput;
-    }
-
-    public Long getId() {
-        return id;
     }
 
 
@@ -119,13 +65,16 @@ public class QrCodeController implements Serializable {
         Map<String, String> params;
         FacesContext context = FacesContext.getCurrentInstance();
         params = context.getExternalContext().getRequestParameterMap();
-        if(params.get("id") == null){return;}
+        if (params.get("id") == null) {
+            return;
+        }
         this.id = Long.parseLong(params.get("id"));
-        text = text+id;
+        text = text + id;
 
         Plant lookingfor = plantService.loadPlant(Long.parseLong(id.toString()));
-        if(lookingfor == null) {this.label = "Plant not Found";}
-        else {
+        if (lookingfor == null) {
+            this.label = PLANT_NOT_FOUND;
+        } else {
             this.label = lookingfor.getPlantName();
         }
     }

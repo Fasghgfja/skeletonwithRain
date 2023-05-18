@@ -37,21 +37,43 @@ public class LogController {
         logList = (ArrayList<Log>) logService.getAllLogs();
     }
 
+    /**
+     * Method to return all logs.
+     * @return Collection of all logs stored in the database.
+     */
+
     public Collection<Log> getLogs() {
         return logService.getAllLogs();
     }
 
-
+    /**
+     * Get the amount of all logs in the database.
+     * @return long of the amount of logs.
+     */
     public long getLogsAmount() {
         return logService.getLogsAmount();
     }
 
+    /**
+     * Get the amount of all error logs.
+     * @return long of the amount of error logs.
+     */
     public long getErrorLogsAmount(){
         return logService.getErrorLogsAmount();
     }
+
+    /**
+     * Get the amount of all warning logs.
+     * @return long of the amount of warninig logs.
+     */
     public long getWarningLogsAmount(){
         return logService.getWarningLogsAmount();
     }
+
+    /**
+     * Get the amount of all success logs.
+     * @return long of the amount of success logs.
+     */
     public long getSuccessLogsAmount(){
         return logService.getSuccessLogsAmount();
     }

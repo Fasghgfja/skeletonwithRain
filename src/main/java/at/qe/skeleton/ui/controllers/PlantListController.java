@@ -35,13 +35,15 @@ public class PlantListController {
      */
 
     @PostConstruct
-    public void init(){
+    public void init() {
         Userx user = getSessionInfoBean().getCurrentUser();
         notYetFollowedPlantsList = (ArrayList<Plant>) plantService.getOnlyPlantsNotYetFollowed(user);
     }
+
     public Collection<String> getPlantsUniqueNames() {
         return plantService.getAllPlantsUniqueNames();
     }
+
     public Collection<String> getNotUsedPlantsUniqueNames() {
         return plantService.getAllNotUsedPlantsUniqueNames();
     }
@@ -67,9 +69,6 @@ public class PlantListController {
     public void deleteAllPlantsWithoutSensorStation() {
         this.plantService.deleteAllPlantsWithoutSensorStation();
     }
-
-
-
 
 
 }
