@@ -4,19 +4,20 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
+
 import java.io.Serializable;
 
 
 /**
  * This class represents the Entity model for Intervals.
  * Intervals are set per Access Point
- * Measurement Interval represents: how often in minutes all conncted sensor station will ....
- * WebApp interval represents: how often the Access Point will send data to the Webapp.
+ * Measurement Interval represents how often the values of the sensors are read.
+ * WebApp interval represents how often the measurments get transfered to the webapp.
  */
 @Getter
 @Setter
 @Entity
-public class SSInterval implements Persistable<Long>, Serializable, Comparable<SSInterval>{
+public class SSInterval implements Persistable<Long>, Serializable, Comparable<SSInterval> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -46,7 +47,7 @@ public class SSInterval implements Persistable<Long>, Serializable, Comparable<S
 
     @Override
     public String toString() {
-       return "MI: "+getMeasurementInterval() + "SI: " + getWebAppInterval();
+        return "MI: " + getMeasurementInterval() + "SI: " + getWebAppInterval();
     }
 
 
@@ -61,7 +62,7 @@ public class SSInterval implements Persistable<Long>, Serializable, Comparable<S
     }
 
     @Override
-    public int compareTo(SSInterval o) {
-        return 0;
+    public int compareTo(SSInterval other) {
+        return getId().compareTo(other.getId());
     }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,21 +12,21 @@ import java.util.Objects;
 /**
  * This is the entity model for the accessPoint.
  * The entity inherit the fields for create user(who created it) , update user(who last updated it) create date and update date from metadata.
- *
+ * <p>
  * An Access Point can Be validated or not (not by default)
  * Access Point is Validated when...
  */
 @Getter
 @Setter
 @Entity
-public class AccessPoint extends Metadata implements Persistable<Long>, Serializable, Comparable<AccessPoint>{
+public class AccessPoint extends Metadata implements Persistable<Long>, Serializable, Comparable<AccessPoint> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, unique = true)
     private Long accessPointID;
     private String location;
-    private boolean validated;//TODO: this is gonna be important
+    private boolean validated;
 
     @Override
     public Long getId() {

@@ -15,9 +15,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * Controller for the user list view.
- *
- * This class is part of the skeleton project provided for students of the
- * course "Software Engineering" offered by the University of Innsbruck.
  */
 @Getter
 @Setter
@@ -28,12 +25,10 @@ public class UserListController implements Serializable {
     private List<Userx> userxList;
 
     @Autowired
-    private UserService userService;
+    private transient UserService userService;
 
     /**
-     * Returns a list of all users.
-     *
-     * @return
+     * Initializes a list of all users.
      */
 
     @PostConstruct
@@ -48,16 +43,10 @@ public class UserListController implements Serializable {
     public Collection<Userx> getGardeners() {
         return userService.getAllGardeners();
     }
-    /**
-     * Frontend used to selkect a gardenre from a select many menu in sensor station menagement TODO: see if it can work with real gardeners instad
-     */
+
     public Collection<String> getGardenerNames() {
         return userService.getAllGardenerNames();
     }
-
-
-
-
 
     public Integer getUsersAmount() {
         return userService.getUsersAmount();

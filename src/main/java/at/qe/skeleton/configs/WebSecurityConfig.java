@@ -19,9 +19,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * Spring configuration for web security.
- *
- * This class is part of the skeleton project provided for students of the
- * course "Software Engineering" offered by the University of Innsbruck.
  */
 @Configuration
 @EnableWebSecurity()
@@ -67,11 +64,10 @@ public class WebSecurityConfig {
                     .httpBasic().and()
                     .formLogin()
                     .loginPage("/login.xhtml")
+                    .loginProcessingUrl("/login")
                     .permitAll()
                     .failureUrl("/login.xhtml?error=true")
                     .defaultSuccessUrl("/dashboard.xhtml")
-                    .loginProcessingUrl("/")
-                    .successForwardUrl("/dashboard.xhtml")
                     .and()
                     .logout()
                     .logoutSuccessUrl("/login.xhtml")

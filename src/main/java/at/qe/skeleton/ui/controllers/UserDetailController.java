@@ -4,10 +4,11 @@ import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.services.PlantService;
 import at.qe.skeleton.services.UserService;
+
 import java.io.InputStream;
 import java.io.Serializable;
+
 import at.qe.skeleton.ui.beans.SessionInfoBean;
-import jakarta.el.MethodExpression;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import lombok.Getter;
@@ -25,7 +26,7 @@ import java.util.*;
 
 /**
  * Controller for the user detail view.
- *
+ * <p>
  * This class is part of the skeleton project provided for students of the
  * course "Software Engineering" offered by the University of Innsbruck.
  */
@@ -77,13 +78,13 @@ public class UserDetailController implements Serializable {
      * {@link #doReloadUser()}, {@link #doSaveUser()} and
      * {@link #doDeleteUser()}.
      *
-     * @param user
+     * @param user user to set
      */
     public void setUser(Userx user) {
         this.user = user;
         this.selectedRolesEdit = new ArrayList<>();
-        Set<UserRole> newRoles  = this.user.getRoles();
-        for (UserRole userRole: newRoles) {
+        Set<UserRole> newRoles = this.user.getRoles();
+        for (UserRole userRole : newRoles) {
             this.selectedRolesEdit.add(userRole.name());
         }
         doReloadUser();
@@ -125,9 +126,9 @@ public class UserDetailController implements Serializable {
         logRepository.save(createLog);
     }
 
-    public void doSaveOwnUser(){
+    public void doSaveOwnUser() {
         this.userService.saveUser(user);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"User saved successfully!", null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User saved successfully!", null));
         Log createLog = new Log();
         createLog.setDate(LocalDate.now());
         createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
@@ -152,13 +153,10 @@ public class UserDetailController implements Serializable {
     }
 
 
-
-
     public void doAddPlantToFollowedPlants(Plant plant) {
         user = sessionInfoBean.getCurrentUser();
-        this.userService.addPlantToFollowedPlants(user,plant);
+        this.userService.addPlantToFollowedPlants(user, plant);
     }
-
 
 
     public void setSelectedRolesEdit(List<String> selectedRolesEdit) {
@@ -166,8 +164,10 @@ public class UserDetailController implements Serializable {
     }
 
     public InputStream getProfilePicture() {
-        if (user == null){return Faces.getResourceAsStream("images/awesomeProfilePicture.png");}
-        InputStream input = galleryController.getProfilePicAsStreamedContent(""+user.getProfilePic().getId());
+        if (user == null) {
+            return Faces.getResourceAsStream("images/awesomeProfilePicture.png");
+        }
+        InputStream input = galleryController.getProfilePicAsStreamedContent(user.getProfilePic().getId().toString());
         return (input != null) ? input : Faces.getResourceAsStream("images/awesomeProfilePicture.png");
     }
 
@@ -176,15 +176,17 @@ public class UserDetailController implements Serializable {
      * Method to initialize a user view for the logged in user.
      */
     public void init() {
-        if (this.user != null) {return;}
-            Userx thisUser = sessionInfoBean.getCurrentUser();
-            this.user = userService.loadUser(thisUser.getId());
+        if (this.user != null) {
+            return;
         }
+        Userx thisUser = sessionInfoBean.getCurrentUser();
+        this.user = userService.loadUser(thisUser.getId());
+    }
 
     public void doRemovePlantFromFollowedPlants(Plant plant) {
         user = sessionInfoBean.getCurrentUser();
-        this.userService.removePlantFromFollowedPlants(user,plant);
-        plantController.setFollowedPlantsList((ArrayList<Plant>)plantService.getFollowedPlants(user));
+        this.userService.removePlantFromFollowedPlants(user, plant);
+        plantController.setFollowedPlantsList((ArrayList<Plant>) plantService.getFollowedPlants(user));
     }
 
 }

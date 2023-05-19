@@ -77,6 +77,20 @@ class CreateUserBeanTest {
     @Test
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
     void testCreateNewUser(){
+        assertNotNull(createUserBean.getUserService());
+        assertNotNull(createUserBean.getPasswordEncoder());
+        assertNotNull(createUserBean.getUserxRepository());
+        assertNotNull(createUserBean.getLogRepository());
+        assertNotNull(createUserBean.getSessionInfoBean());
+        assertNotNull(createUserBean.getSelectedRoles());
+        assertNotNull(createUserBean.getRoles());
+        assertNotNull(createUserBean.getUsername());
+        assertNotNull(createUserBean.getFirstName());
+        assertNotNull(createUserBean.getLastName());
+        assertNotNull(createUserBean.getPassword());
+        assertNotNull(createUserBean.getEmail());
+        assertNotNull(createUserBean.getPhone());
+
         Integer initialAmountOfUsers = userxRepository.count();
         long initialAmountOfLogs = logRepository.count();
 

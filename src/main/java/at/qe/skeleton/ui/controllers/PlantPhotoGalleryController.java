@@ -1,8 +1,10 @@
 package at.qe.skeleton.ui.controllers;
 
 import at.qe.skeleton.model.*;
+
 import java.io.Serializable;
 import java.util.*;
+
 import at.qe.skeleton.services.ImageService;
 import at.qe.skeleton.services.PlantService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
@@ -12,7 +14,6 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 
 
 /**
@@ -26,14 +27,13 @@ public class PlantPhotoGalleryController implements Serializable {
 
 
     @Autowired
-    private PlantService plantService;
+    private transient PlantService plantService;
     @Autowired
-    private ImageService imageService;
+    private transient ImageService imageService;
     @Autowired
     private GalleryController galleryController;
     @Autowired
     private transient SessionInfoBean sessionInfoBean;
-
 
 
     /**
@@ -57,22 +57,18 @@ public class PlantPhotoGalleryController implements Serializable {
     private String plantId = "";
 
 
-    //TODO fix the error handling like in sensor station detail controller the method with same name , inspect this method, is it correct? or does it something else as the name implies?
     /**
-    * The methods gets all images of the cached idString */
+     * The methods gets all images of the cached idString
+     */
     public List<Image> doGetPlantImages() {
-        //if (idString == null){return new ArrayList<Image>();}
-        //return imageService.getAllPlantImages(idString);
         return galleryController.doGetPlantImages(idString);
     }
 
 
     /**
      * Method to get all images of the cached plantid
-     * */
-    public List<Image> doGetApprovedPlantImages() {//TODO fix the error handling like in sensor station detail controller the method with same name
-        //if (idString == null){return new ArrayList<Image>();}
-        //return imageService.getAllPlantImages(idString);
+     */
+    public List<Image> doGetApprovedPlantImages() {
         return galleryController.doGetApprovedPlantImages(plantId);
     }
 
@@ -82,7 +78,6 @@ public class PlantPhotoGalleryController implements Serializable {
         doReloadPlant();
     }
 
-    //TODO: Remove along the hierarchy and replace with something more elegant
     public void setPlantFromId(Long id) {
         this.plant = plantService.loadPlant(id);
     }
@@ -96,8 +91,6 @@ public class PlantPhotoGalleryController implements Serializable {
     }
 
 
-    //TODO: simplify this monstruosity
-
     /**
      * Method to initialize a greenhouse/sensor station view for a specific greenhouse taken from facescontext.
      */
@@ -107,7 +100,6 @@ public class PlantPhotoGalleryController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         params = context.getExternalContext().getRequestParameterMap();
         idString = params.get("id");
-        System.out.println("Im PLANTH PHOTO GALLERY CONTROLLER ID HERE:--------------->" + idString); // testing ;D
         this.newPlant = false;
         if (idString == null) {
             this.newPlant = true;
@@ -119,13 +111,11 @@ public class PlantPhotoGalleryController implements Serializable {
             this.plant = this.getPlant();
             if (this.getPlant() == null) {
                 return;
-            } // error handling XD
+            }
             this.plantName = "" + this.getPlant().getPlantName();
             this.description = this.getPlant().getDescription();
             this.plantId = this.getPlant().getPlantID().toString();
         }
 
     }
-
-
 }

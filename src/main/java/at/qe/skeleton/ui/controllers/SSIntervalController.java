@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 
 
@@ -17,6 +18,7 @@ import java.io.Serializable;
 @Scope("view")
 public class SSIntervalController implements Serializable {
 
+    private static final String DEFAULT = "Default";
     @Autowired
     private transient IntervalService intervalService;
     @Autowired
@@ -30,43 +32,50 @@ public class SSIntervalController implements Serializable {
     private Long accessPointId;
 
 
-    public void doSaveInterval(){
+    public void doSaveInterval() {
         sSinterval = new SSInterval();
         AccessPoint accessPoint = accessPointService.loadAccessPoint(accessPointId);
         SSInterval oldInterval = intervalService.getFirstByAccessPointId(accessPointId);
 
-        System.out.println(accessPoint+""+webAppInterval+""+measurementInterval);
-        if(oldInterval == null) {
+        if (oldInterval == null) {
             sSinterval.setAccessPoint(accessPoint);
-            if(measurementInterval != null ) {sSinterval.setMeasurementInterval(measurementInterval.toString());}
-            if(webAppInterval != null ) {sSinterval.setWebAppInterval(webAppInterval.toString());}
+            if (measurementInterval != null) {
+                sSinterval.setMeasurementInterval(measurementInterval.toString());
+            }
+            if (webAppInterval != null) {
+                sSinterval.setWebAppInterval(webAppInterval.toString());
+            }
             sSinterval = this.intervalService.saveInterval(sSinterval);
-        }
-        else {
-            if(measurementInterval != null ) {oldInterval.setMeasurementInterval(measurementInterval.toString());}
-            if(webAppInterval != null ) {oldInterval.setWebAppInterval(webAppInterval.toString());}
+        } else {
+            if (measurementInterval != null) {
+                oldInterval.setMeasurementInterval(measurementInterval.toString());
+            }
+            if (webAppInterval != null) {
+                oldInterval.setWebAppInterval(webAppInterval.toString());
+            }
             this.intervalService.saveInterval(oldInterval);
         }
     }
 
-    public String getActualMeasurementIntervalForAccessPoint(Long tAccessPointId){
-        AccessPoint accessPoint = accessPointService.loadAccessPoint(tAccessPointId);
+    public String getActualMeasurementIntervalForAccessPoint(Long tAccessPointId) {
         SSInterval oldInterval = intervalService.getFirstByAccessPointId(tAccessPointId);
-        if(oldInterval != null){
-            if(oldInterval.getMeasurementInterval() == null){return "Default";}
-            return oldInterval.getMeasurementInterval();}
-        else return "Default";
+        if (oldInterval != null) {
+            if (oldInterval.getMeasurementInterval() == null) {
+                return DEFAULT;
+            }
+            return oldInterval.getMeasurementInterval();
+        } else return DEFAULT;
     }
 
-    public String getActualWebAppIntervalForAccessPoint(Long tAccessPointId){
+    public String getActualWebAppIntervalForAccessPoint(Long tAccessPointId) {
         SSInterval oldInterval = intervalService.getFirstByAccessPointId(tAccessPointId);
-        if(oldInterval != null){
-            if (oldInterval.getWebAppInterval() == null) {return "Default";}
-            return oldInterval.getWebAppInterval();}
-        else return "Default";
+        if (oldInterval != null) {
+            if (oldInterval.getWebAppInterval() == null) {
+                return DEFAULT;
+            }
+            return oldInterval.getWebAppInterval();
+        } else return DEFAULT;
     }
-
-
 
 
 }

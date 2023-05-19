@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -34,7 +35,7 @@ public class Plant implements Persistable<Long>, Serializable, Comparable<Plant>
     private String plantName;
 
 
-    @ManyToMany(fetch = FetchType.EAGER) //TODO: EAGER , do not touch
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_plant",
             joinColumns = @JoinColumn(name = "plant_id", referencedColumnName = "plantID"),
@@ -49,7 +50,7 @@ public class Plant implements Persistable<Long>, Serializable, Comparable<Plant>
 
     @Override
     public String toString() {
-        return  plantName ;
+        return plantName;
     }
 
 

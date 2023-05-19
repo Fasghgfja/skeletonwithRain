@@ -7,9 +7,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
-
-
-
 @Service
 @Scope("application")
 public class IntervalService {
@@ -26,7 +23,6 @@ public class IntervalService {
     public SSInterval getFirstByAccessPoint(AccessPoint accessPoint){
         return intervalRepository.findFirstByAccessPoint(accessPoint);
     }
-
 
 
     @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")

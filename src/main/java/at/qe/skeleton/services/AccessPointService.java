@@ -94,7 +94,7 @@ public class AccessPointService {
         try {
             createYaml(accessPoint1, isNew);
         }catch (IOException e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return accessPoint1;

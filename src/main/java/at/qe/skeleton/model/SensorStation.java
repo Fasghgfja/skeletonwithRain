@@ -23,9 +23,8 @@ import java.util.Set;
  * Sensor stations have an alarm count Threshold that is initialized with 5 by default
  * (this means that if any of its sensor alarm count reaches 5 then the alarm will be set to ON and on the sensor station a light will blink).
  * The alarm count threshold represents how high the alarm count of any given sensor of this sensor station can go before the system displays a warning light(at this point the alarmcount value of the sensor is changed to -1)
- *  and can be changed from manage sensor station page from an Admin (the real sensor station behaviour will be updated accordingly when this is done).
-
- The alarmcount of a given sensor can be resetted manually by a gardener or admin from the sensor station page aswell.
+ * and can be changed from manage sensor station page from an Admin (the real sensor station behaviour will be updated accordingly when this is done).
+ * The alarmcount of a given sensor can be resetted manually by a gardener or admin from the sensor station page aswell.
  */
 @Getter
 @Setter
@@ -52,7 +51,7 @@ public class SensorStation extends Metadata implements Persistable<String>, Seri
     @ManyToOne(fetch = FetchType.LAZY)
     AccessPoint accessPoint;
 
-    @ManyToMany(mappedBy = "sensorStationsUnderCare")//TODO:LAZY OR NOT
+    @ManyToMany(mappedBy = "sensorStationsUnderCare")
     private Set<Userx> gardener = new HashSet<>();
 
     @Column

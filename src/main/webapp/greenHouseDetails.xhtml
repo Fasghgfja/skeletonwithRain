@@ -377,7 +377,7 @@
                         </div>
 
                         <!-- ................ EDIT FIELDS PANEL............-->
-                        <div class="field col-12 md:col-4">
+                        <div class="field col-12 md:col-4 xl:col-12">
                             <h:form id="EditThisSensorStation">
                                 <p:outputPanel id="sensorStationData"
                                                rendered="#{not empty sensorStationDetailController.sensorStation}">
@@ -406,16 +406,20 @@
                                                      value="#{sensorStationDetailController.sensorStation.accessPoint.id}"
                                                      disabled="true"/>
 
+                                        <p:outputLabel for="mInterval" value="Intervals: (minutes):"/>
+                                        <p:inputText id="mInterval" disabled="true"
+                                                     value="App: #{SSIntervalController.getActualWebAppIntervalForAccessPoint(sensorStationDetailController.sensorStation.accessPoint.id)} Measurements: #{SSIntervalController.getActualMeasurementIntervalForAccessPoint(sensorStationDetailController.sensorStation.accessPoint.id)}" />
+
                                         <p:outputLabel for="newPlant" value="New Plant name:"/>
                                         <p:inputText id="newPlant"
                                                      rendered="#{not empty sensorStationDetailController.sensorStation}"
                                                      value="#{sensorStationDetailController.selectedPlantName}"/>
                                         <!-- ................ ............................................-->
-                                        <!-- ................REAL IMPUT FIELDS............................-->
                                         <p:outputLabel for="sensorStationlocation" value="Location:"/>
                                         <p:inputText id="sensorStationlocation"
                                                      rendered="#{not empty sensorStationDetailController.sensorStation}"
                                                      value="#{sensorStationDetailController.sensorStation.location}"/>
+
 
                                         <!-- ...TOGGLESWITCH FOR THE ALARM....-->
                                         <p:outputLabel rendered="#{sensorStationDetailController.fixed == false}"
@@ -460,9 +464,40 @@
                                                     value="#{sensorStationDetailController.sensorStation.id}"
                                                     target="#{pairingController.sensorStationId}"/>
                                         </p:commandButton>
+
+                                        <!-- .................... INTERVALS BUTTON ........... .............. -->
+                                        <p:commandButton style="margin-right: 2px; background-color: orange" update="intervalEditDialog"
+                                                         oncomplete="PF('intervalEditDialog').show()" icon="fa fa-solid fa-sliders" title="Intervals">
+                                            <f:setPropertyActionListener value="#{sensorStationDetailController.sensorStation.accessPoint.id}" target="#{SSIntervalController.accessPointId}"/>
+                                        </p:commandButton>
+
+
                                     </h:panelGrid>
 
                                 </p:outputPanel>
+
+                                <!-- ...................................Interval Edit dialog.................................... -->
+                                <p:dialog header="Edit Access Point Intervals" id="intervalEditDialog" widgetVar="intervalEditDialog" modal="true"
+                                          showEffect="fade" hideEffect="fade" resizable="false">
+                                    <p:outputPanel id="intervalData">
+                                        <h:panelGrid columns="1">
+
+                                            <p:outputLabel for="m2Interval" value="New Interval Webapp: (minutes):"/>
+                                            <p:inputText id="m2Interval" value="#{SSIntervalController.webAppInterval}" />
+                                            <p:outputLabel for="sinterval" value="New Interval Measurements: (minutes)"/>
+                                            <p:inputText id="sinterval"  value="#{SSIntervalController.measurementInterval}"/>
+
+                                        </h:panelGrid>
+                                        <h:panelGrid columns="3">
+                                            <p:commandButton value="Save New Intervals" action="#{SSIntervalController.doSaveInterval()}"
+                                                             oncomplete="PF('intervalEditDialog').hide();location.reload()" update="sensorStationData"/>
+                                            <p:commandButton value="Abort" onclick="PF('intervalEditDialog').hide()"/>
+
+                                        </h:panelGrid>
+                                    </p:outputPanel>
+                                </p:dialog>
+
+
 
                                 <!-- ....................SENSOR STATION pairing Dialog ........... .............. -->
                                 <p:dialog header="Pairing" id="pairingDialog" widgetVar="pairingDialog" modal="true"
