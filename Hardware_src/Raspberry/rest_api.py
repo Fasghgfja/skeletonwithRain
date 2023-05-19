@@ -163,7 +163,7 @@ def check_if_new_stations():
             try:
                 webapp_sensorstation_names.remove(name)
             except Exception as e:
-                DB_connection.delete_sensor_station(name)
+                # DB_connection.delete_sensor_station(name)
                 exception_logging.logException(e, "Filter New Stations")
 
         return webapp_sensorstation_names
