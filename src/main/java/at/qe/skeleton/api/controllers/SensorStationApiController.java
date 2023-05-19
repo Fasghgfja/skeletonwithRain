@@ -2,10 +2,7 @@ package at.qe.skeleton.api.controllers;
 
 import at.qe.skeleton.api.exceptions.SensorNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
-import at.qe.skeleton.api.model.BoarderValueFrame;
-import at.qe.skeleton.api.model.SendingIntervalFrame;
-import at.qe.skeleton.api.model.SensorApi;
-import at.qe.skeleton.api.model.SensorStationApi;
+import at.qe.skeleton.api.model.*;
 import at.qe.skeleton.api.services.SensorStationServiceApi;
 import at.qe.skeleton.model.Sensor;
 import org.apache.catalina.connector.Response;
@@ -114,8 +111,26 @@ public class SensorStationApiController {
         }
 
     }
+    @GetMapping("/api/validated/{id}")
+    boolean getValidation(@PathVariable("id") String id) {
+        try {
+            return sensorStationServiceApi.isValidated(Long.valueOf(id));
+        }catch (SensorStationNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
 
+    }
 
+    @PostMapping("/api/auditLog")
+    int logFile(@RequestBody List<LogFrame> logFrame) {
+
+        try{
+            sensorStationServiceApi.saveLog(logFrame);
+            return Response.SC_OK;
+        }catch (SensorStationNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
 
 
 }
