@@ -63,7 +63,7 @@ async def read_sensor_data(new_connection, device_list):
                         for descriptor in characteristic.descriptors:
                             try:
                                 type = await client.read_gatt_descriptor(descriptor.handle)
-                                if type == b'TEMPERATURE' or type == b'HUMIDITY' or type == b'AIR_PRESSURE' or type == b'AIR_QUALITY':
+                                if type == b'SOIL_MOISTURE' or type == b'TEMPERATURE' or type == b'HUMIDITY' or type == b'AIR_PRESSURE' or type == b'AIR_QUALITY':
                                     float_value = True
                             except Exception as e:
                                 exception_logging.logException(e, descriptor.uuid)
