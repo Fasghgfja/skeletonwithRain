@@ -9,7 +9,7 @@ Adafruit_BME680 bme;
 
 BLEService readSensorDataService("181A");
 BLEIntCharacteristic ligthValueCharacteristic("19b0", BLERead | BLEWrite);
-BLEIntCharacteristic hygroValueCharacteristic("19b1", BLERead | BLEWrite);
+BLEFloatCharacteristic hygroValueCharacteristic("19b1", BLERead | BLEWrite);
 BLEFloatCharacteristic tempValueCharacteristic("19b2", BLERead | BLEWrite);
 BLEFloatCharacteristic humidityValueCharacteristic("19b3", BLERead | BLEWrite);
 BLEFloatCharacteristic pressureValueCharacteristic("19b4", BLERead | BLEWrite);
@@ -356,8 +356,8 @@ void readLigthValue(BLEDevice central, BLECharacteristic characteristic){
 }
 
 void readHygroValue(BLEDevice central, BLECharacteristic characteristic){
-    int hygro_value = analogRead(hygro_sensor);
-    hygro_value = 100/hygro_value;
+    float hygro_value = analogRead(hygro_sensor);
+    hygro_value = (hygro_value/1024) *100;
     hygroValueCharacteristic.setValue(hygro_value);
 }
 void readAlarmStatus(BLEDevice central, BLECharacteristic characteristic){
