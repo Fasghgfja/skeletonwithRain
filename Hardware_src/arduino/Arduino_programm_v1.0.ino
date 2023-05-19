@@ -71,8 +71,8 @@ void setup() {
         while(1);
     }
     //Change this to the name of your choise
-    BLE.setLocalName("G4T2");
-    BLE.setDeviceName("G4T2");
+    BLE.setLocalName("G4T3");
+    BLE.setDeviceName("G4T3");
     //---------------------------------------------------------------
     BLE.setAdvertisedService(readSensorDataService);
     //---------------------------------------------------------------BLEDescriptor
@@ -357,6 +357,7 @@ void readLigthValue(BLEDevice central, BLECharacteristic characteristic){
 
 void readHygroValue(BLEDevice central, BLECharacteristic characteristic){
     int hygro_value = analogRead(hygro_sensor);
+    hygro_value = 100/hygro_value;
     hygroValueCharacteristic.setValue(hygro_value);
 }
 void readAlarmStatus(BLEDevice central, BLECharacteristic characteristic){
