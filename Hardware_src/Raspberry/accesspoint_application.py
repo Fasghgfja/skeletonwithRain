@@ -8,13 +8,13 @@ import check_boarder_values
 import program_status
 import config_yaml
 
-SECTION_SLEEP = 5
+SECTION_SLEEP = 15
 #  cronjop to restart
 program_state = 0
 if __name__ == '__main__':
     sending_interval_counter = 0
     measurement_interval_counter = 0
-    program_state = 0#program_status.Is.READ_SENSOR_VALUES.value
+    program_state = 0
     while True:
         try:
             match program_state:
@@ -22,9 +22,8 @@ if __name__ == '__main__':
                 case program_status.Is.IMPLEMENT_DATABASE.value:
                     print("Implement database")
                     DB_connection.implement_database()
-                    time.sleep(5)
+                    time.sleep(SECTION_SLEEP)
                     program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
-                    #program_state = program_status.Is.CHECK_FOR_NEW_BOARDER_VALUES.value
 
                 case program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value:
                     print("Call for new Sensorstation")
@@ -66,7 +65,7 @@ if __name__ == '__main__':
                 case program_status.Is.CHECK_BOARDER_VALUER.value:
                     print("check Boarders")
                     check_boarder_values.checkBoarderValues()
-                    time.sleep(1)
+                    time.sleep(SECTION_SLEEP)
                     program_state = program_status.Is.WRITE_VALUES_TO_WEBAPP.value
 
                 case program_status.Is.WRITE_VALUES_TO_WEBAPP.value:

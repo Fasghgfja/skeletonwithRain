@@ -124,6 +124,8 @@ The following code shows the program states. At the beginning the database will 
 ### Packages
    The Directory [Raspberry](Raspberry) contains all the necessary file to run the access point.
    Be sure that you copy the config.yaml into this directory.
+   Furthermore the function to read the current server port let crash the JUnit tests, so make sure that port 8080 is used at webserver.
+   You can change this option in class [AccessPointService.java](..%2Fsrc%2Fmain%2Fjava%2Fat%2Fqe%2Fskeleton%2Fservices%2FAccessPointService.java).
    And here [import_packages.txt](import_packages.txt) you find a list of all the Packages you need to run the application.
 
 ### Transmitting interval
