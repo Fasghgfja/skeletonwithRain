@@ -32,8 +32,8 @@ def get_sensor_id():
     id_list = DB_connection.read_sensors()
     temp_id = 0
     for id in id_list:
-        if temp_id == (id - 1):
-            temp_id = id
+        if temp_id == (id[0] - 1):
+            temp_id = id[0]
         else:
             return temp_id + 1
     return temp_id + 1
