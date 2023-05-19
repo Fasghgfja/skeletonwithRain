@@ -86,7 +86,7 @@ async def write_sensors_and_station_description(station_names):
             if station[0] in station_names:
                 try:
                     station_values = StationValue(name=station[0], service_description=station[1], alarm_switch=station[2])
-                    requests.post(post_sensorStations_url, json=vars(station_values), auth=auth)
+                    requests.post(post_sensorStations_url, json=vars(station_values), auth=get_auth())
                     sensor_list = DB_connection.read_sensors_database(station[0]).fetchall()
                     json_list =[]
                     for sensor in sensor_list:
@@ -252,7 +252,7 @@ def send_log_data_to_webapp():
         response = requests.post(url, json=log_send_list, auth=auth)
         if response.status_code == 200:
              with open('logFile.txt', 'w') as file:
-                file.write("New File")
+                file.write("New File\n")
                 file.close()
     else:
         check_validation()

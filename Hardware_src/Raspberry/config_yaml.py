@@ -36,7 +36,7 @@ def write_sending_intervalls(measurment_intervall, webapp_intervall, treashhold)
     try:
         with open("config.yaml","r") as r_f:
             cfg = yaml.load(r_f, Loader=yaml.FullLoader)
-        cfg["accesspoint-params"]["measurement-intervall"] = measurment_intervall * 3
+        cfg["accesspoint-params"]["measurement-intervall"] = measurment_intervall
         cfg["accesspoint-params"]["webapp-intervall"] = webapp_intervall
         cfg["accesspoint-params"]["alarmCountThreshold"] = treashhold
         with open("config.yaml","w") as w_f:

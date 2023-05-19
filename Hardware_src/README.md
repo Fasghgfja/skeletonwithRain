@@ -144,5 +144,6 @@ The following table shows the relation between the two interval with the set val
 ### Alarm Count
 The alarm is developed on the way that if a quarter of the measurements are breaking the boarders the alarm count gets increased by one.
 The alarmCountThreshold is set by default to one and is the boarder how high the alarm count can increase until an alarm will be switched on.
+But this feature is an additional option and it is still in the test phase so you cant change it. 
 ## Run script
 The run script is the file [start_access_point.sh](Raspberry%2Fstart_access_point.sh) and it is developed to start raspberry programm. 
