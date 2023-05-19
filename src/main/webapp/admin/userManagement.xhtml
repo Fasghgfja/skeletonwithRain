@@ -120,16 +120,16 @@
                     <p:column headerText="Registration Date">
                         <h:outputText value="#{user.createDate}"/>
                     </p:column>
-                    <p:column style="width:100px;text-align: center">
+                    <p:column>
 
                         <!-- ....................EDIT USER BUTTON ........... .............. -->
-                        <p:commandButton style="margin-right: 10px" update=":userForm:userEditDialog"
+                        <p:commandButton style="margin-right: 2px" update=":userForm:userEditDialog"
                                          oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit" title="Edit">
                             <f:setPropertyActionListener value="#{user}" target="#{userDetailController.user}"/>
                         </p:commandButton>
 
                         <!-- ....................DELETE USER BUTTON ........... .............. -->
-                        <p:commandButton disabled="#{user.username == sessionInfoBean.currentUserName}"
+                        <p:commandButton style="margin-right: 2px" disabled="#{user.username == sessionInfoBean.currentUserName}"
                                          styleClass="ui-button-danger"
                                          action="#{userDetailController.doDeleteUser}" icon="pi pi-user-minus"
                                          title="Delete"
