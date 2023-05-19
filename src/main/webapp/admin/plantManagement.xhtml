@@ -72,20 +72,20 @@
 
 
                             <!-- ...........BUTTON TO OPEN QR CODE GENERATION PAGE......... -->
-                            <p:button style="margin-right: 5px" icon="pi pi-qrcode"
+                            <p:button style="margin-right: 2px" icon="pi pi-qrcode"
                                       title="Generate QR-Code"
                                       href="/generateQrCode.xhtml?id=#{plant.plantID}">
                             </p:button>
 
                             <!-- ....................Plant EDIT BUTTON ........... .............. -->
-                            <p:commandButton style="margin-right: 5px" update=":userForm:plantEditDialog"
+                            <p:commandButton style="margin-right: 2px" update=":userForm:plantEditDialog"
                                              oncomplete="PF('plantEditDialog').show()" icon="fa fa-solid fa-pen-to-square" title="Edit">
                                 <f:setPropertyActionListener value="#{plant}" target="#{plantController.plant}"/>
                             </p:commandButton>
 
 
                             <!-- ....................DELETE PLANT BUTTON ......... .............. -->
-                            <p:commandButton style="margin-right: 10px" styleClass="ui-button-danger" rendered="#{sessionInfoBean.hasRole('ADMIN')}"
+                            <p:commandButton style="margin-right: 2px" styleClass="ui-button-danger" rendered="#{sessionInfoBean.hasRole('ADMIN')}"
                                              action="#{plantController.doDeletePlant()}" icon="fa fa-solid fa-trash-can"
                                              oncomplete="location.reload();"
                                              title="Delete"

@@ -3,6 +3,7 @@ package at.qe.skeleton.services;
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.AccessPointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -19,19 +20,16 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Service class for the model AccessPoint.
- * This class is application scoped since it is only created once for the entire application.
- */
-
 @Service
 @Scope("application")
 public class AccessPointService {
 
     @Autowired
     private AccessPointRepository accessPointRepository;
-
-
+    /*
+    @Autowired
+    private ServletWebServerApplicationContext webServerAppCtxt;
+    */
     /**
      * Method to get all access points currently stored in the database.
      * @return Collection of all access points.
@@ -115,13 +113,14 @@ public class AccessPointService {
             String content = String.format("""
                     accesspoint-params:
                       id: %d
-                      measurement-intervall: 5
-                      webapp-intervall: 5
-                      alarmCountThreshold: 5
+                      measurement-intervall: 1
+                      webapp-intervall: 1
+                      alarmCountThreshold: 1
+                      validation: False
                     webapp-params:
                       ip: %s:%d
                       pswd: passwd
-                      usnm: admin""", accessPoint.getAccessPointID(), getIP(), 8080);
+                      usnm: admin""", accessPoint.getAccessPointID(), getIP(),8080 );//webServerAppCtxt.getWebServer().getPort()
             writer.write(content);
             writer.flush();
             writer.close();
@@ -141,8 +140,8 @@ public class AccessPointService {
         }
     }
     /**
-     * Deletes an access point.
-     * @param accessPoint to be deleted
+     * Deletes an access point and creates a delete log.
+     * @param accessPoint
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteAccessPoint(AccessPoint accessPoint) {

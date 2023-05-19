@@ -9,7 +9,7 @@ Adafruit_BME680 bme;
 
 BLEService readSensorDataService("181A");
 BLEIntCharacteristic ligthValueCharacteristic("19b0", BLERead | BLEWrite);
-BLEIntCharacteristic hygroValueCharacteristic("19b1", BLERead | BLEWrite);
+BLEFloatCharacteristic hygroValueCharacteristic("19b1", BLERead | BLEWrite);
 BLEFloatCharacteristic tempValueCharacteristic("19b2", BLERead | BLEWrite);
 BLEFloatCharacteristic humidityValueCharacteristic("19b3", BLERead | BLEWrite);
 BLEFloatCharacteristic pressureValueCharacteristic("19b4", BLERead | BLEWrite);
@@ -71,8 +71,8 @@ void setup() {
         while(1);
     }
     //Change this to the name of your choise
-    BLE.setLocalName("G4T2");
-    BLE.setDeviceName("G4T2");
+    BLE.setLocalName("G4T3");
+    BLE.setDeviceName("G4T3");
     //---------------------------------------------------------------
     BLE.setAdvertisedService(readSensorDataService);
     //---------------------------------------------------------------BLEDescriptor
@@ -143,7 +143,7 @@ void loop(){
 
     }
     //----------------------------------------------reset if 5 mins no connection
-    if((timer_current - Pairing_timer_start) >= Pairing_time_delta && connection_on == false){
+    if((timer_current - Pairing_timer_start) >= Pairing_time_delta && piezo_on == true){
         connection_on = false;
         piezo_on = false;
         noTone(piezo);
@@ -169,12 +169,12 @@ void loop(){
         piezo_timer_start = millis();
         Pairing_timer_start = millis();
     }
-    //---------------------------------------------Button push to deactivate the alarm if is active
+        //---------------------------------------------Button push to deactivate the alarm if is active
     else if(readButton == HIGH && connection_on == true && Alarm == true){
         alarm_on = true;
         alarm_controller();
     }
-    //---------------------------------------------Button push to reset/stop offering signal
+        //---------------------------------------------Button push to reset/stop offering signal
     else if(readButton == HIGH && connection_on == true && piezo_on == false){
         connection_on = false;
         readButton = LOW;
@@ -356,7 +356,8 @@ void readLigthValue(BLEDevice central, BLECharacteristic characteristic){
 }
 
 void readHygroValue(BLEDevice central, BLECharacteristic characteristic){
-    int hygro_value = analogRead(hygro_sensor);
+    float hygro_value = analogRead(hygro_sensor);
+    hygro_value = (hygro_value/1024) *100;
     hygroValueCharacteristic.setValue(hygro_value);
 }
 void readAlarmStatus(BLEDevice central, BLECharacteristic characteristic){

@@ -75,6 +75,16 @@ The characteristic to read if the alarm has been switch off with the button is:
 The raspberry source code is located in the /Raspberry directory. It is developed in python3.10 to read via BLE the sensor data from the arduino and writes them into a database.
 As a next feature the data gets transferred to the webapp via REST POST/GET requests.
 
+### Run accesspoint application
+To run the accesspoint application you need to create a new accesspoint via the webapp application.
+Then move to the [Raspberry](Raspberry) directory and use the command:
+
+    scp -r . "pi@raspberryIP":~
+
+If this is uploaded correct go onto your raspberry and move inside the Raspberry directory and start:
+
+    bash start_access_point.sh
+
 ### Class overview
 
 
@@ -114,8 +124,28 @@ The following code shows the program states. At the beginning the database will 
 ### Packages
    The Directory [Raspberry](Raspberry) contains all the necessary file to run the access point.
    Be sure that you copy the config.yaml into this directory.
+   Furthermore the function to read the current server port let crash the JUnit tests, so make sure that port 8080 is used at webserver.
+   You can change this option in class [AccessPointService.java](..%2Fsrc%2Fmain%2Fjava%2Fat%2Fqe%2Fskeleton%2Fservices%2FAccessPointService.java).
    And here [import_packages.txt](import_packages.txt) you find a list of all the Packages you need to run the application.
+
+### Transmitting interval
+There are two different transmission intervals:
+1) measurement-interval is the interval how often the values of the sensors are read.
+2) webapp-interval is the interval how often the measurments get transfered to the webapp.
+
+The webapp interval is called after the measurement-interval how it is mentioned Application sequence.
+Therefor it is a multiple of the measurement-interval so the webapp interval shoul be greater than the measurement interval.
+The following table shows the relation between the two interval with the set values at webapp:
+
+| webapp interval | measurement-interval | send to webapp | read values |
+|:---------------:|:--------------------:|:--------------:|:-----------:|
+|        1        |          1           |     1 min      |    1 min    |
+|        1        |          2           |     2 min      |    2 min    |
+|        2        |          2           |     4 min      |    2 min    |
+
+### Alarm Count
+The alarm is developed on the way that if a quarter of the measurements are breaking the boarders the alarm count gets increased by one.
+The alarmCountThreshold is set by default to one and is the boarder how high the alarm count can increase until an alarm will be switched on.
+But this feature is an additional option and it is still in the test phase so you cant change it. 
 ## Run script
-The run script is the file start_access_point.sh and it is developed to start and observe the raspberry programm. 
-It also must copyed onto the raspberry to log if the programm is terminated or to start the accespoint programm.
-There is no need to use it, it is just for the phase of use to have a nice handle. 
+The run script is the file [start_access_point.sh](Raspberry%2Fstart_access_point.sh) and it is developed to start raspberry programm. 

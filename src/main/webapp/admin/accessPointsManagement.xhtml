@@ -101,7 +101,7 @@
                                 </p:commandButton>
 
                                 <!-- .................... DELETE BUTTON ........... .............. -->
-                                <p:commandButton class="ui-button-danger" icon="pi pi-trash" title="Delete"
+                                <p:commandButton style="margin-right: 2px" class="ui-button-danger" icon="pi pi-trash" title="Delete"
                                                  update="accessPointsForm:accessPointsTable"
                                                  action="#{accessPointController.doDeleteAccessPoint}" oncomplete="location.reload()">
                                     <f:setPropertyActionListener value="#{accessPoint}"

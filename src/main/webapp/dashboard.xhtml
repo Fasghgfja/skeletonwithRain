@@ -90,6 +90,10 @@
                 </c:if>
 
 
+
+
+
+
                 <!-- ....................................ADMIN VIEW START................................... -->
                 <c:if test="#{sessionInfoBean.hasRole('ADMIN')}">
 
@@ -97,7 +101,7 @@
                     <div class="col-12 md:col-12 xl:col-6">
                         <div class="card chart">
                             <div class="card-header">
-                                <h5>Selected GreenHouse Details</h5>
+                                <h5>Selected Sensor Station Details</h5>
                             </div>
                             <div class="card">
                                 <p:barChart id="myBarChart" model="#{graphController.barModel}"/>
@@ -106,14 +110,11 @@
                         </div>
                     </div>
 
-
-
-
                 <!-- ..........GREENHOUSES PREVIEW........... -->
                     <div class="col-12 md:col-12 xl:col-6">
                         <div class="col-12">
                             <div class="card">
-                                <h5>Green Houses</h5>
+                                <h5>Sensor Stations</h5>
                                 <p:dataTable id="ordersTable" var="sensorStation"
                                              value="#{sensorStationListController.sensorStationList}" selectionMode="single"
                                              reflow="true" paginatorPosition="bottom"
@@ -188,16 +189,13 @@
 
 
 
-
-
-
                 <!-- ....................................GARDENER VIEW START................................... -->
                 <c:if test="#{sessionInfoBean.hasRole('GARDENER')}">  <!-- ........................not needed?................... -->
                 <!-- ..........GRAPH................ -->
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="card chart">
                         <div class="card-header">
-                            <h5>Selected Sensor Station Details</h5>
+                            <h5>Selected Greenhouse Details</h5>
                         </div>
                         <div class="card">
                             <p:barChart id="myBarChart2" model="#{graphController.barModel}"/>
@@ -214,7 +212,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Assigned Sensor Stations</h5>
+                                <h5>Assigned Greehouses</h5>
                                 <div class="header-buttons">
                                     <!-- ........................Help Button ....................... -->
                                     <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
@@ -326,19 +324,19 @@
                                 </p:column>
                                 <p:column >
                                     <!-- ........................Unfollow Button ....................... -->
-                                    <p:commandButton style="border-color: red; background-color: red"
+                                    <p:commandButton style=" margin-right:2px;border-color: red; background-color: red"
                                                      icon="pi pi-minus"
                                                      title="Unfollow Plant"
                                                      update=":userForm:plantsTable">
                                         <p:ajax event="click" listener="#{userDetailController.doRemovePlantFromFollowedPlants(plant)}"/>
+                                        <!-- ........................Plant Page Button ....................... -->
                                     </p:commandButton>
+                                    <p:button style="margin-right: 2px" icon="pi pi-search"
+                                              title="Show Plant Page"
+                                              href="/plantPage.xhtml?id=#{plant.plantID} "/>
                                 </p:column>
-                                <!-- ........................Plant Page Button ....................... -->
-                                <p:column>
-                                <p:button icon="pi pi-search"
-                                          title="Show Plant Page"
-                                          href="/plantPage.xhtml?id=#{plant.plantID} "/>
-                                </p:column>
+
+
 
                                 <!-- .........................................ROW EXPANSION.......................................................... -->
                                 <p:rowExpansion>
