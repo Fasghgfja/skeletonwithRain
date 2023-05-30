@@ -54,7 +54,7 @@ async def read_sensor_data(new_connection, device_list):
 
                 for service in client.services: # iterate all defined services on peripheral
                     if service.uuid != "00001801-0000-1000-8000-00805f9b34fb":
-                        exception_logging.log_information("INFO: Connected to device {0}, Serivce uuid:\t{1}, Description:\t{2}"
+                        exception_logging.log_success("Connected to device {0}, Serivce uuid:\t{1}, Description:\t{2}"
                                                           .format(station_name, service.uuid, service.description))
                         if new_connection:
                             DB_connection.insert_new_sensor_station_to_database(service.description, station_name)

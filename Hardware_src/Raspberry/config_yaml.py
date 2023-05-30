@@ -76,11 +76,11 @@ def read_validation_params():
 
 
 
-def write_valitation():
+def write_valitation(validation):
     try:
         with open("config.yaml","r") as r_f:
             cfg = yaml.load(r_f, Loader=yaml.FullLoader)
-        cfg["accesspoint-params"]["validation"] = True
+        cfg["accesspoint-params"]["validation"] = validation
         with open("config.yaml","w") as w_f:
             yaml.dump(cfg, w_f)
     except Exception as e:
