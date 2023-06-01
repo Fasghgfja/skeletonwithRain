@@ -77,4 +77,4 @@ async def read_sensor_data(new_connection, device_list):
                                     DB_connection.insert_values_into_database(value, float_value, type, station_name)
                             except Exception as e:
                                 exception_logging.logException(e, characteristic.uuid)
-                exception_logging.log_information("INFO: Disconnected")
+                exception_logging.log_success("Disconnected from device {0}".format(station_name))
