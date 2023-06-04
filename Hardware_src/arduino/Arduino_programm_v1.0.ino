@@ -76,12 +76,12 @@ void setup() {
     if (!BLE.begin()) {
         while(1);
     }
-    if(digitalRead(D11) == LOW){
+    if(digitalRead(D11) == HIGH){
         connection_on = true;
     }
     //Change this to the name of your choise
-    BLE.setLocalName("SensTest");
-    BLE.setDeviceName("SensTest");
+    BLE.setLocalName("DataGenarator");
+    BLE.setDeviceName("DataGenarator");
     //---------------------------------------------------------------
     BLE.setAdvertisedService(readSensorDataService);
     //---------------------------------------------------------------BLEDescriptor
@@ -150,7 +150,7 @@ void loop(){
     //----------------------------------------------connection activ
     if(connection_on){
         BLE.poll();
-        //Serial.print("True");
+
     }
     //----------------------------------------------reset if 5 mins no connection
     if((timer_current - Pairing_timer_start) >= Pairing_time_delta && piezo_on == true){
@@ -298,43 +298,43 @@ void readAir_condition_sensor(){
 //green ligth with delay 6sec +
 void sequence_temp_alarm(){
     switch(alarm_ligth_state){
-        case 0: lightOn(0, 0, ligth_on); alarm_ligth_state++; break;
-        case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
+        case 0: lightOn(0, 0, ligth_on); alarm_ligth_state++; tone(piezo, 100); break;
+        case 1: lightOn(0, 0, 0); alarm_ligth_state = 0;noTone(piezo); break;
     }
 }
 //blue ligth with delay 6sec +
 void sequence_humidy_alarm(){
     switch(alarm_ligth_state){
-        case 0: lightOn(0, ligth_on, 0); alarm_ligth_state++; break;
-        case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
+        case 0: lightOn(0, ligth_on, 0); alarm_ligth_state++;tone(piezo, 100); break;
+        case 1: lightOn(0, 0, 0); alarm_ligth_state = 0;noTone(piezo); break;
     }
 }
 // red ligth with delay 6sec +
 void sequence_pressure_alarm(){
     switch(alarm_ligth_state){
-        case 0: lightOn(ligth_on, 0, 0); alarm_ligth_state++; break;
-        case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
+        case 0: lightOn(ligth_on, 0, 0); alarm_ligth_state++;tone(piezo, 100); break;
+        case 1: lightOn(0, 0, 0); alarm_ligth_state = 0;noTone(piezo); break;
     }
 }
 // green ligth with delay 1sec +
 void sequence_gas_alarm(){
     switch(alarm_ligth_state){
-        case 0: lightOn(0, 0, ligth_on); alarm_ligth_state++; break;
-        case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
+        case 0: lightOn(0, 0, ligth_on); alarm_ligth_state++;tone(piezo, 100); break;
+        case 1: lightOn(0, 0, 0); alarm_ligth_state = 0;noTone(piezo); break;
     }
 }
 // red ligth with delay 1sec +
 void sequence_hygro_alarm(){
     switch(alarm_ligth_state){
-        case 0: lightOn(ligth_on, 0, 0); alarm_ligth_state++; break;
-        case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
+        case 0: lightOn(ligth_on, 0, 0); alarm_ligth_state++;tone(piezo, 100); break;
+        case 1: lightOn(0, 0, 0); alarm_ligth_state = 0;noTone(piezo); break;
     }
 }
 // blue ligth with delay 1sec +
 void sequence_ligth_alarm(){
     switch(alarm_ligth_state){
-        case 0: lightOn(0, ligth_on, 0); alarm_ligth_state++; break;
-        case 1: lightOn(0, 0, 0); alarm_ligth_state = 0; break;
+        case 0: lightOn(0, ligth_on, 0); alarm_ligth_state++;tone(piezo, 100); break;
+        case 1: lightOn(0, 0, 0); alarm_ligth_state = 0;noTone(piezo); break;
     }
 }
 //--------------------------------------------------------------------------------------------------Functions to switch ligth on/off-----------------------------------------------------------------------
@@ -385,8 +385,8 @@ void readAlarmStatus(BLEDevice central, BLECharacteristic characteristic){
         alarm_read = true;
         alarm_on = false;
     }
-    Serial.println("Alarm_function:");
-    Serial.println(alarmCharacteristic.value());
+    //Serial.println("Alarm_function:");
+    //Serial.println(alarmCharacteristic.value());
 }
 void blePeripheralConnectHandler(BLEDevice central) {
     if(piezo_on){
@@ -394,24 +394,19 @@ void blePeripheralConnectHandler(BLEDevice central) {
         lightOff();
         //noTone(piezo);
     }
-    Serial.print("Central:");
-    Serial.println(central.address());
+    //Serial.print("Central:");
+    //Serial.println(central.address());
     if(central_mac == "non"){
         central_mac = central.address();
     }
     else if(central.address().compareTo(central_mac) != 0){
         central.disconnect();
-        Serial.println("Rejected");
+        //Serial.println("Rejected");
     }
-    Serial.print("Stored central:");
-    Serial.println(central_mac);
+    //Serial.print("Stored central:");
+    //Serial.println(central_mac);
 }
 
 void blePeripheralDisconnectHandler(BLEDevice central) {
-    lightOn(255,0,0);
-    delay(500);
-    lightOff();
-    lightOn(0,255,0);
-    delay(500);
-    lightOff();
+
 }

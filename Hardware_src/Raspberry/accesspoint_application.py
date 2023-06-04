@@ -14,9 +14,10 @@ SECTION_SLEEP = 15
 #  cronjop to restart
 program_state = 0
 if __name__ == '__main__':
+    print("Application startup {0}".format(datetime.now()))
     print("Implement database this will need 15 seconds")
     DB_connection.implement_database()
-    #time.sleep(SECTION_SLEEP)
+    time.sleep(SECTION_SLEEP)
 
     program_state = 0
     start_measurement_interval_time = datetime.now()
@@ -28,7 +29,7 @@ if __name__ == '__main__':
     start_check_webapp_data_time = datetime.now()
     check_webapp_delta = timedelta(seconds=310) # 5:10
     start_call_new_station_time = datetime.now()
-    call_station_delta = timedelta(seconds=100) # 3:20
+    call_station_delta = timedelta(seconds=200) # 3:20
     start_check_alarm_time = datetime.now()
     check_alarm_delta = timedelta(seconds=260) # 4:20
 
@@ -65,8 +66,8 @@ if __name__ == '__main__':
 
                 else:
                     time.sleep(5)
-                    program_state = program_status.Is.READ_SENSOR_VALUES.value
-                    # program_state = -1
+                    #program_state = program_status.Is.READ_SENSOR_VALUES.value
+                    program_state = -1
 
 
 
@@ -101,7 +102,7 @@ if __name__ == '__main__':
 
                 # call time set by measurment intervall
                 case program_status.Is.READ_SENSOR_VALUES.value:
-                    print("Read Sensor data{0}".format(datetime.now().strftime("%D:%H:%M:%S")))
+                    print("Read Sensor data {0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     try:
                         device_name = DB_connection.read_Sensor_Stationnames_Database()
                         name_list =[]
@@ -119,7 +120,7 @@ if __name__ == '__main__':
 
                 # call time is set by webapp interval
                 case program_status.Is.WRITE_VALUES_TO_WEBAPP.value:
-                    print("write values to Webapp{0}".format(datetime.now().strftime("%D:%H:%M:%S")))
+                    print("write values to Webapp {0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     try:
                         rest_api.write_value_to_web_app()
                     except Exception as e:
@@ -128,7 +129,7 @@ if __name__ == '__main__':
 
                 # send log to webapp with interval 30min:30sec
                 case program_status.Is.SEND_LOG_TO_WEBAPP.value:
-                    print("Send log to webapp{0}".format(datetime.now().strftime("%D:%H:%M:%S")))
+                    print("Send log to webapp {0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     try:
                         rest_api.send_log_data_to_webapp()
                     except Exception as e:
@@ -138,7 +139,7 @@ if __name__ == '__main__':
 
                 # if no other case is true than the alarm status of the sensor stations get checked
                 case program_status.Is.CHECK_SENSOR_STATION_ALARM.value:
-                    print("check sensorstation alarm{0}".format(datetime.now().strftime("%D:%H:%M:%S")))
+                    print("check sensorstation alarm {0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     try:
                         check_boarder_values.check_sensor_station_alarm()
                     except Exception as e:
@@ -147,7 +148,7 @@ if __name__ == '__main__':
 
                 # called every 5min:10sec
                 case program_status.Is.CHECK_FOR_NEW_BOARDER_AND_INTERVAL_VALUES.value:
-                    print("check webapp for new boarder values {0}".format(datetime.now().strftime("%D:%H:%M:%S")))
+                    print("check webapp for new data {0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     try:
                         rest_api.read_sensor_boarder_values()
                         rest_api.read_sending_interval()
@@ -156,4 +157,4 @@ if __name__ == '__main__':
                     start_check_webapp_data_time = datetime.now()
 
         except Exception as e:
-            exception_logging.logException(e, " Programm breakdown")
+            exception_logging.logException(e, " Major exception caught")
