@@ -1,8 +1,10 @@
+
 #include <Arduino.h>
 #include <ArduinoBLE.h>
 #include <SPI.h>
 #include <Adafruit_Sensor.h>
 #include "Adafruit_BME680.h"
+#include <string.h>
 //----------------------------------------------------------------------------------------------------init BLE -----------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Adafruit_BME680 bme;
@@ -25,6 +27,8 @@ const int blue = A2;
 const int red = A3;
 const int hygro_sensor = A6;
 const int piezo = A7;
+String central_mac = "non";
+
 //----------------------------------------------------------------------------------------------------init helpers----------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const byte ligth_on = 254;                               //idea to define different clors depending on the alarm only defined for waterAlarm
@@ -37,6 +41,7 @@ bool connection_on = false;
 bool piezo_on = false;
 bool piep = false;
 bool alarm_on = false;
+bool alarm_read = false;
 //----------------------------------------------------------------------------------------------------init timer attributes----------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //Timer variablen für Zeitmessung
@@ -66,13 +71,17 @@ void setup() {
     pinMode(hygro_sensor, INPUT);
     pinMode(piezo, OUTPUT);
     pinMode(ligth_sensor, INPUT);
+    pinMode(D11, INPUT);
     //--------------------------------------------------------------BluetoothLE setup
     if (!BLE.begin()) {
         while(1);
     }
+    if(digitalRead(D11) == LOW){
+        connection_on = true;
+    }
     //Change this to the name of your choise
-    BLE.setLocalName("G4T3");
-    BLE.setDeviceName("G4T3");
+    BLE.setLocalName("SensTest");
+    BLE.setDeviceName("SensTest");
     //---------------------------------------------------------------
     BLE.setAdvertisedService(readSensorDataService);
     //---------------------------------------------------------------BLEDescriptor
@@ -135,28 +144,32 @@ void setup() {
 //--------------------------------------------------------------------------------------LOOP-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void loop(){
+
     readButton = digitalRead(button_state);
     timer_current = millis();
     //----------------------------------------------connection activ
     if(connection_on){
         BLE.poll();
-
+        //Serial.print("True");
     }
     //----------------------------------------------reset if 5 mins no connection
     if((timer_current - Pairing_timer_start) >= Pairing_time_delta && piezo_on == true){
         connection_on = false;
         piezo_on = false;
-        noTone(piezo);
+        lightOff();
+        //noTone(piezo);
     }
 
     //----------------------------------------------pairing tone
     if(piezo_on && (timer_current - piezo_timer_start) >= 1000){
         if(piep){
-            noTone(piezo);
+            //noTone(piezo);
+            lightOff();
             piep = false;
         }
         else{
-            tone(piezo, 100);
+            //tone(piezo, 100);
+            lightOn(0,0,255);
             piep = true;
         }
         piezo_timer_start = millis();
@@ -172,13 +185,19 @@ void loop(){
         //---------------------------------------------Button push to deactivate the alarm if is active
     else if(readButton == HIGH && connection_on == true && Alarm == true){
         alarm_on = true;
+        readButton = LOW;//new
         alarm_controller();
     }
         //---------------------------------------------Button push to reset/stop offering signal
-    else if(readButton == HIGH && connection_on == true && piezo_on == false){
+    else if(readButton == HIGH && connection_on == true && piezo_on == false && alarm_on == false){
         connection_on = false;
         readButton = LOW;
+        central_mac = "non";
         delay(2000);
+    }
+    //----------------------------------------------Alarm_switch check
+    if(alarm_read == true){
+        alarmCharacteristic.setValue(false);
     }
     //----------------------------------------------Is called to evaluate if air cond is reat successfull
     if( (timer_current - readSensor_timer_start) >= readAir_condition_timer_delta && read_sensor_state == 1){
@@ -205,6 +224,7 @@ void loop(){
     if(gasValueCharacteristic.written()){
         gasAlarm();
     }
+
     //--------------------------------------------Is called if an alarm signal is dedected
     if(Alarm && (timer_current - Alarm_timer_start) >= Alarm_time_delta){
 
@@ -255,7 +275,7 @@ void hygroAlarm(){
 void alarm_controller(){
     if(Alarm){
         Alarm = false;
-        alarmCharacteristic.setValue(alarm_on);
+        alarmCharacteristic.setValue(true);
         alarm_ligth_type = 6;
         lightOff();
     }
@@ -329,8 +349,8 @@ void lightOff(){
 }
 
 void lightOn(byte intense_red, byte intense_green, byte intense_blue){
-    analogWrite(A1, intense_blue);
-    analogWrite(A2, intense_green);
+    analogWrite(A1,  intense_green);
+    analogWrite(A2, intense_blue);
     analogWrite(A3, intense_red);
 }
 //-------------------------------------------------------------------------------------------------------BLE functions called by accesspoint------------------------------------------------------------------
@@ -361,14 +381,37 @@ void readHygroValue(BLEDevice central, BLECharacteristic characteristic){
     hygroValueCharacteristic.setValue(hygro_value);
 }
 void readAlarmStatus(BLEDevice central, BLECharacteristic characteristic){
-    alarm_on = false;
+    if(alarm_on == true){
+        alarm_read = true;
+        alarm_on = false;
+    }
+    Serial.println("Alarm_function:");
+    Serial.println(alarmCharacteristic.value());
 }
 void blePeripheralConnectHandler(BLEDevice central) {
     if(piezo_on){
         piezo_on = false;
-        noTone(piezo);
+        lightOff();
+        //noTone(piezo);
     }
+    Serial.print("Central:");
+    Serial.println(central.address());
+    if(central_mac == "non"){
+        central_mac = central.address();
+    }
+    else if(central.address().compareTo(central_mac) != 0){
+        central.disconnect();
+        Serial.println("Rejected");
+    }
+    Serial.print("Stored central:");
+    Serial.println(central_mac);
 }
 
 void blePeripheralDisconnectHandler(BLEDevice central) {
+    lightOn(255,0,0);
+    delay(500);
+    lightOff();
+    lightOn(0,255,0);
+    delay(500);
+    lightOff();
 }

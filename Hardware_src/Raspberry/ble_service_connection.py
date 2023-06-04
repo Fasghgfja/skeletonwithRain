@@ -70,7 +70,6 @@ async def read_sensor_data(new_connection, device_list):
                             try:
                                 value = await client.read_gatt_char(characteristic.uuid)
                                 if new_connection :
-
                                     DB_connection.insert_new_sensor_to_database(characteristic, station_name, type, sensor_index)
                                     sensor_index += 1
                                 elif type != b'ALARM_STATUS':

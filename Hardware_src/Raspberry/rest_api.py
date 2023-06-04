@@ -228,8 +228,15 @@ def send_log_data_to_webapp():
         url = url_builder("auditLog")
         with open('logFile.txt', 'r') as file:
             for line in file:
+                if line.startswith('ERROR: 00002a05'):
+                    error_msg = line.split('ERROR:', 1)[1].split('Date', 1)[0].strip()
+                    datetime_str = line.rsplit('Date', 1)[-1].strip().replace('__', ' ')
+                    time_stamp_string = str(datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S'))
 
-                if line.startswith('ERROR:'):
+                    #temp_log_data = Log_data(text=error_msg, subject="DEVICE", author=id, time_stamp=time_stamp_string, type="ERROR")
+                    #log_send_list.append(vars(temp_log_data))
+
+                elif line.startswith('ERROR:'):
                     error_msg = line.split('ERROR:', 1)[1].split('Date', 1)[0].strip()
                     datetime_str = line.rsplit('Date', 1)[-1].strip().replace('__', ' ')
                     time_stamp_string = str(datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S'))
@@ -238,15 +245,6 @@ def send_log_data_to_webapp():
                         exception_logging.catch_to_long_error_msg(line)
                     temp_log_data = Log_data(text=error_msg, subject="Access point", author=id, time_stamp=time_stamp_string, type="ERROR")
                     log_send_list.append(vars(temp_log_data))
-
-                elif line.startswith('ERROR: Could not'):
-                    error_msg = line.split('ERROR:', 1)[1].split('Date', 1)[0].strip()
-                    datetime_str = line.rsplit('Date', 1)[-1].strip().replace('__', ' ')
-                    time_stamp_string = str(datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S'))
-
-                    temp_log_data = Log_data(text=error_msg, subject="DEVICE", author=id, time_stamp=time_stamp_string, type="ERROR")
-                    log_send_list.append(vars(temp_log_data))
-
 
                 elif line.startswith('WARNING'):
                     error_msg = line.split('WARNING', 1)[1].split('Date', 1)[0].strip()

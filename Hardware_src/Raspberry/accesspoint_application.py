@@ -16,7 +16,7 @@ program_state = 0
 if __name__ == '__main__':
     print("Implement database this will need 15 seconds")
     DB_connection.implement_database()
-    time.sleep(SECTION_SLEEP)
+    #time.sleep(SECTION_SLEEP)
 
     program_state = 0
     start_measurement_interval_time = datetime.now()
@@ -24,16 +24,18 @@ if __name__ == '__main__':
     start_webapp_interval_time = datetime.now()
     delta_webapp = 0
     start_log_time = datetime.now()
-    log_delta = timedelta(seconds=1830)
+    log_delta = timedelta(seconds=1830) #30:30
     start_check_webapp_data_time = datetime.now()
-    check_webapp_delta = timedelta(310)
+    check_webapp_delta = timedelta(seconds=310) # 5:10
     start_call_new_station_time = datetime.now()
-    call_station_delta = timedelta(seconds=200)
+    call_station_delta = timedelta(seconds=100) # 3:20
+    start_check_alarm_time = datetime.now()
+    check_alarm_delta = timedelta(seconds=260) # 4:20
 
     while True:
         try:
 
-            print(datetime.now().strftime("%H:%M:%S"))
+
             try:
                 delta_measurement = timedelta(minutes=config_yaml.read_sending_intervalls()[0])
                 delta_webapp = timedelta(minutes=config_yaml.read_sending_intervalls()[1])
@@ -44,17 +46,27 @@ if __name__ == '__main__':
             # time evaluations for program state
             if (start_call_new_station_time + call_station_delta) < datetime.now():
                 program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+
             elif (start_check_webapp_data_time + check_webapp_delta) < datetime.now():
                 program_state = program_status.Is.CHECK_FOR_NEW_BOARDER_AND_INTERVAL_VALUES.value
+
+            elif (start_check_alarm_time + check_alarm_delta) < datetime.now():
+                program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
+
             else:
                 if (start_log_time + log_delta) < datetime.now():
                     program_state = program_status.Is.SEND_LOG_TO_WEBAPP.value
+
                 elif (start_measurement_interval_time + delta_measurement) < datetime.now():
                     program_state = program_status.Is.READ_SENSOR_VALUES.value
+
                 elif (start_webapp_interval_time + delta_webapp) < datetime.now():
                     program_state = program_status.Is.WRITE_VALUES_TO_WEBAPP.value
+
                 else:
-                    program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
+                    time.sleep(5)
+                    program_state = program_status.Is.READ_SENSOR_VALUES.value
+                    # program_state = -1
 
 
 
@@ -63,7 +75,7 @@ if __name__ == '__main__':
 
                 # call new SensorStations all 3min:20sec
                 case program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value:
-                    print("Call for new Sensorstation")
+                    print("Call for new Sensorstation {0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     new_device_name_list = []
 
                     try:
@@ -72,7 +84,8 @@ if __name__ == '__main__':
                         exception_logging.logException(e, "Call webapp for new sensorstations")
 
                     if len(new_device_name_list) > 0:
-                        print("New device found: " + new_device_name_list)
+                        print("New device found: ")
+                        print(new_device_name_list)
                         # search for new SensorStation
                         try:
                             asyncio.run(ble_service_connection.read_sensor_data(True, new_device_name_list))
@@ -86,9 +99,9 @@ if __name__ == '__main__':
 
                     start_call_new_station_time = datetime.now()
 
-                # set by measurment intervall
+                # call time set by measurment intervall
                 case program_status.Is.READ_SENSOR_VALUES.value:
-                    print("Read Sensor data")
+                    print("Read Sensor data{0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     try:
                         device_name = DB_connection.read_Sensor_Stationnames_Database()
                         name_list =[]
@@ -104,9 +117,9 @@ if __name__ == '__main__':
                         exception_logging.logException(e, "call_read_values")
                     start_measurement_interval_time = datetime.now()
 
-                # set by webapp interval
+                # call time is set by webapp interval
                 case program_status.Is.WRITE_VALUES_TO_WEBAPP.value:
-                    print("write values to Webapp")
+                    print("write values to Webapp{0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     try:
                         rest_api.write_value_to_web_app()
                     except Exception as e:
@@ -115,7 +128,7 @@ if __name__ == '__main__':
 
                 # send log to webapp with interval 30min:30sec
                 case program_status.Is.SEND_LOG_TO_WEBAPP.value:
-                    print("Send log to webapp")
+                    print("Send log to webapp{0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     try:
                         rest_api.send_log_data_to_webapp()
                     except Exception as e:
@@ -123,22 +136,24 @@ if __name__ == '__main__':
 
                     start_log_time = datetime.now()
 
-                # if no other case is true than the alarm status of the sensorstations get checked
+                # if no other case is true than the alarm status of the sensor stations get checked
                 case program_status.Is.CHECK_SENSOR_STATION_ALARM.value:
-                    print("check sensorstation alarm")
+                    print("check sensorstation alarm{0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     try:
                         check_boarder_values.check_sensor_station_alarm()
                     except Exception as e:
                         exception_logging.logException(e, "check alarm")
+                    start_check_alarm_time = datetime.now()
 
                 # called every 5min:10sec
                 case program_status.Is.CHECK_FOR_NEW_BOARDER_AND_INTERVAL_VALUES.value:
-                    print("check webapp for new boarder values")
+                    print("check webapp for new boarder values {0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     try:
                         rest_api.read_sensor_boarder_values()
                         rest_api.read_sending_interval()
                     except Exception as e:
                         exception_logging.logException(e, "read boarders")
+                    start_check_webapp_data_time = datetime.now()
 
         except Exception as e:
             exception_logging.logException(e, " Programm breakdown")

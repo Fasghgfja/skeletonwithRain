@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -41,18 +42,21 @@ public class MeasurementServiceApi {
      * @param measurement
      * @throws MeasurementNotFoundException
      */
-    public void addMeasurement(Measurement2 measurement) throws MeasurementNotFoundException {
+    public void addMeasurement(List<Measurement2> measurement) throws MeasurementNotFoundException {
+        for (Measurement2 m: measurement) {
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(measurement.getTime_stamp(), formatter);
+        LocalDateTime dateTime = LocalDateTime.parse(m.getTime_stamp(), formatter);
 
         Measurement measurement1 = new Measurement();
-        SensorStation sensorStation = sensorStationService.loadSensorStation(measurement.getSensorStation());
+        SensorStation sensorStation = sensorStationService.loadSensorStation(m.getSensorStation());
         measurement1.setSensorStation(sensorStation);
-        measurement1.setType(measurement.getType());
+        measurement1.setType(m.getType());
         measurement1.setTimestamp(dateTime);
-        measurement1.setValue_s(measurement.getValue());
+        measurement1.setValue_s(m.getValue());
         measurementRepository.save(measurement1);
         System.out.println(measurement1.toString());
+        }
 
     }
 

@@ -70,12 +70,12 @@ def update_alarm_switch(station_name, uuid, description, sensor_id):
     webapp_alarm_switch =""
     alarm_switch_uuid = DB_connection.read_sensors_alarm_characteristic(station_name)[0]
     sensor_station_alarm_switch = asyncio.run(ble_service_connection.read_alarm_status(alarm_switch_uuid, station_name))
-    string_value = int.from_bytes(sensor_station_alarm_switch, "little")
-    if string_value != 1:
+    value = int.from_bytes(sensor_station_alarm_switch, "little")
+    if value != 1:
         webapp_alarm_switch = asyncio.run(rest_api.get_sensorstations(False, station_name))
-    if webapp_alarm_switch == "fixed" or string_value == 1:
+    if webapp_alarm_switch == "fixed" or value == 1:
         alarm_switch = "off"
-        if string_value != 1:
+        if value != 1:
             asyncio.run(ble_service_connection.writeAlarmSignal(uuid, "OFF", station_name))
         DB_connection.update_sensor_station_database(alarm_switch, station_name)
         DB_connection.update_sensor_database(0,sensor_id)
