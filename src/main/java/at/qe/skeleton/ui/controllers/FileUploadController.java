@@ -148,6 +148,15 @@ public class FileUploadController implements Serializable {
         createLog.setType(LogType.SUCCESS);
         logRepository.save(createLog);
     }
+
+    public void setImageService(ImageService imageService) {
+    }
+
+    public void setSessionInfoBean(SessionInfoBean sessionInfoBean) {
+    }
+
+    public void setLogRepository(LogRepository logRepository) {
+    }
 }
 
 
