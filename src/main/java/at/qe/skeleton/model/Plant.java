@@ -81,5 +81,8 @@ public class Plant implements Persistable<Long>, Serializable, Comparable<Plant>
     public int hashCode() {
         return getPlantID().hashCode();
     }
+
+    public void setId(long l) {
+    }
 }
 
