@@ -341,8 +341,14 @@ public class GalleryController implements Serializable {
     }
 
 
+    public void setImageService(ImageService imageService) {
+    }
 
+    public void setSessionInfoBean(SessionInfoBean sessionInfoBean) {
+    }
 
+    public void setLogRepository(LogRepository logRepository) {
+    }
 
 
 }
