@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -31,12 +32,14 @@ public class MeasurementServiceApi {
 
     //TODO: what is this ? why does it search from this hashmap and not the repository?
     private static final ConcurrentHashMap<Long, Measurement> measurements = new ConcurrentHashMap<>();
+
     public Measurement findOneMeasurement(Long id) throws MeasurementNotFoundException {
-        Measurement measurement = measurements.get(id);
-        if (measurement != null)
-            return measurement;
-        else
+        Optional<Measurement> optionalMeasurement = measurementRepository.findById(id);
+        if (optionalMeasurement.isPresent()) {
+            return optionalMeasurement.get();
+        } else {
             throw new MeasurementNotFoundException();
+        }
     }
 
 
