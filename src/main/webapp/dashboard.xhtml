@@ -124,7 +124,7 @@
                                     <p:ajax event="rowSelect" update="myBarChart"
                                             listener="#{graphController.onRowSelect}"/>
 
-                                    <p:column headerText="Id" sortBy="#{sensorStation.id}" filterBy="#{sensorStation.id}">
+                                    <p:column headerText="Id" sortBy="#{sensorStation.id}">
                                         <h:outputText value="#{sensorStation.id}"/>
                                     </p:column>
 
@@ -218,51 +218,50 @@
                                                      onclick="PF('gardenerDhelpDialog').show()"/>
                                 </div>
                             </div>
-
-                            <p:dataTable id="assignedSensorStationsTable" var="sensorStation"
+                            <p:dataTable id="assignedSensorStationsTable" var="assignedSensorStation"
                                          value="#{sensorStationListController.assignedSensorStationList}" selectionMode="single"
-                                         reflow="true" paginatorPosition="bottom"
-                                         rowKey="#{sensorStation.sensorStationName}" paginator="true" rows="5">
+                                         paginatorPosition="bottom"
+                                         rowKey="#{assignedSensorStation.id}" paginator="true" rows="5">
 
                                 <!-- ...........ROW SELECTION EVENT................ -->
                                 <p:ajax event="rowSelect" update="myBarChart2"
                                         listener="#{graphController.onRowSelect}"/>
 
-                                <p:column headerText="Id" sortBy="#{sensorStation.sensorStationName}" filterBy="#{sensorStation.sensorStationName}">
-                                    <h:outputText value="#{sensorStation.id}"/>
+                                <p:column headerText="Id" sortBy="#{assignedSensorStation.sensorStationName}">
+                                    <h:outputText value="#{assignedSensorStation.sensorStationName}"/>
                                 </p:column>
-                                <p:column headerText="Plant" sortBy="#{sensorStation.plant.plantName}" filterBy="#{sensorStation.plant.plantName}">
-                                    <h:outputText value="#{sensorStation.plant.plantName}"/>
+                                <p:column headerText="Plant" sortBy="#{assignedSensorStation.plant.plantName}">
+                                    <h:outputText value="#{assignedSensorStation.plant.plantName}"/>
                                 </p:column>
-                                <p:column headerText="Location" sortBy="#{sensorStation.location}" filterBy="#{sensorStation.location}">
-                                    <h:outputText value="#{sensorStation.location}">
+                                <p:column headerText="Location" sortBy="#{assignedSensorStation.location}" >
+                                    <h:outputText value="#{assignedSensorStation.location}">
                                     </h:outputText>
                                 </p:column>
                                 <p:column headerText="Alarm Status">
                                     <i class="#{measurementListController.getMeasurementTypeIcon('AIR_PRESSURE')}"
-                                       style="color:#{measurementListController.getSensorStatus('AIR_PRESSURE',sensorStation) == 'OK' ? 'green' : 'red'}"
+                                       style="color:#{measurementListController.getSensorStatus('AIR_PRESSURE',assignedSensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Air Pressure"></i>
                                     <i class="#{measurementListController.getMeasurementTypeIcon('TEMPERATURE')}"
-                                       style="color:#{measurementListController.getSensorStatus('TEMPERATURE',sensorStation) == 'OK' ? 'green' : 'red'}"
+                                       style="color:#{measurementListController.getSensorStatus('TEMPERATURE',assignedSensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Temperature"></i>
                                     <i class="#{measurementListController.getMeasurementTypeIcon('SOIL_MOISTURE')}"
-                                       style="color:#{measurementListController.getSensorStatus('SOIL_MOISTURE',sensorStation) == 'OK' ? 'green' : 'red'}"
+                                       style="color:#{measurementListController.getSensorStatus('SOIL_MOISTURE',assignedSensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Soil Moisture"></i>
                                     <i class="#{measurementListController.getMeasurementTypeIcon('AIR_QUALITY')}"
-                                       style="color:#{measurementListController.getSensorStatus('AIR_QUALITY',sensorStation) == 'OK' ? 'green' : 'red'}"
+                                       style="color:#{measurementListController.getSensorStatus('AIR_QUALITY',assignedSensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Air Quality"></i>
                                     <i class="#{measurementListController.getMeasurementTypeIcon('LIGHT_INTENSITY')}"
-                                       style="color:#{measurementListController.getSensorStatus('LIGHT_INTENSITY',sensorStation) == 'OK' ? 'green' : 'red'}"
+                                       style="color:#{measurementListController.getSensorStatus('LIGHT_INTENSITY',assignedSensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Light Intensity"></i>
                                     <i class="#{measurementListController.getMeasurementTypeIcon('HUMIDITY')}"
-                                       style="color:#{measurementListController.getSensorStatus('HUMIDITY',sensorStation) == 'OK' ? 'green' : 'red'}"
+                                       style="color:#{measurementListController.getSensorStatus('HUMIDITY',assignedSensorStation) == 'OK' ? 'green' : 'red'}"
                                        title="Humidity"></i>
                                 </p:column>
                                 <p:column style="width: 3.5rem">
                                     <!-- ...........BUTTON TO OPEN DETAILVIEW OF SELECTED SENSOR STATION......... -->
                                     <p:button icon="pi pi-search"
                                               title="open Detail-View"
-                                              href="/greenHouseDetails.xhtml?id=#{sensorStation.sensorStationName}"/>
+                                              href="/greenHouseDetails.xhtml?id=#{assignedSensorStation.sensorStationName}"/>
                                 </p:column>
                             </p:dataTable>
                         </div>
@@ -270,19 +269,6 @@
                 </div>
             </c:if>
                 <!-- ....................................GARDENER VIEW FINISH................................... -->
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                 <!-- ....................................USER VIEW ................................... -->
