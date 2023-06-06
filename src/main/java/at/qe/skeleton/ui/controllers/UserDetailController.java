@@ -60,6 +60,8 @@ public class UserDetailController implements Serializable {
 
     @Autowired
     private transient PlantService plantService;
+    @Autowired
+    private transient UserListController userListController;
 
     private List<String> selectedRoles;
 
@@ -128,6 +130,8 @@ public class UserDetailController implements Serializable {
         createLog.setText("EDITED USER: " + user.getUsername());
         createLog.setType(LogType.SUCCESS);
         logRepository.save(createLog);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "User has been edited."));
+        userListController.setUserxList((ArrayList<Userx>) userService.getAllUsers());
     }
 
     public void doSaveOwnUser() {
@@ -169,6 +173,8 @@ public class UserDetailController implements Serializable {
         sensorStationService.getAllAssignedSensorStations(user).forEach( x-> {sensorStationService.removeGardenerFromSensorStation(x,user);});
         this.userService.deleteUser(user);
         user = null;
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "User has been deleted."));
+        userListController.setUserxList((ArrayList<Userx>) userService.getAllUsers());
     }
 
     public List<String> getSelectedRolesEdit() {
