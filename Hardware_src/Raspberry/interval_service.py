@@ -5,18 +5,14 @@ class measurement_tuple(object):
     def __init__(self,name: str, measurement_interval: timedelta):
         self.name = name
         self.measurement_interval = measurement_interval
-
-
 class webapp_tuple(object):
     def __init__(self, name: str, webapp_interval: timedelta):
         self.name = name
         self.webapp_interval = webapp_interval
-
 class start_time_tuple(object):
     def __init__(self, name: str, start_time: datetime):
         self.name = name
         self.start_time = start_time
-
 def get_measurement_interval():
     try:
         station_list = DB_connection.read_station_interval_Database()
@@ -61,3 +57,14 @@ def station_interval_passed(start_list, delta_list):
         return station_list
     except Exception as e:
         exception_logging.logException(e, "evaluate station interval")
+
+def get_all_start_times():
+    try:
+        station_list = DB_connection.read_station_interval_Database()
+        start_list = []
+        for s in station_list:
+            start_list.append(get_start_time(s[0]))
+        return start_list
+    except Exception as e:
+        exception_logging.logException(e, "get all initial start times")
+        return []

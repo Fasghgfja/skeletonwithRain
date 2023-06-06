@@ -2,3 +2,4 @@
 target/
 /Hardware_src/Raspberry/config.yaml
 /src/main/logs/
+/Hardware_src/Raspberry/AccessPoint

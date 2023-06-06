@@ -20,20 +20,29 @@ if __name__ == '__main__':
     #time.sleep(SECTION_SLEEP)
 
     program_state = 0
-    start_measurement_interval_time = datetime.now()
-    start_measurement_interval_time_list = []
-    delta_measurement = 0
+    # list that contains all start timer for measurement of the sensor stations
+    start_measurement_interval_time_list = interval_service.get_all_start_times()
+    # list that contains all measurement intervals
     delta_measurement_list =[]
+    # list that contains all station they need to measure values
+    measurement_station_list = []
+
     start_webapp_interval_time = datetime.now()
-    start_webapp_interval_time_list = []
     delta_webapp = 0
+    # list that contains all start timer for webapp interval of the sensor stations
+    start_webapp_interval_time_list = []
+    # list that contains all webapp intervals
     delta_webapp_list = []
+    # send logs timer
     start_log_time = datetime.now()
     log_delta = timedelta(seconds=1830) #30:30
+    # call boarder values and sending intervals from webapp timer
     start_check_webapp_data_time = datetime.now()
     check_webapp_delta = timedelta(seconds=310) # 5:10
+    # call webapp for new connected Sensor Stations timer (must be under pair time of 5 minutes)
     start_call_new_station_time = datetime.now()
     call_station_delta = timedelta(seconds=200) # 3:20
+    # check if an alarm of a Sensor Station is on timer
     start_check_alarm_time = datetime.now()
     check_alarm_delta = timedelta(seconds=260) # 4:20
 
@@ -45,12 +54,13 @@ if __name__ == '__main__':
                 delta_measurement_list = interval_service.get_measurement_interval()
                 delta_webapp_list = interval_service.get_webapp_interval()
                 #delta_measurement = timedelta(minutes=config_yaml.read_sending_intervalls()[0])
-                delta_webapp = timedelta(minutes=1)
+                delta_webapp = timedelta(minutes=5)
+                measurement_station_list = interval_service.station_interval_passed(start_measurement_interval_time_list, delta_measurement_list)
+                webapp_station_list = []
             except Exception as e:
                 exception_logging.logException(e, "Read intervals from database")
 
-            measurement_station_list = interval_service.station_interval_passed(start_measurement_interval_time_list, delta_measurement_list)
-            webapp_station_list = []
+
             # time evaluations for program state
             if (start_call_new_station_time + call_station_delta) < datetime.now():
                 program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
@@ -73,8 +83,8 @@ if __name__ == '__main__':
 
                 else:
                     time.sleep(5)
-                    program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
-                    #program_state = -1
+                    # program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+                    program_state = -1
 
 
 

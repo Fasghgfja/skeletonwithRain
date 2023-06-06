@@ -11,16 +11,6 @@ auth = ("admin", "passwd")
 log_id = 0
 
 post_log_url = "http://localhost:8080/"
-# server
-#auth = ("SHAdmin", "gsecret4passwordt2")
-#measurements_url = "http://srh-softwaresolutions.com/api/measurements"
-#get_sensorStations_url = "http://srh-softwaresolutions.com/api/sensorstations"
-#post_sensorStations_url = "http://srh-softwaresolutions.com/api/sensorstations"
-#post_sensor_url = "http://srh-softwaresolutions.com/api/sensors"
-#get_Station_alarm_switch_url = "http://srh-softwaresolutions.com/api/getsensorstations"
-#post_update_sensor_url = "http://srh-softwaresolutions.com/api/updatesensors"
-#get_sensor_boarder_value_url = "http://srh-softwaresolutions.com/api/sensorsboardervalue"
-
 id = 50100
 
 class SensorValue(object):
@@ -58,6 +48,7 @@ def check_validation():
     valid = requests.get(url, auth=get_auth())
     if valid.json():
         config_yaml.write_valitation(True)
+#---------------------------------------------------------------------------------------need to change
 def write_value_to_web_app():
     if config_yaml.read_validation_params():
         measurements_url = url_builder("measurements")
@@ -99,7 +90,7 @@ async def write_sensors_and_station_description(station_names):
                     exception_logging.logException(e, station[0])
     else:
         check_validation()
-
+# ---------------------------------------------------------------------------------------------need to change
 def read_sensor_boarder_values():
     if config_yaml.read_validation_params():
         try:
@@ -115,9 +106,6 @@ def read_sensor_boarder_values():
             exception_logging.logException(e, "Read Sensor Boarder from Webapp")
     else:
         check_validation()
-
-
-
 
 def write_alarm_switch(name, alarm_switch, description):
     if config_yaml.read_validation_params():
@@ -149,8 +137,6 @@ async def get_sensorstations(getName, name):
 
         except Exception as e:
             exception_logging.logException(e, "read alarm_switch from webapp")
-
-
 
 def check_if_new_stations():
     if config_yaml.read_validation_params():
@@ -185,7 +171,7 @@ def update_Sensor(alarm_count_list):
             exception_logging.log_connection_exception("Web app while writing alarm_count")
     else:
         check_validation()
-
+# -------------------------------------------------------------------------------------need to change
 def read_sending_interval():
     if config_yaml.read_validation_params():
         r = ""
@@ -213,7 +199,6 @@ class Log_data(object):
         self.author = author
         self.time_stamp = time_stamp
         self.type = type
-
 
 def handle_special_values(obj):
     if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
