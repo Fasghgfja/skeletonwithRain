@@ -468,7 +468,7 @@
                                         <!-- .................... INTERVALS BUTTON ........... .............. -->
                                         <p:commandButton style="margin-right: 2px; background-color: orange" update="intervalEditDialog"
                                                          oncomplete="PF('intervalEditDialog').show()" icon="fa fa-solid fa-sliders" title="Intervals">
-                                            <f:setPropertyActionListener value="#{sensorStationDetailController.sensorStation.accessPoint.id}" target="#{SSIntervalController.accessPointId}"/>
+                                            <f:setPropertyActionListener value="#{sensorStationDetailController.sensorStation.id}" target="#{SSIntervalController.ssId}"/>
                                         </p:commandButton>
 
 
