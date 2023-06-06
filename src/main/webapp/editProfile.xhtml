@@ -8,92 +8,97 @@
     </f:metadata>
 
     <ui:define name="head">
-        <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css" />
+        <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css"/>
     </ui:define>
 
     <ui:define name="content">
 
-        <div class="card">
+        <div class="field col-12 md:col-4 xl:col-4" style="display: flex; flex-wrap: nowrap;">
+
+
+        <div class="card ">
             <h:form id="userForm">
-                <div class="ui-fluid formgrid grid">
-
-                    <!-- ................ EDIT FIELDS PANEL............-->
-                    <div class="field col-12 md:col-4">
-                        <p:outputPanel id="userData" rendered="#{not empty userDetailController.user}">
-                            <h5 class="mt-0">User Data </h5>
-                            <h:panelGrid columns="2">
-                                <p:outputLabel for="username" value="Username: "/>
-                                <p:inputText id="username" value="#{userDetailController.user.username}"/>
-                                <p:outputLabel for="firstName" value="First Name: "/>
-                                <p:inputText id="firstName" value="#{userDetailController.user.firstName}"/>
-                                <p:outputLabel for="firstName" value="Last Name: "/>
-                                <p:inputText id="lastName" value="#{userDetailController.user.lastName}"/>
-                                <p:outputLabel for="email" value="E-Mail: "/>
-                                <p:inputText id="email" value="#{userDetailController.user.email}"/>
-                                <p:outputLabel for="phone" value="Phone Number: "/>
-                                <p:inputMask id="phone" value="#{userDetailController.user.phone}"
-                                             mask="+99 999 9999999"/>
-                                <p:selectManyCheckbox id="roles" value="#{userDetailController.user.roles}"
-                                                      disabled="true">
-                                    <f:selectItem itemLabel="ADMIN" itemValue="ADMIN"/>
-                                    <f:selectItem itemLabel="GARDENER" itemValue="GARDENER"/>
-                                </p:selectManyCheckbox>
-
-                            </h:panelGrid>
-                        </p:outputPanel>
-                    </div>
-
-                    <!-- ................ EDIT PASSWORD FORM ............-->
-                    <div class="field col-12 md:col-4">
-                        <h:form>
-                            <h5 class="mt-0">Password</h5>
-                            <div class="field grid">
-                                <p:outputLabel for="pwd1" styleClass="col-fixed" style="width:100px"
-                                               value="Enter new password"/>
-                                <div class="col">
-                                    <p:password id="pwd1" value="#{userDetailController.user.password}" match="pwd2"
-                                                label="Password 1" required="true" feedback="true" toggleMask="true"
-                                                redisplay="true" disabled="true"/>
-                                </div>
-                            </div>
-
-                            <div class="field grid">
-                                <p:outputLabel for="pwd2" styleClass="col-fixed" style="width:100px"
-                                               value="Repeat new password"/>
-                                <div class="col">
-                                    <p:password id="pwd2" value="#{userDetailController.user.password}"
-                                                label="Password 2" required="true" feedback="true" toggleMask="true"
-                                                redisplay="true" disabled="true"/>
-                                </div>
-                            </div>
-                        </h:form>
-                    </div>
-
-                    <!-- ................ CHANGE PROFILE PICTURE............-->
-                    <div class="field col-12 md:col-4">
-                        <div class="col-12">
-                            <div class="card">
-                                <h:form>
-                                    <h5>Upload new Profile picture (Feature in Development)</h5>
-                                    <p:fileUpload disabled="true" listener="#{fileUploadController.handleFileUpload}" mode="advanced"
-                                                  dragDropSupport="false"
-                                                  multiple="true" update="messages" sizeLimit="50000000" fileLimit="3"
-                                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width:100%"/>
-                                    <p:growl id="messages" showDetail="false"/>
-                                </h:form>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                    <!-- ................ SAVE BUTTON ............-->
-                    <p:commandButton value="Save"
-                                     action="#{userDetailController.doSaveOwnUser()}"
-                                     update=":userForm"/>
-
-                    </div>
+                <!-- ................ EDIT FIELDS PANEL............-->
+                <div class="field col-12 md:col-4 xl:col-4">
+                    <p:outputPanel id="userData" rendered="#{not empty userDetailController.user}">
+                        <h5 class="mt-0">User Data </h5>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel for="username" value="Username: "/>
+                            <p:inputText id="username" value="#{userDetailController.user.username}"/>
+                            <p:outputLabel for="firstName" value="First Name: "/>
+                            <p:inputText id="firstName" value="#{userDetailController.user.firstName}"/>
+                            <p:outputLabel for="firstName" value="Last Name: "/>
+                            <p:inputText id="lastName" value="#{userDetailController.user.lastName}"/>
+                            <p:outputLabel for="email" value="E-Mail: "/>
+                            <p:inputText id="email" value="#{userDetailController.user.email}"/>
+                            <p:outputLabel for="phone" value="Phone Number: "/>
+                            <p:inputMask id="phone" value="#{userDetailController.user.phone}"
+                                         mask="+99 999 9999999"/>
+                            <p:selectManyCheckbox id="roles" value="#{userDetailController.user.roles}"
+                                                  disabled="true">
+                                <f:selectItem itemLabel="ADMIN" itemValue="ADMIN"/>
+                                <f:selectItem itemLabel="GARDENER" itemValue="GARDENER"/>
+                            </p:selectManyCheckbox>
+                            <!-- ................ SAVE BUTTON ............-->
+                            <p:commandButton value="Save"
+                                             action="#{userDetailController.doSaveOwnUser()}"
+                                             update=":userForm"
+                                             oncomplete="location.reload();"/>
+                        </h:panelGrid>
+                    </p:outputPanel>
                 </div>
             </h:form>
+
         </div>
+
+
+        <!-- ................ EDIT PASSWORD FORM ............-->
+        <div class="card">
+            <h:form>
+                <h5 class="mt-0">Password</h5>
+                <div class="field grid">
+                    <p:outputLabel for="pwd1" styleClass="col-fixed" style="width:100px"
+                                   value="Enter new password"/>
+                    <div class="col">
+                        <p:password id="pwd1" value="#{userDetailController.newPassword}" match="pwd2"
+                                    label="Password 1" required="false" feedback="true" toggleMask="true"
+                                    redisplay="true"/>
+                    </div>
+                </div>
+
+                <div class="field grid">
+                    <p:outputLabel for="pwd2" styleClass="col-fixed" style="width:100px"
+                                   value="Repeat new password"/>
+                    <div class="col">
+                        <p:password id="pwd2" value="#{userDetailController.newPassword}"
+                                    label="Password 2" required="false" feedback="true" toggleMask="true"
+                                    redisplay="true"/>
+                    </div>
+                </div>
+                <p:commandButton value="Change password"
+                                 action="#{userDetailController.doChangePassword()}"
+                                 update=":userForm"
+                                 oncomplete="location.reload();"/>
+
+            </h:form>
+        </div>
+
+        <!-- ................ CHANGE PROFILE PICTURE............-->
+        <div class="card">
+            <h:form>
+                <h5>Upload new Profile picture (Feature in Development)</h5>
+                <p:fileUpload disabled="true" listener="#{fileUploadController.handleFileUpload}" mode="advanced"
+                              dragDropSupport="false"
+                              multiple="true" update="messages" sizeLimit="50000000" fileLimit="3"
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width:100%"/>
+                <p:growl id="messages" showDetail="false"/>
+            </h:form>
+        </div>
+
+
+
+        </div>
+
 
     </ui:define>
 </ui:composition>

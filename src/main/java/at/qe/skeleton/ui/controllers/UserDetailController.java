@@ -64,7 +64,7 @@ public class UserDetailController implements Serializable {
      * Attribute to cache the currently displayed user
      */
     private Userx user;
-
+    private String newPassword;
     /**
      * Returns the currently displayed user.
      */
@@ -139,11 +139,29 @@ public class UserDetailController implements Serializable {
         logRepository.save(createLog);
     }
 
+    public void doChangePassword() {
+        if( newPassword != null && !Objects.equals(passwordEncoder.encode(newPassword), passwordEncoder.encode(user.getPassword()))){
+            user.setPassword(passwordEncoder.encode(newPassword));
+        }
+        this.userService.saveUser(user);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User saved successfully!", null));
+        Log createLog = new Log();
+        createLog.setDate(LocalDate.now());
+        createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        createLog.setAuthor(sessionInfoBean.getCurrentUserName());
+        createLog.setSubject("USER EDIT");
+        createLog.setText("EDITED USER: " + user.getUsername());
+        createLog.setType(LogType.SUCCESS);
+        logRepository.save(createLog);
+    }
+
 
     /**
      * Action to delete the currently displayed user.
      */
     public void doDeleteUser() {
+        user.setCreateUser(null);
+        user.setUpdateUser(null);
         this.userService.deleteUser(user);
         user = null;
     }
