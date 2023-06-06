@@ -5,9 +5,20 @@ import at.qe.skeleton.services.MeasurementService;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.services.SensorStationService;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.event.ActionListener;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.ScheduleEvent;
+
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.ScheduleEvent;
+import org.primefaces.model.ScheduleModel;
+
+
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.axes.cartesian.CartesianScales;
 import org.primefaces.model.charts.axes.cartesian.linear.CartesianLinearAxes;
@@ -40,6 +51,9 @@ public class GraphController implements Serializable {
     private transient MeasurementService measurementService;
     @Autowired
     private transient SensorStationService sensorService;
+
+
+    private ScheduleEvent event = new DefaultScheduleEvent();
 
 
     /**
@@ -84,11 +98,22 @@ public class GraphController implements Serializable {
     public void onRowSelectLineChart(SelectEvent<Measurement> event) {
         Measurement measurement = event.getObject();
         sensorStation = measurement.getSensorStation();
-        createCartesianLinerModel();
+        //createCartesianLinerModel();         WHY WAS THIS HERE???????
         latestMeasurements = new ArrayList<>(measurementService.getAllMeasurementsBySensorStationAndTypeAsc(sensorStation, measurement.getType()));
         if (!latestMeasurements.isEmpty()) {
             createLineModel(latestMeasurements);
         }
+    }
+
+    public void refreshGraphWithNewTime() {
+        System.out.println(event.getStartDate());
+        System.out.println(event.getEndDate());
+        if (event.getStartDate() == null && event.getEndDate() == null) {
+            return;
+        }
+
+        System.out.println(event.getStartDate());
+        System.out.println(event.getEndDate());
     }
 
 
@@ -194,7 +219,7 @@ public class GraphController implements Serializable {
      */
     public void createLineModel(List<Measurement> measurements) {
         lineModel = new LineChartModel();
-        ChartData Air_Temperature = new ChartData();
+        ChartData chartData = new ChartData();
         LineChartDataSet dataSet = new LineChartDataSet();
 
 
@@ -216,9 +241,9 @@ public class GraphController implements Serializable {
         dataSet.setLabel(measurements.get(0).getType());
         dataSet.setBorderColor("rgb(75, 192, 192)");
         dataSet.setTension(0.1);
-        Air_Temperature.addChartDataSet(dataSet);
+        chartData.addChartDataSet(dataSet);
 
-        Air_Temperature.setLabels(labels);
+        chartData.setLabels(labels);
 
         //Options
         LineChartOptions options = new LineChartOptions();
@@ -228,8 +253,11 @@ public class GraphController implements Serializable {
         options.setTitle(title);
 
         lineModel.setOptions(options);
-        lineModel.setData(Air_Temperature);
+        lineModel.setData(chartData);
     }
+
+
+    //WHAT IS THISSSS???????
 
     public void createLineModel() {
         lineModel = new LineChartModel();
@@ -268,8 +296,9 @@ public class GraphController implements Serializable {
         lineModel.setData(Air_Temperature);
     }
 
-
+    //WAS IST DASSSS????
     public void createCartesianLinerModel() {
+        System.out.println("ora qui");
         cartesianLinerModel = new LineChartModel();
         ChartData data = new ChartData();
 
@@ -335,4 +364,6 @@ public class GraphController implements Serializable {
 
         cartesianLinerModel.setOptions(options);
     }
+
+
 }

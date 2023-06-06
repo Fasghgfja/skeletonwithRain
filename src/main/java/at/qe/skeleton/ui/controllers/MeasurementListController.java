@@ -204,6 +204,10 @@ public class MeasurementListController implements Serializable {
         SensorStation sensorStation = sensorStationDetailController.getSensorStation();
         return measurementService.getLastMeasurementBySensorStationAndType(sensorStation, type);
     }
+
+    public List<MeasurementType> getAllTypes() {
+        return java.util.Arrays.asList(MeasurementType.values());
+    }
 }
 
 

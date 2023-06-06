@@ -24,93 +24,93 @@
 
 
 
-                    <div class="ui-toolbar ui-widget ui-widget-header ui-corner-all" role="toolbar" style=" display: flex;    ">
+            <div class="ui-toolbar ui-widget ui-widget-header ui-corner-all" role="toolbar" style=" display: flex;    ">
 
-                    <!-- ...............................TEMPERATURE BOX................................................ -->
-                    <div class="col-12 md:col-6 xl:col-1">
-                        <p:commandLink action="#{measurementListController.onTempClick()}"
-                                       update="myDataTable1 mylineChart">
-                            <div class="card  overview-box">
-                                <p:graphicImage name="images/dashboard/effect-useronline.svg"/>
-                                <span class="overview-icon">
+                <!-- ...............................TEMPERATURE BOX................................................ -->
+                <div class="col-12 md:col-6 xl:col-1">
+                    <p:commandLink action="#{measurementListController.onTempClick()}"
+                                   update="myDataTable1 mylineChart">
+                        <div class="card  overview-box">
+                            <p:graphicImage name="images/dashboard/effect-useronline.svg"/>
+                            <span class="overview-icon">
                                 <p:graphicImage url="../resources/images/pages/greenhouseDetails/termometerTopBox.png"/>
                                 </span>
-                                <div class="overview">
-                                    <span class="overview-title">TEMPERATURE</span>
-                                    <h3>
-                                        <h:outputText value="#{measurementListController.getLastTemperatureMeasurementValue().length() gt 6 ? measurementListController.getLastTemperatureMeasurementValue().subSequence(0,6) : measurementListController.getLastTemperatureMeasurementValue() }"/>
-                                        C
-                                    </h3>
-                                </div>
+                            <div class="overview">
+                                <span class="overview-title">TEMPERATURE</span>
+                                <h3>
+                                    <h:outputText value="#{measurementListController.getLastTemperatureMeasurementValue().length() gt 6 ? measurementListController.getLastTemperatureMeasurementValue().subSequence(0,6) : measurementListController.getLastTemperatureMeasurementValue() }"/>
+                                    C
+                                </h3>
                             </div>
-                        </p:commandLink>
-                    </div>
+                        </div>
+                    </p:commandLink>
+                </div>
 
-                    <!-- ...............................AIR HUMIDITY BOX............................................... -->
-                    <div class="col-12 md:col-6 xl:col-1">
-                        <p:commandLink action="#{measurementListController.onAirHumidityClick()}"
-                                       update="myDataTable1 mylineChart">
-                            <div class="card overview-box">
-                                <p:graphicImage name="images/dashboard/effect-checkins.svg"/>
-                                <span class="overview-icon">
+                <!-- ...............................AIR HUMIDITY BOX............................................... -->
+                <div class="col-12 md:col-6 xl:col-1">
+                    <p:commandLink action="#{measurementListController.onAirHumidityClick()}"
+                                   update="myDataTable1 mylineChart">
+                        <div class="card overview-box">
+                            <p:graphicImage name="images/dashboard/effect-checkins.svg"/>
+                            <span class="overview-icon">
                                 <p:graphicImage url="../resources/images/pages/greenhouseDetails/leaf.png"/>
                                 </span>
-                                <div class="overview">
-                                    <span class="overview-title">AIR HUMIDITY</span>
-                                    <h3>
-                                        <h:outputText value="#{measurementListController.getLastAirHumidityMeasurementValue().length() gt 6 ? measurementListController.getLastAirHumidityMeasurementValue().subSequence(0,6) : measurementListController.getLastAirHumidityMeasurementValue() }"/>
-                                        %
-                                    </h3>
-                                </div>
+                            <div class="overview">
+                                <span class="overview-title">AIR HUMIDITY</span>
+                                <h3>
+                                    <h:outputText value="#{measurementListController.getLastAirHumidityMeasurementValue().length() gt 6 ? measurementListController.getLastAirHumidityMeasurementValue().subSequence(0,6) : measurementListController.getLastAirHumidityMeasurementValue() }"/>
+                                    %
+                                </h3>
                             </div>
-                        </p:commandLink>
-                    </div>
+                        </div>
+                    </p:commandLink>
+                </div>
 
-                    <!-- ...............................GROUND HUMIDITY BOX............................................ -->
-                    <div class="col-12 md:col-6 xl:col-1">
-                        <p:commandLink action="#{measurementListController.onGroundHumidityClick()}"
-                                       update="myDataTable1 mylineChart">
-                            <div class="card overview-box ">
-                                <p:graphicImage name="images/dashboard/effect-filessynced.svg"/>
-                                <span class="overview-icon">
+                <!-- ...............................GROUND HUMIDITY BOX............................................ -->
+                <div class="col-12 md:col-6 xl:col-1">
+                    <p:commandLink action="#{measurementListController.onGroundHumidityClick()}"
+                                   update="myDataTable1 mylineChart">
+                        <div class="card overview-box ">
+                            <p:graphicImage name="images/dashboard/effect-filessynced.svg"/>
+                            <span class="overview-icon">
                                 <p:graphicImage url="../resources/images/pages/greenhouseDetails/watering-can3.png"/>
                                 </span>
-                                <div class="overview">
-                                    <span class="overview-title">SOIL HUMIDITY</span>
-                                    <h3>
-                                        <h:outputText value="#{measurementListController.getLastSoilMeasurementValue().length() gt 6 ? measurementListController.getLastSoilMeasurementValue().subSequence(0,6) : measurementListController.getLastSoilMeasurementValue() }"/>
-                                        %
-                                    </h3>
-                                </div>
+                            <div class="overview">
+                                <span class="overview-title">SOIL HUMIDITY</span>
+                                <h3>
+                                    <h:outputText value="#{measurementListController.getLastSoilMeasurementValue().length() gt 6 ? measurementListController.getLastSoilMeasurementValue().subSequence(0,6) : measurementListController.getLastSoilMeasurementValue() }"/>
+                                    %
+                                </h3>
                             </div>
-                        </p:commandLink>
-                    </div>
+                        </div>
+                    </p:commandLink>
+                </div>
 
-                    <!-- ...............................LIGHT INTENSITY BOX............................................ -->
-                    <div class="col-12 md:col-6 xl:col-1">
-                        <p:commandLink action="#{measurementListController.onLightIntensityClick()}"
-                                       update="myDataTable1 mylineChart">
-                            <div class="card overview-box">
-                                <p:graphicImage name="images/dashboard/effect-messages.svg"/>
-                                <span class="overview-icon">
+                <!-- ...............................LIGHT INTENSITY BOX............................................ -->
+                <div class="col-12 md:col-6 xl:col-1">
+                    <p:commandLink action="#{measurementListController.onLightIntensityClick()}"
+                                   update="myDataTable1 mylineChart">
+                        <div class="card overview-box">
+                            <p:graphicImage name="images/dashboard/effect-messages.svg"/>
+                            <span class="overview-icon">
                                 <p:graphicImage url="../resources/images/pages/greenhouseDetails/sun2.png"/>
                                 </span>
-                                <div class="overview">
-                                    <span class="overview-title">LIGHT</span>
-                                    <h3>
-                                        <h:outputText value="#{measurementListController.getLastLightMeasurementValue().length() gt 6 ? measurementListController.getLastLightMeasurementValue().subSequence(0,6) : measurementListController.getLastLightMeasurementValue() }"/>
-                                        lux
-                                    </h3>
-                                </div>
+                            <div class="overview">
+                                <span class="overview-title">LIGHT</span>
+                                <h3>
+                                    <h:outputText value="#{measurementListController.getLastLightMeasurementValue().length() gt 6 ? measurementListController.getLastLightMeasurementValue().subSequence(0,6) : measurementListController.getLastLightMeasurementValue() }"/>
+                                    lux
+                                </h3>
                             </div>
-                        </p:commandLink>
-                    </div><!-- ...............................LIGHT INTENSITY BOX END.................................. -->
+                        </div>
+                    </p:commandLink>
+                </div><!-- ...............................LIGHT INTENSITY BOX END.................................. -->
 
 
-                    <div class="px-1">
-                    </div>
+                <div class="px-1">
+                </div>
 
-                    <div class="col-12 md:col-6 xl:col-2">
+                <div class="col-12 md:col-6 xl:col-2">
                     <h:form id="myform"> <!-- .......::::::::::::::::...PLANTNAME....:::::::::::::::.......... -->
                         <h:form id="approvedImagesGallery">
                             <div class="card overview-box">
@@ -126,161 +126,161 @@
                             </div>
                         </h:form>
                     </h:form> <!-- .......::::::::::::::::...PLANT GALLERY FORM END....:::::::::::::::.......... -->
-                    </div>
+                </div>
 
-                    <div class="px-1">
-                    </div>
+                <div class="px-1">
+                </div>
 
 
-                    <!-- ...............................AIR PRESSURE BOX............................................... -->
-                    <div class="col-12 md:col-6 xl:col-1">
-                        <p:commandLink action="#{measurementListController.onAirPressureClick()}"
-                                       update="myDataTable1 mylineChart">
-                            <div class="card  overview-box">
-                                <p:graphicImage name="images/dashboard/effect-useronline.svg"/>
-                                <span class="overview-icon">
+                <!-- ...............................AIR PRESSURE BOX............................................... -->
+                <div class="col-12 md:col-6 xl:col-1">
+                    <p:commandLink action="#{measurementListController.onAirPressureClick()}"
+                                   update="myDataTable1 mylineChart">
+                        <div class="card  overview-box">
+                            <p:graphicImage name="images/dashboard/effect-useronline.svg"/>
+                            <span class="overview-icon">
                                 <p:graphicImage url="../resources/images/pages/greenhouseDetails/pressure.png"/>
                                 </span>
-                                <div class="overview">
-                                    <span class="overview-title">AIR PRESSURE</span>
-                                    <h3>
-                                        <h:outputText value="#{measurementListController.getLastPressureMeasurementValue().length() gt 6 ? measurementListController.getLastPressureMeasurementValue().subSequence(0,6) : measurementListController.getLastPressureMeasurementValue() }"/>
-                                        pa
-                                    </h3>
-                                </div>
-                            </div>
-                        </p:commandLink>
-                    </div>
-
-                    <div class="col-12 md:col-6 xl:col-1">
-                        <!-- ...............................AIR QUALITY BOX............................................ -->
-                        <p:commandLink action="#{measurementListController.onAirQualityClick()}"
-                                       update="myDataTable1 mylineChart">
-                            <div class="card overview-box">
-                                <p:graphicImage name="images/dashboard/effect-checkins.svg"/>
-                                <span class="overview-icon">
-                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/aqi.png"/>
-                                </span>
-                                <div class="overview">
-                                    <span class="overview-title">AIR QUALITY</span>
-                                    <h3>
-                                        <h:outputText value="#{measurementListController.getLastAirMeasurementValue().length() gt 6 ? measurementListController.getLastAirMeasurementValue().subSequence(0,6) : measurementListController.getLastAirMeasurementValue() }"/>
-                                        Aqi
-                                    </h3>
-                                </div>
-                            </div>
-                        </p:commandLink>
-                    </div>
-
-
-                    <div class="col-12 md:col-6 xl:col-1">
-                        <!-- ...............................Pic Approval Box............................................... -->
-                        <div class="card overview-box ">
-                            <p:graphicImage name="images/dashboard/effect-filessynced.svg"/>
-                            <span class="overview-icon">
-                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/gallery.png"/>
-                            </span>
                             <div class="overview">
-                                <span class="overview-title">PLANT GALLERY</span>
+                                <span class="overview-title">AIR PRESSURE</span>
                                 <h3>
-                                    <p:commandButton style="margin-right: 5px;"
-                                            id="b3" icon="fa fa-solid fa-check" title="Approved"
-                                            onclick="PF('galleria3').show()" disabled="#{empty sensorStationDetailController.doGetApprovedPlantImages()}"/>
-
-                                    <p:commandButton
-                                            id="b2" icon="fa fa-solid fa-question" title="Awaiting Approval"
-                                            onclick="PF('galleria2').show()" disabled="#{empty sensorStationDetailController.doGetPlantImagesNotYetApproved()}"/>
+                                    <h:outputText value="#{measurementListController.getLastPressureMeasurementValue().length() gt 6 ? measurementListController.getLastPressureMeasurementValue().subSequence(0,6) : measurementListController.getLastPressureMeasurementValue() }"/>
+                                    pa
                                 </h3>
-                                <!-- .......::::::::::::::::...AWAITING APPROVAL GALLERY FORM ....::::::::::::::::::::::.......... -->
-                                <h:form id="myform2">
-                                    <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
-
-
-
-                                    <!-- .......::::::::::::::::...AWAITING APPROVAL GALLERY ....::::::::::::::::::::::.......... -->
-                                    <p:galleria id="awaitingapprovalgallery" widgetVar="galleria2"
-                                                value="#{sensorStationDetailController.doGetPlantImagesNotYetApproved()}"
-                                                var="image"
-                                                numVisible="20"
-                                                circular="true" fullScreen="true" showItemNavigators="true"
-                                                style="max-width: 70%">
-                                        <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
-                                                        alt="#{galleryController.photoAsStreamedContent}"
-                                                        style="width: 100%; display: block">
-                                            <f:param name="id" value="#{image.id}"/>
-                                        </p:graphicImage>
-
-                                        <p:commandButton icon="fa-regular fa-thumbs-up"
-                                                         title="Approve Image #{image}"
-                                                         style="width: 10%; height: 10%; position: absolute; margin-right: 90%"
-                                                         process="@this"
-                                                         actionListener="#{galleryController.approveImage(image)}"
-                                                         update="awaitingapprovalgallery detailPage:myform3:awaitingapprovalgallery3"
-                                        />
-                                        <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}"
-                                                         style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
-                                                         process="@this"
-                                                         actionListener="#{galleryController.doDeleteImage(image)}"
-                                                         update="awaitingapprovalgallery"
-                                        />
-
-
-                                    </p:galleria>
-
-                                </h:form>
-
-                                <!-- .......::::::::::::::::...APPROVED GALLERY FORM....::::::::::::::::::::::.......... -->
-                                <h:form id="myform3">
-                                    <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
-
-
-                                    <!-- .......::::::::::::::::...APPROVED GALLERY ....::::::::::::::::::::::.......... -->
-                                    <p:galleria id="awaitingapprovalgallery3" widgetVar="galleria3"
-                                                value="#{sensorStationDetailController.doGetApprovedPlantImages()}"
-                                                var="image"
-                                                numVisible="9"
-                                                circular="true" fullScreen="true" showItemNavigators="true"
-                                                style="max-width: 70%">
-                                        <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}"
-                                                         style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
-                                                         process="@this"
-                                                         actionListener="#{galleryController.doDeleteImage(image)}"
-                                                         update="awaitingapprovalgallery3 detailPage:myform:approvedImagesGallery"
-                                        />
-                                        <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
-                                                        alt="#{galleryController.photoAsStreamedContent}"
-                                                        style="width: 100%; display: block">
-                                            <f:param name="id" value="#{image.id}"/>
-                                        </p:graphicImage>
-                                    </p:galleria>
-
-                                </h:form>
-
                             </div>
                         </div>
+                    </p:commandLink>
+                </div>
+
+                <div class="col-12 md:col-6 xl:col-1">
+                    <!-- ...............................AIR QUALITY BOX............................................ -->
+                    <p:commandLink action="#{measurementListController.onAirQualityClick()}"
+                                   update="myDataTable1 mylineChart">
+                        <div class="card overview-box">
+                            <p:graphicImage name="images/dashboard/effect-checkins.svg"/>
+                            <span class="overview-icon">
+                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/aqi.png"/>
+                                </span>
+                            <div class="overview">
+                                <span class="overview-title">AIR QUALITY</span>
+                                <h3>
+                                    <h:outputText value="#{measurementListController.getLastAirMeasurementValue().length() gt 6 ? measurementListController.getLastAirMeasurementValue().subSequence(0,6) : measurementListController.getLastAirMeasurementValue() }"/>
+                                    Aqi
+                                </h3>
+                            </div>
+                        </div>
+                    </p:commandLink>
+                </div>
+
+
+                <div class="col-12 md:col-6 xl:col-1">
+                    <!-- ...............................Pic Approval Box............................................... -->
+                    <div class="card overview-box ">
+                        <p:graphicImage name="images/dashboard/effect-filessynced.svg"/>
+                        <span class="overview-icon">
+                                <p:graphicImage url="../resources/images/pages/greenhouseDetails/gallery.png"/>
+                            </span>
+                        <div class="overview">
+                            <span class="overview-title">PLANT GALLERY</span>
+                            <h3>
+                                <p:commandButton style="margin-right: 5px;"
+                                                 id="b3" icon="fa fa-solid fa-check" title="Approved"
+                                                 onclick="PF('galleria3').show()" disabled="#{empty sensorStationDetailController.doGetApprovedPlantImages()}"/>
+
+                                <p:commandButton
+                                        id="b2" icon="fa fa-solid fa-question" title="Awaiting Approval"
+                                        onclick="PF('galleria2').show()" disabled="#{empty sensorStationDetailController.doGetPlantImagesNotYetApproved()}"/>
+                            </h3>
+                            <!-- .......::::::::::::::::...AWAITING APPROVAL GALLERY FORM ....::::::::::::::::::::::.......... -->
+                            <h:form id="myform2">
+                                <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
+
+
+
+                                <!-- .......::::::::::::::::...AWAITING APPROVAL GALLERY ....::::::::::::::::::::::.......... -->
+                                <p:galleria id="awaitingapprovalgallery" widgetVar="galleria2"
+                                            value="#{sensorStationDetailController.doGetPlantImagesNotYetApproved()}"
+                                            var="image"
+                                            numVisible="20"
+                                            circular="true" fullScreen="true" showItemNavigators="true"
+                                            style="max-width: 70%">
+                                    <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
+                                                    alt="#{galleryController.photoAsStreamedContent}"
+                                                    style="width: 100%; display: block">
+                                        <f:param name="id" value="#{image.id}"/>
+                                    </p:graphicImage>
+
+                                    <p:commandButton icon="fa-regular fa-thumbs-up"
+                                                     title="Approve Image #{image}"
+                                                     style="width: 10%; height: 10%; position: absolute; margin-right: 90%"
+                                                     process="@this"
+                                                     actionListener="#{galleryController.approveImage(image)}"
+                                                     update="awaitingapprovalgallery detailPage:myform3:awaitingapprovalgallery3"
+                                    />
+                                    <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}"
+                                                     style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
+                                                     process="@this"
+                                                     actionListener="#{galleryController.doDeleteImage(image)}"
+                                                     update="awaitingapprovalgallery"
+                                    />
+
+
+                                </p:galleria>
+
+                            </h:form>
+
+                            <!-- .......::::::::::::::::...APPROVED GALLERY FORM....::::::::::::::::::::::.......... -->
+                            <h:form id="myform3">
+                                <!-- .......::::::::::::::::...TEXT AND BUTTONS ....::::::::::::::::::::::.......... -->
+
+
+                                <!-- .......::::::::::::::::...APPROVED GALLERY ....::::::::::::::::::::::.......... -->
+                                <p:galleria id="awaitingapprovalgallery3" widgetVar="galleria3"
+                                            value="#{sensorStationDetailController.doGetApprovedPlantImages()}"
+                                            var="image"
+                                            numVisible="9"
+                                            circular="true" fullScreen="true" showItemNavigators="true"
+                                            style="max-width: 70%">
+                                    <p:commandButton icon="fa-sharp fa-solid fa-trash" title="Delete #{image}"
+                                                     style="width: 10%; height: 10%; background-color: red; position: absolute; margin-left: 90%;"
+                                                     process="@this"
+                                                     actionListener="#{galleryController.doDeleteImage(image)}"
+                                                     update="awaitingapprovalgallery3 detailPage:myform:approvedImagesGallery"
+                                    />
+                                    <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
+                                                    alt="#{galleryController.photoAsStreamedContent}"
+                                                    style="width: 100%; display: block">
+                                        <f:param name="id" value="#{image.id}"/>
+                                    </p:graphicImage>
+                                </p:galleria>
+
+                            </h:form>
+
+                        </div>
                     </div>
+                </div>
 
 
-                    <!-- ...............................TIME OF LAST MEASUREMENT BOX.................................... -->
-                    <div class="col-12 md:col-6 xl:col-1">
-                        <p:commandLink action="#{measurementListController.reSetType()}" update="myDataTable1">
-                            <div class="card overview-box">
-                                <p:graphicImage name="images/dashboard/effect-messages.svg"/>
-                                <span class="overview-icon">
+                <!-- ...............................TIME OF LAST MEASUREMENT BOX.................................... -->
+                <div class="col-12 md:col-6 xl:col-1">
+                    <p:commandLink action="#{measurementListController.reSetType()}" update="myDataTable1">
+                        <div class="card overview-box">
+                            <p:graphicImage name="images/dashboard/effect-messages.svg"/>
+                            <span class="overview-icon">
                                 <p:graphicImage url="../resources/images/pages/greenhouseDetails/measurements.png"/>
                                 </span>
-                                <div class="overview">
-                                    <span class="overview-title">ALL TYPES</span>
-                                    <h3>
-                                        <h:outputText value="#{measurementListController.measurementsAmount}"/>
-                                    </h3>
-                                </div>
+                            <div class="overview">
+                                <span class="overview-title">ALL TYPES</span>
+                                <h3>
+                                    <h:outputText value="#{measurementListController.measurementsAmount}"/>
+                                </h3>
                             </div>
-                        </p:commandLink>
-                    </div>
+                        </div>
+                    </p:commandLink>
+                </div>
 
 
-                    </div>
+            </div>
 
 
         </h:form><!-- ..........................................TOP INFO BOXES FORM END................................................ -->
@@ -292,6 +292,7 @@
 
 
                 <!-- ..........................................GRAPH................................................................... -->
+
                 <div class="col-12 md:col-12 xl:col-6">
                     <div class="card chart">
                         <div class="card-header">
@@ -306,12 +307,43 @@
 
 
                         </div>
+                        <div>
+                            <p:outputLabel for="Measurement" value="Measurement:"/>
+                            <p:selectOneMenu id="Measurement"  label="Gardeners" style="min-width: 15rem"
+                                             panelStyle="width: 30rem" scrollHeight="250"
+                                             emptyLabel="Select Measurement..." updateLabel="true">
+                                <f:selectItems  value="#{measurementListController.allTypes}"/>
+                            </p:selectOneMenu>
+                        </div>
+
+                        <div class="ui-g">
+
+
+                            <!-- ....................from............................ -->
+                            <div class="ui-g-5">
+                                <p:outputLabel for="fromDate" value="fromDate" />
+                                <p:datePicker id="fromDate" value="#{graphController.event.startDate}" pattern="yyyy-MM-dd" showTime="true"  appendTo="@(body)"  />
+                            </div>
+                            <!-- ....................to............ -->
+                            <div class="ui-g-5">
+                                <p:outputLabel for="toDate" value="toDate" />
+                                <p:datePicker id="toDate" value="#{graphController.event.endDate}" pattern="yyyy-MM-dd" showTime="true"  appendTo="@(body)" />
+                            </div>
+
+
+                            <p:commandButton icon="fa fa-refresh" title="Refresh Graph" style="width: 30px; height: 30px" >
+                                <p:ajax update="mylineChart" listener="#{graphController.refreshGraphWithNewTime()}"/>
+                            </p:commandButton>
+
+
+
+                        </div>
+
                         <div class="card">
                             <p:lineChart id="mylineChart" model="#{graphController.lineModel}"/>
                         </div>
                     </div>
                 </div>
-
 
                 <!-- .........................................MEASUREMENTS TABLE...................................................... -->
                 <div class="col-12 md:col-12 xl:col-6">
@@ -411,17 +443,9 @@
                                                      value="App: #{SSIntervalController.getActualWebAppIntervalForSensorStation(sensorStationDetailController.sensorStation)} Measurements: #{SSIntervalController.getActualMeasurementIntervalForSensorStation(sensorStationDetailController.sensorStation)}" />
 
                                         <p:outputLabel for="newPlant" value="New Plant name:"/>
-                                        <p:selectOneMenu value="#{sensorStationDetailController.selectedPlantName}"
-                                                         id="newPlant" filter="true"
-                                                         rendered="#{not empty sensorStationDetailController.sensorStation}"
-                                                         emptyLabel="Plant name"
-                                                         scrollHeight="250" updateLabel="true">
-                                            <f:selectItems value="#{plantListController.notUsedPlantsUniqueNames}"/>
-                                            <f:facet name="footer">
-                                                <p:divider styleClass="mt-0"/>
-                                                <h:outputText value="3 options" style="font-weight:bold;"/>
-                                            </f:facet>
-                                        </p:selectOneMenu>
+                                        <p:inputText id="newPlant"
+                                                     rendered="#{not empty sensorStationDetailController.sensorStation}"
+                                                     value="#{sensorStationDetailController.selectedPlantName}"/>
                                         <!-- ................ ............................................-->
                                         <p:outputLabel for="sensorStationlocation" value="Location:"/>
                                         <p:inputText id="sensorStationlocation"
@@ -452,7 +476,7 @@
                                                        icon="pi pi-exclamation-triangle"/>
                                         </p:commandButton>
 
-                                        <!-- ....................CREATE PLANT BUTTON ........... .............. -->
+                                        <!-- ....................CHANGE PLANT BUTTON ........... .............. -->
                                         <p:commandButton styleClass="ui-button-danger"
                                                          action="#{sensorStationDetailController.doChangeThePlantAndSave()}"
                                                          icon="fa fa-duotone fa-seedling"
@@ -483,7 +507,6 @@
                                     </h:panelGrid>
 
                                 </p:outputPanel>
-
 
                                 <!-- ...................................Interval Edit dialog.................................... -->
                                 <p:dialog header="Edit Access Point Intervals" id="intervalEditDialog" widgetVar="intervalEditDialog" modal="true"
