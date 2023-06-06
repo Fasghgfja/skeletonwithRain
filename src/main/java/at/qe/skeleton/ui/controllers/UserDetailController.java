@@ -3,6 +3,7 @@ package at.qe.skeleton.ui.controllers;
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.services.PlantService;
+import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.services.UserService;
 
 import java.io.InputStream;
@@ -50,6 +51,9 @@ public class UserDetailController implements Serializable {
 
     @Autowired
     private transient LogRepository logRepository;
+
+    @Autowired
+    private transient SensorStationService sensorStationService;
 
     @Autowired
     private transient PlantController plantController;
@@ -162,6 +166,7 @@ public class UserDetailController implements Serializable {
     public void doDeleteUser() {
         user.setCreateUser(null);
         user.setUpdateUser(null);
+        sensorStationService.getAllAssignedSensorStations(user).forEach( x-> {sensorStationService.removeGardenerFromSensorStation(x,user);});
         this.userService.deleteUser(user);
         user = null;
     }
