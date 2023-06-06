@@ -124,7 +124,7 @@ public class SensorStationServiceApi {
             for (SensorApi s :
                     sensorApi) {
                 Sensor sensor = new Sensor();
-                sensor.setId(s.getSensor_id());
+                //sensor.setId(s.getSensor_id());
                 sensor.setSensorStation(sensorStationRepository.findFirstById(s.getStation_name()));
                 sensor.setUuid(s.getUuid());
                 sensor.setType(s.getType());
@@ -134,6 +134,7 @@ public class SensorStationServiceApi {
                 sensorService.saveSensor(sensor);
             }
         }catch (Exception e){
+            System.out.println(e.toString());
             throw new SensorNotFoundException();
         }
         return Response.SC_OK;
@@ -147,7 +148,8 @@ public class SensorStationServiceApi {
     public void updateSensor(List<SensorApi> sensorApi) throws SensorStationNotFoundException{
         for (SensorApi s:
              sensorApi) {
-            Sensor sensor = sensorService.loadSensor(s.getSensor_id());
+            Sensor sensor = sensorService.getSensorForSensorStation(
+                    sensorStationRepository.findFirstById(s.getStation_name()),s.getType());
             if(sensor != null){
                 sensor.setAlarm_count(s.getAlarm_count());
                 sensorService.saveSensor(sensor);

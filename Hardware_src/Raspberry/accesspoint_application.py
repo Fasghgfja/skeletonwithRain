@@ -17,7 +17,7 @@ if __name__ == '__main__':
     print("Application startup {0}".format(datetime.now()))
     print("Implement database this will need 15 seconds")
     DB_connection.implement_database()
-    time.sleep(SECTION_SLEEP)
+    #time.sleep(SECTION_SLEEP)
 
     program_state = 0
     start_measurement_interval_time = datetime.now()
@@ -66,8 +66,8 @@ if __name__ == '__main__':
 
                 else:
                     time.sleep(5)
-                    #program_state = program_status.Is.READ_SENSOR_VALUES.value
-                    program_state = -1
+                    program_state = program_status.Is.READ_SENSOR_VALUES.value
+                    #program_state = -1
 
 
 
