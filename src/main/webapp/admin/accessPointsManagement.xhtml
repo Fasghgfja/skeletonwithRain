@@ -73,10 +73,6 @@
                                 <h:outputText value="#{accessPoint.location}"/>
                             </p:column>
 
-                            <p:column style="" headerText="Intervals">
-                                <h:outputText value="W:#{SSIntervalController.getActualWebAppIntervalForAccessPoint(accessPoint.id)}  "/>
-                                <h:outputText value=" M:#{SSIntervalController.getActualMeasurementIntervalForAccessPoint(accessPoint.id)} "/>
-                            </p:column>
 
 
                             <p:column style="width: 5%;text-align: center" headerText="Validated"
@@ -94,11 +90,7 @@
                                     <f:setPropertyActionListener value="#{accessPoint}" target="#{accessPointController.accessPoint}"/>
                                 </p:commandButton>
 
-                                <!-- .................... INTERVALS BUTTON ........... .............. -->
-                                <p:commandButton style="margin-right: 2px; background-color: orange" update="accessPointsForm:intervalEditDialog"
-                                                 oncomplete="PF('intervalEditDialog').show()" icon="fa fa-solid fa-sliders" title="Intervals">
-                                    <f:setPropertyActionListener value="#{accessPoint.id}" target="#{SSIntervalController.accessPointId}"/>
-                                </p:commandButton>
+
 
                                 <!-- .................... DELETE BUTTON ........... .............. -->
                                 <p:commandButton style="margin-right: 2px" class="ui-button-danger" icon="pi pi-trash" title="Delete"
@@ -115,30 +107,6 @@
                     </div>
                 </div>
             </div>
-
-
-            <!-- ...................................Interval Edit dialog.................................... -->
-            <p:dialog header="Edit Access Point Intervals" id="intervalEditDialog" widgetVar="intervalEditDialog" modal="true"
-                      showEffect="fade" hideEffect="fade" resizable="false">
-                <p:outputPanel id="intervalData">
-                    <h:panelGrid columns="1">
-
-                        <p:outputLabel for="mInterval" value="New Interval Webapp: (minutes):"/>
-                        <p:inputText id="mInterval" value="#{SSIntervalController.webAppInterval}" />
-                        <p:outputLabel for="sinterval" value="New Interval Measurements: (minutes)"/>
-                        <p:inputText id="sinterval"  value="#{SSIntervalController.measurementInterval}"/>
-
-                    </h:panelGrid>
-                    <h:panelGrid columns="3">
-                        <p:commandButton value="Save New Intervals" action="#{SSIntervalController.doSaveInterval()}"
-                                         oncomplete="PF('intervalEditDialog').hide();location.reload()" update="accessPointsTable"/>
-                        <p:commandButton value="Abort" onclick="PF('intervalEditDialog').hide()"/>
-
-                    </h:panelGrid>
-                </p:outputPanel>
-            </p:dialog>
-
-
 
         </h:form>
 

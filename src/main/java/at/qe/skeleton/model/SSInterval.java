@@ -25,7 +25,7 @@ public class SSInterval implements Persistable<Long>, Serializable, Comparable<S
     private Long intervalId;
 
     @OneToOne
-    private AccessPoint accessPoint;
+    private SensorStation sensorStation;
     @Column(length = 100)
     private String measurementInterval;
     @Column(length = 100)

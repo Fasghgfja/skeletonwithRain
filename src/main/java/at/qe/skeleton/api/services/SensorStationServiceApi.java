@@ -191,10 +191,9 @@ public class SensorStationServiceApi {
      * @return
      * @throws SensorStationNotFoundException
      */
-    public SendingIntervalFrame findSendingIntervalByAccesspointID(Long id) throws SensorStationNotFoundException{
-
-        SSInterval ssInterval = intervalService.getFirstByAccessPointId(id);
-        List<SensorStation> sensorStation = sensorStationRepository.findAllByAccessPoint_AccessPointID(id);
+    public SendingIntervalFrame findSendingIntervalBySensorStationID(String id) throws SensorStationNotFoundException{
+//TODO : here
+        SSInterval ssInterval = intervalService.getFirstBySensorStationId(id);
 
         SendingIntervalFrame sendingIntervalFrame = new SendingIntervalFrame();
         sendingIntervalFrame.setMeasurementInterval(Integer.parseInt(ssInterval.getMeasurementInterval()));

@@ -105,7 +105,7 @@ public class SensorStationApiController {
     @GetMapping("/api/sendinterval/{id}")
     SendingIntervalFrame getSendingInterval(@PathVariable("id") String id) {
         try {
-            return sensorStationServiceApi.findSendingIntervalByAccesspointID(Long.valueOf(id));
+            return sensorStationServiceApi.findSendingIntervalBySensorStationID(id);//TODO: here
         }catch (SensorStationNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

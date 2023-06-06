@@ -3,6 +3,7 @@ package at.qe.skeleton.ui.controllers;
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.services.AccessPointService;
 import at.qe.skeleton.services.IntervalService;
+import at.qe.skeleton.services.SensorStationService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,23 +23,23 @@ public class SSIntervalController implements Serializable {
     @Autowired
     private transient IntervalService intervalService;
     @Autowired
-    private transient AccessPointService accessPointService;
+    private transient SensorStationService sensorStationService;
 
 
     private Integer measurementInterval;
     private Integer webAppInterval;
 
     private SSInterval sSinterval;
-    private Long accessPointId;
+    private String ssId;
 
 
     public void doSaveInterval() {
         sSinterval = new SSInterval();
-        AccessPoint accessPoint = accessPointService.loadAccessPoint(accessPointId);
-        SSInterval oldInterval = intervalService.getFirstByAccessPointId(accessPointId);
+        SensorStation sensorStation = sensorStationService.loadSensorStation(ssId);
+        SSInterval oldInterval = intervalService.getFirstBySensorStationId(ssId);
 
         if (oldInterval == null) {
-            sSinterval.setAccessPoint(accessPoint);
+            sSinterval.setSensorStation(sensorStation);
             if (measurementInterval != null) {
                 sSinterval.setMeasurementInterval(measurementInterval.toString());
             }
@@ -57,8 +58,8 @@ public class SSIntervalController implements Serializable {
         }
     }
 
-    public String getActualMeasurementIntervalForAccessPoint(Long tAccessPointId) {
-        SSInterval oldInterval = intervalService.getFirstByAccessPointId(tAccessPointId);
+    public String getActualMeasurementIntervalForSensorStation(String sensorStationId) {
+        SSInterval oldInterval = intervalService.getFirstBySensorStationId(sensorStationId);
         if (oldInterval != null) {
             if (oldInterval.getMeasurementInterval() == null) {
                 return DEFAULT;
@@ -67,8 +68,8 @@ public class SSIntervalController implements Serializable {
         } else return DEFAULT;
     }
 
-    public String getActualWebAppIntervalForAccessPoint(Long tAccessPointId) {
-        SSInterval oldInterval = intervalService.getFirstByAccessPointId(tAccessPointId);
+    public String getActualWebAppIntervalForSensorStation(String sensorStationId) {
+        SSInterval oldInterval = intervalService.getFirstBySensorStationId(sensorStationId);
         if (oldInterval != null) {
             if (oldInterval.getWebAppInterval() == null) {
                 return DEFAULT;

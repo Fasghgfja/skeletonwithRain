@@ -408,7 +408,7 @@
 
                                         <p:outputLabel for="mInterval" value="Intervals: (minutes):"/>
                                         <p:inputText id="mInterval" disabled="true"
-                                                     value="App: #{SSIntervalController.getActualWebAppIntervalForAccessPoint(sensorStationDetailController.sensorStation.accessPoint.id)} Measurements: #{SSIntervalController.getActualMeasurementIntervalForAccessPoint(sensorStationDetailController.sensorStation.accessPoint.id)}" />
+                                                     value="App: #{SSIntervalController.getActualWebAppIntervalForSensorStation(sensorStationDetailController.sensorStation)} Measurements: #{SSIntervalController.getActualMeasurementIntervalForSensorStation(sensorStationDetailController.sensorStation)}" />
 
                                         <p:outputLabel for="newPlant" value="New Plant name:"/>
                                         <p:inputText id="newPlant"

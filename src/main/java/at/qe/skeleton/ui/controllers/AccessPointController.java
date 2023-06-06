@@ -87,7 +87,6 @@ public class AccessPointController implements Serializable {
      */
 
     public void doDeleteAccessPoint(){
-        intervalService.deleteIntervalByAccessPoint(accessPoint);
         sensorStationService.removeAccessPointFromSensorStations(accessPoint);
 
         accessPointService.deleteAccessPoint(accessPoint);

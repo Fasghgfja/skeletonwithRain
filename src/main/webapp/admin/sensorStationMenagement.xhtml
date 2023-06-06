@@ -106,6 +106,13 @@
                             <h:outputText value="#{sensorStation.gardener}"/>
                         </p:column>
 
+
+                        <p:column style="" headerText="Intervals">
+                            <h:outputText value="W:#{SSIntervalController.getActualWebAppIntervalForSensorStation(sensorStation)}  "/>
+                            <h:outputText value=" M:#{SSIntervalController.getActualMeasurementIntervalForSensorStation(sensorStation)} "/>
+                        </p:column>
+
+
                         <p:column style="width: 8%" headerText="Alarm Status">
                             <i class="#{measurementListController.getMeasurementTypeIcon('AIR_PRESSURE')}"
                                style="color:#{measurementListController.getSensorStatus('AIR_PRESSURE',sensorStation) == 'OK' ? 'green' : 'red'}"
@@ -145,6 +152,13 @@
                             <p:button style="margin-right: 2px" icon="pi pi-search"
                                              title="open Detail-View"
                                              href="/greenHouseDetails.xhtml?id=#{sensorStation.id}" />
+
+
+                            <!-- .................... INTERVALS BUTTON ........... .............. -->
+                            <p:commandButton style="margin-right: 2px; background-color: orange" update=":userForm"
+                                             oncomplete="PF('intervalEditDialog').show()" icon="fa fa-solid fa-sliders" title="Intervals">
+                                <f:setPropertyActionListener value="#{sensorStation.id}" target="#{SSIntervalController.ssId}"/>
+                            </p:commandButton>
 
                             <!-- ....................SENSOR STATION pairing BUTTON ........... .............. -->
                             <p:commandButton  style="margin-right: 2px; background-color: darkorange" update=":userForm:pairingDialog"
@@ -220,7 +234,26 @@
 
 
             <!-- .......................................DIALOGS...................................................................... -->
+            <!-- ...................................Interval Edit dialog.................................... -->
+            <p:dialog header="Edit Access Point Intervals" id="intervalEditDialog" widgetVar="intervalEditDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="intervalData">
+                    <h:panelGrid columns="1">
 
+                        <p:outputLabel for="mInterval" value="New Interval Webapp: (minutes):"/>
+                        <p:inputText id="mInterval" value="#{SSIntervalController.webAppInterval}" />
+                        <p:outputLabel for="sinterval" value="New Interval Measurements: (minutes)"/>
+                        <p:inputText id="sinterval"  value="#{SSIntervalController.measurementInterval}"/>
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
+                        <p:commandButton value="Save New Intervals" action="#{SSIntervalController.doSaveInterval()}"
+                                         oncomplete="PF('intervalEditDialog').hide();location.reload()" update="sensorStationTable"/>
+                        <p:commandButton value="Abort" onclick="PF('intervalEditDialog').hide()"/>
+
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
 
 
             <!-- ...................................PAIR WITH Access point..DIALOG.................................. -->

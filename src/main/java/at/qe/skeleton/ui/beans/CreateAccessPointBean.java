@@ -55,14 +55,7 @@ public class CreateAccessPointBean implements Serializable {
         AccessPoint accessPoint = new AccessPoint();
         accessPoint.setValidated(false);
         accessPoint.setLocation(location);
-        SSInterval interval = new SSInterval();
-        interval.setWebAppInterval("1");
-        interval.setMeasurementInterval("1");
-
         accessPoint = accessPointService.saveAccessPoint(accessPoint);
-        interval.setAccessPoint(accessPoint);
-        intervalService.saveInterval(interval);
-
         try {
             successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);
             successFileHandler.setFormatter(new SimpleFormatter());

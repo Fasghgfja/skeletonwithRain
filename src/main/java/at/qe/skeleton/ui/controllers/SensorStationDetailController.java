@@ -43,6 +43,9 @@ public class SensorStationDetailController implements Serializable {
     private transient SensorService sensorService;
 
     @Autowired
+    private transient IntervalService intervalService;
+
+    @Autowired
     private transient MeasurementService measurementService;
     @Autowired
     private transient PlantService plantService;
@@ -249,6 +252,7 @@ public class SensorStationDetailController implements Serializable {
 
 
     public void doDeleteSensorStation() {
+        intervalService.deleteIntervalBySensorStationId(sensorStation.getId());
         this.sensorStationService.deleteSensorStation(sensorStation);
         try {
             successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);

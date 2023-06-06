@@ -2,8 +2,10 @@ package at.qe.skeleton.ui.beans;
 
 import at.qe.skeleton.model.Log;
 import at.qe.skeleton.model.LogType;
+import at.qe.skeleton.model.SSInterval;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.repositories.LogRepository;
+import at.qe.skeleton.services.IntervalService;
 import at.qe.skeleton.services.SensorStationService;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,6 +40,9 @@ public class CreateSensorStationBean implements Serializable {
     private SessionInfoBean sessionInfoBean;
 
     @Autowired
+    private IntervalService intervalService;
+
+    @Autowired
     private transient LogRepository logRepository;
 
     private final transient Logger successLogger = Logger.getLogger("SuccessLogger");
@@ -56,8 +61,12 @@ public class CreateSensorStationBean implements Serializable {
         sensorStation.setAlarmSwitch("off");
         sensorStation.setDescription(description);
         sensorStation.setAlarmCountThreshold(Objects.requireNonNullElse(alarmCountThreshold, 5));
-
+        SSInterval interval = new SSInterval();
+        interval.setWebAppInterval("1");
+        interval.setMeasurementInterval("1");
         sensorStation = sensorStationService.saveSensorStation(sensorStation);
+        interval.setSensorStation(sensorStation);
+        intervalService.saveInterval(interval);
 
         try {
             successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);

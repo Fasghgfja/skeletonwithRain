@@ -238,3 +238,17 @@ May 19, 2023 9:50:26 AM at.qe.skeleton.ui.controllers.GalleryController doDelete
 INFO: IMAGE DELETED: -35
 May 19, 2023 9:52:55 AM at.qe.skeleton.ui.controllers.GalleryController approveImage
 INFO: IMAGE APPROVED: -36
+Jun 06, 2023 1:16:22 PM at.qe.skeleton.ui.beans.CreateSensorStationBean doCreateNewCreateSensorStation
+INFO: CREATED SENSOR STATION: asd
+Jun 06, 2023 1:47:32 PM at.qe.skeleton.ui.beans.CreateAccessPointBean doCreateNewAccessPoint
+INFO: CREATED ACCESSPOINT: 1
+Jun 06, 2023 1:48:06 PM at.qe.skeleton.ui.controllers.AccessPointController doValidateAccessPoint
+INFO: ACCESS POINT VALIDATED: 1
+Jun 06, 2023 1:48:11 PM at.qe.skeleton.ui.controllers.AccessPointController doDeleteAccessPoint
+INFO: DELETED AP: 1
+Jun 06, 2023 1:48:15 PM at.qe.skeleton.ui.beans.CreateAccessPointBean doCreateNewAccessPoint
+INFO: CREATED ACCESSPOINT: 2
+Jun 06, 2023 1:48:57 PM at.qe.skeleton.ui.controllers.SensorStationDetailController doDeleteSensorStation
+INFO: SENSOR STATION DELETED: asd
+Jun 06, 2023 1:49:00 PM at.qe.skeleton.ui.beans.CreateSensorStationBean doCreateNewCreateSensorStation
+INFO: CREATED SENSOR STATION: asdasd
