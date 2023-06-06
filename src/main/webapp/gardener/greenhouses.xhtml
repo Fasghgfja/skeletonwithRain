@@ -126,19 +126,19 @@
 
 
                             <!-- ...........BUTTON TO OPEN QR CODE GENERATION PAGE......... -->
-                            <p:button style="margin-right: 10px" icon="pi pi-qrcode" disabled="#{sensorStation.plant == null}"
+                            <p:button style="margin-right: 2px" icon="pi pi-qrcode" disabled="#{sensorStation.plant == null}"
                                       title="Generate QR-Code"
                                       href="/generateQrCode.xhtml?id=#{sensorStation.plant.plantID}">
                             </p:button>
 
                             <!-- DetailView page Button -->
-                            <p:button style="margin-right: 10px"
+                            <p:button style="margin-right: 2px"
                                       icon="pi pi-search"
                                       title="open Detail-View"
                                       href="/greenHouseDetails.xhtml?id=#{sensorStation.id}" />
 
                             <!-- ....................SENSOR STATION EDIT BUTTON ........... .............. -->
-                            <p:commandButton style="margin-right: 10px" update=":userForm:userEditDialog"
+                            <p:commandButton style="margin-right: 2px"  update=":userForm:userEditDialog"
                                              oncomplete="PF('userEditDialog').show()" icon="pi pi-user-edit" title="Edit">
                                 <f:setPropertyActionListener value="#{sensorStation}" target="#{sensorStationDetailController.sensorStation}"/>
                             </p:commandButton>

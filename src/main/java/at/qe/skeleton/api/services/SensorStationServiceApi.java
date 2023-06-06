@@ -1,6 +1,8 @@
 package at.qe.skeleton.api.services;
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,14 +11,12 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import at.qe.skeleton.api.exceptions.SensorNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
-import at.qe.skeleton.api.model.BoarderValueFrame;
-import at.qe.skeleton.api.model.SendingIntervalFrame;
-import at.qe.skeleton.api.model.SensorApi;
-import at.qe.skeleton.api.model.SensorStationApi;
+import at.qe.skeleton.api.model.*;
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.*;
 import at.qe.skeleton.services.AccessPointService;
 import at.qe.skeleton.services.IntervalService;
+import at.qe.skeleton.services.LogService;
 import at.qe.skeleton.services.SensorService;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +47,11 @@ public class SensorStationServiceApi {
     AccessPointService accessPointService;
     @Autowired
     IntervalService intervalService;
+    @Autowired
+    LogService logService;
     private static final AtomicLong ID_COUNTER = new AtomicLong(1);
     private static final ConcurrentHashMap<Long, SensorStation> sensorStations = new ConcurrentHashMap<>();
     private static final int NOITEMFOUND = 0;
-    private static final int INITVALUE = 0;
-    // TODO call sensorStations via senseorStationService, not via sensorStationRepositrory
 
     /**
      * This method is called to update senorstations
@@ -85,16 +85,21 @@ public class SensorStationServiceApi {
     }
 
     /**
+     * This method is used to check if a accesspoint is validated
+     * @param id
+     * @return
+     * @throws SensorStationNotFoundException
+     */
+    public boolean isValidated(Long id) throws SensorStationNotFoundException {
+        AccessPoint toValidateaccessPoint = accessPointService.loadAccessPoint(id);
+        return toValidateaccessPoint.isValidated();
+    }
+    /**
      * This method is called to find all sensorStationsby AccessPoint
      * @return
      * @throws SensorStationNotFoundException
      */
     public List<String> findAllSensorStation(Long id) throws SensorStationNotFoundException {
-        AccessPoint toValidateaccessPoint = accessPointService.loadAccessPoint(id);
-        if(!toValidateaccessPoint.isValidated()){
-            toValidateaccessPoint.setValidated(true);
-            accessPointService.saveAccessPoint(toValidateaccessPoint);
-        }
         List<SensorStation> sensorStations1 = sensorStationRepository.findAllByAccessPoint_AccessPointID(id);
         ArrayList<String> stationNames = new ArrayList<>();
         if( sensorStations1.size() != NOITEMFOUND){
@@ -149,6 +154,13 @@ public class SensorStationServiceApi {
             }else throw new SensorStationNotFoundException();
         }
     }
+
+    /**
+     * This method is used to call the boarder values for all Sensors they are mapped with an accesspoint via Sensorstation
+     * @param id
+     * @return
+     * @throws SensorStationNotFoundException
+     */
     public ArrayList<BoarderValueFrame> findSensorsByAccesspointID(Long id) throws SensorStationNotFoundException{
         List<SensorStation> sensorStationList = sensorStationRepository.findAllByAccessPoint_AccessPointID(id);
         ArrayList<Sensor> sensorList = new ArrayList<>();
@@ -170,6 +182,13 @@ public class SensorStationServiceApi {
         }
         return boarderValueFrameArrayList;
     }
+
+    /**
+     * This method is used to call the measurement and webapp interval for a given accesspoint
+     * @param id
+     * @return
+     * @throws SensorStationNotFoundException
+     */
     public SendingIntervalFrame findSendingIntervalByAccesspointID(Long id) throws SensorStationNotFoundException{
 
         SSInterval ssInterval = intervalService.getFirstByAccessPointId(id);
@@ -178,7 +197,30 @@ public class SensorStationServiceApi {
         SendingIntervalFrame sendingIntervalFrame = new SendingIntervalFrame();
         sendingIntervalFrame.setMeasurementInterval(Integer.parseInt(ssInterval.getMeasurementInterval()));
         sendingIntervalFrame.setWebappSendInterval(Integer.parseInt(ssInterval.getWebAppInterval()));
-        sendingIntervalFrame.setAlarmCountThreshold(sensorStation.get(0).getAlarmCountThreshold().intValue());
+        sendingIntervalFrame.setAlarmCountThreshold(1);
         return  sendingIntervalFrame;
+    }
+
+    /**
+     * This method is used to store the logs of accesspoints
+     * @param logFrame
+     * @throws SensorStationNotFoundException
+     */
+    public void saveLog(List<LogFrame> logFrame) throws SensorStationNotFoundException{
+        for (LogFrame l:
+             logFrame) {
+            Log log = new Log();
+            log.setAuthor(l.getAuthor());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime dateTime = LocalDateTime.parse(l.getTime_stamp(), formatter);
+            log.setTime(dateTime);
+            log.setText(l.getText());
+            log.setSubject(l.getSubject());
+            if(l.getType().equals("ERROR"))
+                log.setType(LogType.ERROR);
+            else
+                log.setType(LogType.WARNING);
+            logService.saveLog(log);
+        }
     }
 }

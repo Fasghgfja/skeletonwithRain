@@ -29,11 +29,8 @@ public class MeasurementController {
     int createMeasurement(@RequestBody List<Measurement2> measurement2) {
         System.out.println("test123");
         try{
-            for (Measurement2 m:
-                 measurement2) {
-                System.out.println(measurement2);
-                measurementServiceApi.addMeasurement(m);
-            }
+            measurementServiceApi.addMeasurement(measurement2);
+
 
             return Response.SC_OK;
         }catch (MeasurementNotFoundException ex){

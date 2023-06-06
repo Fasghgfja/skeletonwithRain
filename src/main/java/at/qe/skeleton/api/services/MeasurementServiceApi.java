@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -32,82 +33,38 @@ public class MeasurementServiceApi {
 
     //TODO: what is this ? why does it search from this hashmap and not the repository?
     private static final ConcurrentHashMap<Long, Measurement> measurements = new ConcurrentHashMap<>();
-
     public Measurement findOneMeasurement(Long id) throws MeasurementNotFoundException {
-        Optional<Measurement> optionalMeasurement = measurementRepository.findById(id);
-        if (optionalMeasurement.isPresent()) {
-            return optionalMeasurement.get();
-        } else {
+        Measurement measurement = measurements.get(id);
+        if (measurement != null)
+            return measurement;
+        else
             throw new MeasurementNotFoundException();
-        }
     }
 
 
+    /**
+     * This method is called to store the reseived measurements into the database
+     * @param measurement
+     * @throws MeasurementNotFoundException
+     */
+    public void addMeasurement(List<Measurement2> measurement) throws MeasurementNotFoundException {
+        for (Measurement2 m: measurement) {
 
-
-
-
-    public void addMeasurement(Measurement2 measurement) throws MeasurementNotFoundException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(measurement.getTime_stamp(), formatter);
+        LocalDateTime dateTime = LocalDateTime.parse(m.getTime_stamp(), formatter);
 
         Measurement measurement1 = new Measurement();
-        SensorStation sensorStation = sensorStationService.loadSensorStation(measurement.getSensorStation());//TODO: new!
+        SensorStation sensorStation = sensorStationService.loadSensorStation(m.getSensorStation());
         measurement1.setSensorStation(sensorStation);
-        measurement1.setType(measurement.getType());
+        measurement1.setType(m.getType());
         measurement1.setTimestamp(dateTime);
-        measurement1.setValue_s(measurement.getValue());
+        measurement1.setValue_s(m.getValue());
         measurementRepository.save(measurement1);
         System.out.println(measurement1.toString());
+        }
 
     }
 
-
-
-
-
-    public Measurement convertMeasurement(Measurement2 measurement) { //TODO: do we need this?
-        Measurement newMeasurement = new Measurement();
-        newMeasurement.setType(measurement.getSensor_id());
-        newMeasurement.setValue_s(measurement.getValue());
-        newMeasurement.setTimestamp(LocalDateTime.parse(measurement.getTime_stamp()));
-        measurementRepository.save(newMeasurement);
-        //measurements.put(Long.valueOf(newMeasurement.getSensorStationName()), newMeasurement);
-        System.out.println(newMeasurement);
-        newMeasurement = measurementRepository.findFirstById(newMeasurement.getId());
-        System.out.println(newMeasurement);
-        return newMeasurement;
-    }
-
-    public Measurement updateMeasurement(long id, Measurement measurement) {
-        //  if (measurement.getPlant() != null)//TODO: do we need this?what does this even do?
-        //     measurements.computeIfPresent(id, (key, value) -> {
-        //         value.setPlant(measurement.getPlant());
-        //         return value;
-        //     });
-
-        if (measurement.getValue_s() != null)
-            measurements.computeIfPresent(id, (key, value) -> {
-                value.setValue_s(measurement.getValue_s());
-                return value;
-            });
-
-        if (measurement.getUnit() != null)
-            measurements.computeIfPresent(id, (key, value) -> {
-                value.setUnit(measurement.getUnit());
-                return value;
-            });
-
-        if (measurement.getType() != null)
-            measurements.computeIfPresent(id, (key, value) -> {
-                value.setType(measurement.getType());
-                return value;
-            });
-
-        return measurements.get(id);
-
-        //there are more elegant ways to do this: https://www.baeldung.com/spring-rest-json-patch
-    }
 
 
 
