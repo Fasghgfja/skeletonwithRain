@@ -8,6 +8,8 @@ import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.UserxRepository;
 import at.qe.skeleton.services.UserService;
+import at.qe.skeleton.ui.controllers.UserListController;
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
@@ -54,6 +56,9 @@ public class CreateUserBean implements Serializable {
 
     @Autowired
     private SessionInfoBean sessionInfoBean;
+
+    @Autowired
+    private transient UserListController userListController;
 
     private String username;
     private String firstName;
@@ -112,6 +117,9 @@ public class CreateUserBean implements Serializable {
             creationFailLog.setText("ENTERED USERNAME ALREADY TAKEN: " + user.getUsername());
             creationFailLog.setType(LogType.WARNING);
             logRepository.save(creationFailLog);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Username already taken."));
+            userListController.setUserxList((ArrayList<Userx>) userService.getAllUsers());
+
         } else {
             try {
                 successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);
@@ -131,6 +139,8 @@ public class CreateUserBean implements Serializable {
             createLog.setType(LogType.SUCCESS);
             logRepository.save(createLog);
             userService.saveUser(user);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "New user created."));
+            userListController.setUserxList((ArrayList<Userx>) userService.getAllUsers());
         }
     }
 

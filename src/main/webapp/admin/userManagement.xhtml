@@ -47,9 +47,11 @@
                     </h:panelGrid>
                     <h:panelGrid columns="2">
                         <p:commandButton value="Create" action="#{createUserBean.createNewUser()}"
-                                         oncomplete="PF('userCreationDialog').hide();location.reload();"
-                                         update=":userForm:usersTable"/>
+                                         update=":userForm:usersTable, createMessage"
+                                         oncomplete="PF('userCreationDialog').hide()"/>
                         <p:commandButton value="Cancel" onclick="PF('userCreationDialog').hide()"/>
+                        <p:growl id="createMessage" life="5000" globalOnly="true"/>
+
                     </h:panelGrid>
                 </p:outputPanel>
             </p:dialog>
@@ -58,6 +60,7 @@
         </h:form>
 
         <div class="card">
+            <h:form id="usersAmount">
             <div class="card-header">
                 <div class="header-buttons">
 
@@ -91,6 +94,7 @@
 
                 </div>
             </div>
+            </h:form>
 
             <h:form id="userForm"><!-- ................USER FORM BEGIN........... ....... -->
 
@@ -133,12 +137,13 @@
                                          styleClass="ui-button-danger"
                                          action="#{userDetailController.doDeleteUser}" icon="pi pi-user-minus"
                                          title="Delete"
-                                         update=":userForm:usersTable" oncomplete="location.reload();">
+                                         update=":userForm:usersTable, deleteMessage, :usersAmount">
                             <f:setPropertyActionListener value="#{user}" target="#{userDetailController.user}"/>
                             <p:confirm header="Confirmation"
                                        message="Are you sure that you want to delete the user '#{user.username}'? You cannot undo this operation."
                                        icon="pi pi-exclamation-triangle"/>
                         </p:commandButton>
+                        <p:growl id="deleteMessage" life="5000" showDetail="true" />
 
                     </p:column>
                 </p:dataTable>
@@ -175,9 +180,10 @@
                         <!-- ....................SAVE AND ABORT EDIT USER BUTTONS ................... -->
                         <h:panelGrid columns="3">
                             <p:commandButton value="Save" action="#{userDetailController.doSaveUser()}"
-                                             oncomplete="PF('userEditDialog').hide(); location.reload();"
-                                             update=":userForm:usersTable"/>
+                                             oncomplete="PF('userEditDialog').hide();"
+                                             update=":userForm:usersTable, editMessage, :usersAmount"/>
                             <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
+                            <p:growl id="editMessage" life="5000" showDetail="true" />
                         </h:panelGrid>
 
                     </p:outputPanel>
