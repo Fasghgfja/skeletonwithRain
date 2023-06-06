@@ -64,6 +64,27 @@ def read_trashhold_params():
     except Exception as e:
         exception_logging.logException(e, "reading config.yaml")
 
+def read_validation_params():
+
+    try:
+        with open("config.yaml") as f:
+            cfg = yaml.load(f, Loader=yaml.FullLoader)
+        validation = cfg["accesspoint-params"]["validation"]
+        return validation
+    except Exception as e:
+        exception_logging.logException(e, "reading config.yaml")
+
+
+
+def write_valitation(validation):
+    try:
+        with open("config.yaml","r") as r_f:
+            cfg = yaml.load(r_f, Loader=yaml.FullLoader)
+        cfg["accesspoint-params"]["validation"] = validation
+        with open("config.yaml","w") as w_f:
+            yaml.dump(cfg, w_f)
+    except Exception as e:
+        exception_logging.logException(e, "reading config.yaml")
 #webapp-params:
 #ip: localhost:8080
 #usnm: admin

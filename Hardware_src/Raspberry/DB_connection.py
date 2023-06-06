@@ -82,7 +82,7 @@ def insert_new_sensor_to_database(attribute, name, type, sensor_index):
         c = conn.cursor()
         c.execute('''
                 insert into Sensor values( {0}, '{1}', '{2}', '{3}', {4}, {5}, {6})
-            '''.format(sensor_index, attribute.uuid, name, type.decode(), 0, 0, 0))
+            '''.format(sensor_index, attribute.uuid, name, type.decode(), 0, 0, 10000))
         conn.commit()
         exception_logging.log_information("INFO: Sensor with uuid {0} and type {1} from Station {2} has been inserted to the database".format(attribute.uuid, type.decode(), name))
     except Exception as e:
