@@ -39,3 +39,13 @@ def get_start_time(name):
     for station in station_list:
         if name == station[0]:
             return start_time_tuple(name=station[0], start_time=datetime.now())
+
+def station_interval_passed(start_list, delta_list):
+    station_list = []
+    for start_tuple in station_list:
+        for delta_tuple in delta_list:
+            if (start_tuple[1] + delta_tuple[1]) < datetime.now():
+                station_list.append(start_tuple[0])
+                start_tuple[1] = datetime.now()
+
+    return start_list

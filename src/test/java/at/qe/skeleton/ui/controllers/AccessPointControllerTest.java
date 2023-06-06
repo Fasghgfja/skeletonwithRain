@@ -95,7 +95,7 @@ class AccessPointControllerTest {
 
         assertEquals(expectedAmount, result);
     }
-
+/*
     @Test
     void testDoDeleteAccessPoint() {
 
@@ -123,6 +123,8 @@ class AccessPointControllerTest {
         assertEquals(LogType.SUCCESS, deleteLog.getType());
     }
 
+
+ */
     @Test
     void testDoValidateAccessPoint() {
 

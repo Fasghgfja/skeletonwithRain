@@ -10,21 +10,21 @@ public class SSIntervalTest {
     void testSSInterval(){
         SSInterval interval = new SSInterval();
         SSInterval interval2 = new SSInterval();
-        AccessPoint accessPoint = new AccessPoint();
+        SensorStation sensorStation = new SensorStation();
 
         assertNull(interval.getIntervalId());
         assertNull(interval.getMeasurementInterval());
-        assertNull(interval.getAccessPoint());
+        assertNull(interval.getSensorStation());
         assertNull(interval.getWebAppInterval());
 
         interval.setIntervalId(1L);
         interval2.setIntervalId(2L);
-        interval.setAccessPoint(accessPoint);
+        interval.setSensorStation(sensorStation);
         interval.setMeasurementInterval("5");
         interval.setWebAppInterval("2");
 
         assertEquals(1L, interval.getId());
-        assertEquals(accessPoint, interval.getAccessPoint());
+        assertEquals(sensorStation, interval.getSensorStation());
         assertEquals("5", interval.getMeasurementInterval());
         assertEquals("2", interval.getWebAppInterval());
         assertNotEquals(interval, interval2);

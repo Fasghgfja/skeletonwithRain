@@ -44,12 +44,13 @@ if __name__ == '__main__':
             try:
                 delta_measurement_list = interval_service.get_measurement_interval()
                 delta_webapp_list = interval_service.get_webapp_interval()
-                delta_measurement = timedelta(minutes=config_yaml.read_sending_intervalls()[0])
+                #delta_measurement = timedelta(minutes=config_yaml.read_sending_intervalls()[0])
                 delta_webapp = timedelta(minutes=config_yaml.read_sending_intervalls()[1])
             except Exception as e:
                 exception_logging.logException(e, "Read intervals from database")
 
-
+            measurement_station_list = interval_service.station_interval_passed(start_measurement_interval_time_list, delta_measurement_list)
+            webapp_station_list = []
             # time evaluations for program state
             if (start_call_new_station_time + call_station_delta) < datetime.now():
                 program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
@@ -64,7 +65,7 @@ if __name__ == '__main__':
                 if (start_log_time + log_delta) < datetime.now():
                     program_state = program_status.Is.SEND_LOG_TO_WEBAPP.value
 
-                elif (start_measurement_interval_time + delta_measurement) < datetime.now():
+                elif len(measurement_station_list) > 0:
                     program_state = program_status.Is.READ_SENSOR_VALUES.value
 
                 elif (start_webapp_interval_time + delta_webapp) < datetime.now():
@@ -112,11 +113,11 @@ if __name__ == '__main__':
                 case program_status.Is.READ_SENSOR_VALUES.value:
                     print("Read Sensor data {0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     try:
-                        device_name = DB_connection.read_Sensor_Stationnames_Database()
-                        name_list =[]
-                        for device in device_name:
-                            name_list.append(device[0])
-                        asyncio.run(ble_service_connection.read_sensor_data(False, name_list))
+                        #device_name = DB_connection.read_Sensor_Stationnames_Database()
+                        #name_list =[]
+                        #for device in device_name:
+                            #name_list.append(device[0])
+                        asyncio.run(ble_service_connection.read_sensor_data(False, measurement_station_list))
                         print("check Boarders")
                         try:
                             check_boarder_values.checkBoarderValues()
