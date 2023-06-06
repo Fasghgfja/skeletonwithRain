@@ -1,0 +1,7 @@
+accesspoint-params:
+  id: 852
+  validation: true
+webapp-params:
+  ip: localhost:8080
+  pswd: passwd
+  usnm: admin
