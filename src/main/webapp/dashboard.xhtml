@@ -115,22 +115,21 @@
                         <div class="col-12">
                             <div class="card">
                                 <h5>Sensor Stations</h5>
-                                <p:dataTable id="ordersTable" var="sensorStation"
+                                <p:dataTable id="sensorStationTable" var="sensorStation"
                                              value="#{sensorStationListController.sensorStationList}" selectionMode="single"
-                                             reflow="true" paginatorPosition="bottom"
-                                             rowKey="#{sensorStation.sensorStationName}" paginator="true" rows="6"
-                                             sortBy="#{sensorStation.sensorStationName}" sortOrder="descending">
+                                             paginatorPosition="bottom"
+                                             rowKey="#{sensorStation.id}" paginator="true" rows="6">
 
                                     <!-- ...........ROW SELECTION EVENT................ -->
                                     <p:ajax event="rowSelect" update="myBarChart"
                                             listener="#{graphController.onRowSelect}"/>
 
-                                    <p:column headerText="Id" sortBy="#{sensorStation.sensorStationName}">
+                                    <p:column headerText="Id" sortBy="#{sensorStation.id}" filterBy="#{sensorStation.id}">
                                         <h:outputText value="#{sensorStation.id}"/>
                                     </p:column>
 
-                                    <p:column headerText="Plant" sortBy="#{sensorStation.plant}">
-                                        <h:outputText value="#{sensorStation.plant}"/>
+                                    <p:column headerText="Plant" sortBy="#{sensorStation.plant.plantName}">
+                                        <h:outputText value="#{sensorStation.plant.plantName}"/>
                                     </p:column>
 
                                     <!-- ...TODO........THIS HAS TO CHANGE WITH PLANT DATE!!!!!!!!......... -->
@@ -139,8 +138,7 @@
                                     </p:column>
 
                                     <p:column headerText="Location" sortBy="#{sensorStation.location}">
-                                        <h:outputText value="#{sensorStation.location}">
-                                        </h:outputText>
+                                        <h:outputText value="#{sensorStation.location}"/>
                                     </p:column>
 
 
@@ -221,11 +219,10 @@
                                 </div>
                             </div>
 
-                            <p:dataTable id="ordersTable2" var="sensorStation"
+                            <p:dataTable id="assignedSensorStationsTable" var="sensorStation"
                                          value="#{sensorStationListController.assignedSensorStationList}" selectionMode="single"
                                          reflow="true" paginatorPosition="bottom"
-                                         rowKey="#{sensorStation.sensorStationName}" paginator="true" rows="5"
-                                         sortBy="#{sensorStation.sensorStationName}" sortOrder="descending">
+                                         rowKey="#{sensorStation.sensorStationName}" paginator="true" rows="5">
 
                                 <!-- ...........ROW SELECTION EVENT................ -->
                                 <p:ajax event="rowSelect" update="myBarChart2"
@@ -234,8 +231,8 @@
                                 <p:column headerText="Id" sortBy="#{sensorStation.sensorStationName}" filterBy="#{sensorStation.sensorStationName}">
                                     <h:outputText value="#{sensorStation.id}"/>
                                 </p:column>
-                                <p:column headerText="Plant" sortBy="#{sensorStation.plant}" filterBy="#{sensorStation.plant}">
-                                    <h:outputText value="#{sensorStation.plant}"/>
+                                <p:column headerText="Plant" sortBy="#{sensorStation.plant.plantName}" filterBy="#{sensorStation.plant.plantName}">
+                                    <h:outputText value="#{sensorStation.plant.plantName}"/>
                                 </p:column>
                                 <p:column headerText="Location" sortBy="#{sensorStation.location}" filterBy="#{sensorStation.location}">
                                     <h:outputText value="#{sensorStation.location}">
