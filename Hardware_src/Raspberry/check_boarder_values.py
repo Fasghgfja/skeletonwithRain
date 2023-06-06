@@ -13,35 +13,38 @@ UPPER = 6
 LOWER = 5
 TYPE = 3
 UUID = 1
-def checkBoarderValues():
+def check_boarder_values(station_list):
     connected_sensor_stations_list = DB_connection.read_Sensor_Stationnames_Database()
+    sensor_station_list = []
+    for s in connected_sensor_stations_list:
+        for e in station_list:
+            if e == s[NAME]:
+                sensor_station_list.append(s)
+
     update_alarm_count_list = []
-    alarmCountThreshold = config_yaml.read_trashhold_params()
-    for station in connected_sensor_stations_list:
+    for station in sensor_station_list:
         alarm_switch = station[ALARM_SWITCH]#2
         sensor_list = DB_connection.read_sensors_database(station[NAME])
         for sensor in sensor_list.fetchall():
             if sensor[TYPE] != "ALARM_STATUS":#3
-                upper_value = sensor[UPPER]#6
-                lower_value = sensor[LOWER]#5
+                upper_value = num_check(sensor[UPPER])#6
+                lower_value = num_check(sensor[LOWER])#5
                 alarm_count = sensor[ALARM_COUNT]#4
                 uuid = sensor[1]#1
                 current_value_breaks = 0
                 current_value_list = DB_connection.read_value_from_database(sensor[NAME]).fetchall()
                 if alarm_count == -1 and alarm_switch == "on":
-                    alarm_switch = update_alarm_switch(station[NAME], uuid, station[DESCRIPTION], sensor[ID], sensor[TYPE])
+                    update_alarm_switch(station[NAME], uuid, station[DESCRIPTION], sensor[ID], sensor[TYPE])
                 else:
                     for value in current_value_list:
-                        upper = num_check(upper_value)
-                        lower = num_check(lower_value)
                         current_value = num_check(value[0])
-                        if current_value < lower or current_value > upper:
+                        if current_value < lower_value or current_value > upper_value:
                             current_value_breaks += 1
 
                     if alarm_count != -1 and ((len(current_value_list) - current_value_breaks) < ((len(current_value_list) * 3) / 4)):
                         alarm_count += 1
 
-                    if alarm_count > alarmCountThreshold and alarm_switch == "off":
+                    if alarm_count > station[5] and alarm_switch == "off":
                         asyncio.run(ble_service_connection.writeAlarmSignal(uuid, "ON", station[NAME]))
                         alarm_count = -1
                         alarm_switch = "on"

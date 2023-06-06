@@ -45,7 +45,7 @@ if __name__ == '__main__':
                 delta_measurement_list = interval_service.get_measurement_interval()
                 delta_webapp_list = interval_service.get_webapp_interval()
                 #delta_measurement = timedelta(minutes=config_yaml.read_sending_intervalls()[0])
-                delta_webapp = timedelta(minutes=config_yaml.read_sending_intervalls()[1])
+                delta_webapp = timedelta(minutes=1)
             except Exception as e:
                 exception_logging.logException(e, "Read intervals from database")
 
@@ -113,19 +113,18 @@ if __name__ == '__main__':
                 case program_status.Is.READ_SENSOR_VALUES.value:
                     print("Read Sensor data {0}".format(datetime.now().strftime("%D:%H:%M:%S")))
                     try:
-                        #device_name = DB_connection.read_Sensor_Stationnames_Database()
-                        #name_list =[]
-                        #for device in device_name:
-                            #name_list.append(device[0])
                         asyncio.run(ble_service_connection.read_sensor_data(False, measurement_station_list))
+                        for e in start_measurement_interval_time_list:
+                            for s in measurement_station_list:
+                                if e.name == s:
+                                    e.start_time = datetime.now()
                         print("check Boarders")
                         try:
-                            check_boarder_values.checkBoarderValues()
+                            check_boarder_values.check_boarder_values(measurement_station_list)
                         except Exception as e:
                             exception_logging.logException(e, "While checking boarder breaks")
                     except Exception as e:
                         exception_logging.logException(e, "call_read_values")
-                    start_measurement_interval_time = datetime.now()
 
                 # call time is set by webapp interval
                 case program_status.Is.WRITE_VALUES_TO_WEBAPP.value:
