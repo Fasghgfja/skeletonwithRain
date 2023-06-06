@@ -172,6 +172,15 @@ public class PlantService {
     public Plant findFirstByName(String plantName) {
         return plantRepository.findFirstByPlantName(plantName);
     }
+
+    public Plant findFirstByNameAndSensorStation(String plantName , SensorStation sensorStation) {
+        return plantRepository.findFirstByPlantNameAndSensorStation(plantName, sensorStation);
+    }
+
+
+    public Plant findFirstByNameAndFree(String selectedPlantName) {
+        return plantRepository.findFirstByPlantNameAndSensorStationIsNull(selectedPlantName);
+    }
 }
 
 

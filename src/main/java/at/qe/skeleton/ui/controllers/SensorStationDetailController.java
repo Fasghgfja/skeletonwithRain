@@ -170,11 +170,14 @@ public class SensorStationDetailController implements Serializable {
     public void doChangeThePlantAndSave() {
         if (selectedPlantName != null && !selectedPlantName.equals("")) {
             if (sensorStation.getPlant() != null) {
+                if(Objects.equals(sensorStation.getPlant().getPlantName(), selectedPlantName)){
+                    return;
+                }
                 Plant oldPlant = plantService.loadPlant(sensorStation.getPlant().getId());
                 oldPlant.setSensorStation(null);
                 plantService.savePlant(oldPlant);
-                Plant newPlant = new Plant();
-                newPlant.setPlantName(selectedPlantName);
+                //Plant newPlant = new Plant();
+                Plant newPlant = plantService.findFirstByNameAndFree(selectedPlantName);
                 newPlant.setSensorStation(sensorStation);
                 sensorStation.setPlant(plantService.savePlant(newPlant));
                 doSaveSensorStation();
@@ -246,7 +249,6 @@ public class SensorStationDetailController implements Serializable {
         if (alarmCountTreshold != null) {
             sensorStation.setAlarmCountThreshold(Integer.parseInt(alarmCountTreshold));
         }
-
         sensorStation = this.sensorStationService.saveSensorStation(sensorStation);
     }
 

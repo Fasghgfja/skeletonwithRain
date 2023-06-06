@@ -83,10 +83,9 @@ public interface PlantRepository extends AbstractRepository<Plant, Long> {
     void detachFromSensorStation(@Param("sensorStation") SensorStation sensorStation);
 
 
+    Plant findFirstByPlantNameAndSensorStation(String plantName, SensorStation sensorStation);
 
-
-
-
+    Plant findFirstByPlantNameAndSensorStationIsNull(String selectedPlantName);
 }
 
 

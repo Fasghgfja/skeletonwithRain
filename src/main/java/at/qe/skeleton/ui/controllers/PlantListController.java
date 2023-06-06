@@ -66,6 +66,7 @@ public class PlantListController {
         return this.plantService.getFollowedPlants(user);
     }
 
+
     public void deleteAllPlantsWithoutSensorStation() {
         this.plantService.deleteAllPlantsWithoutSensorStation();
     }

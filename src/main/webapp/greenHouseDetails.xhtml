@@ -411,9 +411,17 @@
                                                      value="App: #{SSIntervalController.getActualWebAppIntervalForSensorStation(sensorStationDetailController.sensorStation)} Measurements: #{SSIntervalController.getActualMeasurementIntervalForSensorStation(sensorStationDetailController.sensorStation)}" />
 
                                         <p:outputLabel for="newPlant" value="New Plant name:"/>
-                                        <p:inputText id="newPlant"
-                                                     rendered="#{not empty sensorStationDetailController.sensorStation}"
-                                                     value="#{sensorStationDetailController.selectedPlantName}"/>
+                                        <p:selectOneMenu value="#{sensorStationDetailController.selectedPlantName}"
+                                                         id="newPlant" filter="true"
+                                                         rendered="#{not empty sensorStationDetailController.sensorStation}"
+                                                         emptyLabel="Plant name"
+                                                         scrollHeight="250" updateLabel="true">
+                                            <f:selectItems value="#{plantListController.notUsedPlantsUniqueNames}"/>
+                                            <f:facet name="footer">
+                                                <p:divider styleClass="mt-0"/>
+                                                <h:outputText value="3 options" style="font-weight:bold;"/>
+                                            </f:facet>
+                                        </p:selectOneMenu>
                                         <!-- ................ ............................................-->
                                         <p:outputLabel for="sensorStationlocation" value="Location:"/>
                                         <p:inputText id="sensorStationlocation"
@@ -444,7 +452,7 @@
                                                        icon="pi pi-exclamation-triangle"/>
                                         </p:commandButton>
 
-                                        <!-- ....................CHANGE PLANT BUTTON ........... .............. -->
+                                        <!-- ....................CREATE PLANT BUTTON ........... .............. -->
                                         <p:commandButton styleClass="ui-button-danger"
                                                          action="#{sensorStationDetailController.doChangeThePlantAndSave()}"
                                                          icon="fa fa-duotone fa-seedling"
@@ -475,6 +483,7 @@
                                     </h:panelGrid>
 
                                 </p:outputPanel>
+
 
                                 <!-- ...................................Interval Edit dialog.................................... -->
                                 <p:dialog header="Edit Access Point Intervals" id="intervalEditDialog" widgetVar="intervalEditDialog" modal="true"
