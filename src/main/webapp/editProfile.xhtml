@@ -13,13 +13,13 @@
 
     <ui:define name="content">
 
-        <div class="field col-12 md:col-4 xl:col-4" style="display: flex; flex-wrap: nowrap;">
+        <div style="display: flex; flex-wrap: nowrap; box-sizing: border-box">
 
 
-        <div class="card ">
+        <div style="flex: 1 1 40%;">
             <h:form id="userForm">
                 <!-- ................ EDIT FIELDS PANEL............-->
-                <div class="field col-12 md:col-4 xl:col-4">
+
                     <p:outputPanel id="userData" rendered="#{not empty userDetailController.user}">
                         <h5 class="mt-0">User Data </h5>
                         <h:panelGrid columns="2">
@@ -46,14 +46,14 @@
                                              oncomplete="location.reload();"/>
                         </h:panelGrid>
                     </p:outputPanel>
-                </div>
+
             </h:form>
 
         </div>
 
 
         <!-- ................ EDIT PASSWORD FORM ............-->
-        <div class="card">
+        <div style="flex: 1 1 33%;">
             <h:form>
                 <h5 class="mt-0">Password</h5>
                 <div class="field grid">
@@ -84,7 +84,7 @@
         </div>
 
         <!-- ................ CHANGE PROFILE PICTURE............-->
-        <div class="card">
+        <div style="flex: 1 1 33%;">
             <h:form>
                 <h5>Upload new Profile picture (Feature in Development)</h5>
                 <p:fileUpload disabled="true" listener="#{fileUploadController.handleFileUpload}" mode="advanced"
