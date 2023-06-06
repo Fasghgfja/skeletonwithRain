@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-
+import interval_service
 import exception_logging
 import rest_api
 import time
@@ -21,9 +21,13 @@ if __name__ == '__main__':
 
     program_state = 0
     start_measurement_interval_time = datetime.now()
+    start_measurement_interval_time_list = []
     delta_measurement = 0
+    delta_measurement_list =[]
     start_webapp_interval_time = datetime.now()
+    start_webapp_interval_time_list = []
     delta_webapp = 0
+    delta_webapp_list = []
     start_log_time = datetime.now()
     log_delta = timedelta(seconds=1830) #30:30
     start_check_webapp_data_time = datetime.now()
@@ -38,10 +42,12 @@ if __name__ == '__main__':
 
 
             try:
+                delta_measurement_list = interval_service.get_measurement_interval()
+                delta_webapp_list = interval_service.get_webapp_interval()
                 delta_measurement = timedelta(minutes=config_yaml.read_sending_intervalls()[0])
                 delta_webapp = timedelta(minutes=config_yaml.read_sending_intervalls()[1])
             except Exception as e:
-                exception_logging.logException(e, "Read intervals from config.yaml")
+                exception_logging.logException(e, "Read intervals from database")
 
 
             # time evaluations for program state
@@ -66,7 +72,7 @@ if __name__ == '__main__':
 
                 else:
                     time.sleep(5)
-                    program_state = program_status.Is.READ_SENSOR_VALUES.value
+                    program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
                     #program_state = -1
 
 
@@ -90,6 +96,8 @@ if __name__ == '__main__':
                         # search for new SensorStation
                         try:
                             asyncio.run(ble_service_connection.read_sensor_data(True, new_device_name_list))
+                            start_measurement_interval_time_list.append(interval_service.get_start_time(new_device_name_list[0]))
+                            start_webapp_interval_time_list.append(interval_service.get_start_time(new_device_name_list[0]))
                         except Exception as e:
                             exception_logging.logException(e, "Search for new SensorStation")
                         # write found stations to webapp

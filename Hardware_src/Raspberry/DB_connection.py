@@ -12,7 +12,10 @@ def implement_database():
             create table if not exists Sensorstation(
             name varchar(64) not null primary key,
             service_description varchar,
-            alarm_switch varchar(15) )
+            alarm_switch varchar(15),
+            measurement_interval int,
+            webapp_interval int,
+            treshold int)
           ''')
 
     c.execute('''
@@ -66,7 +69,7 @@ def insert_new_sensor_station_to_database(attribute, name):
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
         c.execute('''
-                insert into Sensorstation values('{0}', '{1}', 'off')
+                insert into Sensorstation values('{0}', '{1}', 'off', 10, 30, 5)
             '''.format(name, attribute))
         conn.commit()
         file1 = open("logFile.txt", "a")
@@ -138,6 +141,17 @@ def read_Sensor_Stationnames_Database():
         c = conn.cursor()
         c.execute('''
             select * from Sensorstation
+        ''')
+        return c.fetchall()
+    except Exception as e:
+        exception_logging.logException(e, "SensorStation")
+
+def read_station_interval_Database():
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+            select name, measurement_interval, webapp_interval from Sensorstation
         ''')
         return c.fetchall()
     except Exception as e:
