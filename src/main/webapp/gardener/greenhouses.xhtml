@@ -88,8 +88,8 @@
                         </p:column>
 
                         <p:column style="" headerText="Intervals">
-                            <h:outputText value="W:#{SSIntervalController.getActualWebAppIntervalForAccessPoint(sensorStation.accessPoint.id)}  "/>
-                            <h:outputText value=" M:#{SSIntervalController.getActualMeasurementIntervalForAccessPoint(sensorStation.accessPoint.id)} "/>
+                            <h:outputText value="W:#{SSIntervalController.getActualWebAppIntervalForSensorStation(sensorStation)}  "/>
+                            <h:outputText value=" M:#{SSIntervalController.getActualMeasurementIntervalForSensorStation(sensorStation)} "/>
                         </p:column>
 
                         <p:column headerText="Alarm Status">
