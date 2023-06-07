@@ -52,7 +52,7 @@ public class GraphController implements Serializable {
     @Autowired
     private transient SensorStationService sensorService;
 
-
+    private ScheduleModel eventModel;
     private ScheduleEvent event = new DefaultScheduleEvent();
 
 
@@ -74,6 +74,11 @@ public class GraphController implements Serializable {
      */
 
     private List<Measurement> latestMeasurements;
+
+    @PostConstruct
+    public void init() {
+        eventModel = new DefaultScheduleModel();//deletion of measurements calendar
+    }
 
 
     /**
@@ -106,12 +111,6 @@ public class GraphController implements Serializable {
     }
 
     public void refreshGraphWithNewTime() {
-        System.out.println(event.getStartDate());
-        System.out.println(event.getEndDate());
-        if (event.getStartDate() == null && event.getEndDate() == null) {
-            return;
-        }
-
         System.out.println(event.getStartDate());
         System.out.println(event.getEndDate());
     }
