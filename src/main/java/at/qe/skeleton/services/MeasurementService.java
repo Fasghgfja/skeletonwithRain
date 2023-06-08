@@ -220,4 +220,6 @@ public class MeasurementService {
         }
     }
 
+    //public Object fuckU(SensorStation sensorStation, MeasurementType chosenMeasurement, Date dateFrom, Date dateTo) {
+    //}
 }

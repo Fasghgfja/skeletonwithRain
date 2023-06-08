@@ -1,21 +1,17 @@
 package at.qe.skeleton.ui.controllers;
 
 
+import at.qe.skeleton.model.MeasurementType;
 import at.qe.skeleton.services.MeasurementService;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.services.SensorStationService;
-import jakarta.annotation.PostConstruct;
-import jakarta.faces.event.ActionListener;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.ScheduleEvent;
 
-import org.primefaces.model.DefaultScheduleEvent;
-import org.primefaces.model.DefaultScheduleModel;
-import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 
@@ -38,8 +34,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
@@ -54,6 +49,12 @@ public class GraphController implements Serializable {
 
     private ScheduleModel eventModel;
     private ScheduleEvent event = new DefaultScheduleEvent();
+
+    private Date dateFrom;
+    private Date dateTo;
+    private MeasurementType chosenMeasurement;
+    private List<Measurement> filteredMeasurements;
+
 
 
     /**
@@ -75,10 +76,6 @@ public class GraphController implements Serializable {
 
     private List<Measurement> latestMeasurements;
 
-    @PostConstruct
-    public void init() {
-        eventModel = new DefaultScheduleModel();//deletion of measurements calendar
-    }
 
 
     /**
@@ -111,8 +108,16 @@ public class GraphController implements Serializable {
     }
 
     public void refreshGraphWithNewTime() {
+        //TODO: fix in case latestmeasuremtn is null
+        System.out.println(latestMeasurements.get(0).getType());
         System.out.println(event.getStartDate());
         System.out.println(event.getEndDate());
+        System.out.println(dateFrom);
+        System.out.println(dateTo);
+        //filteredMeasurements = new ArrayList<>(measurementService.fuckU(sensorStation, chosenMeasurement, dateFrom, dateTo));
+        //if(!filteredMeasurements.isEmpty()) {
+        //    createLineModel(filteredMeasurements);
+        //}
     }
 
 
