@@ -311,31 +311,25 @@
 
 
                         <h:form id="form666">
-                            <div>
-                                <p:outputLabel for="Measurement" value="Measurement:"/>
-                                <p:selectOneMenu id="Measurement" value="#{graphController.chosenMeasurement}">
-                                    <f:selectItem itemLabel="Select Measurement" itemValue="#{null}"/>
-                                    <f:selectItems  value="#{measurementListController.allTypes}"/>
-                                </p:selectOneMenu>
-                            </div>
                             <div class="ui-g">
 
                                 <p:outputPanel id="eventDetails" styleClass="ui-fluid">
                                     <!-- ....................from............................ -->
                                     <div class="ui-g-5">
-                                        <p:outputLabel for="fromDate" value="fromDate" />
-                                        <p:datePicker id="fromDate" value="#{graphController.event.startDate}" pattern="yyyy-MM-dd" showTime="true"  appendTo="@(body)"  />
+                                        <p:datePicker id="fromDate" placeholder="From" value="#{graphController.dateFrom}" pattern="yyyy-MM-dd" showTime="true"  appendTo="@(body)"  />
                                     </div>
                                     <!-- ....................to............ -->
                                     <div class="ui-g-5">
-                                        <p:outputLabel for="toDate" value="toDate" />
-                                        <p:datePicker id="toDate" value="#{graphController.event.endDate}" pattern="yyyy-MM-dd" showTime="true"  appendTo="@(body)" />
+                                        <p:datePicker id="toDate" placeholder="To" value="#{graphController.dateTo}" pattern="yyyy-MM-dd" showTime="true"  appendTo="@(body)" />
+                                    </div>
+                                    <div class="ui-g-2">
+                                    <p:commandButton id="bho"  icon="fa fa-refresh" update="mylineChart" action="#{graphController.refreshGraphWithNewTime(sensorStationDetailController.sensorStation)}" title="Refresh Graph" >
+                                    </p:commandButton>
                                     </div>
                                 </p:outputPanel>
 
-                                <p:commandButton icon="fa fa-refresh"  title="Refresh Graph" style="width: 30px; height: 30px" >
-                                    <p:ajax update="mylineChart" listener="#{graphController.refreshGraphWithNewTime()}"/>
-                                </p:commandButton>
+
+
                             </div>
                         </h:form>
 
@@ -349,6 +343,7 @@
                             <p:lineChart id="mylineChart" model="#{graphController.lineModel}"/>
                         </div>
                     </div>
+
                 </div>
 
                 <!-- .........................................MEASUREMENTS TABLE...................................................... -->

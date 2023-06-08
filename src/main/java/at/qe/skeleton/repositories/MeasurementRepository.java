@@ -1,6 +1,7 @@
 package at.qe.skeleton.repositories;
 
 import at.qe.skeleton.model.Measurement;
+import at.qe.skeleton.model.MeasurementType;
 import at.qe.skeleton.model.Plant;
 import at.qe.skeleton.model.SensorStation;
 import jakarta.transaction.Transactional;
@@ -66,6 +67,8 @@ public interface MeasurementRepository extends AbstractRepository<Measurement, L
 
 
     Measurement getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(SensorStation sensorStation, String type);
+
+    List<Measurement> getMeasurementsByTypeAndSensorStationAndTimestampBetweenOrderByTimestampAsc(String chosenMeasurement, SensorStation sensorStation, LocalDateTime dateFrom, LocalDateTime dateTo);
 
     @Transactional
     void deleteMeasurementsByTimestampBetween(LocalDateTime from, LocalDateTime to);

@@ -6,6 +6,8 @@ import at.qe.skeleton.services.MeasurementService;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.services.SensorStationService;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.SelectEvent;
@@ -34,6 +36,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Getter
@@ -47,14 +51,10 @@ public class GraphController implements Serializable {
     @Autowired
     private transient SensorStationService sensorService;
 
-    private ScheduleModel eventModel;
-    private ScheduleEvent event = new DefaultScheduleEvent();
-
-    private Date dateFrom;
-    private Date dateTo;
-    private MeasurementType chosenMeasurement;
+    private LocalDateTime dateFrom;
+    private LocalDateTime dateTo;
+    private String chosenMeasurement;
     private List<Measurement> filteredMeasurements;
-
 
 
     /**
@@ -75,7 +75,6 @@ public class GraphController implements Serializable {
      */
 
     private List<Measurement> latestMeasurements;
-
 
 
     /**
@@ -107,17 +106,32 @@ public class GraphController implements Serializable {
         }
     }
 
-    public void refreshGraphWithNewTime() {
-        //TODO: fix in case latestmeasuremtn is null
-        System.out.println(latestMeasurements.get(0).getType());
-        System.out.println(event.getStartDate());
-        System.out.println(event.getEndDate());
-        System.out.println(dateFrom);
-        System.out.println(dateTo);
-        //filteredMeasurements = new ArrayList<>(measurementService.fuckU(sensorStation, chosenMeasurement, dateFrom, dateTo));
-        //if(!filteredMeasurements.isEmpty()) {
-        //    createLineModel(filteredMeasurements);
-        //}
+    public void refreshGraphWithNewTime(SensorStation sensorStation) {
+        if (latestMeasurements.get(0) == null) {
+            return;
+        }
+        chosenMeasurement = latestMeasurements.get(0).getType();
+        if (dateFrom == null) {
+            Measurement firstMeasurement = measurementService.doFindFirstBySensorStationOrderByTimestampAsc(sensorStation);
+            if (firstMeasurement == null) {
+                return;
+            }
+            dateFrom = firstMeasurement.getTimestamp();
+
+        }
+        if (dateTo == null) {
+            dateTo = LocalDateTime.now();
+        }
+        if (dateFrom != null && dateFrom.isAfter(dateTo)) {
+            return;
+        }
+
+        filteredMeasurements = new ArrayList<>(measurementService.doGetMeasurementsByTypeAndSensorStationAndTimestampBetween(chosenMeasurement, sensorStation, dateFrom, dateTo));
+
+        if (!filteredMeasurements.isEmpty()) {
+            System.out.println("sisi");
+            createLineModel(filteredMeasurements);
+        }
     }
 
 
@@ -261,7 +275,7 @@ public class GraphController implements Serializable {
     }
 
 
-    //WHAT IS THISSSS???????
+    //TODO:WHAT IS THISSSS???????
 
     public void createLineModel() {
         lineModel = new LineChartModel();
@@ -300,7 +314,7 @@ public class GraphController implements Serializable {
         lineModel.setData(Air_Temperature);
     }
 
-    //WAS IST DASSSS????
+    //TODO:WAS IST DASSSS????
     public void createCartesianLinerModel() {
         System.out.println("ora qui");
         cartesianLinerModel = new LineChartModel();

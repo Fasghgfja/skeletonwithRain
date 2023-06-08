@@ -220,6 +220,11 @@ public class MeasurementService {
         }
     }
 
-    //public Object fuckU(SensorStation sensorStation, MeasurementType chosenMeasurement, Date dateFrom, Date dateTo) {
-    //}
+    public List<Measurement> doGetMeasurementsByTypeAndSensorStationAndTimestampBetween(String chosenMeasurement, SensorStation sensorStation, LocalDateTime dateFrom, LocalDateTime dateTo) {
+        return measurementRepository.getMeasurementsByTypeAndSensorStationAndTimestampBetweenOrderByTimestampAsc(chosenMeasurement, sensorStation, dateFrom, dateTo);
+    }
+
+    public Measurement doFindFirstBySensorStationOrderByTimestampAsc(SensorStation sensorStation) {
+        return measurementRepository.findFirstBySensorStationOrderByTimestampAsc(sensorStation);
+    }
 }
