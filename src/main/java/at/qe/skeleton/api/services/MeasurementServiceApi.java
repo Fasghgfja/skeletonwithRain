@@ -52,11 +52,9 @@ public class MeasurementServiceApi {
      */
     public void addMeasurement(List<Measurement2> measurement) throws MeasurementNotFoundException {
         for (Measurement2 m: measurement) {
-            System.out.println(m.getTime_stamp());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
             DateTimeFormatter databaseFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
             LocalDateTime dateTime = LocalDateTime.parse(m.getTime_stamp(), formatter);
-            System.out.println(dateTime);
             Measurement measurement1 = new Measurement();
             SensorStation sensorStation = sensorStationService.loadSensorStation(m.getSensorStation());
             measurement1.setSensorStation(sensorStation);
@@ -64,7 +62,6 @@ public class MeasurementServiceApi {
             measurement1.setTimestamp(dateTime);
             measurement1.setValue_s(m.getValue());
             measurement1.setUnit(getUnit(m.getType()));
-            System.out.println(measurement1.toString());
             measurementRepository.save(measurement1);
         }
 

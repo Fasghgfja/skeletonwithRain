@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 
+import at.qe.skeleton.api.exceptions.AccessPointNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
 import at.qe.skeleton.api.model.*;
@@ -90,8 +91,11 @@ public class SensorStationServiceApi {
      * @return
      * @throws SensorStationNotFoundException
      */
-    public boolean isValidated(Long id) throws SensorStationNotFoundException {
+    public boolean isValidated(Long id) throws AccessPointNotFoundException {
         AccessPoint toValidateaccessPoint = accessPointService.loadAccessPoint(id);
+        if(toValidateaccessPoint == null){
+            throw new AccessPointNotFoundException();
+        }
         return toValidateaccessPoint.isValidated();
     }
     /**
@@ -105,7 +109,6 @@ public class SensorStationServiceApi {
         if( sensorStations1.size() != NOITEMFOUND){
             for (SensorStation s:
                  sensorStations1) {
-                System.out.println(s.getSensorStationName());
                 stationNames.add(s.getSensorStationName());
             }
             return stationNames;
@@ -129,7 +132,6 @@ public class SensorStationServiceApi {
                     break;
                 }
                 Sensor sensor = new Sensor();
-                //sensor.setId(s.getSensor_id());
                 sensor.setSensorStation(sensorStationRepository.findFirstById(s.getStation_name()));
                 sensor.setUuid(s.getUuid());
                 sensor.setType(s.getType());
@@ -139,7 +141,6 @@ public class SensorStationServiceApi {
                 sensorService.saveSensor(sensor);
             }
         }catch (Exception e){
-            System.out.println(e.toString());
             throw new SensorNotFoundException();
         }
         return Response.SC_OK;
@@ -172,7 +173,6 @@ public class SensorStationServiceApi {
         List<SensorStation> sensorStationList = sensorStationRepository.findAllByAccessPoint_AccessPointID(id);
         ArrayList<Sensor> sensorList = new ArrayList<>();
         ArrayList<SensorStationDataFrame> sensorStationDataFrameArrayList = new ArrayList<>();
-        System.out.println(sensorStationList.size());
         for (SensorStation ss:
              sensorStationList) {
             sensorList.addAll(sensorService.getAllSensorsBySensorStation(ss).stream().toList());
@@ -193,7 +193,6 @@ public class SensorStationServiceApi {
             sensorStationDataFrame.setLowerBoarder(s.getLower_border());
             sensorStationDataFrame.setUpperBoarder(s.getUpper_border());
             sensorStationDataFrame.setStation_name(s.getSensorStation().getSensorStationName());
-            System.out.println(sensorStationDataFrame.toString());
             sensorStationDataFrameArrayList.add(sensorStationDataFrame);
         }
         return sensorStationDataFrameArrayList;

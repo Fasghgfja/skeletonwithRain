@@ -22,6 +22,8 @@ if __name__ == '__main__':
     print("{0} --- SUCCESS: Implement database".format(datetime.now().strftime("%D %H:%M:%S")))
     print("{0} --- Initialize intervals".format(datetime.now().strftime("%D %H:%M:%S")))
     program_state = 0
+    program = ""
+    run = True
     # list that contains all start timer for measurement of the sensor stations
     start_measurement_interval_time_list = interval_service.get_all_start_times()
     # list that contains all measurement intervals
@@ -51,15 +53,11 @@ if __name__ == '__main__':
     check_alarm_delta = timedelta(seconds=260) # 4:20
     #time.sleep(SECTION_SLEEP)
     print("                      Intervals initialized program loop starts -> ok")
-    while True:
+    while run:
         try:
-
-
             try:
                 delta_measurement_list = interval_service.get_measurement_interval()
                 delta_webapp_list = interval_service.get_webapp_interval()
-                #delta_measurement = timedelta(minutes=config_yaml.read_sending_intervalls()[0])
-                #delta_webapp = timedelta(minutes=2)
                 measurement_station_list = interval_service.station_interval_passed(start_measurement_interval_time_list, delta_measurement_list)
                 webapp_station_list = interval_service.station_interval_passed(start_webapp_interval_time_list,delta_webapp_list)
             except Exception as e:
@@ -95,20 +93,22 @@ if __name__ == '__main__':
 
 
             match program_state:
-
                 # call new SensorStations all 3min:20sec
                 case program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value:
                     print("{0} --- Call for new Sensor station".format(datetime.now().strftime("%D %H:%M:%S")))
                     new_device_name_list = []
                     try:
-                        new_device_name_list = rest_api.check_if_new_stations()
-                        print("                      Call new names -> ok")
+                        new_device_name = rest_api.check_if_new_stations()
+                        new_device_name_list.append(new_device_name)
+                        if new_device_name == "AP deleted stop program":
+                            program = "AP deleted stop program"
+                        else:
+                            print("                      Call new names -> ok")
                     except Exception as e:
                         exception_logging.logException(e, "Call webapp for new sensorstations")
 
                     if len(new_device_name_list) > 0:
                         print("                      New device found: {0}".format(new_device_name_list[0]))
-                        print()
                         # search for new SensorStation
                         try:
                             asyncio.run(ble_service_connection.read_sensor_data(True, new_device_name_list))
@@ -119,7 +119,7 @@ if __name__ == '__main__':
                             exception_logging.logException(e, "Search for new SensorStation")
                         # write found stations to webapp
                         try:
-                            asyncio.run(rest_api.write_sensors_and_station_description(new_device_name_list))
+                            program = asyncio.run(rest_api.write_sensors_and_station_description(new_device_name_list))
                             print("                      Write new station to Webapp -> ok")
                         except Exception as e:
                             exception_logging.logException(e, "Write new SensorStation to Webapp")
@@ -150,7 +150,7 @@ if __name__ == '__main__':
                     except Exception as e:
                         exception_logging.logException(e, "While checking boarder breaks")
                     try:
-                        rest_api.write_value_to_web_app(webapp_station_list)
+                        program = rest_api.write_value_to_web_app(webapp_station_list)
                         print("                      Write values to Webapp -> ok")
                         for e in start_webapp_interval_time_list:
                             for s in webapp_station_list:
@@ -163,7 +163,7 @@ if __name__ == '__main__':
                 case program_status.Is.SEND_LOG_TO_WEBAPP.value:
                     print("{0} --- Send log to webapp".format(datetime.now().strftime("%D %H:%M:%S")))
                     try:
-                        rest_api.send_log_data_to_webapp()
+                        program = rest_api.send_log_data_to_webapp(False)
                         print("                      Write log to Webapp -> ok")
                     except Exception as e:
                         exception_logging.logException(e, "send Log to Webapp")
@@ -184,7 +184,7 @@ if __name__ == '__main__':
                 case program_status.Is.CALL_SENSOR_STATION_DATA.value:
                     print("{0} --- check webapp for new data".format(datetime.now().strftime("%D %H:%M:%S")))
                     try:
-                        rest_api.read_sensor_station_data()
+                        program = rest_api.read_sensor_station_data()
                         print("                      Call sensor station data -> ok")
                     except Exception as e:
                         exception_logging.logException(e, "read sensor station data")
@@ -192,3 +192,6 @@ if __name__ == '__main__':
 
         except Exception as e:
             exception_logging.logException(e, " Major exception caught")
+        if program == "AP deleted stop program":
+            run = False
+    rest_api.send_log_data_to_webapp(True)

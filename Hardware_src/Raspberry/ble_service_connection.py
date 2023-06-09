@@ -76,5 +76,5 @@ async def read_sensor_data(new_connection, device_list):
                                     DB_connection.insert_values_into_database(value, float_value, type, station_name)
                             except Exception as e:
                                 exception_logging.logException(e, characteristic.uuid)
-                exception_logging.log_success("Values from device {0}, Serivce uuid:\t{1}, Description:\t{2} hve been read"
+                exception_logging.log_success("Values from device {0}, Serivce uuid:\t{1}, Description:\t{2} have been read"
                                               .format(station_name, service.uuid, service.description))

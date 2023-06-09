@@ -1,5 +1,6 @@
 package at.qe.skeleton.api.controllers;
 
+import at.qe.skeleton.api.exceptions.AccessPointNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
 import at.qe.skeleton.api.model.*;
@@ -12,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 @RestController
@@ -20,7 +22,7 @@ public class SensorStationApiController {
 
     @Autowired
     SensorStationServiceApi sensorStationServiceApi;
-
+    private final transient Logger sensorStationLogger = Logger.getLogger("Rest Api Sensor Station Logger");
     /**
      * This method is called to update SensorStations via Accesspoint
      * update values: descritption, alarm_switch
@@ -31,10 +33,13 @@ public class SensorStationApiController {
     int createSensorStationApi(@RequestBody SensorStationApi sensorStationApi) {
         try {
             sensorStationServiceApi.updateSensorStation(sensorStationApi);
+            sensorStationLogger.info("SENSOR STATION HAS BEEN UPDATED: " + sensorStationApi.getName() + " " + sensorStationApi.getService_description());
+            return Response.SC_OK;
         } catch (SensorStationNotFoundException ex){
+            sensorStationLogger.warning("SENSOR STATION COULD NOT BE UPDATED: " + sensorStationApi.getName() + " " + sensorStationApi.getService_description());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return Response.SC_OK;
+
     }
 
     /**
@@ -44,25 +49,41 @@ public class SensorStationApiController {
      */
     @PostMapping("/api/sensors")
     int createSensorApi(@RequestBody List<SensorApi> sensorApi) {
-        for (SensorApi s:
-             sensorApi) {
-            System.out.println(s.toString());
-        }
-
         try {
-            return sensorStationServiceApi.addSensor(sensorApi);
-        }catch (SensorNotFoundException ex){
+            sensorStationServiceApi.addSensor(sensorApi);
+            if(sensorApi.stream().findAny().isPresent()){
+                sensorStationLogger.info("SENSORS ADDED FOR STATION: " + sensorApi.stream().findAny().get().getStation_name());
+            }
+            return Response.SC_OK;
+        }catch (SensorNotFoundException ex) {
+            sensorStationLogger.warning("SENSORS COULD NOT BE ADDED FROM STATION: " + sensorApi.stream().findAny().get().getStation_name());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("/api/updatesensors")
     int updateSensorApi(@RequestBody List<SensorApi> sensorApi) {
-        System.out.println(sensorApi.toString());
         try {
             sensorStationServiceApi.updateSensor(sensorApi);
+            if(sensorApi.stream().findAny().isPresent()){
+                sensorStationLogger.info("SENSORS UPDATED FOR STATION: " + sensorApi.stream().findAny().get().getStation_name());
+            }
             return Response.SC_OK;
         }catch (SensorStationNotFoundException ex){
+            sensorStationLogger.warning("SENSORS COULD NOT BE UPDATED FOR STATION: " + sensorApi.stream().findAny().get().getStation_name());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+    @PostMapping("/api/auditLog")
+    int logFile(@RequestBody List<LogFrame> logFrame) {
+        try{
+            sensorStationServiceApi.saveLog(logFrame);
+            if(logFrame.stream().findAny().isPresent()){
+                sensorStationLogger.info("LOG ADDED TO WEBAPP DATABASE OF ACCESS POINT: " + logFrame.stream().findAny().get().getAuthor());
+            }
+            return Response.SC_OK;
+        }catch (SensorStationNotFoundException ex){
+            sensorStationLogger.warning("LOG COULD NOT ADDED TO WEBAPP DATABASE OF ACCESS POINT: " + logFrame.stream().findAny().get().getAuthor());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -83,10 +104,12 @@ public class SensorStationApiController {
     //Added to call all sensorstations via rest
     @GetMapping("/api/sensorstations/{id}")
     List<String> getAllSensorStationApi(@PathVariable("id") String id) {
-
         try {
-            return sensorStationServiceApi.findAllSensorStation(Long.valueOf(id));
+            List<String> returnList = sensorStationServiceApi.findAllSensorStation(Long.valueOf(id));
+            sensorStationLogger.info("STATION NAMES CALLED BY ACCESS POINT: " + id);
+            return returnList;
         } catch (SensorStationNotFoundException ex) {
+            sensorStationLogger.warning("STATION NAMES COULD NOT CALLED BY ACCESS POINT: " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -94,8 +117,11 @@ public class SensorStationApiController {
     @GetMapping("/api/sensorstationdata/{id}")
     ArrayList<SensorStationDataFrame> getSensorStationData(@PathVariable("id") String id) {
         try {
-            return sensorStationServiceApi.findSensorsByAccesspointID(Long.valueOf(id));
+            ArrayList<SensorStationDataFrame> returnList = sensorStationServiceApi.findSensorsByAccesspointID(Long.valueOf(id));
+            sensorStationLogger.info("SENSOR STATION DATA CALLED BY ACCESS POINT: " + id);
+            return returnList;
         }catch (SensorStationNotFoundException ex){
+            sensorStationLogger.warning("SENSOR STATION DATA COULD NOT CALLED BY ACCESS POINT: " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
@@ -104,23 +130,17 @@ public class SensorStationApiController {
     @GetMapping("/api/validated/{id}")
     boolean getValidation(@PathVariable("id") String id) {
         try {
-            return sensorStationServiceApi.isValidated(Long.valueOf(id));
-        }catch (SensorStationNotFoundException ex){
+            boolean valid = sensorStationServiceApi.isValidated(Long.valueOf(id));
+            sensorStationLogger.info("VALIDATION ASKED BY ACCESS POINT: " + id);
+            return valid;
+        }catch (AccessPointNotFoundException ex){
+            sensorStationLogger.info("VALIDATION COULD NOT ASKED BY ACCESS POINT: " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
     }
 
-    @PostMapping("/api/auditLog")
-    int logFile(@RequestBody List<LogFrame> logFrame) {
 
-        try{
-            sensorStationServiceApi.saveLog(logFrame);
-            return Response.SC_OK;
-        }catch (SensorStationNotFoundException ex){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-    }
 
 
 }

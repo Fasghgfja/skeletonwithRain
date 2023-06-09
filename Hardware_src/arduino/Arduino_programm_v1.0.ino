@@ -79,7 +79,7 @@ void setup() {
     if(digitalRead(D11) == HIGH){
         connection_on = true;
     }
-    //Change this to the name of your choise
+    //Change this to the name of your choose
     BLE.setLocalName("DataGenarator");
     BLE.setDeviceName("DataGenarator");
     //---------------------------------------------------------------

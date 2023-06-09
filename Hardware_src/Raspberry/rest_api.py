@@ -31,7 +31,13 @@ class Sensor(object):
         self.alarm_count = alarm_count
         self.upperBoarder = upper_boarder
         self.lowerBoarder = lower_boarder
-
+class Log_data(object):
+    def __init__(self, text: str, subject: str, author: str, time_stamp: str, type: str):
+        self.text = text
+        self.subject = subject
+        self.author = author
+        self.time_stamp = time_stamp
+        self.type = type
 def url_builder(link):
     url = "http://{0}/api/{1}".format(config_yaml.read_wepapp_ip(),link, config_yaml.read_accesspoint_id())
     return url
@@ -42,6 +48,8 @@ def get_auth():
 def check_validation():
     url = "{0}/{1}".format(url_builder("validated"), config_yaml.read_accesspoint_id())
     valid = requests.get(url, auth=get_auth())
+    if valid.status_code == 404:
+        return "AP deleted stop program"
     if valid.json():
         config_yaml.write_valitation(True)
 
@@ -53,13 +61,17 @@ def get_current_station_data(station_list):
             if e == s[0]:
                 sensor_station_list.append(s)
     return sensor_station_list
-
+def handle_special_values(obj):
+    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return str(obj)
+    else:
+        return None
 def delete_values(station_list):
     for station in station_list:
         for sensor in DB_connection.read_sensors_database(station).fetchall():
             DB_connection.delete_values(sensor[0])
         exception_logging.log_information("INFO: Values of station {0} have been deleted at".format(station))
-
+# -----------------------------------------REST write operations
 def write_value_to_web_app(station_list):
     if config_yaml.read_validation_params():
         measurements_url = url_builder("measurements")
@@ -76,7 +88,7 @@ def write_value_to_web_app(station_list):
         if r.status_code == 200:
             delete_values(station_list)
     else:
-        check_validation()
+        return check_validation()
 
 async def write_sensors_and_station_description(station_names):
     if config_yaml.read_validation_params():
@@ -100,8 +112,86 @@ async def write_sensors_and_station_description(station_names):
                 except Exception as e:
                     exception_logging.logException(e, station[0])
     else:
-        check_validation()
+        return check_validation()
 
+def write_alarm_switch(name, alarm_switch, description):
+    if config_yaml.read_validation_params():
+        post_sensorStations_url = url_builder("sensorstations")
+        try:
+            station_values = StationValue(name=name, service_description=description, alarm_switch=alarm_switch)
+            requests.post(post_sensorStations_url, json=vars(station_values), auth=get_auth())
+        except Exception as e:
+            exception_logging.logException(e, "write alarm_switch to Webapp")
+    else:
+        return check_validation()
+
+
+def update_Sensor(alarm_count_list):
+    if config_yaml.read_validation_params():
+        post_update_sensor_url = url_builder("updatesensors")
+        try:
+            r = requests.post(post_update_sensor_url, json=alarm_count_list, auth=get_auth())
+        except Exception as e:
+            exception_logging.log_connection_exception("Web app while writing alarm_count")
+    else:
+        return check_validation()
+
+def send_log_data_to_webapp(shutdown):
+    if shutdown:
+        url = url_builder("auditLog")
+        send_list = []
+        temp_log_data = Log_data(text="Deleted access point shutdown",
+                                 subject="Access point",
+                                 author=str(config_yaml.read_accesspoint_id()),
+                                 time_stamp=datetime.now().strftime("%Y-%d-%m %H:%M:%S"),
+                                 type="SUCCESS")
+        send_list.append(vars(temp_log_data))
+        requests.post(url,json=send_list,auth=get_auth())
+        print("{0} --- Program shutdown".format(datetime.now().strftime("%Y-%d-%m %H:%M:%S")))
+    else:
+        if config_yaml.read_validation_params():
+            log_send_list = []
+            id = str(config_yaml.read_accesspoint_id())
+            url = url_builder("auditLog")
+            with open('logFile.txt', 'r') as file:
+                for line in file:
+                    if line.startswith('ERROR: 00002a05'):
+                        continue
+
+                    elif line.startswith('ERROR:'):
+                        error_msg = line.split('ERROR:', 1)[1].split('Date', 1)[0].strip()
+                        datetime_str = line.rsplit('Date', 1)[-1].strip().replace('__', ' ')
+                        time_stamp_string = str(datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S'))
+                        if len(error_msg) > 100:
+                            error_msg = "Error message to long stored to specialLogs.txt"
+                            exception_logging.catch_to_long_error_msg(line)
+                        temp_log_data = Log_data(text=error_msg, subject="Access point", author=id, time_stamp=time_stamp_string, type="ERROR")
+                        log_send_list.append(vars(temp_log_data))
+
+                    elif line.startswith('WARNING'):
+                        error_msg = line.split('WARNING:', 1)[1].split('Date', 1)[0].strip()
+                        datetime_str = line.rsplit('Date', 1)[-1].strip().replace('__', ' ')
+                        time_stamp_string = str(datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S'))
+
+                        temp_log_data = Log_data(text=error_msg, subject="Characteristics", author=id, time_stamp=time_stamp_string, type="WARNING")
+                        log_send_list.append(vars(temp_log_data))
+
+                    elif line.startswith('SUCCESS:'):
+                        error_msg = line.split('SUCCESS:', 1)[1].split('Date', 1)[0].strip()
+                        datetime_str = line.rsplit('Date', 1)[-1].strip().replace('__', ' ')
+                        time_stamp_string = str(datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S'))
+
+                        temp_log_data = Log_data(text=error_msg, subject="Sensor Station", author=id, time_stamp=time_stamp_string, type="SUCCESS")
+                        log_send_list.append(vars(temp_log_data))
+
+            response = requests.post(url, json=log_send_list, auth=get_auth())
+            if response.status_code == 200:
+                with open('logFile.txt', 'w') as file:
+                    file.write("New File {0}\n".format(datetime.now().strftime("%D__%H:%M:%S")))
+                    file.close()
+        else:
+            return check_validation()
+# -----------------------------------------REST read operations
 def read_sensor_station_data():
     if config_yaml.read_validation_params():
         try:
@@ -123,18 +213,9 @@ def read_sensor_station_data():
         except Exception as e:
             exception_logging.logException(e, "Read Sensor Boarder from Webapp")
     else:
-        check_validation()
+        return check_validation()
 
-def write_alarm_switch(name, alarm_switch, description):
-    if config_yaml.read_validation_params():
-        post_sensorStations_url = url_builder("sensorstations")
-        try:
-            station_values = StationValue(name=name, service_description=description, alarm_switch=alarm_switch)
-            requests.post(post_sensorStations_url, json=vars(station_values), auth=get_auth())
-        except Exception as e:
-            exception_logging.logException(e, "write alarm_switch to Webapp")
-    else:
-        check_validation()
+
 async def get_sensorstations(getName, name):
 
     if getName:
@@ -178,77 +259,4 @@ def check_if_new_stations():
 
         return webapp_sensorstation_names
     else:
-        check_validation()
-
-def update_Sensor(alarm_count_list):
-    if config_yaml.read_validation_params():
-        post_update_sensor_url = url_builder("updatesensors")
-        try:
-            r = requests.post(post_update_sensor_url, json=alarm_count_list, auth=get_auth())
-        except Exception as e:
-            exception_logging.log_connection_exception("Web app while writing alarm_count")
-    else:
-        check_validation()
-
-class Log_data(object):
-    def __init__(self, text: str, subject: str, author: str, time_stamp: str, type: str):
-        self.text = text
-        self.subject = subject
-        self.author = author
-        self.time_stamp = time_stamp
-        self.type = type
-
-def handle_special_values(obj):
-    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
-        return str(obj)
-    else:
-        return None
-
-def send_log_data_to_webapp():
-    if config_yaml.read_validation_params():
-        log_send_list = []
-        id = str(config_yaml.read_accesspoint_id())
-        url = url_builder("auditLog")
-        with open('logFile.txt', 'r') as file:
-            for line in file:
-                if line.startswith('ERROR: 00002a05'):
-                    error_msg = line.split('ERROR:', 1)[1].split('Date', 1)[0].strip()
-                    datetime_str = line.rsplit('Date', 1)[-1].strip().replace('__', ' ')
-                    time_stamp_string = str(datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S'))
-
-                    #temp_log_data = Log_data(text=error_msg, subject="DEVICE", author=id, time_stamp=time_stamp_string, type="ERROR")
-                    #log_send_list.append(vars(temp_log_data))
-
-                elif line.startswith('ERROR:'):
-                    error_msg = line.split('ERROR:', 1)[1].split('Date', 1)[0].strip()
-                    datetime_str = line.rsplit('Date', 1)[-1].strip().replace('__', ' ')
-                    time_stamp_string = str(datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S'))
-                    if len(error_msg) > 100:
-                        error_msg = "Error message to long stored to specialLogs.txt"
-                        exception_logging.catch_to_long_error_msg(line)
-                    temp_log_data = Log_data(text=error_msg, subject="Access point", author=id, time_stamp=time_stamp_string, type="ERROR")
-                    log_send_list.append(vars(temp_log_data))
-
-                elif line.startswith('WARNING'):
-                    error_msg = line.split('WARNING:', 1)[1].split('Date', 1)[0].strip()
-                    datetime_str = line.rsplit('Date', 1)[-1].strip().replace('__', ' ')
-                    time_stamp_string = str(datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S'))
-
-                    temp_log_data = Log_data(text=error_msg, subject="Characteristics", author=id, time_stamp=time_stamp_string, type="WARNING")
-                    log_send_list.append(vars(temp_log_data))
-
-                elif line.startswith('SUCCESS:'):
-                    error_msg = line.split('SUCCESS:', 1)[1].split('Date', 1)[0].strip()
-                    datetime_str = line.rsplit('Date', 1)[-1].strip().replace('__', ' ')
-                    time_stamp_string = str(datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S'))
-
-                    temp_log_data = Log_data(text=error_msg, subject="Sensor Station", author=id, time_stamp=time_stamp_string, type="SUCCESS")
-                    log_send_list.append(vars(temp_log_data))
-
-        response = requests.post(url, json=log_send_list, auth=get_auth())
-        if response.status_code == 200:
-             with open('logFile.txt', 'w') as file:
-                file.write("New File {0}\n".format(datetime.now().strftime("%D__%H:%M:%S")))
-                file.close()
-    else:
-        check_validation()
+        return check_validation()

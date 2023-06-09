@@ -15,28 +15,35 @@ import org.springframework.web.server.ResponseStatusException;
 import at.qe.skeleton.api.exceptions.MeasurementNotFoundException;
 
 import java.util.List;
+import java.util.logging.Logger;
 
-
-//TODO: this class is to be renamed to MeasurementControllerApi but it should be done with Sh as it probably need changes in the hw src aswell
 @RestController
 public class MeasurementController {
 
 
     @Autowired
     MeasurementServiceApi measurementServiceApi;
-
+    private final transient Logger measurementLogger = Logger.getLogger("Rest Api Measurement Logger");
     @PostMapping("/api/measurements")
     int createMeasurement(@RequestBody List<Measurement2> measurement2) {
-        System.out.println("test123");
         try{
             measurementServiceApi.addMeasurement(measurement2);
+            String name = "";
+            for (Measurement2 m2:
+                 measurement2) {
+                if(!name.equals(m2.getSensorStation())){
+                    name = m2.getSensorStation();
+                    measurementLogger.info("MEASUREMENTS ADDED OF SENSOR STATION: " + m2.getSensorStation());
+                }
+            }
             return Response.SC_OK;
         }catch (MeasurementNotFoundException ex){
+            measurementLogger.warning("Exception caught by POST request createMeasurement: " + ex.toString());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
     }
-
+// is not used by Hardware can be deleted
     @GetMapping("/api/measurements/{id}")
     Measurement getOneMeasurement(@PathVariable Long id) {
         try {
@@ -45,13 +52,6 @@ public class MeasurementController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
-/*
-    @PatchMapping("/api/measurements/{id}")
-    Measurement updateMeasurement(@PathVariable long id, @RequestBody Measurement measurement) {
-        return measurementService.updateMeasurement(id, measurement);
-    }
-
- */
 
 
 }
