@@ -147,7 +147,7 @@ def send_log_data_to_webapp(shutdown):
                                  type="SUCCESS")
         send_list.append(vars(temp_log_data))
         requests.post(url,json=send_list,auth=get_auth())
-        print("{0} --- Program shutdown".format(datetime.now().strftime("%Y-%d-%m %H:%M:%S")))
+        print("{0} --- Program shutdown".format(datetime.now().strftime("%Y/%d/%m %H:%M:%S")))
     else:
         if config_yaml.read_validation_params():
             log_send_list = []

@@ -8,7 +8,7 @@ import ble_service_connection
 import DB_connection
 import check_boarder_values
 import program_status
-import config_yaml
+import search_service
 
 SECTION_SLEEP = 15
 #  cronjop to restart
@@ -53,6 +53,9 @@ if __name__ == '__main__':
     check_alarm_delta = timedelta(seconds=260) # 4:20
     #time.sleep(SECTION_SLEEP)
     print("                      Intervals initialized program loop starts -> ok")
+
+    new_device_name_list = asyncio.run(search_service.search())
+    asyncio.run(ble_service_connection.read_sensor_data(True, new_device_name_list))
     while run:
         try:
             try:
@@ -97,6 +100,7 @@ if __name__ == '__main__':
                 case program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value:
                     print("{0} --- Call for new Sensor station".format(datetime.now().strftime("%D %H:%M:%S")))
                     new_device_name_list = []
+                    new_device_name = ""
                     try:
                         new_device_name = rest_api.check_if_new_stations()
                         new_device_name_list.append(new_device_name)
@@ -107,7 +111,7 @@ if __name__ == '__main__':
                     except Exception as e:
                         exception_logging.logException(e, "Call webapp for new sensorstations")
 
-                    if len(new_device_name_list) > 0:
+                    if len(new_device_name_list) > 0 and new_device_name != "None":
                         print("                      New device found: {0}".format(new_device_name_list[0]))
                         # search for new SensorStation
                         try:

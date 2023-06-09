@@ -43,7 +43,10 @@ async def read_sensor_data(new_connection, device_list):
     if new_connection:
         sensor_index = get_sensor_id()
     for station_name in device_list:
+        if station_name == None:
+            continue
         device = await BleakScanner.find_device_by_name(station_name) # could also have timeout
+        # device = await BleakScanner.find_device_by_address(station_name)
         if device is None:
             exception_logging.log_connection_exception(station_name)
         else:
