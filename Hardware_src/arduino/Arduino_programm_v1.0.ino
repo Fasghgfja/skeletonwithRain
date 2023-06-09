@@ -72,6 +72,7 @@ void setup() {
     pinMode(piezo, OUTPUT);
     pinMode(ligth_sensor, INPUT);
     pinMode(D11, INPUT);
+
     //--------------------------------------------------------------BluetoothLE setup
     if (!BLE.begin()) {
         while(1);
@@ -79,9 +80,10 @@ void setup() {
     if(digitalRead(D11) == HIGH){
         connection_on = true;
     }
-    //Change this to the name of your choose
-    BLE.setLocalName("DataGenarator");
-    BLE.setDeviceName("DataGenarator");
+    BLE.setLocalName("TestStation");
+    BLE.setDeviceName("TestStation");
+
+
     //---------------------------------------------------------------
     BLE.setAdvertisedService(readSensorDataService);
     //---------------------------------------------------------------BLEDescriptor
@@ -157,18 +159,15 @@ void loop(){
         connection_on = false;
         piezo_on = false;
         lightOff();
-        //noTone(piezo);
     }
 
     //----------------------------------------------pairing tone
     if(piezo_on && (timer_current - piezo_timer_start) >= 1000){
         if(piep){
-            //noTone(piezo);
             lightOff();
             piep = false;
         }
         else{
-            //tone(piezo, 100);
             lightOn(0,0,255);
             piep = true;
         }
@@ -185,7 +184,7 @@ void loop(){
         //---------------------------------------------Button push to deactivate the alarm if is active
     else if(readButton == HIGH && connection_on == true && Alarm == true){
         alarm_on = true;
-        readButton = LOW;//new
+        readButton = LOW;
         alarm_controller();
     }
         //---------------------------------------------Button push to reset/stop offering signal
@@ -277,6 +276,7 @@ void alarm_controller(){
         Alarm = false;
         alarmCharacteristic.setValue(true);
         alarm_ligth_type = 6;
+        noTone(piezo);
         lightOff();
     }
     else{
@@ -385,26 +385,18 @@ void readAlarmStatus(BLEDevice central, BLECharacteristic characteristic){
         alarm_read = true;
         alarm_on = false;
     }
-    //Serial.println("Alarm_function:");
-    //Serial.println(alarmCharacteristic.value());
 }
 void blePeripheralConnectHandler(BLEDevice central) {
     if(piezo_on){
         piezo_on = false;
         lightOff();
-        //noTone(piezo);
     }
-    //Serial.print("Central:");
-    //Serial.println(central.address());
     if(central_mac == "non"){
         central_mac = central.address();
     }
     else if(central.address().compareTo(central_mac) != 0){
         central.disconnect();
-        //Serial.println("Rejected");
     }
-    //Serial.print("Stored central:");
-    //Serial.println(central_mac);
 }
 
 void blePeripheralDisconnectHandler(BLEDevice central) {
