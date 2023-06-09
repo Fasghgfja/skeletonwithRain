@@ -44,7 +44,7 @@ def check_boarder_values(station_list):
                     if alarm_count != -1 and ((len(current_value_list) - current_value_breaks) < ((len(current_value_list) * 3) / 4)):
                         alarm_count += 1
 
-                    if alarm_count > station[5] and alarm_switch == "off":
+                    if alarm_count >= station[5] and alarm_switch == "off":
                         asyncio.run(ble_service_connection.writeAlarmSignal(uuid, "ON", station[NAME]))
                         alarm_count = -1
                         alarm_switch = "on"

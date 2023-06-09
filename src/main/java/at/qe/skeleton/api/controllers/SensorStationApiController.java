@@ -4,7 +4,6 @@ import at.qe.skeleton.api.exceptions.SensorNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
 import at.qe.skeleton.api.model.*;
 import at.qe.skeleton.api.services.SensorStationServiceApi;
-import at.qe.skeleton.model.Sensor;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -92,8 +91,8 @@ public class SensorStationApiController {
         }
     }
 
-    @GetMapping("/api/sensorsboardervalue/{id}")
-    ArrayList<BoarderValueFrame> updateMeasurement(@PathVariable("id") String id) {
+    @GetMapping("/api/sensorstationdata/{id}")
+    ArrayList<SensorStationDataFrame> getSensorStationData(@PathVariable("id") String id) {
         try {
             return sensorStationServiceApi.findSensorsByAccesspointID(Long.valueOf(id));
         }catch (SensorStationNotFoundException ex){
@@ -102,15 +101,6 @@ public class SensorStationApiController {
 
     }
 
-    @GetMapping("/api/sendinterval/{id}")
-    SendingIntervalFrame getSendingInterval(@PathVariable("id") String id) {
-        try {
-            return sensorStationServiceApi.findSendingIntervalBySensorStationID(id);//TODO: here
-        }catch (SensorStationNotFoundException ex){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-
-    }
     @GetMapping("/api/validated/{id}")
     boolean getValidation(@PathVariable("id") String id) {
         try {

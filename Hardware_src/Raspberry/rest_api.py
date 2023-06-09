@@ -6,12 +6,8 @@ import exception_logging
 import datetime
 from datetime import datetime
 import config_yaml
-# local
-auth = ("admin", "passwd")
-log_id = 0
 
-post_log_url = "http://localhost:8080/"
-id = 50100
+log_id = 0
 
 class SensorValue(object):
     def __init__(self, sensorStation: str, sensor_id: str, value: str, time_stamp: str, type:str):
@@ -63,7 +59,7 @@ def delete_values(station_list):
         for sensor in DB_connection.read_sensors_database(station).fetchall():
             DB_connection.delete_values(sensor[0])
         exception_logging.log_information("INFO: Values of station {0} have been deleted at".format(station))
-#---------------------------------------------------------------------------------------need to change
+
 def write_value_to_web_app(station_list):
     if config_yaml.read_validation_params():
         measurements_url = url_builder("measurements")
@@ -105,17 +101,24 @@ async def write_sensors_and_station_description(station_names):
                     exception_logging.logException(e, station[0])
     else:
         check_validation()
-# ---------------------------------------------------------------------------------------------need to change
-def read_sensor_boarder_values():
+
+def read_sensor_station_data():
     if config_yaml.read_validation_params():
         try:
-            url = "{0}/{1}".format(url_builder("sensorsboardervalue"), config_yaml.read_accesspoint_id())
+            url = "{0}/{1}".format(url_builder("sensorstationdata"), config_yaml.read_accesspoint_id())
             data = requests.get(url,auth=get_auth())
-            sensor_list = data.json()
-            for sensor in sensor_list:
-                to_update_sensor = DB_connection.read_sensors_by_id(sensor["sensor_id"])
+            station_data_list = data.json()
+            station = ""
+            for sensor in station_data_list:
+                if station != sensor["station_name"]:
+                    station = sensor["station_name"]
+                    DB_connection.update_sensor_station_interval(station_name=sensor["station_name"],
+                                                                 measurement_interval=sensor["measurementInterval"],
+                                                                 webapp_interval=sensor["webappSendInterval"],
+                                                                 treshold=sensor["alarmCountThreshold"])
+                to_update_sensor = DB_connection.read_sensors_by_id(sensor["station_name"], sensor["sensorType"])
                 if to_update_sensor[5] != sensor["lowerBoarder"] or to_update_sensor[6] != sensor["upperBoarder"]:
-                    DB_connection.update_boarder_value(sensor["sensor_id"], sensor["upperBoarder"], sensor["lowerBoarder"])
+                    DB_connection.update_boarder_value(to_update_sensor[0], sensor["upperBoarder"], sensor["lowerBoarder"])
 
         except Exception as e:
             exception_logging.logException(e, "Read Sensor Boarder from Webapp")
@@ -186,26 +189,6 @@ def update_Sensor(alarm_count_list):
             exception_logging.log_connection_exception("Web app while writing alarm_count")
     else:
         check_validation()
-# -------------------------------------------------------------------------------------need to change
-def read_sending_interval():
-    if config_yaml.read_validation_params():
-        r = ""
-        url = "{0}/{1}".format(url_builder("sendinterval"), config_yaml.read_accesspoint_id())
-        try:
-            r = requests.get(url, auth=get_auth())
-        except Exception as e:
-            exception_logging.log_connection_exception("Web app while writing alarm_count")
-        try:
-            mes_int = r.json()["measurementInterval"]
-            web_int = r.json()["webappSendInterval"]
-            tr_ho = r.json()["alarmCountThreshold"]
-            config_yaml.write_sending_intervalls(mes_int, web_int, tr_ho)
-        except Exception as e:
-            exception_logging.logException(e, "Write intervals to config.yaml")
-    else:
-        check_validation()
-
-
 
 class Log_data(object):
     def __init__(self, text: str, subject: str, author: str, time_stamp: str, type: str):
@@ -247,7 +230,7 @@ def send_log_data_to_webapp():
                     log_send_list.append(vars(temp_log_data))
 
                 elif line.startswith('WARNING'):
-                    error_msg = line.split('WARNING', 1)[1].split('Date', 1)[0].strip()
+                    error_msg = line.split('WARNING:', 1)[1].split('Date', 1)[0].strip()
                     datetime_str = line.rsplit('Date', 1)[-1].strip().replace('__', ' ')
                     time_stamp_string = str(datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S'))
 
@@ -255,14 +238,14 @@ def send_log_data_to_webapp():
                     log_send_list.append(vars(temp_log_data))
 
                 elif line.startswith('SUCCESS:'):
-                    error_msg = line.split('SUCCESS', 1)[1].split('Date', 1)[0].strip()
+                    error_msg = line.split('SUCCESS:', 1)[1].split('Date', 1)[0].strip()
                     datetime_str = line.rsplit('Date', 1)[-1].strip().replace('__', ' ')
                     time_stamp_string = str(datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S'))
 
-                    temp_log_data = Log_data(text=error_msg, subject="Sensor Station", author=id, time_stamp=time_stamp_string, type="WARNING")
+                    temp_log_data = Log_data(text=error_msg, subject="Sensor Station", author=id, time_stamp=time_stamp_string, type="SUCCESS")
                     log_send_list.append(vars(temp_log_data))
 
-        response = requests.post(url, json=log_send_list, auth=auth)
+        response = requests.post(url, json=log_send_list, auth=get_auth())
         if response.status_code == 200:
              with open('logFile.txt', 'w') as file:
                 file.write("New File {0}\n".format(datetime.now().strftime("%D__%H:%M:%S")))

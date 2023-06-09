@@ -107,6 +107,19 @@ def update_sensor_station_database(alarm_switch, station_name):
     except Exception as e:
         exception_logging.logException(e, station_name)
 
+def update_sensor_station_interval(station_name, measurement_interval, webapp_interval, treshold):
+    try:
+        conn = sqlite3.connect('AccessPoint')
+        c = conn.cursor()
+        c.execute('''
+                update Sensorstation set measurement_interval={0}, webapp_interval={1}, treshold={2} where name='{3}'
+            '''.format(measurement_interval, webapp_interval, treshold, station_name))
+        conn.commit()
+        file1 = open("logFile.txt", "a")
+        file1.write("INFO: SensorStation {0} has been updated data\n".format(station_name))
+        file1.close()
+    except Exception as e:
+        exception_logging.logException(e, station_name)
 def update_sensor_database(alarm_count, sensor_id):
     try:
         conn = sqlite3.connect('AccessPoint')
@@ -178,16 +191,16 @@ def read_sensors_database(name):
     except Exception as e:
         exception_logging.logException(e, "Sensor")
 
-def read_sensors_by_id(id):
+def read_sensors_by_id(station, sensor_type):
     try:
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
         c.execute('''
-            select * from Sensor where sensor_id='{0}'
-        '''.format(id))
+            select * from Sensor where station_name='{0}' and sensor_type='{1}'
+        '''.format(station, sensor_type))
         return c.fetchone()
     except Exception as e:
-        exception_logging.logException(e, "Sensor")
+        exception_logging.logException(e, "Sensor by station and type")
 
 def read_sensors_alarm_count(name):
     try:

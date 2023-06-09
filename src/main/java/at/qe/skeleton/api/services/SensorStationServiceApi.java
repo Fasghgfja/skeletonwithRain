@@ -115,9 +115,9 @@ public class SensorStationServiceApi {
 
     /**
      * This method is called to save new Sensors
-     * @param sensorApi
+     * @param sensorApi list
      * @return
-     * @throws SensorStationNotFoundException
+     * @throws SensorNotFoundException
      */
     public int addSensor(List<SensorApi> sensorApi) throws SensorNotFoundException {
         try {
@@ -147,7 +147,7 @@ public class SensorStationServiceApi {
 
     /**
      * This method is called to update sensor attribute alarm_count
-     * @param sensorApi
+     * @param sensorApi list
      * @throws SensorStationNotFoundException
      */
     public void updateSensor(List<SensorApi> sensorApi) throws SensorStationNotFoundException{
@@ -168,10 +168,10 @@ public class SensorStationServiceApi {
      * @return
      * @throws SensorStationNotFoundException
      */
-    public ArrayList<BoarderValueFrame> findSensorsByAccesspointID(Long id) throws SensorStationNotFoundException{
+    public ArrayList<SensorStationDataFrame> findSensorsByAccesspointID(Long id) throws SensorStationNotFoundException{
         List<SensorStation> sensorStationList = sensorStationRepository.findAllByAccessPoint_AccessPointID(id);
         ArrayList<Sensor> sensorList = new ArrayList<>();
-        ArrayList<BoarderValueFrame> boarderValueFrameArrayList = new ArrayList<>();
+        ArrayList<SensorStationDataFrame> sensorStationDataFrameArrayList = new ArrayList<>();
         System.out.println(sensorStationList.size());
         for (SensorStation ss:
              sensorStationList) {
@@ -180,31 +180,23 @@ public class SensorStationServiceApi {
 
         for (Sensor s:
              sensorList) {
-            BoarderValueFrame boarderValueFrame = new BoarderValueFrame();
-            boarderValueFrame.setSensor_id(s.getId());
-            boarderValueFrame.setLowerBoarder(s.getLower_border());
-            boarderValueFrame.setUpperBoarder(s.getUpper_border());
-            boarderValueFrame.setStation_name(s.getSensorStation().getSensorStationName());
-            boarderValueFrameArrayList.add(boarderValueFrame);
+            SensorStationDataFrame sensorStationDataFrame = new SensorStationDataFrame();
+            sensorStationDataFrame.setSensor_id(s.getId());
+            sensorStationDataFrame.setSensorType(s.getType());
+            sensorStationDataFrame.setMeasurementInterval(Integer.parseInt(
+                    intervalService.getFirstBySensorStation(s.getSensorStation()).getMeasurementInterval()
+            ));
+            sensorStationDataFrame.setWebappSendInterval(Integer.parseInt(
+                    intervalService.getFirstBySensorStation(s.getSensorStation()).getWebAppInterval()
+            ));
+            sensorStationDataFrame.setAlarmCountThreshold(s.getSensorStation().getAlarmCountThreshold());
+            sensorStationDataFrame.setLowerBoarder(s.getLower_border());
+            sensorStationDataFrame.setUpperBoarder(s.getUpper_border());
+            sensorStationDataFrame.setStation_name(s.getSensorStation().getSensorStationName());
+            System.out.println(sensorStationDataFrame.toString());
+            sensorStationDataFrameArrayList.add(sensorStationDataFrame);
         }
-        return boarderValueFrameArrayList;
-    }
-
-    /**
-     * This method is used to call the measurement and webapp interval for a given accesspoint
-     * @param id
-     * @return
-     * @throws SensorStationNotFoundException
-     */
-    public SendingIntervalFrame findSendingIntervalBySensorStationID(String id) throws SensorStationNotFoundException{
-//TODO : here
-        SSInterval ssInterval = intervalService.getFirstBySensorStationId(id);
-
-        SendingIntervalFrame sendingIntervalFrame = new SendingIntervalFrame();
-        sendingIntervalFrame.setMeasurementInterval(Integer.parseInt(ssInterval.getMeasurementInterval()));
-        sendingIntervalFrame.setWebappSendInterval(Integer.parseInt(ssInterval.getWebAppInterval()));
-        sendingIntervalFrame.setAlarmCountThreshold(1);
-        return  sendingIntervalFrame;
+        return sensorStationDataFrameArrayList;
     }
 
     /**
@@ -224,6 +216,8 @@ public class SensorStationServiceApi {
             log.setSubject(l.getSubject());
             if(l.getType().equals("ERROR"))
                 log.setType(LogType.ERROR);
+            else if(l.getType().equals("SUCCESS"))
+                log.setType(LogType.SUCCESS);
             else
                 log.setType(LogType.WARNING);
             logService.saveLog(log);

@@ -71,7 +71,7 @@ if __name__ == '__main__':
                 program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
 
             elif (start_check_webapp_data_time + check_webapp_delta) < datetime.now():
-                program_state = program_status.Is.CHECK_FOR_NEW_BOARDER_AND_INTERVAL_VALUES.value
+                program_state = program_status.Is.CALL_SENSOR_STATION_DATA.value
 
             elif (start_check_alarm_time + check_alarm_delta) < datetime.now():
                 program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
@@ -88,7 +88,7 @@ if __name__ == '__main__':
 
                 else:
                     time.sleep(5)
-                    # program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+                    # program_state = program_status.Is.CHECK_FOR_NEW_BOARDER_AND_INTERVAL_VALUES.value
                     program_state = -1
 
 
@@ -123,7 +123,8 @@ if __name__ == '__main__':
                             print("                      Write new station to Webapp -> ok")
                         except Exception as e:
                             exception_logging.logException(e, "Write new SensorStation to Webapp")
-
+                    else:
+                        print("                      No new stations to search")
                     start_call_new_station_time = datetime.now()
 
                 # call time set by measurment intervall
@@ -180,13 +181,13 @@ if __name__ == '__main__':
                     start_check_alarm_time = datetime.now()
 
                 # called every 5min:10sec
-                case program_status.Is.CHECK_FOR_NEW_BOARDER_AND_INTERVAL_VALUES.value:
+                case program_status.Is.CALL_SENSOR_STATION_DATA.value:
                     print("{0} --- check webapp for new data".format(datetime.now().strftime("%D %H:%M:%S")))
                     try:
-                        rest_api.read_sensor_boarder_values()
-                        rest_api.read_sending_interval()
+                        rest_api.read_sensor_station_data()
+                        print("                      Call sensor station data -> ok")
                     except Exception as e:
-                        exception_logging.logException(e, "read boarders")
+                        exception_logging.logException(e, "read sensor station data")
                     start_check_webapp_data_time = datetime.now()
 
         except Exception as e:
