@@ -48,22 +48,37 @@ def check_validation():
     valid = requests.get(url, auth=get_auth())
     if valid.json():
         config_yaml.write_valitation(True)
+
+def get_current_station_data(station_list):
+    connected_sensor_stations_list = DB_connection.read_Sensor_Stationnames_Database()
+    sensor_station_list = []
+    for s in connected_sensor_stations_list:
+        for e in station_list:
+            if e == s[0]:
+                sensor_station_list.append(s)
+    return sensor_station_list
+
+def delete_values(station_list):
+    for station in station_list:
+        for sensor in DB_connection.read_sensors_database(station).fetchall():
+            DB_connection.delete_values(sensor[0])
+        exception_logging.log_information("INFO: Values of station {0} have been deleted at".format(station))
 #---------------------------------------------------------------------------------------need to change
-def write_value_to_web_app():
+def write_value_to_web_app(station_list):
     if config_yaml.read_validation_params():
         measurements_url = url_builder("measurements")
+        sensor_station_list = get_current_station_data(station_list)
         send_value_list = []
-        for sensorstations in DB_connection.read_Sensor_Stationnames_Database():
-            for sensor in DB_connection.read_sensors_database(sensorstations[0]).fetchall():
+        for station in sensor_station_list:
+            for sensor in DB_connection.read_sensors_database(station[0]).fetchall():
                 if sensor[3] != "ALARM_STATUS":
                     for value in DB_connection.read_value_from_database(sensor[0]):
                         sensor_id_string = str(value[2])
-                        time_stamp_string = str(value[1])
-                        temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=time_stamp_string, type=sensor[3])
+                        temp_sensor_value = SensorValue(sensorStation=sensor[2], sensor_id=sensor_id_string, value=value[0], time_stamp=value[1], type=sensor[3])
                         send_value_list.append(vars(temp_sensor_value))
         r = requests.post(measurements_url, json=send_value_list, auth=get_auth())
         if r.status_code == 200:
-            DB_connection.delete_values()
+            delete_values(station_list)
     else:
         check_validation()
 

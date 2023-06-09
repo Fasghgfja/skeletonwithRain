@@ -1,3 +1,4 @@
+from datetime import datetime
 import sqlite3
 import struct
 import exception_logging
@@ -33,7 +34,7 @@ def implement_database():
     c.execute('''
             create table if not exists Value(
             value varchar not null,
-            time_stamp timestamp,
+            time_stamp varchar(32),
             sensor_id int,
             FOREIGN KEY (sensor_id) REFERENCES Sensor(sensor_id) ON DELETE CASCADE);
         ''')
@@ -55,8 +56,8 @@ def insert_values_into_database(value, float_value, type, deviceName):
         sensor_id = c.fetchone()[0]
         c = conn.cursor()
         c.execute('''
-                insert into value values('{0}', CURRENT_TIMESTAMP, {1})
-            '''.format(string_value, sensor_id))
+                insert into value values('{0}', '{2}', {1})
+            '''.format(string_value, sensor_id, datetime.now().strftime("%m-%d-%Y %H:%M:%S")))
         conn.commit()
         file1 = open("logFile.txt", "a")
         file1.write("INFO: Value for type {0} on id {1} saved\n".format(type.decode(), sensor_id))
@@ -223,15 +224,14 @@ def read_sensors():
         exception_logging.logException(e, "Sensor")
 
 #----------------------------------------delete Database
-def delete_values():
+def delete_values(id):
     try:
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
         c.execute('''
-            delete from Value 
-        ''')
+            delete from Value where sensor_id ='{0}'
+        '''.format(id))
         conn.commit()
-        exception_logging.log_information("INFO: Values of have been deleted at")
     except Exception as e:
         exception_logging.logException(e, "delete values")
 

@@ -30,8 +30,6 @@ public class MeasurementController {
         System.out.println("test123");
         try{
             measurementServiceApi.addMeasurement(measurement2);
-
-
             return Response.SC_OK;
         }catch (MeasurementNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

@@ -5,13 +5,16 @@ import at.qe.skeleton.api.exceptions.MeasurementNotFoundException;
 import at.qe.skeleton.api.model.Measurement2;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.SensorStation;
+import at.qe.skeleton.model.MeasurementType;
 import at.qe.skeleton.repositories.MeasurementRepository;
 import at.qe.skeleton.services.SensorStationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.List;
@@ -49,23 +52,42 @@ public class MeasurementServiceApi {
      */
     public void addMeasurement(List<Measurement2> measurement) throws MeasurementNotFoundException {
         for (Measurement2 m: measurement) {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(m.getTime_stamp(), formatter);
-
-        Measurement measurement1 = new Measurement();
-        SensorStation sensorStation = sensorStationService.loadSensorStation(m.getSensorStation());
-        measurement1.setSensorStation(sensorStation);
-        measurement1.setType(m.getType());
-        measurement1.setTimestamp(dateTime);
-        measurement1.setValue_s(m.getValue());
-        measurementRepository.save(measurement1);
-        System.out.println(measurement1.toString());
+            System.out.println(m.getTime_stamp());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            DateTimeFormatter databaseFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(m.getTime_stamp(), formatter);
+            System.out.println(dateTime);
+            Measurement measurement1 = new Measurement();
+            SensorStation sensorStation = sensorStationService.loadSensorStation(m.getSensorStation());
+            measurement1.setSensorStation(sensorStation);
+            measurement1.setType(m.getType());
+            measurement1.setTimestamp(dateTime);
+            measurement1.setValue_s(m.getValue());
+            measurement1.setUnit(getUnit(m.getType()));
+            System.out.println(measurement1.toString());
+            measurementRepository.save(measurement1);
         }
 
     }
 
+    private String getUnit(String type){
+        if(type.equals(MeasurementType.AIR_PRESSURE.getValue())){
+            return "hpa";
+        }
+        else if (type.equals(MeasurementType.HUMIDITY.getValue()) || type.equals(MeasurementType.SOIL_MOISTURE.getValue())){
+            return "%";
+        }
+        else if (type.equals(MeasurementType.TEMPERATURE.getValue())){
+            return "°C";
+        }
+        else if (type.equals(MeasurementType.AIR_QUALITY.getValue())){
+            return "ppm";
+        }
+        else {
+            return "Lux";
+        }
 
+    }
 
 
 

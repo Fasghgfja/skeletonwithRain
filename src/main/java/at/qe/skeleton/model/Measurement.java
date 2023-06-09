@@ -35,7 +35,7 @@ public class Measurement implements Serializable {
 
 
     public String getReadableTimestamp() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return timestamp.format(formatter);
     }
 
@@ -43,6 +43,8 @@ public class Measurement implements Serializable {
     public String toString() {
         return "Measurement{" +
                 "id: " + id +
+                "Timestamp: " + getReadableTimestamp() +
+                "unit: " + unit +
                 '}';
     }
 

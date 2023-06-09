@@ -49,7 +49,7 @@ async def read_sensor_data(new_connection, device_list):
         else:
             # the naming convention is not intuitive imho
             async with BleakClient(device) as client:
-                print("Connected to device {0}".format(station_name))
+                print("                      Connected to device: {0}".format(station_name))
                 # print all services and all characteristics provided by device
 
                 for service in client.services: # iterate all defined services on peripheral

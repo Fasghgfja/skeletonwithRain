@@ -121,8 +121,13 @@ public class SensorStationServiceApi {
      */
     public int addSensor(List<SensorApi> sensorApi) throws SensorNotFoundException {
         try {
+
             for (SensorApi s :
                     sensorApi) {
+                if (sensorService.areSensorsPresent(sensorStationRepository.findFirstById(s.getStation_name()))){
+                    System.out.println("Sensors are in Database");
+                    break;
+                }
                 Sensor sensor = new Sensor();
                 //sensor.setId(s.getSensor_id());
                 sensor.setSensorStation(sensorStationRepository.findFirstById(s.getStation_name()));
