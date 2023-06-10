@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
                 else:
                     time.sleep(5)
-                    program_state = program_status.Is.SEARCH_FOR_DEVICES.value
+                    program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
                     # program_state = -1
 
 
@@ -106,18 +106,15 @@ if __name__ == '__main__':
                 case program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value:
                     print("{0} --- Call for new Sensor station".format(datetime.now().strftime("%D %H:%M:%S")))
                     new_device_name_list = []
-                    new_device_name = ""
                     try:
-                        new_device_name = rest_api.check_if_new_stations()
-                        new_device_name_list.append(new_device_name)
-                        if new_device_name == "AP deleted stop program":
-                            program = "AP deleted stop program"
-                        else:
-                            print("                      Call new names -> ok")
+                        new_device_name_list = rest_api.check_if_new_stations()
+                        print("                      Call new names -> ok")
                     except Exception as e:
                         exception_logging.logException(e, "Call webapp for new sensorstations")
 
-                    if len(new_device_name_list) > 0 and new_device_name != "None":
+                    if len(new_device_name_list) > 0:
+                        if new_device_name_list[0] == "AP deleted stop program":
+                            program = "AP deleted stop program"
                         print("                      New device found: {0}".format(new_device_name_list[0]))
                         # search for new SensorStation
                         try:
