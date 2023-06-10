@@ -8,7 +8,6 @@ import ble_service_connection
 import DB_connection
 import check_boarder_values
 import program_status
-import search_service
 
 SECTION_SLEEP = 15
 #  cronjop to restart
@@ -51,11 +50,15 @@ if __name__ == '__main__':
     # check if an alarm of a Sensor Station is on timer
     start_check_alarm_time = datetime.now()
     check_alarm_delta = timedelta(seconds=260) # 4:20
+    # searching for devices nearby
+    start_search_for_devices_time = datetime.now()
+    search_delta = timedelta(seconds=90) # 1:30
     #time.sleep(SECTION_SLEEP)
+    found_devices = []
     print("                      Intervals initialized program loop starts -> ok")
 
-    new_device_name_list = asyncio.run(search_service.search())
-    asyncio.run(ble_service_connection.read_sensor_data(True, new_device_name_list))
+
+
     while run:
         try:
             try:
@@ -70,6 +73,9 @@ if __name__ == '__main__':
             # time evaluations for program state
             if (start_call_new_station_time + call_station_delta) < datetime.now():
                 program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+
+            elif (start_search_for_devices_time + search_delta) < datetime.now():
+                program_state = program_status.Is.SEARCH_FOR_DEVICES.value
 
             elif (start_check_webapp_data_time + check_webapp_delta) < datetime.now():
                 program_state = program_status.Is.CALL_SENSOR_STATION_DATA.value
@@ -89,8 +95,8 @@ if __name__ == '__main__':
 
                 else:
                     time.sleep(5)
-                    # program_state = program_status.Is.CHECK_FOR_NEW_BOARDER_AND_INTERVAL_VALUES.value
-                    program_state = -1
+                    program_state = program_status.Is.SEARCH_FOR_DEVICES.value
+                    # program_state = -1
 
 
 
@@ -130,6 +136,22 @@ if __name__ == '__main__':
                     else:
                         print("                      No new stations to search")
                     start_call_new_station_time = datetime.now()
+
+                # call time every 1:30 minutes
+                case program_status.Is.SEARCH_FOR_DEVICES.value:
+                    print("{0} --- Search for sensor stations".format(datetime.now().strftime("%D %H:%M:%S")))
+                    try:
+                        found_devices = asyncio.run(ble_service_connection.search())
+                        # asyncio.run(ble_service_connection.read_sensor_data(True, found_devices))
+                        print("                      searching for stations -> ok")
+                    except Exception as e:
+                        exception_logging.logException(e, "search for stations")
+                    try:
+                        rest_api.send_possible_devices_to_webapp(found_devices)
+                        print("                      sending nearby devices -> ok")
+                    except Exception as e:
+                        exception_logging.logException(e, "search for stations")
+                    start_search_for_devices_time = datetime.now()
 
                 # call time set by measurment intervall
                 case program_status.Is.READ_SENSOR_VALUES.value:

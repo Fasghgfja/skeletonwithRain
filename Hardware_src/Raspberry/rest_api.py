@@ -191,6 +191,16 @@ def send_log_data_to_webapp(shutdown):
                     file.close()
         else:
             return check_validation()
+
+def send_possible_devices_to_webapp(found_devices):
+    if config_yaml.read_validation_params():
+        try:
+            url = "{0}/{1}".format(url_builder("newdevices"), config_yaml.read_accesspoint_id())
+            r = requests.post(url, json=found_devices, auth=get_auth())
+            if r.status_code == 404:
+                config_yaml.write_valitation(False)
+        except Exception as e:
+            exception_logging.logException(e, " send possible devices to webapp")
 # -----------------------------------------REST read operations
 def read_sensor_station_data():
     if config_yaml.read_validation_params():

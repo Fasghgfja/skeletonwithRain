@@ -1,8 +1,27 @@
+import asyncio
 
 import DB_connection
 import exception_logging
-
 from bleak import BleakClient, BleakScanner
+class device_tuple(object):
+    def __init__(self, name: str, mac: str, uuid: str):
+        self.name = name
+        self.mac = mac
+        self.uuid = uuid
+async def search():
+    try:
+        devices = await BleakScanner.discover(timeout=10.0, return_adv=True)
+        device_list = []
+        for k, v in devices.items():
+            print("                      name: {0},  mac: {1}, uuid: {2}".format(v[1].local_name, k, v[1].service_uuids))
+            if v[1].local_name == "TestStation":
+                d_tuple = device_tuple(name=v[1].local_name, mac=k, uuid=v[1].service_uuids[0])
+                device_list.append(vars(d_tuple))
+                # device_list.append(k)
+        return device_list
+    except Exception as e:
+        exception_logging.logException(e, "read devices")
+        return []
 # send signal to switch on/off alarm ligth on a given uuid
 async def writeAlarmSignal(uuid, switch, station_name):
     device = await BleakScanner.find_device_by_name(station_name)
@@ -45,8 +64,8 @@ async def read_sensor_data(new_connection, device_list):
     for station_name in device_list:
         if station_name == None:
             continue
-        device = await BleakScanner.find_device_by_name(station_name) # could also have timeout
-        # device = await BleakScanner.find_device_by_address(station_name)
+        # device = await BleakScanner.find_device_by_name(station_name) # could also have timeout
+        device = await BleakScanner.find_device_by_address(station_name)
         if device is None:
             exception_logging.log_connection_exception(station_name)
         else:

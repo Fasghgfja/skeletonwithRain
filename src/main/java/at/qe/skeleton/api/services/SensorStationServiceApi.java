@@ -198,6 +198,13 @@ public class SensorStationServiceApi {
         return sensorStationDataFrameArrayList;
     }
 
+    public void saveNearbyDevices(Long id, List<SensorDevice> devices) throws AccessPointNotFoundException{
+
+        for (SensorDevice sd:
+             devices) {
+            System.out.println(sd);
+        }
+    }
     /**
      * This method is used to store the logs of accesspoints
      * @param logFrame
