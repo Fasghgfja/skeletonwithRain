@@ -52,7 +52,7 @@ if __name__ == '__main__':
     check_alarm_delta = timedelta(seconds=260) # 4:20
     # searching for devices nearby
     start_search_for_devices_time = datetime.now()
-    search_delta = timedelta(seconds=90) # 1:30
+    search_delta = timedelta(seconds=15) # 0:15
     #time.sleep(SECTION_SLEEP)
     found_devices = []
     print("                      Intervals initialized program loop starts -> ok")
@@ -95,8 +95,8 @@ if __name__ == '__main__':
 
                 else:
                     time.sleep(5)
-                    program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
-                    # program_state = -1
+                    # program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+                    program_state = -1
 
 
 
@@ -137,17 +137,19 @@ if __name__ == '__main__':
                 # call time every 1:30 minutes
                 case program_status.Is.SEARCH_FOR_DEVICES.value:
                     print("{0} --- Search for sensor stations".format(datetime.now().strftime("%D %H:%M:%S")))
+                    found_devices = []
                     try:
                         found_devices = asyncio.run(ble_service_connection.search())
                         # asyncio.run(ble_service_connection.read_sensor_data(True, found_devices))
                         print("                      searching for stations -> ok")
                     except Exception as e:
                         exception_logging.logException(e, "search for stations")
-                    try:
-                        rest_api.send_possible_devices_to_webapp(found_devices)
-                        print("                      sending nearby devices -> ok")
-                    except Exception as e:
-                        exception_logging.logException(e, "search for stations")
+                    if len(found_devices) > 0:
+                        try:
+                            rest_api.send_possible_devices_to_webapp(found_devices)
+                            print("                      sending nearby devices -> ok")
+                        except Exception as e:
+                            exception_logging.logException(e, "search for stations")
                     start_search_for_devices_time = datetime.now()
 
                 # call time set by measurment intervall

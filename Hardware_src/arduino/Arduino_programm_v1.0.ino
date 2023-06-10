@@ -72,6 +72,7 @@ void setup() {
     pinMode(piezo, OUTPUT);
     pinMode(ligth_sensor, INPUT);
     pinMode(D11, INPUT);
+
     //--------------------------------------------------------------BluetoothLE setup
     if (!BLE.begin()) {
         while(1);
@@ -79,9 +80,9 @@ void setup() {
     if(digitalRead(D11) == HIGH){
         connection_on = true;
     }
-    //Change this to the name of your choose
-    BLE.setLocalName("DataGenarator");
-    BLE.setDeviceName("DataGenarator");
+    BLE.setLocalName("PlantSensor");
+    BLE.setDeviceName("PlantSensor");
+
     //---------------------------------------------------------------
     BLE.setAdvertisedService(readSensorDataService);
     //---------------------------------------------------------------BLEDescriptor
@@ -128,7 +129,7 @@ void setup() {
     BLE.setEventHandler(BLEConnected, blePeripheralConnectHandler);
     BLE.setEventHandler(BLEDisconnected, blePeripheralDisconnectHandler);
     //---------------------------------------------------------------
-    BLE.advertise();
+
     //---------------------------------------------------------------BME688 setup
 
     if (!bme.begin()) {
@@ -144,31 +145,28 @@ void setup() {
 //--------------------------------------------------------------------------------------LOOP-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void loop(){
-
     readButton = digitalRead(button_state);
     timer_current = millis();
     //----------------------------------------------connection activ
     if(connection_on){
         BLE.poll();
-
+        BLE.advertise();
     }
     //----------------------------------------------reset if 5 mins no connection
     if((timer_current - Pairing_timer_start) >= Pairing_time_delta && piezo_on == true){
         connection_on = false;
         piezo_on = false;
         lightOff();
-        //noTone(piezo);
+        tone();
     }
 
     //----------------------------------------------pairing tone
     if(piezo_on && (timer_current - piezo_timer_start) >= 1000){
         if(piep){
-            //noTone(piezo);
             lightOff();
             piep = false;
         }
         else{
-            //tone(piezo, 100);
             lightOn(0,0,255);
             piep = true;
         }
@@ -185,7 +183,7 @@ void loop(){
         //---------------------------------------------Button push to deactivate the alarm if is active
     else if(readButton == HIGH && connection_on == true && Alarm == true){
         alarm_on = true;
-        readButton = LOW;//new
+        readButton = LOW;
         alarm_controller();
     }
         //---------------------------------------------Button push to reset/stop offering signal
@@ -277,6 +275,7 @@ void alarm_controller(){
         Alarm = false;
         alarmCharacteristic.setValue(true);
         alarm_ligth_type = 6;
+        noTone(piezo);
         lightOff();
     }
     else{
@@ -385,28 +384,26 @@ void readAlarmStatus(BLEDevice central, BLECharacteristic characteristic){
         alarm_read = true;
         alarm_on = false;
     }
-    //Serial.println("Alarm_function:");
-    //Serial.println(alarmCharacteristic.value());
 }
 void blePeripheralConnectHandler(BLEDevice central) {
     if(piezo_on){
         piezo_on = false;
         lightOff();
-        //noTone(piezo);
     }
-    //Serial.print("Central:");
-    //Serial.println(central.address());
     if(central_mac == "non"){
         central_mac = central.address();
+        tone();
     }
     else if(central.address().compareTo(central_mac) != 0){
         central.disconnect();
-        //Serial.println("Rejected");
     }
-    //Serial.print("Stored central:");
-    //Serial.println(central_mac);
 }
 
-void blePeripheralDisconnectHandler(BLEDevice central) {
-
+void blePeripheralDisconnectHandler(BLEDevice central) {}
+void tone(){
+    for(int i=100; i<20000; i*=2){
+        tone(piezo, i);
+        delay(300);
+        noTone(piezo);
+    }
 }
