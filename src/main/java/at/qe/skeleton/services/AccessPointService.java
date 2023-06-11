@@ -113,9 +113,6 @@ public class AccessPointService {
             String content = String.format("""
                     accesspoint-params:
                       id: %d
-                      measurement-intervall: 1
-                      webapp-intervall: 1
-                      alarmCountThreshold: 1
                       validation: False
                     webapp-params:
                       ip: %s:%d

@@ -30,8 +30,6 @@ if __name__ == '__main__':
     # list that contains all station they need to measure values
     measurement_station_list = []
 
-    start_webapp_interval_time = datetime.now()
-    delta_webapp = 0
     # list that contains all start timer for webapp interval of the sensor stations
     start_webapp_interval_time_list = interval_service.get_all_start_times()
     # list that contains all webapp intervals
@@ -41,18 +39,23 @@ if __name__ == '__main__':
     # send logs timer
     start_log_time = datetime.now()
     log_delta = timedelta(seconds=1830) #30:30
+    print("                      Send logs to webapp interval set to:                       {0} min".format(log_delta/60))
     # call boarder values and sending intervals from webapp timer
     start_check_webapp_data_time = datetime.now()
     check_webapp_delta = timedelta(seconds=310) # 5:10
+    print("                      Call sensor station data from webapp interval set to:      {0} min".format(check_webapp_delta/60))
     # call webapp for new connected Sensor Stations timer (must be under pair time of 5 minutes)
     start_call_new_station_time = datetime.now()
-    call_station_delta = timedelta(seconds=200) # 3:20
+    call_station_delta = timedelta(seconds=100) # 3:20
+    print("                      Call to connection station from webapp interval set to:    {0} min".format(call_station_delta/60))
     # check if an alarm of a Sensor Station is on timer
     start_check_alarm_time = datetime.now()
     check_alarm_delta = timedelta(seconds=260) # 4:20
+    print("                      Prove sensor station alarm interval set to:                {0} min".format(check_alarm_delta/60))
     # searching for devices nearby
     start_search_for_devices_time = datetime.now()
-    search_delta = timedelta(seconds=15) # 0:15
+    search_delta = timedelta(seconds=60) # 0:15
+    print("                      Search for new sensor stations via BLE interval set to:    {0} min".format(search_delta/60))
     #time.sleep(SECTION_SLEEP)
     found_devices = []
     print("                      Intervals initialized program loop starts -> ok")
@@ -68,36 +71,56 @@ if __name__ == '__main__':
                 webapp_station_list = interval_service.station_interval_passed(start_webapp_interval_time_list,delta_webapp_list)
             except Exception as e:
                 exception_logging.logException(e, "Read intervals from database")
+            #-------------------------------------------------------------------------------------------------
+            try:
+                if measurement_station_list is None:
+                    measurement_station_list = []
+                if webapp_station_list is None:
+                    webapp_station_list = []
+                # time evaluations for program state
+                if (start_call_new_station_time + call_station_delta) < datetime.now():
+                    program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+                    start_call_new_station_time = datetime.now()
 
+                elif (start_search_for_devices_time + search_delta) < datetime.now():
+                    program_state = program_status.Is.SEARCH_FOR_DEVICES.value
+                    start_search_for_devices_time = datetime.now()
 
-            # time evaluations for program state
-            if (start_call_new_station_time + call_station_delta) < datetime.now():
-                program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+                elif (start_check_webapp_data_time + check_webapp_delta) < datetime.now():
+                    program_state = program_status.Is.CALL_SENSOR_STATION_DATA.value
+                    start_check_webapp_data_time = datetime.now()
 
-            elif (start_search_for_devices_time + search_delta) < datetime.now():
-                program_state = program_status.Is.SEARCH_FOR_DEVICES.value
-
-            elif (start_check_webapp_data_time + check_webapp_delta) < datetime.now():
-                program_state = program_status.Is.CALL_SENSOR_STATION_DATA.value
-
-            elif (start_check_alarm_time + check_alarm_delta) < datetime.now():
-                program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
-
-            else:
-                if (start_log_time + log_delta) < datetime.now():
-                    program_state = program_status.Is.SEND_LOG_TO_WEBAPP.value
-
-                elif len(measurement_station_list) > 0:
-                    program_state = program_status.Is.READ_SENSOR_VALUES.value
-
-                elif len(webapp_station_list) > 0:
-                    program_state = program_status.Is.WRITE_VALUES_TO_WEBAPP.value
+                elif (start_check_alarm_time + check_alarm_delta) < datetime.now():
+                    program_state = program_status.Is.CHECK_SENSOR_STATION_ALARM.value
+                    start_check_alarm_time = datetime.now()
 
                 else:
-                    time.sleep(5)
-                    # program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
-                    program_state = -1
+                    if (start_log_time + log_delta) < datetime.now():
+                        program_state = program_status.Is.SEND_LOG_TO_WEBAPP.value
+                        start_log_time = datetime.now()
 
+                    elif len(measurement_station_list) > 0:
+                        program_state = program_status.Is.READ_SENSOR_VALUES.value
+                        for e in start_measurement_interval_time_list:
+                            for s in measurement_station_list:
+                                if e.name == s:
+                                    e.start_time = datetime.now()
+
+                    elif len(webapp_station_list) > 0:
+                        program_state = program_status.Is.WRITE_VALUES_TO_WEBAPP.value
+                        for e in start_webapp_interval_time_list:
+                            for s in webapp_station_list:
+                                if e.name == s:
+                                    e.start_time = datetime.now()
+
+                    else:
+                        time.sleep(5)
+                        # program_state = program_status.Is.READ_SENSOR_VALUES.value
+                        program_state = -1
+            except Exception as e:
+                exception_logging.logException(e, "Time evaluation")
+                program_state = -1
+            #-------------------------------------------------------------------------------------------------
 
 
 
@@ -131,8 +154,8 @@ if __name__ == '__main__':
                         except Exception as e:
                             exception_logging.logException(e, "Write new SensorStation to Webapp")
                     else:
-                        print("                      No new stations to search")
-                    start_call_new_station_time = datetime.now()
+                        print("                      No new stations to connect")
+                #-------------------------------------------------------------------------------------------------
 
                 # call time every 1:30 minutes
                 case program_status.Is.SEARCH_FOR_DEVICES.value:
@@ -150,7 +173,7 @@ if __name__ == '__main__':
                             print("                      sending nearby devices -> ok")
                         except Exception as e:
                             exception_logging.logException(e, "search for stations")
-                    start_search_for_devices_time = datetime.now()
+                #-------------------------------------------------------------------------------------------------
 
                 # call time set by measurment intervall
                 case program_status.Is.READ_SENSOR_VALUES.value:
@@ -158,13 +181,10 @@ if __name__ == '__main__':
                     try:
                         asyncio.run(ble_service_connection.read_sensor_data(False, measurement_station_list))
                         print("                      Read measurements -> ok")
-                        for e in start_measurement_interval_time_list:
-                            for s in measurement_station_list:
-                                if e.name == s:
-                                    e.start_time = datetime.now()
+
                     except Exception as e:
                         exception_logging.logException(e, "call_read_values")
-
+                #-------------------------------------------------------------------------------------------------
                 # call time is set by webapp interval
                 # first the evaluation if boarder values are broken before sending values to webapp and delete successful send values
                 case program_status.Is.WRITE_VALUES_TO_WEBAPP.value:
@@ -177,13 +197,10 @@ if __name__ == '__main__':
                     try:
                         program = rest_api.write_value_to_web_app(webapp_station_list)
                         print("                      Write values to Webapp -> ok")
-                        for e in start_webapp_interval_time_list:
-                            for s in webapp_station_list:
-                                if e.name == s:
-                                    e.start_time = datetime.now()
+
                     except Exception as e:
                         exception_logging.logException(e, "rest_api write values")
-
+                #-------------------------------------------------------------------------------------------------
                 # send log to webapp with interval 30min:30sec
                 case program_status.Is.SEND_LOG_TO_WEBAPP.value:
                     print("{0} --- Send log to webapp".format(datetime.now().strftime("%D %H:%M:%S")))
@@ -192,8 +209,8 @@ if __name__ == '__main__':
                         print("                      Write log to Webapp -> ok")
                     except Exception as e:
                         exception_logging.logException(e, "send Log to Webapp")
+                #-------------------------------------------------------------------------------------------------
 
-                    start_log_time = datetime.now()
 
                 # if no other case is true than the alarm status of the sensor stations get checked
                 case program_status.Is.CHECK_SENSOR_STATION_ALARM.value:
@@ -203,7 +220,7 @@ if __name__ == '__main__':
                         print("                      Check sensor station alarm -> ok")
                     except Exception as e:
                         exception_logging.logException(e, "check alarm")
-                    start_check_alarm_time = datetime.now()
+                #--------------------------------------------------------------------------------------------------
 
                 # called every 5min:10sec
                 case program_status.Is.CALL_SENSOR_STATION_DATA.value:
@@ -213,7 +230,7 @@ if __name__ == '__main__':
                         print("                      Call sensor station data -> ok")
                     except Exception as e:
                         exception_logging.logException(e, "read sensor station data")
-                    start_check_webapp_data_time = datetime.now()
+                #-------------------------------------------------------------------------------------------------
 
         except Exception as e:
             exception_logging.logException(e, " Major exception caught")

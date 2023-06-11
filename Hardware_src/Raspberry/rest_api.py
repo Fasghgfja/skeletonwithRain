@@ -184,6 +184,10 @@ def send_log_data_to_webapp(shutdown):
                         temp_log_data = Log_data(text=error_msg, subject="Sensor Station", author=id, time_stamp=time_stamp_string, type="SUCCESS")
                         log_send_list.append(vars(temp_log_data))
 
+            if len(log_send_list) > 100:
+                with open('logFile.txt', 'w') as file:
+                    file.write("New File {0}\n".format(datetime.now().strftime("%D__%H:%M:%S")))
+                    file.close()
             response = requests.post(url, json=log_send_list, auth=get_auth())
             if response.status_code == 200:
                 with open('logFile.txt', 'w') as file:
@@ -201,6 +205,8 @@ def send_possible_devices_to_webapp(found_devices):
                 config_yaml.write_valitation(False)
         except Exception as e:
             exception_logging.logException(e, " send possible devices to webapp")
+    else:
+        return check_validation()
 # -----------------------------------------REST read operations
 def read_sensor_station_data():
     if config_yaml.read_validation_params():
