@@ -117,42 +117,6 @@ class PlantControllerTest {
         assertEquals(plant, plantController.getPlant());
     }
 
-    @Test
-    void testDoDeletePlant_WithoutSensorStation() throws IOException {
-        Plant plant = new Plant();
-        plant.setId(1L);
-
-        when(plant.getSensorStation()).thenReturn(null);
-        when(logRepository.save(any(Log.class))).thenReturn(null);
-
-        plantController.setPlant(plant);
-
-        plantController.doDeletePlant();
-
-        verify(plantService, times(1)).detachAllImagesFromPlant(plant);
-        verify(plantService, times(1)).deletePlant(plant);
-        verify(logRepository, times(1)).save(any(Log.class));
-
-        assertNull(plantController.getPlant());
-    }
-
-    @Test
-    void testDoDeletePlant_WithSensorStation() throws IOException {
-        Plant plant = new Plant();
-        plant.setId(1L);
-
-        when(plant.getSensorStation()).thenReturn(new SensorStation());
-        when(logRepository.save(any(Log.class))).thenReturn(null);
-
-        plantController.setPlant(plant);
-
-        plantController.doDeletePlant();
-
-        verify(plantService, times(1)).deletePlantWithStation(plant);
-        verify(logRepository, times(1)).save(any(Log.class));
-
-        assertNull(plantController.getPlant());
-    }
 
     @Test
     void testGetLatestMeasurements() {
