@@ -17,10 +17,12 @@ async def search():
                 d_tuple = device_tuple(name=v[1].local_name, mac=k, uuid=v[1].service_uuids[0])
                 print("                      {0}, {1}".format(d_tuple.mac, d_tuple.name))
                 device_list.append(vars(d_tuple))
+        print("                      searching for stations -> ok")
         return device_list
     except Exception as e:
         exception_logging.logException(e, "read devices")
-        return []
+        print("                      searching for stations -> fail")
+        return ["error"]
 # send signal to switch on/off alarm ligth on a given uuid
 async def write_alarm_signal(uuid, switch, station_name):
     if is_mac(station_name):
@@ -93,7 +95,7 @@ async def read_sensor_data(new_connection, device_list):
                                 exception_logging.logException(e, characteristic.uuid)
                 exception_logging.log_success("Values from device {0}, Serivce uuid:\t{1}, Description:\t{2} have been read"
                                               .format(station_name, service.uuid, service.description))
-
+        device = None
 def not_present(name):
     current_names = DB_connection.read_station_interval_Database()
     for s in current_names:

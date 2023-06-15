@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta
 import interval_service
 import exception_logging
@@ -14,6 +15,9 @@ SECTION_SLEEP = 15
 program_state = 0
 if __name__ == '__main__':
     exception_logging.log_success("Application startup")
+    file1 = open("application_properties.txt", "w")
+
+
     print("{0} --- Application startup".format(datetime.now().strftime("%D %H:%M:%S")))
     print("                      Implement database this will need 15 seconds")
     DB_connection.implement_database()
@@ -21,7 +25,8 @@ if __name__ == '__main__':
     print("{0} --- SUCCESS: Implement database".format(datetime.now().strftime("%D %H:%M:%S")))
     print("{0} --- Initialize intervals".format(datetime.now().strftime("%D %H:%M:%S")))
     program_state = 0
-    program = ""
+    bleak_bug_counter = 0
+    program = 0
     run = True
     # list that contains all start timer for measurement of the sensor stations
     start_measurement_interval_time_list = interval_service.get_all_start_times()
@@ -29,7 +34,6 @@ if __name__ == '__main__':
     delta_measurement_list =[]
     # list that contains all station they need to measure values
     measurement_station_list = []
-
     # list that contains all start timer for webapp interval of the sensor stations
     start_webapp_interval_time_list = interval_service.get_all_start_times()
     # list that contains all webapp intervals
@@ -39,33 +43,43 @@ if __name__ == '__main__':
     # send logs timer
     start_log_time = datetime.now()
     log_delta = timedelta(seconds=1830) #30:30
-    print("                      Send logs to webapp interval set to:                       {0} min".format(log_delta/60))
+    print("                      Send logs to webapp interval set to:                           {0} min".format(log_delta))
+    file1.write("Send logs to webapp interval set to:                           {0} min\n".format(log_delta))
     # call boarder values and sending intervals from webapp timer
     start_check_webapp_data_time = datetime.now()
     check_webapp_delta = timedelta(seconds=310) # 5:10
-    print("                      Call sensor station data from webapp interval set to:      {0} min".format(check_webapp_delta/60))
+    print("                      Call sensor station data from webapp interval set to:          {0} min".format(check_webapp_delta))
+    file1.write("Call sensor station data from webapp interval set to:          {0} min\n".format(check_webapp_delta))
     # call webapp for new connected Sensor Stations timer (must be under pair time of 5 minutes)
     start_call_new_station_time = datetime.now()
     call_station_delta = timedelta(seconds=100) # 3:20
-    print("                      Call to connection station from webapp interval set to:    {0} min".format(call_station_delta/60))
+    print("                      Call sensor station to connect from webapp interval set to:    {0} min".format(call_station_delta))
+    file1.write("Call sensor station to connect from webapp interval set to:    {0} min\n".format(call_station_delta))
     # check if an alarm of a Sensor Station is on timer
     start_check_alarm_time = datetime.now()
     check_alarm_delta = timedelta(seconds=260) # 4:20
-    print("                      Prove sensor station alarm interval set to:                {0} min".format(check_alarm_delta/60))
+    print("                      Prove sensor station alarm interval set to:                    {0} min".format(check_alarm_delta))
+    file1.write("Prove sensor station alarm interval set to:                    {0} min\n".format(check_alarm_delta))
     # searching for devices nearby
     start_search_for_devices_time = datetime.now()
     search_delta = timedelta(seconds=60) # 0:15
-    print("                      Search for new sensor stations via BLE interval set to:    {0} min".format(search_delta/60))
+    print("                      Search for new sensor stations via BLE interval set to:        {0} min".format(search_delta))
+    file1.write("Search for new sensor stations via BLE interval set to:        {0} min\n".format(search_delta))
     #time.sleep(SECTION_SLEEP)
     found_devices = []
+    file1.close()
+    print("                      Interval properties added to application_proprties.txt")
     print("                      Intervals initialized program loop starts -> ok")
-
-
-
     while run:
+        if bleak_bug_counter > 5:
+            exception_logging.log_success("Shutdown caused by Bleak ERROR")
+            break
         try:
             try:
-                delta_measurement_list = interval_service.get_measurement_interval()
+                if len(DB_connection.read_station_interval_Database()) != len(start_measurement_interval_time_list):
+                    start_measurement_interval_time_list = interval_service.get_all_start_times()
+                elif len(DB_connection.read_station_interval_Database()) != len(start_webapp_interval_time_list):
+                    delta_measurement_list = interval_service.get_measurement_interval()
                 delta_webapp_list = interval_service.get_webapp_interval()
                 measurement_station_list = interval_service.station_interval_passed(start_measurement_interval_time_list, delta_measurement_list)
                 webapp_station_list = interval_service.station_interval_passed(start_webapp_interval_time_list,delta_webapp_list)
@@ -160,19 +174,13 @@ if __name__ == '__main__':
                 # call time every 1:30 minutes
                 case program_status.Is.SEARCH_FOR_DEVICES.value:
                     print("{0} --- Search for sensor stations".format(datetime.now().strftime("%D %H:%M:%S")))
-                    found_devices = []
-                    try:
-                        found_devices = asyncio.run(ble_service_connection.search())
-                        # asyncio.run(ble_service_connection.read_sensor_data(True, found_devices))
-                        print("                      searching for stations -> ok")
-                    except Exception as e:
-                        exception_logging.logException(e, "search for stations")
+                    found_devices = asyncio.run(ble_service_connection.search())
                     if len(found_devices) > 0:
-                        try:
+                        if found_devices[0] == "error":
+                            bleak_bug_counter += 1
+                        else:
                             rest_api.send_possible_devices_to_webapp(found_devices)
-                            print("                      sending nearby devices -> ok")
-                        except Exception as e:
-                            exception_logging.logException(e, "search for stations")
+
                 #-------------------------------------------------------------------------------------------------
 
                 # call time set by measurment intervall
@@ -181,8 +189,8 @@ if __name__ == '__main__':
                     try:
                         asyncio.run(ble_service_connection.read_sensor_data(False, measurement_station_list))
                         print("                      Read measurements -> ok")
-
                     except Exception as e:
+                        print("                      Read measurements -> fail")
                         exception_logging.logException(e, "call_read_values")
                 #-------------------------------------------------------------------------------------------------
                 # call time is set by webapp interval
@@ -234,6 +242,7 @@ if __name__ == '__main__':
 
         except Exception as e:
             exception_logging.logException(e, " Major exception caught")
-        if program == "AP deleted stop program":
+        if program != 0:
+            os.system("rm AccessPoint")
             run = False
     rest_api.send_log_data_to_webapp(True)
