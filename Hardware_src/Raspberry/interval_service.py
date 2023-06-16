@@ -21,6 +21,7 @@ def get_measurement_interval():
         return interval_tuple_list
     except Exception as e:
         exception_logging.logException(e, "get station measurement interval")
+        return []
 
 def get_webapp_interval():
     try:
@@ -32,6 +33,7 @@ def get_webapp_interval():
         return interval_tuple_list
     except Exception as e:
         exception_logging.logException(e, "get station webapp interval")
+        return []
 
 def get_start_time(name):
     try:
@@ -41,18 +43,21 @@ def get_start_time(name):
                 return start_time_tuple(name=station[0], start_time=datetime.now())
     except Exception as e:
         exception_logging.logException(e, "get station start time")
+
 def station_interval_passed(start_list, delta_list):
     station_list = []
     try:
         for start_tuple in start_list:
             for delta_tuple in delta_list:
-                    start_time = getattr(start_tuple, "start_time")
-                    delta_time = getattr(delta_tuple, "interval")
-                    if (start_time + delta_time) < datetime.now():
-                        station_list.append(getattr(start_tuple, "name"))
+
+                start_time = getattr(start_tuple, "start_time")
+                delta_time = getattr(delta_tuple, "interval")
+                if (start_time + delta_time) < datetime.now():
+                    station_list.append(getattr(start_tuple, "name"))
         return station_list
     except Exception as e:
         exception_logging.logException(e, "evaluate station interval")
+        return []
 
 
 

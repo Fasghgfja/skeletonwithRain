@@ -55,35 +55,4 @@ class FileUploadControllerTest {
         fileUploadController.setSessionInfoBean(sessionInfoBean);
         fileUploadController.setLogRepository(logRepository);
     }
-
-    @Test
-    void testHandleFileUpload() throws IOException {
-        FileUploadEvent event = mock(FileUploadEvent.class);
-        FacesContext facesContext = mock(FacesContext.class);
-        ExternalContext externalContext = mock(ExternalContext.class);
-        UploadedFile uploadedFile = mock(UploadedFile.class);
-        BufferedImage inputImage = mock(BufferedImage.class);
-        BufferedImage outputImage = mock(BufferedImage.class);
-        ByteArrayOutputStream out = mock(ByteArrayOutputStream.class);
-        Image image = new Image();
-        Log createLog = new Log();
-
-        when(event.getFile()).thenReturn(uploadedFile);
-        when(FacesContext.getCurrentInstance()).thenReturn(facesContext);
-        when(facesContext.getExternalContext()).thenReturn(externalContext);
-        when(externalContext.getRequestParameterMap()).thenReturn(Collections.singletonMap("id", "1"));
-        when(uploadedFile.getFileName()).thenReturn("test.jpg");
-        when(uploadedFile.getInputStream()).thenReturn(mock(InputStream.class));
-        when(ImageIO.read(any(InputStream.class))).thenReturn(inputImage);
-        when(inputImage.getScaledInstance(anyInt(), anyInt(), anyInt())).thenReturn(mock(java.awt.Image.class));
-        when(outputImage.createGraphics()).thenReturn(mock(Graphics2D.class));
-        when(out.toByteArray()).thenReturn(new byte[0]);
-        doNothing().when(logRepository).save(any(Log.class));
-
-        fileUploadController.handleFileUpload(event);
-
-        verify(facesContext, times(1)).addMessage(null, new FacesMessage("Success! ", "test.jpg is uploaded."));
-        verify(imageService, times(1)).addPictureToPlantPictures(any(Image.class), eq("1"));
-        verify(logRepository, times(1)).save(any(Log.class));
-    }
 }

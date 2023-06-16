@@ -88,6 +88,17 @@ public class SensorStationApiController {
         }
     }
 
+    @PostMapping("/api/newdevices/{id}")
+    int nearbyDevices(@PathVariable("id") String id, @RequestBody List<SensorDevice> devices) {
+        try{
+            sensorStationServiceApi.saveNearbyDevices(Long.valueOf(id), devices);
+            sensorStationLogger.info("NEARBY DEVICES ARE SEND BY ACCESS POINT: " + id);
+            return Response.SC_OK;
+        }catch (AccessPointNotFoundException ex){
+            sensorStationLogger.warning("EARBY DEVICES COULD NOT SEND BY ACCESS POINT: " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
     /**
      * This method is called to get the alarm_switch of a given SensorStation
      * @param sensorStationApi

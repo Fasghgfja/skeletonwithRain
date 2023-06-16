@@ -92,11 +92,13 @@ public class SensorStationServiceApi {
      * @throws SensorStationNotFoundException
      */
     public boolean isValidated(Long id) throws AccessPointNotFoundException {
-        AccessPoint toValidateaccessPoint = accessPointService.loadAccessPoint(id);
-        if(toValidateaccessPoint == null){
+        try {
+            AccessPoint toValidateaccessPoint = accessPointService.loadAccessPoint(id);
+            return toValidateaccessPoint.isValidated();
+        }catch (Exception e){
             throw new AccessPointNotFoundException();
         }
-        return toValidateaccessPoint.isValidated();
+
     }
     /**
      * This method is called to find all sensorStationsby AccessPoint
@@ -122,15 +124,11 @@ public class SensorStationServiceApi {
      * @return
      * @throws SensorNotFoundException
      */
-    public int addSensor(List<SensorApi> sensorApi) throws SensorNotFoundException {
+    public void addSensor(List<SensorApi> sensorApi) throws SensorNotFoundException {
         try {
 
             for (SensorApi s :
                     sensorApi) {
-                if (sensorService.areSensorsPresent(sensorStationRepository.findFirstById(s.getStation_name()))){
-                    System.out.println("Sensors are in Database");
-                    break;
-                }
                 Sensor sensor = new Sensor();
                 sensor.setSensorStation(sensorStationRepository.findFirstById(s.getStation_name()));
                 sensor.setUuid(s.getUuid());
@@ -143,7 +141,6 @@ public class SensorStationServiceApi {
         }catch (Exception e){
             throw new SensorNotFoundException();
         }
-        return Response.SC_OK;
     }
 
     /**
@@ -198,6 +195,13 @@ public class SensorStationServiceApi {
         return sensorStationDataFrameArrayList;
     }
 
+    public void saveNearbyDevices(Long id, List<SensorDevice> devices) throws AccessPointNotFoundException{
+
+        for (SensorDevice sd:
+             devices) {
+            System.out.println(sd);
+        }
+    }
     /**
      * This method is used to store the logs of accesspoints
      * @param logFrame

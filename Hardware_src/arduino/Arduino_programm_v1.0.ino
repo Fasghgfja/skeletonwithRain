@@ -80,8 +80,8 @@ void setup() {
     if(digitalRead(D11) == HIGH){
         connection_on = true;
     }
-    BLE.setLocalName("TestStation");
-    BLE.setDeviceName("TestStation");
+    BLE.setLocalName("PlantSensor");
+    BLE.setDeviceName("PlantSensor");
 
 
     //---------------------------------------------------------------
@@ -130,7 +130,7 @@ void setup() {
     BLE.setEventHandler(BLEConnected, blePeripheralConnectHandler);
     BLE.setEventHandler(BLEDisconnected, blePeripheralDisconnectHandler);
     //---------------------------------------------------------------
-    BLE.advertise();
+
     //---------------------------------------------------------------BME688 setup
 
     if (!bme.begin()) {
@@ -146,19 +146,19 @@ void setup() {
 //--------------------------------------------------------------------------------------LOOP-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void loop(){
-
     readButton = digitalRead(button_state);
     timer_current = millis();
     //----------------------------------------------connection activ
     if(connection_on){
         BLE.poll();
-
+        BLE.advertise();
     }
     //----------------------------------------------reset if 5 mins no connection
     if((timer_current - Pairing_timer_start) >= Pairing_time_delta && piezo_on == true){
         connection_on = false;
         piezo_on = false;
         lightOff();
+        tone();
     }
 
     //----------------------------------------------pairing tone
@@ -393,12 +393,18 @@ void blePeripheralConnectHandler(BLEDevice central) {
     }
     if(central_mac == "non"){
         central_mac = central.address();
+        tone();
     }
     else if(central.address().compareTo(central_mac) != 0){
         central.disconnect();
     }
 }
 
-void blePeripheralDisconnectHandler(BLEDevice central) {
-
+void blePeripheralDisconnectHandler(BLEDevice central) {}
+void tone(){
+    for(int i=100; i<20000; i*=2){
+        tone(piezo, i);
+        delay(300);
+        noTone(piezo);
+    }
 }

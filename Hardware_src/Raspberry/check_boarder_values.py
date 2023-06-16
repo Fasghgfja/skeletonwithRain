@@ -45,7 +45,7 @@ def check_boarder_values(station_list):
                         alarm_count += 1
 
                     if alarm_count >= station[5] and alarm_switch == "off":
-                        asyncio.run(ble_service_connection.writeAlarmSignal(uuid, "ON", station[NAME]))
+                        asyncio.run(ble_service_connection.write_alarm_signal(uuid, "ON", station[NAME]))
                         alarm_count = -1
                         alarm_switch = "on"
                         DB_connection.update_sensor_station_database(alarm_switch, station[NAME])
@@ -74,13 +74,14 @@ def update_alarm_switch(station_name, uuid, description, sensor_id, sensor_type)
     alarm_switch_uuid = DB_connection.read_sensors_alarm_characteristic(station_name)[0]
     sensor_station_alarm_switch = asyncio.run(ble_service_connection.read_alarm_status(alarm_switch_uuid, station_name))
     value = int.from_bytes(sensor_station_alarm_switch, "little")
+    print("alarm value: " + str(value))
     if value != 1:
         webapp_alarm_switch = asyncio.run(rest_api.get_sensorstations(False, station_name))
     if webapp_alarm_switch == "fixed" or value == 1:
         update_alarm_count_list = []
         alarm_switch = "off"
         if value != 1:
-            asyncio.run(ble_service_connection.writeAlarmSignal(uuid, "OFF", station_name))
+            asyncio.run(ble_service_connection.write_alarm_signal(uuid, "OFF", station_name))
         DB_connection.update_sensor_station_database(alarm_switch, station_name)
         DB_connection.update_sensor_database(0,sensor_id)
         rest_api.write_alarm_switch(station_name, alarm_switch, description)
