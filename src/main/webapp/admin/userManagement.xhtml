@@ -124,7 +124,7 @@
                     <p:column headerText="Registration Date" sortBy="#{user.createDate}" filterBy="#{user.createDate}">
                         <h:outputText value="#{user.createDate}"/>
                     </p:column>
-                    <p:column>
+                    <p:column headerText="Interactions">
 
                         <!-- ....................EDIT USER BUTTON ........... .............. -->
                         <p:commandButton style="margin-right: 2px" update=":userForm:userEditDialog"
