@@ -21,8 +21,7 @@ public class Plant implements Persistable<Long>, Serializable, Comparable<Plant>
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_gen")
-    @SequenceGenerator(name = "id_gen", initialValue = 100)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, unique = true)
     private Long plantID;
 

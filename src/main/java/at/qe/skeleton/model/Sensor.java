@@ -31,8 +31,7 @@ import java.io.Serializable;
 @Entity
 public class Sensor extends Metadata implements Persistable<Long>, Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_gen")
-    @SequenceGenerator(name = "id_gen", initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, unique = true)
     private Long id;
     @Column(length = 100)
