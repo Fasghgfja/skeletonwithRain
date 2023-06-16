@@ -9,7 +9,7 @@ import ble_service_connection
 import DB_connection
 import check_boarder_values
 import program_status
-
+import config_yaml
 SECTION_SLEEP = 15
 #  cronjop to restart
 program_state = 0
@@ -73,7 +73,7 @@ if __name__ == '__main__':
     while run:
         if bleak_bug_counter > 5:
             exception_logging.log_success("Shutdown caused by Bleak ERROR")
-            #os.system("bash start_access_point.sh")
+            config_yaml.write_restart(True)
             break
         try:
             try:
@@ -245,5 +245,6 @@ if __name__ == '__main__':
             exception_logging.logException(e, " Major exception caught")
         if program != 0 and program is not None:
             os.system("rm AccessPoint")
+            config_yaml.write_restart(False)
             run = False
     rest_api.send_log_data_to_webapp(True)
