@@ -49,10 +49,11 @@ def station_interval_passed(start_list, delta_list):
     try:
         for start_tuple in start_list:
             for delta_tuple in delta_list:
-                    start_time = getattr(start_tuple, "start_time")
-                    delta_time = getattr(delta_tuple, "interval")
-                    if (start_time + delta_time) < datetime.now():
-                        station_list.append(getattr(start_tuple, "name"))
+
+                start_time = getattr(start_tuple, "start_time")
+                delta_time = getattr(delta_tuple, "interval")
+                if (start_time + delta_time) < datetime.now():
+                    station_list.append(getattr(start_tuple, "name"))
         return station_list
     except Exception as e:
         exception_logging.logException(e, "evaluate station interval")

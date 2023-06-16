@@ -46,10 +46,11 @@ def get_auth():
     return auth
 
 def check_validation():
+    print("                      check validation -> ok")
     url = "{0}/{1}".format(url_builder("validated"), config_yaml.read_accesspoint_id())
     valid = requests.get(url, auth=get_auth())
     if valid.status_code == 404:
-        return "AP deleted stop program"
+        return ["AP deleted stop program"]
     if valid.json():
         config_yaml.write_valitation(True)
 
@@ -143,11 +144,11 @@ def send_log_data_to_webapp(shutdown):
         temp_log_data = Log_data(text="Deleted access point shutdown",
                                  subject="Access point",
                                  author=str(config_yaml.read_accesspoint_id()),
-                                 time_stamp=datetime.now().strftime("%Y-%d-%m %H:%M:%S"),
+                                 time_stamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                  type="SUCCESS")
         send_list.append(vars(temp_log_data))
         requests.post(url,json=send_list,auth=get_auth())
-        print("{0} --- Program shutdown".format(datetime.now().strftime("%Y/%d/%m %H:%M:%S")))
+        print("{0} --- Program shutdown".format(datetime.now().strftime("%m/%d/%Y %H:%M:%S")))
     else:
         if config_yaml.read_validation_params():
             log_send_list = []
@@ -203,8 +204,10 @@ def send_possible_devices_to_webapp(found_devices):
             r = requests.post(url, json=found_devices, auth=get_auth())
             if r.status_code == 404:
                 config_yaml.write_valitation(False)
+            print("                      sending nearby devices -> ok")
         except Exception as e:
             exception_logging.logException(e, " send possible devices to webapp")
+            print("                      sending nearby devices -> fail")
     else:
         return check_validation()
 # -----------------------------------------REST read operations
@@ -236,12 +239,13 @@ async def get_sensorstations(getName, name):
 
     if getName:
         url = "{0}/{1}".format(url_builder("sensorstations"), config_yaml.read_accesspoint_id())
-        response = requests.get(url, auth=get_auth())
+        response = requests.get(url, timeout= 10, auth=get_auth())
         if response.status_code == 200:
             data = response.json()
             return data
         elif response.status_code == 404:
             config_yaml.write_valitation(False)
+
     else:
         get_Station_alarm_switch_url = url_builder("getsensorstations")
         try:
@@ -258,6 +262,8 @@ def check_if_new_stations():
 
         try:
             webapp_sensorstation_names = asyncio.run(get_sensorstations(True, ""))
+            if webapp_sensorstation_names is None:
+                return []
         except Exception as e:
             exception_logging.logException(e,"Read Station names from Webapp")
             return []

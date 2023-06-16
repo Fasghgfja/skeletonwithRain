@@ -92,11 +92,13 @@ public class SensorStationServiceApi {
      * @throws SensorStationNotFoundException
      */
     public boolean isValidated(Long id) throws AccessPointNotFoundException {
-        AccessPoint toValidateaccessPoint = accessPointService.loadAccessPoint(id);
-        if(toValidateaccessPoint == null){
+        try {
+            AccessPoint toValidateaccessPoint = accessPointService.loadAccessPoint(id);
+            return toValidateaccessPoint.isValidated();
+        }catch (Exception e){
             throw new AccessPointNotFoundException();
         }
-        return toValidateaccessPoint.isValidated();
+
     }
     /**
      * This method is called to find all sensorStationsby AccessPoint
