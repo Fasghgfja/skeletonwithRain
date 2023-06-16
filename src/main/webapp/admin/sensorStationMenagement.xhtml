@@ -363,42 +363,21 @@
                   modal="true"
                   showEffect="fade" hideEffect="fade" resizable="false">
             <p:outputPanel id="SSHelp">
-                <h6>About Deleting a Sensor Station:</h6>
-                You can delete a Sensor station by pressing the dedicated button. when deleting a SS all related entities gonna be detached automatically:<br></br>
-                Gardeners will be unassigned , plants detached , sensors deleted and measurements detached;
-                <h6>About Sensor Station Trashold:</h6>
-                the trashold determines when a alarm status will be red or green.
-                <h6>About Creating a sensor station:</h6>
-                By Pressing the appropriate button a Dialog to create a Sensor Station will open.<br></br>
-                From this panel you will be able to select sensor-station name , description and Location<br></br>
-                Note: a newly created SS will always have The Alarm switch set to off by default.<br></br>
-                <h6>About Editing A Sensor Station</h6>
-                By Pressing the appropriate button a Dialog to edit the selected Sensor Station will open.<br></br>
-                From this panel you will see the selected sensor-station name and will be able to:
-                Edit the Location.<br></br>
-                Assign and unassign the SS to Gardeners(many gardeners can work on the same sensor station if necessary).<br></br>
-                Note: Alarm switch will be on if one of the alarm count of a sensosr station triggered it , you can manually set it to fixed from here.<br></br>
-                <h6>About Pairing:</h6>
-                From the pairing Dialog it is possible to pair the sensor station to a new access point or remove the current one.<br></br>
-                Upon initiating the pairing process the system will start to try to pair the selected sensorStation with the access point for 5 minutes.<br></br>
-                until interrupted by pressing the dedicated button.
-                <h6>About The Status:</h6>
-                The status Icon show the alarm status and not the last measurement status. A alarm status will only be red if the alarm count is hight enough.
-                <h6>About The Dropdown Menu</h6>
-                The Dropdown menu will show the last 6 measurements(1 per type) and the Alarm status for the given type.<br></br>
-                NOTE: even a water measurement of 100% can be Ok (green) if its not repeated (for example after a plant is irrigated)<br></br>
-                thats the reasonw hy the status shows the alarm status and not if the displaye dmeasurement has exceeded the set tresholds on his own.
-                <h6>About The Details View</h6>
-                By clicking on the associated button you can open the DetailPage , in the detailpage you will have the possibility to:<br></br>
-                <br></br>
-                See all measurements for the chosen Sensor Station with the corresponding Graphs.<br></br>
-                Manage the pictures users take of the plants , Pictures will need your approval before going to the public Plant Gallery.<br></br>
-                Edit Things like the location of the sensorStation and the plant displayed.<br></br>
-                Remove The Current Pairing And/Or Pair to a new Access Point.<br></br>
-                Reset the Alarm Switch .<br></br>
-                See all Sensors of the chosen Sensor Station with their relative information<br></br>
-                Edit Sensors bordervalues aswell as resetting the respective Alarm Counts.<br></br>
-                More Detailed Usage infos can be found on the page itself.
+                <h6>Deleting a sensor station:</h6>
+                by clicking on the "Delete" button, it's possible to delete the sensor station.<br></br>
+                <h6>Set sensor station's treshold:</h6>
+                by clicking on the "Intervals" button, it's possible to set the threshold of the selected sensor station.<br></br>
+                <h6>Creating a new sensor station:</h6>
+                by clicking on the "Create new Sensor Station" button, it's possible to create a new sensor station. "Sensor station Name" is a mandatory field, while all the others are optional.
+                Note: a newly created sensor station will always have The Alarm switch set "off" by default.<br></br>
+                <h6>Editing A Sensor Station:</h6>
+                by clicking on the "Edit" button, it's possible to edit all the non-mandatory fields and also remove or add gardeners to the specified sensor station.
+                Note: Alarm switch will be "on" if one of the alarm count of a sensosr station triggered it, you can manually set it to fixed from here.<br></br>
+                <h6>Pairing:</h6>
+                by clicking on the "Pair" button, it's possible to pair the sensor station to a new access point or remove the current one.
+                Upon initiating the pairing process, the system will start to try to pair the selected sensor station with the access point for 5 minutes, until interrupted by pressing the "Abort Pairing" button.<br></br>
+                <h6>Detail view:</h6>
+                by clicking on the "open Detail-View" button, you will get redirected to the detail view page of the selected sensor station.
 
             </p:outputPanel>
         </p:dialog>
