@@ -73,6 +73,7 @@ if __name__ == '__main__':
     while run:
         if bleak_bug_counter > 5:
             exception_logging.log_success("Shutdown caused by Bleak ERROR")
+            #os.system("bash start_access_point.sh")
             break
         try:
             try:
@@ -242,7 +243,7 @@ if __name__ == '__main__':
 
         except Exception as e:
             exception_logging.logException(e, " Major exception caught")
-        if program != 0:
+        if program != 0 and program is not None:
             os.system("rm AccessPoint")
             run = False
     rest_api.send_log_data_to_webapp(True)
