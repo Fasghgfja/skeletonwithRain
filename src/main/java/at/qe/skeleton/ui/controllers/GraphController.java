@@ -316,7 +316,6 @@ public class GraphController implements Serializable {
 
     //TODO:WAS IST DASSSS????
     public void createCartesianLinerModel() {
-        System.out.println("ora qui");
         cartesianLinerModel = new LineChartModel();
         ChartData data = new ChartData();
 
