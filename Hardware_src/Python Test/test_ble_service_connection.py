@@ -1,10 +1,6 @@
 import unittest
 from unittest.mock import MagicMock, patch, AsyncMock
-from asyncio import Future
-
-import DB_connection
-import exception_logging
-import ble_service_connection
+import DB_connection, ble_service_connection
 import asyncio
 
 from bleak import BleakClient, BleakScanner
