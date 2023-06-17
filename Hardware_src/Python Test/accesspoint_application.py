@@ -1,11 +1,11 @@
 import os
 from datetime import datetime, timedelta
-import interval_service, exception_logging, rest_api, ble_service_connection,\
-    DB_connection, check_boarder_values, program_status, config_yaml
+import interval_service, exception_logging, rest_api, ble_service_connection, DB_connection, check_boarder_values, program_status, config_yaml
 import time
 import asyncio
 
 SECTION_SLEEP = 15
+#  cronjop to restart
 program_state = 0
 if __name__ == '__main__':
     exception_logging.log_success("Application startup")

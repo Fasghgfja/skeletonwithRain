@@ -2,7 +2,6 @@ import unittest
 from unittest import mock
 from unittest.mock import patch, MagicMock
 import DB_connection as db
-import struct
 
 class TestDBConnection(unittest.TestCase):
 

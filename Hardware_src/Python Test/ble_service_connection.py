@@ -1,3 +1,5 @@
+import asyncio
+
 import DB_connection, exception_logging
 from bleak import BleakClient, BleakScanner
 class device_tuple(object):

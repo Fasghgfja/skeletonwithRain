@@ -1,21 +1,8 @@
-
 import unittest
-import DB_connection
-from datetime import datetime, timedelta
 from unittest.mock import MagicMock, patch
+import DB_connection, interval_service, rest_api
 
-import asyncio
-
-
-import interval_service
-import exception_logging
-import rest_api
-import time
-import ble_service_connection
-import check_boarder_values
-import program_status
-
-class accesspoint_application_test(unittest.TestCase):
+class AccesspointApplicationTest(unittest.TestCase):
     def test_implement_database(self):
         with patch('DB_connection.implement_database') as mock_implement_database:
             DB_connection.implement_database()

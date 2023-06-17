@@ -117,15 +117,21 @@ If this is uploaded correct go onto your raspberry and move inside the Raspberry
 | Class                                                                |                                                                                                                                        description                                                                                                                                        |            properties            |
 |----------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------:|
 | [accesspoint_application.py](Raspberry%2Faccesspoint_application.py) |                                                                              main application it calls the different classes<br/> in the way that it has been describe in section<br/> Application sequence                                                                               | control the application sequence |
-| [ble_service_connection.py](Raspberry%2Fble_service_connection.py)   |                   read and write via bluetooth LE.<br/>It reads the Service and the characteristics if a connection is new.<br/>If a connection is existing it reads the values of the sensors.<br/>In addition it writes an alarm and reads the alarm characteristic.                    |      BLE connection handle       |
+| [ble_service_connection.py](Raspberry%2Fble_service_connection.py)   |    read and write via bluetooth LE.<br/>It reads the Service and the characteristics if a connection is new.<br/>If a connection is existing it reads the values of the sensors.<br/>In addition it writes an alarm and reads the alarm characteristic and search for nearby devices.     |      BLE connection handle       |
 | [check_boarder_values.py](Raspberry%2Fcheck_boarder_values.py)       |                                                                        This class evaluates if sensor boarders are broken. Moreover if an alarm is switch on it checks if the alarm has been switched off or not.                                                                         |      boarder value checker       |
 | [config_yaml.py](Raspberry%2Fconfig_yaml.py)                         |                                                                                                          In this class the read/write functions for the config.yaml are placed.                                                                                                           |       read/write conf.yaml       |
 | [DB_connection.py](Raspberry%2FDB_connection.py)                     | This class is the database connection. There are different insert/update/read functions for the database.<br/>The database is developed as an sqLite.The model is shown in [E-R_sensorstation.pdf](Database_sql%2FE-R_sensorstation.pdf) and will be build up at the start if not exists. |       database connection        |
 | [rest_api.py](Raspberry%2Frest_api.py)                               |                                                                                                 This class contains the different POST/GET function to read and write data to the Webapp.                                                                                                 |           REST handle            |
 | [program_status.py](Raspberry%2Fprogram_status.py)                   |                                                                                                                             Is a enum for the program states.                                                                                                                             |               enum               |
 | [exception_logging.py](Raspberry%2Fexception_logging.py)             |                                                                                   At this class the exceptions get connected and saved to a logfile that gets transfer to the webapp from time to time                                                                                    |         exception handle         |
-| [interval_service.py](Raspberry%2Finterval_service.py)               |                                                                                       This class evaluates the time intervals and offers the start times for the webapp and measurement interval.                                                                                         |          interval handle         |
+| [interval_service.py](Raspberry%2Finterval_service.py)               |                                                                                        This class evaluates the time intervals and offers the start times for the webapp and measurement interval.                                                                                        |         interval handle          |
+| [application_restarter.py](Raspberry%2Fapplication_restarter.py)     |                                 This class is called inside the start_access_point.sh after the application start. It will evaluate if the application needs to restart. This information gets read out of the  [restart.yaml](Raspberry%2Frestart.yaml)                                  |     restart the main program     |
 
+
+Additional files in the directory [Raspberry](Raspberry) are:
+
+- logFile.txt: in this file the logs will be stored until they get write to the webapp.
+- specialLogs.txt: in this file all the errors they are too long to send to the webapp are stored.
 
 ### Application sequence
 The following code shows the program states. This states will called depending on the time intervals for the states. The intervals will be stored into the application_properties.txt.
@@ -171,13 +177,13 @@ At the beginning the database will be implemented automatically.
 ### Packages
    The Directory [Raspberry](Raspberry) contains all the necessary file to run the access point.
    Be sure that you copy the config.yaml into this directory.
-   Furthermore the function to read the current server port let crash the JUnit tests, so make sure that port 8080 is used at webserver.
+   Furthermore, the function to read the current server port let crash the JUnit tests, so make sure that port 8080 is used at webserver.
    You can change this option in class [AccessPointService.java](..%2Fsrc%2Fmain%2Fjava%2Fat%2Fqe%2Fskeleton%2Fservices%2FAccessPointService.java).
    And here [import_packages.txt](import_packages.txt) you find a list of all the Packages you need to run the application.
 
 ### Configuration
    The config.yaml contains all the necessary information for the access point.
-   You can download the config.yaml from the accesspoint management page.
+   You can download the config.yaml from the access point management page at the webapp.
    
 Example:
 ```yaml
@@ -192,7 +198,7 @@ webapp-params:
 ### Transmitting interval
 There are two different transmission intervals:
 1) measurement-interval is the interval how often the values of the sensors are read.
-2) webapp-interval is the interval how often the measurments get transfered to the webapp.
+2) webapp-interval is the interval how often the measurements get transferred to the webapp.
 
 ### Alarm Count
 The alarm is developed on the way that if a quarter of the measurements are breaking the boarders the alarm count gets increased by one.
