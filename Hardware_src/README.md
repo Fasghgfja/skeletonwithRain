@@ -85,22 +85,25 @@ The raspberry source code is located in the /Raspberry directory. It is develope
 As a next feature the data gets transferred to the webapp via REST POST/GET requests.
 
 ### Run accesspoint application
-To run the accesspoint application you need to create a new accesspoint via the webapp application.
+To run the accesspoint application you need to create a new access point via the webapp application.
 After creating a new access point you are able to download the config.yaml.
-Copy this yaml into the [Raspberry](Raspberry) directory, afterward use the following command to upload the application onto the raspberry device.
-```shell
-  scp -r Raspberry/ "pi@raspberryIP":~
-```
-    
+Copy this yaml into the [Raspberry](Raspberry) directory, afterward open a terminal and move into the directory [Hardware_src](Hardware_src) 
+Use the following command to upload the application onto the raspberry device. If the password is needed please enter your raspberry password.
 
-If this is uploaded correct go onto your raspberry and move inside the Raspberry directory and start:
 ```shell
-    bash start_access_point.sh&
+  bash upload_access_point.sh "raspberry-IP"
 ```
 
+
+If this is uploaded correct you will be asked to enter your raspberry password again to enter onto your raspberry.
+If you are on your raspberry use the following command to start the access point application.
+```shell
+    bash Raspberry/start_access_point.sh&
+```
+After SUCCESS startup you should see a log entry of the given access point at webapp.
 #### Note 
-   If you are using the raspberry that we setup you just need to reboot the raspberry it will start the application automatically.
-   If not the following description shows how you can setup a crontab:
+   If you are using the raspberry that we set up you just need to reboot the raspberry it will start the application automatically.
+   If not the following description shows how you can set up a crontab:
    
 1) Open new crontab
 ```shell

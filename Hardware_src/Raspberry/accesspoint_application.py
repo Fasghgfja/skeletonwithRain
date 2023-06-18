@@ -10,7 +10,7 @@ program_state = 0
 if __name__ == '__main__':
     exception_logging.log_success("Application startup")
     file1 = open("application_properties.txt", "w")
-
+    rest_api.send_log_data_to_webapp(True, "Access point startup")
 
     print("{0} --- Application startup".format(datetime.now().strftime("%D %H:%M:%S")))
     print("                      Implement database this will need 15 seconds")
@@ -211,7 +211,7 @@ if __name__ == '__main__':
                 case program_status.Is.SEND_LOG_TO_WEBAPP.value:
                     print("{0} --- Send log to webapp".format(datetime.now().strftime("%D %H:%M:%S")))
                     try:
-                        program = rest_api.send_log_data_to_webapp(False)
+                        program = rest_api.send_log_data_to_webapp(False, "")
                         print("                      Write log to Webapp -> ok")
                     except Exception as e:
                         exception_logging.logException(e, "send Log to Webapp")
@@ -244,4 +244,4 @@ if __name__ == '__main__':
             os.system("rm AccessPoint")
             config_yaml.write_restart(False)
             run = False
-    rest_api.send_log_data_to_webapp(True)
+    rest_api.send_log_data_to_webapp(True, "Deleted access point shutdown")
