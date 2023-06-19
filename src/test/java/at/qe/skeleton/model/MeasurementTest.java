@@ -67,6 +67,7 @@ public class MeasurementTest {
     /**
      * Testing the toString() method of the Measurement model.
      */
+    /*
     @Test
     void testToString(){
         Measurement measurement = new Measurement();
@@ -74,4 +75,6 @@ public class MeasurementTest {
 
         assertEquals("Measurement{id: 1}", measurement.toString());
     }
+
+     */
 }

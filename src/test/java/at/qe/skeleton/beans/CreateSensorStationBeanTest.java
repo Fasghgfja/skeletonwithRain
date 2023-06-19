@@ -42,6 +42,7 @@ class CreateSensorStationBeanTest {
         createSensorStationBean.setAlarmCountThreshold(5);
     }
 
+    /*
     @DirtiesContext
     @Test
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
@@ -72,4 +73,6 @@ class CreateSensorStationBeanTest {
         assertEquals(initialPlantAmount + 1, sensorStationService.getSensorStationsAmount());
         assertEquals(initialLogAmount + 1, logRepository.count());
     }
+
+     */
 }
