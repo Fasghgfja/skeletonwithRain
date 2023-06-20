@@ -63,6 +63,9 @@ public class Log implements Persistable<Long>, Serializable, Comparable<Log> {
 
     @Override
     public int compareTo(Log o) {
+        if (o == null || o.getId() == null) {
+            return 1;
+        }
         return id.compareTo(o.getId());
     }
 

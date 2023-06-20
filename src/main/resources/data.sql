@@ -1,32 +1,30 @@
---one user for every role;
---2 AP, 2SS each,
---User
-INSERT INTO userx (ENABLED, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, CREATE_DATE) VALUES(TRUE, 'Admin', 'Istrator', '$2a$10$Bm27OvKm5FENObph7xPfnO2L1mbKyjpG3LdeixGrJV0xC7TgcFGX2', 'admin', '2016-01-01');
-INSERT INTO userx (ENABLED, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, CREATE_DATE) VALUES(TRUE, 'Susi', 'Kaufgern', '$2a$10$Bm27OvKm5FENObph7xPfnO2L1mbKyjpG3LdeixGrJV0xC7TgcFGX2', 'Susi', '2016-01-01');
-INSERT INTO userx (ENABLED, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, CREATE_DATE) VALUES(TRUE, 'Max', 'Mustermann', '$2a$10$Bm27OvKm5FENObph7xPfnO2L1mbKyjpG3LdeixGrJV0xC7TgcFGX2', 'Max', '2016-01-01');
 
---Userrole
+INSERT INTO userx (ENABLED, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, CREATE_DATE) VALUES(TRUE, 'Admin', 'Istrator', '$2a$10$Bm27OvKm5FENObph7xPfnO2L1mbKyjpG3LdeixGrJV0xC7TgcFGX2', 'admin', '2016-01-01');
+INSERT INTO userx (ENABLED, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, CREATE_DATE) VALUES(TRUE, 'Susi', 'Gründaumen', '$2a$10$Bm27OvKm5FENObph7xPfnO2L1mbKyjpG3LdeixGrJV0xC7TgcFGX2', 'Susi', '2016-01-01');
+INSERT INTO userx (ENABLED, FIRST_NAME, LAST_NAME, PASSWORD, USERNAME, CREATE_DATE) VALUES(TRUE, 'Max', 'Bennau', '$2a$10$Bm27OvKm5FENObph7xPfnO2L1mbKyjpG3LdeixGrJV0xC7TgcFGX2', 'Max', '2016-01-01');
+
+
 INSERT INTO userx_user_role (USERX_USERNAME, ROLES) VALUES ('Max', 'USER');
 INSERT INTO userx_user_role (USERX_USERNAME, ROLES) VALUES ('admin', 'ADMIN');
 INSERT INTO userx_user_role (USERX_USERNAME, ROLES) VALUES ('admin', 'GARDENER');
 INSERT INTO userx_user_role (USERX_USERNAME, ROLES) VALUES ('admin', 'USER');
 INSERT INTO userx_user_role (USERX_USERNAME, ROLES) VALUES ('Susi', 'USER');
 INSERT INTO userx_user_role (USERX_USERNAME, ROLES) VALUES ('Susi', 'GARDENER');
---AccessPoints
+
 INSERT INTO access_point(ACCESS_POINTID, LOCATION, VALIDATED, CREATE_DATE, UPDATE_DATE) VALUES(50, 'Room1', TRUE, '2023-01-01', '2022-01-01');
 INSERT INTO access_point(ACCESS_POINTID, LOCATION, VALIDATED, CREATE_DATE, UPDATE_DATE) VALUES(51, 'Room2', TRUE, '2023-01-01', '2022-01-01');
---Plants
-INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(51, 'Atomic Northern Lights','2022-01-01');
-INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(52, 'Charlotte''s Web','2022-01-02');
-INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(53, 'Alpine Rocket', '2022-01-03');
-INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(54, 'Blue Dream', '2022-01-04');
-INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(55, 'Sour Diesel', '2022-01-05');
---SensorStations
+
+INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(51, 'Lunaris Blossom','2022-01-01');
+INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(52, 'Verdant Flameleaf','2022-01-02');
+INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(53, 'Crystalvine Serpentia', '2022-01-03');
+INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(54, 'Aurora Orchid', '2022-01-04');
+INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(55, 'Celestial Saffronbloom', '2022-01-05');
+
 INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION ,alarm_switch, plant_plantid, alarm_count_threshold) VALUES('G4T2','2022-01-01','2022-01-05','Room1', 'off',51, 1);
 INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION,alarm_switch, plant_plantid, alarm_count_threshold) VALUES('G4T1','2022-01-01','2022-02-05','Room2', 'off',52, 1);
 INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION ,alarm_switch, plant_plantid, alarm_count_threshold) VALUES('G4T3','2022-01-01','2022-02-01','Room3', 'off',53, 1);
 INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION,alarm_switch, plant_plantid, alarm_count_threshold ) VALUES('G4T4','2022-03-01','2022-02-01','Room4', 'off',54, 1);
---Sensors
+
 insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(51,'000019b1-0000-1000-8000-00805f9b34fb', 'G4T2', 'SOIL_MOISTURE', 0, 0, 0,'2022-01-02');
 insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(52,'000019b0-0000-1000-8000-00805f9b34fb', 'G4T2', 'HUMIDITY', 0, 0, 0,'2022-01-02');
 insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(53,'000019b2-0000-1000-8000-00805f9b34fb', 'G4T2', 'AIR_PRESSURE', 0, 0, 0,'2022-01-02');
