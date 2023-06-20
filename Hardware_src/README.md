@@ -1,13 +1,17 @@
 # Accesspoint and Sensor station
 
-This readme should describe the handle of the raspberry pi and the arduino uno LE.
+This readme should describe the handle of the raspberry pi and the arduino nano LE.
+
+If you want to skip the description and just want to know how the setup works, click [here](#run-accesspoint-application).
 ## Arduino
 In the directory [arduino](arduino) is the source code for the sensor station [Arduino_programm_v1.0.ino](arduino%2FArduino_programm_v1.0.ino).
-This program is prepared to load onto an arduinoUnoLE.
+This program is prepared to load onto an arduinoNanoLE.
 There are two different option to connect to a Sensor Station.
 1) Give the Sensor station a name and pair it at sensorstation managemant page.
    The identification will happen via the name.
    The current name is "PlantSensor" but you can change it to another one if you like.
+
+   
 2) Search for sensor station via accesspoint management page and choose one.
    The identification will happen via the mac address of the arduino.
 
@@ -26,7 +30,7 @@ BLEService readSensorDataService("181A");
 ```
     
 
-### Arduino connection Plan
+### Arduino's connection Plan
 [Arduino_Schaltplan_aktuell.png](..%2FArduino%2FArduino_Schaltplan_aktuell.png) 
 
 There are additional plans in directory [Arduino](..%2FArduino)
@@ -84,7 +88,7 @@ The characteristic to read if the alarm has been switch off with the button is:
 The raspberry source code is located in the /Raspberry directory. It is developed in python3.10 to read via BLE the sensor data from the arduino and writes them into a database.
 As a next feature the data gets transferred to the webapp via REST POST/GET requests.
 
-### Run accesspoint application
+# Run accesspoint application
 To run the accesspoint application you need to create a new access point via the webapp application.
 After creating a new access point you are able to download the config.yaml.
 Copy this yaml into the [Raspberry](Raspberry) directory, afterward open a terminal and move into the directory [Hardware_src](Hardware_src) 
@@ -107,7 +111,7 @@ After SUCCESS startup you should see a log entry of the given access point at we
    
 1) Open new crontab
 ```shell
-   crontap -e
+   crontab -e
 ```
 2) add the following line on the bottom of the file:
 ```shell

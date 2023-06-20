@@ -62,12 +62,12 @@ public class Sensor extends Metadata implements Persistable<Long>, Serializable 
 
         Sensor sensor = (Sensor) o;
 
-        return getId().equals(sensor.getId());
+        return id.equals(sensor.getId());
     }
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return id.hashCode();
     }
 
     @Override

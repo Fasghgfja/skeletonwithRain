@@ -114,7 +114,9 @@
                     <div class="col-12 md:col-12 xl:col-6">
                         <div class="col-12">
                             <div class="card">
-                                <h5>Sensor Stations</h5>
+                                <h:outputLink style="color: #3C9462" value="/admin/sensorStationMenagement.xhtml">
+                                    <h5>Sensor Stations</h5>
+                                </h:outputLink>
                                 <p:dataTable id="sensorStationTable" var="sensorStation"
                                              value="#{sensorStationListController.sensorStationList}" selectionMode="single"
                                              paginatorPosition="bottom"
@@ -124,19 +126,20 @@
                                     <p:ajax event="rowSelect" update="myBarChart"
                                             listener="#{graphController.onRowSelect}"/>
 
-                                    <p:column headerText="Id" sortBy="#{sensorStation.id}">
+                                    <p:column headerText="Id">
                                         <h:outputText value="#{sensorStation.id}"/>
                                     </p:column>
 
-                                    <p:column headerText="Plant" sortBy="#{sensorStation.plant.plantName}">
+                                    <p:column headerText="Plant">
                                         <h:outputText value="#{sensorStation.plant.plantName}"/>
                                     </p:column>
 
-                                    <p:column headerText="Created Date" sortBy="#{sensorStation.createDate}">
+
+                                    <p:column headerText="Date">
                                         <h:outputText value="#{sensorStation.createDate}"/>
                                     </p:column>
 
-                                    <p:column headerText="Location" sortBy="#{sensorStation.location}">
+                                    <p:column headerText="Location">
                                         <h:outputText value="#{sensorStation.location}"/>
                                     </p:column>
 
@@ -209,7 +212,9 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Assigned Greenhouses</h5>
+                                <h:outputLink style="color:#3C9462;" value="/gardener/greenhouses.xhtml">
+                                    <h5>Assigned Greenhouses</h5>
+                                </h:outputLink>
                                 <div class="header-buttons">
                                     <!-- ........................Help Button ....................... -->
                                     <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
@@ -226,13 +231,13 @@
                                 <p:ajax event="rowSelect" update="myBarChart2"
                                         listener="#{graphController.onRowSelect}"/>
 
-                                <p:column headerText="Id" sortBy="#{assignedSensorStation.sensorStationName}">
+                                <p:column headerText="Id">
                                     <h:outputText value="#{assignedSensorStation.sensorStationName}"/>
                                 </p:column>
-                                <p:column headerText="Plant" sortBy="#{assignedSensorStation.plant.plantName}">
+                                <p:column headerText="Plant">
                                     <h:outputText value="#{assignedSensorStation.plant.plantName}"/>
                                 </p:column>
-                                <p:column headerText="Location" sortBy="#{assignedSensorStation.location}" >
+                                <p:column headerText="Location">
                                     <h:outputText value="#{assignedSensorStation.location}">
                                     </h:outputText>
                                 </p:column>
@@ -393,7 +398,7 @@
                             <div >
                                 <div class="card status">
                                     <h:outputLink value="/admin/auditLog.xhtml">
-                                        <h5 style="text-align: center; color: grey;">Audit Logs</h5>
+                                        <h5 style="text-align: center; color: #3C9462;">Audit Logs</h5>
                                     </h:outputLink>
 
                                     <div class="status-content">

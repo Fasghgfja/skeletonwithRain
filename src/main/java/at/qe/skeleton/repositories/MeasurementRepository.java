@@ -16,7 +16,6 @@ import java.util.List;
  * ALL METHODS RETURN MEASUREMENTS ORDERED BY DATE ; MOST RECENT FIRST
  * Provides methods for loading, saving and removing Measurements as inherited from the Abstract Repository
  * and adds methods to find measurements by measurementId  {@link MeasurementRepository#findFirstById(Long)} and
- * By Plant {@link MeasurementRepository#findMeasurementsByPlantOrderByTimestampDesc(Plant)} .
  * among with a wide selection of methods to find measurements using different parameters:
  * The Derived Query are split into parts separated by keywords:
  * The first one is the introducer(e.g find.., read.., query.., ...)
