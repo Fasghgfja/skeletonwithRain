@@ -57,7 +57,7 @@ def insert_values_into_database(value, float_value, type, deviceName):
         c = conn.cursor()
         c.execute('''
                 insert into value values('{0}', '{2}', {1})
-            '''.format(string_value, sensor_id, datetime.now().strftime("%m-%d-%Y %H:%M:%S")))
+            '''.format(string_value, sensor_id, datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
         conn.commit()
         file1 = open("logFile.txt", "a")
         file1.write("INFO: Value for type {0} on id {1} saved\n".format(type.decode(), sensor_id))
