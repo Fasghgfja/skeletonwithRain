@@ -168,8 +168,8 @@ PrimeFaces.widget.Rain = PrimeFaces.widget.BaseWidget.extend({
         
         this.menulinks.off('click.menu').on('click.menu', function(e) {
             var link = $(this),
-                item = link.parent(),
-                submenu = item.children('ul');
+            item = link.parent(),
+            submenu = item.children('ul');
             horizontal = $this.isHorizontal();
             $this.menuClick = true;
 

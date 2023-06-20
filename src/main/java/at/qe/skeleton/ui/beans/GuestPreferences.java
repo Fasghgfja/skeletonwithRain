@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Getter
 @Setter
+@ManagedBean
 @SessionScoped
 public class GuestPreferences implements Serializable {
 

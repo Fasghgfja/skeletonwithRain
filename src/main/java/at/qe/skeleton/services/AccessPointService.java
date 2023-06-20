@@ -19,15 +19,10 @@ import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 @Service
 @Scope("application")
 public class AccessPointService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(AccessPointService.class);
 
     @Autowired
     private AccessPointRepository accessPointRepository;
@@ -95,7 +90,7 @@ public class AccessPointService {
         try {
             createYaml(accessPoint1, isNew);
         }catch (IOException e){
-            LOGGER.error("error", e);
+            e.printStackTrace();
         }
 
         return accessPoint1;
@@ -122,7 +117,7 @@ public class AccessPointService {
                 writer.write(content);
                 writer.flush();
             } catch (IOException | IPCantReadException e) {
-                LOGGER.error("error", e);
+                e.printStackTrace();
             }
         }
     }

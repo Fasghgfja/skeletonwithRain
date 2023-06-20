@@ -1,27 +1,24 @@
 package at.qe.skeleton.services;
 
-import at.qe.skeleton.model.Measurement;
-import at.qe.skeleton.model.MeasurementType;
-import at.qe.skeleton.model.Plant;
-import at.qe.skeleton.model.SensorStation;
-import at.qe.skeleton.repositories.MeasurementRepository;
-import at.qe.skeleton.repositories.SensorRepository;
-import at.qe.skeleton.repositories.SensorStationRepository;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
-
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-
+import at.qe.skeleton.model.*;
+import at.qe.skeleton.repositories.LogRepository;
+import at.qe.skeleton.repositories.MeasurementRepository;
+import at.qe.skeleton.repositories.SensorRepository;
+import at.qe.skeleton.repositories.SensorStationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -35,8 +32,6 @@ import java.util.logging.SimpleFormatter;
 @Scope("application")
 public class MeasurementService {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AccessPointService.class);
-
     @Autowired
     MeasurementRepository measurementRepository;
 
@@ -44,6 +39,9 @@ public class MeasurementService {
     SensorRepository sensorRepository;
     @Autowired
     private SensorStationRepository sensorStationRepository;
+
+    @Autowired
+    LogRepository logRepository;
 
     private final Logger successLogger = Logger.getLogger("SuccessLogger");
     private FileHandler successFileHandler;
@@ -194,8 +192,16 @@ public class MeasurementService {
             successLogger.info("ALL MEASUREMENTS DELETED FROM " + from + " TO " + to);
             successFileHandler.close();
         } catch (IOException e) {
-            LOGGER.error("error", e);
+            e.printStackTrace();
         }
+        Log deleteLog = new Log();
+        deleteLog.setDate(LocalDate.now());
+        deleteLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        deleteLog.setAuthor(getCurrentUser());
+        deleteLog.setSubject("MEASUREMENT DELETION");
+        deleteLog.setText("ALL MEASUREMENTS DELETED FROM " + from + " TO " + to);
+        deleteLog.setType(LogType.SUCCESS);
+        logRepository.save(deleteLog);
     }
 
     public void deleteMeasurementsFromToForSensorStation(LocalDateTime from, LocalDateTime to, String sensorStationToDeleteFromId) {
@@ -223,8 +229,16 @@ public class MeasurementService {
             successLogger.info("MEASUREMENTS FOR SENSOR STATION " + sensorStation.getSensorStationID() + " DELETED FROM " + from + " TO " + to);
             successFileHandler.close();
         } catch (IOException e) {
-            LOGGER.error("error", e);
+            e.printStackTrace();
         }
+        Log deleteLog = new Log();
+        deleteLog.setDate(LocalDate.now());
+        deleteLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        deleteLog.setAuthor(getCurrentUser());
+        deleteLog.setSubject("SENSOR STATION MEASUREMENT DELETION");
+        deleteLog.setText("DELETED MEASUREMENTS FROM " + from + " TO " + to + " FOR SENSOR STATION " + sensorStation);
+        deleteLog.setType(LogType.SUCCESS);
+        logRepository.save(deleteLog);
     }
 
     public List<Measurement> doGetMeasurementsByTypeAndSensorStationAndTimestampBetween(String chosenMeasurement, SensorStation sensorStation, LocalDateTime dateFrom, LocalDateTime dateTo) {
@@ -256,5 +270,19 @@ public class MeasurementService {
 
     public SensorRepository getSensorRepository() {
         return sensorRepository;
+    }
+
+    /**
+     * Method to get the name of the user currently logged in.
+     * This is needed for logging.
+     *
+     * @return username.
+     */
+    public String getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            return authentication.getName();
+        }
+        return null;
     }
 }
