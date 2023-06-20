@@ -53,6 +53,7 @@ async def read_alarm_status(uuid, station_name):
 
 
 async def read_sensor_data(new_connection, device_list):
+    ble_fails = 0
     sensor_index = 0
     if new_connection:
         sensor_index = get_sensor_id()
@@ -65,6 +66,7 @@ async def read_sensor_data(new_connection, device_list):
             device = await BleakScanner.find_device_by_name(station_name)
         if device is None:
             exception_logging.log_connection_exception(station_name)
+            ble_fails += 1
         else:
             async with BleakClient(device) as client:
                 print("                      Connected to device: {0}".format(station_name))
@@ -93,6 +95,7 @@ async def read_sensor_data(new_connection, device_list):
                 exception_logging.log_success("Values from device {0}, Serivce uuid:\t{1}, Description:\t{2} have been read"
                                               .format(station_name, service.uuid, service.description))
         device = None
+    return ble_fails
 def not_present(name):
     current_names = DB_connection.read_station_interval_Database()
     for s in current_names:

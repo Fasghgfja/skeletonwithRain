@@ -126,8 +126,8 @@ if __name__ == '__main__':
 
                     else:
                         time.sleep(5)
-                        # program_state = program_status.Is.READ_SENSOR_VALUES.value
-                        program_state = -1
+                        program_state = program_status.Is.READ_SENSOR_VALUES.value
+                        #program_state = -1
             except Exception as e:
                 exception_logging.logException(e, "Time evaluation")
                 program_state = -1
@@ -184,7 +184,7 @@ if __name__ == '__main__':
                 case program_status.Is.READ_SENSOR_VALUES.value:
                     print("{0} --- Read Sensor data".format(datetime.now().strftime("%D %H:%M:%S")))
                     try:
-                        asyncio.run(ble_service_connection.read_sensor_data(False, measurement_station_list))
+                        bleak_bug_counter += asyncio.run(ble_service_connection.read_sensor_data(False, measurement_station_list))
                         print("                      Read measurements -> ok")
                     except Exception as e:
                         print("                      Read measurements -> fail")
