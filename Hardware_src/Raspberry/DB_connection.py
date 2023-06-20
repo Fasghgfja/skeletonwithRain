@@ -70,7 +70,7 @@ def insert_new_sensor_station_to_database(attribute, name):
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
         c.execute('''
-                insert into Sensorstation values('{0}', '{1}', 'off', 1, 30, 5)
+                insert into Sensorstation values('{0}', '{1}', 'off', 5, 10, 2)
             '''.format(name, attribute))
         conn.commit()
         file1 = open("logFile.txt", "a")

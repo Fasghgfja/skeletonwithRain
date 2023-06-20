@@ -30,7 +30,7 @@ BLEService readSensorDataService("181A");
 ```
     
 
-### Arduino connection Plan
+### Arduino's connection Plan
 [Arduino_Schaltplan_aktuell.png](..%2FArduino%2FArduino_Schaltplan_aktuell.png) 
 
 There are additional plans in directory [Arduino](..%2FArduino)
