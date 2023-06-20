@@ -8,7 +8,7 @@
         <f:event type="preRenderView" listener="#{sensorStationDetailController.init}"/>
     </f:metadata>
 
-    <ui:define name="title">PlantHealth: Greenhouse Details</ui:define>
+    <ui:define name="title">PlantHealth: Sensor Station Details</ui:define>
     <ui:define name="viewname">
     </ui:define>
     <ui:define name="head">
@@ -56,7 +56,7 @@
                                 <p:graphicImage url="../resources/images/pages/greenhouseDetails/leaf.png"/>
                                 </span>
                             <div class="overview">
-                                <span class="overview-title">AIR HUMIDITY</span>
+                                <span class="overview-title">HUMIDITY</span>
                                 <h3>
                                     <h:outputText value="#{measurementListController.getLastAirHumidityMeasurementValue().length() gt 6 ? measurementListController.getLastAirHumidityMeasurementValue().subSequence(0,6) : measurementListController.getLastAirHumidityMeasurementValue() }"/>
                                     %
@@ -76,7 +76,7 @@
                                 <p:graphicImage url="../resources/images/pages/greenhouseDetails/watering-can3.png"/>
                                 </span>
                             <div class="overview">
-                                <span class="overview-title">SOIL HUMIDITY</span>
+                                <span class="overview-title">SOIL MOISTURE</span>
                                 <h3>
                                     <h:outputText value="#{measurementListController.getLastSoilMeasurementValue().length() gt 6 ? measurementListController.getLastSoilMeasurementValue().subSequence(0,6) : measurementListController.getLastSoilMeasurementValue() }"/>
                                     %
@@ -96,7 +96,7 @@
                                 <p:graphicImage url="../resources/images/pages/greenhouseDetails/sun2.png"/>
                                 </span>
                             <div class="overview">
-                                <span class="overview-title">LIGHT</span>
+                                <span class="overview-title">LIGHT INTENSITY</span>
                                 <h3>
                                     <h:outputText value="#{measurementListController.getLastLightMeasurementValue().length() gt 6 ? measurementListController.getLastLightMeasurementValue().subSequence(0,6) : measurementListController.getLastLightMeasurementValue() }"/>
                                     lux
@@ -288,7 +288,11 @@
 
         <!-- ..........................................PAGE............................................................................ -->
         <div class="layout-dashboard">
+            <div class="card" style="margin-top: 20px;">
+                <h5>Description: #{sensorStationDetailController.sensorStation.description}</h5>
+            </div>
             <div class="grid">
+
 
 
                 <!-- ..........................................GRAPH................................................................... -->
@@ -619,10 +623,10 @@
                                 <p:column headerText="Type" sortBy="#{sensor.type}">
                                     <h:outputText value="#{sensor.type}"/>
                                 </p:column>
-                                <p:column headerText="Upper Border" sortBy="#{sensor.upper_border}">
+                                <p:column headerText="Upper Threshold" sortBy="#{sensor.upper_border}">
                                     <h:outputText value="#{sensor.upper_border}"/>
                                 </p:column>
-                                <p:column headerText="Lower Border" sortBy="#{sensor.lower_border}">
+                                <p:column headerText="Lower Threshold" sortBy="#{sensor.lower_border}">
                                     <h:outputText value="#{sensor.lower_border}"/>
                                 </p:column>
                                 <p:column headerText="Alarm Count" sortBy="#{sensor.alarm_count}">

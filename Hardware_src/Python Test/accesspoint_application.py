@@ -1,16 +1,16 @@
 import os
 from datetime import datetime, timedelta
-import interval_service, exception_logging, rest_api, ble_service_connection,\
-    DB_connection, check_boarder_values, program_status, config_yaml
+import interval_service, exception_logging, rest_api, ble_service_connection, DB_connection, check_boarder_values, program_status, config_yaml
 import time
 import asyncio
 
 SECTION_SLEEP = 15
+#  cronjop to restart
 program_state = 0
 if __name__ == '__main__':
     exception_logging.log_success("Application startup")
     file1 = open("application_properties.txt", "w")
-    rest_api.send_log_data_to_webapp(True, "Access point startup")
+
 
     print("{0} --- Application startup".format(datetime.now().strftime("%D %H:%M:%S")))
     print("                      Implement database this will need 15 seconds")
@@ -25,13 +25,13 @@ if __name__ == '__main__':
     # list that contains all start timer for measurement of the sensor stations
     start_measurement_interval_time_list = interval_service.get_all_start_times()
     # list that contains all measurement intervals
-    #delta_measurement_list =[]
+    delta_measurement_list =[]
     # list that contains all station they need to measure values
     measurement_station_list = []
     # list that contains all start timer for webapp interval of the sensor stations
     start_webapp_interval_time_list = interval_service.get_all_start_times()
     # list that contains all webapp intervals
-    #delta_webapp_list = []
+    delta_webapp_list = []
     # list that contains all stations they need to send their values to the webapp
     webapp_station_list = []
     # send logs timer
@@ -74,13 +74,10 @@ if __name__ == '__main__':
                 if len(DB_connection.read_station_interval_Database()) != len(start_measurement_interval_time_list):
                     start_measurement_interval_time_list = interval_service.get_all_start_times()
                 elif len(DB_connection.read_station_interval_Database()) != len(start_webapp_interval_time_list):
-                    start_webapp_interval_time_list = interval_service.get_all_start_times()
-
-                measurement_station_list = interval_service.station_interval_passed(
-                    start_measurement_interval_time_list, interval_service.get_measurement_interval())
-
-                webapp_station_list = interval_service.station_interval_passed(
-                    start_webapp_interval_time_list, interval_service.get_webapp_interval())
+                    delta_measurement_list = interval_service.get_measurement_interval()
+                delta_webapp_list = interval_service.get_webapp_interval()
+                measurement_station_list = interval_service.station_interval_passed(start_measurement_interval_time_list, delta_measurement_list)
+                webapp_station_list = interval_service.station_interval_passed(start_webapp_interval_time_list,delta_webapp_list)
             except Exception as e:
                 exception_logging.logException(e, "Read intervals from database")
             #-------------------------------------------------------------------------------------------------
@@ -211,7 +208,7 @@ if __name__ == '__main__':
                 case program_status.Is.SEND_LOG_TO_WEBAPP.value:
                     print("{0} --- Send log to webapp".format(datetime.now().strftime("%D %H:%M:%S")))
                     try:
-                        program = rest_api.send_log_data_to_webapp(False, "")
+                        program = rest_api.send_log_data_to_webapp(False)
                         print("                      Write log to Webapp -> ok")
                     except Exception as e:
                         exception_logging.logException(e, "send Log to Webapp")
@@ -244,4 +241,4 @@ if __name__ == '__main__':
             os.system("rm AccessPoint")
             config_yaml.write_restart(False)
             run = False
-    rest_api.send_log_data_to_webapp(True, "Deleted access point shutdown")
+    rest_api.send_log_data_to_webapp(True)

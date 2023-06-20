@@ -1,10 +1,7 @@
 import unittest
 from unittest.mock import patch, Mock
 import rest_api
-import config_yaml
-import DB_connection
-import exception_logging
-import datetime
+
 
 class TestRestApi(unittest.TestCase):
 

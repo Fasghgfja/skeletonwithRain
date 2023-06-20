@@ -135,11 +135,11 @@ def update_Sensor(alarm_count_list):
     else:
         return check_validation()
 
-def send_log_data_to_webapp(shutdown, text):
+def send_log_data_to_webapp(shutdown):
     if shutdown:
         url = url_builder("auditLog")
         send_list = []
-        temp_log_data = Log_data(text=text,
+        temp_log_data = Log_data(text="Deleted access point shutdown",
                                  subject="Access point",
                                  author=str(config_yaml.read_accesspoint_id()),
                                  time_stamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),

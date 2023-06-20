@@ -126,17 +126,21 @@ public class SensorStationServiceApi {
      */
     public void addSensor(List<SensorApi> sensorApi) throws SensorNotFoundException {
         try {
-
-            for (SensorApi s :
-                    sensorApi) {
-                Sensor sensor = new Sensor();
-                sensor.setSensorStation(sensorStationRepository.findFirstById(s.getStation_name()));
-                sensor.setUuid(s.getUuid());
-                sensor.setType(s.getType());
-                sensor.setAlarm_count(s.getAlarm_count());
-                sensor.setLower_border(s.getLowerBoarder());
-                sensor.setUpper_border(s.getUpperBoarder());
-                sensorService.saveSensor(sensor);
+            if (sensorApi.stream().findAny().isPresent() && !sensorService.areSensorsPresent(
+                    sensorStationRepository.findFirstById(
+                            sensorApi.stream().findFirst().get().getStation_name()))) {
+                
+                for (SensorApi s :
+                        sensorApi) {
+                    Sensor sensor = new Sensor();
+                    sensor.setSensorStation(sensorStationRepository.findFirstById(s.getStation_name()));
+                    sensor.setUuid(s.getUuid());
+                    sensor.setType(s.getType());
+                    sensor.setAlarm_count(s.getAlarm_count());
+                    sensor.setLower_border(s.getLowerBoarder());
+                    sensor.setUpper_border(s.getUpperBoarder());
+                    sensorService.saveSensor(sensor);
+                }
             }
         }catch (Exception e){
             throw new SensorNotFoundException();

@@ -1,4 +1,5 @@
 #!/bin/bash
 sleep 10
-python3 accesspoint_application.py;
-bash start_access_point.sh
+cd $HOME/Raspberry;
+python3 accesspoint_application.py
+python3 application_restarter.py
