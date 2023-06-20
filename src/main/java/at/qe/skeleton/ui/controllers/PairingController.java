@@ -84,6 +84,7 @@ public class PairingController {
         long startTime = System.currentTimeMillis();
         sensorsFound = false;
         interruptFlag = false;
+        successLogger.info("Sensor station is pairing ...");
         while (!sensorsFound && (System.currentTimeMillis() - startTime < MAX_SEARCH_TIME_MS) && !interruptFlag) {
             sensorsFound = sensorService.areSensorsPresent(sensorStationToPair );
             if (!sensorsFound) {
@@ -93,7 +94,6 @@ public class PairingController {
                         break;}
                     // Wait for 5 seconds before checking again
                     Thread.sleep(4000);
-                    System.out.println("Sleep");
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     e.printStackTrace();
@@ -121,6 +121,7 @@ public class PairingController {
             }
         }
         abortPairing();
+        successLogger.info("Pairing aborted.");
     }
 
     /**
