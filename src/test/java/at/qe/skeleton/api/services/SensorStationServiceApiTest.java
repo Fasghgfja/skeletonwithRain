@@ -314,4 +314,67 @@ class SensorStationServiceApiTest {
         // Assert
         verify(logService, times(2)).saveLog(any(Log.class));
     }
+
+    @Test
+    void testUpdateSensorStation_NullSensorStation_ThrowsException() {
+        // Arrange
+        SensorStationApi sensorStationApi = null;
+
+        // Act & Assert
+        assertThrows(NullPointerException.class, () -> sensorStationServiceApi.updateSensorStation(sensorStationApi));
+    }
+
+    @Test
+    void testUpdateSensor_NullSensorApiList_ThrowsException() {
+        // Arrange
+        List<SensorApi> sensorApiList = null;
+
+        // Act & Assert
+        assertThrows(NullPointerException.class, () -> sensorStationServiceApi.updateSensor(sensorApiList));
+    }
+
+    @Test
+    void testSaveLog_NullLogFrameList_ThrowsException() {
+        // Arrange
+        List<LogFrame> logFrames = null;
+
+        // Act & Assert
+        assertThrows(NullPointerException.class, () -> sensorStationServiceApi.saveLog(logFrames));
+    }
+
+    @Test
+    void testUpdateSensor_EmptySensorApiList_NoExceptionThrown() {
+        // Arrange
+        List<SensorApi> sensorApiList = new ArrayList<>();
+
+        // Act & Assert
+        assertDoesNotThrow(() -> sensorStationServiceApi.updateSensor(sensorApiList));
+        verify(sensorStationRepository, never()).findFirstById(anyString());
+        verify(sensorService, never()).getSensorForSensorStation(any(SensorStation.class), anyString());
+        verify(sensorService, never()).saveSensor(any(Sensor.class));
+    }
+
+    @Test
+    void testAddSensor_EmptySensorApiList_NoExceptionThrown() {
+        // Arrange
+        List<SensorApi> sensorApiList = new ArrayList<>();
+
+        // Act & Assert
+        assertDoesNotThrow(() -> sensorStationServiceApi.addSensor(sensorApiList));
+        verify(sensorStationRepository, never()).findFirstById(anyString());
+        verify(sensorService, never()).saveSensor(any(Sensor.class));
+    }
+
+    @Test
+    void testSaveLog_EmptyLogFrameList_NoExceptionThrown() {
+        // Arrange
+        List<LogFrame> logFrames = new ArrayList<>();
+
+        // Act & Assert
+        assertDoesNotThrow(() -> sensorStationServiceApi.saveLog(logFrames));
+        verify(logService, never()).saveLog(any(Log.class));
+    }
+
+
+
 }

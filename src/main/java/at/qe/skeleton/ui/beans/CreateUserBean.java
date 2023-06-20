@@ -118,7 +118,8 @@ public class CreateUserBean implements Serializable {
             creationFailLog.setType(LogType.WARNING);
             logRepository.save(creationFailLog);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Username already taken."));
-            userListController.setUserxList((ArrayList<Userx>) userService.getAllUsers());
+            userListController.setUserxList(new LinkedList<>(userService.getAllUsers()));
+
 
         } else {
             try {
@@ -140,7 +141,7 @@ public class CreateUserBean implements Serializable {
             logRepository.save(createLog);
             userService.saveUser(user);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "New user created."));
-            userListController.setUserxList((ArrayList<Userx>) userService.getAllUsers());
+            userListController.setUserxList(new LinkedList<>(userService.getAllUsers()));
         }
     }
 
