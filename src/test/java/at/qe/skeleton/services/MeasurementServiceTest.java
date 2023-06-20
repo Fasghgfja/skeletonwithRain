@@ -1,199 +1,101 @@
 package at.qe.skeleton.services;
 
-import org.junit.jupiter.api.Test;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.web.WebAppConfiguration;
-
-import java.util.ArrayList;
-
+import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * This is a test class for the measurementService.
- */
+import at.qe.skeleton.model.*;
+import at.qe.skeleton.repositories.*;
 
-@SpringBootTest
-@WebAppConfiguration
+import java.time.LocalDateTime;
+import java.util.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+@ExtendWith(MockitoExtension.class)
 class MeasurementServiceTest {
 
-    @Autowired
-    private MeasurementService measurementService;
+    @Mock
+    MeasurementRepository measurementRepository;
 
-    /**
-     * Testing the getAllMeasurements() method of the measurementService.
-     */
-    @DirtiesContext
-    @Test
-    void testGetAllMeasurements(){
-        int initialAmountOfMeasurements = measurementService.getMeasurementsAmount();
+    @Mock
+    SensorRepository sensorRepository;
 
-        if(initialAmountOfMeasurements > 0){
-            assertNotNull(measurementService.getAllMeasurements());
-            assertEquals(initialAmountOfMeasurements, measurementService.getAllMeasurements().size());
-        }
-        else{
-            assertThrows(NullPointerException.class, measurementService::getAllMeasurements);
-        }
+    @Mock
+    SensorStationRepository sensorStationRepository;
+
+    @InjectMocks
+    MeasurementService measurementService;
+
+    SensorStation sensorStation;
+    Plant plant;
+    Measurement measurement;
+
+    @BeforeEach
+    void setup() {
+        sensorStation = new SensorStation(); // Add necessary initializations
+        plant = new Plant(); // Add necessary initializations
+        measurement = new Measurement(); // Add necessary initializations
     }
 
-    /**
-     * Testing the getMeasurementsAmount() method of the measurementService.
-     */
-    @DirtiesContext
     @Test
-    void testGetMeasurementsAmount(){
-        if(measurementService.getAllMeasurements() != null){
-            assertEquals(measurementService.getAllMeasurements().size(),measurementService.getMeasurementsAmount());
-        }
-        else {
-            assertEquals(0, measurementService.getMeasurementsAmount());
-        }
+    void getAllMeasurements() {
+        measurementService.getAllMeasurements();
+        verify(measurementRepository, times(1)).findAll();
     }
 
-    /**
-     * TODO: update method change the tests
-     * Testing the getMeasurementStatus() method of the measurementService.
-     * Here we test what happens if the value is empty or null.
-
-    @DirtiesContext
     @Test
-    void testGetMeasurementStatusForValueNull(){
-        String measurementValue1 = null;
-        String measurementValue2 = "";
-        assertEquals("OK", measurementService.getMeasurementStatusForValue(measurementValue1,null));
-        assertEquals("OK", measurementService.getMeasurementStatusForValue(measurementValue2,null));
+    void getAllMeasurementsBySensorStation() {
+        measurementService.getAllMeasurementsBySensorStation(sensorStation);
+        verify(measurementRepository, times(1)).findMeasurementsBySensorStationOrderByTimestampDesc(sensorStation);
     }
-     */
 
-    /**
-     * //TODO: method changed
-     * Testing the checkThreshold() method for the type 'SOIL_MOISTURE' of the measurementService.
-     * The first two values exceed the threshold. The third value is within the given threshold.
-
-    @DirtiesContext
     @Test
-    void testCheckThresholdSoilMoisture(){
-        String type = "SOIL_MOISTURE";
-        String measurmentValue1 = "100";
-        String measurmentValue2 = "5";
-        String measurmentValue3 = "50";
-
-        assertEquals(1, measurementService.checkThreshold(measurmentValue1, type));
-        assertEquals(1, measurementService.checkThreshold(measurmentValue2, type));
-        assertEquals(0, measurementService.checkThreshold(measurmentValue3, type));
-    }
-     */
-
-    /**
-     *      * //TODO: method changed
-     * Testing the checkThreshold() method for the type 'HUMIDITY' of the measurementService.
-     * The first two values exceed the threshold. The third value is within the given threshold.
-
-    @DirtiesContext
-    @Test
-    void testCheckThresholdHumidity(){
-        String type = "HUMIDITY";
-        String measurmentValue1 = "81";
-        String measurmentValue2 = "5";
-        String measurmentValue3 = "50";
-
-        assertEquals(1, measurementService.checkThreshold(measurmentValue1, type));
-        assertEquals(1, measurementService.checkThreshold(measurmentValue2, type));
-        assertEquals(0, measurementService.checkThreshold(measurmentValue3, type));
-    }
-     */
-
-    /**
-     * Testing the checkThreshold() method for the type 'AIR_PRESSURE' of the measurementService.
-     * The first two values exceed the threshold. The third value is within the given threshold.
-     *      * //TODO: method changed
-    @DirtiesContext
-    @Test
-    void testCheckThresholdAirPressure(){
-        String type = "AIR_PRESSURE";
-        String measurmentValue1 = "2.5";
-        String measurmentValue2 = "0.2";
-        String measurmentValue3 = "1.5";
-
-        assertEquals(1, measurementService.checkThreshold(measurmentValue1, type));
-        assertEquals(1, measurementService.checkThreshold(measurmentValue2, type));
-        assertEquals(0, measurementService.checkThreshold(measurmentValue3, type));
-    }
-         */
-
-    /**
-     * Testing the checkThreshold() method for the type 'TEMPERATURE' of the measurementService.
-     *      * //TODO: method changed
-
-    @DirtiesContext
-    @Test
-    void testCheckThresholdTemperatur(){
+    void getAllMeasurementsBySensorStationAndTypeAsc() {
         String type = "TEMPERATURE";
-        String measurmentValue1 = "37";
-        String measurmentValue2 = "5";
-        String measurmentValue3 = "23";
-
-        assertEquals(1, measurementService.checkThreshold(measurmentValue1, type));
-        assertEquals(1, measurementService.checkThreshold(measurmentValue2, type));
-        assertEquals(0, measurementService.checkThreshold(measurmentValue3, type));
+        measurementService.getAllMeasurementsBySensorStationAndTypeAsc(sensorStation, type);
+        verify(measurementRepository, times(1)).findMeasurementsBySensorStationAndTypeLikeOrderByTimestampAsc(sensorStation, type);
     }
 
 
-
-     * Testing the checkThreshold() method for the type 'AIR_QUALITY' of the measurementService.
-     * The first two values exceed the threshold. The third value is within the given threshold.
-
-    @DirtiesContext
     @Test
-    void testCheckThresholdAirQuality(){
-        String type = "AIR_QUALITY";
-        String measurmentValue1 = "37";
-        String measurmentValue2 = "5";
-        String measurmentValue3 = "55";
-
-        assertEquals(1, measurementService.checkThreshold(measurmentValue1, type));
-        assertEquals(1, measurementService.checkThreshold(measurmentValue2, type));
-        assertEquals(0, measurementService.checkThreshold(measurmentValue3, type));
+    void getMeasurementsAmount() {
+        when(measurementRepository.count()).thenReturn(10);
+        assertEquals(10, measurementService.getMeasurementsAmount());
     }
 
-
-     * Testing the checkThreshold() method for the type 'LIGHT_INTENSITY' of the measurementService.
-     * The first two values exceed the threshold. The third value is within the given threshold.
-
-    @DirtiesContext
     @Test
-    void testCheckThresholdLightIntensity(){
-        String type = "LIGHT_INTENSITY";
-        String measurmentValue1 = "2933";
-        String measurmentValue2 = "5";
-        String measurmentValue3 = "1200";
-
-        assertEquals(1, measurementService.checkThreshold(measurmentValue1, type));
-        assertEquals(1, measurementService.checkThreshold(measurmentValue2, type));
-        assertEquals(0, measurementService.checkThreshold(measurmentValue3, type));
+    void getMeasurementTypeIcon() {
+        String type = "HUMIDITY";
+        String expected = "fa-solid fa-droplet fa-lg";
+        assertEquals(expected, measurementService.getMeasurementTypeIcon(type));
     }
-         */
 
-    /**
-     *      * TODO: update method change the tests
-     * Testing the getMeasurementStatus() method of the measurementService.
-     * Here we test what happens if the value that is not null.
 
-    @DirtiesContext
     @Test
-    void testGetMeasurementStatusForValueNotNull(){
-        String measurementValueSoilMoistureOK = "50";
-        String measurementValueHumidityOK = "75";
-        String measurementValueHumidityNotOK = "90";
-        assertEquals("OK", measurementService.getMeasurementStatusForValue(measurementValueSoilMoistureOK,"SOIL_MOISTURE"));
-        assertEquals("OK", measurementService.getMeasurementStatusForValue(measurementValueHumidityOK,"HUMIDITY"));
-        assertEquals("Wrong", measurementService.getMeasurementStatusForValue(measurementValueHumidityNotOK,"HUMIDITY"));
+    void deleteMeasurementsFromTo() {
+        LocalDateTime from = LocalDateTime.now().minusDays(1);
+        LocalDateTime to = LocalDateTime.now();
+        measurementService.deleteMeasurementsFromTo(from, to);
+        verify(measurementRepository, times(1)).deleteMeasurementsByTimestampBetween(from, to);
     }
-         */
 
-//TODO: measurementThresholds redo
+    @Test
+    void setMeasurementRepository() {
+        MeasurementRepository measurementRepository = mock(MeasurementRepository.class);
+        measurementService.setMeasurementRepository(measurementRepository);
+        assertEquals(measurementRepository, measurementService.getMeasurementRepository());
+    }
 
+
+    @Test
+    void setSensorStationRepository() {
+        SensorStationRepository sensorStationRepository = mock(SensorStationRepository.class);
+        measurementService.setSensorStationRepository(sensorStationRepository);
+        assertEquals(sensorStationRepository, measurementService.getSensorStationRepository());
+    }
 }
