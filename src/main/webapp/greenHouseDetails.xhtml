@@ -703,10 +703,14 @@
                   showEffect="fade" hideEffect="fade" resizable="false">
 
             <p:outputPanel id="GraphHelpDialog">
-                From This Panel you can see the The measurement linechart for a given measurement type.<br></br>
-                Click on one of the top boxes to show the graph for you choosen measurement type.<br></br>
-                The measurement list on the right will be updated aswell.<br></br>
-                You can hover over a measurement in the graph to see its value
+
+
+
+                <h6>Showing graph for a specific measurement:</h6>
+                By clicking on one of the measurement's boxes on the top of the page (or by clicking one of the measurements in the list on the right side of the graph), it's possible to see the graph for that specific measurement.
+                Also is possible to select an interval of time, where all the measurements inside this timeframe, will be shown in the graph.
+                If only the "To" field is selected, then all measurement up to the given date, will be shown.
+                If only the "From" field is selected, then all measurement starting from the given date up to today, will be shown.
 
 
             </p:outputPanel>
@@ -718,16 +722,18 @@
                   showEffect="fade" hideEffect="fade" resizable="false">
 
             <p:outputPanel id="SensorhelpDialog">
-                <h5>Sensors</h5>From this panel you can see the sensors registered for this greenhouse.<br></br>
-                For each sensor you can set upper and lower border values and reset the alarm count.
-                <h6>About Setting border values:</h6>
-                Setting new border values will reload the page and all measurements status will be updated according to your new bordervalues.<br></br>
-                Setting new border values will also change the values used for counting up the alarmcount.
-                <h6>About the Alarm Count:</h6>
-                The alarm count rapresent how many times a given sensor treshold has been exceeded.
-                If the alarm count is high enough <br></br> the status of the sensor will change from green to red.
-                This change will be visible on the corresponding plant page aswell.<br></br>
-                If you have solved the problem you can just reset the alarm count by using the toggle in the edit sensors button.
+
+
+
+                <h6>Editing threasholds:</h6>
+                By clicking on the "Edit" button, it's possible to edit the upper and/or lower threshold for the selected sensor.
+                <h6>Resetting alarm count:</h6>
+                By clicking on the "Edit" button, it's possible to reset the alarm count for the selected sensor.
+                The alarm count represents how many times a given sensor treshold has been exceeded.
+                If the alarm count exceed the selected value, the status of the sensor will change from green to red.
+                This change will be visible on the corresponding plant page as well.
+                If you have solved the problem, you can just reset the alarm count.
+
 
             </p:outputPanel>
         </p:dialog>
@@ -738,6 +744,18 @@
                   showEffect="fade" hideEffect="fade" resizable="false">
 
             <p:outputPanel id="EdithelpDialog">
+                <h6>Creating a new user:</h6>
+                By clicking on the "Create new user" button, it's possible to create a new user. "Username" and "Password" are mandatory fields, while all the others are optional. Here it is also possible to set user roles like GARDENER or ADMIN.
+                <h6>Detail view:</h6>
+                By clicking on the "open Detail-View" button, you will get redirected to the detail view page of the selected sensor station.
+                <h6>:</h6>
+                .
+
+
+                <h6>:</h6>
+                --------------------------------------------------------------------------------------------------------------.
+
+
                 From this panel you can edit settings for this Sensor Station.<br></br>
                 The first 5 fields are intended to show you the actual settings.
                 <h6>About Changing Plant:</h6>
@@ -762,9 +780,11 @@
                   showEffect="fade" hideEffect="fade" resizable="false">
 
             <p:outputPanel id="MeasurementHelpDialog">
-                From this panel you can See measurements of your chosen type.<br></br>
-                Press on a Top Box to chose a measurement type , the data showed in the list and the graph will be updated accordingly.<br></br>
-                Also when pressing on a measurement the graph will update to the show the timeline of that type.
+
+
+                <h6>Showing a specific measurement's list:</h6>
+                By clicking on one of the measurement's boxes on the top of the page, it's possible to see a list for that specific measurement.
+                Also when pressing on a measurement, the graph will update to the show the timeline of that type.
             </p:outputPanel>
         </p:dialog>
 

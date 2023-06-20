@@ -208,7 +208,13 @@ public class SensorStationServiceApi {
                 sensorStation.setAccessPoint(
                         accessPointService.loadAccessPoint(id)
                 );
-                sensorStationService.saveSensorStation(sensorStation);
+                sensorStation.setAlarmSwitch("off");
+                sensorStation.setAlarmCountThreshold(2);
+                SSInterval interval = new SSInterval();
+                interval.setSensorStation(sensorStationService.saveSensorStation(sensorStation));
+                interval.setWebAppInterval("10");
+                interval.setMeasurementInterval("5");
+                intervalService.saveInterval(interval);
                 System.out.println(sd);
                 System.out.println(sensorStation.getId());
             }
