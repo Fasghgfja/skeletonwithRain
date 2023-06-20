@@ -18,7 +18,6 @@ INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(-51, 'Lunaris Blosso
 INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(-52, 'Verdant Flameleaf','2022-01-02');
 INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(-53, 'Crystalvine Serpentia', '2022-01-03');
 INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(-54, 'Aurora Orchid', '2022-01-04');
-INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(-55, 'Celestial Saffronbloom', '2022-01-05');
 
 INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION ,alarm_switch, plant_plantid, alarm_count_threshold) VALUES('G4T2','2022-01-01','2022-01-05','Room1', 'off',-51, 1);
 INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION,alarm_switch, plant_plantid, alarm_count_threshold) VALUES('G4T1','2022-01-01','2022-02-05','Room2', 'off',-52, 1);
