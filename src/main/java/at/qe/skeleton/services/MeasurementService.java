@@ -1,12 +1,5 @@
 package at.qe.skeleton.services;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.*;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.MeasurementType;
 import at.qe.skeleton.model.Plant;
@@ -14,9 +7,21 @@ import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.repositories.MeasurementRepository;
 import at.qe.skeleton.repositories.SensorRepository;
 import at.qe.skeleton.repositories.SensorStationRepository;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
+
 
 
 /**
@@ -29,6 +34,8 @@ import org.springframework.stereotype.Service;
 @Service
 @Scope("application")
 public class MeasurementService {
+
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AccessPointService.class);
 
     @Autowired
     MeasurementRepository measurementRepository;
@@ -187,7 +194,7 @@ public class MeasurementService {
             successLogger.info("ALL MEASUREMENTS DELETED FROM " + from + " TO " + to);
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
     }
 
@@ -216,7 +223,7 @@ public class MeasurementService {
             successLogger.info("MEASUREMENTS FOR SENSOR STATION " + sensorStation.getSensorStationID() + " DELETED FROM " + from + " TO " + to);
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
     }
 
