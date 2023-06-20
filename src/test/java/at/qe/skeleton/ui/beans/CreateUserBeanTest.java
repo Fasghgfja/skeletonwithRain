@@ -48,7 +48,6 @@ class CreateUserBeanTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
         createUserBean = new CreateUserBean();
         createUserBean.setUserService(userService);
         createUserBean.setPasswordEncoder(passwordEncoder);
@@ -63,7 +62,21 @@ class CreateUserBeanTest {
     @Test
     void registerNewUser_UsernameTaken() throws IOException {
         // Mock dependencies
+        UserxRepository userxRepository = mock(UserxRepository.class);
+        PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
+        SessionInfoBean sessionInfoBean = mock(SessionInfoBean.class);
+        LogRepository logRepository = mock(LogRepository.class);
+        UserService userService = mock(UserService.class); // Create a mock UserService
+
         when(userxRepository.findFirstByUsername(anyString())).thenReturn(new Userx());
+
+        // Create the instance of the class under test and set the dependencies
+        CreateUserBean createUserBean = new CreateUserBean();
+        createUserBean.setUserxRepository(userxRepository);
+        createUserBean.setPasswordEncoder(passwordEncoder);
+        createUserBean.setSessionInfoBean(sessionInfoBean);
+        createUserBean.setLogRepository(logRepository);
+        createUserBean.setUserService(userService); // Set the UserService
 
         // Mock FacesContext
         try (MockedStatic<FacesContext> mockedFacesContext = mockStatic(FacesContext.class)) {
@@ -84,14 +97,29 @@ class CreateUserBeanTest {
     }
 
 
+
+
     @Test
     void registerNewUser_Success() throws IOException {
         // Mock dependencies
-        when(userxRepository.findFirstByUsername(anyString())).thenReturn(null);
-
-        // Mock FacesContext and ExternalContext
+        UserxRepository userxRepository = mock(UserxRepository.class);
+        PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
+        SessionInfoBean sessionInfoBean = mock(SessionInfoBean.class);
+        LogRepository logRepository = mock(LogRepository.class);
+        UserService userService = mock(UserService.class);
         ExternalContext externalContext = mock(ExternalContext.class);
 
+        when(userxRepository.findFirstByUsername(anyString())).thenReturn(null);
+
+        // Create the instance of the class under test and set the dependencies
+        CreateUserBean createUserBean = new CreateUserBean();
+        createUserBean.setUserxRepository(userxRepository);
+        createUserBean.setPasswordEncoder(passwordEncoder);
+        createUserBean.setSessionInfoBean(sessionInfoBean);
+        createUserBean.setLogRepository(logRepository);
+        createUserBean.setUserService(userService);
+
+        // Mock FacesContext and ExternalContext
         try (MockedStatic<FacesContext> mocked = mockStatic(FacesContext.class)) {
             FacesContext facesContext = mock(FacesContext.class);
             when(facesContext.getExternalContext()).thenReturn(externalContext);
@@ -108,6 +136,6 @@ class CreateUserBeanTest {
             // Verify that the user is redirected to the login page
             verify(externalContext).redirect(contains("/login.xhtml"));
         }
-
     }
+
 }

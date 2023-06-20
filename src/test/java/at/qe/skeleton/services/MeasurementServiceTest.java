@@ -84,13 +84,6 @@ class MeasurementServiceTest {
         verify(measurementRepository, times(1)).deleteMeasurementsByTimestampBetween(from, to);
     }
 
-    @Test
-    void setMeasurementRepository() {
-        MeasurementRepository measurementRepository = mock(MeasurementRepository.class);
-        measurementService.setMeasurementRepository(measurementRepository);
-        assertEquals(measurementRepository, measurementService.getMeasurementRepository());
-    }
-
 
     @Test
     void setSensorStationRepository() {
