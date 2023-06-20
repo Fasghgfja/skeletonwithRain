@@ -225,12 +225,20 @@
                   showEffect="fade" hideEffect="fade" resizable="false">
 
             <p:outputPanel id="ImageshelpDialog">
-                <h5>Image Menagement</h5>From this page you can see all approved and awaiting approval pictures for all plants and manage them.<br></br>
-                A approved image that has no plant linked to it will go in the general gallery that is visible on all plant pages<br></br>
-                and qr linked pages that have no pictures for their plant.<br></br>
-                <h6>About Images without a plant:</h6>
-                When a plant dies or is deleted for other reasons all pictures of that plant will be detached and go in the general gallery<br></br>
-                that can be managed from here.
+
+                <h6>Approved images:</h6>
+                In the "Approved" section are located all the images that were already approved by a gardener or an administrator.
+                These include images that are currently linked to a plant, but also images that used to be linked to a now deleted plant (these are displayed for example in the registration page, along with the other plant images).
+                <h6>Awaiting approval images:</h6>
+                In the "Awaiting Approval" section are located all the images that were not yet approved.
+                These are just displayed here for administrators and in the greenhouse details page, for the gardener that has that specific plant under care.
+                <h6>Approve an image:</h6>
+                By clicking on the "Approve Image" button, it's possible to approve the selected image.
+                This image will be now visible to every user on the plant page and also to guests when they scan the QR code of a plant.
+                <h6>Delete an image:</h6>
+                By clicking on the "Delete Image" button, it's possible to delete the selected image.
+
+
 
             </p:outputPanel>
         </p:dialog>

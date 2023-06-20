@@ -201,18 +201,19 @@
                   modal="true"
                   showEffect="fade" hideEffect="fade" resizable="false">
         <p:outputPanel id="measurementPageHelp">
-            From This page you can cancel measurement for a given timeslot or for a sensor station.<br></br>
-            <h6>About Deleting for a timeframe:</h6>
-            To delete measurement for a given timeframe press the "Delete all Measurements From To" button.<br></br>
-            This will open a dialog that will ask you for starting date and an end date.
-            If u leave both fields empty nothing will happen.<br></br>
-            If u only fill in the "To" field then all measurement in the system up to your given date will be deleted.<br></br>
-            If u only fill in the field "From" then all measurement in the system starting from your date up to today will be deleted.<br></br>
-            <h6>About Deleting For a sensor station:</h6>
-            By Pressing the appropriate button you will be asked to chose a sensor station and a timeframe.<br></br>
-            all measurement for that sensorstation in your specified timeframe will be deleted.<br></br>
-            WARNING: By leaving both fields empty all measurements for that sensor station will be deleted.<br></br>
-            the rest of the delete logic works like the one for deleting for a timeframe explained above.
+
+
+            <h6>Deleting all measurements in a certain interval:</h6>
+            By clicking on the "Delete all Measurements from to" button, it's possible to select an interval of time. All the measurements inside this timeframe, will be deleted.
+            If only the "To" field is selected, then all measurement in the system up to the given date, will be deleted.
+            If only the "From" field is selected, then all measurement in the system starting from the given date up to today, will be deleted.
+            If both fields are left empty, nothing is going to happen.
+            <h6>Deleting measurements for a specified sensor station:</h6>
+            By clicking on the "Delete for Sensor Station" button, it's possible to select an interval of time and a sensor station. All the measurements inside this timeframe, will be deleted.
+            If only the "To" field is selected, then all measurement for that specified sensor station up to the given date, will be deleted.
+            If only the "From" field is selected, then all measurement for that specified sensor station starting from the given date up to today, will be deleted.
+            If both fields are left empty, ALL the measurements for that specified sensor station, will be deleted.
+
         </p:outputPanel>
         </p:dialog>
 
