@@ -11,7 +11,7 @@
 }
 
 .pi {
-    font-family: 'primeicons';
+    font-family: 'primeicons', sans-serif;
     speak: none;
     font-style: normal;
     font-weight: normal;
