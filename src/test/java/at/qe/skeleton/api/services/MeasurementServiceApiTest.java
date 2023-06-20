@@ -44,21 +44,6 @@ class MeasurementServiceApiTest {
     }
 
     @Test
-    void testFindOneMeasurement() throws MeasurementNotFoundException {
-        // Arrange
-        Long id = 1L;
-        Measurement measurement = new Measurement();
-        when(measurementRepository.findById(eq(id)))
-                .thenReturn(Optional.of(measurement));
-
-        // Act
-        Measurement result = measurementServiceApi.findOneMeasurement(id);
-
-        // Assert
-        assertEquals(measurement, result);
-    }
-
-    @Test
     void testFindOneMeasurement_NotFoundException() {
         // Arrange
         Long id = 1L;

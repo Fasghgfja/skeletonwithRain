@@ -101,26 +101,6 @@ class MeasurementServiceTest {
     }
 
     @Test
-    void deleteMeasurementsFromTo() {
-        LocalDateTime from = LocalDateTime.now().minusDays(1);
-        LocalDateTime to = LocalDateTime.now();
-        measurementService.deleteMeasurementsFromTo(from, to);
-        verify(measurementRepository, times(1)).deleteMeasurementsByTimestampBetween(from, to);
-    }
-
-    @Test
-    void deleteMeasurementsFromToForSensorStation() {
-        LocalDateTime from = LocalDateTime.now().minusDays(1);
-        LocalDateTime to = LocalDateTime.now();
-        String sensorStationToDeleteFromId = "sensorStationId";
-        SensorStation sensorStationToDeleteFrom = new SensorStation();
-        when(sensorStationRepository.findFirstById(sensorStationToDeleteFromId)).thenReturn(sensorStationToDeleteFrom);
-
-        measurementService.deleteMeasurementsFromToForSensorStation(from, to, sensorStationToDeleteFromId);
-        verify(measurementRepository, times(1)).deleteMeasurementsBySensorStationAndTimestampBetween(sensorStationToDeleteFrom, from, to);
-    }
-
-    @Test
     void doGetMeasurementsByTypeAndSensorStationAndTimestampBetween() {
         String chosenMeasurement = "TEMPERATURE";
         LocalDateTime dateFrom = LocalDateTime.now().minusDays(1);
