@@ -61,6 +61,24 @@ class MeasurementServiceTest {
         verify(measurementRepository, times(1)).findMeasurementsBySensorStationAndTypeLikeOrderByTimestampAsc(sensorStation, type);
     }
 
+    @Test
+    void getAllMeasurementsBySensorStationAndType() {
+        String type = "TEMPERATURE";
+        measurementService.getAllMeasurementsBySensorStationAndType(sensorStation, type);
+        verify(measurementRepository, times(1)).findMeasurementsBySensorStationAndTypeLikeOrderByTimestampDesc(sensorStation, type);
+    }
+
+    @Test
+    void getLatestPlantMeasurements() {
+        measurementService.getLatestPlantMeasurements(sensorStation);
+        verify(measurementRepository, times(6)).findFirstMeasurementBySensorStationAndTypeOrderByTimestampDesc(eq(sensorStation), anyString());
+    }
+
+    @Test
+    void getLatestPlantMeasurementsWithPlant() {
+        measurementService.getLatestPlantMeasurements(plant);
+        verify(measurementRepository, times(6)).findFirstMeasurementBySensorStation_PlantAndTypeOrderByTimestampDesc(eq(plant), anyString());
+    }
 
     @Test
     void getMeasurementsAmount() {
@@ -75,6 +93,12 @@ class MeasurementServiceTest {
         assertEquals(expected, measurementService.getMeasurementTypeIcon(type));
     }
 
+    @Test
+    void getLastMeasurementBySensorStationAndType() {
+        String type = "TEMPERATURE";
+        measurementService.getLastMeasurementBySensorStationAndType(sensorStation, type);
+        verify(measurementRepository, times(1)).getFirstBySensorStationAndTypeEqualsOrderByTimestampDesc(sensorStation, type);
+    }
 
     @Test
     void deleteMeasurementsFromTo() {
@@ -84,6 +108,46 @@ class MeasurementServiceTest {
         verify(measurementRepository, times(1)).deleteMeasurementsByTimestampBetween(from, to);
     }
 
+    @Test
+    void deleteMeasurementsFromToForSensorStation() {
+        LocalDateTime from = LocalDateTime.now().minusDays(1);
+        LocalDateTime to = LocalDateTime.now();
+        String sensorStationToDeleteFromId = "sensorStationId";
+        SensorStation sensorStationToDeleteFrom = new SensorStation();
+        when(sensorStationRepository.findFirstById(sensorStationToDeleteFromId)).thenReturn(sensorStationToDeleteFrom);
+
+        measurementService.deleteMeasurementsFromToForSensorStation(from, to, sensorStationToDeleteFromId);
+        verify(measurementRepository, times(1)).deleteMeasurementsBySensorStationAndTimestampBetween(sensorStationToDeleteFrom, from, to);
+    }
+
+    @Test
+    void doGetMeasurementsByTypeAndSensorStationAndTimestampBetween() {
+        String chosenMeasurement = "TEMPERATURE";
+        LocalDateTime dateFrom = LocalDateTime.now().minusDays(1);
+        LocalDateTime dateTo = LocalDateTime.now();
+        measurementService.doGetMeasurementsByTypeAndSensorStationAndTimestampBetween(chosenMeasurement, sensorStation, dateFrom, dateTo);
+        verify(measurementRepository, times(1)).getMeasurementsByTypeAndSensorStationAndTimestampBetweenOrderByTimestampAsc(chosenMeasurement, sensorStation, dateFrom, dateTo);
+    }
+
+    @Test
+    void doFindFirstBySensorStationOrderByTimestampAsc() {
+        measurementService.doFindFirstBySensorStationOrderByTimestampAsc(sensorStation);
+        verify(measurementRepository, times(1)).findFirstBySensorStationOrderByTimestampAsc(sensorStation);
+    }
+
+    @Test
+    void setMeasurementRepository() {
+        MeasurementRepository measurementRepository = mock(MeasurementRepository.class);
+        measurementService.setMeasurementRepository(measurementRepository);
+        assertEquals(measurementRepository, measurementService.getMeasurementRepository());
+    }
+
+    @Test
+    void setSensorRepository() {
+        SensorRepository sensorRepository = mock(SensorRepository.class);
+        measurementService.setSensorRepository(sensorRepository);
+        // Verify that the method does not throw any exceptions
+    }
 
     @Test
     void setSensorStationRepository() {
@@ -91,4 +155,5 @@ class MeasurementServiceTest {
         measurementService.setSensorStationRepository(sensorStationRepository);
         assertEquals(sensorStationRepository, measurementService.getSensorStationRepository());
     }
+
 }
