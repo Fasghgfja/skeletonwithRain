@@ -1,78 +1,99 @@
 package at.qe.skeleton.beans;
 
-import at.qe.skeleton.model.SensorStation;
+import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.LogRepository;
+import at.qe.skeleton.services.IntervalService;
 import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.CreateSensorStationBean;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
-@SpringBootTest
-class CreateSensorStationBeanTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
-    @Autowired
+public class CreateSensorStationBeanTest {
+
+    @Mock
     private SensorStationService sensorStationService;
 
-    @Autowired
+    @Mock
     private SessionInfoBean sessionInfoBean;
 
-    @Autowired
+    @Mock
+    private IntervalService intervalService;
+
+    @Mock
     private LogRepository logRepository;
 
+    @InjectMocks
     private CreateSensorStationBean createSensorStationBean;
 
-    @BeforeEach
-    public void setUp() {
-        createSensorStationBean = new CreateSensorStationBean();
-        createSensorStationBean.setSensorStationService(sensorStationService);
-        createSensorStationBean.setSessionInfoBean(sessionInfoBean);
-        createSensorStationBean.setLogRepository(logRepository);
+    private Logger successLogger;
+    private FileHandler successFileHandler;
 
-        createSensorStationBean.setLocation("Location");
-        createSensorStationBean.setSensorStationName("SensorStation");
-        createSensorStationBean.setAlarmSwitch("Off");
-        createSensorStationBean.setDescription("Description");
-        createSensorStationBean.setAlarmCountThreshold(5);
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        successLogger = Logger.getLogger("SuccessLogger");
     }
 
-    /*
-    @DirtiesContext
     @Test
-    @WithMockUser(username = "admin", authorities = {"ADMIN"})
-    void testDoCreateNewAccessPoint() {
-        assertNotNull(createSensorStationBean.getSensorStationService());
-        assertNotNull(createSensorStationBean.getSessionInfoBean());
-        assertNotNull(createSensorStationBean.getLogRepository());
+    void testDoCreateNewCreateSensorStation() throws IOException {
+        // Arrange
+        String location = "Location";
+        String sensorStationName = "Sensor Station";
+        String description = "Description";
+        Integer alarmCountThreshold = 5;
+        SensorStation sensorStation = new SensorStation();
+        sensorStation.setLocation(location);
+        sensorStation.setSensorStationName(sensorStationName);
+        sensorStation.setAlarmSwitch("off");
+        sensorStation.setDescription(description);
+        sensorStation.setAlarmCountThreshold(alarmCountThreshold);
+        when(sensorStationService.saveSensorStation(any(SensorStation.class))).thenReturn(sensorStation);
 
-        long initialPlantAmount = sensorStationService.getSensorStationsAmount();
-        long initialLogAmount = logRepository.count();
+        SSInterval interval = new SSInterval();
+        interval.setWebAppInterval("1");
+        interval.setMeasurementInterval("1");
+        interval.setSensorStation(sensorStation);
+        when(intervalService.saveInterval(any(SSInterval.class))).thenReturn(interval);
 
-        assertNotNull(createSensorStationBean.getLocation());
-        assertNotNull(createSensorStationBean.getSensorStationName());
-        assertNotNull(createSensorStationBean.getAlarmSwitch());
-        assertNotNull(createSensorStationBean.getDescription());
-        assertNotNull(createSensorStationBean.getAlarmCountThreshold());
+        when(logRepository.save(any(Log.class))).thenReturn(null);
 
+        Userx currentUser = new Userx();
+        currentUser.setUsername("admin"); // Set the username of the current user
+        when(sessionInfoBean.getCurrentUser()).thenReturn(currentUser);
+
+        // Act
+        createSensorStationBean.setLocation(location);
+        createSensorStationBean.setSensorStationName(sensorStationName);
+        createSensorStationBean.setAlarmSwitch("off");
+        createSensorStationBean.setDescription(description);
+        createSensorStationBean.setAlarmCountThreshold(alarmCountThreshold);
         createSensorStationBean.doCreateNewCreateSensorStation();
 
-        SensorStation createdSensorStation = sensorStationService.loadSensorStation("SensorStation");
-        assertNotNull(createdSensorStation);
-        assertEquals("Location", createdSensorStation.getLocation());
-        assertEquals("Description", createdSensorStation.getDescription());
-        assertEquals("SensorStation", createdSensorStation.getSensorStationName());
-        assertEquals("off", createdSensorStation.getAlarmSwitch());
-        assertEquals(5, createdSensorStation.getAlarmCountThreshold());
-
-        assertEquals(initialPlantAmount + 1, sensorStationService.getSensorStationsAmount());
-        assertEquals(initialLogAmount + 1, logRepository.count());
+        // Assert
+        verify(sensorStationService, times(1)).saveSensorStation(any(SensorStation.class));
+        verify(intervalService, times(1)).saveInterval(any(SSInterval.class));
+        verify(logRepository, times(1)).save(any(Log.class));
+        assertEquals(location, sensorStation.getLocation());
+        assertEquals(sensorStationName, sensorStation.getSensorStationName());
+        assertEquals("off", sensorStation.getAlarmSwitch());
+        assertEquals(description, sensorStation.getDescription());
+        assertEquals(alarmCountThreshold, sensorStation.getAlarmCountThreshold());
     }
-
-     */
 }
+
