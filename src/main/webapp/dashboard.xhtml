@@ -132,8 +132,7 @@
                                         <h:outputText value="#{sensorStation.plant.plantName}"/>
                                     </p:column>
 
-                                    <!-- ...TODO........THIS HAS TO CHANGE WITH PLANT DATE!!!!!!!!......... -->
-                                    <p:column headerText="Date" sortBy="#{sensorStation.createDate}">
+                                    <p:column headerText="Created Date" sortBy="#{sensorStation.createDate}">
                                         <h:outputText value="#{sensorStation.createDate}"/>
                                     </p:column>
 
@@ -517,7 +516,7 @@
                 <h6>Opening detail view:</h6>
                 By clicking on the "open Detail-View" button, you will get redirected to the detail view page of the selected greenhouse.
                 <h6>Viewing the graph:</h6>
-                By clicking on the any of the listed greenhouses, it's possible to see a graph preview of the latest measurements (in percentage, calculated based on the current threshold for that specific measurement) for the selected greenhouse.
+                By clicking on the any of the listed greenhouses, it's possible to see a graph preview of the latest measurements for the selected greenhouse.
 
             </p:outputPanel>
         </p:dialog>
