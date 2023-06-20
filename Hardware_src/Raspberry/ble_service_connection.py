@@ -21,7 +21,7 @@ async def search():
         print("                      searching for stations -> fail")
         return ["error"]
 # send signal to switch on/off alarm ligth on a given uuid
-async def write_alarm_signal(uuid, switch, station_name):
+async def write_alarm_signal(uuid, switch, station_name, sensor_type):
     if is_mac(station_name):
         device = await BleakScanner.find_device_by_address(station_name)
     else:
@@ -32,7 +32,7 @@ async def write_alarm_signal(uuid, switch, station_name):
         async with BleakClient(device) as client:
             try:
                 await client.write_gatt_char(uuid, b'1', response=True)
-                exception_logging.log_information("WARNING: Send {0} alarm signal on uuid: {1}".format(switch, uuid))
+                exception_logging.log_information("WARNING: Send {0} alarm signal on station {1} to type: {2}".format(switch, station_name, sensor_type))
             except Exception as e:
                 exception_logging.logException(e, uuid)
 async def read_alarm_status(uuid, station_name):
