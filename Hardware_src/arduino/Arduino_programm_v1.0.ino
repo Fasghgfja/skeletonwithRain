@@ -83,6 +83,7 @@ void setup() {
     BLE.setLocalName("PlantSensor");
     BLE.setDeviceName("PlantSensor");
 
+
     //---------------------------------------------------------------
     BLE.setAdvertisedService(readSensorDataService);
     //---------------------------------------------------------------BLEDescriptor

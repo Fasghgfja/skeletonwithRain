@@ -27,7 +27,6 @@ public class AccessPoint extends Metadata implements Persistable<Long>, Serializ
     private Long accessPointID;
     private String location;
     private boolean validated;
-
     @Override
     public Long getId() {
         return this.accessPointID;

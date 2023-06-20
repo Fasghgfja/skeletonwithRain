@@ -227,4 +227,27 @@ public class MeasurementService {
     public Measurement doFindFirstBySensorStationOrderByTimestampAsc(SensorStation sensorStation) {
         return measurementRepository.findFirstBySensorStationOrderByTimestampAsc(sensorStation);
     }
+
+    public void setMeasurementRepository(MeasurementRepository measurementRepository) {
+        this.measurementRepository = measurementRepository;
+    }
+
+    public MeasurementRepository getMeasurementRepository() {
+        return measurementRepository;
+    }
+
+    public void setSensorRepository(SensorRepository sensorRepository) {
+    }
+
+    public void setSensorStationRepository(SensorStationRepository sensorStationRepository) {
+        this.sensorStationRepository = sensorStationRepository;
+    }
+
+    public SensorStationRepository getSensorStationRepository() {
+        return sensorStationRepository;
+    }
+
+    public SensorRepository getSensorRepository() {
+        return sensorRepository;
+    }
 }

@@ -5,6 +5,7 @@ import at.qe.skeleton.api.exceptions.SensorNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
 import at.qe.skeleton.api.model.*;
 import at.qe.skeleton.api.services.SensorStationServiceApi;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ public class SensorStationApiController {
         try {
             sensorStationServiceApi.updateSensorStation(sensorStationApi);
             sensorStationLogger.info("SENSOR STATION HAS BEEN UPDATED: " + sensorStationApi.getName() + " " + sensorStationApi.getService_description());
-            return Response.SC_OK;
+            return HttpServletResponse.SC_OK;
         } catch (SensorStationNotFoundException ex){
             sensorStationLogger.warning("SENSOR STATION COULD NOT BE UPDATED: " + sensorStationApi.getName() + " " + sensorStationApi.getService_description());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -51,12 +52,14 @@ public class SensorStationApiController {
     int createSensorApi(@RequestBody List<SensorApi> sensorApi) {
         try {
             sensorStationServiceApi.addSensor(sensorApi);
-            if(sensorApi.stream().findAny().isPresent()){
-                sensorStationLogger.info("SENSORS ADDED FOR STATION: " + sensorApi.stream().findAny().get().getStation_name());
-            }
-            return Response.SC_OK;
+            sensorApi.stream().findAny().ifPresent(sensorApi1->{
+                sensorStationLogger.info("SENSORS ADDED FOR STATION: " + sensorApi1.getStation_name());
+            });
+            return HttpServletResponse.SC_OK;
         }catch (SensorNotFoundException ex) {
-            sensorStationLogger.warning("SENSORS COULD NOT BE ADDED FROM STATION: " + sensorApi.stream().findAny().get().getStation_name());
+            sensorApi.stream().findAny().ifPresent(sensorApi1->{
+                sensorStationLogger.warning("SENSORS COULD NOT BE ADDED FROM STATION: " + sensorApi1.getStation_name());
+            });
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -65,12 +68,14 @@ public class SensorStationApiController {
     int updateSensorApi(@RequestBody List<SensorApi> sensorApi) {
         try {
             sensorStationServiceApi.updateSensor(sensorApi);
-            if(sensorApi.stream().findAny().isPresent()){
-                sensorStationLogger.info("SENSORS UPDATED FOR STATION: " + sensorApi.stream().findAny().get().getStation_name());
-            }
-            return Response.SC_OK;
+            sensorApi.stream().findAny().ifPresent(sensorApi1->{
+                sensorStationLogger.info("SENSORS UPDATED FOR STATION: " + sensorApi1.getStation_name());
+            });
+            return HttpServletResponse.SC_OK;
         }catch (SensorStationNotFoundException ex){
-            sensorStationLogger.warning("SENSORS COULD NOT BE UPDATED FOR STATION: " + sensorApi.stream().findAny().get().getStation_name());
+            sensorApi.stream().findAny().ifPresent(sensorApi1->{
+                sensorStationLogger.warning("SENSORS COULD NOT BE UPDATED FOR STATION: " + sensorApi1.getStation_name());
+            });
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -78,12 +83,14 @@ public class SensorStationApiController {
     int logFile(@RequestBody List<LogFrame> logFrame) {
         try{
             sensorStationServiceApi.saveLog(logFrame);
-            if(logFrame.stream().findAny().isPresent()){
-                sensorStationLogger.info("LOG ADDED TO WEBAPP DATABASE OF ACCESS POINT: " + logFrame.stream().findAny().get().getAuthor());
-            }
-            return Response.SC_OK;
+            logFrame.stream().findAny().ifPresent(logFrame1->{
+                sensorStationLogger.info("LOG ADDED TO WEBAPP DATABASE OF ACCESS POINT: " + logFrame1.getAuthor());
+            });
+            return HttpServletResponse.SC_OK;
         }catch (SensorStationNotFoundException ex){
-            sensorStationLogger.warning("LOG COULD NOT ADDED TO WEBAPP DATABASE OF ACCESS POINT: " + logFrame.stream().findAny().get().getAuthor());
+            logFrame.stream().findAny().ifPresent(logFrame1->{
+                sensorStationLogger.warning("LOG COULD NOT ADDED TO WEBAPP DATABASE OF ACCESS POINT: " + logFrame1.getAuthor());
+            });
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -93,7 +100,7 @@ public class SensorStationApiController {
         try{
             sensorStationServiceApi.saveNearbyDevices(Long.valueOf(id), devices);
             sensorStationLogger.info("NEARBY DEVICES ARE SEND BY ACCESS POINT: " + id);
-            return Response.SC_OK;
+            return HttpServletResponse.SC_OK;
         }catch (AccessPointNotFoundException ex){
             sensorStationLogger.warning("EARBY DEVICES COULD NOT SEND BY ACCESS POINT: " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

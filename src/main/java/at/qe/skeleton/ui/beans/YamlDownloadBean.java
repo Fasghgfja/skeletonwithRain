@@ -11,7 +11,6 @@ import org.primefaces.model.StreamedContent;
 @RequestScoped
 public class YamlDownloadBean {
     private StreamedContent file;
-
     public YamlDownloadBean() {
         file = DefaultStreamedContent.builder()
                 .name("config.yaml")

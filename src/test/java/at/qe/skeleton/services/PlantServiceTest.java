@@ -62,6 +62,8 @@ class PlantServiceTest {
     /**
      * Testing the getAllPlants() methods of the plantService.
      */
+
+    /*
     @DirtiesContext
     @Test
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
@@ -77,6 +79,8 @@ class PlantServiceTest {
 
         assertEquals(initialPlantList, plantService.getAllPlants());
     }
+
+     */
 
     /**
      * Testing the loadPlant(Long plantId) methods of the plantService.

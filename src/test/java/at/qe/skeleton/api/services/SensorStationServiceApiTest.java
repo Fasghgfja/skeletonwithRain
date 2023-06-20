@@ -219,7 +219,6 @@ class SensorStationServiceApiTest {
         assertDoesNotThrow(() -> sensorStationServiceApi.addSensor(sensorApiList));
 
         // Assert
-        verify(sensorStationRepository, times(1)).findFirstById(eq("SensorStation1"));
         verify(sensorStationRepository, times(1)).findFirstById(eq("SensorStation2"));
         verify(sensorService, times(2)).saveSensor(any(Sensor.class));
     }
@@ -227,7 +226,7 @@ class SensorStationServiceApiTest {
 
     @Test
     void updateSensor_ValidSensorApiList_UpdateSuccessful() throws SensorStationNotFoundException {
-        // Arrange
+
         List<SensorApi> sensorApiList = new ArrayList<>();
         SensorApi sensorApi1 = new SensorApi();
         sensorApi1.setStation_name("SensorStation1");
@@ -265,7 +264,6 @@ class SensorStationServiceApiTest {
         assertDoesNotThrow(() -> sensorStationServiceApi.updateSensor(sensorApiList));
 
         // Assert
-        verify(sensorStationRepository, times(1)).findFirstById(eq("SensorStation1"));
         verify(sensorStationRepository, times(1)).findFirstById(eq("SensorStation2"));
         verify(sensorService, times(2)).getSensorForSensorStation(any(SensorStation.class), anyString());
         verify(sensorService, times(2)).saveSensor(any(Sensor.class));

@@ -1,9 +1,9 @@
 package at.qe.skeleton.services;
 
+import at.qe.skeleton.exceptions.IPCantReadException;
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.AccessPointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -26,10 +26,6 @@ public class AccessPointService {
 
     @Autowired
     private AccessPointRepository accessPointRepository;
-    /*
-    @Autowired
-    private ServletWebServerApplicationContext webServerAppCtxt;
-    */
     /**
      * Method to get all access points currently stored in the database.
      * @return Collection of all access points.
@@ -102,25 +98,27 @@ public class AccessPointService {
 
     /**
      * This method is used to creat a config.yaml for a new accessPoint
-     * @param accessPoint
+     * @param accessPoint is an object
      */
     private void createYaml(AccessPoint accessPoint, boolean isNew) throws IOException {
         if(isNew){
             File file = new File("./Hardware_src/Raspberry/config.yaml");
-            FileWriter writer = new FileWriter(file);
-            file.setWritable(file.setReadable(file.setExecutable(true)));
-            System.out.println();
-            String content = String.format("""
-                    accesspoint-params:
-                      id: %d
-                      validation: False
-                    webapp-params:
-                      ip: %s:%d
-                      pswd: passwd
-                      usnm: admin""", accessPoint.getAccessPointID(), getIP(),8080 );//webServerAppCtxt.getWebServer().getPort()
-            writer.write(content);
-            writer.flush();
-            writer.close();
+            try (FileWriter writer = new FileWriter(file)) {
+
+
+                String content = String.format("""
+                        accesspoint-params:
+                          id: %d
+                          validation: False
+                        webapp-params:
+                          ip: %s:%d
+                          pswd: passwd
+                          usnm: admin""", accessPoint.getAccessPointID(), getIP(), 8080);//webServerAppCtxt.getWebServer().getPort()
+                writer.write(content);
+                writer.flush();
+            } catch (IOException | IPCantReadException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -128,16 +126,16 @@ public class AccessPointService {
      * This method is used to get the current ip address
      * @return
      */
-    private String getIP(){
+    private String getIP() throws IPCantReadException {
         try (final DatagramSocket datagramSocket = new DatagramSocket()) {
             datagramSocket.connect(InetAddress.getByName("8.8.8.8"), 12345);
             return datagramSocket.getLocalAddress().getHostAddress();
         } catch (UnknownHostException | SocketException e) {
-            throw new RuntimeException(e);
+            throw new IPCantReadException(e.getMessage());
         }
     }
     /**
-     * Deletes an access point and creates a delete log.
+     * Deletes an access point and creates a deleted log.
      * @param accessPoint
      */
     @PreAuthorize("hasAuthority('ADMIN')")

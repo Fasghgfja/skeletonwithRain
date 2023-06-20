@@ -15,10 +15,7 @@ import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
 import at.qe.skeleton.api.model.*;
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.*;
-import at.qe.skeleton.services.AccessPointService;
-import at.qe.skeleton.services.IntervalService;
-import at.qe.skeleton.services.LogService;
-import at.qe.skeleton.services.SensorService;
+import at.qe.skeleton.services.*;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +26,7 @@ import org.springframework.stereotype.Service;
  * ALL METHODS THAT RETURN MEASUREMENTS WILL DO SO ORDERED BY DATE ; MOST RECENT FIRST
  * Provides methods for loading, saving and removing Measurements
  * and adds methods to find measurements by measurementId  {@link MeasurementRepository#findFirstById(Long)} and
- * By Plant {@link MeasurementRepository#findMeasurementsByPlantOrderByTimestampDesc(Plant)} .
- * among with a additional wide selection of methods to find measurements using different parameters:
+ * among with an additional wide selection of methods to find measurements using different parameters:
  * The Derived Query are split into parts separated by keywords:
  * The first one is the introducer(e.g find.., read.., query.., ...)
  * The second one defines the criteria (e.g ...ByName, ...).
@@ -40,6 +36,8 @@ public class SensorStationServiceApi {
 
     @Autowired
     SensorStationRepository sensorStationRepository;
+    @Autowired
+    SensorStationService sensorStationService;
     @Autowired
     SensorService sensorService;
     @Autowired
@@ -203,7 +201,24 @@ public class SensorStationServiceApi {
 
         for (SensorDevice sd:
              devices) {
-            System.out.println(sd);
+            SensorStation sensorStation = sensorStationService.loadSensorStation(sd.getMac());
+            if(sensorStation == null){
+                sensorStation = new SensorStation();
+                sensorStation.setSensorStationID(sd.getMac());
+                sensorStation.setAccessPoint(
+                        accessPointService.loadAccessPoint(id)
+                );
+                sensorStationService.saveSensorStation(sensorStation);
+                System.out.println(sd);
+                System.out.println(sensorStation.getId());
+            }
+            else if(sensorStation.getAccessPoint() == null){
+                sensorStation.setAccessPoint(
+                        accessPointService.loadAccessPoint(id)
+                );
+                sensorStationService.saveSensorStation(sensorStation);
+            }
+
         }
     }
     /**
