@@ -19,44 +19,7 @@
 
     <ui:define name ="content">
 
-        <!-- ...................................PLANT CREATE dialog.................................... -->
-        <h:form id="plantCreateDialog">
 
-
-            <p:dialog header="Create New Plant" id="createPlantDialog" widgetVar="createPlantDialog" modal="true"
-                      showEffect="fade" hideEffect="fade" resizable="false">
-                <p:ajax event="close" update="createPlantDialog"/>
-
-                <p:outputPanel id="createPlant">
-                    <h:panelGrid columns="2">
-
-
-                        <p:outputLabel for="plantNameCreation" value="Plant Name:"/>
-                        <p:inputText id="plantNameCreation"
-                                     placeholder="Required field" value="#{createPlantBean.plantName}" required="true"/>
-
-
-                        <p:outputLabel for="plantDescrptiom" value="Description:"/>
-                        <p:inputText id="plantDescrptiom"
-                                     placeholder="description" value="#{createPlantBean.description}" required="false"/>
-
-
-                        <p:commandButton value="Create"
-                                         action="#{createPlantBean.doCreateNewPlant()}"
-                                         update=":userForm:sensorStationTable"
-                                         oncomplete="PF('createPlantDialog').hide()"/>
-                        <p:commandButton value="Cancel" onclick="PF('createPlantDialog').hide()"/>
-
-
-
-
-
-
-                    </h:panelGrid>
-
-                </p:outputPanel>
-            </p:dialog>
-        </h:form>
 
 
         <!-- .........................................TABLE.............................................................. -->
@@ -66,10 +29,10 @@
 
                 <div class="card">
                     <div style="display: flex; gap: 10px;">
-                        <h5>Assigned Greenhouses</h5>
+                        <h3>Assigned Greenhouses</h3>
                         <!-- ....................Help button...........................BUTTON................................. -->
 
-                        <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
+                        <p:commandButton style="margin-bottom: 10px" type="button" icon="fa fa-duotone fa-seedling" title="Help"
                                          styleClass="ui-button-secondary outlined-button"
                                          onclick="PF('helpDialog').show()"/>
                     </div>
@@ -154,7 +117,7 @@
                             <!-- .................... INTERVALS BUTTON ........... .............. -->
                             <p:commandButton style="margin-right: 2px; background-color: orange" update=":userForm:intervalEditDialog"
                                              oncomplete="PF('intervalEditDialog').show()" icon="fa fa-solid fa-sliders" title="Intervals">
-                                <f:setPropertyActionListener value="#{sensorStation.accessPoint.id}" target="#{SSIntervalController.accessPointId}"/>
+                                <f:setPropertyActionListener value="#{sensorStation.accessPoint.id}" target="#{SSIntervalController.ssId}"/>
                             </p:commandButton>
 
 
@@ -209,8 +172,49 @@
 
             <!-- .......................................DIALOGS...................................................................... -->
 
+
+            <!-- ...................................PLANT CREATE dialog.................................... -->
+            <!--
+            <h:form id="plantCreateDialog">
+
+
+                <p:dialog header="Create New Plant" id="createPlantDialog" widgetVar="createPlantDialog" modal="true"
+                          showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:ajax event="close" update="createPlantDialog"/>
+
+                    <p:outputPanel id="createPlant">
+                        <h:panelGrid columns="2">
+
+
+                            <p:outputLabel for="plantNameCreation" value="Plant Name:"/>
+                            <p:inputText id="plantNameCreation"
+                                         placeholder="Required field" value="#{createPlantBean.plantName}" required="true"/>
+
+
+                            <p:outputLabel for="plantDescrptiom" value="Description:"/>
+                            <p:inputText id="plantDescrptiom"
+                                         placeholder="description" value="#{createPlantBean.description}" required="false"/>
+
+
+                            <p:commandButton value="Create"
+                                             action="#{createPlantBean.doCreateNewPlant()}"
+                                             update=":userForm:sensorStationTable"
+                                             oncomplete="PF('createPlantDialog').hide()"/>
+                            <p:commandButton value="Cancel" onclick="PF('createPlantDialog').hide()"/>
+
+
+
+
+
+
+                        </h:panelGrid>
+
+                    </p:outputPanel>
+                </p:dialog>
+            </h:form>
+            -->
             <!-- ...................................Interval Edit dialog.................................... -->
-            <p:dialog header="Edit Access Point Intervals" id="intervalEditDialog" widgetVar="intervalEditDialog" modal="true"
+            <p:dialog header="Edit Greenhouse's Intervals" id="intervalEditDialog" widgetVar="intervalEditDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="intervalData">
                     <h:panelGrid columns="1">
@@ -236,12 +240,12 @@
 
 
             <!-- ...................................Sensor station Edit dialog.................................... -->
-            <p:dialog header="Edit Sensor Station" id="userEditDialog" widgetVar="userEditDialog" modal="true"
+            <p:dialog header="Edit Greenhouse" id="userEditDialog" widgetVar="userEditDialog" modal="true"
                       showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="userData" rendered="#{not empty sensorStationDetailController.sensorStation}">
                     <h:panelGrid columns="1">
 
-                        <p:outputLabel for="sensorStationId" value="Sensor-station name:"/>
+                        <p:outputLabel for="sensorStationId" value="Greenhouse name:"/>
                         <p:inputText id="sensorStationId" value="#{sensorStationDetailController.sensorStation.sensorStationName}" disabled="true" />
 
                         <p:outputLabel for="sensorStationAccessPoint" value="Access Point:"/>
@@ -255,7 +259,7 @@
                         </p:selectOneMenu>
 
 
-                        <p:outputLabel for="sensorStationlocation" value="Sensor-station location:"/>
+                        <p:outputLabel for="sensorStationlocation" value="Greenhouse location:"/>
                         <p:inputText id="sensorStationlocation" rendered="#{not empty sensorStationDetailController.sensorStation}" value="#{sensorStationDetailController.sensorStation.location}"/>
 
 
@@ -287,18 +291,15 @@
                   showEffect="fade" hideEffect="fade" resizable="false">
             <p:outputPanel id="assignedGreenhousePageHelp">
 
-                <h6>Deleting all measurements in a certain interval:</h6>
-                By clicking on the "Delete all Measurements from to" button, it's possible to
-                <h6>:</h6>
 
                 <h6>Generating QR code:</h6>
                 By clicking on the "Generate QR-Code" button,  you will get redirected to the QR-code page of the selected plant. Note: the buton will be clickable only when the assigned greenhouse has a plant in it.
                 <h6>Opening detail view:</h6>
                 By clicking on the "open Detail-View" button, you will get redirected to the detail view page of the selected greenhouse.
-
-
-
-                -----------------------------------------------
+                <h6>Editing greenhouse:</h6>
+                By clicking on the "Edit" button, it's possible to edit the location of the selcted greenhouse.
+                <h6>Setting greenhouse's intervals:</h6>
+                By clicking on the "Intervals" button, it's possible to set the intervals of the selected greenhouse. "Interval Webapp" is the time interval where new measurements are going to be sent, between access point and webapp. "Interval Measurements" is the time interval where new measurements are going to be sent, between greenhouse and access point.
 
             </p:outputPanel>
         </p:dialog>
