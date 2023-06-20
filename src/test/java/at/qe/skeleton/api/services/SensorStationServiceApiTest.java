@@ -5,9 +5,7 @@ import at.qe.skeleton.api.exceptions.SensorNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
 import at.qe.skeleton.api.model.LogFrame;
 import at.qe.skeleton.api.model.SensorApi;
-import at.qe.skeleton.api.model.SensorDevice;
 import at.qe.skeleton.api.model.SensorStationApi;
-import at.qe.skeleton.api.model.SensorStationDataFrame;
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.SensorRepository;
 import at.qe.skeleton.repositories.SensorStationRepository;
@@ -21,10 +19,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
