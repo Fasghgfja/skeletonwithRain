@@ -452,7 +452,7 @@
                                                      rendered="#{not empty sensorStationDetailController.sensorStation}"
                                                      value="#{sensorStationDetailController.selectedPlantName}"/>
                                         <!-- ................ ............................................-->
-                                        <p:outputLabel for="sensorStationlocation" value="Location:"/>
+                                        <p:outputLabel for="sensorStationlocation" value="New Location:"/>
                                         <p:inputText id="sensorStationlocation"
                                                      rendered="#{not empty sensorStationDetailController.sensorStation}"
                                                      value="#{sensorStationDetailController.sensorStation.location}"/>
@@ -514,7 +514,7 @@
                                 </p:outputPanel>
 
                                 <!-- ...................................Interval Edit dialog.................................... -->
-                                <p:dialog header="Edit Access Point Intervals" id="intervalEditDialog" widgetVar="intervalEditDialog" modal="true"
+                                <p:dialog header="Edit Sensor Station Intervals" id="intervalEditDialog" widgetVar="intervalEditDialog" modal="true"
                                           showEffect="fade" hideEffect="fade" resizable="false">
                                     <p:outputPanel id="intervalData">
                                         <h:panelGrid columns="1">
@@ -749,15 +749,17 @@
                 <h6>Detail view:</h6>
                 By clicking on the "open Detail-View" button, you will get redirected to the detail view page of the selected sensor station.
                 <h6>:</h6>
-                .
 
 
-                <h6>:</h6>
-                --------------------------------------------------------------------------------------------------------------.
+
+                <h6>Adding a new plant to the sensor station:</h6>
+                By clicking on the "Change Plant" button, it's possible to change the plant inside the sensor station. The plant is newly created, using the name inserted in the "New Plant name" field. If the sensor station had already a plant, this will be detached from it, but not deleted (to delete a plant, see manage plants page).
+                <h6>Changing location:</h6>
+                By clicking on the "Save Changes" button, it's possible to set a new location for the sensor station. The new location is taken from the inserted "New Location" field.
+                <h6>Set sensor station's intervals:</h6>
+                By clicking on the "Intervals" button, it's possible to set the intervals of the selected sensor station. "Interval Webapp" is the time interval where new measurements are going to be sent, between access point and webapp. "Interval Measurements" is the time interval where new measurements are going to be sent, between sensor station and access point.
 
 
-                From this panel you can edit settings for this Sensor Station.<br></br>
-                The first 5 fields are intended to show you the actual settings.
                 <h6>About Changing Plant:</h6>
                 To change the plant you have to put a new Plant Name in the according imput field and click the button Change Plant.<br></br>
                 The page will be reloaded and updated accordingly , This action is not reversible as it will detach the old plant from this sensor station.<br></br>
