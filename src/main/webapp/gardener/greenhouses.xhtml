@@ -61,10 +61,18 @@
 
         <!-- .........................................TABLE.............................................................. -->
         <h:form id="userForm">
+
             <div class="col-12">
 
                 <div class="card">
-                    <h5>Assigned Greenhouses</h5>
+                    <div style="display: flex; gap: 10px;">
+                        <h5>Assigned Greenhouses</h5>
+                        <!-- ....................Help button...........................BUTTON................................. -->
+
+                        <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
+                                         styleClass="ui-button-secondary outlined-button"
+                                         onclick="PF('helpDialog').show()"/>
+                    </div>
                     <p:dataTable id="sensorStationTable" var="sensorStation" value="#{sensorStationListController.assignedSensorStationList}"
                                   scrollHeight="550"
                                  paginatorPosition="bottom" rowKey="#{sensorStation.id}">
@@ -198,6 +206,7 @@
 
 
 
+
             <!-- .......................................DIALOGS...................................................................... -->
 
             <!-- ...................................Interval Edit dialog.................................... -->
@@ -251,8 +260,8 @@
 
 
 
-                        <p:outputLabel for="sensorStationswitchEdit1" value="Alarm Switch to Fixed(if not):" />
-                        <p:toggleSwitch id ="sensorStationswitchEdit1" rendered="#{sensorStationDetailController.sensorStation.alarmSwitch.equals('fixed') == false}" value="#{sensorStationDetailController.sensorStation.alarmSwitch}"/>
+                        <p:outputLabel for="sensorStationswitchEdit1" value="Alarm Switch to Fixed(if not):" rendered="#{sensorStationDetailController.sensorStation.alarmSwitch.equals('fixed') == false}" />
+                        <p:toggleSwitch id ="sensorStationswitchEdit1"  value="#{sensorStationDetailController.sensorStation.alarmSwitch}" rendered="#{sensorStationDetailController.sensorStation.alarmSwitch.equals('fixed') == false}"/>
 
                     </h:panelGrid>
                     <h:panelGrid columns="3">
@@ -271,6 +280,28 @@
             </p:confirmDialog>
 
         </h:form>
+
+        <!-- .................................. Help dialog............................................................................... -->
+        <p:dialog header="Assigned Greenhouse Help" id="helpDialog" widgetVar="helpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+            <p:outputPanel id="assignedGreenhousePageHelp">
+
+                <h6>Deleting all measurements in a certain interval:</h6>
+                By clicking on the "Delete all Measurements from to" button, it's possible to
+                <h6>:</h6>
+
+                <h6>Generating QR code:</h6>
+                By clicking on the "Generate QR-Code" button,  you will get redirected to the QR-code page of the selected plant. Note: the buton will be clickable only when the assigned greenhouse has a plant in it.
+                <h6>Opening detail view:</h6>
+                By clicking on the "open Detail-View" button, you will get redirected to the detail view page of the selected greenhouse.
+
+
+
+                -----------------------------------------------
+
+            </p:outputPanel>
+        </p:dialog>
 
 
 

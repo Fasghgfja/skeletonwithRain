@@ -5,13 +5,6 @@
 
     <ui:define name="title">Planthealth: Measurement Management</ui:define>
 
-    <ui:define name="viewname">
-        <li>Measurement Management</li>
-        <li><i class="pi pi-chevron-right"></i></li>
-        <li>
-        </li>
-    </ui:define>
-
     <ui:define name="head">
         <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.min.css"/>
 
@@ -52,13 +45,13 @@
 
 
                             <!-- ....................Delete all Measurement for a given time....BUTTON............................ -->
-                            <p:commandButton style="margin-left:5px; background-color: black; margin-right: 10px" value="Delete all Measurements from to" rendered="#{sessionInfoBean.hasRole('ADMIN')}"  oncomplete="PF('deleteFromToDialog').show()"
-                                             icon="fa-solid fa-trash-can" title="Delete measurements" class="btn btn-primary" update=":deleteFromToForm:DeleteMeasurements" >
+                            <p:commandButton style="margin-left:5px; background-color: red; margin-right: 10px" value="Delete all Measurements from to" rendered="#{sessionInfoBean.hasRole('ADMIN')}"  oncomplete="PF('deleteFromToDialog').show()"
+                                             icon="fa-solid fa-calendar-xmark" title="Delete measurements" class="btn btn-primary" update=":deleteFromToForm:DeleteMeasurements" >
                             </p:commandButton>
 
                             <!-- ....................Delete all Measurement for a given sensor station..........BUTTON............ -->
                             <p:commandButton style="margin-left:5px; background-color: red; margin-right: 10px" value="Delete for Sensor Station" rendered="#{sessionInfoBean.hasRole('ADMIN')}"  oncomplete="PF('deleteForSensorStationDialog').show()"
-                                             icon="fa-solid fa-calendar-xmark" title="Delete measurements" class="btn btn-primary" update=":deleteForSensorStationForm:DeleteForSensorStationDialog" >
+                                             icon="fa-solid fa-trash-can" title="Delete measurements" class="btn btn-primary" update=":deleteForSensorStationForm:DeleteForSensorStationDialog" >
                             </p:commandButton>
 
                             <!-- ....................Help button...........................BUTTON................................. -->

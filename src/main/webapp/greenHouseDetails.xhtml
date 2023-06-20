@@ -744,35 +744,16 @@
                   showEffect="fade" hideEffect="fade" resizable="false">
 
             <p:outputPanel id="EdithelpDialog">
-                <h6>Creating a new user:</h6>
-                By clicking on the "Create new user" button, it's possible to create a new user. "Username" and "Password" are mandatory fields, while all the others are optional. Here it is also possible to set user roles like GARDENER or ADMIN.
-                <h6>Detail view:</h6>
-                By clicking on the "open Detail-View" button, you will get redirected to the detail view page of the selected sensor station.
-                <h6>:</h6>
-
-
-
                 <h6>Adding a new plant to the sensor station:</h6>
                 By clicking on the "Change Plant" button, it's possible to change the plant inside the sensor station. The plant is newly created, using the name inserted in the "New Plant name" field. If the sensor station had already a plant, this will be detached from it, but not deleted (to delete a plant, see manage plants page).
                 <h6>Changing location:</h6>
                 By clicking on the "Save Changes" button, it's possible to set a new location for the sensor station. The new location is taken from the inserted "New Location" field.
                 <h6>Set sensor station's intervals:</h6>
                 By clicking on the "Intervals" button, it's possible to set the intervals of the selected sensor station. "Interval Webapp" is the time interval where new measurements are going to be sent, between access point and webapp. "Interval Measurements" is the time interval where new measurements are going to be sent, between sensor station and access point.
-
-
-                <h6>About Changing Plant:</h6>
-                To change the plant you have to put a new Plant Name in the according imput field and click the button Change Plant.<br></br>
-                The page will be reloaded and updated accordingly , This action is not reversible as it will detach the old plant from this sensor station.<br></br>
-                The plant page for the old plant will continue to be visible to users until it is deleted from a administrator from Plant Menegement.<br></br>
-                Setting new border values will also change the values for the alarmcount.
-                <h6>About Saving Changes:</h6>
-                Save Changes will save changes to Location and Access Point and will make no changes regarding the displayed Plant
-                <br></br>
-                <h6>About Changing Access Point:</h6>
-                From the pairing button it is possible to pair with a new Access Point or remove the current pairing, The pairing process will<br></br>
-                search for the access point for 5 minutes unless interrupted.
-                <h6>About The Switch:</h6>
-                Once the alram switch is on a toggle will appear to deactivate it when the issue is fixed.
+                <h6>Pairing:</h6>
+                By clicking on the "Pairing" button, it's possible to pair with a new access point or remove the current pairing, The pairing process will search for the access point for 5 minutes unless interrupted.
+                <h6>Switching alarm to fixed:</h6>
+                By clicking on the "Alarm Switch to Fixed(if not)" button, it's possible to switch off the alarm. This button will be visible only if the alarm was triggered.
             </p:outputPanel>
         </p:dialog>
 
