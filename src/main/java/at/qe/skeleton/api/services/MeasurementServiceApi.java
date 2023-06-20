@@ -30,19 +30,19 @@ public class MeasurementServiceApi {
     @Autowired
     SensorStationService sensorStationService;
 
-    private static final AtomicLong ID_COUNTER = new AtomicLong(1); //TODO: what is this? do we need it? ..SH
-
-
+    private static final AtomicLong ID_COUNTER = new AtomicLong(1);
 
     //TODO: what is this ? why does it search from this hashmap and not the repository?
     private static final ConcurrentHashMap<Long, Measurement> measurements = new ConcurrentHashMap<>();
     public Measurement findOneMeasurement(Long id) throws MeasurementNotFoundException {
-        Measurement measurement = measurements.get(id);
-        if (measurement != null)
-            return measurement;
-        else
+        Optional<Measurement> measurementOptional = measurementRepository.findById(id);
+        if (measurementOptional.isPresent()) {
+            return measurementOptional.get();
+        } else {
             throw new MeasurementNotFoundException();
+        }
     }
+
 
 
     /**
@@ -67,7 +67,7 @@ public class MeasurementServiceApi {
 
     }
 
-    private String getUnit(String type){
+    public String getUnit(String type){
         if(type.equals(MeasurementType.AIR_PRESSURE.getValue())){
             return "hpa";
         }
