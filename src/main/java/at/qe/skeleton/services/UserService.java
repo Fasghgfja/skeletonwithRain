@@ -39,7 +39,6 @@ public class UserService {
     /**
      * Returns a collection of all users.
      */
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('GARDENER')")
     public Collection<Userx> getAllUsers() {
         return userRepository.findAll();
     }
