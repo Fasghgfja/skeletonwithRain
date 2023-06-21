@@ -18,6 +18,10 @@ Plants may also have a gardener assigned that takes care of them. This gardener 
 
 For more details, check the [wiki](https://git.uibk.ac.at/informatik/qe/swess23/group4/g4t2/-/wikis/home) page.
 
+## How to start
+
+For details on how to setup the hardware and the webapp, click [here](https://git.uibk.ac.at/informatik/qe/swess23/group4/g4t2/-/wikis/software-concept#functionalities).
+
 ### Used Technologies
 - Java 17
 - Prime Faces
