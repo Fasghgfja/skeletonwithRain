@@ -16,7 +16,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-public class Measurement implements Serializable {
+public class Measurement  implements Serializable, Comparable<Measurement> {
 
     @Id
     @GeneratedValue
@@ -37,6 +37,11 @@ public class Measurement implements Serializable {
     public String getReadableTimestamp() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return timestamp.format(formatter);
+    }
+
+    public String getFormattedValue() {
+        return String.format("%.1f",Double.parseDouble(this.value_s));
+
     }
 
     @Override
@@ -64,5 +69,12 @@ public class Measurement implements Serializable {
             return false;
         }
         return Objects.equals(this.id, other.getId());
+    }
+
+    @Override
+    public int compareTo(Measurement measurement) {
+        Double comp1 = Double.parseDouble(measurement.value_s);
+        Double comp2 = Double.parseDouble(this.value_s);
+        return comp1.compareTo(comp2);
     }
 }
