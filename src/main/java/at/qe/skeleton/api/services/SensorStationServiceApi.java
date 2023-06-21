@@ -124,10 +124,11 @@ public class SensorStationServiceApi {
      */
     public void addSensor(List<SensorApi> sensorApi) throws SensorNotFoundException {
         try {
+
             if (sensorApi.stream().findAny().isPresent() && !sensorService.areSensorsPresent(
                     sensorStationRepository.findFirstById(
-                            sensorApi.stream().findFirst().get().getStation_name()))) {
-                
+                            sensorApi.stream().findFirst().get().getStation_name())) && !sensorApi.isEmpty()) {
+
                 for (SensorApi s :
                         sensorApi) {
                     Sensor sensor = new Sensor();
