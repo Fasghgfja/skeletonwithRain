@@ -8,15 +8,11 @@ import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.services.SensorService;
 import at.qe.skeleton.services.SensorStationService;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.DefaultScheduleEvent;
-import org.primefaces.model.ScheduleEvent;
 
-import org.primefaces.model.ScheduleModel;
 
 
 import org.primefaces.model.chart.Axis;
