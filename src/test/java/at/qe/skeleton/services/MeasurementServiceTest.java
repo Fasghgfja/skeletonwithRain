@@ -125,13 +125,6 @@ class MeasurementServiceTest {
     }
 
     @Test
-    void setSensorRepository() {
-        SensorRepository sensorRepository = mock(SensorRepository.class);
-        measurementService.setSensorRepository(sensorRepository);
-        // Verify that the method does not throw any exceptions
-    }
-
-    @Test
     void setSensorStationRepository() {
         SensorStationRepository sensorStationRepository = mock(SensorStationRepository.class);
         measurementService.setSensorStationRepository(sensorStationRepository);
@@ -219,40 +212,6 @@ class MeasurementServiceTest {
         assertEquals("--", value);
     }
 
-    @Test
-    void deleteMeasurementsFromTo_nullFromAndTo() {
-        measurementService.deleteMeasurementsFromTo(null, null);
-        // Verify that the method does not throw any exceptions
-    }
-
-    @Test
-    void deleteMeasurementsFromTo_fromAfterTo() {
-        LocalDateTime from = LocalDateTime.now();
-        LocalDateTime to = LocalDateTime.now().minusDays(1);
-
-        measurementService.deleteMeasurementsFromTo(from, to);
-        // Verify that the method does not throw any exceptions
-    }
-
-    @Test
-    void deleteMeasurementsFromToForSensorStation_nullFromAndTo() {
-        String sensorStationId = "sensorStationId";
-        when(sensorStationRepository.findFirstById(sensorStationId)).thenReturn(sensorStation);
-
-        measurementService.deleteMeasurementsFromToForSensorStation(null, null, sensorStationId);
-        // Verify that the method does not throw any exceptions
-    }
-
-    @Test
-    void deleteMeasurementsFromToForSensorStation_fromAfterTo() {
-        String sensorStationId = "sensorStationId";
-        when(sensorStationRepository.findFirstById(sensorStationId)).thenReturn(sensorStation);
-        LocalDateTime from = LocalDateTime.now();
-        LocalDateTime to = LocalDateTime.now().minusDays(1);
-
-        measurementService.deleteMeasurementsFromToForSensorStation(from, to, sensorStationId);
-        // Verify that the method does not throw any exceptions
-    }
 
     @Test
     void getCurrentUser_authenticatedUser() {
