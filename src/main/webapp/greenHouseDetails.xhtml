@@ -384,9 +384,9 @@
                                 <h:outputText value="#{measurement.readableTimestamp}"/>
                             </p:column>
                             <p:column headerText="Status">
-                                <i class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"
+                                <em class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"
                                    style="display: flex; justify-content: center; align-items: center; color:#{sensorStationDetailController.getMeasurementStatus(measurement.value_s,measurement.type) == 'OK' ? 'green' : 'red'}"
-                                   title="#{measurement.type}"></i>
+                                   title="#{measurement.type}"></em>
                             </p:column>
                             <p:column headerText="Type" sortBy="#{measurement.type}">
                                 <h:outputText value="#{measurement.type}"/>

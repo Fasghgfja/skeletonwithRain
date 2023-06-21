@@ -115,24 +115,24 @@
 
 
                         <p:column style="width: 8%" headerText="Alarm Status">
-                            <i class="#{measurementListController.getMeasurementTypeIcon('AIR_PRESSURE')}"
+                            <em class="#{measurementListController.getMeasurementTypeIcon('AIR_PRESSURE')}"
                                style="color:#{measurementListController.getSensorStatus('AIR_PRESSURE',sensorStation) == 'OK' ? 'green' : 'red'}"
-                               title="Air Pressure"></i>
-                            <i class="#{measurementListController.getMeasurementTypeIcon('TEMPERATURE')}"
+                               title="Air Pressure"></em>
+                            <em class="#{measurementListController.getMeasurementTypeIcon('TEMPERATURE')}"
                                style="color:#{measurementListController.getSensorStatus('TEMPERATURE',sensorStation) == 'OK' ? 'green' : 'red'}"
-                               title="Temperature"></i>
-                            <i class="#{measurementListController.getMeasurementTypeIcon('SOIL_MOISTURE')}"
+                               title="Temperature"></em>
+                            <em class="#{measurementListController.getMeasurementTypeIcon('SOIL_MOISTURE')}"
                                style="color:#{measurementListController.getSensorStatus('SOIL_MOISTURE',sensorStation) == 'OK' ? 'green' : 'red'}"
-                               title="Soil Moisture"></i>
-                            <i class="#{measurementListController.getMeasurementTypeIcon('AIR_QUALITY')}"
+                               title="Soil Moisture"></em>
+                            <em class="#{measurementListController.getMeasurementTypeIcon('AIR_QUALITY')}"
                                style="color:#{measurementListController.getSensorStatus('AIR_QUALITY',sensorStation) == 'OK' ? 'green' : 'red'}"
-                               title="Air Quality"></i>
-                            <i class="#{measurementListController.getMeasurementTypeIcon('LIGHT_INTENSITY')}"
+                               title="Air Quality"></em>
+                            <em class="#{measurementListController.getMeasurementTypeIcon('LIGHT_INTENSITY')}"
                                style="color:#{measurementListController.getSensorStatus('LIGHT_INTENSITY',sensorStation) == 'OK' ? 'green' : 'red'}"
-                               title="Light Intensity"></i>
-                            <i class="#{measurementListController.getMeasurementTypeIcon('HUMIDITY')}"
+                               title="Light Intensity"></em>
+                            <em class="#{measurementListController.getMeasurementTypeIcon('HUMIDITY')}"
                                style="color:#{measurementListController.getSensorStatus('HUMIDITY',sensorStation) == 'OK' ? 'green' : 'red'}"
-                               title="Humidity"></i>
+                               title="Humidity"></em>
                         </p:column>
 
                         <p:column style="width: 6%; text-align: left " headerText="Location" sortBy="#{sensorStation.location}" filterBy="#{sensorStation.location}">
@@ -209,9 +209,9 @@
 
                                     <p:column headerText="Sensor Alarm Status">
                                         <h:form rendered="#{not empty measurement.id}">
-                                        <i class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"
+                                        <em class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"
                                            style="display: flex; justify-content: center; align-items: center; color:#{measurementListController.getSensorStatus(measurement.type,sensorStation) == 'OK' ? 'green' : 'red'}"
-                                           title="#{measurement.type}"></i>
+                                           title="#{measurement.type}"></em>
                                         </h:form>
                                     </p:column>
 

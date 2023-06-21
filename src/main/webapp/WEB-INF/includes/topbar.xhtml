@@ -43,7 +43,7 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
 
                             <p:inputText placeholder="Search Plant" value="#{searchBean.plantNameToSearchFor}" />
 
-                            <i  class="pi pi-search"></i>
+                            <em  class="pi pi-search"></em>
 
                         </h:panelGroup>
 
@@ -56,7 +56,7 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
 
                 <li class="topbar-item notifications">
                     <a href="#">
-                        <i class="topbar-icon pi pi-bell"></i>
+                        <em class="topbar-icon pi pi-bell"></em>
                     </a>
                     <ul>
                         <li class="layout-submenu-header">
@@ -65,7 +65,7 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
                         <li>
                             <a tabindex="0">
                                 <h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('GARDENER') }">
-                                <i class="pi pi-image"></i>
+                                <em class="pi pi-image"></em>
                                 <div class="notification-item">
                                     <div class="notification-summary">Pics Awaiting Approval</div>
                                     <div class="notification-detail">You have <strong>#{notificationsController.picturesAwaitingApprovalCount}</strong> pics awaiting approval.</div>
@@ -76,7 +76,7 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
                         <li>
                             <a tabindex="0">
                                 <h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('GARDENER') }"> <!-- .//TODO:check if this makes problem when a user is logged in -->
-                                    <i class="fa fa-regular fa-bell"></i>
+                                    <em class="fa fa-regular fa-bell"></em>
                                 <div class="notification-item" >
                                     <div class="notification-summary">Assigned SS Alarms</div>
                                     <div class="notification-detail"> #{notificationsController.assignedSensorStationsAlarms} Alarms On.</div>
@@ -115,13 +115,13 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
                         <ul >
                             <li onclick="location.href='/editProfile.xhtml'" >
                                 <a href="#">
-                                    <i class="pi pi-user"></i>
+                                    <em class="pi pi-user"></em>
                                     <span>Profile Settings</span>
                                 </a>
                             </li>
                             <li onclick="location.href='/logout'" >
                                 <a href="#">
-                                    <i class="topbar-icon pi pi-power-off"></i>
+                                    <em class="topbar-icon pi pi-power-off"></em>
                                     <span>Log out</span>
                                 </a>
                             </li>
