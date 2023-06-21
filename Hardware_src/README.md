@@ -101,7 +101,7 @@ Use the following command to upload the application onto the raspberry device. I
 If this is uploaded correct you will be asked to enter your raspberry password again to enter onto your raspberry.
 If you are on your raspberry use the following command to start the access point application.
 ```shell
-    bash Raspberry/start_access_point.sh&
+    bash Raspberry/start_access_point.sh >/dev/null 2>&1 &
 ```
 After SUCCESS startup you should see a log entry of the given access point at webapp.
 #### Note 
@@ -114,7 +114,7 @@ After SUCCESS startup you should see a log entry of the given access point at we
 ```
 2) add the following line on the bottom of the file:
 ```shell
-   @reboot bash /home/pi/Raspberry/start_access_point.sh >/dev/null 2>&1
+   @reboot bash /home/pi/Raspberry/start_access_point.sh >/dev/null 2>&1 
 ```
 
 ### Class overview
