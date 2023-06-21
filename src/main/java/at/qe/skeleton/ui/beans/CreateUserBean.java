@@ -7,6 +7,7 @@ import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.UserxRepository;
+import at.qe.skeleton.services.AccessPointService;
 import at.qe.skeleton.services.UserService;
 import at.qe.skeleton.ui.controllers.UserListController;
 import jakarta.faces.application.FacesMessage;
@@ -15,6 +16,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -59,6 +61,8 @@ public class CreateUserBean implements Serializable {
 
     @Autowired
     private transient UserListController userListController;
+
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CreateUserBean.class);
 
     private String username;
     private String firstName;
@@ -107,7 +111,7 @@ public class CreateUserBean implements Serializable {
                 warningOrErrorLogger.warning("USERNAME TAKEN: " + user.getUsername());
                 warningOrErrorFileHandler.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("error", e);
             }
             Log creationFailLog = new Log();
             creationFailLog.setDate(LocalDate.now());
@@ -129,7 +133,7 @@ public class CreateUserBean implements Serializable {
                 successLogger.info(CREATE + user.getUsername());
                 successFileHandler.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("error", e);
             }
             Log createLog = new Log();
             createLog.setDate(LocalDate.now());
@@ -169,7 +173,7 @@ public class CreateUserBean implements Serializable {
                 warningOrErrorLogger.warning("USERNAME TAKEN:" + user.getUsername());
                 warningOrErrorFileHandler.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("error", e);
             }
             Log creationFailLog = new Log();
             creationFailLog.setDate(LocalDate.now());
@@ -192,7 +196,7 @@ public class CreateUserBean implements Serializable {
                 successLogger.info(CREATE + user.getUsername());
                 successFileHandler.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("error", e);
             }
             Log createLog = new Log();
             createLog.setDate(LocalDate.now());
