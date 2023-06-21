@@ -8,10 +8,13 @@ import asyncio
 SECTION_SLEEP = 15
 program_state = 0
 if __name__ == '__main__':
+
     exception_logging.log_success("Application startup")
     file1 = open("application_properties.txt", "w")
-    rest_api.send_log_data_to_webapp(True, "Access point startup")
-
+    try:
+        rest_api.send_log_data_to_webapp(True, "Access point startup")
+    except Exception as e:
+        exception_logging.logException(e, "Write startup info to webapp")
     print("{0} --- Application startup".format(datetime.now().strftime("%D %H:%M:%S")))
     print("                      Implement database this will need 15 seconds")
     DB_connection.implement_database()
@@ -24,14 +27,10 @@ if __name__ == '__main__':
     run = True
     # list that contains all start timer for measurement of the sensor stations
     start_measurement_interval_time_list = interval_service.get_all_start_times()
-    # list that contains all measurement intervals
-    #delta_measurement_list =[]
     # list that contains all station they need to measure values
     measurement_station_list = []
     # list that contains all start timer for webapp interval of the sensor stations
     start_webapp_interval_time_list = interval_service.get_all_start_times()
-    # list that contains all webapp intervals
-    #delta_webapp_list = []
     # list that contains all stations they need to send their values to the webapp
     webapp_station_list = []
     # send logs timer
@@ -127,8 +126,8 @@ if __name__ == '__main__':
 
                     else:
                         time.sleep(5)
-                        # program_state = program_status.Is.READ_SENSOR_VALUES.value
-                        program_state = -1
+                        program_state = program_status.Is.READ_SENSOR_VALUES.value
+                        #program_state = -1
             except Exception as e:
                 exception_logging.logException(e, "Time evaluation")
                 program_state = -1
@@ -185,7 +184,7 @@ if __name__ == '__main__':
                 case program_status.Is.READ_SENSOR_VALUES.value:
                     print("{0} --- Read Sensor data".format(datetime.now().strftime("%D %H:%M:%S")))
                     try:
-                        asyncio.run(ble_service_connection.read_sensor_data(False, measurement_station_list))
+                        bleak_bug_counter += asyncio.run(ble_service_connection.read_sensor_data(False, measurement_station_list))
                         print("                      Read measurements -> ok")
                     except Exception as e:
                         print("                      Read measurements -> fail")

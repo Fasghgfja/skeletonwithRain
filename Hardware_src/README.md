@@ -1,6 +1,6 @@
 # Accesspoint and Sensor station
 
-This readme should describe the handle of the raspberry pi and the arduino nano LE.
+This readme should describe the handle of the raspberry pi and the arduinoNANO LE.
 
 If you want to skip the description and just want to know how the setup works, click [here](#run-accesspoint-application).
 ## Arduino
@@ -12,8 +12,7 @@ There are two different option to connect to a Sensor Station.
    The current name is "PlantSensor" but you can change it to another one if you like.
 
    
-2) Search for sensor station via accesspoint management page and choose one.
-   The identification will happen via the mac address of the arduino.
+2) Search for sensor station via access point. The identification will happen via the mac address of the arduino.
 
 
 The following service and characteristic are implemented:

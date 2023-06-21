@@ -18,7 +18,14 @@
             <div class="col-12">
 
                 <div class="card">
-                    <h5>Plant Catalogue</h5>
+                    <div style="display: flex; gap: 10px;">
+                    <h3>Plant Catalogue</h3>
+                        <!-- ....................Help button...........................BUTTON................................. -->
+
+                        <p:commandButton style="margin-bottom: 10px" type="button" icon="fa fa-duotone fa-seedling" title="Help"
+                                         styleClass="ui-button-secondary outlined-button"
+                                         onclick="PF('helpDialog').show()"/>
+                    </div>
                     <p:dataTable id="plantsTable" var="plant" value="#{plantListController.notYetFollowedPlantsList}" paginator="true" rows="10" paginatorPosition="bottom" rowKey="#{plant.id}">
 
 
@@ -66,6 +73,16 @@
             </div>
 
         </h:form>
+        <p:dialog header="Plant Catalogue Help" id="helpDialog" widgetVar="helpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+            <p:outputPanel id="plantCataloguePageHelp">
+                <h6>Showing plant page:</h6>
+                By clicking on the "Show Plant Page" button, you will get redirected to the selected plant page.
+                <h6>Following a plant:</h6>
+                By clicking on the "Follow Plant" button, it's possible to add the selected plant to the followed plants (showed in dashboard page). The followed plant will no longer be visible in the plant catalogue.
+            </p:outputPanel>
+        </p:dialog>
 
 
 
