@@ -2,9 +2,11 @@ package at.qe.skeleton.ui.beans;
 
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.LogRepository;
+import at.qe.skeleton.services.AccessPointService;
 import at.qe.skeleton.services.PlantService;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -26,6 +28,8 @@ import java.util.logging.SimpleFormatter;
 @Component
 @Scope("view")
 public class CreatePlantBean implements Serializable {
+
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CreatePlantBean.class);
 
     @Autowired
     transient PlantService plantService;
@@ -55,7 +59,7 @@ public class CreatePlantBean implements Serializable {
             successLogger.info("CREATED PLANT: " + plant.getPlantID());
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         Log createLog = new Log();
         createLog.setDate(LocalDate.now());

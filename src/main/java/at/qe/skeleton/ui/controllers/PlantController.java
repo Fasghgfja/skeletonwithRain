@@ -26,6 +26,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -50,6 +51,7 @@ public class PlantController implements Serializable {
 
     private final transient Logger successLogger = Logger.getLogger("SuccessLogger");
     private transient FileHandler successFileHandler;
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PlantController.class);
 
     private Collection<Plant> filteredPlants;
 
@@ -108,7 +110,7 @@ public class PlantController implements Serializable {
                 successLogger.info(PLANT_DELETED + plant.getId());
                 successFileHandler.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("error", e);
             }
             Log createLog = new Log();
             createLog.setDate(LocalDate.now());
@@ -128,7 +130,7 @@ public class PlantController implements Serializable {
                 successLogger.info(PLANT_DELETED + plant.getId());
                 successFileHandler.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("error", e);
             }
             Log createLog = new Log();
             createLog.setDate(LocalDate.now());

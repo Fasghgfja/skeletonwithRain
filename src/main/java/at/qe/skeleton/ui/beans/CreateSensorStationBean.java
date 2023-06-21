@@ -5,10 +5,12 @@ import at.qe.skeleton.model.LogType;
 import at.qe.skeleton.model.SSInterval;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.repositories.LogRepository;
+import at.qe.skeleton.services.AccessPointService;
 import at.qe.skeleton.services.IntervalService;
 import at.qe.skeleton.services.SensorStationService;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -45,6 +47,8 @@ public class CreateSensorStationBean implements Serializable {
     @Autowired
     private transient LogRepository logRepository;
 
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CreateSensorStationBean.class);
+
     private final transient Logger successLogger = Logger.getLogger("SuccessLogger");
     private transient FileHandler successFileHandler;
 
@@ -75,7 +79,7 @@ public class CreateSensorStationBean implements Serializable {
             successLogger.info("CREATED SENSOR STATION: " + sensorStation.getSensorStationID());
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         Log createLog = new Log();
         createLog.setDate(LocalDate.now());

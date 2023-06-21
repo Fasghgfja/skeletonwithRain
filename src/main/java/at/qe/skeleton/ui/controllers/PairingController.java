@@ -11,6 +11,7 @@ import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -48,6 +49,7 @@ public class PairingController {
 
     private final Logger successLogger = Logger.getLogger("SuccessLogger");
     private FileHandler successFileHandler;
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PairingController.class);
 
     private String sensorStationId = "";
     private Long accessPointId;
@@ -96,7 +98,7 @@ public class PairingController {
                     Thread.sleep(4000);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
-                    e.printStackTrace();
+                    LOGGER.error("error", e);
                 }
             }
             if (sensorsFound) {
@@ -107,7 +109,7 @@ public class PairingController {
                     successLogger.info("SENSOR STATION PAIRED : " + sensorStationToPair.getSensorStationID());
                     successFileHandler.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOGGER.error("error", e);
                 }
                 Log createLog = new Log();
                 createLog.setDate(LocalDate.now());
@@ -139,7 +141,7 @@ public class PairingController {
             successLogger.info("UNPAIRED : " + sensorStationToUnpair.getSensorStationID());
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         Log createLog = new Log();
         createLog.setDate(LocalDate.now());

@@ -14,6 +14,7 @@ import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.MeasurementRepository;
 import at.qe.skeleton.repositories.SensorRepository;
 import at.qe.skeleton.repositories.SensorStationRepository;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
@@ -31,6 +32,8 @@ import org.springframework.stereotype.Service;
 @Service
 @Scope("application")
 public class MeasurementService {
+
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(MeasurementService.class);
 
     @Autowired
     MeasurementRepository measurementRepository;
@@ -192,7 +195,7 @@ public class MeasurementService {
             successLogger.info("ALL MEASUREMENTS DELETED FROM " + from + " TO " + to);
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         Log deleteLog = new Log();
         deleteLog.setDate(LocalDate.now());
@@ -229,7 +232,7 @@ public class MeasurementService {
             successLogger.info("MEASUREMENTS FOR SENSOR STATION " + sensorStation.getSensorStationID() + " DELETED FROM " + from + " TO " + to);
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         Log deleteLog = new Log();
         deleteLog.setDate(LocalDate.now());

@@ -12,6 +12,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.PhaseId;
 import jakarta.inject.Named;
 import org.primefaces.model.ResponsiveOption;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -73,6 +74,7 @@ public class GalleryController implements Serializable {
 
     private final transient Logger successLogger = Logger.getLogger("SuccessLogger");
     private transient FileHandler successFileHandler;
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(GalleryController.class);
 
     private List<Image> images;
     private List<Image> approvedimages;
@@ -267,7 +269,7 @@ public class GalleryController implements Serializable {
             successLogger.info("IMAGE DELETED: " + image.getId());
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         Log createLog = new Log();
         createLog.setDate(LocalDate.now());
@@ -295,7 +297,7 @@ public class GalleryController implements Serializable {
             successLogger.info(IMAGE_APPROVED + image.getId());
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         Log createLog = new Log();
         createLog.setDate(LocalDate.now());

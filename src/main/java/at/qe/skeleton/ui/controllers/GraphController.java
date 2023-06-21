@@ -108,15 +108,17 @@ public class GraphController implements Serializable {
         Map<Measurement,Double> resultMap = new HashMap<>();
         for (Measurement measurement : measurements) {
             for (Sensor sensor : sensors) {
-                if (sensor.getType().equals(measurement.getType())) {
-                    double upper = Double.parseDouble(sensor.getUpper_border());
-                    double lower = Double.parseDouble(sensor.getLower_border());
-                    double value = Double.parseDouble(measurement.getValue_s());
+                if(measurement != null) {
+                    if (sensor.getType().equals(measurement.getType())) {
+                        double upper = Double.parseDouble(sensor.getUpper_border());
+                        double lower = Double.parseDouble(sensor.getLower_border());
+                        double value = Double.parseDouble(measurement.getValue_s());
 
-                    double result = ((value - lower) / (upper - lower)) * 100;
-                    double roundedResult = Math.round(result * 100.0) / 100.0;
-                    resultMap.put(measurement, roundedResult);
-                    break;
+                        double result = ((value - lower) / (upper - lower)) * 100;
+                        double roundedResult = Math.round(result * 100.0) / 100.0;
+                        resultMap.put(measurement, roundedResult);
+                        break;
+                    }
                 }
             }
         }

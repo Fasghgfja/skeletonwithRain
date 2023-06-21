@@ -21,6 +21,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.Visibility;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -61,6 +62,7 @@ public class SensorStationDetailController implements Serializable {
 
     private final transient Logger successLogger = Logger.getLogger("SuccessLogger");
     private transient FileHandler successFileHandler;
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(SensorStationDetailController.class);
 
 
     /**
@@ -188,7 +190,7 @@ public class SensorStationDetailController implements Serializable {
                     successLogger.info(PLANT_CREATED + newPlant.getId());
                     successFileHandler.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOGGER.error("error", e);
                 }
                 Log createLog = new Log();
                 createLog.setDate(LocalDate.now());
@@ -211,7 +213,7 @@ public class SensorStationDetailController implements Serializable {
                     successLogger.info(PLANT_CREATED + sensorStation.getPlant().getPlantID());
                     successFileHandler.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOGGER.error("error", e);
                 }
                 Log createLog = new Log();
                 createLog.setDate(LocalDate.now());
@@ -263,7 +265,7 @@ public class SensorStationDetailController implements Serializable {
             successLogger.info("SENSOR STATION DELETED: " + sensorStation.getSensorStationID());
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         Log createLog = new Log();
         createLog.setDate(LocalDate.now());

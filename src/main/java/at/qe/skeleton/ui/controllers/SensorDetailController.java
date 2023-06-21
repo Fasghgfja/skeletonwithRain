@@ -16,6 +16,7 @@ import at.qe.skeleton.services.SensorService;
 import at.qe.skeleton.ui.beans.SessionInfoBean;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -42,6 +43,7 @@ public class SensorDetailController implements Serializable {
 
     private final transient Logger successLogger = Logger.getLogger("SuccessLogger");
     private transient FileHandler successFileHandler;
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(SensorDetailController.class);
 
     /**
      * Tells us if the sensor is new.
@@ -84,7 +86,7 @@ public class SensorDetailController implements Serializable {
             successLogger.info("SENSOR CREATED: " + sensor.getId());
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         Log createLog = new Log();
         createLog.setDate(LocalDate.now());
@@ -108,7 +110,7 @@ public class SensorDetailController implements Serializable {
             successLogger.info("SENSOR DELETED: " + sensor.getId());
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         Log deleteLog = new Log();
         deleteLog.setDate(LocalDate.now());

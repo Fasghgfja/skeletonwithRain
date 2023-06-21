@@ -12,6 +12,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -49,6 +50,7 @@ public class FileUploadController implements Serializable {
 
     private final transient Logger successLogger = Logger.getLogger("SuccessLogger");
     private transient FileHandler successFileHandler;
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(FileUploadController.class);
 
     private String id;
 
@@ -59,6 +61,8 @@ public class FileUploadController implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
+
 
     /**
      * Handles the uploaded file by converting it to a byte array, saving it as an {@link at.qe.skeleton.model.Image} object using the
@@ -108,7 +112,7 @@ public class FileUploadController implements Serializable {
                 successLogger.info(UPLOADED_IMAGE + image.getId());
                 successFileHandler.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("error", e);
             }
             Log createLog = new Log();
             createLog.setDate(LocalDate.now());
@@ -133,7 +137,7 @@ public class FileUploadController implements Serializable {
             successLogger.info(UPLOADED_IMAGE + image.getId());
             successFileHandler.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         Log createLog = new Log();
         createLog.setDate(LocalDate.now());

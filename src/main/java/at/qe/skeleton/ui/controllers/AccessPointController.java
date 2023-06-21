@@ -11,6 +11,7 @@ import at.qe.skeleton.ui.beans.SessionInfoBean;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -54,6 +55,7 @@ public class AccessPointController implements Serializable {
 
     private final transient Logger successLogger = Logger.getLogger("SuccessLogger");
     private transient FileHandler successFileHandler;
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AccessPointController.class);
 
     private AccessPoint accessPoint;
     private String location;
@@ -106,7 +108,7 @@ public class AccessPointController implements Serializable {
             }
             successLogger.info("DELETED AP: " + accessPoint.getAccessPointID());
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         accessPoint = null;
 
@@ -127,7 +129,7 @@ public class AccessPointController implements Serializable {
             }
             successLogger.info("ACCESS POINT VALIDATED: " + accessPoint.getAccessPointID());
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("error", e);
         }
         Log validationLog = new Log();
         validationLog.setDate(LocalDate.now());
