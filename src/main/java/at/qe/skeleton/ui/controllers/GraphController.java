@@ -91,27 +91,11 @@ public class GraphController implements Serializable {
         sensorStation = (SensorStation) event.getObject();
 
         Collection<Sensor> sensors = sensorService.getAllSensorsBySensorStation(sensorStation);
-        /*
-        System.out.println("yaaas");
-        System.out.println(sensors);
 
-        sensors.forEach(sensor -> {
-            System.out.print(sensor.getType());
-            System.out.print(", upper: " + sensor.getUpper_border() + " , ");
-            System.out.println("lower: " +sensor.getLower_border());
-        });
-        */
         createLineModel();
         createCartesianLinerModel();
         latestMeasurements = new ArrayList<>(measurementService.getLatestPlantMeasurements(sensorStation));
-        /*
-        System.out.println("naaaa");
-        System.out.println(latestMeasurements);
-        latestMeasurements.forEach(measurement -> {
-            System.out.print(measurement.getType());
-            System.out.println(measurement.getValue_s());
-        });
-        */
+
         Map<Measurement,Double> latestMeasurementsAndPercentage;
         latestMeasurementsAndPercentage = extractMapMeasurePercentage(latestMeasurements, sensors);
 
@@ -200,27 +184,26 @@ public class GraphController implements Serializable {
         barModel = new BarChartModel();
         ChartData data = new ChartData();
 
+        List<Map.Entry<Measurement, Double>> entries = new ArrayList<>(measurementsAndPercentage.entrySet());
+        entries.sort(Comparator.comparing(entry -> entry.getKey().getType()));
+
+        Map<Measurement, Double> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<Measurement, Double> entry : entries) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
         BarChartDataSet barDataSet = new BarChartDataSet();
         barDataSet.setLabel("Value in % (between boarder values)");
 
         List<Number> values = new ArrayList<>();
         List<String> labels = new ArrayList<>();
-        /*
-        measurements.forEach(measurement -> {
-            if (measurement == null) {
-                values.add(0);
-            } else {
-                values.add(Double.valueOf(measurement.getValue_s()));
-                labels.add(measurement.getType() + " ");
-            }
-        });
-        */
-        measurementsAndPercentage.forEach((measurement, percent) -> {
+
+        sortedMap.forEach((measurement, percent) -> {
             if (measurement == null) {
                 values.add(0);
             } else {
                 values.add(percent);
-                labels.add(measurement.getType());// + ": " + measurement.getValue_s());
+                labels.add(String.format("%s: %.1f",measurement.getType(), Double.parseDouble(measurement.getValue_s())));
             }
         });
 

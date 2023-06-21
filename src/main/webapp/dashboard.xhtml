@@ -104,7 +104,9 @@
                                 <h5>Selected Sensor Station Details</h5>
                             </div>
                             <div class="card">
-                                <p:barChart id="myBarChart" model="#{graphController.barModel}"/>
+
+                                <p:barChart id="myBarChart" model="#{graphController.barModel}"
+                                extender="extndr()"/>
 
                             </div>
                         </div>
