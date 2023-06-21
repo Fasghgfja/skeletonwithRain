@@ -3,9 +3,7 @@ package at.qe.skeleton.api.services;
 import at.qe.skeleton.api.exceptions.AccessPointNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorNotFoundException;
 import at.qe.skeleton.api.exceptions.SensorStationNotFoundException;
-import at.qe.skeleton.api.model.LogFrame;
-import at.qe.skeleton.api.model.SensorApi;
-import at.qe.skeleton.api.model.SensorStationApi;
+import at.qe.skeleton.api.model.*;
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.SensorRepository;
 import at.qe.skeleton.repositories.SensorStationRepository;
@@ -375,6 +373,110 @@ class SensorStationServiceApiTest {
         verify(logService, never()).saveLog(any(Log.class));
     }
 
+    @Test
+    void updateSensorStation_ExistingSensorStation_UpdateSuccessfulWithNullDescriptionAndAlarmSwitch() throws SensorStationNotFoundException {
+        // Arrange
+        SensorStationApi sensorStationApi = new SensorStationApi();
+        sensorStationApi.setName("SensorStation1");
 
+        SensorStation sensorStation = new SensorStation();
+        sensorStation.setSensorStationName("SensorStation1");
+        sensorStation.setDescription("Description");
+        sensorStation.setAlarmSwitch("ON");
+
+        when(sensorStationRepository.findFirstById(anyString())).thenReturn(sensorStation);
+        when(sensorStationRepository.save(any(SensorStation.class))).thenReturn(sensorStation);
+
+        // Act
+        assertDoesNotThrow(() -> sensorStationServiceApi.updateSensorStation(sensorStationApi));
+
+        // Assert
+        verify(sensorStationRepository, times(1)).findFirstById(eq("SensorStation1"));
+        verify(sensorStationRepository, times(1)).save(eq(sensorStation));
+        assertNull(sensorStation.getDescription());
+        assertNull(sensorStation.getAlarmSwitch());
+    }
+
+    @Test
+    void isValidated_InvalidAccessPoint_ReturnsFalse() throws AccessPointNotFoundException {
+        // Arrange
+        AccessPoint accessPoint = new AccessPoint();
+        accessPoint.setValidated(false);
+
+        when(accessPointService.loadAccessPoint(anyLong())).thenReturn(accessPoint);
+
+        // Act
+        boolean isValidated = sensorStationServiceApi.isValidated(1L);
+
+        // Assert
+        verify(accessPointService, times(1)).loadAccessPoint(eq(1L));
+        assertFalse(isValidated);
+    }
+
+    @Test
+    void addSensor_ValidSensorApiList_SensorsNotAddedIfAlreadyPresent() throws SensorNotFoundException {
+        // Arrange
+        List<SensorApi> sensorApiList = new ArrayList<>();
+        SensorApi sensorApi = new SensorApi();
+        sensorApi.setStation_name("SensorStation1");
+        sensorApiList.add(sensorApi);
+
+        SensorStation sensorStation = new SensorStation();
+        sensorStation.setSensorStationName("SensorStation1");
+
+        when(sensorService.areSensorsPresent(eq(sensorStation))).thenReturn(true);
+
+        assertDoesNotThrow(() -> sensorStationServiceApi.addSensor(sensorApiList));
+
+
+    }
+
+    @Test
+    void addSensor_ValidSensorApiList_SensorsNotAddedIfListIsEmpty() throws SensorNotFoundException {
+        // Arrange
+        List<SensorApi> sensorApiList = new ArrayList<>();
+
+        // Act
+        assertDoesNotThrow(() -> sensorStationServiceApi.addSensor(sensorApiList));
+
+        // Assert
+        verify(sensorService, never()).saveSensor(any(Sensor.class));
+    }
+
+    @Test
+    void updateSensor_InvalidSensorApiList_SensorsNotUpdatedIfSensorStationNotFound() throws SensorStationNotFoundException {
+        // Arrange
+        List<SensorApi> sensorApiList = new ArrayList<>();
+        SensorApi sensorApi = new SensorApi();
+        sensorApi.setStation_name("InvalidSensorStation");
+        sensorApi.setType("InvalidSensorType");
+        sensorApi.setAlarm_count(5);
+        sensorApiList.add(sensorApi);
+
+        when(sensorStationRepository.findFirstById(eq("InvalidSensorStation"))).thenReturn(null);
+
+        // Act & Assert
+        assertThrows(SensorStationNotFoundException.class, () -> sensorStationServiceApi.updateSensor(sensorApiList));
+
+        // Verify
+        verify(sensorStationRepository, times(1)).findFirstById(eq("InvalidSensorStation"));
+        verify(sensorService, never()).getSensorForSensorStation(any(SensorStation.class), anyString());
+        verify(sensorService, never()).saveSensor(any(Sensor.class));
+    }
+
+    @Test
+    void findSensorsByAccesspointID_ExistingAccessPoint_ReturnsEmptyList() throws SensorStationNotFoundException {
+        // Arrange
+        List<SensorStation> sensorStationList = new ArrayList<>();
+
+        when(sensorStationRepository.findAllByAccessPoint_AccessPointID(anyLong())).thenReturn(sensorStationList);
+
+        // Act
+        ArrayList<SensorStationDataFrame> sensorStationDataFrameArrayList = sensorStationServiceApi.findSensorsByAccesspointID(1L);
+
+        // Assert
+        verify(sensorStationRepository, times(1)).findAllByAccessPoint_AccessPointID(eq(1L));
+        assertTrue(sensorStationDataFrameArrayList.isEmpty());
+    }
 
 }

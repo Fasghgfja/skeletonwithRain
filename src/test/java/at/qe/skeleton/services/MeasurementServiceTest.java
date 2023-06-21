@@ -6,8 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.*;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -260,6 +263,52 @@ class MeasurementServiceTest {
         assertNull(currentUser);
     }
 
+    @Test
+    void getMeasurementsAmount_zeroMeasurements() {
+        when(measurementRepository.count()).thenReturn(0);
+        assertEquals(0, measurementService.getMeasurementsAmount());
+    }
 
+    @Test
+    void getMeasurementTypeIcon_unknownType() {
+        String type = "UNKNOWN";
+        assertEquals("", measurementService.getMeasurementTypeIcon(type));
+    }
 
+    @Test
+    void deleteMeasurementsFromTo_nullFromAndTo() {
+        measurementService.deleteMeasurementsFromTo(null, null);
+        verify(measurementRepository, never()).deleteMeasurementsByTimestampBetween(any(), any());
+    }
+
+    @Test
+    void deleteMeasurementsFromTo_fromAfterTo() {
+        LocalDateTime from = LocalDateTime.now();
+        LocalDateTime to = from.minusDays(1);
+        measurementService.deleteMeasurementsFromTo(from, to);
+        verify(measurementRepository, never()).deleteMeasurementsByTimestampBetween(any(), any());
+    }
+
+    @Test
+    void deleteMeasurementsFromTo_emptyMeasurementRepository() {
+        when(measurementRepository.findFirstByOrderByTimestampAsc()).thenReturn(null);
+        measurementService.deleteMeasurementsFromTo(null, null);
+        verify(measurementRepository, never()).deleteMeasurementsByTimestampBetween(any(), any());
+    }
+
+    @Test
+    void deleteMeasurementsFromToForSensorStation_nullFromAndTo() {
+        String sensorStationToDeleteFromId = "sensorStationId";
+        measurementService.deleteMeasurementsFromToForSensorStation(null, null, sensorStationToDeleteFromId);
+        verify(measurementRepository, never()).deleteMeasurementsBySensorStationAndTimestampBetween(any(), any(), any());
+    }
+
+    @Test
+    void deleteMeasurementsFromToForSensorStation_fromAfterTo() {
+        LocalDateTime from = LocalDateTime.now();
+        LocalDateTime to = from.minusDays(1);
+        String sensorStationToDeleteFromId = "sensorStationId";
+        measurementService.deleteMeasurementsFromToForSensorStation(from, to, sensorStationToDeleteFromId);
+        verify(measurementRepository, never()).deleteMeasurementsBySensorStationAndTimestampBetween(any(), any(), any());
+    }
 }
