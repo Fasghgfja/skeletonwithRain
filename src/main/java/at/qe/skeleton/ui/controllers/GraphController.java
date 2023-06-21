@@ -2,9 +2,11 @@ package at.qe.skeleton.ui.controllers;
 
 
 import at.qe.skeleton.model.MeasurementType;
+import at.qe.skeleton.model.Sensor;
 import at.qe.skeleton.services.MeasurementService;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.SensorStation;
+import at.qe.skeleton.services.SensorService;
 import at.qe.skeleton.services.SensorStationService;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -17,7 +19,9 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 
+import org.primefaces.model.chart.Axis;
 import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.axes.AxesTicks;
 import org.primefaces.model.charts.axes.cartesian.CartesianScales;
 import org.primefaces.model.charts.axes.cartesian.linear.CartesianLinearAxes;
 import org.primefaces.model.charts.axes.cartesian.linear.CartesianLinearTicks;
@@ -49,7 +53,9 @@ public class GraphController implements Serializable {
     @Autowired
     private transient MeasurementService measurementService;
     @Autowired
-    private transient SensorStationService sensorService;
+    private transient SensorService sensorService;
+    @Autowired
+    private transient SensorStationService sensorStationService;
 
     private LocalDateTime dateFrom;
     private LocalDateTime dateTo;
@@ -83,12 +89,39 @@ public class GraphController implements Serializable {
      */
     public void onRowSelect(SelectEvent<SensorStation> event) {
         sensorStation = (SensorStation) event.getObject();
+
+        Collection<Sensor> sensors = sensorService.getAllSensorsBySensorStation(sensorStation);
+
         createLineModel();
         createCartesianLinerModel();
         latestMeasurements = new ArrayList<>(measurementService.getLatestPlantMeasurements(sensorStation));
+
+        Map<Measurement,Double> latestMeasurementsAndPercentage;
+        latestMeasurementsAndPercentage = extractMapMeasurePercentage(latestMeasurements, sensors);
+
         if (!latestMeasurements.isEmpty()) {
-            createBarModel(latestMeasurements);
+            createBarModel(latestMeasurementsAndPercentage);
         }
+    }
+
+    private Map<Measurement, Double> extractMapMeasurePercentage(List<Measurement> measurements, Collection<Sensor> sensors) {
+        Map<Measurement,Double> resultMap = new HashMap<>();
+        for (Measurement measurement : measurements) {
+            for (Sensor sensor : sensors) {
+                if (sensor.getType().equals(measurement.getType())) {
+                    double upper = Double.parseDouble(sensor.getUpper_border());
+                    double lower = Double.parseDouble(sensor.getLower_border());
+                    double value = Double.parseDouble(measurement.getValue_s());
+
+                    double result = ((value - lower) / (upper - lower)) * 100;
+                    double roundedResult = Math.round(result * 100.0) / 100.0;
+                    resultMap.put(measurement, roundedResult);
+                    break;
+                }
+            }
+        }
+        return resultMap;
+
     }
 
     /**
@@ -129,7 +162,6 @@ public class GraphController implements Serializable {
         filteredMeasurements = new ArrayList<>(measurementService.doGetMeasurementsByTypeAndSensorStationAndTimestampBetween(chosenMeasurement, sensorStation, dateFrom, dateTo));
 
         if (!filteredMeasurements.isEmpty()) {
-            System.out.println("sisi");
             createLineModel(filteredMeasurements);
         }
     }
@@ -148,22 +180,30 @@ public class GraphController implements Serializable {
      * Method to create a barchart from a list of measurements.
      * used in the dashboard
      */
-    public void createBarModel(List<Measurement> measurements) {
+    public void createBarModel(Map<Measurement, Double> measurementsAndPercentage) {
         barModel = new BarChartModel();
         ChartData data = new ChartData();
 
+        List<Map.Entry<Measurement, Double>> entries = new ArrayList<>(measurementsAndPercentage.entrySet());
+        entries.sort(Comparator.comparing(entry -> entry.getKey().getType()));
+
+        Map<Measurement, Double> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<Measurement, Double> entry : entries) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
         BarChartDataSet barDataSet = new BarChartDataSet();
-        barDataSet.setLabel("Selected Sensor Station Last Measurements");
+        barDataSet.setLabel("Value in % (between boarder values)");
 
         List<Number> values = new ArrayList<>();
         List<String> labels = new ArrayList<>();
 
-        measurements.forEach(measurement -> {
+        sortedMap.forEach((measurement, percent) -> {
             if (measurement == null) {
                 values.add(0);
             } else {
-                values.add(Double.parseDouble(measurement.getValue_s()));
-                labels.add(measurement.getType());
+                values.add(percent);
+                labels.add(String.format("%s: %.1f",measurement.getType(), Double.parseDouble(measurement.getValue_s())));
             }
         });
 
@@ -194,6 +234,7 @@ public class GraphController implements Serializable {
         data.setLabels(labels);
         barModel.setData(data);
 
+
         //Options
         BarChartOptions options = new BarChartOptions();
         CartesianScales cScales = new CartesianScales();
@@ -204,6 +245,9 @@ public class GraphController implements Serializable {
         linearAxes.setTicks(ticks);
         cScales.addYAxesData(linearAxes);
         options.setScales(cScales);
+
+
+
 
         Title title = new Title();
         title.setDisplay(true);
@@ -220,6 +264,8 @@ public class GraphController implements Serializable {
         legendLabels.setFontSize(24);
         legend.setLabels(legendLabels);
         options.setLegend(legend);
+
+
 
 
         // disable animation
