@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 
 /**
@@ -63,6 +64,7 @@ public class SSInterval implements Persistable<Long>, Serializable, Comparable<S
 
     @Override
     public int compareTo(SSInterval other) {
-        return getId().compareTo(other.getId());
+        return Objects.requireNonNull(getId()).compareTo(Objects.requireNonNull(other.getId()));
     }
 }
+

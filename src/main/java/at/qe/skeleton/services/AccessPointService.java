@@ -132,7 +132,9 @@ public class AccessPointService {
      */
     private String getIP() throws IPCantReadException {
         try (final DatagramSocket datagramSocket = new DatagramSocket()) {
-            datagramSocket.connect(InetAddress.getByName("8.8.8.8"), 12345);
+
+            String ip = "8.8.8.8";
+            datagramSocket.connect(InetAddress.getByName(ip), 12345);
             return datagramSocket.getLocalAddress().getHostAddress();
         } catch (UnknownHostException | SocketException e) {
             throw new IPCantReadException(e.getMessage());

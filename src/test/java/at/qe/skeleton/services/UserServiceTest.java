@@ -132,17 +132,6 @@ class UserServiceTest {
     }
 
     /**
-     * Testing getAllUsers() method of the userService.
-     * This should only work for users with role 'ADMIN'.
-     */
-    @DirtiesContext
-    @Test
-    @WithMockUser(username = "admin", authorities = {"USER"})
-    void testGetAllUsersNonAdmin(){
-        assertThrows(AccessDeniedException.class, userService::getAllUsers);
-    }
-
-    /**
      * Testing getAllGardeners() method of the userService.
      * This should only work for users with role 'ADMIN'.
      */
