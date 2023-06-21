@@ -3,6 +3,10 @@ import sqlite3
 import struct
 import exception_logging
 
+
+upper_temp = 40
+upper_hygro = 100
+upper_pres = 1100
 #----------------------------------------Create Database
 def implement_database():
     # TODO check database connection
@@ -76,17 +80,26 @@ def insert_new_sensor_station_to_database(attribute, name):
         file1 = open("logFile.txt", "a")
         file1.write("INFO: Sensor Station with name {0} has been inserted to the database\n".format(name))
         file1.close()
-        print("saved")
+        print("                      New device saved")
     except Exception as e:
         exception_logging.logException(e, attribute)
 
+def upper_boarder(type):
+    if type == "LIGHT_INTENSITY" or type == "HUMIDITY" or type == "SOIL_MOISTURE" or type == "AIR_QUALITY":
+        return upper_hygro
+    elif type == "TEMPERATURE":
+        return upper_temp
+    else:
+        return upper_pres
 def insert_new_sensor_to_database(attribute, name, type, sensor_index):
+    upper = 1000
+    upper = upper_boarder(type.decode())
     try:
         conn = sqlite3.connect('AccessPoint')
         c = conn.cursor()
         c.execute('''
                 insert into Sensor values( {0}, '{1}', '{2}', '{3}', {4}, {5}, {6})
-            '''.format(sensor_index, attribute.uuid, name, type.decode(), 0, 0, 10000))
+            '''.format(sensor_index, attribute.uuid, name, type.decode(), 0, 0, upper))
         conn.commit()
         exception_logging.log_information("INFO: Sensor with uuid {0} and type {1} from Station {2} has been inserted to the database".format(attribute.uuid, type.decode(), name))
     except Exception as e:

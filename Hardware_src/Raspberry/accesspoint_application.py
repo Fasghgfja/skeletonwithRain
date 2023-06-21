@@ -126,8 +126,8 @@ if __name__ == '__main__':
 
                     else:
                         time.sleep(5)
-                        program_state = program_status.Is.READ_SENSOR_VALUES.value
-                        #program_state = -1
+                        #program_state = program_status.Is.CHECK_WEBAPP_FOR_NEW_SENSORSTATION.value
+                        program_state = -1
             except Exception as e:
                 exception_logging.logException(e, "Time evaluation")
                 program_state = -1

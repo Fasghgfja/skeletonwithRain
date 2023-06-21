@@ -103,7 +103,7 @@ async def write_sensors_and_station_description(station_names):
                     json_list =[]
                     for sensor in sensor_list:
                         if sensor[3] != "ALARM_STATUS":
-                            sensor_values = Sensor(sensor_id=sensor[0], uuid=sensor[1], station_name=sensor[2], type=sensor[3], alarm_count=sensor[4], upper_boarder="10000", lower_boarder="0" )
+                            sensor_values = Sensor(sensor_id=sensor[0], uuid=sensor[1], station_name=sensor[2], type=sensor[3], alarm_count=sensor[4], upper_boarder=str(sensor[6]), lower_boarder="0" )
                             json_list.append(vars(sensor_values))
                     r = requests.post(post_sensor_url, json=json_list,auth=get_auth())
                     if r.status_code != 200:
@@ -260,8 +260,6 @@ def check_if_new_stations():
 
         try:
             webapp_sensorstation_names = asyncio.run(get_sensorstations(True, ""))
-            if webapp_sensorstation_names is None:
-                return []
         except Exception as e:
             exception_logging.logException(e,"Read Station names from Webapp")
             return []
@@ -276,7 +274,9 @@ def check_if_new_stations():
                 except Exception as e:
                     exception_logging.logException(e, "Sensor Station {0} deleted".format(name))
                     DB_connection.delete_sensor_station(name)
-
-        return webapp_sensorstation_names
+        if webapp_sensorstation_names is None:
+            return []
+        else:
+            return webapp_sensorstation_names
     else:
         return check_validation()
