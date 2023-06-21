@@ -275,5 +275,32 @@ class MeasurementServiceTest {
         assertNull(currentUser);
     }
 
+    @Test
+    void testDoGetMeasurementsByTypeAndSensorStationAndTimestampBetween_emptyRepository() {
+        String type = "TEMPERATURE";
+        LocalDateTime dateFrom = LocalDateTime.now().minusDays(1);
+        LocalDateTime dateTo = LocalDateTime.now();
+        when(measurementRepository.getMeasurementsByTypeAndSensorStationAndTimestampBetweenOrderByTimestampAsc(type, sensorStation, dateFrom, dateTo))
+                .thenReturn(Collections.emptyList());
+        Collection<Measurement> measurements = measurementService.doGetMeasurementsByTypeAndSensorStationAndTimestampBetween(type, sensorStation, dateFrom, dateTo);
+        assertTrue(measurements.isEmpty());
+    }
+
+    @Test
+    void testDoFindFirstBySensorStationOrderByTimestampAsc_noMeasurementFound() {
+        when(measurementRepository.findFirstBySensorStationOrderByTimestampAsc(sensorStation))
+                .thenReturn(null);
+        Measurement measurement = measurementService.doFindFirstBySensorStationOrderByTimestampAsc(sensorStation);
+        assertNull(measurement);
+    }
+
+    @Test
+    void testGetCurrentUser_nullAuthentication() {
+        SecurityContextHolder.getContext().setAuthentication(null);
+        String currentUser = measurementService.getCurrentUser();
+        assertNull(currentUser);
+    }
+
+
 
 }
