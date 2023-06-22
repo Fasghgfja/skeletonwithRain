@@ -39,7 +39,7 @@
                                 <span class="overview-title">TEMPERATURE</span>
                                 <h3>
                                     <h:outputText value="#{measurementListController.getLastTemperatureMeasurementValue().length() gt 4 ? measurementListController.getLastTemperatureMeasurementValue().subSequence(0,4) : measurementListController.getLastTemperatureMeasurementValue() }"/>
-                                    C
+                                    °C
                                 </h3>
                             </div>
                         </div>
@@ -165,7 +165,7 @@
                                 <span class="overview-title">AIR QUALITY</span>
                                 <h3>
                                     <h:outputText value="#{measurementListController.getLastAirMeasurementValue().length() gt 4 ? measurementListController.getLastAirMeasurementValue().subSequence(0,4) : measurementListController.getLastAirMeasurementValue() }"/>
-                                    Aqi
+                                    ppm
                                 </h3>
                             </div>
                         </div>
