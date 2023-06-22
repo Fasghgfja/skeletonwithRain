@@ -13,15 +13,32 @@ INSERT INTO userx_user_role (USERX_USERNAME, ROLES) VALUES ('gardener', 'GARDENE
 INSERT INTO access_point(ACCESS_POINTID, LOCATION, VALIDATED, CREATE_DATE, UPDATE_DATE) VALUES(-50, 'Room1', TRUE, '2023-01-01', '2022-01-01');
 INSERT INTO access_point(ACCESS_POINTID, LOCATION, VALIDATED, CREATE_DATE, UPDATE_DATE) VALUES(-51, 'Room2', TRUE, '2023-01-01', '2022-01-01');
 
-INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(-51, 'Lunaris Blossom','2022-01-01');
-INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(-52, 'Verdant Flameleaf','2022-01-02');
-INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(-53, 'Crystalvine Serpentia', '2022-01-03');
-INSERT INTO plant(PLANTID, PLANT_NAME, planted_date) VALUES(-54, 'Aurora Orchid', '2022-01-04');
+INSERT INTO plant(PLANTID, PLANT_NAME, planted_date, description) VALUES(-51, 'Lunaris Blossom','2022-01-01', 'This plant likes it hot');
+INSERT INTO plant(PLANTID, PLANT_NAME, planted_date, description) VALUES(-52, 'Verdant Flameleaf','2022-01-02', 'Needs a lot of water');
+INSERT INTO plant(PLANTID, PLANT_NAME, planted_date, description) VALUES(-53, 'Crystalvine Serpentia', '2022-01-03', 'Do not give too much water');
+INSERT INTO plant(PLANTID, PLANT_NAME, planted_date, description) VALUES(-54, 'Aurora Orchid', '2022-01-04', 'Likes sun');
 
 INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION ,alarm_switch, plant_plantid, alarm_count_threshold, description) VALUES('G4T2','2022-01-01','2022-01-05','Room1', 'off',-51, 1, 'Taking care of important plants.');
 INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION, alarm_switch, plant_plantid, alarm_count_threshold, description) VALUES('G4T1','2022-01-01','2022-02-05','Room2', 'off',-52, 1, 'My plants need to stay healthy.');
 INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION ,alarm_switch, plant_plantid, alarm_count_threshold, description) VALUES('G4T3','2022-01-01','2022-02-01','Room3', 'off',-53, 1, 'I am a good sensor station.');
 INSERT INTO sensor_station(SENSOR_STATION_NAME, CREATE_DATE, UPDATE_DATE, LOCATION, alarm_switch, plant_plantid, alarm_count_threshold, description) VALUES('G4T4','2022-03-01','2022-02-01','Room4', 'off',-54, 1, 'The best sensor station of all!');
+
+UPDATE plant
+SET sensor_station_sensor_station_name = 'G4T2'
+WHERE PLANTID = -51;
+
+UPDATE plant
+SET sensor_station_sensor_station_name = 'G4T1'
+WHERE PLANTID = -52;
+
+UPDATE plant
+SET sensor_station_sensor_station_name = 'G4T3'
+WHERE PLANTID = -53;
+
+UPDATE plant
+SET sensor_station_sensor_station_name = 'G4T4'
+WHERE PLANTID = -54;
+
 
 insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(-51,'000019b1-0000-1000-8000-00805f9b34fb', 'G4T2', 'SOIL_MOISTURE', 0, 65, 55,'2022-01-02');
 insert into sensor (id,uuid,sensor_station_name,type, alarm_count,upper_border, lower_border,create_date) values(-52,'000019b0-0000-1000-8000-00805f9b34fb', 'G4T2', 'HUMIDITY', 0, 75, 85,'2022-01-02');
