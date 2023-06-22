@@ -295,12 +295,11 @@ public class GraphController implements Serializable {
 
 
         List<Object> values = new ArrayList<>();
-        //actually the timestamps
         List<String> labels = new ArrayList<>();
 
         measurements.forEach(measurement -> {
             if (measurement != null) {
-                values.add(Double.parseDouble(measurement.getValue_s()));
+                values.add(String.format("%.1f", Double.parseDouble(measurement.getValue_s())));
                 labels.add(measurement.getReadableTimestamp());
             }
         });
@@ -308,7 +307,6 @@ public class GraphController implements Serializable {
 
         dataSet.setData(values);
         dataSet.setFill(false);
-        //TODO: test what happens if get(0) gets a null or measurements is empty....
         dataSet.setLabel(measurements.get(0).getType());
         dataSet.setBorderColor("rgb(75, 192, 192)");
         dataSet.setTension(0.1);
@@ -327,8 +325,6 @@ public class GraphController implements Serializable {
         lineModel.setData(chartData);
     }
 
-
-    //TODO:WHAT IS THISSSS???????
 
     public void createLineModel() {
         lineModel = new LineChartModel();
@@ -367,7 +363,7 @@ public class GraphController implements Serializable {
         lineModel.setData(Air_Temperature);
     }
 
-    //TODO:WAS IST DASSSS????
+
     public void createCartesianLinerModel() {
         cartesianLinerModel = new LineChartModel();
         ChartData data = new ChartData();
