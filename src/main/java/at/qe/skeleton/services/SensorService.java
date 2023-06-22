@@ -27,12 +27,10 @@ public class SensorService {
         return sensorRepository.findAll();
     }
 
-    //TODO: if this works implement all similar functions this way
     public Collection<Sensor> getAllSensorsBySensorStation(SensorStation station) {
         return sensorRepository.findSensorsBySensorStation(station);
     }
 
-    //TODO: check if we have sensor data and answer true or false
     public boolean areSensorsPresent(SensorStation station) {
       return sensorRepository.countSensors(station) > 0;
     }
@@ -66,7 +64,7 @@ public class SensorService {
         if (type.equals("SOIL_MOISTURE")) {sensor = sensorRepository.findFirstBySensorStationAndType(sensorStation,"SOIL_MOISTURE");}
         if (sensor == null ) {return "OK";}
         Integer alarmCountThreshold =  sensor.getSensorStation().getAlarmCountThreshold();
-        if (alarmCountThreshold != null &&  sensor.getAlarm_count() < alarmCountThreshold  ) {return "OK";} //TODO new, this is better, still we probably want this to be per sensor?!
+        if (alarmCountThreshold != null &&  sensor.getAlarm_count() < alarmCountThreshold  ) {return "OK";}
         else {return "Wrong";}
     }
 
@@ -99,7 +97,6 @@ public class SensorService {
 
 
 
-    //TODO: implement logging , like it was it crashes the db
     @PreAuthorize("hasAuthority('ADMIN')or hasAuthority('GARDENER')")
     public void deleteSensor(Sensor sensor) {
        // Log deleteLog = new Log();

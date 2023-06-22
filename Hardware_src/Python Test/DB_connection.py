@@ -5,7 +5,6 @@ import exception_logging
 
 #----------------------------------------Create Database
 def implement_database():
-    # TODO check database connection
 
     conn = sqlite3.connect('AccessPoint')
     c = conn.cursor()

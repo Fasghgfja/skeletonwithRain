@@ -170,7 +170,7 @@
                                 <p:datePicker id="toDateS" value="#{measurementListController.event.endDate}" pattern="yyyy-MM-dd" showTime="true"  appendTo="@(body)" />
                             </div>
                         </p:outputPanel>
-                        <!-- ...................................Buttons.....TODO:is it really necessary to reload the location?................... -->
+                        <!-- BUTTONS -->
                         <p:commandButton value="Delete"
                                          action="#{measurementListController.deleteFromToForSensorStation()}"
                                          oncomplete="PF('deleteForSensorStationDialog').hide(); location.reload();">

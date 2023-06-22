@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class Measurement2 implements Serializable {
-//TODO: refactor this to MeasurementApi togheter with hw as it could have dependencies in hw src
+
 
     private String sensorStation;
     private String sensor_id;

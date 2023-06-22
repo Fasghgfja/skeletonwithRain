@@ -9,7 +9,6 @@ upper_hygro = 100
 upper_pres = 1100
 #----------------------------------------Create Database
 def implement_database():
-    # TODO check database connection
 
     conn = sqlite3.connect('AccessPoint')
     c = conn.cursor()
