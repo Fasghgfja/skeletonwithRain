@@ -193,7 +193,7 @@ public class SensorStationDetailController implements Serializable {
                 successLogger.info(PLANT_CREATED + sensorStation.getPlant().getPlantID());
                 successFileHandler.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("error", e);
             }
             Log createLog = new Log();
             createLog.setDate(LocalDate.now());
