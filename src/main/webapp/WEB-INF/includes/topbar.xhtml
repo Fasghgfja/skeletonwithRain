@@ -78,7 +78,7 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
                                 <h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('GARDENER') }"> <!-- .//TODO:check if this makes problem when a user is logged in -->
                                     <i class="fa fa-regular fa-bell"></i>
                                 <div class="notification-item" >
-                                    <div class="notification-summary">Assigned SS Alarms</div>
+                                    <div class="notification-summary">Assigned Greenhouses Alarms</div>
                                     <div class="notification-detail"> #{notificationsController.assignedSensorStationsAlarms} Alarms On.</div>
                                 </div>
                                 </h:panelGroup>
