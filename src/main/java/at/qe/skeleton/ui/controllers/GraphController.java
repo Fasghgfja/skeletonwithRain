@@ -278,7 +278,11 @@ public class GraphController implements Serializable {
 
         measurements.forEach(measurement -> {
             if (measurement != null) {
-                values.add(String.format("%.1f", Double.parseDouble(measurement.getValue_s())));
+                if(!(measurement.getValue_s().length() < 5)){
+                    values.add(Double.parseDouble(measurement.getValue_s().substring(0,5)));
+                } else {
+                    values.add(Double.parseDouble(measurement.getValue_s()));
+                }
                 labels.add(measurement.getReadableTimestamp());
             }
         });
