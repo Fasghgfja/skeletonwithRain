@@ -1,4 +1,4 @@
 #!/bin/bash
 
-scp -r Raspberry/ pi@$1:~;
-ssh pi@$1
+scp -r Raspberry/ $2@$1:~;
+ssh $2@$1
