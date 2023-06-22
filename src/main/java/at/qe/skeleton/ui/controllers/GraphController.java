@@ -8,11 +8,15 @@ import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.services.SensorService;
 import at.qe.skeleton.services.SensorStationService;
-
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.ScheduleEvent;
 
+import org.primefaces.model.ScheduleModel;
 
 
 import org.primefaces.model.chart.Axis;
@@ -91,30 +95,37 @@ public class GraphController implements Serializable {
         createLineModel();
         createCartesianLinerModel();
         latestMeasurements = new ArrayList<>(measurementService.getLatestPlantMeasurements(sensorStation));
-
+        latestMeasurements.removeIf(Objects::isNull);
         Map<Measurement,Double> latestMeasurementsAndPercentage;
         latestMeasurementsAndPercentage = extractMapMeasurePercentage(latestMeasurements, sensors);
 
         if (!latestMeasurements.isEmpty()) {
             createBarModel(latestMeasurementsAndPercentage);
         }
+        else {
+            createBarModel(null);
+        }
     }
 
     private Map<Measurement, Double> extractMapMeasurePercentage(List<Measurement> measurements, Collection<Sensor> sensors) {
         Map<Measurement,Double> resultMap = new HashMap<>();
+        measurements.sort(Comparator.nullsLast(Comparator.comparing(Measurement::getType)));
         for (Measurement measurement : measurements) {
             for (Sensor sensor : sensors) {
-                if(measurement != null) {
-                    if (sensor.getType().equals(measurement.getType())) {
-                        double upper = Double.parseDouble(sensor.getUpper_border());
-                        double lower = Double.parseDouble(sensor.getLower_border());
-                        double value = Double.parseDouble(measurement.getValue_s());
-
-                        double result = ((value - lower) / (upper - lower)) * 100;
-                        double roundedResult = Math.round(result * 100.0) / 100.0;
-                        resultMap.put(measurement, roundedResult);
-                        break;
+                if (sensor.getType().equals(measurement.getType())) {
+                    double upper = Double.parseDouble(sensor.getUpper_border());
+                    double lower = Double.parseDouble(sensor.getLower_border());
+                    double value = Double.parseDouble(measurement.getValue_s());
+                    double roundedResult;
+                    if (lower == upper) {
+                        roundedResult = 0;
                     }
+                    else {
+                        double result = ((value - lower) / (upper - lower)) * 100;
+                        roundedResult = Math.round(result * 100.0) / 100.0;
+                    }
+                    resultMap.put(measurement, roundedResult);
+                    break;
                 }
             }
         }
@@ -182,28 +193,33 @@ public class GraphController implements Serializable {
         barModel = new BarChartModel();
         ChartData data = new ChartData();
 
-        List<Map.Entry<Measurement, Double>> entries = new ArrayList<>(measurementsAndPercentage.entrySet());
-        entries.sort(Comparator.comparing(entry -> entry.getKey().getType()));
-
-        Map<Measurement, Double> sortedMap = new LinkedHashMap<>();
-        for (Map.Entry<Measurement, Double> entry : entries) {
-            sortedMap.put(entry.getKey(), entry.getValue());
-        }
-
         BarChartDataSet barDataSet = new BarChartDataSet();
         barDataSet.setLabel("Value in % (between boarder values)");
 
         List<Number> values = new ArrayList<>();
         List<String> labels = new ArrayList<>();
 
-        sortedMap.forEach((measurement, percent) -> {
-            if (measurement == null) {
-                values.add(0);
-            } else {
-                values.add(percent);
-                labels.add(String.format("%s: %.1f",measurement.getType(), Double.parseDouble(measurement.getValue_s())));
+        if (measurementsAndPercentage != null) {
+
+            /**/
+            List<Map.Entry<Measurement, Double>> entries = new ArrayList<>(measurementsAndPercentage.entrySet());
+            entries.sort(Comparator.comparing(entry -> entry.getKey().getType()));
+
+            Map<Measurement, Double> sortedMap = new LinkedHashMap<>();
+            for (Map.Entry<Measurement, Double> entry : entries) {
+                sortedMap.put(entry.getKey(), entry.getValue());
             }
-        });
+            /**/
+
+            sortedMap.forEach((measurement, percent) -> {
+                if (measurement == null) {
+                    values.add(0);
+                } else {
+                    values.add(percent);
+                    labels.add(String.format("%.1f %s",Double.parseDouble(measurement.getValue_s()), measurement.getUnit() != null ? measurement.getUnit() : "--"));
+                }
+            });
+        }
 
         barDataSet.setData(values);
         List<String> bgColor = new ArrayList<>();
@@ -244,14 +260,10 @@ public class GraphController implements Serializable {
         cScales.addYAxesData(linearAxes);
         options.setScales(cScales);
 
-
-
-
         Title title = new Title();
         title.setDisplay(true);
         title.setText("Bar Chart");
         options.setTitle(title);
-
 
         Legend legend = new Legend();
         legend.setDisplay(true);
@@ -263,15 +275,14 @@ public class GraphController implements Serializable {
         legend.setLabels(legendLabels);
         options.setLegend(legend);
 
-
-
-
         // disable animation
         Animation animation = new Animation();
         animation.setDuration(0);
         options.setAnimation(animation);
 
         barModel.setOptions(options);
+
+
     }
 
 
@@ -286,12 +297,11 @@ public class GraphController implements Serializable {
 
 
         List<Object> values = new ArrayList<>();
-        //actually the timestamps
         List<String> labels = new ArrayList<>();
 
         measurements.forEach(measurement -> {
             if (measurement != null) {
-                values.add(Double.parseDouble(measurement.getValue_s()));
+                values.add(String.format("%.1f", Double.parseDouble(measurement.getValue_s())));
                 labels.add(measurement.getReadableTimestamp());
             }
         });
@@ -299,7 +309,6 @@ public class GraphController implements Serializable {
 
         dataSet.setData(values);
         dataSet.setFill(false);
-        //TODO: test what happens if get(0) gets a null or measurements is empty....
         dataSet.setLabel(measurements.get(0).getType());
         dataSet.setBorderColor("rgb(75, 192, 192)");
         dataSet.setTension(0.1);
@@ -318,8 +327,6 @@ public class GraphController implements Serializable {
         lineModel.setData(chartData);
     }
 
-
-    //TODO:WHAT IS THISSSS???????
 
     public void createLineModel() {
         lineModel = new LineChartModel();
@@ -358,7 +365,7 @@ public class GraphController implements Serializable {
         lineModel.setData(Air_Temperature);
     }
 
-    //TODO:WAS IST DASSSS????
+
     public void createCartesianLinerModel() {
         cartesianLinerModel = new LineChartModel();
         ChartData data = new ChartData();

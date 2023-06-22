@@ -38,7 +38,7 @@
                             <div class="overview">
                                 <span class="overview-title">TEMPERATURE</span>
                                 <h3>
-                                    <h:outputText value="#{measurementListController.getLastTemperatureMeasurementValue().length() gt 6 ? measurementListController.getLastTemperatureMeasurementValue().subSequence(0,6) : measurementListController.getLastTemperatureMeasurementValue() }"/>
+                                    <h:outputText value="#{measurementListController.getLastTemperatureMeasurementValue().length() gt 4 ? measurementListController.getLastTemperatureMeasurementValue().subSequence(0,4) : measurementListController.getLastTemperatureMeasurementValue() }"/>
                                     C
                                 </h3>
                             </div>
@@ -58,7 +58,7 @@
                             <div class="overview">
                                 <span class="overview-title">HUMIDITY</span>
                                 <h3>
-                                    <h:outputText value="#{measurementListController.getLastAirHumidityMeasurementValue().length() gt 6 ? measurementListController.getLastAirHumidityMeasurementValue().subSequence(0,6) : measurementListController.getLastAirHumidityMeasurementValue() }"/>
+                                    <h:outputText value="#{measurementListController.getLastAirHumidityMeasurementValue().length() gt 4 ? measurementListController.getLastAirHumidityMeasurementValue().subSequence(0,4) : measurementListController.getLastAirHumidityMeasurementValue() }"/>
                                     %
                                 </h3>
                             </div>
@@ -78,7 +78,7 @@
                             <div class="overview">
                                 <span class="overview-title">SOIL MOISTURE</span>
                                 <h3>
-                                    <h:outputText value="#{measurementListController.getLastSoilMeasurementValue().length() gt 6 ? measurementListController.getLastSoilMeasurementValue().subSequence(0,6) : measurementListController.getLastSoilMeasurementValue() }"/>
+                                    <h:outputText value="#{measurementListController.getLastSoilMeasurementValue().length() gt 4 ? measurementListController.getLastSoilMeasurementValue().subSequence(0,4) : measurementListController.getLastSoilMeasurementValue() }"/>
                                     %
                                 </h3>
                             </div>
@@ -98,7 +98,7 @@
                             <div class="overview">
                                 <span class="overview-title">LIGHT INTENSITY</span>
                                 <h3>
-                                    <h:outputText value="#{measurementListController.getLastLightMeasurementValue().length() gt 6 ? measurementListController.getLastLightMeasurementValue().subSequence(0,6) : measurementListController.getLastLightMeasurementValue() }"/>
+                                    <h:outputText value="#{measurementListController.getLastLightMeasurementValue().length() gt 4 ? measurementListController.getLastLightMeasurementValue().subSequence(0,4) : measurementListController.getLastLightMeasurementValue() }"/>
                                     lux
                                 </h3>
                             </div>
@@ -120,7 +120,7 @@
                                 </span>
                                 <div class="overview">
                                     <span class="overview-title">Contained Plant</span>
-                                    <h3>#{sensorStationDetailController.plantName}</h3>
+                                    <h3> <a href="/plantPage.xhtml?id=#{sensorStationDetailController.plantId} "> #{sensorStationDetailController.plantName}</a></h3>
                                     <span></span>
                                 </div>
                             </div>
@@ -144,7 +144,7 @@
                             <div class="overview">
                                 <span class="overview-title">AIR PRESSURE</span>
                                 <h3>
-                                    <h:outputText value="#{measurementListController.getLastPressureMeasurementValue().length() gt 6 ? measurementListController.getLastPressureMeasurementValue().subSequence(0,6) : measurementListController.getLastPressureMeasurementValue() }"/>
+                                    <h:outputText value="#{measurementListController.getLastPressureMeasurementValue().length() gt 4 ? measurementListController.getLastPressureMeasurementValue().subSequence(0,5) : measurementListController.getLastPressureMeasurementValue() }"/>
                                     pa
                                 </h3>
                             </div>
@@ -164,7 +164,7 @@
                             <div class="overview">
                                 <span class="overview-title">AIR QUALITY</span>
                                 <h3>
-                                    <h:outputText value="#{measurementListController.getLastAirMeasurementValue().length() gt 6 ? measurementListController.getLastAirMeasurementValue().subSequence(0,6) : measurementListController.getLastAirMeasurementValue() }"/>
+                                    <h:outputText value="#{measurementListController.getLastAirMeasurementValue().length() gt 4 ? measurementListController.getLastAirMeasurementValue().subSequence(0,4) : measurementListController.getLastAirMeasurementValue() }"/>
                                     Aqi
                                 </h3>
                             </div>
@@ -332,16 +332,8 @@
                                     </div>
                                 </p:outputPanel>
 
-
-
                             </div>
                         </h:form>
-
-
-
-
-
-
 
                         <div class="card">
                             <p:lineChart id="mylineChart" model="#{graphController.lineModel}"/>
@@ -374,13 +366,11 @@
                             <p:ajax event="rowSelect" update="mylineChart"
                                     listener="#{graphController.onRowSelectLineChart}"/>
 
-                            <p:column headerText="Measurement" sortBy="#{measurement.value_s}"
-                                      filterBy="#{measurement.value_s}">
+                            <p:column headerText="Measurement" sortBy="#{measurement}">
                                 <h:outputText style="vertical-align: middle; margin-left: .5rem"
-                                              value="#{measurement.value_s} #{measurement.unit}"/>
+                                              value="#{measurement.getFormattedValue()} #{measurement.unit}"/>
                             </p:column>
-                            <p:column headerText="Time" sortBy="#{measurement.timestamp}"
-                                      filterBy="#{measurement.timestamp}">
+                            <p:column headerText="Time" sortBy="#{measurement.timestamp}">
                                 <h:outputText value="#{measurement.readableTimestamp}"/>
                             </p:column>
                             <p:column headerText="Status">
@@ -616,18 +606,19 @@
                                          selectionMode="single" reflow="true" paginatorPosition="bottom"
                                          rowKey="#{sensor.id}" paginator="true" rows="6" sortBy="#{sensor.id}"
                                          sortOrder="descending">
-
+                                <!--
                                 <p:column headerText="id(only in testing phase)" sortBy="#{sensor.id}">
                                     <h:outputText value="#{sensor.id}"/>
                                 </p:column>
+                                -->
                                 <p:column headerText="Type" sortBy="#{sensor.type}">
                                     <h:outputText value="#{sensor.type}"/>
                                 </p:column>
-                                <p:column headerText="Upper Threshold" sortBy="#{sensor.upper_border}">
-                                    <h:outputText value="#{sensor.upper_border}"/>
-                                </p:column>
                                 <p:column headerText="Lower Threshold" sortBy="#{sensor.lower_border}">
                                     <h:outputText value="#{sensor.lower_border}"/>
+                                </p:column>
+                                <p:column headerText="Upper Threshold" sortBy="#{sensor.upper_border}">
+                                    <h:outputText value="#{sensor.upper_border}"/>
                                 </p:column>
                                 <p:column headerText="Alarm Count" sortBy="#{sensor.alarm_count}">
                                     <h:outputText value="#{sensor.alarm_count}"/>
@@ -656,10 +647,10 @@
                                     <h5 class="mt-0">Sensor Data </h5>
 
                                     <h:panelGrid columns="1">
-                                        <p:outputLabel for="upper" value="Upper border"/>
-                                        <p:inputText id="upper" value="#{sensorDetailController.upper_border}"/>
                                         <p:outputLabel for="lower" value="Lower border"/>
                                         <p:inputText id="lower" value="#{sensorDetailController.lower_border}"/>
+                                        <p:outputLabel for="upper" value="Upper border"/>
+                                        <p:inputText id="upper" value="#{sensorDetailController.upper_border}"/>
                                         <p:outputLabel for="sensorResetSwitch" value="Reset Alarm Count:"/>
                                         <p:toggleSwitch id="sensorResetSwitch"
                                                         value="#{sensorDetailController.resetAlarm}"/>

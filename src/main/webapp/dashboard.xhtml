@@ -102,11 +102,15 @@
                         <div class="card chart">
                             <div class="card-header">
                                 <h5>Selected Sensor Station Details</h5>
+                                <!-- ........................Help Button ....................... -->
+                                <p:commandButton type="button" icon="fa fa-duotone fa-seedling" title="Help"
+                                                 styleClass="ui-button-secondary outlined-button"
+                                                 onclick="PF('adminGraphHelpDialog').show()"/>
                             </div>
+
                             <div class="card">
 
-                                <p:barChart id="myBarChart" model="#{graphController.barModel}"
-                                extender="extndr()"/>
+                                <p:barChart id="myBarChart" model="#{graphController.barModel}"/>
 
                             </div>
                         </div>
@@ -345,7 +349,7 @@
                                             </p:column>
 
                                             <p:column headerText="Value" sortBy="#{measurement.value_s}">
-                                                <h:outputText value="#{measurement.value_s}" />
+                                                <h:outputText value="#{measurement.getFormattedValue()}" />
                                             </p:column>
 
                                             <p:column headerText="Unit" sortBy="#{measurement.unit}">
@@ -546,6 +550,23 @@
 
                 <h6>Opening detail view:</h6>
                 By clicking on the "open Detail-View" button, you will get redirected to the detail view page of the selected greenhouse.
+                <h6>Viewing the graph:</h6>
+                By clicking on the any of the listed greenhouses, it's possible to see a graph preview of the latest measurements for the selected greenhouse.
+
+            </p:outputPanel>
+        </p:dialog>
+
+        <!-- ...................................Admin Dashboard help dialog............................. -->
+        <p:dialog header="Administrator Graph Help" id="adminGraphHelpDialog" widgetVar="adminGraphHelpDialog"
+                  modal="true"
+                  showEffect="fade" hideEffect="fade" resizable="false">
+
+            <p:outputPanel id="AdminGraphHelpDialog">
+
+
+                <h5>Showing the graph:</h5>
+                By clicking on the any of the listed greenhouses on the right, it's possible to see a graph preview of the latest measurements for the selected greenhouse.
+                Notes:
                 <h6>Viewing the graph:</h6>
                 By clicking on the any of the listed greenhouses, it's possible to see a graph preview of the latest measurements for the selected greenhouse.
 

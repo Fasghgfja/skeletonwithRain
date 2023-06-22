@@ -170,62 +170,42 @@ public class SensorStationDetailController implements Serializable {
 
 
     public void doChangeThePlantAndSave() {
+
         if (selectedPlantName != null && !selectedPlantName.equals("")) {
             if (sensorStation.getPlant() != null) {
-                if(Objects.equals(sensorStation.getPlant().getPlantName(), selectedPlantName)){
+                if (Objects.equals(sensorStation.getPlant().getPlantName(), selectedPlantName)) {
                     return;
                 }
                 Plant oldPlant = plantService.loadPlant(sensorStation.getPlant().getId());
                 oldPlant.setSensorStation(null);
                 plantService.savePlant(oldPlant);
-                //Plant newPlant = new Plant();
-                Plant newPlant = plantService.findFirstByNameAndFree(selectedPlantName);
-                newPlant.setSensorStation(sensorStation);
-                sensorStation.setPlant(plantService.savePlant(newPlant));
-                doSaveSensorStation();
-                try {
-                    successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);
-                    successFileHandler.setFormatter(new SimpleFormatter());
-                    successLogger.addHandler(successFileHandler);
-                    successLogger.info(PLANT_CREATED + newPlant.getId());
-                    successFileHandler.close();
-                } catch (IOException e) {
-                    LOGGER.error("error", e);
-                }
-                Log createLog = new Log();
-                createLog.setDate(LocalDate.now());
-                createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-                createLog.setAuthor(sessionInfoBean.getCurrentUserName());
-                createLog.setSubject("PLANT CREATION");
-                createLog.setText(PLANT_CREATED + newPlant.getId());
-                createLog.setType(LogType.SUCCESS);
-                logRepository.save(createLog);
-            } else {
-                Plant newPlant = new Plant();
-                newPlant.setPlantName(selectedPlantName);
-                newPlant.setSensorStation(sensorStation);
-                sensorStation.setPlant(plantService.savePlant(newPlant));
-                doSaveSensorStation();
-                try {
-                    successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);
-                    successFileHandler.setFormatter(new SimpleFormatter());
-                    successLogger.addHandler(successFileHandler);
-                    successLogger.info(PLANT_CREATED + sensorStation.getPlant().getPlantID());
-                    successFileHandler.close();
-                } catch (IOException e) {
-                    LOGGER.error("error", e);
-                }
-                Log createLog = new Log();
-                createLog.setDate(LocalDate.now());
-                createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-                createLog.setAuthor(sessionInfoBean.getCurrentUserName());
-                createLog.setSubject("PLANT CREATION");
-                createLog.setText(PLANT_CREATED + sensorStation.getPlant().getPlantID());
-                createLog.setType(LogType.SUCCESS);
-                logRepository.save(createLog);
             }
+
+            Plant newPlant = new Plant();
+            newPlant.setPlantName(selectedPlantName);
+            newPlant.setSensorStation(sensorStation);
+            sensorStation.setPlant(plantService.savePlant(newPlant));
+            doSaveSensorStation();
+            try {
+                successFileHandler = new FileHandler("src/main/logs/success_logs.log", true);
+                successFileHandler.setFormatter(new SimpleFormatter());
+                successLogger.addHandler(successFileHandler);
+                successLogger.info(PLANT_CREATED + sensorStation.getPlant().getPlantID());
+                successFileHandler.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log createLog = new Log();
+            createLog.setDate(LocalDate.now());
+            createLog.setTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+            createLog.setAuthor(sessionInfoBean.getCurrentUserName());
+            createLog.setSubject("PLANT CREATION");
+            createLog.setText(PLANT_CREATED + sensorStation.getPlant().getPlantID());
+            createLog.setType(LogType.SUCCESS);
+            logRepository.save(createLog);
         }
-        this.gardeners = new ArrayList<>();
+
+        this.gardeners = new ArrayList<>(); // what s this for????
         sensorStation = this.sensorStationService.saveSensorStation(sensorStation);
     }
 
