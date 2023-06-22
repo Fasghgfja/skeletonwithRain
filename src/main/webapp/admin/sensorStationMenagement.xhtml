@@ -210,8 +210,9 @@
                                     <p:column headerText="Sensor Alarm Status">
                                         <h:form rendered="#{not empty measurement.id}">
                                         <em class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"
-                                           style="display: flex; justify-content: center; align-items: center; color:#{measurementListController.getSensorStatus(measurement.type,sensorStation) == 'OK' ? 'green' : 'red'}"
-                                           title="#{measurement.type}"></em>
+                                           style="color:#{measurementListController.getSensorStatus(measurement.type,sensorStation) == 'OK' ? 'green' : 'red'}"
+                                           title="#{measurement.type}">
+                                        </em>
                                         </h:form>
                                     </p:column>
 

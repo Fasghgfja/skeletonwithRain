@@ -150,8 +150,9 @@
 
                                     <p:column headerText="Status">
                                         <em class="#{measurementListController.getMeasurementTypeIcon(measurement.type)}"
-                                           style="display: flex; justify-content: center; align-items: center; color:#{measurementListController.getSensorStatus(measurement.type,sensorStation) == 'OK' ? 'green' : 'red'}"
-                                           title="#{measurement.type}"></em>
+                                           style="color:#{measurementListController.getSensorStatus(measurement.type,sensorStation) == 'OK' ? 'green' : 'red'}"
+                                           title="#{measurement.type}">
+                                        </em>
                                     </p:column>
 
                                 </p:dataTable>
