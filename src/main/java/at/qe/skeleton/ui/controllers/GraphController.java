@@ -1,27 +1,14 @@
 package at.qe.skeleton.ui.controllers;
-
-
-import at.qe.skeleton.model.MeasurementType;
 import at.qe.skeleton.model.Sensor;
 import at.qe.skeleton.services.MeasurementService;
 import at.qe.skeleton.model.Measurement;
 import at.qe.skeleton.model.SensorStation;
 import at.qe.skeleton.services.SensorService;
 import at.qe.skeleton.services.SensorStationService;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.DefaultScheduleEvent;
-import org.primefaces.model.ScheduleEvent;
-
-import org.primefaces.model.ScheduleModel;
-
-
-import org.primefaces.model.chart.Axis;
 import org.primefaces.model.charts.ChartData;
-import org.primefaces.model.charts.axes.AxesTicks;
 import org.primefaces.model.charts.axes.cartesian.CartesianScales;
 import org.primefaces.model.charts.axes.cartesian.linear.CartesianLinearAxes;
 import org.primefaces.model.charts.axes.cartesian.linear.CartesianLinearTicks;
@@ -38,9 +25,7 @@ import org.primefaces.model.charts.optionconfig.title.Title;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -141,7 +126,6 @@ public class GraphController implements Serializable {
     public void onRowSelectLineChart(SelectEvent<Measurement> event) {
         Measurement measurement = event.getObject();
         sensorStation = measurement.getSensorStation();
-        //createCartesianLinerModel();         WHY WAS THIS HERE???????
         latestMeasurements = new ArrayList<>(measurementService.getAllMeasurementsBySensorStationAndTypeAsc(sensorStation, measurement.getType()));
         if (!latestMeasurements.isEmpty()) {
             createLineModel(latestMeasurements);
@@ -200,8 +184,6 @@ public class GraphController implements Serializable {
         List<String> labels = new ArrayList<>();
 
         if (measurementsAndPercentage != null) {
-
-            /**/
             List<Map.Entry<Measurement, Double>> entries = new ArrayList<>(measurementsAndPercentage.entrySet());
             entries.sort(Comparator.comparing(entry -> entry.getKey().getType()));
 
@@ -209,8 +191,6 @@ public class GraphController implements Serializable {
             for (Map.Entry<Measurement, Double> entry : entries) {
                 sortedMap.put(entry.getKey(), entry.getValue());
             }
-            /**/
-
             sortedMap.forEach((measurement, percent) -> {
                 if (measurement == null) {
                     values.add(0);
@@ -248,8 +228,6 @@ public class GraphController implements Serializable {
         data.setLabels(labels);
         barModel.setData(data);
 
-
-        //Options
         BarChartOptions options = new BarChartOptions();
         CartesianScales cScales = new CartesianScales();
         CartesianLinearAxes linearAxes = new CartesianLinearAxes();
@@ -275,7 +253,6 @@ public class GraphController implements Serializable {
         legend.setLabels(legendLabels);
         options.setLegend(legend);
 
-        // disable animation
         Animation animation = new Animation();
         animation.setDuration(0);
         options.setAnimation(animation);
@@ -306,7 +283,6 @@ public class GraphController implements Serializable {
             }
         });
 
-
         dataSet.setData(values);
         dataSet.setFill(false);
         dataSet.setLabel(measurements.get(0).getType());
@@ -316,7 +292,6 @@ public class GraphController implements Serializable {
 
         chartData.setLabels(labels);
 
-        //Options
         LineChartOptions options = new LineChartOptions();
         Title title = new Title();
         title.setDisplay(true);
@@ -355,7 +330,7 @@ public class GraphController implements Serializable {
         labels.add("June");
         labels.add("July");
         Air_Temperature.setLabels(labels);
-        //Options
+
         LineChartOptions options = new LineChartOptions();
         Title title = new Title();
         title.setDisplay(true);
@@ -411,7 +386,6 @@ public class GraphController implements Serializable {
         data.setLabels(labels);
         cartesianLinerModel.setData(data);
 
-        //Options
         LineChartOptions options = new LineChartOptions();
         CartesianScales cScales = new CartesianScales();
         CartesianLinearAxes linearAxes = new CartesianLinearAxes();
@@ -432,6 +406,4 @@ public class GraphController implements Serializable {
 
         cartesianLinerModel.setOptions(options);
     }
-
-
 }
