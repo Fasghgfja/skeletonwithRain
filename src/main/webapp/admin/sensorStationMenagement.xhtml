@@ -198,7 +198,7 @@
                                     </p:column>
 
                                     <p:column headerText="Value" sortBy="#{measurement.value_s}">
-                                        <h:outputText value="#{measurement.value_s}" />
+                                        <h:outputText value="#{measurement.getFormattedValue()}" />
                                     </p:column>
 
                                     <p:column headerText="Unit" sortBy="#{measurement.unit}">
