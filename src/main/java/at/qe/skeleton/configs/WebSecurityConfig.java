@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -56,6 +55,7 @@ public class WebSecurityConfig {
                             .permitAll()
                             .defaultSuccessUrl("/dashboard.xhtml")
                             .loginProcessingUrl("/login")
+                            .successForwardUrl("/dashboard.xhtml")
                             .failureUrl("/login.xhtml?error=true")
                     )
                     .logout(logout -> logout

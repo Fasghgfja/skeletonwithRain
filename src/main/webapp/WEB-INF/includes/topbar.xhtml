@@ -41,7 +41,7 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
 
                         <h:panelGroup styleClass="md-inputfield search-input-wrapper">
 
-                            <p:inputText placeholder="Search Plant" value="#{searchBean.plantNameToSearchFor}" />
+                            <p:inputText placeholder="Search" value="#{searchBean.searchFor}" />
 
                             <em  class="pi pi-search"></em>
 
@@ -67,8 +67,8 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
                                 <h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('GARDENER') }">
                                 <i class="pi pi-image"></i>
                                 <div class="notification-item">
-                                    <div class="notification-summary">Pics Awaiting Approval</div>
-                                    <div class="notification-detail">You have <strong>#{notificationsController.picturesAwaitingApprovalCount}</strong> pics awaiting approval.</div>
+                                    <div class="notification-summary">text</div>
+                                    <div class="notification-detail">You have <strong>#{userListController.usersAmount}</strong> new users.</div>
                                 </div>
                                 </h:panelGroup>
                             </a>
@@ -78,8 +78,8 @@ xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelet
                                 <h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('GARDENER') }">
                                     <i class="fa fa-regular fa-bell"></i>
                                 <div class="notification-item" >
-                                    <div class="notification-summary">Assigned Greenhouses Alarms</div>
-                                    <div class="notification-detail"> #{notificationsController.assignedSensorStationsAlarms} Alarms On.</div>
+                                    <div class="notification-summary">test notification</div>
+                                    <div class="notification-detail"> Alarms On.</div>
                                 </div>
                                 </h:panelGroup>
                             </a>

@@ -118,6 +118,8 @@
 
 
     <repositories>
+
+        <!-- theme is located here -->
         <repository>
             <id>in-project</id>
             <name>In Project Repo</name>
