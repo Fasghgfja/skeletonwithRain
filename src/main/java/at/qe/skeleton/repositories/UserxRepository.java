@@ -1,12 +1,10 @@
 package at.qe.skeleton.repositories;
 
-import at.qe.skeleton.model.SensorStation;
+
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.model.UserRole;
 import java.util.List;
 
-import jakarta.transaction.Transactional;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -46,9 +44,7 @@ public interface UserxRepository extends AbstractRepository<Userx, String> {
 
 
 
-    Userx findFirstById(Long id);
 
-    List<Userx> findUserxBySensorStationsUnderCareIsContaining(SensorStation sensorStation);
 
     /**
      * The method Retrieves a List of User entities searching by a string containing both firstname and lastname separated

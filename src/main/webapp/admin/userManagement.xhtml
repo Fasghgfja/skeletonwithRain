@@ -43,7 +43,6 @@
 
                         <p:selectManyCheckbox id="rolesCreation" value="#{createUserBean.selectedRoles}">
                             <f:selectItem itemLabel="ADMIN" itemValue="ADMIN"/>
-                            <f:selectItem itemLabel="GARDENER" itemValue="GARDENER"/>
                         </p:selectManyCheckbox>
                     </h:panelGrid>
                     <h:panelGrid columns="2">
@@ -176,7 +175,6 @@
                         <p:separator/>
                         <p:selectManyCheckbox id="rolesCreation1" value="#{userDetailController.selectedRolesEdit}">
                             <f:selectItem itemLabel="ADMIN" itemValue="ADMIN"/>
-                            <f:selectItem itemLabel="GARDENER" itemValue="GARDENER"/>
                         </p:selectManyCheckbox>
                         <p:separator/>
 
@@ -212,7 +210,7 @@
                   showEffect="fade" hideEffect="fade" resizable="false">
             <p:outputPanel id="measurementPageHelp">
                 <h6>Creating a new user:</h6>
-                By clicking on the "Create new user" button, it's possible to create a new user. "Username" and "Password" are mandatory fields, while all the others are optional. Here it is also possible to set user roles like GARDENER or ADMIN.
+                By clicking on the "Create new user" button, it's possible to create a new user. "Username" and "Password" are mandatory fields, while all the others are optional. Here it is also possible to set user roles like USER or ADMIN.
                 <h6>Edit user:</h6>
                 By clicking the "Edit" button, it's possible to edit all the non-mandatory felds and also remove or add roles to the specified user.
                 <h6>Delete user:</h6>

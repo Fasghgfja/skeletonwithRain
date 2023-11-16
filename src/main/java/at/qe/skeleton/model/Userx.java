@@ -24,8 +24,6 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     @ManyToOne(fetch = FetchType.LAZY)
     private Userx updateUser;
 
-    @OneToOne
-    private Image profilePic;
     private String password;
     private String firstName;
     private String lastName;
@@ -33,22 +31,6 @@ public class Userx extends Metadata implements Persistable<String>, Serializable
     private String phone;
     boolean enabled;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_plant",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username"),
-            inverseJoinColumns = @JoinColumn(name = "plant_id", referencedColumnName = "plantID")
-    )
-    private Set<Plant> followedPlants = new HashSet<>();
-
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "gardener_sensorStation",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username"),
-            inverseJoinColumns = @JoinColumn(name = "sensorStationName", referencedColumnName = "sensorStationName")
-    )
-    private Set<SensorStation> sensorStationsUnderCare = new HashSet<>();
 
     @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "Userx_UserRole")

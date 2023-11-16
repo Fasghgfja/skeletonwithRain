@@ -7,7 +7,6 @@ import at.qe.skeleton.model.UserRole;
 import at.qe.skeleton.model.Userx;
 import at.qe.skeleton.repositories.LogRepository;
 import at.qe.skeleton.repositories.UserxRepository;
-import at.qe.skeleton.services.AccessPointService;
 import at.qe.skeleton.services.UserService;
 import at.qe.skeleton.ui.controllers.UserListController;
 import jakarta.faces.application.FacesMessage;
@@ -95,9 +94,6 @@ public class CreateUserBean implements Serializable {
         selectedRoles.forEach(x -> {
             if (x.equals("ADMIN")) {
                 roles.add(UserRole.ADMIN);
-                roles.add(UserRole.GARDENER);
-            } else if (x.equals("GARDENER")) {
-                roles.add(UserRole.GARDENER);
             }
         });
         roles.add(UserRole.USER);

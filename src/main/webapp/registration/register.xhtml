@@ -6,10 +6,6 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templates/loginMain.xhtml">
 
-    <f:metadata>
-        <f:event type="preRenderView" listener="#{plantPhotoGalleryController.init}"/>
-    </f:metadata>
-
 
 <ui:define name="content">
 
@@ -57,51 +53,19 @@
 
                     <!-- .......::::::::::::::::...PLANT GALLERY ....::::::::::::::::::::::.......... -->
                     <div class="card">
-                        <p:galleria rendered="#{not empty plantPhotoGalleryController.idString and not empty plantPhotoGalleryController.doGetApprovedPlantImages()}"
-                                    widgetVar="galleria1" value="#{plantPhotoGalleryController.doGetApprovedPlantImages()}" var="image"
-                                    numVisible="40"
-                                    circular="true" fullScreen="true" showItemNavigators="true"
-                                    style="max-width: 70%">
-                            <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
-                                            alt="#{galleryController.photoAsStreamedContent}"
-                                            style="width: 100%; display: block">
-                                <f:param name="id" value="#{image.id}"/>
-                            </p:graphicImage>
-                        </p:galleria>
+
                     </div>
 
                     <!-- .......::::::::::::::::...ALL PICTURES GALLERY ....::::::::::::::::::::::.......... -->
                     <div class="card">
-                        <p:galleria rendered="#{empty plantPhotoGalleryController.idString or empty plantPhotoGalleryController.doGetApprovedPlantImages()}"
-                                    widgetVar="galleria2" value="#{galleryController.doGetAllApprovedPlantImages()}" var="image"
-                                    numVisible="40"
-                                    circular="true" fullScreen="true" showItemNavigators="true"
-                                    style="max-width: 70%">
-                            <p:graphicImage value="#{galleryController.photoAsStreamedContent}"
-                                            alt="#{galleryController.photoAsStreamedContent}"
-                                            style="width: 100%; display: block">
-                                <f:param name="id" value="#{image.id}"/>
-                            </p:graphicImage>
-                        </p:galleria>
+
                     </div>
 
 
                 </h:form>
 
 
-                <!-- ....:::::::::::::::::::::......UPLOAD DIALOG ......::::::::::::::::::........ -->
-                <p:dialog widgetVar="submitDialog" modal="true" rendered="#{not empty plantPhotoGalleryController.idString}" >
-                    <h:form>
-                        <input type="hidden" name="id" value="#{plantPhotoGalleryController.plant.id}"/>
-                        <p:fileUpload widgetVar="submitDialog" listener="#{fileUploadController.handleFileUpload}"
-                                      mode="advanced" dragDropSupport="false"
-                                      multiple="true" update="idParam" sizeLimit="50000000" fileLimit="10"
-                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width:100%" />
 
-                        <h:inputHidden id="idParam" value="#{fileUploadController.id}"/>
-                        <p:growl id="messages" showDetail="true"/>
-                    </h:form>
-                </p:dialog>
             </p>
         </div>
 

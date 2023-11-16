@@ -2,11 +2,8 @@ package at.qe.skeleton.ui.controllers;
 
 import at.qe.skeleton.model.*;
 import at.qe.skeleton.repositories.LogRepository;
-import at.qe.skeleton.services.PlantService;
-import at.qe.skeleton.services.SensorStationService;
 import at.qe.skeleton.services.UserService;
 
-import java.io.InputStream;
 import java.io.Serializable;
 
 import at.qe.skeleton.ui.beans.SessionInfoBean;
@@ -14,7 +11,6 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.Setter;
-import org.omnifaces.util.Faces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,9 +37,6 @@ public class UserDetailController implements Serializable {
     private transient UserService userService;
 
     @Autowired
-    private transient GalleryController galleryController;
-
-    @Autowired
     private SessionInfoBean sessionInfoBean;
 
     @Autowired
@@ -52,14 +45,6 @@ public class UserDetailController implements Serializable {
     @Autowired
     private transient LogRepository logRepository;
 
-    @Autowired
-    private transient SensorStationService sensorStationService;
-
-    @Autowired
-    private transient PlantController plantController;
-
-    @Autowired
-    private transient PlantService plantService;
     @Autowired
     private transient UserListController userListController;
 
@@ -114,9 +99,6 @@ public class UserDetailController implements Serializable {
             for (String role : selectedRolesEdit) {
                 if (role.equals("ADMIN")) {
                     roles.add(UserRole.ADMIN);
-                    roles.add(UserRole.GARDENER);
-                } else if (role.equals("GARDENER")) {
-                    roles.add(UserRole.GARDENER);
                 }
             }
         }
@@ -170,7 +152,6 @@ public class UserDetailController implements Serializable {
     public void doDeleteUser() {
         user.setCreateUser(null);
         user.setUpdateUser(null);
-        sensorStationService.getAllAssignedSensorStations(user).forEach( x-> {sensorStationService.removeGardenerFromSensorStation(x,user);});
         this.userService.deleteUser(user);
         user = null;
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "User has been deleted."));
@@ -182,22 +163,8 @@ public class UserDetailController implements Serializable {
     }
 
 
-    public void doAddPlantToFollowedPlants(Plant plant) {
-        user = sessionInfoBean.getCurrentUser();
-        this.userService.addPlantToFollowedPlants(user, plant);
-    }
-
-
     public void setSelectedRolesEdit(List<String> selectedRolesEdit) {
         this.selectedRolesEdit = selectedRolesEdit;
-    }
-
-    public InputStream getProfilePicture() {
-        if (user == null) {
-            return Faces.getResourceAsStream("images/awesomeProfilePicture.png");
-        }
-        InputStream input = galleryController.getProfilePicAsStreamedContent(user.getProfilePic().getId().toString());
-        return (input != null) ? input : Faces.getResourceAsStream("images/awesomeProfilePicture.png");
     }
 
 
@@ -212,11 +179,6 @@ public class UserDetailController implements Serializable {
         this.user = userService.loadUser(thisUser.getId());
     }
 
-    public void doRemovePlantFromFollowedPlants(Plant plant) {
-        user = sessionInfoBean.getCurrentUser();
-        this.userService.removePlantFromFollowedPlants(user, plant);
-        plantController.setFollowedPlantsList((ArrayList<Plant>) plantService.getFollowedPlants(user));
-    }
 
 }
 

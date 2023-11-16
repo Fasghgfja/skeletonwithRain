@@ -55,24 +55,17 @@
                     <!-- ..........................................ADMIN SUBMENU............................................................... -->
                     <p:submenu id="m_components" label="Administration Utility" icon="fa fa-solid fa-toolbox" rendered="#{sessionInfoBean.hasRole('ADMIN')}">
                         <p:menuitem id="m_table" value="Manage Users" icon="pi pi-users" outcome="/admin/userManagement" />
-                        <p:menuitem id="m_input2" value="Manage Sensor Stations" icon="fa fa-brands fa-codepen" outcome="/admin/sensorStationMenagement" />
-                        <p:menuitem id="m_list" value="Manage Access Points" icon="fa fa-solid fa-tower-broadcast" outcome="/admin/accessPointsManagement" />
-                        <p:menuitem id="m_list2" value="Manage Plants" icon="fa fa-solid fa-leaf" outcome="/admin/plantManagement" />
-                        <p:menuitem id="m_media" value="Manage Images" icon="pi pi-image" url="/admin/imageMenagement.xhtml" />
-                        <p:menuitem id="m_table2" value="Manage Measurements" icon="fa fa-solid fa-chart-line" outcome="/admin/measurementManagement" />
                         <p:menuitem id="m_formlayout" value="Audit Log" icon="pi pi-history" outcome="/admin/auditLog" />
-                        <p:menuitem id="qrCode" value="Generate Qr Code" icon="pi pi-qrcode" outcome="/generateQrCode.xhtml?id=00"/>
                     </p:submenu>
 
                     <!-- ..........................................GARDENER SUBMENU............................................................... -->
-                    <p:submenu id="m_primeblocks" label="Gardener Submenu" icon="pi pi-prime" rendered="#{sessionInfoBean.hasRole('GARDENER')}">
-                        <p:menuitem id="m_freeblocks" value="Manage Assigned Greenhouses" icon="pi pi-eye" outcome="/gardener/greenhouses"/>
+                    <p:submenu id="m_primeblocks" label="Gardener Submenu" icon="pi pi-prime" >
                         </p:submenu>
 
 
                     <!-- ..........................................OTHER MENU ELEMENTS..................................................... -->
 
-                    <p:menuitem id="m_icons" value="Plants Catalogue" icon="fa fa-solid fa-leaf" outcome="/plantCatalogue"/>
+                    <p:menuitem id="m_icons" value="Plants Catalogue" icon="fa fa-solid fa-leaf" />
                     <!--
                     <p:menuitem id="m_help" value="Help" icon="pi pi-question-circle" outcome="/help" />
                     -->

@@ -40,14 +40,6 @@ public class UserListController implements Serializable {
         return userService.getAllUsers();
     }
 
-    public Collection<Userx> getGardeners() {
-        return userService.getAllGardeners();
-    }
-
-    public Collection<String> getGardenerNames() {
-        return userService.getAllGardenerNames();
-    }
-
     public Integer getUsersAmount() {
         return userService.getUsersAmount();
     }

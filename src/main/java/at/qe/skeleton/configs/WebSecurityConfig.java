@@ -13,9 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
-import at.qe.skeleton.spring.CustomizedLogoutSuccessHandler;
+
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Spring configuration for web security.
@@ -25,60 +25,53 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
 
     private static final String ADMIN = UserRole.ADMIN.name();
-    private static final String GARDENER = UserRole.GARDENER.name();
     private static final String USER = UserRole.USER.name();
+
+    private static final String LOGIN = "/login.xhtml";
+    private static final String ACCESSDENIED = "/error/access_denied.xhtml";
 
     @Autowired
     DataSource dataSource;
 
-    @Bean
-    protected LogoutSuccessHandler logoutSuccessHandler() {
-    	return new CustomizedLogoutSuccessHandler();
-    }
-
-    
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         try {
-            http.csrf().disable();
-            http.headers().frameOptions().disable(); // needed for H2 console
-
             http
+                    .csrf(csrf -> csrf.disable())
                     .authorizeHttpRequests(authorize -> authorize
-                            // Permit access for all to the sensor stations for now
-                            .requestMatchers("/sensorStation/**").permitAll()
-                            .requestMatchers("/").permitAll()
-                            .requestMatchers("/registration/**").permitAll()
-                            .requestMatchers("/**.jsf").permitAll()
-                            .requestMatchers(antMatcher("/h2-console/**")).permitAll()
-                            .requestMatchers("/jakarta.faces.resource/**").permitAll()
-                            .requestMatchers("/error/**").permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/registration/**")).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/**.jsf")).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/jakarta.faces.resource/**")).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/error/**")).permitAll()
                             // Only access with higher autority role
-                            .requestMatchers("/admin/**").hasAnyAuthority(ADMIN)
-                            .requestMatchers("/secured/**").hasAnyAuthority(ADMIN, GARDENER, USER)
-                            .requestMatchers("/omnifaces.push/**").hasAnyAuthority(ADMIN, GARDENER, USER)
-                            .requestMatchers("/api/**").authenticated() // requires authentication for /api/ endpoints only
-                            .anyRequest().permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAnyAuthority("ADMIN")
+                            .requestMatchers(new AntPathRequestMatcher("/secured/**")).hasAnyAuthority(ADMIN, USER)
+                            .anyRequest().authenticated()
                     )
-                    .httpBasic().and()
-                    .formLogin()
-                    .loginPage("/login.xhtml")
-                    .loginProcessingUrl("/login")
-                    .permitAll()
-                    .failureUrl("/login.xhtml?error=true")
-                    .defaultSuccessUrl("/dashboard.xhtml")
-                    .and()
-                    .logout()
-                    .logoutSuccessUrl("/login.xhtml")
-                    .deleteCookies("JSESSIONID");
-            http.exceptionHandling().accessDeniedPage("/error/access_denied.xhtml");
-            http.sessionManagement().invalidSessionUrl("/error/invalid_session.xhtml");
-			return http.build();
-            }
-            catch (Exception ex) {
-                    throw new BeanCreationException("Wrong spring security configuration", ex);
-            }
+                    .formLogin(form -> form
+                            .loginPage(LOGIN)
+                            .permitAll()
+                            .defaultSuccessUrl("/dashboard.xhtml")
+                            .loginProcessingUrl("/login")
+                            .failureUrl("/login.xhtml?error=true")
+                    )
+                    .logout(logout -> logout
+                            .logoutSuccessUrl(LOGIN)
+                            .deleteCookies("JSESSIONID")
+                            .invalidateHttpSession(true)
+                            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    )
+                    .sessionManagement(session -> session
+                            .invalidSessionUrl("/error/invalid_session.xhtml")
+                    );
+
+            return http.build();
+        } catch (Exception ex) {
+            throw new BeanCreationException("Wrong spring security configuration", ex);
+        }
 
     }
 
@@ -93,7 +86,7 @@ public class WebSecurityConfig {
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
-            return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
 
 
