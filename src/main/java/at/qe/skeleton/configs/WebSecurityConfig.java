@@ -37,7 +37,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         try {
             http
-                    .csrf(csrf -> csrf.disable())
+                    .csrf(csrf -> csrf.disable());
+            http.headers().frameOptions().disable(); // needed for H2 console
+                    http
                     .authorizeHttpRequests(authorize -> authorize
                             .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/registration/**")).permitAll()
